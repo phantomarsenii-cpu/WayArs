@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WayArs</string>
+    <string name="splash_slogan">Asistent inteligent pentru șoferi și curieri</string>
+    <string name="splash_start">Începe</string>
+
+    <string name="onboarding_title">Alege profilul tău</string>
+    <string name="onboarding_subtitle">Vom seta filtrele optime pentru tine</string>
+    <string name="onboarding_customize_later">Personalizează mai târziu</string>
+
+    <string name="preset_economy_title">Economy</string>
+    <string name="preset_economy_desc">Cheltuieli reduse, venit moderat</string>
+    <string name="preset_balance_title">Balance</string>
+    <string name="preset_balance_desc">Echilibru între timp și venit</string>
+    <string name="preset_profitable_title">Profitable Only</string>
+    <string name="preset_profitable_desc">Doar comenzi profitabile</string>
+
+    <string name="dashboard_today_summary">Rezumatul zilei</string>
+    <string name="dashboard_active_time">Timp activ</string>
+    <string name="dashboard_distance">Distanță</string>
+    <string name="dashboard_avg_rate">Tarif mediu</string>
+    <string name="dashboard_order_evaluation">Evaluarea comenzii</string>
+    <string name="dashboard_orders">comenzi</string>
+    <string name="dashboard_no_order">Se așteaptă o comandă nouă…</string>
+
+    <string name="verdict_good">PROFITABIL</string>
+    <string name="verdict_bad">NEPROFITABIL</string>
+    <string name="action_accept">Acceptă</string>
+    <string name="action_reject">Respinge</string>
+
+    <string name="nav_home">Acasă</string>
+    <string name="nav_stats">Statistici</string>
+    <string name="nav_presets">Profiluri</string>
+    <string name="nav_settings">Setări</string>
+
+    <string name="settings_title">Setări</string>
+    <string name="settings_language">Limbă</string>
+    <string name="settings_currency">Monedă</string>
+    <string name="settings_preset">Profil</string>
+    <string name="settings_enable_accessibility">Activează citirea ecranului</string>
+    <string name="settings_enable_overlay">Activează widgetul plutitor</string>
+    <string name="settings_accessibility_hint">Necesar pentru detectarea comenzilor (doar citire, fără clicuri automate)</string>
+    <string name="settings_overlay_hint">Necesar pentru a afișa widgetul peste alte aplicații</string>
+
+    <string name="overlay_new_order">Comandă nouă</string>
+    <string name="overlay_min_km">min</string>
+
+    <string name="accessibility_service_description">WayArs citește detaliile comenzii (preț, distanță, timp) afișate pe ecranul aplicațiilor de livrare/taxi pentru a te ajuta să decizi mai repede. Nu apasă și nu modifică niciodată nimic automat.</string>
+</resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WayArs</string>
+    <string name="splash_slogan">Smart Assistant for Drivers &amp; Couriers</string>
+    <string name="splash_start">Get Started</string>
+
+    <string name="onboarding_title">Choose Your Preset</string>
+    <string name="onboarding_subtitle">We will set optimal filters for you</string>
+    <string name="onboarding_customize_later">Customize later</string>
+
+    <string name="preset_economy_title">Economy</string>
+    <string name="preset_economy_desc">Low expenses, moderate income</string>
+    <string name="preset_balance_title">Balance</string>
+    <string name="preset_balance_desc">Balanced time and income</string>
+    <string name="preset_profitable_title">Profitable Only</string>
+    <string name="preset_profitable_desc">Only high paying orders</string>
+
+    <string name="dashboard_today_summary">Today\'s Summary</string>
+    <string name="dashboard_active_time">Active Time</string>
+    <string name="dashboard_distance">Distance</string>
+    <string name="dashboard_avg_rate">Avg Rate</string>
+    <string name="dashboard_order_evaluation">Order Evaluation</string>
+    <string name="dashboard_orders">orders</string>
+    <string name="dashboard_no_order">Waiting for a new order…</string>
+
+    <string name="verdict_good">GOOD</string>
+    <string name="verdict_bad">BAD</string>
+    <string name="action_accept">Accept</string>
+    <string name="action_reject">Reject</string>
+
+    <string name="nav_home">Home</string>
+    <string name="nav_stats">Stats</string>
+    <string name="nav_presets">Presets</string>
+    <string name="nav_settings">Settings</string>
+
+    <string name="settings_title">Settings</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_currency">Currency</string>
+    <string name="settings_preset">Preset</string>
+    <string name="settings_enable_accessibility">Enable screen reading service</string>
+    <string name="settings_enable_overlay">Enable floating widget</string>
+    <string name="settings_accessibility_hint">Required to detect incoming orders (read-only, no auto-clicks)</string>
+    <string name="settings_overlay_hint">Required to show the floating verdict widget over other apps</string>
+
+    <string name="overlay_new_order">New Order</string>
+    <string name="overlay_min_km">min</string>
+
+    <string name="accessibility_service_description">WayArs reads order details (price, distance, time) shown on screen by delivery/taxi apps to help you decide faster. It never taps or modifies anything automatically.</string>
+</resources>

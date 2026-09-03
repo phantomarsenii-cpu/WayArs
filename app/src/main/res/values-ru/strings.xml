@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WayArs</string>
+    <string name="splash_slogan">Умный помощник для водителей и курьеров</string>
+    <string name="splash_start">Начать</string>
+
+    <string name="onboarding_title">Выберите пресет</string>
+    <string name="onboarding_subtitle">Мы настроим оптимальные фильтры за вас</string>
+    <string name="onboarding_customize_later">Настроить позже</string>
+
+    <string name="preset_economy_title">Economy</string>
+    <string name="preset_economy_desc">Низкие расходы, умеренный доход</string>
+    <string name="preset_balance_title">Balance</string>
+    <string name="preset_balance_desc">Баланс времени и дохода</string>
+    <string name="preset_profitable_title">Profitable Only</string>
+    <string name="preset_profitable_desc">Только выгодные заказы</string>
+
+    <string name="dashboard_today_summary">Сводка за сегодня</string>
+    <string name="dashboard_active_time">Активное время</string>
+    <string name="dashboard_distance">Дистанция</string>
+    <string name="dashboard_avg_rate">Средняя ставка</string>
+    <string name="dashboard_order_evaluation">Оценка заказа</string>
+    <string name="dashboard_orders">заказов</string>
+    <string name="dashboard_no_order">Ожидание нового заказа…</string>
+
+    <string name="verdict_good">ВЫГОДНО</string>
+    <string name="verdict_bad">НЕВЫГОДНО</string>
+    <string name="action_accept">Принять</string>
+    <string name="action_reject">Отклонить</string>
+
+    <string name="nav_home">Главная</string>
+    <string name="nav_stats">Статистика</string>
+    <string name="nav_presets">Пресеты</string>
+    <string name="nav_settings">Настройки</string>
+
+    <string name="settings_title">Настройки</string>
+    <string name="settings_language">Язык</string>
+    <string name="settings_currency">Валюта</string>
+    <string name="settings_preset">Пресет</string>
+    <string name="settings_enable_accessibility">Включить чтение экрана</string>
+    <string name="settings_enable_overlay">Включить плавающий виджет</string>
+    <string name="settings_accessibility_hint">Нужно для распознавания заказов (только чтение, без автокликов)</string>
+    <string name="settings_overlay_hint">Нужно для показа виджета поверх других приложений</string>
+
+    <string name="overlay_new_order">Новый заказ</string>
+    <string name="overlay_min_km">мин</string>
+
+    <string name="accessibility_service_description">WayArs считывает детали заказа (цену, дистанцию, время), отображаемые на экране приложений доставки/такси, чтобы помочь вам быстрее принять решение. Приложение никогда не нажимает и не изменяет что-либо автоматически.</string>
+</resources>

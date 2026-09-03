@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="#FFFFFF">
+    <!-- Simplified W silhouette for status bar / notification tray -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M4,6 L7,18 L10,10 L12,15.5 L14,10 L17,18 L20,6 L17.3,6 L15.4,14 L13,7.6 L11,7.6 L8.6,14 L6.7,6 Z" />
+</vector>

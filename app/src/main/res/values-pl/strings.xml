@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WayArs</string>
+    <string name="splash_slogan">Inteligentny asystent dla kierowców i kurierów</string>
+    <string name="splash_start">Rozpocznij</string>
+
+    <string name="onboarding_title">Wybierz swój profil</string>
+    <string name="onboarding_subtitle">Ustawimy dla Ciebie optymalne filtry</string>
+    <string name="onboarding_customize_later">Dostosuj później</string>
+
+    <string name="preset_economy_title">Economy</string>
+    <string name="preset_economy_desc">Niskie koszty, umiarkowany dochód</string>
+    <string name="preset_balance_title">Balance</string>
+    <string name="preset_balance_desc">Balans czasu i dochodu</string>
+    <string name="preset_profitable_title">Profitable Only</string>
+    <string name="preset_profitable_desc">Tylko opłacalne zlecenia</string>
+
+    <string name="dashboard_today_summary">Podsumowanie dnia</string>
+    <string name="dashboard_active_time">Czas aktywności</string>
+    <string name="dashboard_distance">Dystans</string>
+    <string name="dashboard_avg_rate">Śr. stawka</string>
+    <string name="dashboard_order_evaluation">Ocena zlecenia</string>
+    <string name="dashboard_orders">zleceń</string>
+    <string name="dashboard_no_order">Oczekiwanie na nowe zlecenie…</string>
+
+    <string name="verdict_good">OPŁACALNE</string>
+    <string name="verdict_bad">NIEOPŁACALNE</string>
+    <string name="action_accept">Akceptuj</string>
+    <string name="action_reject">Odrzuć</string>
+
+    <string name="nav_home">Start</string>
+    <string name="nav_stats">Statystyki</string>
+    <string name="nav_presets">Profile</string>
+    <string name="nav_settings">Ustawienia</string>
+
+    <string name="settings_title">Ustawienia</string>
+    <string name="settings_language">Język</string>
+    <string name="settings_currency">Waluta</string>
+    <string name="settings_preset">Profil</string>
+    <string name="settings_enable_accessibility">Włącz odczyt ekranu</string>
+    <string name="settings_enable_overlay">Włącz pływający widget</string>
+    <string name="settings_accessibility_hint">Wymagane do wykrywania zleceń (tylko odczyt, bez auto-kliknięć)</string>
+    <string name="settings_overlay_hint">Wymagane do wyświetlania widgetu nad innymi aplikacjami</string>
+
+    <string name="overlay_new_order">Nowe zlecenie</string>
+    <string name="overlay_min_km">min</string>
+
+    <string name="accessibility_service_description">WayArs odczytuje szczegóły zlecenia (cenę, dystans, czas) wyświetlane na ekranie aplikacji dostawczych/taxi, aby pomóc Ci szybciej podjąć decyzję. Nigdy nie klika ani nie modyfikuje niczego automatycznie.</string>
+</resources>
