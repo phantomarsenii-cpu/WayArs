@@ -31,10 +31,10 @@ import java.util.Date
 import java.util.Locale
 
 @Composable
-fun StatsScreen(orders: List<OrderRecord>) {
+fun StatsScreen(orders: List<OrderRecord>, modifier: Modifier = Modifier) {
     if (orders.isEmpty()) {
         Column(
-            modifier = Modifier.fillMaxSize().padding(24.dp),
+            modifier = modifier.fillMaxSize().padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -46,7 +46,7 @@ fun StatsScreen(orders: List<OrderRecord>) {
     val timeFormat = remember { SimpleDateFormat("HH:mm", Locale.getDefault()) }
 
     LazyColumn(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         items(orders) { order ->

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="wa_background">#0D0F12</color>
-    <color name="wa_surface">#16191D</color>
-    <color name="wa_surface_variant">#1E2227</color>
+    <color name="wa_background">#040608</color>
+    <color name="wa_surface">#0E141B</color>
+    <color name="wa_surface_variant">#1A2129</color>
     <color name="wa_neon_green">#00E676</color>
     <color name="wa_neon_green_dark">#00C853</color>
     <color name="wa_red">#FF5252</color>

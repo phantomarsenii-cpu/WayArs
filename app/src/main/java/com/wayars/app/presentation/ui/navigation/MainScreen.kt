@@ -44,12 +44,13 @@ fun MainScreen(
     ) { padding ->
         val content = Modifier.padding(padding)
         when (tab) {
-            MainTab.HOME -> DashboardScreen(summary = summary, latestEvaluation = latestEvaluation)
-            MainTab.STATS -> StatsScreen(orders = todayOrders)
+            MainTab.HOME -> DashboardScreen(summary = summary, latestEvaluation = latestEvaluation, modifier = content)
+            MainTab.STATS -> StatsScreen(orders = todayOrders, modifier = content)
             MainTab.PRESETS -> PresetSelectionScreen(
                 selected = preset,
                 onSelect = onPresetSelected,
-                onContinue = { tab = MainTab.HOME }
+                onContinue = { tab = MainTab.HOME },
+                modifier = content
             )
             MainTab.SETTINGS -> SettingsScreen(
                 languageCode = languageCode,
@@ -59,7 +60,8 @@ fun MainScreen(
                 onCurrencySelected = onCurrencySelected,
                 onPresetSelected = onPresetSelected,
                 onOpenAccessibilitySettings = onOpenAccessibilitySettings,
-                onOpenOverlaySettings = onOpenOverlaySettings
+                onOpenOverlaySettings = onOpenOverlaySettings,
+                modifier = content
             )
         }
     }

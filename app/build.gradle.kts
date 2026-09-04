@@ -4,6 +4,15 @@ plugins {
     id("com.google.devtools.ksp")
 }
 
+// Version auto-increments on every GitHub Actions build using the built-in
+// GITHUB_RUN_NUMBER env var (1, 2, 3, ... forever, never resets). Locally
+// (Android Studio, no CI env var) it falls back to patch "0" -> 0.1.0.
+// To bump the major/minor line later, just change VERSION_MAJOR_MINOR below.
+val versionMajorMinor = "0.1"
+val ciPatch = System.getenv("GITHUB_RUN_NUMBER")?.toIntOrNull() ?: 0
+val appVersionName = "$versionMajorMinor.$ciPatch"
+val appVersionCode = ciPatch + 1 // versionCode must be >= 1 and strictly increasing
+
 android {
     namespace = "com.wayars.app"
     compileSdk = 34
@@ -12,8 +21,8 @@ android {
         applicationId = "com.wayars.app"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "0.1.0"
+        versionCode = appVersionCode
+        versionName = appVersionName
     }
 
     buildTypes {
@@ -43,6 +52,15 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+
+    // Rename the output file itself (not just the artifact zip) to WayArs.apk
+    // instead of the default app-debug.apk / app-release.apk.
+    applicationVariants.all {
+        outputs.all {
+            val output = this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
+            output.outputFileName = "WayArs.apk"
         }
     }
 }

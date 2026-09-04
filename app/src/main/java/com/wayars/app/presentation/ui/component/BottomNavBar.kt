@@ -59,5 +59,5 @@ private fun navColors() = NavigationBarItemDefaults.colors(
     selectedTextColor = WaNeonGreen,
     unselectedIconColor = WaTextSecondary,
     unselectedTextColor = WaTextSecondary,
-    indicatorColor = WaSurface
+    indicatorColor = WaNeonGreen.copy(alpha = 0.15f)
 )

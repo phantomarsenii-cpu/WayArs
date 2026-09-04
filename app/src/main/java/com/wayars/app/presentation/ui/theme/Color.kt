@@ -2,9 +2,9 @@ package com.wayars.app.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val WaBackground = Color(0xFF0D0F12)
-val WaSurface = Color(0xFF16191D)
-val WaSurfaceVariant = Color(0xFF1E2227)
+val WaBackground = Color(0xFF040608)
+val WaSurface = Color(0xFF0E141B)
+val WaSurfaceVariant = Color(0xFF1A2129)
 val WaNeonGreen = Color(0xFF00E676)
 val WaNeonGreenDark = Color(0xFF00C853)
 val WaRed = Color(0xFFFF5252)

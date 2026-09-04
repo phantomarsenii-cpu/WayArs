@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -47,7 +48,8 @@ fun SettingsScreen(
     onCurrencySelected: (Currency) -> Unit,
     onPresetSelected: (PresetType) -> Unit,
     onOpenAccessibilitySettings: () -> Unit,
-    onOpenOverlaySettings: () -> Unit
+    onOpenOverlaySettings: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     // stringResource() must run in a @Composable context. items() inside LazyColumn's
     // builder block is NOT itself @Composable (only each item{}/items{} content lambda is),
@@ -60,8 +62,9 @@ fun SettingsScreen(
     )
 
     LazyColumn(
-        modifier = Modifier.fillMaxSize().padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(20.dp)
+        modifier = modifier.fillMaxSize().padding(20.dp),
+        verticalArrangement = Arrangement.spacedBy(20.dp),
+        contentPadding = PaddingValues(bottom = 24.dp)
     ) {
         item {
             Text(stringResource(R.string.settings_title), style = MaterialTheme.typography.headlineMedium, color = MaterialTheme.colorScheme.onBackground)

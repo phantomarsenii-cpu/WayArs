@@ -1,24 +1,23 @@
 package com.wayars.app.presentation.ui.screen.splash
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.wayars.app.R
 import com.wayars.app.presentation.ui.theme.WaNeonGreen
-import com.wayars.app.presentation.ui.theme.WaTextSecondary
 
 @Composable
 fun SplashScreen(onStart: () -> Unit) {
@@ -27,19 +26,12 @@ fun SplashScreen(onStart: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(
-            text = "WayArs",
-            fontSize = 44.sp,
-            fontWeight = FontWeight.Bold,
-            color = WaNeonGreen
+        Image(
+            painter = painterResource(R.drawable.wayars_logo_full),
+            contentDescription = stringResource(R.string.app_name),
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp)
         )
-        Text(
-            text = stringResource(R.string.splash_slogan),
-            color = WaTextSecondary,
-            style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.padding(top = 8.dp)
-        )
-        Column(modifier = Modifier.padding(top = 48.dp)) {
+        Column(modifier = Modifier.padding(top = 56.dp)) {
             Button(
                 onClick = onStart,
                 colors = ButtonDefaults.buttonColors(containerColor = WaNeonGreen, contentColor = Color.Black)
