@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import com.wayars.app.appContainer
+import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.Currency
 import com.wayars.app.domain.model.Preset
 import com.wayars.app.domain.model.PresetType
@@ -35,6 +36,7 @@ class OrderAccessibilityService : AccessibilityService() {
 
     private var currentCurrency: Currency = Currency.default
     private var currentPreset: Preset = Preset.BALANCE
+    private var currentCustomThresholds: CustomThresholds? = null
     private var lastProcessedAt = 0L
 
     override fun onServiceConnected() {
@@ -45,6 +47,9 @@ class OrderAccessibilityService : AccessibilityService() {
         }
         scope.launch {
             container.settingsRepository.preset.collect { currentPreset = Preset.fromType(it) }
+        }
+        scope.launch {
+            container.settingsRepository.customThresholds.collect { currentCustomThresholds = it }
         }
     }
 
@@ -77,7 +82,8 @@ class OrderAccessibilityService : AccessibilityService() {
             distanceKm = distanceKm,
             timeMinutes = timeMinutes,
             currency = currency,
-            preset = currentPreset
+            preset = currentPreset,
+            customThresholds = currentCustomThresholds
         )
 
         Log.d(TAG, "Parsed order: $evaluation")

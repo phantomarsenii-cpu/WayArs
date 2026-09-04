@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.wayars.app.domain.model.Currency
+import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.PresetType
 import com.wayars.app.presentation.MainViewModel
 import com.wayars.app.presentation.ui.screen.onboarding.PresetSelectionScreen
@@ -34,10 +35,11 @@ fun WayArsNavHost(
     val summary by viewModel.todaySummary.collectAsState()
     val latestEvaluation by viewModel.latestEvaluation.collectAsState()
     val todayOrders by viewModel.todayOrders.collectAsState()
+    val customThresholds by viewModel.customThresholds.collectAsState()
 
     NavHost(navController = navController, startDestination = Routes.SPLASH) {
         composable(Routes.SPLASH) {
-            SplashScreen(onStart = {
+            SplashScreen(onFinished = {
                 val dest = if (onboardingDone) Routes.MAIN else Routes.ONBOARDING
                 navController.navigate(dest) {
                     popUpTo(Routes.SPLASH) { inclusive = true }
@@ -68,7 +70,10 @@ fun WayArsNavHost(
                 onCurrencySelected = { viewModel.setCurrency(it) },
                 onPresetSelected = { viewModel.setPreset(it) },
                 onOpenAccessibilitySettings = onOpenAccessibilitySettings,
-                onOpenOverlaySettings = onOpenOverlaySettings
+                onOpenOverlaySettings = onOpenOverlaySettings,
+                customThresholds = customThresholds,
+                onSaveCustomThresholds = { bad, average, good -> viewModel.setCustomThresholds(bad, average, good) },
+                onClearCustomThresholds = { viewModel.clearCustomThresholds() }
             )
         }
     }

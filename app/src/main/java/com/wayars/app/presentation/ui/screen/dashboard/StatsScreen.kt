@@ -17,12 +17,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.wayars.app.domain.model.Verdict
+import com.wayars.app.R
 import com.wayars.app.domain.repository.OrderRecord
-import com.wayars.app.presentation.ui.theme.WaNeonGreen
-import com.wayars.app.presentation.ui.theme.WaRed
 import com.wayars.app.presentation.ui.theme.WaSurface
 import com.wayars.app.presentation.ui.theme.WaTextSecondary
 import com.wayars.app.util.CurrencyFormatter
@@ -38,7 +37,11 @@ fun StatsScreen(orders: List<OrderRecord>, modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text("—", color = WaTextSecondary, textAlign = TextAlign.Center)
+            Text(
+                stringResource(R.string.stats_empty),
+                color = WaTextSecondary,
+                textAlign = TextAlign.Center
+            )
         }
         return
     }
@@ -72,8 +75,8 @@ fun StatsScreen(orders: List<OrderRecord>, modifier: Modifier = Modifier) {
                     )
                 }
                 Text(
-                    if (order.evaluation.verdict == Verdict.GOOD) "GOOD" else "BAD",
-                    color = if (order.evaluation.verdict == Verdict.GOOD) WaNeonGreen else WaRed,
+                    com.wayars.app.presentation.ui.component.verdictLabel(order.evaluation.verdict),
+                    color = com.wayars.app.presentation.ui.component.verdictColor(order.evaluation.verdict),
                     style = MaterialTheme.typography.labelSmall
                 )
             }

@@ -46,4 +46,13 @@
     <string name="overlay_min_km">min</string>
 
     <string name="accessibility_service_description">WayArs reads order details (price, distance, time) shown on screen by delivery/taxi apps to help you decide faster. It never taps or modifies anything automatically.</string>
+
+    <string name="stats_empty">No orders yet</string>
+    <string name="settings_custom_thresholds_title">Your own €/km thresholds</string>
+    <string name="settings_custom_thresholds_hint">Optional — if set, these replace the preset and use your own numbers (in %1$s) to judge orders</string>
+    <string name="settings_custom_bad">Bad order, up to</string>
+    <string name="settings_custom_average">Average order, from</string>
+    <string name="settings_custom_good">Good order, from</string>
+    <string name="settings_custom_save">Save</string>
+    <string name="settings_custom_clear">Use preset instead</string>
 </resources>

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.wayars.app.AppContainer
+import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.Currency
 import com.wayars.app.domain.model.OrderEvaluation
 import com.wayars.app.domain.model.PresetType
@@ -40,6 +41,9 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
     val onboardingDone: StateFlow<Boolean> =
         settings.onboardingDone.stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
+    val customThresholds: StateFlow<CustomThresholds?> =
+        settings.customThresholds.stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
     val todayOrders: StateFlow<List<OrderRecord>> =
         container.orderRepository.observeToday().stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
@@ -68,6 +72,9 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
     fun setCurrency(currency: Currency) = viewModelScope.launch { settings.setCurrency(currency) }
     fun setPreset(preset: PresetType) = viewModelScope.launch { settings.setPreset(preset) }
     fun completeOnboarding() = viewModelScope.launch { settings.setOnboardingDone(true) }
+    fun setCustomThresholds(bad: Double, average: Double, good: Double) =
+        viewModelScope.launch { settings.setCustomThresholds(bad, average, good) }
+    fun clearCustomThresholds() = viewModelScope.launch { settings.clearCustomThresholds() }
 
     class Factory(private val container: AppContainer) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")

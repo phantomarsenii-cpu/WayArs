@@ -31,6 +31,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.wayars.app.domain.model.OrderEvaluation
 import com.wayars.app.domain.model.Verdict
+import com.wayars.app.presentation.ui.component.verdictColor
+import com.wayars.app.presentation.ui.component.verdictLabel
 import com.wayars.app.presentation.ui.theme.WaNeonGreen
 import com.wayars.app.presentation.ui.theme.WaRed
 import com.wayars.app.presentation.ui.theme.WaSurface
@@ -87,8 +89,7 @@ fun OverlayContent(
                 color = WaTextSecondary
             )
         } else {
-            val isGood = evaluation.verdict == Verdict.GOOD
-            val verdictColor = if (isGood) WaNeonGreen else WaRed
+            val verdictColor = verdictColor(evaluation.verdict)
 
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(
@@ -98,7 +99,7 @@ fun OverlayContent(
                         .padding(horizontal = 10.dp, vertical = 4.dp)
                 ) {
                     Text(
-                        if (isGood) "GOOD" else "BAD",
+                        verdictLabel(evaluation.verdict),
                         color = verdictColor,
                         style = MaterialTheme.typography.labelSmall
                     )

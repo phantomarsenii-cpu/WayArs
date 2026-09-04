@@ -65,7 +65,7 @@ fun DashboardScreen(
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Image(
-                    painter = painterResource(R.drawable.wayars_icon_master),
+                    painter = painterResource(R.drawable.wayars_icon_header),
                     contentDescription = null,
                     modifier = Modifier.size(28.dp).clip(RoundedCornerShape(8.dp))
                 )

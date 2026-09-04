@@ -9,6 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.wayars.app.domain.model.Currency
+import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.PresetType
 import com.wayars.app.domain.repository.OrderRecord
 import com.wayars.app.domain.model.OrderEvaluation
@@ -31,11 +32,14 @@ fun MainScreen(
     languageCode: String,
     currency: Currency,
     preset: PresetType,
+    customThresholds: CustomThresholds?,
     onLanguageSelected: (String) -> Unit,
     onCurrencySelected: (Currency) -> Unit,
     onPresetSelected: (PresetType) -> Unit,
     onOpenAccessibilitySettings: () -> Unit,
-    onOpenOverlaySettings: () -> Unit
+    onOpenOverlaySettings: () -> Unit,
+    onSaveCustomThresholds: (bad: Double, average: Double, good: Double) -> Unit,
+    onClearCustomThresholds: () -> Unit
 ) {
     var tab by remember { mutableStateOf(MainTab.HOME) }
 
@@ -56,11 +60,14 @@ fun MainScreen(
                 languageCode = languageCode,
                 currency = currency,
                 preset = preset,
+                customThresholds = customThresholds,
                 onLanguageSelected = onLanguageSelected,
                 onCurrencySelected = onCurrencySelected,
                 onPresetSelected = onPresetSelected,
                 onOpenAccessibilitySettings = onOpenAccessibilitySettings,
                 onOpenOverlaySettings = onOpenOverlaySettings,
+                onSaveCustomThresholds = onSaveCustomThresholds,
+                onClearCustomThresholds = onClearCustomThresholds,
                 modifier = content
             )
         }

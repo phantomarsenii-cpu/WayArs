@@ -53,8 +53,7 @@ fun VerdictCard(evaluation: OrderEvaluation?, emptyLabel: String, modifier: Modi
             return@Column
         }
 
-        val good = evaluation.verdict == Verdict.GOOD
-        val gaugeColor = if (good) WaNeonGreen else WaRed
+        val gaugeColor = verdictColor(evaluation.verdict)
 
         Box(contentAlignment = Alignment.Center, modifier = Modifier.size(170.dp)) {
             Canvas(modifier = Modifier.size(170.dp)) {
@@ -71,7 +70,7 @@ fun VerdictCard(evaluation: OrderEvaluation?, emptyLabel: String, modifier: Modi
             }
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
-                    if (good) "GOOD" else "BAD",
+                    verdictLabel(evaluation.verdict),
                     color = gaugeColor,
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp
