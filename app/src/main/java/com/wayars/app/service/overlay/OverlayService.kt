@@ -4,7 +4,6 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.graphics.PixelFormat
@@ -19,11 +18,11 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleService
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.savedstate.setViewTreeSavedStateRegistryOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.lifecycle.setViewTreeViewModelStoreOwner
+import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import com.wayars.app.MainActivity
 import com.wayars.app.R
 import com.wayars.app.appContainer
@@ -31,18 +30,26 @@ import com.wayars.app.presentation.ui.theme.WayArsTheme
 import com.wayars.app.presentation.widget.OverlayContent
 import com.wayars.app.presentation.widget.OverlayLifecycleOwner
 import com.wayars.app.presentation.widget.OverlayState
+import com.wayars.app.service.accessibility.ScanningState
 import kotlinx.coroutines.launch
 
 /**
  * Foreground service that hosts the floating "verdict" widget over other
  * apps via WindowManager. It never touches other apps' windows or dispatches
  * input — it only draws its own overlay window and lets the driver tap its
- * own Accept/Reject buttons (which just log a decision locally).
+ * own Accept/Reject buttons.
+ *
+ * The card itself is only attached to the WindowManager while there is an
+ * actual order to show — no permanent "Waiting for order…" plaque cluttering
+ * the driver's map. The underlying foreground service (and its status-bar
+ * icon) keeps running the whole time Active is ON, ready to pop the card up
+ * the instant a new order is parsed.
  */
 class OverlayService : LifecycleService() {
 
     private lateinit var windowManager: WindowManager
-    private var overlayView: ComposeView? = null
+    private var composeView: ComposeView? = null
+    private var isViewAttached = false
     private val overlayLifecycleOwner = OverlayLifecycleOwner()
 
     private var layoutParams: WindowManager.LayoutParams? = null
@@ -61,7 +68,19 @@ class OverlayService : LifecycleService() {
             startForeground(NOTIFICATION_ID, notification)
         }
         overlayLifecycleOwner.performRestore()
-        addOverlayView()
+        overlayLifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_START)
+        overlayLifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+
+        // Show/hide the card purely based on whether there's something to show —
+        // and stop everything immediately if Active gets flipped off elsewhere.
+        lifecycleScope.launch {
+            OverlayState.latestEvaluation.collect { evaluation ->
+                if (evaluation != null && ScanningState.isActive.value) attachView() else detachView()
+            }
+        }
+        lifecycleScope.launch {
+            ScanningState.isActive.collect { active -> if (!active) stopSelf() }
+        }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -74,37 +93,16 @@ class OverlayService : LifecycleService() {
         return null
     }
 
+    private fun buildComposeViewIfNeeded(): ComposeView {
+        composeView?.let { return it }
 
-    private fun addOverlayView() {
-        if (overlayView != null) return
-
-        val overlayType = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-        else
-            @Suppress("DEPRECATION") WindowManager.LayoutParams.TYPE_PHONE
-
-        val params = WindowManager.LayoutParams(
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            overlayType,
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            PixelFormat.TRANSLUCENT
-        ).apply {
-            gravity = Gravity.TOP or Gravity.START
-            x = 40
-            y = 160
-        }
-        layoutParams = params
-
-        val composeView = ComposeView(this).apply {
+        val view = ComposeView(this).apply {
             setViewTreeLifecycleOwner(overlayLifecycleOwner)
             setViewTreeViewModelStoreOwner(overlayLifecycleOwner)
             setViewTreeSavedStateRegistryOwner(overlayLifecycleOwner)
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
 
-            setOnTouchListener { _, event ->
-                handleDrag(event, this@apply)
-            }
+            setOnTouchListener { _, event -> handleDrag(event, this) }
 
             setContent {
                 val evaluation by OverlayState.latestEvaluation.collectAsStateWithLifecycle()
@@ -119,11 +117,45 @@ class OverlayService : LifecycleService() {
                 }
             }
         }
+        composeView = view
+        return view
+    }
 
-        overlayView = composeView
-        overlayLifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_START)
-        overlayLifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
-        windowManager.addView(composeView, params)
+    private fun attachView() {
+        if (isViewAttached) return
+        val view = buildComposeViewIfNeeded()
+
+        val overlayType = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+        else
+            @Suppress("DEPRECATION") WindowManager.LayoutParams.TYPE_PHONE
+
+        val params = layoutParams ?: WindowManager.LayoutParams(
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            overlayType,
+            // FLAG_NOT_TOUCH_MODAL lets touches outside the card fall through to
+            // the app underneath, while the card itself still reliably receives
+            // its own taps (buttons were previously eating the first tap without it).
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
+                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            PixelFormat.TRANSLUCENT
+        ).apply {
+            gravity = Gravity.TOP or Gravity.START
+            x = 40
+            y = 160
+        }
+        layoutParams = params
+
+        runCatching { windowManager.addView(view, params) }
+        isViewAttached = true
+    }
+
+    private fun detachView() {
+        if (!isViewAttached) return
+        composeView?.let { runCatching { windowManager.removeView(it) } }
+        isViewAttached = false
     }
 
     private fun handleDrag(event: MotionEvent, view: View): Boolean {
@@ -145,12 +177,23 @@ class OverlayService : LifecycleService() {
         return false
     }
 
+    /**
+     * A row is only ever written to Room here, on Accept — never during
+     * scanning. This is deliberate: it's what stopped every re-scan of the
+     * same still-visible order from spamming duplicate rows into history.
+     * Reject just dismisses the card with no history entry.
+     */
     private fun onDecision(accepted: Boolean) {
-        val id = OverlayState.pendingRecordId.value ?: return
-        lifecycleScope.launch {
-            runCatching { appContainer().orderRepository.markDecision(id, accepted) }
+        val evaluation = OverlayState.latestEvaluation.value
+        OverlayState.clear() // hide instantly, before the DB write even starts
+        if (accepted && evaluation != null) {
+            lifecycleScope.launch {
+                runCatching {
+                    val id = appContainer().orderRepository.record(evaluation)
+                    appContainer().orderRepository.markDecision(id, true)
+                }
+            }
         }
-        OverlayState.clear()
     }
 
     private fun openApp() {
@@ -164,7 +207,7 @@ class OverlayService : LifecycleService() {
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                CHANNEL_ID, "WayArs Overlay", NotificationManager.IMPORTANCE_MIN
+                CHANNEL_ID, "WayArs", NotificationManager.IMPORTANCE_MIN
             )
             manager.createNotificationChannel(channel)
         }
@@ -185,8 +228,9 @@ class OverlayService : LifecycleService() {
     }
 
     override fun onDestroy() {
-        overlayView?.let { runCatching { windowManager.removeView(it) } }
+        detachView()
         overlayLifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        OverlayState.clear()
         super.onDestroy()
     }
 

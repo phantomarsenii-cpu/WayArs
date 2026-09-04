@@ -23,8 +23,8 @@
     <string name="dashboard_orders">заказов</string>
     <string name="dashboard_no_order">Ожидание нового заказа…</string>
 
-    <string name="verdict_good">ВЫГОДНО</string>
-    <string name="verdict_bad">НЕВЫГОДНО</string>
+    <string name="verdict_good">ХОРОШИЙ</string>
+    <string name="verdict_bad">ПЛОХОЙ</string>
     <string name="action_accept">Принять</string>
     <string name="action_reject">Отклонить</string>
 
@@ -55,4 +55,6 @@
     <string name="settings_custom_good">Хороший заказ, от</string>
     <string name="settings_custom_save">Сохранить</string>
     <string name="settings_custom_clear">Использовать пресет</string>
+    <string name="active_requires_permissions">Сначала включите чтение экрана и плавающий виджет в Настройках</string>
+    <string name="verdict_average">СРЕДНЕ</string>
 </resources>

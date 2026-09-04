@@ -25,6 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.wayars.app.domain.model.PresetType
@@ -76,8 +77,8 @@ fun PresetCard(
         }
         Spacer(Modifier.width(14.dp))
         Column(Modifier.weight(1f)) {
-            Text(preset.title, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 17.sp)
-            Text(preset.description, color = Color.White.copy(alpha = 0.8f), fontSize = 13.sp)
+            Text(preset.title, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 17.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text(preset.description, color = Color.White.copy(alpha = 0.8f), fontSize = 13.sp, maxLines = 2, overflow = TextOverflow.Ellipsis)
         }
         if (selected) {
             Box(

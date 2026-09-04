@@ -19,19 +19,22 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import android.content.Intent
+import android.provider.Settings
+import android.widget.Toast
 import com.wayars.app.R
 import com.wayars.app.domain.model.OrderEvaluation
 import com.wayars.app.presentation.TodaySummary
@@ -40,6 +43,9 @@ import com.wayars.app.presentation.ui.theme.WaNeonGreen
 import com.wayars.app.presentation.ui.theme.WaSurface
 import com.wayars.app.presentation.ui.theme.WaSurfaceVariant
 import com.wayars.app.presentation.ui.theme.WaTextSecondary
+import com.wayars.app.service.accessibility.ScanningState
+import com.wayars.app.service.overlay.OverlayService
+import com.wayars.app.util.AccessibilityUtils
 import com.wayars.app.util.CurrencyFormatter
 
 @Composable
@@ -48,6 +54,9 @@ fun DashboardScreen(
     latestEvaluation: OrderEvaluation?,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    val isActive by ScanningState.isActive.collectAsState()
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -55,9 +64,10 @@ fun DashboardScreen(
             .padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(18.dp)
     ) {
-        // Header: small app glyph + wordmark on the left, "Active" switch on the right —
-        // matches the design template's top bar. The switch is a visual on/off indicator;
-        // it doesn't yet drive the scanning service directly.
+        // Header: small app glyph + wordmark on the left, "Active" switch on the right.
+        // The switch is wired to the real global scanning gate (ScanningState) — when
+        // OFF, the accessibility service does nothing at all and the overlay service
+        // (with its status-bar icon) is fully stopped, not just visually hidden.
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
@@ -74,15 +84,41 @@ fun DashboardScreen(
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.padding(start = 8.dp)
                 )
             }
-            var active by remember { mutableStateOf(true) }
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text("Active", color = WaTextSecondary, fontSize = 13.sp, modifier = Modifier.padding(end = 6.dp))
+                Text(
+                    "Active",
+                    color = WaTextSecondary,
+                    fontSize = 13.sp,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(end = 6.dp)
+                )
                 Switch(
-                    checked = active,
-                    onCheckedChange = { active = it },
+                    checked = isActive,
+                    onCheckedChange = { checked ->
+                        if (checked) {
+                            val overlayOk = Settings.canDrawOverlays(context)
+                            val accessibilityOk = AccessibilityUtils.isServiceEnabled(context)
+                            if (overlayOk && accessibilityOk) {
+                                ScanningState.setActive(true)
+                                context.startForegroundService(Intent(context, OverlayService::class.java))
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    context.getString(R.string.active_requires_permissions),
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+                        } else {
+                            ScanningState.setActive(false)
+                            context.stopService(Intent(context, OverlayService::class.java))
+                        }
+                    },
                     colors = SwitchDefaults.colors(
                         checkedTrackColor = WaNeonGreen,
                         checkedThumbColor = Color.White,
@@ -164,8 +200,8 @@ fun DashboardScreen(
 @Composable
 private fun SummaryStat(value: String, label: String, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
-        Text(value, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 15.sp)
-        Text(label, color = WaTextSecondary, fontSize = 12.sp)
+        Text(value, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 15.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
+        Text(label, color = WaTextSecondary, fontSize = 12.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
     }
 }
 

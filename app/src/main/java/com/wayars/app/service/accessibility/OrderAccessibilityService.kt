@@ -11,6 +11,7 @@ import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.Currency
 import com.wayars.app.domain.model.Preset
 import com.wayars.app.domain.model.PresetType
+import com.wayars.app.domain.model.RawOrderCandidate
 import com.wayars.app.presentation.widget.OverlayState
 import com.wayars.app.service.overlay.OverlayService
 import com.wayars.app.util.ScreenTextParser
@@ -23,12 +24,20 @@ import kotlinx.coroutines.launch
 /**
  * Read-only order scanner.
  *
- * Safety properties (see project README for the full rationale):
+ * Safety properties:
  *  - Never calls performAction/dispatchGesture -> no auto-clicking, ever.
  *  - Only reads text already rendered on screen via the official
- *    AccessibilityNodeInfo tree (rootInActiveWindow), scoped to the
- *    package allow-list in res/xml/accessibility_service_config.xml.
+ *    AccessibilityNodeInfo tree (rootInActiveWindow).
  *  - Does not inject into or modify the target app's process in any way.
+ *
+ * Package filtering is enforced TWICE, deliberately: once via the
+ * android:packageNames allow-list in res/xml/accessibility_service_config.xml
+ * (so the OS doesn't even deliver events for other apps), and again here in
+ * code via [isSupportedPackage] as a hard backstop. Real-world testing showed
+ * the overlay misfiring on Google Maps navigation UI ("17 min · 4.2 km" from
+ * Maps' own ETA bar was mistaken for an order) — this second check exists
+ * specifically so that can never happen again even if the XML allow-list
+ * config is ever loosened or misconfigured.
  */
 class OrderAccessibilityService : AccessibilityService() {
 
@@ -38,6 +47,7 @@ class OrderAccessibilityService : AccessibilityService() {
     private var currentPreset: Preset = Preset.BALANCE
     private var currentCustomThresholds: CustomThresholds? = null
     private var lastProcessedAt = 0L
+    private var lastCandidate: RawOrderCandidate? = null
 
     override fun onServiceConnected() {
         super.onServiceConnected()
@@ -55,6 +65,17 @@ class OrderAccessibilityService : AccessibilityService() {
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         event ?: return
+
+        // Hard gate #1: the app-wide "Active" switch. The service stays bound
+        // to the OS whenever Accessibility is enabled in Settings, but it must
+        // do nothing at all unless the user has flipped Active ON.
+        if (!ScanningState.isActive.value) return
+
+        // Hard gate #2: package allow-list, enforced in code regardless of
+        // what the XML config says.
+        val eventPackage = event.packageName?.toString()
+        if (eventPackage == null || !isSupportedPackage(eventPackage)) return
+
         if (event.eventType != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED &&
             event.eventType != AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED
         ) return
@@ -64,12 +85,19 @@ class OrderAccessibilityService : AccessibilityService() {
         lastProcessedAt = now
 
         val root = rootInActiveWindow ?: return
+        // Double-check the root itself belongs to a supported app — rootInActiveWindow
+        // can momentarily lag behind the event's own package during window transitions.
+        val rootPackage = root.packageName?.toString()
+        if (rootPackage == null || !isSupportedPackage(rootPackage)) return
+
         val texts = ArrayList<String>()
         collectText(root, texts, maxDepth = 40)
-
         if (texts.isEmpty()) return
+
         val candidate = ScreenTextParser.parse(texts)
         if (!candidate.isComplete) return
+        if (candidate == lastCandidate) return // identical to what's already on screen — nothing changed
+        lastCandidate = candidate
 
         val earnings = candidate.earnings ?: return
         val distanceKm = candidate.distanceKm ?: return
@@ -88,10 +116,11 @@ class OrderAccessibilityService : AccessibilityService() {
 
         Log.d(TAG, "Parsed order: $evaluation")
 
-        scope.launch {
-            val id = runCatching { container.orderRepository.record(evaluation) }.getOrNull()
-            OverlayState.publish(evaluation, id)
-        }
+        // NOTE: nothing is written to Room here. A row is only ever inserted
+        // when the driver taps Accept in the overlay (see OverlayService) —
+        // this is what stops every re-scan of the same still-visible order
+        // from spamming duplicate rows into the stats history.
+        OverlayState.publish(evaluation, recordId = null)
 
         if (Settings.canDrawOverlays(applicationContext)) {
             startForegroundService(Intent(applicationContext, OverlayService::class.java))
@@ -124,5 +153,20 @@ class OrderAccessibilityService : AccessibilityService() {
 
     companion object {
         private const val TAG = "WayArsAccessibility"
+
+        /**
+         * Runtime backstop allow-list — keep in sync with
+         * res/xml/accessibility_service_config.xml. Verify real package IDs
+         * on-device via `adb shell dumpsys window | grep mCurrentFocus`
+         * while each app is open; these are best-effort names.
+         */
+        private val SUPPORTED_PACKAGES = setOf(
+            "ee.mtakso.driver",           // Bolt driver app (rides + Bolt Food share this app)
+            "com.ubercab.driver",         // Uber driver
+            "com.wolt.courier.app",       // Wolt courier
+            "com.freenow.driver"          // FreeNow driver — verify on-device, name unconfirmed
+        )
+
+        fun isSupportedPackage(packageName: String): Boolean = packageName in SUPPORTED_PACKAGES
     }
 }

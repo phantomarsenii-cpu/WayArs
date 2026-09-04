@@ -36,9 +36,6 @@ import androidx.compose.ui.unit.dp
 import com.wayars.app.R
 import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.Currency
-import com.wayars.app.domain.model.PresetType
-import com.wayars.app.presentation.ui.component.PresetCard
-import com.wayars.app.presentation.ui.component.PresetUi
 import com.wayars.app.presentation.ui.theme.WaAmber
 import com.wayars.app.presentation.ui.theme.WaNeonGreen
 import com.wayars.app.presentation.ui.theme.WaRed
@@ -50,27 +47,15 @@ import com.wayars.app.util.LocaleManager
 fun SettingsScreen(
     languageCode: String,
     currency: Currency,
-    preset: PresetType,
     customThresholds: CustomThresholds?,
     onLanguageSelected: (String) -> Unit,
     onCurrencySelected: (Currency) -> Unit,
-    onPresetSelected: (PresetType) -> Unit,
     onOpenAccessibilitySettings: () -> Unit,
     onOpenOverlaySettings: () -> Unit,
     onSaveCustomThresholds: (bad: Double, average: Double, good: Double) -> Unit,
     onClearCustomThresholds: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    // stringResource() must run in a @Composable context. items() inside LazyColumn's
-    // builder block is NOT itself @Composable (only each item{}/items{} content lambda is),
-    // so this list has to be built here, in the screen's own composable body, not inline
-    // as an argument to items(...).
-    val presetOptions = listOf(
-        PresetUi(PresetType.ECONOMY, stringResource(R.string.preset_economy_title), stringResource(R.string.preset_economy_desc)),
-        PresetUi(PresetType.BALANCE, stringResource(R.string.preset_balance_title), stringResource(R.string.preset_balance_desc)),
-        PresetUi(PresetType.PROFITABLE_ONLY, stringResource(R.string.preset_profitable_title), stringResource(R.string.preset_profitable_desc))
-    )
-
     LazyColumn(
         modifier = modifier.fillMaxSize().padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
@@ -88,13 +73,6 @@ fun SettingsScreen(
         item {
             SectionLabel(stringResource(R.string.settings_currency))
             CurrencyPicker(current = currency, onSelect = onCurrencySelected)
-        }
-
-        item {
-            SectionLabel(stringResource(R.string.settings_preset))
-        }
-        items(presetOptions) { p ->
-            PresetCard(preset = p, selected = p.type == preset, onClick = { onPresetSelected(p.type) })
         }
 
         item {

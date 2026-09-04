@@ -55,4 +55,6 @@
     <string name="settings_custom_good">Good order, from</string>
     <string name="settings_custom_save">Save</string>
     <string name="settings_custom_clear">Use preset instead</string>
+    <string name="active_requires_permissions">Enable screen reading and the floating widget in Settings first</string>
+    <string name="verdict_average">AVERAGE</string>
 </resources>

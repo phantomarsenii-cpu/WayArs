@@ -59,11 +59,9 @@ fun MainScreen(
             MainTab.SETTINGS -> SettingsScreen(
                 languageCode = languageCode,
                 currency = currency,
-                preset = preset,
                 customThresholds = customThresholds,
                 onLanguageSelected = onLanguageSelected,
                 onCurrencySelected = onCurrencySelected,
-                onPresetSelected = onPresetSelected,
                 onOpenAccessibilitySettings = onOpenAccessibilitySettings,
                 onOpenOverlaySettings = onOpenOverlaySettings,
                 onSaveCustomThresholds = onSaveCustomThresholds,

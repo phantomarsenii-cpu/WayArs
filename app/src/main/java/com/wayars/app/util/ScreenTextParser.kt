@@ -7,8 +7,14 @@ import com.wayars.app.domain.model.RawOrderCandidate
  * Turns the flat list of text strings scraped from an order app's screen
  * (via AccessibilityNodeInfo) into a [RawOrderCandidate]. Pure regex, no
  * network, no per-app hardcoding beyond common currency/unit notations —
- * this is intentionally generic so it keeps working if Bolt/Uber/Glovo/Wolt
+ * this is intentionally generic so it keeps working if Bolt/Uber/Wolt/FreeNow
  * tweak their layouts.
+ *
+ * Bolt in particular often prints everything on ONE line, e.g.
+ * "5.2 km, 34 min, PLN 16.37" — that's why currency patterns exist in BOTH
+ * orders (amount-then-symbol AND symbol/code-then-amount): PLN/UAH/MDL
+ * commonly appear before the number in that combined-string layout, while
+ * the same currencies can appear after the number elsewhere in the app.
  *
  * NOTE: real-world order screens are messy (extra prices for tips, surge,
  * etc). This picks the FIRST plausible match per field. If in testing you
@@ -25,8 +31,13 @@ object ScreenTextParser {
         Regex("""(\d+[.,]\d{1,2})\s?\$""") to Currency.USD,
         Regex("""£\s?(\d+[.,]\d{1,2})""") to Currency.GBP,
         Regex("""(\d+[.,]\d{1,2})\s?£""") to Currency.GBP,
+        // PLN/UAH/MDL: accept the currency marker BEFORE or AFTER the number,
+        // since Bolt's combined-line format puts it before ("PLN 16.37").
+        Regex("""(?:zł|PLN|zl)\s?(\d+[.,]\d{1,2})""", RegexOption.IGNORE_CASE) to Currency.PLN,
         Regex("""(\d+[.,]\d{1,2})\s?(?:zł|PLN|zl)""", RegexOption.IGNORE_CASE) to Currency.PLN,
+        Regex("""(?:₴|UAH|грн)\s?(\d+[.,]\d{1,2})""", RegexOption.IGNORE_CASE) to Currency.UAH,
         Regex("""(\d+[.,]\d{1,2})\s?(?:₴|UAH|грн)""", RegexOption.IGNORE_CASE) to Currency.UAH,
+        Regex("""(?:MDL|lei)\s?(\d+[.,]\d{1,2})""", RegexOption.IGNORE_CASE) to Currency.MDL,
         Regex("""(\d+[.,]\d{1,2})\s?(?:MDL|lei|L\b)""", RegexOption.IGNORE_CASE) to Currency.MDL
     )
 
@@ -48,8 +59,9 @@ object ScreenTextParser {
             if (earnings == null) {
                 for ((regex, cur) in moneyPatterns) {
                     val match = regex.find(text) ?: continue
-                    earnings = match.groupValues[1].replace(',', '.').toDoubleOrNull()
-                    if (earnings != null) {
+                    val amount = match.groupValues[1].replace(',', '.').toDoubleOrNull()
+                    if (amount != null && amount > 0) {
+                        earnings = amount
                         currency = cur
                         break
                     }
@@ -58,13 +70,15 @@ object ScreenTextParser {
 
             if (distanceKm == null) {
                 distanceRegex.find(text)?.let { match ->
-                    distanceKm = match.groupValues[1].replace(',', '.').toDoubleOrNull()
+                    val km = match.groupValues[1].replace(',', '.').toDoubleOrNull()
+                    if (km != null && km > 0) distanceKm = km
                 }
             }
 
             if (timeMinutes == null) {
                 timeRegex.find(text)?.let { match ->
-                    timeMinutes = match.groupValues[1].toDoubleOrNull()
+                    val mins = match.groupValues[1].toDoubleOrNull()
+                    if (mins != null && mins > 0) timeMinutes = mins
                 }
             }
 

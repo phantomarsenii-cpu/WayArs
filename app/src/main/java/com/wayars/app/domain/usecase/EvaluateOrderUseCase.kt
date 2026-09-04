@@ -11,9 +11,15 @@ import com.wayars.app.domain.model.Verdict
  *
  * If the user has set [customThresholds] (Settings screen), those take
  * priority over the selected preset and produce a 3-tier verdict
- * (GOOD / AVERAGE / BAD) based purely on €/km. Otherwise falls back to the
- * original preset-based 2-tier logic (GOOD if both €/km and €/min clear the
- * preset's thresholds, else BAD).
+ * (GOOD / AVERAGE / BAD) based purely on €/km.
+ *
+ * Otherwise falls back to the preset-based logic — BUT with one hard rule
+ * that always wins: an order clearing [ABSOLUTE_GOOD_RATE_PER_KM_PLN] (~4 zł/km
+ * equivalent in the user's currency) is ALWAYS GOOD, full stop, even if its
+ * €/minute happens to be low (e.g. a short hop with a red light or two).
+ * Real-world testing showed the old dual-condition (km AND minute) logic
+ * marking excellent-€/km orders as BAD just because they were short trips —
+ * that's exactly the failure mode this rule exists to prevent.
  */
 class EvaluateOrderUseCase {
 
@@ -38,7 +44,10 @@ class EvaluateOrderUseCase {
                 else -> Verdict.BAD
             }
         } else {
-            if (ratePerKm >= preset.minRatePerKm(currency) && ratePerMinute >= preset.minRatePerMinute(currency)) {
+            val absoluteGoodRate = ABSOLUTE_GOOD_RATE_PER_KM_PLN / currency.rateToPln
+            if (ratePerKm >= absoluteGoodRate) {
+                Verdict.GOOD
+            } else if (ratePerKm >= preset.minRatePerKm(currency) && ratePerMinute >= preset.minRatePerMinute(currency)) {
                 Verdict.GOOD
             } else {
                 Verdict.BAD
@@ -54,5 +63,10 @@ class EvaluateOrderUseCase {
             ratePerMinute = ratePerMinute,
             verdict = verdict
         )
+    }
+
+    companion object {
+        /** Any order clearing this €/km bar (converted to the user's currency) is always GOOD. */
+        const val ABSOLUTE_GOOD_RATE_PER_KM_PLN = 4.0
     }
 }

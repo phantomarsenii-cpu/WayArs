@@ -8,5 +8,5 @@ data class RawOrderCandidate(
     val currency: Currency?
 ) {
     val isComplete: Boolean
-        get() = earnings != null && distanceKm != null && distanceKm > 0 && timeMinutes != null && timeMinutes > 0
+        get() = earnings != null && earnings > 0 && distanceKm != null && distanceKm > 0 && timeMinutes != null && timeMinutes > 0
 }

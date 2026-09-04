@@ -23,8 +23,8 @@
     <string name="dashboard_orders">zleceń</string>
     <string name="dashboard_no_order">Oczekiwanie na nowe zlecenie…</string>
 
-    <string name="verdict_good">OPŁACALNE</string>
-    <string name="verdict_bad">NIEOPŁACALNE</string>
+    <string name="verdict_good">DOBRY</string>
+    <string name="verdict_bad">SŁABY</string>
     <string name="action_accept">Akceptuj</string>
     <string name="action_reject">Odrzuć</string>
 
@@ -55,4 +55,6 @@
     <string name="settings_custom_good">Dobre zlecenie, od</string>
     <string name="settings_custom_save">Zapisz</string>
     <string name="settings_custom_clear">Użyj profilu</string>
+    <string name="active_requires_permissions">Najpierw włącz odczyt ekranu i pływający widget w Ustawieniach</string>
+    <string name="verdict_average">ŚREDNI</string>
 </resources>

@@ -23,8 +23,8 @@
     <string name="dashboard_orders">замовлень</string>
     <string name="dashboard_no_order">Очікування нового замовлення…</string>
 
-    <string name="verdict_good">ВИГІДНО</string>
-    <string name="verdict_bad">НЕВИГІДНО</string>
+    <string name="verdict_good">ДОБРИЙ</string>
+    <string name="verdict_bad">ПОГАНИЙ</string>
     <string name="action_accept">Прийняти</string>
     <string name="action_reject">Відхилити</string>
 
@@ -55,4 +55,6 @@
     <string name="settings_custom_good">Гарне замовлення, від</string>
     <string name="settings_custom_save">Зберегти</string>
     <string name="settings_custom_clear">Використати пресет</string>
+    <string name="active_requires_permissions">Спочатку увімкніть читання екрана і плаваючий віджет у Налаштуваннях</string>
+    <string name="verdict_average">СЕРЕДНЬО</string>
 </resources>
