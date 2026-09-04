@@ -49,6 +49,16 @@ fun SettingsScreen(
     onOpenAccessibilitySettings: () -> Unit,
     onOpenOverlaySettings: () -> Unit
 ) {
+    // stringResource() must run in a @Composable context. items() inside LazyColumn's
+    // builder block is NOT itself @Composable (only each item{}/items{} content lambda is),
+    // so this list has to be built here, in the screen's own composable body, not inline
+    // as an argument to items(...).
+    val presetOptions = listOf(
+        PresetUi(PresetType.ECONOMY, stringResource(R.string.preset_economy_title), stringResource(R.string.preset_economy_desc)),
+        PresetUi(PresetType.BALANCE, stringResource(R.string.preset_balance_title), stringResource(R.string.preset_balance_desc)),
+        PresetUi(PresetType.PROFITABLE_ONLY, stringResource(R.string.preset_profitable_title), stringResource(R.string.preset_profitable_desc))
+    )
+
     LazyColumn(
         modifier = Modifier.fillMaxSize().padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp)
@@ -70,13 +80,7 @@ fun SettingsScreen(
         item {
             SectionLabel(stringResource(R.string.settings_preset))
         }
-        items(
-            listOf(
-                PresetUi(PresetType.ECONOMY, stringResource(R.string.preset_economy_title), stringResource(R.string.preset_economy_desc)),
-                PresetUi(PresetType.BALANCE, stringResource(R.string.preset_balance_title), stringResource(R.string.preset_balance_desc)),
-                PresetUi(PresetType.PROFITABLE_ONLY, stringResource(R.string.preset_profitable_title), stringResource(R.string.preset_profitable_desc))
-            )
-        ) { p ->
+        items(presetOptions) { p ->
             PresetCard(preset = p, selected = p.type == preset, onClick = { onPresetSelected(p.type) })
         }
 

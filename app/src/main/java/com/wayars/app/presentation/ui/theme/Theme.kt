@@ -4,6 +4,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 
+private val Color0 = androidx.compose.ui.graphics.Color(0xFF04140C)
+
 private val WayArsColorScheme = darkColorScheme(
     primary = WaNeonGreen,
     onPrimary = Color0,
@@ -16,8 +18,6 @@ private val WayArsColorScheme = darkColorScheme(
     onSurfaceVariant = WaTextSecondary,
     error = WaRed
 )
-
-private val Color0 = androidx.compose.ui.graphics.Color(0xFF04140C)
 
 @Composable
 fun WayArsTheme(content: @Composable () -> Unit) {
