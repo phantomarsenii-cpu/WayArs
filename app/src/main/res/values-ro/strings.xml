@@ -57,4 +57,6 @@
     <string name="settings_custom_clear">Folosește profilul</string>
     <string name="active_requires_permissions">Activează mai întâi citirea ecranului și widgetul plutitor în Setări</string>
     <string name="verdict_average">MEDIU</string>
+    <string name="settings_enable_notifications">Activează accesul la notificări</string>
+    <string name="settings_notifications_hint">Canal de rezervă opțional — detectează comenzile trimise ca notificare când aplicația este minimizată</string>
 </resources>

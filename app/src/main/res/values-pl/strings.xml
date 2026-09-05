@@ -57,4 +57,6 @@
     <string name="settings_custom_clear">Użyj profilu</string>
     <string name="active_requires_permissions">Najpierw włącz odczyt ekranu i pływający widget w Ustawieniach</string>
     <string name="verdict_average">ŚREDNI</string>
+    <string name="settings_enable_notifications">Włącz dostęp do powiadomień</string>
+    <string name="settings_notifications_hint">Opcjonalny kanał zapasowy — wykrywa zlecenia przesłane jako powiadomienie, gdy aplikacja jest zminimalizowana</string>
 </resources>

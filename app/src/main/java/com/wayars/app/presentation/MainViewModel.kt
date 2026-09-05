@@ -12,7 +12,7 @@ import com.wayars.app.domain.repository.OrderRecord
 import com.wayars.app.presentation.widget.OverlayState
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -47,14 +47,22 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
     val todayOrders: StateFlow<List<OrderRecord>> =
         container.orderRepository.observeToday().stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
-    val todaySummary: StateFlow<TodaySummary> = todayOrders
-        .map { orders -> buildSummary(orders) }
-        .stateIn(viewModelScope, SharingStarted.Eagerly, TodaySummary())
+    // Was `todayOrders.map { buildSummary(it) }` — with zero orders, that Flow
+    // never re-emits when the user only changes the currency setting (nothing
+    // about "today's orders" changed), so the Dashboard kept showing the old
+    // currency ("zł" stuck even after picking EUR). combine() re-evaluates on
+    // either input changing.
+    val todaySummary: StateFlow<TodaySummary> = combine(todayOrders, currency) { orders, cur ->
+        buildSummary(orders, cur)
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, TodaySummary())
 
     val latestEvaluation: StateFlow<OrderEvaluation?> = OverlayState.latestEvaluation
 
-    private fun buildSummary(orders: List<OrderRecord>): TodaySummary {
-        if (orders.isEmpty()) return TodaySummary(currency = currency.value)
+    private fun buildSummary(orders: List<OrderRecord>, currentCurrency: Currency): TodaySummary {
+        // Always display the currently selected currency label, even for
+        // historical orders recorded under a different one — this app shows
+        // one working currency at a time, not a multi-currency ledger.
+        if (orders.isEmpty()) return TodaySummary(currency = currentCurrency)
         val totalEarnings = orders.sumOf { it.evaluation.earnings }
         val totalDistance = orders.sumOf { it.evaluation.distanceKm }
         val totalTime = orders.sumOf { it.evaluation.timeMinutes }
@@ -64,7 +72,7 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
             totalDistanceKm = totalDistance,
             totalTimeMinutes = totalTime,
             avgRatePerKm = if (totalDistance > 0) totalEarnings / totalDistance else 0.0,
-            currency = orders.first().evaluation.currency
+            currency = currentCurrency
         )
     }
 

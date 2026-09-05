@@ -25,7 +25,27 @@ android {
         versionName = appVersionName
     }
 
+    // A fresh GitHub Actions runner has no ~/.android/debug.keystore, so
+    // Gradle silently generates a NEW random one on every single CI build.
+    // Each APK ends up signed with a different key, and Android refuses to
+    // install an "update" signed by a different key than the one already on
+    // the phone — hence needing to uninstall the old version every time.
+    // Using this committed, fixed keystore for the debug build fixes that:
+    // every CI build (and every local build) signs with the SAME key, so
+    // installing a new APK over the old one works like a normal update.
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
+    }
+
     buildTypes {
+        debug {
+            signingConfig = signingConfigs.getByName("debug")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")

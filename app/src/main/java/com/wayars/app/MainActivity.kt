@@ -7,14 +7,15 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.wayars.app.data.prefs.LanguagePrefs
 import com.wayars.app.presentation.MainViewModel
 import com.wayars.app.presentation.ui.navigation.WayArsNavHost
 import com.wayars.app.presentation.ui.theme.WayArsTheme
 import com.wayars.app.util.LocaleManager
-import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
@@ -24,13 +25,29 @@ class MainActivity : ComponentActivity() {
         MainViewModel.Factory(applicationContext.appContainer())
     }
 
+    // The language actually baked into this Activity instance's resources by
+    // attachBaseContext. Compared against live settings changes below —
+    // this replaces a fragile "drop the first Flow emission" heuristic that
+    // could race with DataStore's initial load and skip a real language
+    // change (reported as "switching language doesn't always work").
+    private var appliedLanguage: String = LocaleManager.fallback
+
     override fun attachBaseContext(newBase: Context) {
         val languageCode = LanguagePrefs.read(newBase) ?: LocaleManager.resolveInitialLanguage()
+        appliedLanguage = languageCode
         super.attachBaseContext(LocaleManager.wrap(newBase, languageCode))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Edge-to-edge + explicit system bar colors: relying on the theme's
+        // android:navigationBarColor alone left a mismatched dark strip above
+        // the nav bar on some OEM skins.
+        enableEdgeToEdge()
+        window.statusBarColor = ContextCompat.getColor(this, R.color.wa_background)
+        window.navigationBarColor = ContextCompat.getColor(this, R.color.wa_surface)
+
         setContent {
             WayArsTheme {
                 WayArsNavHost(
@@ -41,10 +58,10 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        // Language is picked from Settings and persisted via DataStore, but attachBaseContext
-        // only runs once per Activity instance — recreate() re-applies it immediately.
         lifecycleScope.launch {
-            viewModel.languageCode.filterNotNull().drop(1).collect { recreate() }
+            viewModel.languageCode.filterNotNull().collect { code ->
+                if (code != appliedLanguage) recreate()
+            }
         }
     }
 
