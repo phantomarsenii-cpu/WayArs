@@ -71,6 +71,10 @@ class OrderAccessibilityService : AccessibilityService() {
         // do nothing at all unless the user has flipped Active ON.
         if (!ScanningState.isActive.value) return
 
+        // Hard gate #1b: brief cooldown right after Accept/Reject — see
+        // ScanningState.suppressScanningBriefly() for why this exists.
+        if (ScanningState.isSuppressed()) return
+
         // Hard gate #2: package allow-list, enforced in code regardless of
         // what the XML config says.
         val eventPackage = event.packageName?.toString()

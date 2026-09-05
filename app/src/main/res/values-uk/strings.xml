@@ -48,8 +48,8 @@
     <string name="accessibility_service_description">WayArs зчитує деталі замовлення (ціну, дистанцію, час), що відображаються на екрані застосунків доставки/таксі, щоб допомогти вам швидше прийняти рішення. Застосунок ніколи не натискає і не змінює нічого автоматично.</string>
 
     <string name="stats_empty">Замовлень поки не було</string>
-    <string name="settings_custom_thresholds_title">Свої пороги, €/км</string>
-    <string name="settings_custom_thresholds_hint">Необов\'язково — якщо заповнено, ці цифри (у %1$s) замінюють пресет при оцінці замовлень</string>
+    <string name="settings_custom_thresholds_title">Свої пороги оцінки</string>
+    <string name="settings_custom_thresholds_hint">Необов\'язково — свої цифри %1$s/км замість пресету</string>
     <string name="settings_custom_bad">Погане замовлення, до</string>
     <string name="settings_custom_average">Середнє замовлення, від</string>
     <string name="settings_custom_good">Гарне замовлення, від</string>

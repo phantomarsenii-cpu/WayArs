@@ -53,7 +53,8 @@ class MainActivity : ComponentActivity() {
                 WayArsNavHost(
                     viewModel = viewModel,
                     onOpenAccessibilitySettings = { openAccessibilitySettings() },
-                    onOpenOverlaySettings = { openOverlaySettings() }
+                    onOpenOverlaySettings = { openOverlaySettings() },
+                    onOpenNotificationSettings = { openNotificationSettings() }
                 )
             }
         }
@@ -75,5 +76,9 @@ class MainActivity : ComponentActivity() {
             Uri.parse("package:$packageName")
         )
         startActivity(intent)
+    }
+
+    private fun openNotificationSettings() {
+        startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
     }
 }

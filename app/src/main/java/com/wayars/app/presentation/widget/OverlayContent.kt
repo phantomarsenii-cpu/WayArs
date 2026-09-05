@@ -1,6 +1,7 @@
 package com.wayars.app.presentation.widget
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,9 +29,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.wayars.app.R
 import com.wayars.app.domain.model.OrderEvaluation
-import com.wayars.app.domain.model.Verdict
 import com.wayars.app.presentation.ui.component.verdictColor
 import com.wayars.app.presentation.ui.component.verdictLabel
 import com.wayars.app.presentation.ui.theme.WaNeonGreen
@@ -41,9 +44,14 @@ import com.wayars.app.presentation.ui.theme.WaTextSecondary
 import com.wayars.app.util.CurrencyFormatter
 
 /**
- * The floating card shown over Bolt/Uber/Glovo/Wolt. Matches the WayArs
- * design template: dark card, big verdict, amount, distance/time, rate chip,
- * Accept/Reject actions.
+ * The floating card shown over Bolt/Uber/Wolt/FreeNow.
+ *
+ * Dragging lives ONLY on the header row via [onDragBy] + Compose's own
+ * detectDragGestures — the Accept/Reject/Settings/Close buttons below are
+ * never touched by any drag-handling code, which is what actually fixes taps
+ * "not registering" (a raw View.OnTouchListener spanning the whole card used
+ * to intercept every touch, including button taps, before Compose's click
+ * detector ever got a clean look at it).
  */
 @Composable
 fun OverlayContent(
@@ -51,7 +59,8 @@ fun OverlayContent(
     onAccept: () -> Unit,
     onReject: () -> Unit,
     onSettings: () -> Unit,
-    onClose: () -> Unit
+    onClose: () -> Unit,
+    onDragBy: (dx: Float, dy: Float) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -61,7 +70,14 @@ fun OverlayContent(
             .padding(16.dp)
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .pointerInput(Unit) {
+                    detectDragGestures { change, dragAmount ->
+                        change.consume()
+                        onDragBy(dragAmount.x, dragAmount.y)
+                    }
+                },
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -84,7 +100,7 @@ fun OverlayContent(
 
         if (evaluation == null) {
             Text(
-                "Waiting for order…",
+                stringResource(R.string.dashboard_no_order),
                 style = MaterialTheme.typography.bodyMedium,
                 color = WaTextSecondary
             )

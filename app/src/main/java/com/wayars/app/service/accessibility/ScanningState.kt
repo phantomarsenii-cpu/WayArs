@@ -17,4 +17,18 @@ object ScanningState {
     fun setActive(active: Boolean) {
         _isActive.value = active
     }
+
+    // Cooldown after Accept/Reject: the same still-visible order screen often
+    // keeps updating live text (a ticking ETA, "17 min" -> "16 min", a moving
+    // pickup-distance counter) which used to look like a "new" order to our
+    // equality-based dedup and pop the card straight back up right after the
+    // driver dismissed it. Suppressing scanning for a few seconds after any
+    // decision gives the app's own UI time to actually move on.
+    private var suppressUntilMillis: Long = 0L
+
+    fun suppressScanningBriefly(durationMillis: Long = 8000L) {
+        suppressUntilMillis = System.currentTimeMillis() + durationMillis
+    }
+
+    fun isSuppressed(): Boolean = System.currentTimeMillis() < suppressUntilMillis
 }

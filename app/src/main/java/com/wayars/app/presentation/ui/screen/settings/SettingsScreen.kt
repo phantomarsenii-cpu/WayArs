@@ -1,21 +1,29 @@
 package com.wayars.app.presentation.ui.screen.settings
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -41,6 +49,7 @@ import com.wayars.app.presentation.ui.theme.WaNeonGreen
 import com.wayars.app.presentation.ui.theme.WaRed
 import com.wayars.app.presentation.ui.theme.WaSurface
 import com.wayars.app.presentation.ui.theme.WaTextSecondary
+import com.wayars.app.util.CurrencyFormatter
 import com.wayars.app.util.LocaleManager
 
 @Composable
@@ -52,6 +61,7 @@ fun SettingsScreen(
     onCurrencySelected: (Currency) -> Unit,
     onOpenAccessibilitySettings: () -> Unit,
     onOpenOverlaySettings: () -> Unit,
+    onOpenNotificationSettings: () -> Unit,
     onSaveCustomThresholds: (bad: Double, average: Double, good: Double) -> Unit,
     onClearCustomThresholds: () -> Unit,
     modifier: Modifier = Modifier
@@ -78,7 +88,7 @@ fun SettingsScreen(
         item {
             CustomThresholdsSection(
                 existing = customThresholds,
-                currencySymbol = currency.symbol,
+                currency = currency,
                 onSave = onSaveCustomThresholds,
                 onClear = onClearCustomThresholds
             )
@@ -99,16 +109,30 @@ fun SettingsScreen(
                 onClick = onOpenOverlaySettings
             )
         }
+        item {
+            PermissionRow(
+                title = stringResource(R.string.settings_enable_notifications),
+                hint = stringResource(R.string.settings_notifications_hint),
+                onClick = onOpenNotificationSettings
+            )
+        }
     }
 }
 
+/**
+ * Collapsed by default so it doesn't dominate the Settings screen — expands
+ * on tap. The currency symbol now lives on each field's own label (not a
+ * hardcoded symbol in the section title, which used to say "€/km" even when
+ * PLN or another currency was selected).
+ */
 @Composable
 private fun CustomThresholdsSection(
     existing: CustomThresholds?,
-    currencySymbol: String,
+    currency: Currency,
     onSave: (bad: Double, average: Double, good: Double) -> Unit,
     onClear: () -> Unit
 ) {
+    var expanded by remember { mutableStateOf(false) }
     var badText by remember(existing) { mutableStateOf(existing?.badRatePerKm?.toString() ?: "") }
     var averageText by remember(existing) { mutableStateOf(existing?.averageRatePerKm?.toString() ?: "") }
     var goodText by remember(existing) { mutableStateOf(existing?.goodRatePerKm?.toString() ?: "") }
@@ -118,59 +142,84 @@ private fun CustomThresholdsSection(
             .fillMaxWidth()
             .clip(RoundedCornerShape(14.dp))
             .background(WaSurface)
+            .clickable { expanded = !expanded }
             .padding(16.dp)
     ) {
-        Text(
-            stringResource(R.string.settings_custom_thresholds_title),
-            color = MaterialTheme.colorScheme.onSurface,
-            style = MaterialTheme.typography.titleMedium
-        )
-        Text(
-            stringResource(R.string.settings_custom_thresholds_hint, currencySymbol),
-            color = WaTextSecondary,
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier.padding(top = 4.dp, bottom = 14.dp)
-        )
-
-        ThresholdField(
-            label = stringResource(R.string.settings_custom_bad),
-            value = badText,
-            accent = WaRed,
-            onValueChange = { badText = it }
-        )
-        androidx.compose.foundation.layout.Spacer(Modifier.padding(top = 10.dp))
-        ThresholdField(
-            label = stringResource(R.string.settings_custom_average),
-            value = averageText,
-            accent = WaAmber,
-            onValueChange = { averageText = it }
-        )
-        androidx.compose.foundation.layout.Spacer(Modifier.padding(top = 10.dp))
-        ThresholdField(
-            label = stringResource(R.string.settings_custom_good),
-            value = goodText,
-            accent = WaNeonGreen,
-            onValueChange = { goodText = it }
-        )
-
-        Row(modifier = Modifier.padding(top = 14.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            Button(
-                onClick = {
-                    val bad = badText.toDoubleOrNull()
-                    val avg = averageText.toDoubleOrNull()
-                    val good = goodText.toDoubleOrNull()
-                    if (bad != null && avg != null && good != null) onSave(bad, avg, good)
-                },
-                colors = ButtonDefaults.buttonColors(containerColor = WaNeonGreen, contentColor = Color.Black)
-            ) {
-                Text(stringResource(R.string.settings_custom_save))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(Modifier.weight(1f)) {
+                Text(
+                    stringResource(R.string.settings_custom_thresholds_title),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    if (existing != null) {
+                        "${CurrencyFormatter.formatRatePerKm(existing.badRatePerKm, currency)} · " +
+                            "${CurrencyFormatter.formatRatePerKm(existing.averageRatePerKm, currency)} · " +
+                            CurrencyFormatter.formatRatePerKm(existing.goodRatePerKm, currency)
+                    } else {
+                        stringResource(R.string.settings_custom_thresholds_hint, currency.symbol)
+                    },
+                    color = WaTextSecondary,
+                    style = MaterialTheme.typography.bodyMedium,
+                    maxLines = 1,
+                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                )
             }
-            if (existing != null) {
-                TextButton(onClick = {
-                    badText = ""; averageText = ""; goodText = ""
-                    onClear()
-                }) {
-                    Text(stringResource(R.string.settings_custom_clear), color = WaTextSecondary)
+            Icon(
+                imageVector = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
+                contentDescription = null,
+                tint = WaTextSecondary
+            )
+        }
+
+        AnimatedVisibility(visible = expanded, enter = expandVertically(), exit = shrinkVertically()) {
+            Column(modifier = Modifier.padding(top = 14.dp)) {
+                ThresholdField(
+                    label = "${stringResource(R.string.settings_custom_bad)} (${currency.symbol}/km)",
+                    value = badText,
+                    accent = WaRed,
+                    onValueChange = { badText = it }
+                )
+                Spacer(Modifier.padding(top = 10.dp))
+                ThresholdField(
+                    label = "${stringResource(R.string.settings_custom_average)} (${currency.symbol}/km)",
+                    value = averageText,
+                    accent = WaAmber,
+                    onValueChange = { averageText = it }
+                )
+                Spacer(Modifier.padding(top = 10.dp))
+                ThresholdField(
+                    label = "${stringResource(R.string.settings_custom_good)} (${currency.symbol}/km)",
+                    value = goodText,
+                    accent = WaNeonGreen,
+                    onValueChange = { goodText = it }
+                )
+
+                Row(modifier = Modifier.padding(top = 14.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Button(
+                        onClick = {
+                            val bad = badText.toDoubleOrNull()
+                            val avg = averageText.toDoubleOrNull()
+                            val good = goodText.toDoubleOrNull()
+                            if (bad != null && avg != null && good != null) onSave(bad, avg, good)
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = WaNeonGreen, contentColor = Color.Black)
+                    ) {
+                        Text(stringResource(R.string.settings_custom_save))
+                    }
+                    if (existing != null) {
+                        TextButton(onClick = {
+                            badText = ""; averageText = ""; goodText = ""
+                            onClear()
+                        }) {
+                            Text(stringResource(R.string.settings_custom_clear), color = WaTextSecondary)
+                        }
+                    }
                 }
             }
         }
@@ -189,7 +238,7 @@ private fun ThresholdField(
         onValueChange = { new -> if (new.all { it.isDigit() || it == '.' || it == ',' }) onValueChange(new) },
         label = { Text(label) },
         singleLine = true,
-        keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = KeyboardType.Decimal),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = accent,
             unfocusedBorderColor = WaTextSecondary,

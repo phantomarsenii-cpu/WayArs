@@ -50,6 +50,7 @@ class OrderNotificationListenerService : NotificationListenerService() {
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         sbn ?: return
         if (!ScanningState.isActive.value) return
+        if (ScanningState.isSuppressed()) return
         if (!OrderAccessibilityService.isSupportedPackage(sbn.packageName)) return
 
         val extras = sbn.notification.extras

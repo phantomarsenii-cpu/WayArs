@@ -38,6 +38,7 @@ fun MainScreen(
     onPresetSelected: (PresetType) -> Unit,
     onOpenAccessibilitySettings: () -> Unit,
     onOpenOverlaySettings: () -> Unit,
+    onOpenNotificationSettings: () -> Unit,
     onSaveCustomThresholds: (bad: Double, average: Double, good: Double) -> Unit,
     onClearCustomThresholds: () -> Unit
 ) {
@@ -64,6 +65,7 @@ fun MainScreen(
                 onCurrencySelected = onCurrencySelected,
                 onOpenAccessibilitySettings = onOpenAccessibilitySettings,
                 onOpenOverlaySettings = onOpenOverlaySettings,
+                onOpenNotificationSettings = onOpenNotificationSettings,
                 onSaveCustomThresholds = onSaveCustomThresholds,
                 onClearCustomThresholds = onClearCustomThresholds,
                 modifier = content

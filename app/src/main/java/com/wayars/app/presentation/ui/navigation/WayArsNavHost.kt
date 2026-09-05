@@ -24,7 +24,8 @@ private object Routes {
 fun WayArsNavHost(
     viewModel: MainViewModel,
     onOpenAccessibilitySettings: () -> Unit,
-    onOpenOverlaySettings: () -> Unit
+    onOpenOverlaySettings: () -> Unit,
+    onOpenNotificationSettings: () -> Unit
 ) {
     val navController: NavHostController = rememberNavController()
 
@@ -71,6 +72,7 @@ fun WayArsNavHost(
                 onPresetSelected = { viewModel.setPreset(it) },
                 onOpenAccessibilitySettings = onOpenAccessibilitySettings,
                 onOpenOverlaySettings = onOpenOverlaySettings,
+                onOpenNotificationSettings = onOpenNotificationSettings,
                 customThresholds = customThresholds,
                 onSaveCustomThresholds = { bad, average, good -> viewModel.setCustomThresholds(bad, average, good) },
                 onClearCustomThresholds = { viewModel.clearCustomThresholds() }

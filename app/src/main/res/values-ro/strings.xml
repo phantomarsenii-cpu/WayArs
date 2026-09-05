@@ -48,8 +48,8 @@
     <string name="accessibility_service_description">WayArs citește detaliile comenzii (preț, distanță, timp) afișate pe ecranul aplicațiilor de livrare/taxi pentru a te ajuta să decizi mai repede. Nu apasă și nu modifică niciodată nimic automat.</string>
 
     <string name="stats_empty">Încă nu au fost comenzi</string>
-    <string name="settings_custom_thresholds_title">Praguri proprii, €/km</string>
-    <string name="settings_custom_thresholds_hint">Opțional — dacă sunt setate, aceste valori (în %1$s) înlocuiesc profilul la evaluarea comenzilor</string>
+    <string name="settings_custom_thresholds_title">Praguri proprii de evaluare</string>
+    <string name="settings_custom_thresholds_hint">Opțional — valori proprii %1$s/km în loc de profil</string>
     <string name="settings_custom_bad">Comandă slabă, până la</string>
     <string name="settings_custom_average">Comandă medie, de la</string>
     <string name="settings_custom_good">Comandă bună, de la</string>

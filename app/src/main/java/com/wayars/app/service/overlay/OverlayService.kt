@@ -10,8 +10,6 @@ import android.graphics.PixelFormat
 import android.os.Build
 import android.os.IBinder
 import android.view.Gravity
-import android.view.MotionEvent
-import android.view.View
 import android.view.WindowManager
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
@@ -26,24 +24,26 @@ import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import com.wayars.app.MainActivity
 import com.wayars.app.R
 import com.wayars.app.appContainer
+import com.wayars.app.data.prefs.LanguagePrefs
 import com.wayars.app.presentation.ui.theme.WayArsTheme
 import com.wayars.app.presentation.widget.OverlayContent
 import com.wayars.app.presentation.widget.OverlayLifecycleOwner
 import com.wayars.app.presentation.widget.OverlayState
 import com.wayars.app.service.accessibility.ScanningState
+import com.wayars.app.util.LocaleManager
 import kotlinx.coroutines.launch
 
 /**
  * Foreground service that hosts the floating "verdict" widget over other
- * apps via WindowManager. It never touches other apps' windows or dispatches
- * input — it only draws its own overlay window and lets the driver tap its
- * own Accept/Reject buttons.
+ * apps via WindowManager.
  *
- * The card itself is only attached to the WindowManager while there is an
- * actual order to show — no permanent "Waiting for order…" plaque cluttering
- * the driver's map. The underlying foreground service (and its status-bar
- * icon) keeps running the whole time Active is ON, ready to pop the card up
- * the instant a new order is parsed.
+ * Dragging is implemented with Compose's OWN pointer-input system on a
+ * dedicated header handle (see [OverlayContent]'s onDragBy), NOT a raw
+ * View.OnTouchListener on the whole card. The earlier raw-listener approach
+ * intercepted every touch before Compose's click detection ever saw it,
+ * which was silently swallowing a lot of Accept/Reject taps — a plain
+ * Modifier.pointerInput drag on just the header avoids that entirely and
+ * leaves the buttons completely untouched by drag logic.
  */
 class OverlayService : LifecycleService() {
 
@@ -51,12 +51,17 @@ class OverlayService : LifecycleService() {
     private var composeView: ComposeView? = null
     private var isViewAttached = false
     private val overlayLifecycleOwner = OverlayLifecycleOwner()
-
     private var layoutParams: WindowManager.LayoutParams? = null
-    private var initialX = 0
-    private var initialY = 0
-    private var touchStartX = 0f
-    private var touchStartY = 0f
+
+    // The Application's locale is only re-applied at process cold start, so a
+    // language change made while the app was already running never reached a
+    // freshly-started Service before — the overlay kept showing the OLD
+    // language ("Язык приложения не соответствует на оверлее"). Re-wrapping
+    // here, every time the service is (re)created, fixes that.
+    override fun attachBaseContext(newBase: Context) {
+        val languageCode = LanguagePrefs.read(newBase) ?: LocaleManager.resolveInitialLanguage()
+        super.attachBaseContext(LocaleManager.wrap(newBase, languageCode))
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -71,8 +76,6 @@ class OverlayService : LifecycleService() {
         overlayLifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_START)
         overlayLifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
-        // Show/hide the card purely based on whether there's something to show —
-        // and stop everything immediately if Active gets flipped off elsewhere.
         lifecycleScope.launch {
             OverlayState.latestEvaluation.collect { evaluation ->
                 if (evaluation != null && ScanningState.isActive.value) attachView() else detachView()
@@ -102,8 +105,6 @@ class OverlayService : LifecycleService() {
             setViewTreeSavedStateRegistryOwner(overlayLifecycleOwner)
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
 
-            setOnTouchListener { _, event -> handleDrag(event, this) }
-
             setContent {
                 val evaluation by OverlayState.latestEvaluation.collectAsStateWithLifecycle()
                 WayArsTheme {
@@ -112,13 +113,22 @@ class OverlayService : LifecycleService() {
                         onAccept = { onDecision(accepted = true) },
                         onReject = { onDecision(accepted = false) },
                         onSettings = { openApp() },
-                        onClose = { stopSelf() }
+                        onClose = { onDecision(accepted = false) },
+                        onDragBy = ::moveWindowBy
                     )
                 }
             }
         }
         composeView = view
         return view
+    }
+
+    private fun moveWindowBy(dx: Float, dy: Float) {
+        val params = layoutParams ?: return
+        val view = composeView ?: return
+        params.x += dx.toInt()
+        params.y += dy.toInt()
+        runCatching { windowManager.updateViewLayout(view, params) }
     }
 
     private fun attachView() {
@@ -134,9 +144,6 @@ class OverlayService : LifecycleService() {
             WindowManager.LayoutParams.WRAP_CONTENT,
             WindowManager.LayoutParams.WRAP_CONTENT,
             overlayType,
-            // FLAG_NOT_TOUCH_MODAL lets touches outside the card fall through to
-            // the app underneath, while the card itself still reliably receives
-            // its own taps (buttons were previously eating the first tap without it).
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
                 WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
@@ -158,34 +165,17 @@ class OverlayService : LifecycleService() {
         isViewAttached = false
     }
 
-    private fun handleDrag(event: MotionEvent, view: View): Boolean {
-        val params = layoutParams ?: return false
-        when (event.action) {
-            MotionEvent.ACTION_DOWN -> {
-                initialX = params.x
-                initialY = params.y
-                touchStartX = event.rawX
-                touchStartY = event.rawY
-                return false // let clicks on children (buttons) pass through
-            }
-            MotionEvent.ACTION_MOVE -> {
-                params.x = initialX + (event.rawX - touchStartX).toInt()
-                params.y = initialY + (event.rawY - touchStartY).toInt()
-                windowManager.updateViewLayout(view, params)
-            }
-        }
-        return false
-    }
-
     /**
-     * A row is only ever written to Room here, on Accept — never during
-     * scanning. This is deliberate: it's what stopped every re-scan of the
-     * same still-visible order from spamming duplicate rows into history.
-     * Reject just dismisses the card with no history entry.
+     * A row is only ever written to Room here, on Accept — Reject dismisses
+     * with no history entry. Either way we (a) hide instantly and (b) start a
+     * short scanning cooldown, since the order screen underneath often keeps
+     * updating its own live text for a few seconds after the driver already
+     * made a decision, which used to make the card pop right back up.
      */
     private fun onDecision(accepted: Boolean) {
         val evaluation = OverlayState.latestEvaluation.value
-        OverlayState.clear() // hide instantly, before the DB write even starts
+        OverlayState.clear()
+        ScanningState.suppressScanningBriefly()
         if (accepted && evaluation != null) {
             lifecycleScope.launch {
                 runCatching {

@@ -48,8 +48,8 @@
     <string name="accessibility_service_description">WayArs odczytuje szczegóły zlecenia (cenę, dystans, czas) wyświetlane na ekranie aplikacji dostawczych/taxi, aby pomóc Ci szybciej podjąć decyzję. Nigdy nie klika ani nie modyfikuje niczego automatycznie.</string>
 
     <string name="stats_empty">Jeszcze nie było zleceń</string>
-    <string name="settings_custom_thresholds_title">Własne progi, €/km</string>
-    <string name="settings_custom_thresholds_hint">Opcjonalnie — jeśli ustawione, te wartości (w %1$s) zastępują profil przy ocenie zleceń</string>
+    <string name="settings_custom_thresholds_title">Własne progi oceny</string>
+    <string name="settings_custom_thresholds_hint">Opcjonalnie — własne wartości %1$s/km zamiast profilu</string>
     <string name="settings_custom_bad">Słabe zlecenie, do</string>
     <string name="settings_custom_average">Średnie zlecenie, od</string>
     <string name="settings_custom_good">Dobre zlecenie, od</string>
