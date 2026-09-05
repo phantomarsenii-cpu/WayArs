@@ -27,17 +27,26 @@ import kotlinx.coroutines.launch
  * Safety properties:
  *  - Never calls performAction/dispatchGesture -> no auto-clicking, ever.
  *  - Only reads text already rendered on screen via the official
- *    AccessibilityNodeInfo tree (rootInActiveWindow).
+ *    AccessibilityNodeInfo tree.
  *  - Does not inject into or modify the target app's process in any way.
  *
- * Package filtering is enforced TWICE, deliberately: once via the
- * android:packageNames allow-list in res/xml/accessibility_service_config.xml
- * (so the OS doesn't even deliver events for other apps), and again here in
- * code via [isSupportedPackage] as a hard backstop. Real-world testing showed
- * the overlay misfiring on Google Maps navigation UI ("17 min · 4.2 km" from
- * Maps' own ETA bar was mistaken for an order) — this second check exists
- * specifically so that can never happen again even if the XML allow-list
- * config is ever loosened or misconfigured.
+ * IMPORTANT: this does NOT rely solely on [rootInActiveWindow]. That API only
+ * ever returns the currently *focused* window — but Bolt/Uber/Wolt/FreeNow
+ * often show an incoming order as their OWN non-focusable overlay popup
+ * (drawn with SYSTEM_ALERT_WINDOW, the same technique WayArs itself uses for
+ * its verdict card) while the app is minimized, e.g. right on top of the
+ * home screen launcher. A non-focusable window is never "the active window",
+ * so rootInActiveWindow silently returns the LAUNCHER instead and the order
+ * popup is invisible to a scan that only looks there. [windows] (enabled by
+ * flagRetrieveInteractiveWindows in the service config) returns EVERY
+ * currently visible window regardless of focus, which is what actually finds
+ * that popup.
+ *
+ * Package filtering is enforced TWICE: once via the android:packageNames
+ * allow-list in res/xml/accessibility_service_config.xml, and again here via
+ * [isSupportedPackage] as a hard backstop against misfiring on unrelated
+ * apps (this caught the service reading Google Maps' own ETA bar as an order
+ * during testing).
  */
 class OrderAccessibilityService : AccessibilityService() {
 
@@ -66,13 +75,10 @@ class OrderAccessibilityService : AccessibilityService() {
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         event ?: return
 
-        // Hard gate #1: the app-wide "Active" switch. The service stays bound
-        // to the OS whenever Accessibility is enabled in Settings, but it must
-        // do nothing at all unless the user has flipped Active ON.
+        // Hard gate #1: the app-wide "Active" switch.
         if (!ScanningState.isActive.value) return
 
-        // Hard gate #1b: brief cooldown right after Accept/Reject — see
-        // ScanningState.suppressScanningBriefly() for why this exists.
+        // Hard gate #1b: brief cooldown right after Accept/Reject.
         if (ScanningState.isSuppressed()) return
 
         // Hard gate #2: package allow-list, enforced in code regardless of
@@ -88,11 +94,7 @@ class OrderAccessibilityService : AccessibilityService() {
         if (now - lastProcessedAt < 400) return // simple debounce, screens fire many events per second
         lastProcessedAt = now
 
-        val root = rootInActiveWindow ?: return
-        // Double-check the root itself belongs to a supported app — rootInActiveWindow
-        // can momentarily lag behind the event's own package during window transitions.
-        val rootPackage = root.packageName?.toString()
-        if (rootPackage == null || !isSupportedPackage(rootPackage)) return
+        val root = findSupportedWindowRoot(eventPackage) ?: return
 
         val texts = ArrayList<String>()
         collectText(root, texts, maxDepth = 40)
@@ -121,14 +123,39 @@ class OrderAccessibilityService : AccessibilityService() {
         Log.d(TAG, "Parsed order: $evaluation")
 
         // NOTE: nothing is written to Room here. A row is only ever inserted
-        // when the driver taps Accept in the overlay (see OverlayService) —
-        // this is what stops every re-scan of the same still-visible order
-        // from spamming duplicate rows into the stats history.
+        // when the driver taps Accept in the overlay (see OverlayService).
         OverlayState.publish(evaluation, recordId = null)
 
         if (Settings.canDrawOverlays(applicationContext)) {
             startForegroundService(Intent(applicationContext, OverlayService::class.java))
         }
+    }
+
+    /**
+     * Looks across ALL currently visible windows (not just the focused one)
+     * for one belonging to a supported app, preferring [preferredPackage]
+     * (the package that actually generated this event) if it has a window,
+     * otherwise any other supported-app window that happens to be visible.
+     * Falls back to rootInActiveWindow only if the windows list is empty for
+     * some reason (e.g. capability not yet granted).
+     */
+    private fun findSupportedWindowRoot(preferredPackage: String): AccessibilityNodeInfo? {
+        val visibleWindows = windows
+        if (visibleWindows.isNullOrEmpty()) {
+            val fallbackRoot = rootInActiveWindow ?: return null
+            val fallbackPackage = fallbackRoot.packageName?.toString()
+            return if (fallbackPackage != null && isSupportedPackage(fallbackPackage)) fallbackRoot else null
+        }
+
+        var fallbackMatch: AccessibilityNodeInfo? = null
+        for (window in visibleWindows) {
+            val root = window.root ?: continue
+            val pkg = root.packageName?.toString() ?: continue
+            if (!isSupportedPackage(pkg)) continue
+            if (pkg == preferredPackage) return root
+            if (fallbackMatch == null) fallbackMatch = root
+        }
+        return fallbackMatch
     }
 
     /** Iterative (non-recursive) tree walk to avoid stack overflows on deep trees. */
@@ -160,15 +187,19 @@ class OrderAccessibilityService : AccessibilityService() {
 
         /**
          * Runtime backstop allow-list — keep in sync with
-         * res/xml/accessibility_service_config.xml. Verify real package IDs
-         * on-device via `adb shell dumpsys window | grep mCurrentFocus`
-         * while each app is open; these are best-effort names.
+         * res/xml/accessibility_service_config.xml.
+         * ee.mtakso.driver / com.wolt.courier.app kept alongside the
+         * user-verified names below in case either regional build uses the
+         * other package id — harmless to list both, an exact match is still
+         * required either way.
          */
         private val SUPPORTED_PACKAGES = setOf(
-            "ee.mtakso.driver",           // Bolt driver app (rides + Bolt Food share this app)
+            "com.bolt.deliverycourier",   // Bolt courier — verified on-device
+            "ee.mtakso.driver",           // Bolt driver (rides) — older/alt package id
             "com.ubercab.driver",         // Uber driver
-            "com.wolt.courier.app",       // Wolt courier
-            "com.freenow.driver"          // FreeNow driver — verify on-device, name unconfirmed
+            "com.wolt.courierapp",        // Wolt courier — verified on-device
+            "com.wolt.courier.app",       // Wolt courier — older/alt package id
+            "com.freenow.driver"          // FreeNow driver — still unconfirmed
         )
 
         fun isSupportedPackage(packageName: String): Boolean = packageName in SUPPORTED_PACKAGES

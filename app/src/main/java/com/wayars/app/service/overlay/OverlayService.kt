@@ -9,6 +9,7 @@ import android.content.Intent
 import android.graphics.PixelFormat
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import android.view.Gravity
 import android.view.WindowManager
 import androidx.compose.runtime.getValue
@@ -37,27 +38,27 @@ import kotlinx.coroutines.launch
  * Foreground service that hosts the floating "verdict" widget over other
  * apps via WindowManager.
  *
- * Dragging is implemented with Compose's OWN pointer-input system on a
- * dedicated header handle (see [OverlayContent]'s onDragBy), NOT a raw
- * View.OnTouchListener on the whole card. The earlier raw-listener approach
- * intercepted every touch before Compose's click detection ever saw it,
- * which was silently swallowing a lot of Accept/Reject taps — a plain
- * Modifier.pointerInput drag on just the header avoids that entirely and
- * leaves the buttons completely untouched by drag logic.
+ * The ComposeView is built FRESH every time the card is shown and fully torn
+ * down every time it's hidden — it is deliberately NOT cached/reused across
+ * show/hide cycles. Reusing one long-lived ComposeView across many
+ * attach/detach cycles (re-adding a previously-removed View back into
+ * WindowManager, over and over, for hours during a shift) was the likely
+ * cause of the overlay occasionally freezing with dead buttons after a
+ * while — a fresh View each time costs very little and removes that whole
+ * class of stuck-state bug.
  */
 class OverlayService : LifecycleService() {
 
     private lateinit var windowManager: WindowManager
     private var composeView: ComposeView? = null
-    private var isViewAttached = false
-    private val overlayLifecycleOwner = OverlayLifecycleOwner()
+    private var overlayLifecycleOwner: OverlayLifecycleOwner? = null
     private var layoutParams: WindowManager.LayoutParams? = null
 
     // The Application's locale is only re-applied at process cold start, so a
     // language change made while the app was already running never reached a
     // freshly-started Service before — the overlay kept showing the OLD
-    // language ("Язык приложения не соответствует на оверлее"). Re-wrapping
-    // here, every time the service is (re)created, fixes that.
+    // language. Re-wrapping here, every time the service is (re)created,
+    // fixes that.
     override fun attachBaseContext(newBase: Context) {
         val languageCode = LanguagePrefs.read(newBase) ?: LocaleManager.resolveInitialLanguage()
         super.attachBaseContext(LocaleManager.wrap(newBase, languageCode))
@@ -72,9 +73,6 @@ class OverlayService : LifecycleService() {
         } else {
             startForeground(NOTIFICATION_ID, notification)
         }
-        overlayLifecycleOwner.performRestore()
-        overlayLifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_START)
-        overlayLifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
         lifecycleScope.launch {
             OverlayState.latestEvaluation.collect { evaluation ->
@@ -96,13 +94,29 @@ class OverlayService : LifecycleService() {
         return null
     }
 
-    private fun buildComposeViewIfNeeded(): ComposeView {
-        composeView?.let { return it }
+    private fun moveWindowBy(dx: Float, dy: Float) {
+        val params = layoutParams ?: return
+        val view = composeView ?: return
+        params.x += dx.toInt()
+        params.y += dy.toInt()
+        runCatching { windowManager.updateViewLayout(view, params) }
+            .onFailure { Log.w(TAG, "updateViewLayout failed", it) }
+    }
+
+    private fun attachView() {
+        if (composeView != null) return // already showing
+
+        val lifecycleOwner = OverlayLifecycleOwner().also {
+            it.performRestore()
+            it.handleLifecycleEvent(Lifecycle.Event.ON_START)
+            it.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+        }
+        overlayLifecycleOwner = lifecycleOwner
 
         val view = ComposeView(this).apply {
-            setViewTreeLifecycleOwner(overlayLifecycleOwner)
-            setViewTreeViewModelStoreOwner(overlayLifecycleOwner)
-            setViewTreeSavedStateRegistryOwner(overlayLifecycleOwner)
+            setViewTreeLifecycleOwner(lifecycleOwner)
+            setViewTreeViewModelStoreOwner(lifecycleOwner)
+            setViewTreeSavedStateRegistryOwner(lifecycleOwner)
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
 
             setContent {
@@ -119,21 +133,6 @@ class OverlayService : LifecycleService() {
                 }
             }
         }
-        composeView = view
-        return view
-    }
-
-    private fun moveWindowBy(dx: Float, dy: Float) {
-        val params = layoutParams ?: return
-        val view = composeView ?: return
-        params.x += dx.toInt()
-        params.y += dy.toInt()
-        runCatching { windowManager.updateViewLayout(view, params) }
-    }
-
-    private fun attachView() {
-        if (isViewAttached) return
-        val view = buildComposeViewIfNeeded()
 
         val overlayType = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
@@ -156,21 +155,27 @@ class OverlayService : LifecycleService() {
         layoutParams = params
 
         runCatching { windowManager.addView(view, params) }
-        isViewAttached = true
+            .onSuccess { composeView = view }
+            .onFailure { Log.e(TAG, "addView failed", it) }
     }
 
     private fun detachView() {
-        if (!isViewAttached) return
-        composeView?.let { runCatching { windowManager.removeView(it) } }
-        isViewAttached = false
+        val view = composeView ?: return
+        runCatching { windowManager.removeView(view) }
+            .onFailure { Log.w(TAG, "removeView failed", it) }
+        overlayLifecycleOwner?.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+        overlayLifecycleOwner?.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+        overlayLifecycleOwner?.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        overlayLifecycleOwner = null
+        composeView = null
     }
 
     /**
      * A row is only ever written to Room here, on Accept — Reject dismisses
-     * with no history entry. Either way we (a) hide instantly and (b) start a
-     * short scanning cooldown, since the order screen underneath often keeps
-     * updating its own live text for a few seconds after the driver already
-     * made a decision, which used to make the card pop right back up.
+     * with no history entry. Either way we hide instantly and start a short
+     * scanning cooldown, since the order screen underneath often keeps
+     * updating its own live text for a few seconds after a decision, which
+     * used to make the card pop right back up.
      */
     private fun onDecision(accepted: Boolean) {
         val evaluation = OverlayState.latestEvaluation.value
@@ -219,12 +224,12 @@ class OverlayService : LifecycleService() {
 
     override fun onDestroy() {
         detachView()
-        overlayLifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
         OverlayState.clear()
         super.onDestroy()
     }
 
     companion object {
+        private const val TAG = "WayArsOverlay"
         private const val NOTIFICATION_ID = 42
         private const val CHANNEL_ID = "wayars_overlay"
     }

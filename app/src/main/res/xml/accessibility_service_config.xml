@@ -6,4 +6,4 @@
     android:canRetrieveWindowContent="true"
     android:notificationTimeout="150"
     android:description="@string/accessibility_service_description"
-    android:packageNames="ee.mtakso.driver,com.ubercab.driver,com.wolt.courier.app,com.freenow.driver" />
+    android:packageNames="com.bolt.deliverycourier,ee.mtakso.driver,com.ubercab.driver,com.wolt.courierapp,com.wolt.courier.app,com.freenow.driver" />
