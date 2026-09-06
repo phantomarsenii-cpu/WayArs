@@ -59,4 +59,6 @@
     <string name="verdict_average">ŚREDNI</string>
     <string name="settings_enable_notifications">Włącz dostęp do powiadomień</string>
     <string name="settings_notifications_hint">Opcjonalny kanał zapasowy — wykrywa zlecenia przesłane jako powiadomienie, gdy aplikacja jest zminimalizowana</string>
+    <string name="settings_permissions_title">Uprawnienia</string>
+    <string name="settings_permissions_hint">Odczyt ekranu, pływający widget, powiadomienia</string>
 </resources>

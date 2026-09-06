@@ -59,4 +59,6 @@
     <string name="verdict_average">СЕРЕДНЬО</string>
     <string name="settings_enable_notifications">Увімкнути доступ до сповіщень</string>
     <string name="settings_notifications_hint">Резервний канал — вловлює замовлення, надіслані сповіщенням, поки застосунок згорнутий</string>
+    <string name="settings_permissions_title">Дозволи</string>
+    <string name="settings_permissions_hint">Читання екрана, плаваючий віджет, сповіщення</string>
 </resources>

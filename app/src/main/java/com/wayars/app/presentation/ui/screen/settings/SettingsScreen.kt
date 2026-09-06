@@ -48,6 +48,7 @@ import com.wayars.app.presentation.ui.theme.WaAmber
 import com.wayars.app.presentation.ui.theme.WaNeonGreen
 import com.wayars.app.presentation.ui.theme.WaRed
 import com.wayars.app.presentation.ui.theme.WaSurface
+import com.wayars.app.presentation.ui.theme.WaSurfaceVariant
 import com.wayars.app.presentation.ui.theme.WaTextSecondary
 import com.wayars.app.util.CurrencyFormatter
 import com.wayars.app.util.LocaleManager
@@ -95,26 +96,99 @@ fun SettingsScreen(
         }
 
         item {
-            SectionLabel("")
-            PermissionRow(
-                title = stringResource(R.string.settings_enable_accessibility),
-                hint = stringResource(R.string.settings_accessibility_hint),
-                onClick = onOpenAccessibilitySettings
+            PermissionsSection(
+                onOpenAccessibilitySettings = onOpenAccessibilitySettings,
+                onOpenOverlaySettings = onOpenOverlaySettings,
+                onOpenNotificationSettings = onOpenNotificationSettings
             )
         }
-        item {
-            PermissionRow(
-                title = stringResource(R.string.settings_enable_overlay),
-                hint = stringResource(R.string.settings_overlay_hint),
-                onClick = onOpenOverlaySettings
+    }
+}
+
+/** Collapsed by default — groups all three permission buttons into one compact row. */
+@Composable
+private fun PermissionsSection(
+    onOpenAccessibilitySettings: () -> Unit,
+    onOpenOverlaySettings: () -> Unit,
+    onOpenNotificationSettings: () -> Unit
+) {
+    var expanded by remember { mutableStateOf(false) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(14.dp))
+            .background(WaSurface)
+            .clickable { expanded = !expanded }
+            .padding(16.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(Modifier.weight(1f)) {
+                Text(
+                    stringResource(R.string.settings_permissions_title),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    stringResource(R.string.settings_permissions_hint),
+                    color = WaTextSecondary,
+                    style = MaterialTheme.typography.bodyMedium,
+                    maxLines = 1,
+                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                )
+            }
+            Icon(
+                imageVector = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
+                contentDescription = null,
+                tint = WaTextSecondary
             )
         }
-        item {
-            PermissionRow(
-                title = stringResource(R.string.settings_enable_notifications),
-                hint = stringResource(R.string.settings_notifications_hint),
-                onClick = onOpenNotificationSettings
-            )
+
+        AnimatedVisibility(visible = expanded, enter = expandVertically(), exit = shrinkVertically()) {
+            Column(
+                modifier = Modifier.padding(top = 14.dp),
+                verticalArrangement = Arrangement.spacedBy(14.dp)
+            ) {
+                InnerPermissionButton(
+                    title = stringResource(R.string.settings_enable_accessibility),
+                    hint = stringResource(R.string.settings_accessibility_hint),
+                    onClick = onOpenAccessibilitySettings
+                )
+                InnerPermissionButton(
+                    title = stringResource(R.string.settings_enable_overlay),
+                    hint = stringResource(R.string.settings_overlay_hint),
+                    onClick = onOpenOverlaySettings
+                )
+                InnerPermissionButton(
+                    title = stringResource(R.string.settings_enable_notifications),
+                    hint = stringResource(R.string.settings_notifications_hint),
+                    onClick = onOpenNotificationSettings
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun InnerPermissionButton(title: String, hint: String, onClick: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .background(WaSurfaceVariant)
+            .padding(14.dp)
+    ) {
+        Text(title, color = MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.bodyLarge)
+        Text(hint, color = WaTextSecondary, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(top = 4.dp, bottom = 10.dp))
+        Button(
+            onClick = onClick,
+            colors = ButtonDefaults.buttonColors(containerColor = WaNeonGreen, contentColor = Color.Black)
+        ) {
+            Text(title)
         }
     }
 }
@@ -302,26 +376,6 @@ private fun CurrencyPicker(current: Currency, onSelect: (Currency) -> Unit) {
                     onClick = { onSelect(c); expanded = false }
                 )
             }
-        }
-    }
-}
-
-@Composable
-private fun PermissionRow(title: String, hint: String, onClick: () -> Unit) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(14.dp))
-            .background(WaSurface)
-            .padding(16.dp)
-    ) {
-        Text(title, color = MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.titleMedium)
-        Text(hint, color = WaTextSecondary, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(top = 4.dp, bottom = 10.dp))
-        Button(
-            onClick = onClick,
-            colors = ButtonDefaults.buttonColors(containerColor = WaNeonGreen, contentColor = Color.Black)
-        ) {
-            Text(title)
         }
     }
 }

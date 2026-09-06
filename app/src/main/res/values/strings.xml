@@ -59,4 +59,6 @@
     <string name="verdict_average">AVERAGE</string>
     <string name="settings_enable_notifications">Enable notification access</string>
     <string name="settings_notifications_hint">Optional backup channel — catches orders sent as a notification while the app is minimized</string>
+    <string name="settings_permissions_title">Permissions</string>
+    <string name="settings_permissions_hint">Screen reading, floating widget, notifications</string>
 </resources>

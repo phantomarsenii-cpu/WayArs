@@ -9,7 +9,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.wayars.app.data.prefs.LanguagePrefs
 import com.wayars.app.presentation.MainViewModel
@@ -41,12 +40,15 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Edge-to-edge + explicit system bar colors: relying on the theme's
-        // android:navigationBarColor alone left a mismatched dark strip above
-        // the nav bar on some OEM skins.
+        // enableEdgeToEdge() makes the system bars transparent by design and
+        // draws app content behind them — setting window.navigationBarColor
+        // /statusBarColor afterwards fights that (and behaves inconsistently
+        // across Android versions, which is exactly why a mismatched dark
+        // strip kept showing above the nav bar on some devices no matter what
+        // color was set there). The correct fix is to let our OWN Compose
+        // background paint that area instead of trying to color the system
+        // bar directly — see WayArsNavHost's root Surface.
         enableEdgeToEdge()
-        window.statusBarColor = ContextCompat.getColor(this, R.color.wa_background)
-        window.navigationBarColor = ContextCompat.getColor(this, R.color.wa_surface)
 
         setContent {
             WayArsTheme {
