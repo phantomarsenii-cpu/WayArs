@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Deliberately no android:packageNames allow-list here.
+
+That filter is applied by the OS BEFORE an event ever reaches
+onAccessibilityEvent() — which sounds like the safer, more efficient choice,
+but it silently broke exactly the case that matters most: an order app's own
+floating popup drawn over the home screen while minimized. A non-focusable
+overlay like that frequently doesn't fire ITS OWN accessibility event; the
+event that actually fires belongs to the launcher underneath it. With this
+XML-level filter in place, the OS dropped the launcher's event before our
+code ever got a chance to look at ALL currently visible windows (including
+the popup) via the `windows` API. The equivalent, correct filtering now
+happens entirely in code — see OrderAccessibilityService.isSupportedPackage()
+and findSupportedWindowRoot() — with a debounce still in place so this stays
+cheap despite receiving events for every foreground app change, not just the
+supported ones.
+-->
 <accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
     android:accessibilityEventTypes="typeWindowStateChanged|typeWindowContentChanged"
     android:accessibilityFeedbackType="feedbackGeneric"
     android:accessibilityFlags="flagRetrieveInteractiveWindows|flagReportViewIds"
     android:canRetrieveWindowContent="true"
     android:notificationTimeout="150"
-    android:description="@string/accessibility_service_description"
-    android:packageNames="com.bolt.deliverycourier,ee.mtakso.driver,com.ubercab.driver,com.wolt.courierapp,com.wolt.courier.app,com.freenow.driver" />
+    android:description="@string/accessibility_service_description" />

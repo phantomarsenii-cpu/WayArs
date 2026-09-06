@@ -81,20 +81,29 @@ class OrderAccessibilityService : AccessibilityService() {
         // Hard gate #1b: brief cooldown right after Accept/Reject.
         if (ScanningState.isSuppressed()) return
 
-        // Hard gate #2: package allow-list, enforced in code regardless of
-        // what the XML config says.
-        val eventPackage = event.packageName?.toString()
-        if (eventPackage == null || !isSupportedPackage(eventPackage)) return
-
         if (event.eventType != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED &&
             event.eventType != AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED
         ) return
 
         val now = System.currentTimeMillis()
-        if (now - lastProcessedAt < 400) return // simple debounce, screens fire many events per second
-        lastProcessedAt = now
+        if (now - lastProcessedAt < 500) return // debounce — now runs for events from ANY app,
+        lastProcessedAt = now                    // not just supported ones, so a bit more headroom here
 
-        val root = findSupportedWindowRoot(eventPackage) ?: return
+        // NOTE: deliberately NOT gating on event.packageName here anymore.
+        // A non-focusable popup (Uber's own overlay, drawn over the home
+        // screen while Uber is minimized) does not reliably fire its OWN
+        // accessibility event with its own package attached — the event that
+        // actually wakes us up is very often the LAUNCHER's, because that's
+        // technically the window that changed from the OS's point of view.
+        // Gating on event.packageName silently dropped exactly this case.
+        // The real package check now happens inside findSupportedWindowRoot,
+        // which scans every currently visible window (via the accessibility
+        // `windows` API) regardless of which one triggered this callback —
+        // this is also why accessibility_service_config.xml's own
+        // android:packageNames allow-list had to be removed: the OS applies
+        // that filter BEFORE events even reach this method, which would have
+        // blocked the launcher's event from arriving at all.
+        val root = findSupportedWindowRoot(event.packageName?.toString()) ?: return
 
         val texts = ArrayList<String>()
         collectText(root, texts, maxDepth = 40)
@@ -139,7 +148,7 @@ class OrderAccessibilityService : AccessibilityService() {
      * Falls back to rootInActiveWindow only if the windows list is empty for
      * some reason (e.g. capability not yet granted).
      */
-    private fun findSupportedWindowRoot(preferredPackage: String): AccessibilityNodeInfo? {
+    private fun findSupportedWindowRoot(preferredPackage: String?): AccessibilityNodeInfo? {
         val visibleWindows = windows
         if (visibleWindows.isNullOrEmpty()) {
             val fallbackRoot = rootInActiveWindow ?: return null
