@@ -1,5 +1,7 @@
 package com.wayars.app.presentation.ui.screen.dashboard
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,9 +35,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.provider.Settings
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.wayars.app.R
 import com.wayars.app.domain.model.OrderEvaluation
 import com.wayars.app.presentation.TodaySummary
@@ -56,6 +63,31 @@ fun DashboardScreen(
 ) {
     val context = LocalContext.current
     val isActive by ScanningState.isActive.collectAsState()
+
+    // Android 13+ requires POST_NOTIFICATIONS to be granted at RUNTIME, not
+    // just declared in the manifest — without it, the foreground service's
+    // notification (and its status-bar icon) can be silently suppressed even
+    // though the service itself is running fine, which looked like "Active
+    // sometimes needs to be toggled twice" but was really just a missing
+    // permission prompt that never happened.
+    val notificationPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { /* proceed regardless of the result — see activateScanning below */ }
+
+    fun activateScanning() {
+        val overlayOk = Settings.canDrawOverlays(context)
+        val accessibilityOk = AccessibilityUtils.isServiceEnabled(context)
+        if (overlayOk && accessibilityOk) {
+            ScanningState.setActive(true)
+            context.startForegroundService(Intent(context, OverlayService::class.java))
+        } else {
+            Toast.makeText(
+                context,
+                context.getString(R.string.active_requires_permissions),
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
 
     Column(
         modifier = modifier
@@ -102,18 +134,13 @@ fun DashboardScreen(
                     checked = isActive,
                     onCheckedChange = { checked ->
                         if (checked) {
-                            val overlayOk = Settings.canDrawOverlays(context)
-                            val accessibilityOk = AccessibilityUtils.isServiceEnabled(context)
-                            if (overlayOk && accessibilityOk) {
-                                ScanningState.setActive(true)
-                                context.startForegroundService(Intent(context, OverlayService::class.java))
-                            } else {
-                                Toast.makeText(
-                                    context,
-                                    context.getString(R.string.active_requires_permissions),
-                                    Toast.LENGTH_LONG
-                                ).show()
+                            val needsNotificationPermission = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+                                ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) !=
+                                PackageManager.PERMISSION_GRANTED
+                            if (needsNotificationPermission) {
+                                notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                             }
+                            activateScanning()
                         } else {
                             ScanningState.setActive(false)
                             context.stopService(Intent(context, OverlayService::class.java))

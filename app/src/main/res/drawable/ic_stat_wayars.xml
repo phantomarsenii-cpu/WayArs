@@ -5,8 +5,15 @@
     android:viewportWidth="24"
     android:viewportHeight="24"
     android:tint="#FFFFFF">
-    <!-- Simplified W silhouette for status bar / notification tray -->
+    <!--
+    Same "W" silhouette as before, scaled up (proportionally, same center
+    point) to actually fill the 24x24dp canvas with ~2dp margin like other
+    apps' status-bar icons do. The previous version left a huge 6dp margin on
+    top/bottom, which is why it visibly looked much smaller than the icons
+    next to it in the status bar despite technically being a correct,
+    Android-mask-compatible flat white shape.
+    -->
     <path
         android:fillColor="#FF000000"
-        android:pathData="M4,6 L7,18 L10,10 L12,15.5 L14,10 L17,18 L20,6 L17.3,6 L15.4,14 L13,7.6 L11,7.6 L8.6,14 L6.7,6 Z" />
+        android:pathData="M2,3 L5.75,21 L9.5,9 L12,17.25 L14.5,9 L18.25,21 L22,3 L18.63,3 L16.25,15 L13.25,5.4 L10.75,5.4 L7.75,15 L5.38,3 Z" />
 </vector>
