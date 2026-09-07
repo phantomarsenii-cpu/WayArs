@@ -221,6 +221,11 @@ fun DashboardScreen(
             evaluation = latestEvaluation,
             emptyLabel = stringResource(R.string.dashboard_no_order)
         )
+
+        // Bottom inset so content scrolls fully BEHIND the floating nav pill
+        // instead of stopping short with a separately-colored reserved gap
+        // above it.
+        androidx.compose.foundation.layout.Spacer(Modifier.height(90.dp))
     }
 }
 

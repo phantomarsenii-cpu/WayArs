@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.wayars.app.data.local.dao.OrderDao
 import com.wayars.app.data.local.entity.OrderEntity
 
-@Database(entities = [OrderEntity::class], version = 1, exportSchema = false)
+@Database(entities = [OrderEntity::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun orderDao(): OrderDao
@@ -21,7 +21,13 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "wayars.db"
-                ).build().also { INSTANCE = it }
+                )
+                    // App is still in active development/testing, no real
+                    // migrations written yet — wiping local order history on
+                    // a schema bump (like this one, adding fuelCost/netProfit)
+                    // is an acceptable trade-off versus crashing on launch.
+                    .fallbackToDestructiveMigration()
+                    .build().also { INSTANCE = it }
             }
     }
 }

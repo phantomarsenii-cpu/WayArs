@@ -13,6 +13,8 @@ data class OrderEntity(
     val timeMinutes: Double,
     val ratePerKm: Double,
     val ratePerMinute: Double,
-    val verdict: String, // "GOOD" | "BAD"
+    val fuelCost: Double = 0.0,
+    val netProfit: Double = 0.0,
+    val verdict: String, // "GOOD" | "AVERAGE" | "BAD"
     val accepted: Boolean? = null // null = no manual decision recorded yet
 )

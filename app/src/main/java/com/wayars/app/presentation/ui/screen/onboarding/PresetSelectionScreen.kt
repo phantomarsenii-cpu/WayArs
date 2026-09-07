@@ -62,7 +62,7 @@ fun PresetSelectionScreen(
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(14.dp),
-            contentPadding = PaddingValues(bottom = 16.dp)
+            contentPadding = PaddingValues(bottom = 90.dp)
         ) {
             items(presets) { preset ->
                 PresetCard(

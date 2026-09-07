@@ -1,9 +1,7 @@
 package com.wayars.app.presentation.ui.navigation
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -11,7 +9,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.wayars.app.domain.model.Currency
 import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.PresetType
@@ -58,19 +55,22 @@ fun MainScreen(
 ) {
     var tab by remember { mutableStateOf(MainTab.HOME) }
 
-    // Extra bottom padding so scrollable content never sits underneath the
-    // floating pill bar.
-    val content = Modifier.padding(PaddingValues(bottom = 90.dp))
-
+    // No outer padding reserved for the pill anymore — that reserved gap was
+    // exactly what read as a separate-colored strip above the nav bar
+    // (WaBackground behind it vs WaSurface cards above it). Content now
+    // fills the full screen and scrolls BEHIND the floating pill instead;
+    // each screen adds its own bottom inset as part of its scrollable
+    // content (see their contentPadding/trailing spacer) so the last item
+    // isn't permanently stuck under the opaque pill, without introducing a
+    // separately-colored dead zone.
     Box(modifier = Modifier.fillMaxSize()) {
         when (tab) {
-            MainTab.HOME -> DashboardScreen(summary = summary, latestEvaluation = latestEvaluation, modifier = content)
-            MainTab.STATS -> StatsScreen(orders = todayOrders, modifier = content)
+            MainTab.HOME -> DashboardScreen(summary = summary, latestEvaluation = latestEvaluation)
+            MainTab.STATS -> StatsScreen(orders = todayOrders)
             MainTab.PRESETS -> PresetSelectionScreen(
                 selected = preset,
                 onSelect = onPresetSelected,
-                onContinue = { tab = MainTab.HOME },
-                modifier = content
+                onContinue = { tab = MainTab.HOME }
             )
             MainTab.SETTINGS -> SettingsScreen(
                 languageCode = languageCode,
@@ -84,8 +84,7 @@ fun MainScreen(
                 onOpenNotificationSettings = onOpenNotificationSettings,
                 onSaveCustomThresholds = onSaveCustomThresholds,
                 onClearCustomThresholds = onClearCustomThresholds,
-                onSaveVehicleProfile = onSaveVehicleProfile,
-                modifier = content
+                onSaveVehicleProfile = onSaveVehicleProfile
             )
         }
 

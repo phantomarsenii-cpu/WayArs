@@ -33,6 +33,8 @@ class OrderRepositoryImpl(private val dao: OrderDao) : OrderRepository {
             timeMinutes = evaluation.timeMinutes,
             ratePerKm = evaluation.ratePerKm,
             ratePerMinute = evaluation.ratePerMinute,
+            fuelCost = evaluation.fuelCost,
+            netProfit = evaluation.netProfit,
             verdict = evaluation.verdict.name
         )
     )
@@ -51,6 +53,8 @@ class OrderRepositoryImpl(private val dao: OrderDao) : OrderRepository {
             currency = Currency.fromCode(currencyCode),
             ratePerKm = ratePerKm,
             ratePerMinute = ratePerMinute,
+            fuelCost = fuelCost,
+            netProfit = netProfit,
             verdict = Verdict.valueOf(verdict)
         ),
         accepted = accepted
