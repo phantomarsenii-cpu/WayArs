@@ -44,6 +44,9 @@ import androidx.compose.ui.unit.dp
 import com.wayars.app.R
 import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.Currency
+import com.wayars.app.domain.model.FuelType
+import com.wayars.app.domain.model.VehicleCategory
+import com.wayars.app.domain.model.VehicleProfile
 import com.wayars.app.presentation.ui.theme.WaAmber
 import com.wayars.app.presentation.ui.theme.WaNeonGreen
 import com.wayars.app.presentation.ui.theme.WaRed
@@ -58,6 +61,7 @@ fun SettingsScreen(
     languageCode: String,
     currency: Currency,
     customThresholds: CustomThresholds?,
+    vehicleProfile: VehicleProfile,
     onLanguageSelected: (String) -> Unit,
     onCurrencySelected: (Currency) -> Unit,
     onOpenAccessibilitySettings: () -> Unit,
@@ -65,6 +69,7 @@ fun SettingsScreen(
     onOpenNotificationSettings: () -> Unit,
     onSaveCustomThresholds: (bad: Double, average: Double, good: Double) -> Unit,
     onClearCustomThresholds: () -> Unit,
+    onSaveVehicleProfile: (VehicleProfile) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -92,6 +97,14 @@ fun SettingsScreen(
                 currency = currency,
                 onSave = onSaveCustomThresholds,
                 onClear = onClearCustomThresholds
+            )
+        }
+
+        item {
+            VehicleSection(
+                profile = vehicleProfile,
+                currency = currency,
+                onSave = onSaveVehicleProfile
             )
         }
 
@@ -297,6 +310,200 @@ private fun CustomThresholdsSection(
                 }
             }
         }
+    }
+}
+
+/**
+ * Compact single row when collapsed ("Car · Petrol · 7.0/100km"); expands
+ * into the hierarchical picker: category first, then (only for Car) fuel
+ * type, then the two number fields. Two-wheelers never show fuel fields at
+ * all — there is nothing to enter, cost is always 0 for them.
+ */
+@Composable
+private fun VehicleSection(
+    profile: VehicleProfile,
+    currency: Currency,
+    onSave: (VehicleProfile) -> Unit
+) {
+    var expanded by remember { mutableStateOf(false) }
+    var category by remember(profile) { mutableStateOf(profile.category) }
+    var fuelType by remember(profile) { mutableStateOf(profile.fuelType ?: FuelType.PETROL) }
+    var consumptionText by remember(profile) {
+        mutableStateOf(if (profile.consumptionPer100Km > 0) profile.consumptionPer100Km.toString() else "")
+    }
+    var priceText by remember(profile) {
+        mutableStateOf(if (profile.fuelPricePerUnit > 0) profile.fuelPricePerUnit.toString() else "")
+    }
+
+    val categoryLabel = when (profile.category) {
+        VehicleCategory.CAR -> stringResource(R.string.settings_vehicle_car)
+        VehicleCategory.SCOOTER -> stringResource(R.string.settings_vehicle_scooter)
+        VehicleCategory.BICYCLE -> stringResource(R.string.settings_vehicle_bicycle)
+    }
+    val fuelLabel = when (profile.fuelType) {
+        FuelType.PETROL -> stringResource(R.string.settings_fuel_petrol)
+        FuelType.DIESEL -> stringResource(R.string.settings_fuel_diesel)
+        FuelType.LPG -> stringResource(R.string.settings_fuel_lpg)
+        FuelType.ELECTRIC -> stringResource(R.string.settings_fuel_electric)
+        null -> ""
+    }
+    val summary = if (profile.category == VehicleCategory.CAR) {
+        stringResource(R.string.settings_vehicle_summary_car, fuelLabel, profile.consumptionPer100Km.toString())
+    } else {
+        stringResource(R.string.settings_vehicle_summary_no_fuel, categoryLabel)
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(14.dp))
+            .background(WaSurface)
+            .clickable { expanded = !expanded }
+            .padding(16.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(Modifier.weight(1f)) {
+                Text(
+                    stringResource(R.string.settings_vehicle_title),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    summary,
+                    color = WaTextSecondary,
+                    style = MaterialTheme.typography.bodyMedium,
+                    maxLines = 1,
+                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                )
+            }
+            Icon(
+                imageVector = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
+                contentDescription = null,
+                tint = WaTextSecondary
+            )
+        }
+
+        AnimatedVisibility(visible = expanded, enter = expandVertically(), exit = shrinkVertically()) {
+            Column(modifier = Modifier.padding(top = 14.dp)) {
+                // Step 1: category
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
+                    ChoiceChip(
+                        label = stringResource(R.string.settings_vehicle_car),
+                        selected = category == VehicleCategory.CAR,
+                        onClick = { category = VehicleCategory.CAR },
+                        modifier = Modifier.weight(1f)
+                    )
+                    ChoiceChip(
+                        label = stringResource(R.string.settings_vehicle_scooter),
+                        selected = category == VehicleCategory.SCOOTER,
+                        onClick = { category = VehicleCategory.SCOOTER },
+                        modifier = Modifier.weight(1f)
+                    )
+                    ChoiceChip(
+                        label = stringResource(R.string.settings_vehicle_bicycle),
+                        selected = category == VehicleCategory.BICYCLE,
+                        onClick = { category = VehicleCategory.BICYCLE },
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+
+                // Step 2: fuel type + consumption/price — only for Car.
+                if (category == VehicleCategory.CAR) {
+                    Spacer(Modifier.padding(top = 12.dp))
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
+                        ChoiceChip(
+                            label = stringResource(R.string.settings_fuel_petrol),
+                            selected = fuelType == FuelType.PETROL,
+                            onClick = { fuelType = FuelType.PETROL },
+                            modifier = Modifier.weight(1f)
+                        )
+                        ChoiceChip(
+                            label = stringResource(R.string.settings_fuel_diesel),
+                            selected = fuelType == FuelType.DIESEL,
+                            onClick = { fuelType = FuelType.DIESEL },
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                    Spacer(Modifier.padding(top = 8.dp))
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
+                        ChoiceChip(
+                            label = stringResource(R.string.settings_fuel_lpg),
+                            selected = fuelType == FuelType.LPG,
+                            onClick = { fuelType = FuelType.LPG },
+                            modifier = Modifier.weight(1f)
+                        )
+                        ChoiceChip(
+                            label = stringResource(R.string.settings_fuel_electric),
+                            selected = fuelType == FuelType.ELECTRIC,
+                            onClick = { fuelType = FuelType.ELECTRIC },
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+
+                    Spacer(Modifier.padding(top = 12.dp))
+                    ThresholdField(
+                        label = stringResource(R.string.settings_vehicle_consumption),
+                        value = consumptionText,
+                        accent = WaNeonGreen,
+                        onValueChange = { consumptionText = it }
+                    )
+                    Spacer(Modifier.padding(top = 10.dp))
+                    ThresholdField(
+                        label = if (fuelType == FuelType.ELECTRIC)
+                            stringResource(R.string.settings_vehicle_price_electric)
+                        else
+                            "${stringResource(R.string.settings_vehicle_price_fuel)} (${currency.symbol})",
+                        value = priceText,
+                        accent = WaNeonGreen,
+                        onValueChange = { priceText = it }
+                    )
+                }
+
+                Spacer(Modifier.padding(top = 14.dp))
+                Button(
+                    onClick = {
+                        val newProfile = if (category == VehicleCategory.CAR) {
+                            VehicleProfile(
+                                category = VehicleCategory.CAR,
+                                fuelType = fuelType,
+                                consumptionPer100Km = consumptionText.toDoubleOrNull() ?: 0.0,
+                                fuelPricePerUnit = priceText.toDoubleOrNull() ?: 0.0
+                            )
+                        } else {
+                            VehicleProfile(category = category, fuelType = null, consumptionPer100Km = 0.0, fuelPricePerUnit = 0.0)
+                        }
+                        onSave(newProfile)
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = WaNeonGreen, contentColor = Color.Black)
+                ) {
+                    Text(stringResource(R.string.settings_vehicle_save))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ChoiceChip(label: String, selected: Boolean, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .clip(RoundedCornerShape(10.dp))
+            .background(if (selected) WaNeonGreen.copy(alpha = 0.18f) else WaSurfaceVariant)
+            .clickable(onClick = onClick)
+            .padding(vertical = 10.dp, horizontal = 6.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            label,
+            color = if (selected) WaNeonGreen else WaTextSecondary,
+            style = MaterialTheme.typography.bodySmall,
+            maxLines = 1,
+            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+        )
     }
 }
 

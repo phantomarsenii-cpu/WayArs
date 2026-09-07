@@ -61,4 +61,20 @@
     <string name="settings_notifications_hint">Optional backup channel — catches orders sent as a notification while the app is minimized</string>
     <string name="settings_permissions_title">Permissions</string>
     <string name="settings_permissions_hint">Screen reading, floating widget, notifications</string>
+
+    <string name="settings_vehicle_title">Vehicle</string>
+    <string name="settings_vehicle_car">Car</string>
+    <string name="settings_vehicle_scooter">Scooter</string>
+    <string name="settings_vehicle_bicycle">Bicycle / e-scooter</string>
+    <string name="settings_fuel_petrol">Petrol</string>
+    <string name="settings_fuel_diesel">Diesel</string>
+    <string name="settings_fuel_lpg">LPG / gas</string>
+    <string name="settings_fuel_electric">Electric</string>
+    <string name="settings_vehicle_consumption">Consumption per 100 km</string>
+    <string name="settings_vehicle_price_fuel">Price per liter</string>
+    <string name="settings_vehicle_price_electric">Price per kWh</string>
+    <string name="settings_vehicle_save">Save</string>
+    <string name="settings_vehicle_summary_car">Car · %1$s · %2$s/100km</string>
+    <string name="settings_vehicle_summary_no_fuel">%1$s · no fuel cost</string>
+    <string name="verdict_net_profit">Net %1$s (fuel %2$s)</string>
 </resources>

@@ -61,4 +61,20 @@
     <string name="settings_notifications_hint">Canal de rezervă opțional — detectează comenzile trimise ca notificare când aplicația este minimizată</string>
     <string name="settings_permissions_title">Permisiuni</string>
     <string name="settings_permissions_hint">Citirea ecranului, widget plutitor, notificări</string>
+
+    <string name="settings_vehicle_title">Vehicul</string>
+    <string name="settings_vehicle_car">Mașină</string>
+    <string name="settings_vehicle_scooter">Scuter</string>
+    <string name="settings_vehicle_bicycle">Bicicletă / trotinetă electrică</string>
+    <string name="settings_fuel_petrol">Benzină</string>
+    <string name="settings_fuel_diesel">Motorină</string>
+    <string name="settings_fuel_lpg">Gaz / GPL</string>
+    <string name="settings_fuel_electric">Electric</string>
+    <string name="settings_vehicle_consumption">Consum la 100 km</string>
+    <string name="settings_vehicle_price_fuel">Preț pe litru</string>
+    <string name="settings_vehicle_price_electric">Preț pe kWh</string>
+    <string name="settings_vehicle_save">Salvează</string>
+    <string name="settings_vehicle_summary_car">Mașină · %1$s · %2$s/100km</string>
+    <string name="settings_vehicle_summary_no_fuel">%1$s · fără cost de combustibil</string>
+    <string name="verdict_net_profit">Net %1$s (combustibil %2$s)</string>
 </resources>

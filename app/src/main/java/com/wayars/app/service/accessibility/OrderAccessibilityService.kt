@@ -12,6 +12,7 @@ import com.wayars.app.domain.model.Currency
 import com.wayars.app.domain.model.Preset
 import com.wayars.app.domain.model.PresetType
 import com.wayars.app.domain.model.RawOrderCandidate
+import com.wayars.app.domain.model.VehicleProfile
 import com.wayars.app.presentation.widget.OverlayState
 import com.wayars.app.service.overlay.OverlayService
 import com.wayars.app.util.ScreenTextParser
@@ -55,6 +56,7 @@ class OrderAccessibilityService : AccessibilityService() {
     private var currentCurrency: Currency = Currency.default
     private var currentPreset: Preset = Preset.BALANCE
     private var currentCustomThresholds: CustomThresholds? = null
+    private var currentVehicleProfile: VehicleProfile = VehicleProfile.DEFAULT
     private var lastProcessedAt = 0L
     private var lastCandidate: RawOrderCandidate? = null
 
@@ -69,6 +71,9 @@ class OrderAccessibilityService : AccessibilityService() {
         }
         scope.launch {
             container.settingsRepository.customThresholds.collect { currentCustomThresholds = it }
+        }
+        scope.launch {
+            container.settingsRepository.vehicleProfile.collect { currentVehicleProfile = it }
         }
     }
 
@@ -126,6 +131,7 @@ class OrderAccessibilityService : AccessibilityService() {
             timeMinutes = timeMinutes,
             currency = currency,
             preset = currentPreset,
+            vehicleProfile = currentVehicleProfile,
             customThresholds = currentCustomThresholds
         )
 

@@ -61,4 +61,20 @@
     <string name="settings_notifications_hint">Резервний канал — вловлює замовлення, надіслані сповіщенням, поки застосунок згорнутий</string>
     <string name="settings_permissions_title">Дозволи</string>
     <string name="settings_permissions_hint">Читання екрана, плаваючий віджет, сповіщення</string>
+
+    <string name="settings_vehicle_title">Транспорт</string>
+    <string name="settings_vehicle_car">Автомобіль</string>
+    <string name="settings_vehicle_scooter">Скутер</string>
+    <string name="settings_vehicle_bicycle">Велосипед / електросамокат</string>
+    <string name="settings_fuel_petrol">Бензин</string>
+    <string name="settings_fuel_diesel">Дизель</string>
+    <string name="settings_fuel_lpg">Газ / LPG</string>
+    <string name="settings_fuel_electric">Електро</string>
+    <string name="settings_vehicle_consumption">Витрата на 100 км</string>
+    <string name="settings_vehicle_price_fuel">Ціна за літр</string>
+    <string name="settings_vehicle_price_electric">Ціна за кВт·год</string>
+    <string name="settings_vehicle_save">Зберегти</string>
+    <string name="settings_vehicle_summary_car">Автомобіль · %1$s · %2$s/100км</string>
+    <string name="settings_vehicle_summary_no_fuel">%1$s · без витрат на паливо</string>
+    <string name="verdict_net_profit">Чисто %1$s (паливо %2$s)</string>
 </resources>

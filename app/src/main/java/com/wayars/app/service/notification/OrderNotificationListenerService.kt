@@ -7,6 +7,7 @@ import com.wayars.app.appContainer
 import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.Currency
 import com.wayars.app.domain.model.Preset
+import com.wayars.app.domain.model.VehicleProfile
 import com.wayars.app.presentation.widget.OverlayState
 import com.wayars.app.service.accessibility.OrderAccessibilityService
 import com.wayars.app.service.accessibility.ScanningState
@@ -38,6 +39,7 @@ class OrderNotificationListenerService : NotificationListenerService() {
     private var currentCurrency: Currency = Currency.default
     private var currentPreset: Preset = Preset.BALANCE
     private var currentCustomThresholds: CustomThresholds? = null
+    private var currentVehicleProfile: VehicleProfile = VehicleProfile.DEFAULT
 
     override fun onListenerConnected() {
         super.onListenerConnected()
@@ -45,6 +47,7 @@ class OrderNotificationListenerService : NotificationListenerService() {
         scope.launch { container.settingsRepository.currency.collect { currentCurrency = it } }
         scope.launch { container.settingsRepository.preset.collect { currentPreset = Preset.fromType(it) } }
         scope.launch { container.settingsRepository.customThresholds.collect { currentCustomThresholds = it } }
+        scope.launch { container.settingsRepository.vehicleProfile.collect { currentVehicleProfile = it } }
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
@@ -76,6 +79,7 @@ class OrderNotificationListenerService : NotificationListenerService() {
             timeMinutes = timeMinutes,
             currency = currency,
             preset = currentPreset,
+            vehicleProfile = currentVehicleProfile,
             customThresholds = currentCustomThresholds
         )
         Log.d(TAG, "Parsed order from notification: $evaluation")

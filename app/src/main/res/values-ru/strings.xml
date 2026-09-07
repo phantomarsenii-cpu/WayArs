@@ -56,9 +56,25 @@
     <string name="settings_custom_save">Сохранить</string>
     <string name="settings_custom_clear">Использовать пресет</string>
     <string name="active_requires_permissions">Сначала включите чтение экрана и плавающий виджет в Настройках</string>
-    <string name="verdict_average">СРЕДНЕ</string>
+    <string name="verdict_average">ПРИЕМЛЕМЫЙ</string>
     <string name="settings_enable_notifications">Включить доступ к уведомлениям</string>
     <string name="settings_notifications_hint">Резервный канал — ловит заказы, пришедшие уведомлением, пока приложение свёрнуто</string>
     <string name="settings_permissions_title">Разрешения</string>
     <string name="settings_permissions_hint">Чтение экрана, плавающий виджет, уведомления</string>
+
+    <string name="settings_vehicle_title">Транспорт</string>
+    <string name="settings_vehicle_car">Автомобиль</string>
+    <string name="settings_vehicle_scooter">Скутер</string>
+    <string name="settings_vehicle_bicycle">Велосипед / электросамокат</string>
+    <string name="settings_fuel_petrol">Бензин</string>
+    <string name="settings_fuel_diesel">Дизель</string>
+    <string name="settings_fuel_lpg">Газ / LPG</string>
+    <string name="settings_fuel_electric">Электро</string>
+    <string name="settings_vehicle_consumption">Расход на 100 км</string>
+    <string name="settings_vehicle_price_fuel">Цена за литр</string>
+    <string name="settings_vehicle_price_electric">Цена за кВт·ч</string>
+    <string name="settings_vehicle_save">Сохранить</string>
+    <string name="settings_vehicle_summary_car">Автомобиль · %1$s · %2$s/100км</string>
+    <string name="settings_vehicle_summary_no_fuel">%1$s · без затрат на топливо</string>
+    <string name="verdict_net_profit">Чисто %1$s (топливо %2$s)</string>
 </resources>

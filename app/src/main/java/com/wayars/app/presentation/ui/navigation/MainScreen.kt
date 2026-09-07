@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.wayars.app.domain.model.Currency
 import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.PresetType
+import com.wayars.app.domain.model.VehicleProfile
 import com.wayars.app.domain.repository.OrderRecord
 import com.wayars.app.domain.model.OrderEvaluation
 import com.wayars.app.presentation.TodaySummary
@@ -44,6 +45,7 @@ fun MainScreen(
     currency: Currency,
     preset: PresetType,
     customThresholds: CustomThresholds?,
+    vehicleProfile: VehicleProfile,
     onLanguageSelected: (String) -> Unit,
     onCurrencySelected: (Currency) -> Unit,
     onPresetSelected: (PresetType) -> Unit,
@@ -51,7 +53,8 @@ fun MainScreen(
     onOpenOverlaySettings: () -> Unit,
     onOpenNotificationSettings: () -> Unit,
     onSaveCustomThresholds: (bad: Double, average: Double, good: Double) -> Unit,
-    onClearCustomThresholds: () -> Unit
+    onClearCustomThresholds: () -> Unit,
+    onSaveVehicleProfile: (VehicleProfile) -> Unit
 ) {
     var tab by remember { mutableStateOf(MainTab.HOME) }
 
@@ -73,6 +76,7 @@ fun MainScreen(
                 languageCode = languageCode,
                 currency = currency,
                 customThresholds = customThresholds,
+                vehicleProfile = vehicleProfile,
                 onLanguageSelected = onLanguageSelected,
                 onCurrencySelected = onCurrencySelected,
                 onOpenAccessibilitySettings = onOpenAccessibilitySettings,
@@ -80,6 +84,7 @@ fun MainScreen(
                 onOpenNotificationSettings = onOpenNotificationSettings,
                 onSaveCustomThresholds = onSaveCustomThresholds,
                 onClearCustomThresholds = onClearCustomThresholds,
+                onSaveVehicleProfile = onSaveVehicleProfile,
                 modifier = content
             )
         }

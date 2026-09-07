@@ -20,8 +20,10 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.wayars.app.R
 import com.wayars.app.domain.model.OrderEvaluation
 import com.wayars.app.domain.model.Verdict
 import com.wayars.app.presentation.ui.theme.WaNeonGreen
@@ -99,6 +101,21 @@ fun VerdictCard(evaluation: OrderEvaluation?, emptyLabel: String, modifier: Modi
                 CurrencyFormatter.formatRatePerKm(evaluation.ratePerKm, evaluation.currency),
                 style = MaterialTheme.typography.labelSmall,
                 color = gaugeColor
+            )
+        }
+
+        // Only shown when fuel actually costs something (Car profile) — for
+        // scooters/bicycles net profit always equals gross earnings, so this
+        // line would be pure noise.
+        if (evaluation.fuelCost > 0) {
+            Text(
+                stringResource(
+                    R.string.verdict_net_profit,
+                    CurrencyFormatter.format(evaluation.netProfit, evaluation.currency),
+                    CurrencyFormatter.format(evaluation.fuelCost, evaluation.currency)
+                ),
+                color = WaTextSecondary,
+                style = MaterialTheme.typography.labelSmall
             )
         }
     }

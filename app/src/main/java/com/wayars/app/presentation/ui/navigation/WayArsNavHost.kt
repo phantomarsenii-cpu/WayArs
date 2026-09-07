@@ -14,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import com.wayars.app.domain.model.Currency
 import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.PresetType
+import com.wayars.app.domain.model.VehicleProfile
 import com.wayars.app.presentation.MainViewModel
 import com.wayars.app.presentation.ui.screen.onboarding.PresetSelectionScreen
 import com.wayars.app.presentation.ui.screen.splash.SplashScreen
@@ -42,6 +43,7 @@ fun WayArsNavHost(
     val latestEvaluation by viewModel.latestEvaluation.collectAsState()
     val todayOrders by viewModel.todayOrders.collectAsState()
     val customThresholds by viewModel.customThresholds.collectAsState()
+    val vehicleProfile by viewModel.vehicleProfile.collectAsState()
 
     // Fills the ENTIRE screen, including the area behind the (now
     // transparent, edge-to-edge) system status/navigation bars, with the
@@ -87,8 +89,10 @@ fun WayArsNavHost(
                     onOpenOverlaySettings = onOpenOverlaySettings,
                     onOpenNotificationSettings = onOpenNotificationSettings,
                     customThresholds = customThresholds,
+                    vehicleProfile = vehicleProfile,
                     onSaveCustomThresholds = { bad, average, good -> viewModel.setCustomThresholds(bad, average, good) },
-                    onClearCustomThresholds = { viewModel.clearCustomThresholds() }
+                    onClearCustomThresholds = { viewModel.clearCustomThresholds() },
+                    onSaveVehicleProfile = { viewModel.setVehicleProfile(it) }
                 )
             }
         }

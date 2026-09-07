@@ -61,4 +61,20 @@
     <string name="settings_notifications_hint">Opcjonalny kanał zapasowy — wykrywa zlecenia przesłane jako powiadomienie, gdy aplikacja jest zminimalizowana</string>
     <string name="settings_permissions_title">Uprawnienia</string>
     <string name="settings_permissions_hint">Odczyt ekranu, pływający widget, powiadomienia</string>
+
+    <string name="settings_vehicle_title">Pojazd</string>
+    <string name="settings_vehicle_car">Samochód</string>
+    <string name="settings_vehicle_scooter">Skuter</string>
+    <string name="settings_vehicle_bicycle">Rower / hulajnoga elektryczna</string>
+    <string name="settings_fuel_petrol">Benzyna</string>
+    <string name="settings_fuel_diesel">Diesel</string>
+    <string name="settings_fuel_lpg">Gaz / LPG</string>
+    <string name="settings_fuel_electric">Elektryczny</string>
+    <string name="settings_vehicle_consumption">Spalanie na 100 km</string>
+    <string name="settings_vehicle_price_fuel">Cena za litr</string>
+    <string name="settings_vehicle_price_electric">Cena za kWh</string>
+    <string name="settings_vehicle_save">Zapisz</string>
+    <string name="settings_vehicle_summary_car">Samochód · %1$s · %2$s/100km</string>
+    <string name="settings_vehicle_summary_no_fuel">%1$s · bez kosztów paliwa</string>
+    <string name="verdict_net_profit">Netto %1$s (paliwo %2$s)</string>
 </resources>

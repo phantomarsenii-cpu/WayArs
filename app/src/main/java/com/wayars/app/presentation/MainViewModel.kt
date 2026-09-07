@@ -8,6 +8,7 @@ import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.Currency
 import com.wayars.app.domain.model.OrderEvaluation
 import com.wayars.app.domain.model.PresetType
+import com.wayars.app.domain.model.VehicleProfile
 import com.wayars.app.domain.repository.OrderRecord
 import com.wayars.app.presentation.widget.OverlayState
 import kotlinx.coroutines.flow.SharingStarted
@@ -43,6 +44,9 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
 
     val customThresholds: StateFlow<CustomThresholds?> =
         settings.customThresholds.stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
+    val vehicleProfile: StateFlow<VehicleProfile> =
+        settings.vehicleProfile.stateIn(viewModelScope, SharingStarted.Eagerly, VehicleProfile.DEFAULT)
 
     val todayOrders: StateFlow<List<OrderRecord>> =
         container.orderRepository.observeToday().stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
@@ -83,6 +87,7 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
     fun setCustomThresholds(bad: Double, average: Double, good: Double) =
         viewModelScope.launch { settings.setCustomThresholds(bad, average, good) }
     fun clearCustomThresholds() = viewModelScope.launch { settings.clearCustomThresholds() }
+    fun setVehicleProfile(profile: VehicleProfile) = viewModelScope.launch { settings.setVehicleProfile(profile) }
 
     class Factory(private val container: AppContainer) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")

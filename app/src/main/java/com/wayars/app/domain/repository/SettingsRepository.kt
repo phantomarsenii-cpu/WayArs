@@ -3,6 +3,7 @@ package com.wayars.app.domain.repository
 import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.Currency
 import com.wayars.app.domain.model.PresetType
+import com.wayars.app.domain.model.VehicleProfile
 import kotlinx.coroutines.flow.Flow
 
 interface SettingsRepository {
@@ -11,6 +12,7 @@ interface SettingsRepository {
     val preset: Flow<PresetType>
     val onboardingDone: Flow<Boolean>
     val customThresholds: Flow<CustomThresholds?>
+    val vehicleProfile: Flow<VehicleProfile>
 
     suspend fun setLanguage(code: String)
     suspend fun setCurrency(currency: Currency)
@@ -18,4 +20,5 @@ interface SettingsRepository {
     suspend fun setOnboardingDone(done: Boolean)
     suspend fun setCustomThresholds(bad: Double, average: Double, good: Double)
     suspend fun clearCustomThresholds()
+    suspend fun setVehicleProfile(profile: VehicleProfile)
 }
