@@ -77,4 +77,5 @@
     <string name="settings_vehicle_summary_car">Car · %1$s · %2$s/100km</string>
     <string name="settings_vehicle_summary_no_fuel">%1$s · no fuel cost</string>
     <string name="verdict_net_profit">Net %1$s (fuel %2$s)</string>
+    <string name="settings_saved">Saved</string>
 </resources>

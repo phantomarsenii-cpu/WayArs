@@ -94,24 +94,23 @@ class OrderAccessibilityService : AccessibilityService() {
         if (now - lastProcessedAt < 500) return // debounce — now runs for events from ANY app,
         lastProcessedAt = now                    // not just supported ones, so a bit more headroom here
 
-        // NOTE: deliberately NOT gating on event.packageName here anymore.
-        // A non-focusable popup (Uber's own overlay, drawn over the home
-        // screen while Uber is minimized) does not reliably fire its OWN
-        // accessibility event with its own package attached — the event that
-        // actually wakes us up is very often the LAUNCHER's, because that's
-        // technically the window that changed from the OS's point of view.
-        // Gating on event.packageName silently dropped exactly this case.
-        // The real package check now happens inside findSupportedWindowRoot,
-        // which scans every currently visible window (via the accessibility
-        // `windows` API) regardless of which one triggered this callback —
-        // this is also why accessibility_service_config.xml's own
-        // android:packageNames allow-list had to be removed: the OS applies
-        // that filter BEFORE events even reach this method, which would have
-        // blocked the launcher's event from arriving at all.
-        val root = findSupportedWindowRoot(event.packageName?.toString()) ?: return
+        // Diagnostic recording happens for EVERY app (see ScanDiagnostics /
+        // Settings -> Диагностика) so the real Bolt/Wolt package name can
+        // finally be confirmed on-device. Anything not on our supported list
+        // bails out immediately, right here — before touching `windows` or
+        // walking any node tree — so the cost of the temporarily-removed
+        // XML package filter stays as close to zero as possible for the
+        // flood of unrelated apps' events.
+        val eventPackage = event.packageName?.toString() ?: return
+        val isSupported = isSupportedPackage(eventPackage)
+        ScanDiagnostics.record(eventPackage, isSupported, textsCollected = 0)
+        if (!isSupported) return
+
+        val root = findSupportedWindowRoot(eventPackage) ?: return
 
         val texts = ArrayList<String>()
         collectText(root, texts, maxDepth = 40)
+        ScanDiagnostics.record(eventPackage, isSupported, textsCollected = texts.size)
         if (texts.isEmpty()) return
 
         val candidate = ScreenTextParser.parse(texts)

@@ -77,4 +77,5 @@
     <string name="settings_vehicle_summary_car">Mașină · %1$s · %2$s/100km</string>
     <string name="settings_vehicle_summary_no_fuel">%1$s · fără cost de combustibil</string>
     <string name="verdict_net_profit">Net %1$s (combustibil %2$s)</string>
+    <string name="settings_saved">Salvat</string>
 </resources>

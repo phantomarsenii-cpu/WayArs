@@ -30,6 +30,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,9 +39,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import android.widget.Toast
 import com.wayars.app.R
 import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.Currency
@@ -114,6 +117,10 @@ fun SettingsScreen(
                 onOpenOverlaySettings = onOpenOverlaySettings,
                 onOpenNotificationSettings = onOpenNotificationSettings
             )
+        }
+
+        item {
+            DiagnosticsSection()
         }
     }
 }
@@ -219,6 +226,7 @@ private fun CustomThresholdsSection(
     onSave: (bad: Double, average: Double, good: Double) -> Unit,
     onClear: () -> Unit
 ) {
+    val context = LocalContext.current
     var expanded by remember { mutableStateOf(false) }
     var badText by remember(existing) { mutableStateOf(existing?.badRatePerKm?.toString() ?: "") }
     var averageText by remember(existing) { mutableStateOf(existing?.averageRatePerKm?.toString() ?: "") }
@@ -293,7 +301,11 @@ private fun CustomThresholdsSection(
                             val bad = badText.toDoubleOrNull()
                             val avg = averageText.toDoubleOrNull()
                             val good = goodText.toDoubleOrNull()
-                            if (bad != null && avg != null && good != null) onSave(bad, avg, good)
+                            if (bad != null && avg != null && good != null) {
+                                onSave(bad, avg, good)
+                                expanded = false
+                                Toast.makeText(context, context.getString(R.string.settings_saved), Toast.LENGTH_SHORT).show()
+                            }
                         },
                         colors = ButtonDefaults.buttonColors(containerColor = WaNeonGreen, contentColor = Color.Black)
                     ) {
@@ -325,6 +337,7 @@ private fun VehicleSection(
     currency: Currency,
     onSave: (VehicleProfile) -> Unit
 ) {
+    val context = LocalContext.current
     var expanded by remember { mutableStateOf(false) }
     var category by remember(profile) { mutableStateOf(profile.category) }
     var fuelType by remember(profile) { mutableStateOf(profile.fuelType ?: FuelType.PETROL) }
@@ -477,6 +490,8 @@ private fun VehicleSection(
                             VehicleProfile(category = category, fuelType = null, consumptionPer100Km = 0.0, fuelPricePerUnit = 0.0)
                         }
                         onSave(newProfile)
+                        expanded = false
+                        Toast.makeText(context, context.getString(R.string.settings_saved), Toast.LENGTH_SHORT).show()
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = WaNeonGreen, contentColor = Color.Black)
                 ) {
@@ -504,6 +519,86 @@ private fun ChoiceChip(label: String, selected: Boolean, onClick: () -> Unit, mo
             maxLines = 1,
             overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
         )
+    }
+}
+
+/**
+ * TEMPORARY debugging tool (see ScanDiagnostics) — shows the real Android
+ * package name of whatever app the accessibility service just saw, so
+ * Bolt/Wolt's actual package name can finally be confirmed without a PC or
+ * adb. Expanded by default since finding this quickly matters more right
+ * now than keeping Settings tidy.
+ */
+@Composable
+private fun DiagnosticsSection() {
+    val entries by com.wayars.app.service.accessibility.ScanDiagnostics.recentPackages.collectAsState()
+    var expanded by remember { mutableStateOf(true) }
+    val timeFormat = remember { java.text.SimpleDateFormat("HH:mm:ss", java.util.Locale.getDefault()) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(14.dp))
+            .background(WaSurface)
+            .clickable { expanded = !expanded }
+            .padding(16.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(Modifier.weight(1f)) {
+                Text("Диагностика (временно)", color = MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.titleMedium)
+                Text(
+                    "Открой Bolt/Wolt и посмотри, что появится ниже",
+                    color = WaTextSecondary,
+                    style = MaterialTheme.typography.bodyMedium,
+                    maxLines = 1,
+                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                )
+            }
+            Icon(
+                imageVector = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
+                contentDescription = null,
+                tint = WaTextSecondary
+            )
+        }
+
+        AnimatedVisibility(visible = expanded, enter = expandVertically(), exit = shrinkVertically()) {
+            Column(modifier = Modifier.padding(top = 14.dp)) {
+                if (entries.isEmpty()) {
+                    Text(
+                        "Пока пусто. Включи Active, открой Bolt или Wolt на экране заказа и подожди пару секунд.",
+                        color = WaTextSecondary,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                } else {
+                    entries.forEach { entry ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 6.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Column(Modifier.weight(1f)) {
+                                Text(
+                                    entry.packageName,
+                                    color = if (entry.matchedSupportedApp) WaNeonGreen else Color.White,
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                                Text(
+                                    "${timeFormat.format(java.util.Date(entry.timestampMillis))} · текстов считано: ${entry.textsCollected}",
+                                    color = WaTextSecondary,
+                                    style = MaterialTheme.typography.bodySmall
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
