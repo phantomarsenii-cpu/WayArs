@@ -600,6 +600,23 @@ private fun DiagnosticsSection() {
                                         style = MaterialTheme.typography.bodySmall
                                     )
                                 }
+                                if (entry.rawTexts.isNotEmpty()) {
+                                    var rawExpanded by remember { mutableStateOf(false) }
+                                    Text(
+                                        if (rawExpanded) "тексты: скрыть" else "тексты: показать (${entry.rawTexts.size})",
+                                        color = WaTextSecondary,
+                                        style = MaterialTheme.typography.bodySmall,
+                                        modifier = Modifier.clickable { rawExpanded = !rawExpanded }
+                                    )
+                                    AnimatedVisibility(visible = rawExpanded) {
+                                        Text(
+                                            entry.rawTexts.joinToString("\n") { "• $it" },
+                                            color = WaTextSecondary,
+                                            style = MaterialTheme.typography.bodySmall,
+                                            modifier = Modifier.padding(top = 2.dp, start = 4.dp)
+                                        )
+                                    }
+                                }
                             }
                         }
                     }

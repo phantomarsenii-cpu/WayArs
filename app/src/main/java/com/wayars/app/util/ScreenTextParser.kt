@@ -36,7 +36,27 @@ object ScreenTextParser {
     )
 
     private val distanceRegex = Regex("""(\d+[.,]\d+|\d+)\s?km\b""", RegexOption.IGNORE_CASE)
-    private val timeRegex = Regex("""(\d+)\s?(?:min|mín|хв|мин)\b""", RegexOption.IGNORE_CASE)
+
+    // Widened beyond the original "min|mín|хв|мин" to also accept the
+    // Polish full-word forms ("minut", "minuty", "minuta") and "min." with a
+    // trailing dot — apps that spell out the word instead of abbreviating it
+    // (Stuart included, per on-device raw-text diagnostics) were silently
+    // falling through to timeMinutes=null with the old word-boundary-only
+    // "min" pattern.
+    private val timeRegex = Regex(
+        """(\d+)\s?(?:min\.?|mins?|mín|хв|мин|minut[ay]?)\b""",
+        RegexOption.IGNORE_CASE
+    )
+
+    /**
+     * Some apps (Stuart among them) show a per-km/per-order rate ("1,70
+     * zł/km") alongside the actual total earnings. That rate matches the
+     * money regex just as well as a real total and, depending on node
+     * traversal order, can get picked first — leaving the real total
+     * ignored. Treat a match immediately followed by "/km" (or a localized
+     * "per km") as a rate, not the total, and keep scanning instead.
+     */
+    private val perUnitSuffixRegex = Regex("""^\s*/\s?km|^\s*per\s?km""", RegexOption.IGNORE_CASE)
 
     fun parse(texts: List<String>): RawOrderCandidate {
         var earnings: Double? = null
@@ -51,6 +71,7 @@ object ScreenTextParser {
             if (earnings == null) {
                 for ((regex, cur) in moneyPatterns) {
                     val match = regex.find(text) ?: continue
+                    if (perUnitSuffixRegex.containsMatchIn(text.substring(match.range.last + 1))) continue
                     val amount = match.groupValues[1].replace(',', '.').toDoubleOrNull()
                     if (amount != null && amount > 0) {
                         earnings = amount

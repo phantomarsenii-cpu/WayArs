@@ -114,13 +114,52 @@ class OrderAccessibilityService : AccessibilityService() {
         val texts = ArrayList<String>()
         collectText(root, texts, maxDepth = 40)
 
+        // Fallback source #1: some overlay popups (Uber's incoming-order
+        // toast in particular) expose a root that's found but whose node
+        // tree yields zero text — the window itself carries text on the
+        // triggering AccessibilityEvent even when its node tree doesn't.
+        if (texts.isEmpty()) {
+            event.text?.forEach { if (it.isNotBlank()) texts.add(it.toString()) }
+            event.source?.let { collectText(it, texts, maxDepth = 40) }
+        }
+
+        if (texts.isEmpty()) {
+            // Fallback source #2: the window's semantics tree may simply not
+            // be built yet (Compose/Flutter overlays build it a few frames
+            // after the popup appears). One short, single retry — cheap and
+            // bounded, never recurses further.
+            ScanDiagnostics.record(
+                eventPackage, matchedSupportedApp = true, windowFound = true, textsCollected = 0
+            )
+            scope.launch {
+                kotlinx.coroutines.delay(200)
+                val retryRoot = findSupportedWindowRoot(eventPackage) ?: return@launch
+                val retryTexts = ArrayList<String>()
+                collectText(retryRoot, retryTexts, maxDepth = 40)
+                if (retryTexts.isNotEmpty()) {
+                    handleCollectedTexts(eventPackage, retryTexts)
+                }
+            }
+            return
+        }
+
+        handleCollectedTexts(eventPackage, texts)
+    }
+
+    /**
+     * Parses the scraped [texts], updates diagnostics (always, with the raw
+     * texts attached so misparsed layouts like Stuart's can be inspected
+     * on-device instead of guessed at from logs), and — if the candidate is
+     * complete and new — publishes it to the overlay.
+     */
+    private fun handleCollectedTexts(eventPackage: String, texts: List<String>) {
         val candidate = ScreenTextParser.parse(texts)
         val candidateSummary = "earnings=${candidate.earnings} km=${candidate.distanceKm} min=${candidate.timeMinutes} cur=${candidate.currency}"
 
         if (!candidate.isComplete) {
             ScanDiagnostics.record(
                 eventPackage, matchedSupportedApp = true, windowFound = true,
-                textsCollected = texts.size, parsedSummary = candidateSummary
+                textsCollected = texts.size, parsedSummary = candidateSummary, rawTexts = texts
             )
             return
         }
@@ -146,7 +185,8 @@ class OrderAccessibilityService : AccessibilityService() {
         Log.d(TAG, "Parsed order: $evaluation")
         ScanDiagnostics.record(
             eventPackage, matchedSupportedApp = true, windowFound = true,
-            textsCollected = texts.size, parsedSummary = "OK: $candidateSummary -> ${evaluation.verdict}"
+            textsCollected = texts.size, parsedSummary = "OK: $candidateSummary -> ${evaluation.verdict}",
+            rawTexts = texts
         )
 
         // NOTE: nothing is written to Room here. A row is only ever inserted

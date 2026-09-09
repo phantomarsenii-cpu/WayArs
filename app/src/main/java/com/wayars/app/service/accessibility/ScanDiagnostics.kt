@@ -10,7 +10,14 @@ data class DiagnosticEntry(
     val windowFound: Boolean,
     val textsCollected: Int,
     /** Whatever the parser could pull out, even if incomplete — e.g. "earnings=null km=3.1 min=null". */
-    val parsedSummary: String?
+    val parsedSummary: String?,
+    /**
+     * The raw strings scraped from the screen for this event, capped so the
+     * diagnostics list can't blow up. Only meant for on-device debugging of
+     * unsupported/misparsed app layouts (e.g. Stuart) — lets us see exactly
+     * what ScreenTextParser had to work with instead of guessing blind.
+     */
+    val rawTexts: List<String> = emptyList()
 )
 
 /**
@@ -29,12 +36,16 @@ object ScanDiagnostics {
     private val _recentPackages = MutableStateFlow<List<DiagnosticEntry>>(emptyList())
     val recentPackages: StateFlow<List<DiagnosticEntry>> = _recentPackages
 
+    /** Raw text lists are capped per-entry too — only need enough to spot the pattern. */
+    private const val MAX_RAW_TEXTS_PER_ENTRY = 40
+
     fun record(
         packageName: String,
         matchedSupportedApp: Boolean,
         windowFound: Boolean = false,
         textsCollected: Int = 0,
-        parsedSummary: String? = null
+        parsedSummary: String? = null,
+        rawTexts: List<String> = emptyList()
     ) {
         val entry = DiagnosticEntry(
             packageName = packageName,
@@ -42,7 +53,8 @@ object ScanDiagnostics {
             matchedSupportedApp = matchedSupportedApp,
             windowFound = windowFound,
             textsCollected = textsCollected,
-            parsedSummary = parsedSummary
+            parsedSummary = parsedSummary,
+            rawTexts = rawTexts.take(MAX_RAW_TEXTS_PER_ENTRY)
         )
         _recentPackages.value = (listOf(entry) + _recentPackages.value).take(MAX_ENTRIES)
     }
