@@ -600,8 +600,6 @@ private fun DiagnosticsSection() {
                                         style = MaterialTheme.typography.bodySmall
                                     )
                                 }
-                                    style = MaterialTheme.typography.bodySmall
-                                )
                             }
                         }
                     }
