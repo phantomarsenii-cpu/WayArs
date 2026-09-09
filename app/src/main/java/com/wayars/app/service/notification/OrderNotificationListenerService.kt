@@ -69,7 +69,9 @@ class OrderNotificationListenerService : NotificationListenerService() {
 
         val earnings = candidate.earnings ?: return
         val distanceKm = candidate.distanceKm ?: return
-        val timeMinutes = candidate.timeMinutes ?: return
+        // Not required for isComplete — default to 0 rather than drop the
+        // order (Stuart routinely has no parseable minutes figure).
+        val timeMinutes = candidate.timeMinutes ?: 0.0
         val currency = candidate.currency ?: currentCurrency
 
         val container = applicationContext.appContainer()

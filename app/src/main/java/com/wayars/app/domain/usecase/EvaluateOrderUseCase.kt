@@ -41,7 +41,12 @@ class EvaluateOrderUseCase {
         customThresholds: CustomThresholds? = null
     ): OrderEvaluation {
         require(distanceKm > 0) { "distanceKm must be > 0" }
-        require(timeMinutes > 0) { "timeMinutes must be > 0" }
+        // >= 0, not > 0: apps like Stuart don't always expose a parseable
+        // minutes figure, and the candidate then reaches here with
+        // timeMinutes defaulted to 0 rather than being dropped entirely.
+        // realTimeMinutes below still gets the full HIDDEN_TIME_MINUTES
+        // padding, so the rate-per-minute math stays sane (no div-by-zero).
+        require(timeMinutes >= 0) { "timeMinutes must be >= 0" }
 
         val fuelCost = vehicleProfile.fuelCostForDistance(distanceKm)
         val netProfit = earnings - fuelCost

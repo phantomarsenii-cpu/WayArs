@@ -57,7 +57,10 @@ class OrderAccessibilityService : AccessibilityService() {
     private var currentPreset: Preset = Preset.BALANCE
     private var currentCustomThresholds: CustomThresholds? = null
     private var currentVehicleProfile: VehicleProfile = VehicleProfile.DEFAULT
-    private var lastProcessedAt = 0L
+    // Per-package, not global — see the debounce comment in
+    // onAccessibilityEvent for why a single shared timer let noise from
+    // unrelated apps starve out real order-popup events (Uber especially).
+    private val lastProcessedAtByPackage = HashMap<String, Long>()
     private var lastCandidate: RawOrderCandidate? = null
 
     override fun onServiceConnected() {
@@ -90,10 +93,20 @@ class OrderAccessibilityService : AccessibilityService() {
             event.eventType != AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED
         ) return
 
-        val now = System.currentTimeMillis()
-        if (now - lastProcessedAt < 500) return // debounce — now runs for events from ANY app,
-        lastProcessedAt = now                    // not just supported ones, so a bit more headroom here
-
+        // Package filter MUST run before the debounce check, not after.
+        // The old order checked/updated a single global lastProcessedAt
+        // against events from EVERY app (launcher, system UI, keyboard,
+        // whatever else is generating accessibility events at that moment)
+        // before ever looking at which package the event came from. On a
+        // busy device that global timer is almost never idle, so the one
+        // event that actually matters — Uber's order popup WINDOW_STATE_
+        // CHANGED the instant it appears — regularly landed inside someone
+        // else's 500ms window and got silently dropped. By the time a
+        // Uber event finally survived the debounce, the popup itself had
+        // often already been dismissed/expired, so the overlay showed
+        // late or not at all. Filtering by package first means only
+        // Uber's (or another supported app's) own event cadence can debounce
+        // Uber, so the very first appearance is processed immediately.
         val eventPackage = event.packageName?.toString() ?: return
         val isSupported = isSupportedPackage(eventPackage)
         if (!isSupported) {
@@ -104,6 +117,21 @@ class OrderAccessibilityService : AccessibilityService() {
             ScanDiagnostics.record(eventPackage, matchedSupportedApp = false)
             return
         }
+
+        // Per-package debounce, not a single global one — see comment
+        // above. A burst of content-changed events from the SAME popup
+        // (e.g. a ticking ETA) is still collapsed, but that no longer
+        // costs other apps' events any of the window's budget.
+        val now = System.currentTimeMillis()
+        val lastForPackage = lastProcessedAtByPackage[eventPackage] ?: 0L
+        // Never debounce a brand-new window appearing — only repeat
+        // content-changed spam on an already-seen window. This is what
+        // guarantees the FIRST sighting of an order popup (Uber's included)
+        // is always parsed instantly instead of possibly being the one
+        // event that gets swallowed by the debounce.
+        val isNewWindowAppearing = event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED
+        if (!isNewWindowAppearing && now - lastForPackage < 500) return
+        lastProcessedAtByPackage[eventPackage] = now
 
         val root = findSupportedWindowRoot(eventPackage)
         if (root == null) {
@@ -168,7 +196,9 @@ class OrderAccessibilityService : AccessibilityService() {
 
         val earnings = candidate.earnings ?: return
         val distanceKm = candidate.distanceKm ?: return
-        val timeMinutes = candidate.timeMinutes ?: return
+        // Not required for isComplete — default to 0 rather than drop the
+        // order (Stuart routinely has no parseable minutes figure).
+        val timeMinutes = candidate.timeMinutes ?: 0.0
         val currency = candidate.currency ?: currentCurrency
 
         val container = applicationContext.appContainer()
