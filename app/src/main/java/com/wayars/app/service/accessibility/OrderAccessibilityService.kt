@@ -62,6 +62,13 @@ class OrderAccessibilityService : AccessibilityService() {
     // unrelated apps starve out real order-popup events (Uber especially).
     private val lastProcessedAtByPackage = HashMap<String, Long>()
     private var lastCandidate: RawOrderCandidate? = null
+    // One in-flight poll job per package. Uber (and occasionally others)
+    // draws its incoming-order popup as a non-focusable SYSTEM_ALERT_WINDOW
+    // whose Accessibility node tree isn't populated yet on the very first
+    // WINDOW_STATE_CHANGED — see pollForTexts() below. Keyed per package so
+    // a fresh event for the same app cancels and restarts its own poll
+    // instead of racing a stale one; unrelated packages are untouched.
+    private val pollJobsByPackage = HashMap<String, kotlinx.coroutines.Job>()
 
     override fun onServiceConnected() {
         super.onServiceConnected()
@@ -154,24 +161,51 @@ class OrderAccessibilityService : AccessibilityService() {
         if (texts.isEmpty()) {
             // Fallback source #2: the window's semantics tree may simply not
             // be built yet (Compose/Flutter overlays build it a few frames
-            // after the popup appears). One short, single retry — cheap and
-            // bounded, never recurses further.
+            // after the popup appears). Uber's incoming-order popup is the
+            // main offender — poll for it instead of a single fixed-delay
+            // retry, since one retry at a fixed 200ms either fires too
+            // early (tree still empty, no second attempt left) or wastes
+            // 200ms when the tree was actually ready sooner.
             ScanDiagnostics.record(
                 eventPackage, matchedSupportedApp = true, windowFound = true, textsCollected = 0
             )
-            scope.launch {
-                kotlinx.coroutines.delay(200)
+            pollForTexts(eventPackage)
+            return
+        }
+
+        handleCollectedTexts(eventPackage, texts)
+    }
+
+    /**
+     * Bounded poll for a package's window text, used only when the initial
+     * scan in onAccessibilityEvent found the window but its node tree was
+     * still empty (see the comment there). Polls every [intervalMs] up to
+     * [maxAttempts] times — short interval so a fast-appearing tree (the
+     * common case) is caught almost immediately, hard cap so a window that
+     * never populates (or never should have matched) can't spin forever.
+     * Stops as soon as text is found and handed to handleCollectedTexts, or
+     * the window disappears. Any previous poll for the same package is
+     * cancelled first so a new event for that app always restarts from
+     * scratch rather than racing a stale poll.
+     */
+    private fun pollForTexts(
+        eventPackage: String,
+        intervalMs: Long = 75L,
+        maxAttempts: Int = 20 // 20 * 75ms = 1.5s ceiling
+    ) {
+        pollJobsByPackage[eventPackage]?.cancel()
+        pollJobsByPackage[eventPackage] = scope.launch {
+            repeat(maxAttempts) {
+                kotlinx.coroutines.delay(intervalMs)
                 val retryRoot = findSupportedWindowRoot(eventPackage) ?: return@launch
                 val retryTexts = ArrayList<String>()
                 collectText(retryRoot, retryTexts, maxDepth = 40)
                 if (retryTexts.isNotEmpty()) {
                     handleCollectedTexts(eventPackage, retryTexts)
+                    return@launch
                 }
             }
-            return
         }
-
-        handleCollectedTexts(eventPackage, texts)
     }
 
     /**
@@ -255,7 +289,24 @@ class OrderAccessibilityService : AccessibilityService() {
         return fallbackMatch
     }
 
-    /** Iterative (non-recursive) tree walk to avoid stack overflows on deep trees. */
+    /**
+     * Iterative (non-recursive) tree walk to avoid stack overflows on deep
+     * trees.
+     *
+     * MUST preserve document/visual sibling order in [out]. ScreenTextParser
+     * relies on the FIRST money match in the list being the real total
+     * (Stuart, and every other supported app, always renders the headline
+     * price before secondary figures like a star rating). A plain stack
+     * walk that pushes children left-to-right and pops with removeLast()
+     * visits them LIFO — i.e. RIGHTMOST/LAST child first — which silently
+     * reverses sibling order at every level. That reversal was the actual
+     * cause of Stuart mis-parses that looked like a regex problem (e.g. a
+     * "★ 1.87" rating node landing in [out] before the real "16.81zł"
+     * total, because the rating happened to be a later sibling in the
+     * tree). Pushing children in REVERSE (childCount-1 downTo 0) makes the
+     * LIFO pop order come out correct again: child 0 first, child 1 next,
+     * etc. — matching both document order and what parse() assumes.
+     */
     private fun collectText(root: AccessibilityNodeInfo, out: MutableList<String>, maxDepth: Int) {
         val stack = ArrayDeque<Pair<AccessibilityNodeInfo, Int>>()
         stack.addLast(root to 0)
@@ -264,7 +315,7 @@ class OrderAccessibilityService : AccessibilityService() {
             node.text?.let { if (it.isNotBlank()) out.add(it.toString()) }
             node.contentDescription?.let { if (it.isNotBlank()) out.add(it.toString()) }
             if (depth >= maxDepth) continue
-            for (i in 0 until node.childCount) {
+            for (i in node.childCount - 1 downTo 0) {
                 node.getChild(i)?.let { stack.addLast(it to depth + 1) }
             }
         }
