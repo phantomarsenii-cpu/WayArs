@@ -589,8 +589,17 @@ private fun DiagnosticsSection() {
                                     style = MaterialTheme.typography.bodyMedium
                                 )
                                 Text(
-                                    "${timeFormat.format(java.util.Date(entry.timestampMillis))} · текстов считано: ${entry.textsCollected}",
+                                    "${timeFormat.format(java.util.Date(entry.timestampMillis))} · окно: ${if (entry.windowFound) "найдено" else "нет"} · текстов: ${entry.textsCollected}",
                                     color = WaTextSecondary,
+                                    style = MaterialTheme.typography.bodySmall
+                                )
+                                if (entry.parsedSummary != null) {
+                                    Text(
+                                        entry.parsedSummary,
+                                        color = if (entry.parsedSummary.startsWith("OK")) WaNeonGreen else WaTextSecondary,
+                                        style = MaterialTheme.typography.bodySmall
+                                    )
+                                }
                                     style = MaterialTheme.typography.bodySmall
                                 )
                             }

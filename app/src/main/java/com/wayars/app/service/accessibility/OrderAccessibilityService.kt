@@ -94,27 +94,36 @@ class OrderAccessibilityService : AccessibilityService() {
         if (now - lastProcessedAt < 500) return // debounce — now runs for events from ANY app,
         lastProcessedAt = now                    // not just supported ones, so a bit more headroom here
 
-        // Diagnostic recording happens for EVERY app (see ScanDiagnostics /
-        // Settings -> Диагностика) so the real Bolt/Wolt package name can
-        // finally be confirmed on-device. Anything not on our supported list
-        // bails out immediately, right here — before touching `windows` or
-        // walking any node tree — so the cost of the temporarily-removed
-        // XML package filter stays as close to zero as possible for the
-        // flood of unrelated apps' events.
         val eventPackage = event.packageName?.toString() ?: return
         val isSupported = isSupportedPackage(eventPackage)
-        ScanDiagnostics.record(eventPackage, isSupported, textsCollected = 0)
-        if (!isSupported) return
+        if (!isSupported) {
+            // Still worth a diagnostic line (see Settings -> Диагностика) so
+            // the real Bolt/Wolt/Uber package name can be confirmed
+            // on-device — but nothing more expensive than that for apps we
+            // don't care about.
+            ScanDiagnostics.record(eventPackage, matchedSupportedApp = false)
+            return
+        }
 
-        val root = findSupportedWindowRoot(eventPackage) ?: return
+        val root = findSupportedWindowRoot(eventPackage)
+        if (root == null) {
+            ScanDiagnostics.record(eventPackage, matchedSupportedApp = true, windowFound = false)
+            return
+        }
 
         val texts = ArrayList<String>()
         collectText(root, texts, maxDepth = 40)
-        ScanDiagnostics.record(eventPackage, isSupported, textsCollected = texts.size)
-        if (texts.isEmpty()) return
 
         val candidate = ScreenTextParser.parse(texts)
-        if (!candidate.isComplete) return
+        val candidateSummary = "earnings=${candidate.earnings} km=${candidate.distanceKm} min=${candidate.timeMinutes} cur=${candidate.currency}"
+
+        if (!candidate.isComplete) {
+            ScanDiagnostics.record(
+                eventPackage, matchedSupportedApp = true, windowFound = true,
+                textsCollected = texts.size, parsedSummary = candidateSummary
+            )
+            return
+        }
         if (candidate == lastCandidate) return // identical to what's already on screen — nothing changed
         lastCandidate = candidate
 
@@ -135,6 +144,10 @@ class OrderAccessibilityService : AccessibilityService() {
         )
 
         Log.d(TAG, "Parsed order: $evaluation")
+        ScanDiagnostics.record(
+            eventPackage, matchedSupportedApp = true, windowFound = true,
+            textsCollected = texts.size, parsedSummary = "OK: $candidateSummary -> ${evaluation.verdict}"
+        )
 
         // NOTE: nothing is written to Room here. A row is only ever inserted
         // when the driver taps Accept in the overlay (see OverlayService).
@@ -210,10 +223,11 @@ class OrderAccessibilityService : AccessibilityService() {
         private val SUPPORTED_PACKAGES = setOf(
             "com.bolt.deliverycourier",   // Bolt courier — verified on-device
             "ee.mtakso.driver",           // Bolt driver (rides) — older/alt package id
-            "com.ubercab.driver",         // Uber driver
+            "com.ubercab.driver",         // Uber driver — verified on-device
             "com.wolt.courierapp",        // Wolt courier — verified on-device
             "com.wolt.courier.app",       // Wolt courier — older/alt package id
-            "com.freenow.driver"          // FreeNow driver — still unconfirmed
+            "com.freenow.driver",         // FreeNow driver — still unconfirmed
+            "com.stuart.courier"          // Stuart courier
         )
 
         fun isSupportedPackage(packageName: String): Boolean = packageName in SUPPORTED_PACKAGES

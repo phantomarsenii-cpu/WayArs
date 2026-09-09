@@ -7,39 +7,44 @@ data class DiagnosticEntry(
     val packageName: String,
     val timestampMillis: Long,
     val matchedSupportedApp: Boolean,
-    val textsCollected: Int
+    val windowFound: Boolean,
+    val textsCollected: Int,
+    /** Whatever the parser could pull out, even if incomplete — e.g. "earnings=null km=3.1 min=null". */
+    val parsedSummary: String?
 )
 
 /**
- * TEMPORARY diagnostic tool — not for end users, for figuring out the exact
- * real package name of Bolt/Wolt on this specific device/build, since guessed
- * package names have repeatedly turned out wrong and there's no PC/adb handy
- * to check with `dumpsys window`. Records every foreground-app package the
- * accessibility service sees (regardless of whether it's on the supported
- * list) into a small rolling in-memory list — nothing is written to disk,
- * nothing leaves the device. Once the real Bolt/Wolt package names are
- * confirmed from this screen, the XML allow-list gets the correct names and
- * this can go back to only logging supported-app events.
+ * TEMPORARY diagnostic tool. Records exactly ONE entry per accessibility
+ * event, with the full outcome already known (not two separate before/after
+ * calls) — an earlier version recorded a cheap "0 texts" entry immediately
+ * and a real one after text collection, but the dedup logic (meant to stop
+ * the list filling up with 50 copies of the same app while scrolling)
+ * matched on package name alone and silently ate the second, actually
+ * useful entry every time, since it shared a package name with the one
+ * right above it. Every real reading was hidden behind a fake "0".
  */
 object ScanDiagnostics {
-    private const val MAX_ENTRIES = 15
+    private const val MAX_ENTRIES = 20
 
     private val _recentPackages = MutableStateFlow<List<DiagnosticEntry>>(emptyList())
     val recentPackages: StateFlow<List<DiagnosticEntry>> = _recentPackages
 
-    fun record(packageName: String, matchedSupportedApp: Boolean, textsCollected: Int) {
+    fun record(
+        packageName: String,
+        matchedSupportedApp: Boolean,
+        windowFound: Boolean = false,
+        textsCollected: Int = 0,
+        parsedSummary: String? = null
+    ) {
         val entry = DiagnosticEntry(
             packageName = packageName,
             timestampMillis = System.currentTimeMillis(),
             matchedSupportedApp = matchedSupportedApp,
-            textsCollected = textsCollected
+            windowFound = windowFound,
+            textsCollected = textsCollected,
+            parsedSummary = parsedSummary
         )
-        val current = _recentPackages.value
-        // Skip if it's identical to the very last entry (avoid the list
-        // filling up with 50 copies of the same app while you're just
-        // scrolling around inside it).
-        if (current.firstOrNull()?.packageName == packageName) return
-        _recentPackages.value = (listOf(entry) + current).take(MAX_ENTRIES)
+        _recentPackages.value = (listOf(entry) + _recentPackages.value).take(MAX_ENTRIES)
     }
 
     fun clear() {
