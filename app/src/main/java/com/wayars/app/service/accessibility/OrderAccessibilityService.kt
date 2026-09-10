@@ -72,13 +72,20 @@ class OrderAccessibilityService : AccessibilityService() {
 
     override fun onServiceConnected() {
         super.onServiceConnected()
-        // Defensive: if the OS recreates this service while Active is still
-        // true (e.g. process restart with ScanningState surviving), make
-        // sure the log file exists rather than relying solely on the
-        // Dashboard toggle that originally flipped Active on.
-        if (ScanningState.isActive.value) {
-            ScanLogFile.start(applicationContext)
-        }
+        // The log file must exist the moment this service is alive, not only
+        // when the in-app "Active" switch happens to flip it on — the UI
+        // path that used to guarantee this (ScanningState.setActive ->
+        // ScanLogFile.start(context)) depends on a toggle that may be
+        // hidden or skipped, which left ScanDiagnostics.record() writing to
+        // a null currentFile. Starting it here, unconditionally, with the
+        // service's own context, removes that dependency entirely.
+        //
+        // Note: this does NOT change what gets scanned or recorded — event
+        // processing is still fully gated behind ScanningState.isActive in
+        // onAccessibilityEvent() below ("Hard gate #1"). This only
+        // guarantees the FILE is ready to receive lines whenever that gate
+        // does let a diagnostic through.
+        ScanLogFile.start(this)
         val container = applicationContext.appContainer()
         scope.launch {
             container.settingsRepository.currency.collect { currentCurrency = it }
