@@ -157,10 +157,19 @@ class OrderAccessibilityService : AccessibilityService() {
         // guarantees the FIRST sighting of an order popup (Uber's included)
         // is always parsed instantly instead of possibly being the one
         // event that gets swallowed by the debounce. TYPE_WINDOWS_CHANGED
-        // counts as a new-window signal too — it's fired for exactly that
-        // reason for Uber's overlay popup.
-        val isNewWindowAppearing = event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED ||
-            event.eventType == AccessibilityEvent.TYPE_WINDOWS_CHANGED
+        // deliberately does NOT get the same bypass: unlike WINDOW_STATE_
+        // CHANGED (which only fires on a genuine window change), WINDOWS_
+        // CHANGED fires for any change to the system's visible-window list
+        // — including ones that have nothing to do with a new order (minor
+        // layout/animation churn while the same popup is still on screen).
+        // Bypassing the debounce for every one of those flooded ScanDiagnostics
+        // with near-duplicate entries every few hundred ms, which pushed the
+        // one entry actually worth reading off the capped list before it
+        // could be opened. The normal per-package debounce below is enough:
+        // the first WINDOWS_CHANGED for a package is virtually always >500ms
+        // after that package's last event (it wasn't in the foreground a
+        // moment ago), so Uber's popup still gets caught on first sight.
+        val isNewWindowAppearing = event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED
         if (!isNewWindowAppearing && now - lastForPackage < 500) return
         lastProcessedAtByPackage[eventPackage] = now
 

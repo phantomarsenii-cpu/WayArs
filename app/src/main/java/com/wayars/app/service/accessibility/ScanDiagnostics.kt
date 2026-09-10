@@ -36,6 +36,19 @@ object ScanDiagnostics {
     private val _recentPackages = MutableStateFlow<List<DiagnosticEntry>>(emptyList())
     val recentPackages: StateFlow<List<DiagnosticEntry>> = _recentPackages
 
+    /**
+     * While true, [record] is a no-op. Lets the Diagnostics screen freeze
+     * the list on demand — entries scroll off the capped list fast enough
+     * (even after fixing the debounce bug that made it worse) that reading
+     * one before it's evicted was still a race against real time.
+     */
+    private val _paused = MutableStateFlow(false)
+    val paused: StateFlow<Boolean> = _paused
+
+    fun setPaused(value: Boolean) {
+        _paused.value = value
+    }
+
     /** Raw text lists are capped per-entry too — only need enough to spot the pattern. */
     private const val MAX_RAW_TEXTS_PER_ENTRY = 40
 
@@ -47,6 +60,7 @@ object ScanDiagnostics {
         parsedSummary: String? = null,
         rawTexts: List<String> = emptyList()
     ) {
+        if (_paused.value) return
         val entry = DiagnosticEntry(
             packageName = packageName,
             timestampMillis = System.currentTimeMillis(),

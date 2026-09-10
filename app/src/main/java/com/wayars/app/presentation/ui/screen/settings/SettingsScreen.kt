@@ -532,6 +532,7 @@ private fun ChoiceChip(label: String, selected: Boolean, onClick: () -> Unit, mo
 @Composable
 private fun DiagnosticsSection() {
     val entries by com.wayars.app.service.accessibility.ScanDiagnostics.recentPackages.collectAsState()
+    val paused by com.wayars.app.service.accessibility.ScanDiagnostics.paused.collectAsState()
     var expanded by remember { mutableStateOf(true) }
     val timeFormat = remember { java.text.SimpleDateFormat("HH:mm:ss", java.util.Locale.getDefault()) }
 
@@ -567,6 +568,17 @@ private fun DiagnosticsSection() {
                     overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
                 )
             }
+            // Separate clickable target from the header row's own toggle —
+            // stops event propagation here the same way the per-entry rows
+            // do below, so tapping Pause doesn't also collapse the section.
+            Text(
+                if (paused) "▶ продолжить" else "⏸ пауза",
+                color = if (paused) WaNeonGreen else WaTextSecondary,
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier
+                    .clickable { com.wayars.app.service.accessibility.ScanDiagnostics.setPaused(!paused) }
+                    .padding(horizontal = 8.dp, vertical = 4.dp)
+            )
             Icon(
                 imageVector = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
                 contentDescription = null,
