@@ -72,6 +72,13 @@ class OrderAccessibilityService : AccessibilityService() {
 
     override fun onServiceConnected() {
         super.onServiceConnected()
+        // Defensive: if the OS recreates this service while Active is still
+        // true (e.g. process restart with ScanningState surviving), make
+        // sure the log file exists rather than relying solely on the
+        // Dashboard toggle that originally flipped Active on.
+        if (ScanningState.isActive.value) {
+            ScanLogFile.start(applicationContext)
+        }
         val container = applicationContext.appContainer()
         scope.launch {
             container.settingsRepository.currency.collect { currentCurrency = it }

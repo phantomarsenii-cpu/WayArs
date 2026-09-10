@@ -3,7 +3,6 @@ package com.wayars.app
 import android.app.Application
 import android.content.Context
 import com.wayars.app.data.prefs.LanguagePrefs
-import com.wayars.app.service.accessibility.ScanLogFile
 import com.wayars.app.util.LocaleManager
 
 class WayArsApplication : Application() {
@@ -14,7 +13,6 @@ class WayArsApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         container = AppContainer(this)
-        ScanLogFile.init(this)
     }
 
     override fun attachBaseContext(base: Context) {

@@ -83,7 +83,7 @@ fun DashboardScreen(
         val overlayOk = Settings.canDrawOverlays(context)
         val accessibilityOk = AccessibilityUtils.isServiceEnabled(context)
         if (overlayOk && accessibilityOk) {
-            ScanningState.setActive(true)
+            ScanningState.setActive(true, context)
             context.startForegroundService(Intent(context, OverlayService::class.java))
         } else {
             Toast.makeText(
@@ -147,7 +147,7 @@ fun DashboardScreen(
                             }
                             activateScanning()
                         } else {
-                            ScanningState.setActive(false)
+                            ScanningState.setActive(false, context)
                             context.stopService(Intent(context, OverlayService::class.java))
                         }
                     },

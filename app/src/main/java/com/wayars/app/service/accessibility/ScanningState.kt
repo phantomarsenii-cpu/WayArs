@@ -1,5 +1,6 @@
 package com.wayars.app.service.accessibility
 
+import android.content.Context
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -14,12 +15,12 @@ object ScanningState {
     private val _isActive = MutableStateFlow(false)
     val isActive: StateFlow<Boolean> = _isActive
 
-    fun setActive(active: Boolean) {
+    fun setActive(active: Boolean, context: Context) {
         _isActive.value = active
         // Ties the file logger's lifetime exactly to one Active session,
         // regardless of which call site flips this flag.
         if (active) {
-            ScanLogFile.start()
+            ScanLogFile.start(context.applicationContext)
         } else {
             ScanLogFile.stop()
         }
