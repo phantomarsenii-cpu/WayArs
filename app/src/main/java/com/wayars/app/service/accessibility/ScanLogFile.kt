@@ -1,6 +1,8 @@
 package com.wayars.app.service.accessibility
 
 import android.content.Context
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import java.io.File
 import java.io.FileWriter
 import java.text.SimpleDateFormat
@@ -45,6 +47,15 @@ object ScanLogFile {
 
     /** The file currently being written to, or null if no session is active. */
     private var currentFile: File? = null
+
+    /**
+     * Points at the most recently FINISHED (i.e. [stop]-closed) log file,
+     * or null if no session has completed yet. Only ever updated by [stop],
+     * so a UI observing this never gets offered a file that a session is
+     * still actively writing to. Used by DashboardScreen's "share log" action.
+     */
+    private val _lastCompletedLogFile = MutableStateFlow<File?>(null)
+    val lastCompletedLogFile: StateFlow<File?> = _lastCompletedLogFile
 
     /**
      * Starts a new logging session: creates `wayars_logs/` if needed, prunes
@@ -118,6 +129,9 @@ object ScanLogFile {
                 FileWriter(file, true).use { writer ->
                     writer.write("=== WayArs scan log stopped ${Date()} ===")
                     writer.write(System.lineSeparator())
+                }
+                if (file.exists() && file.length() > 0) {
+                    _lastCompletedLogFile.value = file
                 }
             } catch (_: Exception) {
                 // Ignore — nothing more can be done at this point.
