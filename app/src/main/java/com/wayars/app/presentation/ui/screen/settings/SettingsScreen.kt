@@ -540,11 +540,20 @@ private fun DiagnosticsSection() {
             .fillMaxWidth()
             .clip(RoundedCornerShape(14.dp))
             .background(WaSurface)
-            .clickable { expanded = !expanded }
             .padding(16.dp)
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                // Only the header toggles the whole section now — this used
+                // to be on the outer Column, which meant it covered the
+                // entries list too. Since no entry row had its own clickable
+                // area big enough to consume a tap first, almost any tap
+                // inside an entry (anywhere but the tiny "тексты: показать"
+                // label) fell through to this handler and collapsed the
+                // whole diagnostics block instead of expanding that entry's
+                // raw texts.
+                .clickable { expanded = !expanded },
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -575,10 +584,17 @@ private fun DiagnosticsSection() {
                     )
                 } else {
                     entries.forEach { entry ->
+                        var rawExpanded by remember(entry.timestampMillis) { mutableStateOf(false) }
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(vertical = 6.dp),
+                                .padding(vertical = 6.dp)
+                                // Whole row toggles this entry's raw texts now,
+                                // not just the small "показать" label — and
+                                // it's a normal per-entry clickable, so it
+                                // consumes the tap here and never reaches the
+                                // header's section-collapse handler above.
+                                .clickable(enabled = entry.rawTexts.isNotEmpty()) { rawExpanded = !rawExpanded },
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -601,12 +617,10 @@ private fun DiagnosticsSection() {
                                     )
                                 }
                                 if (entry.rawTexts.isNotEmpty()) {
-                                    var rawExpanded by remember { mutableStateOf(false) }
                                     Text(
                                         if (rawExpanded) "тексты: скрыть" else "тексты: показать (${entry.rawTexts.size})",
                                         color = WaTextSecondary,
-                                        style = MaterialTheme.typography.bodySmall,
-                                        modifier = Modifier.clickable { rawExpanded = !rawExpanded }
+                                        style = MaterialTheme.typography.bodySmall
                                     )
                                     AnimatedVisibility(visible = rawExpanded) {
                                         Text(
