@@ -64,14 +64,36 @@ object ScreenTextParser {
         var distanceKm: Double? = null
         var timeMinutes: Double? = null
 
-        for (raw in texts) {
+        for (index in texts.indices) {
+            val raw = texts[index]
             val text = raw.trim()
             if (text.isEmpty()) continue
 
             if (earnings == null) {
                 for ((regex, cur) in moneyPatterns) {
                     val match = regex.find(text) ?: continue
-                    if (perUnitSuffixRegex.containsMatchIn(text.substring(match.range.last + 1))) continue
+
+                    // Guard: a rating badge (e.g. "★ 1.67") is never the
+                    // order total, even on the rare layout where the badge
+                    // text itself happens to sit next to a currency marker.
+                    // Checked in the SAME string only — a star glyph in an
+                    // unrelated earlier sibling node can't reach this match.
+                    val precedingText = text.substring(0, match.range.first)
+                    if (precedingText.trimEnd().endsWith("★")) continue
+
+                    // Guard: a per-km/per-order rate suffix ("/km", "per km").
+                    // Checked in two places: right after the amount in THIS
+                    // string (original case), and also at the START of the
+                    // NEXT collected text (Stuart observed splitting a rate
+                    // like "1.67 zł" and its "/km" suffix across two sibling
+                    // nodes — collectText's sibling order guarantees the
+                    // suffix, if present, is the very next entry).
+                    val sameNodeSuffix = text.substring(match.range.last + 1)
+                    val nextNodeText = texts.getOrNull(index + 1)?.trim().orEmpty()
+                    if (perUnitSuffixRegex.containsMatchIn(sameNodeSuffix) ||
+                        perUnitSuffixRegex.containsMatchIn(nextNodeText)
+                    ) continue
+
                     val amount = match.groupValues[1].replace(',', '.').toDoubleOrNull()
                     if (amount != null && amount > 0) {
                         earnings = amount

@@ -97,8 +97,25 @@ class OrderAccessibilityService : AccessibilityService() {
         if (ScanningState.isSuppressed()) return
 
         if (event.eventType != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED &&
-            event.eventType != AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED
+            event.eventType != AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED &&
+            event.eventType != AccessibilityEvent.TYPE_WINDOWS_CHANGED
         ) return
+
+        // TYPE_WINDOWS_CHANGED fires the instant the system's set of visible
+        // windows changes anywhere on the device, and is the only event a
+        // non-focusable TYPE_APPLICATION_OVERLAY popup reliably triggers —
+        // which is how Uber draws its incoming-order toast. Unlike the other
+        // two event types it does NOT reliably carry event.packageName, so
+        // the package can't be read off the event itself here. Resolve it by
+        // scanning the actually-visible windows instead (findSupportedWindowRoot
+        // already does that scan) and hang onto the root it finds so the
+        // normal path below doesn't have to scan `windows` a second time.
+        val windowsChangedRoot: AccessibilityNodeInfo? =
+            if (event.eventType == AccessibilityEvent.TYPE_WINDOWS_CHANGED) {
+                findSupportedWindowRoot(null)
+            } else {
+                null
+            }
 
         // Package filter MUST run before the debounce check, not after.
         // The old order checked/updated a single global lastProcessedAt
@@ -114,7 +131,11 @@ class OrderAccessibilityService : AccessibilityService() {
         // late or not at all. Filtering by package first means only
         // Uber's (or another supported app's) own event cadence can debounce
         // Uber, so the very first appearance is processed immediately.
-        val eventPackage = event.packageName?.toString() ?: return
+        val eventPackage = if (event.eventType == AccessibilityEvent.TYPE_WINDOWS_CHANGED) {
+            windowsChangedRoot?.packageName?.toString() ?: return
+        } else {
+            event.packageName?.toString() ?: return
+        }
         val isSupported = isSupportedPackage(eventPackage)
         if (!isSupported) {
             // Still worth a diagnostic line (see Settings -> Диагностика) so
@@ -135,12 +156,15 @@ class OrderAccessibilityService : AccessibilityService() {
         // content-changed spam on an already-seen window. This is what
         // guarantees the FIRST sighting of an order popup (Uber's included)
         // is always parsed instantly instead of possibly being the one
-        // event that gets swallowed by the debounce.
-        val isNewWindowAppearing = event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED
+        // event that gets swallowed by the debounce. TYPE_WINDOWS_CHANGED
+        // counts as a new-window signal too — it's fired for exactly that
+        // reason for Uber's overlay popup.
+        val isNewWindowAppearing = event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED ||
+            event.eventType == AccessibilityEvent.TYPE_WINDOWS_CHANGED
         if (!isNewWindowAppearing && now - lastForPackage < 500) return
         lastProcessedAtByPackage[eventPackage] = now
 
-        val root = findSupportedWindowRoot(eventPackage)
+        val root = windowsChangedRoot ?: findSupportedWindowRoot(eventPackage)
         if (root == null) {
             ScanDiagnostics.record(eventPackage, matchedSupportedApp = true, windowFound = false)
             return
