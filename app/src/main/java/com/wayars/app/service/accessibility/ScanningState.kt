@@ -16,6 +16,13 @@ object ScanningState {
 
     fun setActive(active: Boolean) {
         _isActive.value = active
+        // Ties the file logger's lifetime exactly to one Active session,
+        // regardless of which call site flips this flag.
+        if (active) {
+            ScanLogFile.start()
+        } else {
+            ScanLogFile.stop()
+        }
     }
 
     // Cooldown after Accept/Reject: the same still-visible order screen often

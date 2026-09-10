@@ -118,10 +118,6 @@ fun SettingsScreen(
                 onOpenNotificationSettings = onOpenNotificationSettings
             )
         }
-
-        item {
-            DiagnosticsSection()
-        }
     }
 }
 
@@ -523,12 +519,12 @@ private fun ChoiceChip(label: String, selected: Boolean, onClick: () -> Unit, mo
 }
 
 /**
- * TEMPORARY debugging tool (see ScanDiagnostics) — shows the real Android
- * package name of whatever app the accessibility service just saw, so
- * Bolt/Wolt's actual package name can finally be confirmed without a PC or
- * adb. Expanded by default since finding this quickly matters more right
- * now than keeping Settings tidy.
+ * Kept only as a fallback in case the file-based log (see ScanLogFile /
+ * Dashboard "share log") ever needs to be bypassed — no longer surfaced
+ * anywhere in Settings. Currently unused and safe to delete entirely once
+ * confident the file log fully replaces it.
  */
+@Suppress("unused")
 @Composable
 private fun DiagnosticsSection() {
     val entries by com.wayars.app.service.accessibility.ScanDiagnostics.recentPackages.collectAsState()

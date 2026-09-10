@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Matches the "wayars_logs" folder ScanLogFile writes into under
+         getExternalFilesDir(null). -->
+    <external-files-path name="wayars_logs" path="wayars_logs/" />
+</paths>

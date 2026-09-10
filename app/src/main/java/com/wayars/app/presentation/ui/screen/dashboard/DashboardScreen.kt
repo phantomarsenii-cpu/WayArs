@@ -4,6 +4,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -50,6 +51,7 @@ import com.wayars.app.presentation.ui.theme.WaNeonGreen
 import com.wayars.app.presentation.ui.theme.WaSurface
 import com.wayars.app.presentation.ui.theme.WaSurfaceVariant
 import com.wayars.app.presentation.ui.theme.WaTextSecondary
+import com.wayars.app.service.accessibility.ScanLogFile
 import com.wayars.app.service.accessibility.ScanningState
 import com.wayars.app.service.overlay.OverlayService
 import com.wayars.app.util.AccessibilityUtils
@@ -63,6 +65,9 @@ fun DashboardScreen(
 ) {
     val context = LocalContext.current
     val isActive by ScanningState.isActive.collectAsState()
+    // Only a FINISHED session's file ever lands here (see ScanLogFile), so
+    // this is never offered while a scan is still being written to.
+    val lastLogFile by ScanLogFile.lastCompletedLogFile.collectAsState()
 
     // Android 13+ requires POST_NOTIFICATIONS to be granted at RUNTIME, not
     // just declared in the manifest — without it, the foreground service's
@@ -151,6 +156,35 @@ fun DashboardScreen(
                         checkedThumbColor = Color.White,
                         uncheckedTrackColor = WaSurfaceVariant
                     )
+                )
+            }
+        }
+
+        // Only shown once a completed scan-log file exists, and never while
+        // Active is still on (that file isn't finished yet — see ScanLogFile).
+        if (lastLogFile != null && !isActive) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.End
+            ) {
+                Text(
+                    stringResource(R.string.dashboard_share_log),
+                    color = WaNeonGreen,
+                    fontSize = 13.sp,
+                    modifier = Modifier.clickable {
+                        val file = lastLogFile ?: return@clickable
+                        val uri = androidx.core.content.FileProvider.getUriForFile(
+                            context, "${context.packageName}.fileprovider", file
+                        )
+                        val sendIntent = Intent(Intent.ACTION_SEND).apply {
+                            type = "text/plain"
+                            putExtra(Intent.EXTRA_STREAM, uri)
+                            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                        }
+                        context.startActivity(
+                            Intent.createChooser(sendIntent, null).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        )
+                    }
                 )
             }
         }

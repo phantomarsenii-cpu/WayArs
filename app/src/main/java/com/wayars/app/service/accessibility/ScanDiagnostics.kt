@@ -60,6 +60,25 @@ object ScanDiagnostics {
         parsedSummary: String? = null,
         rawTexts: List<String> = emptyList()
     ) {
+        // Written unconditionally, independent of [_paused] below — [_paused]
+        // only ever froze the (now-removed) live on-screen list; the file
+        // must keep capturing every single event for the whole Active
+        // session no matter what, since it's the only place these are still
+        // readable after the fact.
+        run {
+            val line = buildString {
+                append(packageName)
+                append(" | matched=").append(matchedSupportedApp)
+                append(" | window=").append(windowFound)
+                append(" | texts=").append(textsCollected)
+                if (parsedSummary != null) append(" | ").append(parsedSummary)
+            }
+            ScanLogFile.append(line)
+            if (rawTexts.isNotEmpty()) {
+                ScanLogFile.append("  raw: " + rawTexts.joinToString(" | "))
+            }
+        }
+
         if (_paused.value) return
         val entry = DiagnosticEntry(
             packageName = packageName,
