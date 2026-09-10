@@ -213,8 +213,18 @@ class OrderAccessibilityService : AccessibilityService() {
             // retry, since one retry at a fixed 200ms either fires too
             // early (tree still empty, no second attempt left) or wastes
             // 200ms when the tree was actually ready sooner.
+            //
+            // Diagnostic-only addition: describeEmptyTree() records WHY the
+            // tree was empty (zero children at all vs. children present but
+            // textless) instead of just the fact that it was. Field logs
+            // show Uber's window is found (window=true) but yields texts=0
+            // for several REAL seconds in a row (not a single missed frame)
+            // before it suddenly populates — that's too long to be a normal
+            // "not laid out yet" gap, so the next step is seeing which of
+            // the two shapes it actually is on-device, not guessing.
             ScanDiagnostics.record(
-                eventPackage, matchedSupportedApp = true, windowFound = true, textsCollected = 0
+                eventPackage, matchedSupportedApp = true, windowFound = true, textsCollected = 0,
+                parsedSummary = describeEmptyTree(root)
             )
             pollForTexts(eventPackage)
             return
@@ -366,6 +376,27 @@ class OrderAccessibilityService : AccessibilityService() {
                 node.getChild(i)?.let { stack.addLast(it to depth + 1) }
             }
         }
+    }
+
+    /**
+     * Inspects why [root]'s tree yielded no text — for diagnostics only,
+     * never used to change scan behavior. Distinguishes two very different
+     * situations that both currently look identical as "texts=0":
+     *  - genuinely no children yet (root.childCount == 0): the window
+     *    exists but the app hasn't attached any content to it — consistent
+     *    with a staged/animated reveal.
+     *  - children exist but none carry text/contentDescription: the layout
+     *    is already there, only the text itself is missing — consistent
+     *    with fields being populated asynchronously (e.g. after a route/ETA
+     *    lookup) rather than the whole card being deferred.
+     * Only looks one level deep and only at className, so this stays cheap
+     * enough to run on every empty-tree event without adding real cost.
+     */
+    private fun describeEmptyTree(root: AccessibilityNodeInfo): String {
+        val childCount = root.childCount
+        if (childCount == 0) return "emptyTree: root has 0 children"
+        val classes = (0 until childCount).mapNotNull { root.getChild(it)?.className?.toString() }
+        return "emptyTree: root has $childCount children, classes=$classes"
     }
 
     override fun onInterrupt() {
