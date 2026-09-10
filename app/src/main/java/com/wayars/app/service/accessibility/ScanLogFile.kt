@@ -70,7 +70,7 @@ object ScanLogFile {
     @Synchronized
     fun start(context: Context) {
         try {
-            val baseDir = context.getExternalFilesDir(null) ?: context.filesDir
+            val baseDir = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS) ?: context.filesDir
             val logDir = File(baseDir, LOG_DIR_NAME)
             if (!logDir.exists()) {
                 logDir.mkdirs()
