@@ -194,7 +194,7 @@ class OrderAccessibilityService : AccessibilityService() {
         }
 
         val texts = ArrayList<String>()
-        collectText(root, texts, maxDepth = 40)
+        texts.addAll(collectTextsFromAllSupportedWindows(eventPackage))
 
         // Fallback source #1: some overlay popups (Uber's incoming-order
         // toast in particular) expose a root that's found but whose node
@@ -238,25 +238,44 @@ class OrderAccessibilityService : AccessibilityService() {
      * scan in onAccessibilityEvent found the window but its node tree was
      * still empty (see the comment there). Polls every [intervalMs] up to
      * [maxAttempts] times — short interval so a fast-appearing tree (the
-     * common case) is caught almost immediately, hard cap so a window that
-     * never populates (or never should have matched) can't spin forever.
-     * Stops as soon as text is found and handed to handleCollectedTexts, or
-     * the window disappears. Any previous poll for the same package is
-     * cancelled first so a new event for that app always restarts from
-     * scratch rather than racing a stale poll.
+     * common case) is caught almost immediately. Stops as soon as text is
+     * found and handed to handleCollectedTexts, or the window disappears.
+     * Any previous poll for the same package is cancelled first so a new
+     * event for that app always restarts from scratch rather than racing a
+     * stale poll.
+     *
+     * Ceiling raised from an original 1.5s (20 * 75ms) to ~12s. Field logs
+     * (Uber, 2026-09-10) showed root has 0 children for a SINGLE sustained
+     * popup for 20-30+ real seconds before Uber's own tree finally
+     * populated — this is not a "missed frame", it's how slow that specific
+     * overlay's content genuinely loads. The old 1.5s cap gave up long
+     * before that and depended on the NEXT external TYPE_WINDOWS_CHANGED
+     * event to restart a fresh 1.5s poll; when the popup went quiet for a
+     * stretch with no further system window-list churn (also seen in the
+     * same logs — 90+ second gaps with zero Uber events while the banner
+     * was presumably still up), no poll was running at all during that gap
+     * and a populate-then-disappear cycle could be missed entirely. A
+     * single ~12s poll covers the slow case without needing to rely on
+     * lucky re-triggering. 150ms interval keeps the total attempt count
+     * (~80) cheap — each attempt is a shallow window-root fetch, not a
+     * repeated full tree walk unless text is actually found.
      */
     private fun pollForTexts(
         eventPackage: String,
-        intervalMs: Long = 75L,
-        maxAttempts: Int = 20 // 20 * 75ms = 1.5s ceiling
+        intervalMs: Long = 150L,
+        maxAttempts: Int = 80 // 80 * 150ms = 12s ceiling
     ) {
         pollJobsByPackage[eventPackage]?.cancel()
         pollJobsByPackage[eventPackage] = scope.launch {
             repeat(maxAttempts) {
                 kotlinx.coroutines.delay(intervalMs)
-                val retryRoot = findSupportedWindowRoot(eventPackage) ?: return@launch
-                val retryTexts = ArrayList<String>()
-                collectText(retryRoot, retryTexts, maxDepth = 40)
+                // Existence check only — still tells us the window is gone
+                // and we should stop polling. The actual text comes from
+                // collectTextsFromAllSupportedWindows() below so a
+                // same-package drawer/overlay window can't hide the real
+                // content here either.
+                findSupportedWindowRoot(eventPackage) ?: return@launch
+                val retryTexts = collectTextsFromAllSupportedWindows(eventPackage)
                 if (retryTexts.isNotEmpty()) {
                     handleCollectedTexts(eventPackage, retryTexts)
                     return@launch
@@ -363,19 +382,82 @@ class OrderAccessibilityService : AccessibilityService() {
      * tree). Pushing children in REVERSE (childCount-1 downTo 0) makes the
      * LIFO pop order come out correct again: child 0 first, child 1 next,
      * etc. — matching both document order and what parse() assumes.
+     *
+     * Skips text/contentDescription from a node whose [AccessibilityNodeInfo.isVisibleToUser]
+     * is false. Wolt (confirmed on-device) keeps its navigation-drawer
+     * content permanently attached to the semantics tree — just translated
+     * off-screen while "closed" — rather than removing it, so a blind walk
+     * picks up drawer menu text even when the user is on the main screen
+     * looking at an order card. Only the text-adding step is skipped, not
+     * the subtree walk itself: visibility flags on some OEM/Compose builds
+     * are unreliable at a container level even when accurate on leaves, so
+     * still descending avoids silently losing genuinely visible children
+     * of a container that (for whatever reason) reports itself as hidden.
      */
     private fun collectText(root: AccessibilityNodeInfo, out: MutableList<String>, maxDepth: Int) {
         val stack = ArrayDeque<Pair<AccessibilityNodeInfo, Int>>()
         stack.addLast(root to 0)
         while (stack.isNotEmpty()) {
             val (node, depth) = stack.removeLast()
-            node.text?.let { if (it.isNotBlank()) out.add(it.toString()) }
-            node.contentDescription?.let { if (it.isNotBlank()) out.add(it.toString()) }
+            if (node.isVisibleToUser) {
+                node.text?.let { if (it.isNotBlank()) out.add(it.toString()) }
+                node.contentDescription?.let { if (it.isNotBlank()) out.add(it.toString()) }
+            }
             if (depth >= maxDepth) continue
             for (i in node.childCount - 1 downTo 0) {
                 node.getChild(i)?.let { stack.addLast(it to depth + 1) }
             }
         }
+    }
+
+    /**
+     * Collects text from EVERY currently-visible window belonging to a
+     * supported package, not just one. [findSupportedWindowRoot] returns on
+     * the FIRST same-package window it finds, which field logs (Wolt,
+     * 2026-09-10) showed can be the wrong one: Wolt exposed a second window
+     * for its own package whose entire reachable tree was just the
+     * navigation-drawer chrome ("Close drawer", then its menu items), and
+     * the scanner stayed latched onto THAT window for 28+ minutes while the
+     * user was on the main screen the whole time with a real order showing
+     * — because nothing ever made it try any other window for the same
+     * package. Concatenating every matching window's text costs a handful
+     * of harmless extra strings (like "Close drawer", which matches no
+     * money/distance/time pattern and is simply ignored by the parser) in
+     * exchange for not being permanently stuck on the wrong one.
+     */
+    private fun collectTextsFromAllSupportedWindows(preferredPackage: String?): List<String> {
+        val texts = ArrayList<String>()
+        val visibleWindows = windows
+        if (visibleWindows.isNullOrEmpty()) {
+            val fallbackRoot = rootInActiveWindow ?: return texts
+            val fallbackPackage = fallbackRoot.packageName?.toString()
+            if (fallbackPackage != null && isSupportedPackage(fallbackPackage)) {
+                collectText(fallbackRoot, texts, maxDepth = 40)
+            }
+            return texts
+        }
+
+        // Preferred-package window first, if there is one, so ScreenTextParser's
+        // "first money match wins" assumption still favors the window that
+        // actually generated this event; any other supported-package window
+        // (e.g. a drawer/overlay window for the same app) is appended after.
+        var preferredRoot: AccessibilityNodeInfo? = null
+        val otherRoots = ArrayList<AccessibilityNodeInfo>()
+        for (window in visibleWindows) {
+            val root = window.root ?: continue
+            val pkg = root.packageName?.toString() ?: continue
+            if (!isSupportedPackage(pkg)) continue
+            if (pkg == preferredPackage && preferredRoot == null) {
+                preferredRoot = root
+            } else {
+                otherRoots.add(root)
+            }
+        }
+        preferredRoot?.let { collectText(it, texts, maxDepth = 40) }
+        for (root in otherRoots) {
+            collectText(root, texts, maxDepth = 40)
+        }
+        return texts
     }
 
     /**
