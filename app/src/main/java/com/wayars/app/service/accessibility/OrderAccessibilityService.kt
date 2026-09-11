@@ -357,15 +357,27 @@ class OrderAccessibilityService : AccessibilityService() {
             return if (fallbackPackage != null && isSupportedPackage(fallbackPackage)) fallbackRoot else null
         }
 
-        var fallbackMatch: AccessibilityNodeInfo? = null
+        var anySupportedMatch: AccessibilityNodeInfo? = null
         for (window in visibleWindows) {
             val root = window.root ?: continue
             val pkg = root.packageName?.toString() ?: continue
             if (!isSupportedPackage(pkg)) continue
             if (pkg == preferredPackage) return root
-            if (fallbackMatch == null) fallbackMatch = root
+            // Falling back to a DIFFERENT supported app's window is only
+            // correct when preferredPackage is null, i.e. the
+            // TYPE_WINDOWS_CHANGED case above, which doesn't carry a
+            // package name at all and is deliberately asking "is ANY
+            // supported app's window on screen right now". When a SPECIFIC
+            // package was asked for, handing back a different one instead
+            // is actively wrong, not just imprecise: with two courier apps
+            // open at once (confirmed on-device, 2026-09-11 — Wolt, Bolt
+            // and Stuart all running side by side), this used to make an
+            // event for one app report the OTHER app's window as if it
+            // were its own, rather than correctly reporting "not found yet"
+            // for the one that legitimately had nothing.
+            if (preferredPackage == null && anySupportedMatch == null) anySupportedMatch = root
         }
-        return fallbackMatch
+        return anySupportedMatch
     }
 
     /**
@@ -414,19 +426,30 @@ class OrderAccessibilityService : AccessibilityService() {
     }
 
     /**
-     * Collects text from EVERY currently-visible window belonging to a
-     * supported package, not just one. [findSupportedWindowRoot] returns on
-     * the FIRST same-package window it finds, which field logs (Wolt,
-     * 2026-09-10) showed can be the wrong one: Wolt exposed a second window
-     * for its own package whose entire reachable tree was just the
-     * navigation-drawer chrome ("Close drawer", then its menu items), and
-     * the scanner stayed latched onto THAT window for 28+ minutes while the
-     * user was on the main screen the whole time with a real order showing
-     * — because nothing ever made it try any other window for the same
-     * package. Concatenating every matching window's text costs a handful
-     * of harmless extra strings (like "Close drawer", which matches no
-     * money/distance/time pattern and is simply ignored by the parser) in
-     * exchange for not being permanently stuck on the wrong one.
+     * Collects text from EVERY currently-visible window belonging to
+     * [preferredPackage] SPECIFICALLY — not one, and NOT any other
+     * supported package. [findSupportedWindowRoot] returns on the FIRST
+     * same-package window it finds, which field logs (Wolt, 2026-09-10)
+     * showed can be the wrong one: Wolt exposed a second window for its own
+     * package whose entire reachable tree was just the navigation-drawer
+     * chrome ("Close drawer", then its menu items), and the scanner stayed
+     * latched onto THAT window for 28+ minutes while the user was on the
+     * main screen the whole time with a real order showing — because
+     * nothing ever made it try any other window for the SAME package.
+     *
+     * An earlier version of this fix filtered by `isSupportedPackage(pkg)`
+     * instead of `pkg == preferredPackage` for the "other windows" pass,
+     * intending to only broaden the search within one app. That was a real
+     * bug, not just imprecise: field logs (2026-09-11) showed a
+     * Wolt-triggered scan and a Bolt-triggered scan producing
+     * byte-for-byte IDENTICAL merged text, because couriers commonly run
+     * TWO delivery apps side by side (confirmed on-device — Wolt, Bolt,
+     * AND Stuart were all open at once in that session) and every single
+     * scan was pulling in every OTHER open courier app's window too,
+     * corrupting all of them at once. Restricting to `pkg == preferredPackage`
+     * keeps the original drawer-window fix (still gathers every window
+     * that particular app owns) without reaching into a different app's
+     * screen.
      */
     private fun collectTextsFromAllSupportedWindows(preferredPackage: String?): List<String> {
         val texts = ArrayList<String>()
@@ -434,30 +457,19 @@ class OrderAccessibilityService : AccessibilityService() {
         if (visibleWindows.isNullOrEmpty()) {
             val fallbackRoot = rootInActiveWindow ?: return texts
             val fallbackPackage = fallbackRoot.packageName?.toString()
-            if (fallbackPackage != null && isSupportedPackage(fallbackPackage)) {
+            if (fallbackPackage != null && isSupportedPackage(fallbackPackage) &&
+                (preferredPackage == null || fallbackPackage == preferredPackage)
+            ) {
                 collectText(fallbackRoot, texts, maxDepth = 40)
             }
             return texts
         }
+        if (preferredPackage == null) return texts
 
-        // Preferred-package window first, if there is one, so ScreenTextParser's
-        // "first money match wins" assumption still favors the window that
-        // actually generated this event; any other supported-package window
-        // (e.g. a drawer/overlay window for the same app) is appended after.
-        var preferredRoot: AccessibilityNodeInfo? = null
-        val otherRoots = ArrayList<AccessibilityNodeInfo>()
         for (window in visibleWindows) {
             val root = window.root ?: continue
             val pkg = root.packageName?.toString() ?: continue
-            if (!isSupportedPackage(pkg)) continue
-            if (pkg == preferredPackage && preferredRoot == null) {
-                preferredRoot = root
-            } else {
-                otherRoots.add(root)
-            }
-        }
-        preferredRoot?.let { collectText(it, texts, maxDepth = 40) }
-        for (root in otherRoots) {
+            if (pkg != preferredPackage) continue
             collectText(root, texts, maxDepth = 40)
         }
         return texts

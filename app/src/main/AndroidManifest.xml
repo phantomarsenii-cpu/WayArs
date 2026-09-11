@@ -8,6 +8,27 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
+    <!--
+      Android 11+ (API 30+) package visibility: without this <queries>
+      declaration, PackageManager.getInstalledApplications() and
+      getLaunchIntentForPackage() only see this app itself plus a small
+      set of always-visible system packages — confirmed on-device,
+      2026-09-11: the "add app" picker in Settings showed almost nothing
+      but system apps. Declaring interest in apps that have a launcher
+      icon (MAIN/LAUNCHER) is the standard, Play-Store-compliant way to
+      make the picker see every regular installed app (including Bolt,
+      Wolt, Uber, FreeNow, etc.) without requesting the much heavier
+      QUERY_ALL_PACKAGES permission, which needs a separate Play Console
+      justification and isn't needed here — the picker only ever needs
+      apps a person can actually open.
+    -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
     <application
         android:name=".WayArsApplication"
         android:allowBackup="true"
