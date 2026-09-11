@@ -31,7 +31,10 @@ object ScreenTextParser {
     private val moneyPatterns: List<Pair<Regex, Currency>> = listOf(
         Regex("""€\s?(\d+[.,]\d{1,2})""") to Currency.EUR,
         Regex("""(\d+[.,]\d{1,2})\s?€""") to Currency.EUR,
-        Regex("""\$\s?(\d+[.,]\d{1,2})""") to Currency.USD,
+        // (?<!R) guards against matching the "$" inside Brazil's "R$" as a
+        // bare USD sign — without it, "R$ 25,00" would be misread as USD
+        // 25.00 by THIS pattern before ever reaching the BRL pattern below.
+        Regex("""(?<!R)\$\s?(\d+[.,]\d{1,2})""") to Currency.USD,
         Regex("""(\d+[.,]\d{1,2})\s?\$""") to Currency.USD,
         Regex("""£\s?(\d+[.,]\d{1,2})""") to Currency.GBP,
         Regex("""(\d+[.,]\d{1,2})\s?£""") to Currency.GBP,
@@ -55,7 +58,21 @@ object ScreenTextParser {
         Regex("""(?<!\d)(?:₴|UAH|грн)[ \t]?(\d+[.,]\d{1,2})""", RegexOption.IGNORE_CASE) to Currency.UAH,
         Regex("""(\d+[.,]\d{1,2})\s?(?:₴|UAH|грн)""", RegexOption.IGNORE_CASE) to Currency.UAH,
         Regex("""(?<!\d)(?:MDL|lei)[ \t]?(\d+[.,]\d{1,2})""", RegexOption.IGNORE_CASE) to Currency.MDL,
-        Regex("""(\d+[.,]\d{1,2})\s?(?:MDL|lei|L\b)""", RegexOption.IGNORE_CASE) to Currency.MDL
+        Regex("""(\d+[.,]\d{1,2})\s?(?:MDL|lei|L\b)""", RegexOption.IGNORE_CASE) to Currency.MDL,
+        // "R$" is always a prefix in practice (Brazilian apps never write
+        // "25,00 R$") so only one direction is needed here.
+        Regex("""(?<!\d)R\$[ \t]?(\d+[.,]\d{1,2})""", RegexOption.IGNORE_CASE) to Currency.BRL,
+        Regex("""(?<!\d)₹[ \t]?(\d+[.,]\d{1,2})""") to Currency.INR,
+        Regex("""(\d+[.,]\d{1,2})\s?₹""") to Currency.INR,
+        Regex("""(?<!\d)(?:₺|TRY|TL\b)[ \t]?(\d+[.,]\d{1,2})""", RegexOption.IGNORE_CASE) to Currency.TRY,
+        Regex("""(\d+[.,]\d{1,2})\s?(?:₺|TRY|TL\b)""", RegexOption.IGNORE_CASE) to Currency.TRY,
+        // Yen has no minor unit in normal display ("¥850", not "¥850.00"),
+        // so unlike every other currency here the amount group has NO
+        // required decimal part.
+        Regex("""(?<!\d)¥[ \t]?(\d+(?:[.,]\d{1,2})?)""") to Currency.JPY,
+        Regex("""(\d+(?:[.,]\d{1,2})?)\s?¥""") to Currency.JPY,
+        Regex("""(?<!\d)(?:JPY)[ \t]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.JPY,
+        Regex("""(\d+(?:[.,]\d{1,2})?)\s?(?:JPY)""", RegexOption.IGNORE_CASE) to Currency.JPY
     )
 
     /**

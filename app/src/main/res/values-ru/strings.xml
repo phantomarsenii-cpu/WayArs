@@ -79,4 +79,17 @@
     <string name="settings_vehicle_summary_no_fuel">%1$s · без затрат на топливо</string>
     <string name="verdict_net_profit">Чисто %1$s (топливо %2$s)</string>
     <string name="settings_saved">Сохранено</string>
+    <string name="settings_supported_apps_title">Поддерживаемые приложения</string>
+    <string name="settings_supported_apps_hint">Встроенный список + добавленные вами</string>
+    <string name="settings_supported_apps_builtin_label">Встроенные:</string>
+    <string name="settings_supported_apps_custom_label">Добавлены вами:</string>
+    <string name="settings_add_from_installed">Выбрать из установленных</string>
+    <string name="settings_add_manually">Ввести package id</string>
+    <string name="settings_package_id_label">Package id (напр. com.example.app)</string>
+    <string name="settings_add">Добавить</string>
+    <string name="settings_pick_installed_app_title">Выберите приложение</string>
+    <string name="settings_search_apps_label">Поиск</string>
+    <string name="settings_cancel">Отмена</string>
+    <string name="settings_already_added">уже добавлено</string>
+    <string name="settings_no_apps_found">Приложения не найдены</string>
 </resources>

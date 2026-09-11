@@ -44,6 +44,7 @@ fun WayArsNavHost(
     val todayOrders by viewModel.todayOrders.collectAsState()
     val customThresholds by viewModel.customThresholds.collectAsState()
     val vehicleProfile by viewModel.vehicleProfile.collectAsState()
+    val customPackages by viewModel.customPackages.collectAsState()
 
     // Fills the ENTIRE screen, including the area behind the (now
     // transparent, edge-to-edge) system status/navigation bars, with the
@@ -92,7 +93,10 @@ fun WayArsNavHost(
                     vehicleProfile = vehicleProfile,
                     onSaveCustomThresholds = { bad, average, good -> viewModel.setCustomThresholds(bad, average, good) },
                     onClearCustomThresholds = { viewModel.clearCustomThresholds() },
-                    onSaveVehicleProfile = { viewModel.setVehicleProfile(it) }
+                    onSaveVehicleProfile = { viewModel.setVehicleProfile(it) },
+                    customPackages = customPackages,
+                    onAddCustomPackage = { viewModel.addCustomPackage(it) },
+                    onRemoveCustomPackage = { viewModel.removeCustomPackage(it) }
                 )
             }
         }

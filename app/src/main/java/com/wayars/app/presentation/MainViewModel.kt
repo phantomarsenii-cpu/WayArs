@@ -48,6 +48,9 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
     val vehicleProfile: StateFlow<VehicleProfile> =
         settings.vehicleProfile.stateIn(viewModelScope, SharingStarted.Eagerly, VehicleProfile.DEFAULT)
 
+    val customPackages: StateFlow<Set<String>> =
+        settings.customPackages.stateIn(viewModelScope, SharingStarted.Eagerly, emptySet())
+
     val todayOrders: StateFlow<List<OrderRecord>> =
         container.orderRepository.observeToday().stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
@@ -88,6 +91,8 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
         viewModelScope.launch { settings.setCustomThresholds(bad, average, good) }
     fun clearCustomThresholds() = viewModelScope.launch { settings.clearCustomThresholds() }
     fun setVehicleProfile(profile: VehicleProfile) = viewModelScope.launch { settings.setVehicleProfile(profile) }
+    fun addCustomPackage(packageName: String) = viewModelScope.launch { settings.addCustomPackage(packageName) }
+    fun removeCustomPackage(packageName: String) = viewModelScope.launch { settings.removeCustomPackage(packageName) }
 
     class Factory(private val container: AppContainer) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")

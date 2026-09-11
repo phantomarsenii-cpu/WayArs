@@ -79,4 +79,17 @@
     <string name="settings_vehicle_summary_no_fuel">%1$s · no fuel cost</string>
     <string name="verdict_net_profit">Net %1$s (fuel %2$s)</string>
     <string name="settings_saved">Saved</string>
+    <string name="settings_supported_apps_title">Supported apps</string>
+    <string name="settings_supported_apps_hint">Built-in list + apps you add yourself</string>
+    <string name="settings_supported_apps_builtin_label">Built in:</string>
+    <string name="settings_supported_apps_custom_label">Added by you:</string>
+    <string name="settings_add_from_installed">Pick from installed</string>
+    <string name="settings_add_manually">Enter package id</string>
+    <string name="settings_package_id_label">Package id (e.g. com.example.app)</string>
+    <string name="settings_add">Add</string>
+    <string name="settings_pick_installed_app_title">Choose an app</string>
+    <string name="settings_search_apps_label">Search</string>
+    <string name="settings_cancel">Cancel</string>
+    <string name="settings_already_added">already added</string>
+    <string name="settings_no_apps_found">No apps found</string>
 </resources>

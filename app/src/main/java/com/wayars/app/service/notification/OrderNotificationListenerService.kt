@@ -9,6 +9,7 @@ import com.wayars.app.domain.model.Currency
 import com.wayars.app.domain.model.Preset
 import com.wayars.app.domain.model.VehicleProfile
 import com.wayars.app.presentation.widget.OverlayState
+import com.wayars.app.service.accessibility.CustomPackagesState
 import com.wayars.app.service.accessibility.OrderAccessibilityService
 import com.wayars.app.service.accessibility.ScanningState
 import com.wayars.app.util.ScreenTextParser
@@ -48,6 +49,9 @@ class OrderNotificationListenerService : NotificationListenerService() {
         scope.launch { container.settingsRepository.preset.collect { currentPreset = Preset.fromType(it) } }
         scope.launch { container.settingsRepository.customThresholds.collect { currentCustomThresholds = it } }
         scope.launch { container.settingsRepository.vehicleProfile.collect { currentVehicleProfile = it } }
+        scope.launch {
+            container.settingsRepository.customPackages.collect { CustomPackagesState.update(it) }
+        }
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {

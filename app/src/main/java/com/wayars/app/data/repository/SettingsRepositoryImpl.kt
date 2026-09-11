@@ -15,6 +15,7 @@ class SettingsRepositoryImpl(private val store: SettingsDataStore) : SettingsRep
     override val onboardingDone: Flow<Boolean> = store.onboardingDone
     override val customThresholds: Flow<CustomThresholds?> = store.customThresholds
     override val vehicleProfile: Flow<VehicleProfile> = store.vehicleProfile
+    override val customPackages: Flow<Set<String>> = store.customPackages
 
     override suspend fun setLanguage(code: String) = store.setLanguage(code)
     override suspend fun setCurrency(currency: Currency) = store.setCurrency(currency)
@@ -24,4 +25,6 @@ class SettingsRepositoryImpl(private val store: SettingsDataStore) : SettingsRep
         store.setCustomThresholds(bad, average, good)
     override suspend fun clearCustomThresholds() = store.clearCustomThresholds()
     override suspend fun setVehicleProfile(profile: VehicleProfile) = store.setVehicleProfile(profile)
+    override suspend fun addCustomPackage(packageName: String) = store.addCustomPackage(packageName)
+    override suspend fun removeCustomPackage(packageName: String) = store.removeCustomPackage(packageName)
 }

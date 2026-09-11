@@ -12,8 +12,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -43,6 +45,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import android.widget.Toast
 import com.wayars.app.R
 import com.wayars.app.domain.model.CustomThresholds
@@ -73,6 +76,9 @@ fun SettingsScreen(
     onSaveCustomThresholds: (bad: Double, average: Double, good: Double) -> Unit,
     onClearCustomThresholds: () -> Unit,
     onSaveVehicleProfile: (VehicleProfile) -> Unit,
+    customPackages: Set<String>,
+    onAddCustomPackage: (String) -> Unit,
+    onRemoveCustomPackage: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -116,6 +122,14 @@ fun SettingsScreen(
                 onOpenAccessibilitySettings = onOpenAccessibilitySettings,
                 onOpenOverlaySettings = onOpenOverlaySettings,
                 onOpenNotificationSettings = onOpenNotificationSettings
+            )
+        }
+
+        item {
+            SupportedAppsSection(
+                customPackages = customPackages,
+                onAddCustomPackage = onAddCustomPackage,
+                onRemoveCustomPackage = onRemoveCustomPackage
             )
         }
     }
@@ -205,6 +219,299 @@ private fun InnerPermissionButton(title: String, hint: String, onClick: () -> Un
             colors = ButtonDefaults.buttonColors(containerColor = WaNeonGreen, contentColor = Color.Black)
         ) {
             Text(title)
+        }
+    }
+}
+
+/**
+ * Every delivery/taxi app WayArs reads from is on ONE allow-list check
+ * ([com.wayars.app.service.accessibility.OrderAccessibilityService.isSupportedPackage]):
+ * a hardcoded default set plus whatever the user adds here. The scanner and
+ * ScreenTextParser have no per-app code — they just need the package id on
+ * that list — so this section is what makes "any courier/taxi app in the
+ * world" actually reachable without a WayArs update: the user points the
+ * app at a new package themselves, either by picking it from what's already
+ * installed on their phone or by typing the id directly (useful for an app
+ * they're about to install, or one they found the id for online).
+ *
+ * The built-in list itself is NOT editable here (no code path removes a
+ * default) — only entries the user added can be removed.
+ */
+@Composable
+private fun SupportedAppsSection(
+    customPackages: Set<String>,
+    onAddCustomPackage: (String) -> Unit,
+    onRemoveCustomPackage: (String) -> Unit
+) {
+    var expanded by remember { mutableStateOf(false) }
+    var showAppPicker by remember { mutableStateOf(false) }
+    var showManualEntry by remember { mutableStateOf(false) }
+    var manualText by remember { mutableStateOf("") }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(14.dp))
+            .background(WaSurface)
+            .clickable { expanded = !expanded }
+            .padding(16.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(Modifier.weight(1f)) {
+                Text(
+                    stringResource(R.string.settings_supported_apps_title),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    stringResource(R.string.settings_supported_apps_hint),
+                    color = WaTextSecondary,
+                    style = MaterialTheme.typography.bodyMedium,
+                    maxLines = 1,
+                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                )
+            }
+            Icon(
+                imageVector = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
+                contentDescription = null,
+                tint = WaTextSecondary
+            )
+        }
+
+        AnimatedVisibility(visible = expanded, enter = expandVertically(), exit = shrinkVertically()) {
+            Column(
+                modifier = Modifier.padding(top = 14.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                Text(
+                    stringResource(R.string.settings_supported_apps_builtin_label),
+                    color = WaTextSecondary,
+                    style = MaterialTheme.typography.bodySmall
+                )
+                BUILTIN_SUPPORTED_PACKAGES_DISPLAY.forEach { line ->
+                    Text("• $line", color = WaTextSecondary, style = MaterialTheme.typography.bodySmall)
+                }
+
+                if (customPackages.isNotEmpty()) {
+                    Text(
+                        stringResource(R.string.settings_supported_apps_custom_label),
+                        color = WaTextSecondary,
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(top = 8.dp)
+                    )
+                    customPackages.sorted().forEach { pkg ->
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(pkg, color = Color.White, style = MaterialTheme.typography.bodyMedium)
+                            Text(
+                                "✕",
+                                color = WaRed,
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(6.dp))
+                                    .clickable { onRemoveCustomPackage(pkg) }
+                                    .padding(horizontal = 8.dp, vertical = 4.dp)
+                            )
+                        }
+                    }
+                }
+
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    Button(
+                        onClick = { showAppPicker = true },
+                        colors = ButtonDefaults.buttonColors(containerColor = WaSurfaceVariant, contentColor = Color.White),
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text(stringResource(R.string.settings_add_from_installed), style = MaterialTheme.typography.bodySmall)
+                    }
+                    Button(
+                        onClick = { showManualEntry = !showManualEntry },
+                        colors = ButtonDefaults.buttonColors(containerColor = WaSurfaceVariant, contentColor = Color.White),
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text(stringResource(R.string.settings_add_manually), style = MaterialTheme.typography.bodySmall)
+                    }
+                }
+
+                AnimatedVisibility(visible = showManualEntry) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        OutlinedTextField(
+                            value = manualText,
+                            onValueChange = { manualText = it },
+                            label = { Text(stringResource(R.string.settings_package_id_label)) },
+                            singleLine = true,
+                            colors = OutlinedTextFieldDefaults.colors(
+                                focusedBorderColor = WaNeonGreen,
+                                unfocusedBorderColor = WaTextSecondary,
+                                focusedLabelColor = WaNeonGreen,
+                                unfocusedLabelColor = WaTextSecondary,
+                                focusedTextColor = Color.White,
+                                unfocusedTextColor = Color.White
+                            ),
+                            modifier = Modifier.weight(1f)
+                        )
+                        TextButton(onClick = {
+                            val trimmed = manualText.trim()
+                            if (trimmed.isNotEmpty()) {
+                                onAddCustomPackage(trimmed)
+                                manualText = ""
+                                showManualEntry = false
+                            }
+                        }) {
+                            Text(stringResource(R.string.settings_add), color = WaNeonGreen)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if (showAppPicker) {
+        InstalledAppsPickerDialog(
+            alreadyAdded = customPackages,
+            onDismiss = { showAppPicker = false },
+            onPick = { pkg ->
+                onAddCustomPackage(pkg)
+                showAppPicker = false
+            }
+        )
+    }
+}
+
+// Display-only — package ids match OrderAccessibilityService.SUPPORTED_PACKAGES.
+// Not read from there directly to avoid pulling an accessibility-service
+// class into a Compose screen just for a label list; keep the two in sync
+// by hand if that set changes.
+private val BUILTIN_SUPPORTED_PACKAGES_DISPLAY = listOf(
+    "Bolt Courier — com.bolt.deliverycourier",
+    "Bolt Driver — ee.mtakso.driver",
+    "Uber Driver — com.ubercab.driver",
+    "Wolt Courier — com.wolt.courierapp",
+    "FreeNow Driver — taxi.android.driver",
+    "Stuart Courier — com.stuart.courier"
+)
+
+/**
+ * Lets the user pick any app already installed on their phone instead of
+ * having to know/type its package id by hand. Filtered to apps that have a
+ * launcher entry (an icon the user actually taps to open) so the list isn't
+ * flooded with system components and background services that could never
+ * be the delivery/taxi app in the first place.
+ */
+@Composable
+private fun InstalledAppsPickerDialog(
+    alreadyAdded: Set<String>,
+    onDismiss: () -> Unit,
+    onPick: (String) -> Unit
+) {
+    val context = LocalContext.current
+    var query by remember { mutableStateOf("") }
+
+    val apps = remember {
+        val pm = context.packageManager
+        val installed = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            pm.getInstalledApplications(android.content.pm.PackageManager.ApplicationInfoFlags.of(0L))
+        } else {
+            @Suppress("DEPRECATION")
+            pm.getInstalledApplications(0)
+        }
+        installed
+            .asSequence()
+            .filter { pm.getLaunchIntentForPackage(it.packageName) != null }
+            .map { it.packageName to pm.getApplicationLabel(it).toString() }
+            .distinctBy { it.first }
+            .sortedBy { it.second.lowercase() }
+            .toList()
+    }
+
+    val filtered = remember(query, apps) {
+        if (query.isBlank()) {
+            apps
+        } else {
+            apps.filter {
+                it.second.contains(query, ignoreCase = true) || it.first.contains(query, ignoreCase = true)
+            }
+        }
+    }
+
+    Dialog(onDismissRequest = onDismiss) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(16.dp))
+                .background(WaSurface)
+                .padding(16.dp)
+        ) {
+            Text(
+                stringResource(R.string.settings_pick_installed_app_title),
+                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.titleMedium
+            )
+            OutlinedTextField(
+                value = query,
+                onValueChange = { query = it },
+                label = { Text(stringResource(R.string.settings_search_apps_label)) },
+                singleLine = true,
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = WaNeonGreen,
+                    unfocusedBorderColor = WaTextSecondary,
+                    focusedLabelColor = WaNeonGreen,
+                    unfocusedLabelColor = WaTextSecondary,
+                    focusedTextColor = Color.White,
+                    unfocusedTextColor = Color.White
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp, bottom = 8.dp)
+            )
+            LazyColumn(modifier = Modifier.fillMaxWidth().heightIn(max = 420.dp)) {
+                items(filtered, key = { it.first }) { (pkg, label) ->
+                    val isAlreadyAdded = pkg in alreadyAdded
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable(enabled = !isAlreadyAdded) { onPick(pkg) }
+                            .padding(vertical = 10.dp)
+                    ) {
+                        Text(
+                            label,
+                            color = if (isAlreadyAdded) WaTextSecondary else Color.White,
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                        Text(
+                            if (isAlreadyAdded) "$pkg · " + stringResource(R.string.settings_already_added) else pkg,
+                            color = WaTextSecondary,
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
+                }
+                if (filtered.isEmpty()) {
+                    item {
+                        Text(
+                            stringResource(R.string.settings_no_apps_found),
+                            color = WaTextSecondary,
+                            style = MaterialTheme.typography.bodyMedium,
+                            modifier = Modifier.padding(vertical = 16.dp)
+                        )
+                    }
+                }
+            }
+            TextButton(onClick = onDismiss, modifier = Modifier.align(Alignment.End)) {
+                Text(stringResource(R.string.settings_cancel))
+            }
         }
     }
 }

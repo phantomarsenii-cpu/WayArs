@@ -51,7 +51,10 @@ fun MainScreen(
     onOpenNotificationSettings: () -> Unit,
     onSaveCustomThresholds: (bad: Double, average: Double, good: Double) -> Unit,
     onClearCustomThresholds: () -> Unit,
-    onSaveVehicleProfile: (VehicleProfile) -> Unit
+    onSaveVehicleProfile: (VehicleProfile) -> Unit,
+    customPackages: Set<String>,
+    onAddCustomPackage: (String) -> Unit,
+    onRemoveCustomPackage: (String) -> Unit
 ) {
     var tab by remember { mutableStateOf(MainTab.HOME) }
 
@@ -84,7 +87,10 @@ fun MainScreen(
                 onOpenNotificationSettings = onOpenNotificationSettings,
                 onSaveCustomThresholds = onSaveCustomThresholds,
                 onClearCustomThresholds = onClearCustomThresholds,
-                onSaveVehicleProfile = onSaveVehicleProfile
+                onSaveVehicleProfile = onSaveVehicleProfile,
+                customPackages = customPackages,
+                onAddCustomPackage = onAddCustomPackage,
+                onRemoveCustomPackage = onRemoveCustomPackage
             )
         }
 

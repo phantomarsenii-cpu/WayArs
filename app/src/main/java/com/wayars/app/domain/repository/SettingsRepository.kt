@@ -13,6 +13,7 @@ interface SettingsRepository {
     val onboardingDone: Flow<Boolean>
     val customThresholds: Flow<CustomThresholds?>
     val vehicleProfile: Flow<VehicleProfile>
+    val customPackages: Flow<Set<String>>
 
     suspend fun setLanguage(code: String)
     suspend fun setCurrency(currency: Currency)
@@ -21,4 +22,6 @@ interface SettingsRepository {
     suspend fun setCustomThresholds(bad: Double, average: Double, good: Double)
     suspend fun clearCustomThresholds()
     suspend fun setVehicleProfile(profile: VehicleProfile)
+    suspend fun addCustomPackage(packageName: String)
+    suspend fun removeCustomPackage(packageName: String)
 }

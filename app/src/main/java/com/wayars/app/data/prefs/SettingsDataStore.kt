@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.doublePreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.Currency
@@ -38,6 +39,9 @@ class SettingsDataStore(private val context: Context) {
         val VEHICLE_FUEL_TYPE = stringPreferencesKey("vehicle_fuel_type")
         val VEHICLE_CONSUMPTION = doublePreferencesKey("vehicle_consumption_per_100km")
         val VEHICLE_FUEL_PRICE = doublePreferencesKey("vehicle_fuel_price_per_unit")
+        // User-added package ids for delivery/taxi apps beyond the built-in
+        // list — see the "universal support" comment on customPackages below.
+        val CUSTOM_PACKAGES = stringSetPreferencesKey("custom_scanned_packages")
     }
 
     val languageCode: Flow<String?> = context.dataStore.data.map { it[Keys.LANGUAGE] }
@@ -69,6 +73,17 @@ class SettingsDataStore(private val context: Context) {
             fuelPricePerUnit = prefs[Keys.VEHICLE_FUEL_PRICE] ?: 0.0
         )
     }
+
+    /**
+     * Package ids the USER has added on top of the built-in courier/taxi
+     * app list, so WayArs can be pointed at any delivery/taxi app worldwide
+     * without a code change or app update — the scanner and ScreenTextParser
+     * are already generic (plain money/km/min regex, no per-app branches),
+     * they just need the package name added to the allow-list they check.
+     * Empty set by default (nothing added yet).
+     */
+    val customPackages: Flow<Set<String>> =
+        context.dataStore.data.map { it[Keys.CUSTOM_PACKAGES] ?: emptySet() }
 
     suspend fun setLanguage(code: String) {
         context.dataStore.edit { it[Keys.LANGUAGE] = code }
@@ -113,6 +128,22 @@ class SettingsDataStore(private val context: Context) {
             }
             prefs[Keys.VEHICLE_CONSUMPTION] = profile.consumptionPer100Km
             prefs[Keys.VEHICLE_FUEL_PRICE] = profile.fuelPricePerUnit
+        }
+    }
+
+    suspend fun addCustomPackage(packageName: String) {
+        val trimmed = packageName.trim()
+        if (trimmed.isEmpty()) return
+        context.dataStore.edit { prefs ->
+            val current = prefs[Keys.CUSTOM_PACKAGES] ?: emptySet()
+            prefs[Keys.CUSTOM_PACKAGES] = current + trimmed
+        }
+    }
+
+    suspend fun removeCustomPackage(packageName: String) {
+        context.dataStore.edit { prefs ->
+            val current = prefs[Keys.CUSTOM_PACKAGES] ?: emptySet()
+            prefs[Keys.CUSTOM_PACKAGES] = current - packageName
         }
     }
 }

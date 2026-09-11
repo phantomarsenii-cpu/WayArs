@@ -99,6 +99,9 @@ class OrderAccessibilityService : AccessibilityService() {
         scope.launch {
             container.settingsRepository.vehicleProfile.collect { currentVehicleProfile = it }
         }
+        scope.launch {
+            container.settingsRepository.customPackages.collect { CustomPackagesState.update(it) }
+        }
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
@@ -496,21 +499,38 @@ class OrderAccessibilityService : AccessibilityService() {
         /**
          * Runtime backstop allow-list — keep in sync with
          * res/xml/accessibility_service_config.xml.
-         * ee.mtakso.driver / com.wolt.courier.app kept alongside the
-         * user-verified names below in case either regional build uses the
-         * other package id — harmless to list both, an exact match is still
+         *
+         * This is the DEFAULT list only. The user can add any other
+         * delivery/taxi app's package id at runtime from Settings ->
+         * "Поддерживаемые приложения" — see [CustomPackagesState] and
+         * [isSupportedPackage] below, which checks both. Nothing here needs
+         * to change to support a new country/app; that's the whole point of
+         * the user-editable list — the scanner and ScreenTextParser have no
+         * per-app branches, they just need the package name allow-listed.
+         *
+         * "Driver" (ride-hailing/taxi) and "courier" (delivery) apps from
+         * the same company are separate packages with separate order-screen
+         * layouts, so both are listed explicitly per company rather than
+         * assumed to be the same app. ee.mtakso.driver (Bolt Driver) and
+         * taxi.android.driver (FreeNow Driver) confirmed by the user
+         * directly, replacing an earlier unconfirmed guess for FreeNow
+         * (com.freenow.driver, which was never right — that's why FreeNow
+         * never worked at all before). com.wolt.courier.app kept alongside
+         * the verified com.wolt.courierapp in case a regional build uses
+         * the other id — harmless to list both, an exact match is still
          * required either way.
          */
         private val SUPPORTED_PACKAGES = setOf(
             "com.bolt.deliverycourier",   // Bolt courier — verified on-device
-            "ee.mtakso.driver",           // Bolt driver (rides) — older/alt package id
+            "ee.mtakso.driver",           // Bolt driver (taxi/rides) — confirmed by user
             "com.ubercab.driver",         // Uber driver — verified on-device
             "com.wolt.courierapp",        // Wolt courier — verified on-device
             "com.wolt.courier.app",       // Wolt courier — older/alt package id
-            "com.freenow.driver",         // FreeNow driver — still unconfirmed
+            "taxi.android.driver",        // FreeNow driver (taxi) — confirmed by user
             "com.stuart.courier"          // Stuart courier
         )
 
-        fun isSupportedPackage(packageName: String): Boolean = packageName in SUPPORTED_PACKAGES
+        fun isSupportedPackage(packageName: String): Boolean =
+            packageName in SUPPORTED_PACKAGES || packageName in CustomPackagesState.packages
     }
 }
