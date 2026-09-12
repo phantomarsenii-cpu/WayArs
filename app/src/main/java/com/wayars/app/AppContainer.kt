@@ -5,8 +5,10 @@ import com.wayars.app.data.local.AppDatabase
 import com.wayars.app.data.prefs.SettingsDataStore
 import com.wayars.app.data.repository.OrderRepositoryImpl
 import com.wayars.app.data.repository.SettingsRepositoryImpl
+import com.wayars.app.data.repository.SubscriptionRepositoryImpl
 import com.wayars.app.domain.repository.OrderRepository
 import com.wayars.app.domain.repository.SettingsRepository
+import com.wayars.app.domain.repository.SubscriptionRepository
 import com.wayars.app.domain.usecase.EvaluateOrderUseCase
 
 /**
@@ -22,6 +24,10 @@ class AppContainer(context: Context) {
     val settingsRepository: SettingsRepository by lazy { SettingsRepositoryImpl(settingsDataStore) }
     val orderRepository: OrderRepository by lazy { OrderRepositoryImpl(database.orderDao()) }
     val evaluateOrderUseCase by lazy { EvaluateOrderUseCase() }
+
+    // Single shared instance: it holds the current subscriptionState StateFlow,
+    // so every screen (nav gate, paywall, settings) must observe the same one.
+    val subscriptionRepository: SubscriptionRepository by lazy { SubscriptionRepositoryImpl() }
 }
 
 /** Convenience accessor from any [Context]. */

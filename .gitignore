@@ -9,3 +9,7 @@
 .cxx
 local.properties
 /app/build
+
+# Release signing keystore is decoded from a CI secret at build time — it
+# must never be committed (see .github/workflows/build.yml).
+/app/release.keystore

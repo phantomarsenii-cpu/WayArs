@@ -12,6 +12,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.wayars.app.data.prefs.LanguagePrefs
 import com.wayars.app.presentation.MainViewModel
+import com.wayars.app.presentation.SubscriptionViewModel
 import com.wayars.app.presentation.ui.navigation.WayArsNavHost
 import com.wayars.app.presentation.ui.theme.WayArsTheme
 import com.wayars.app.util.LocaleManager
@@ -22,6 +23,10 @@ class MainActivity : ComponentActivity() {
 
     private val viewModel: MainViewModel by viewModels {
         MainViewModel.Factory(applicationContext.appContainer())
+    }
+
+    private val subscriptionViewModel: SubscriptionViewModel by viewModels {
+        SubscriptionViewModel.Factory(applicationContext.appContainer())
     }
 
     // The language actually baked into this Activity instance's resources by
@@ -54,6 +59,7 @@ class MainActivity : ComponentActivity() {
             WayArsTheme {
                 WayArsNavHost(
                     viewModel = viewModel,
+                    subscriptionViewModel = subscriptionViewModel,
                     onOpenAccessibilitySettings = { openAccessibilitySettings() },
                     onOpenOverlaySettings = { openOverlaySettings() },
                     onOpenNotificationSettings = { openNotificationSettings() }

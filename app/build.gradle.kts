@@ -40,6 +40,34 @@ android {
             keyAlias = "androiddebugkey"
             keyPassword = "android"
         }
+
+        // Release signing reads entirely from environment variables so the
+        // real keystore/passwords never touch source control. GitHub
+        // Actions decodes the keystore from a base64 secret to
+        // app/release.keystore before the build runs (see
+        // .github/workflows/build.yml) and exports the three secrets below
+        // into the job's env — Gradle just reads them here.
+        //
+        // Guarded with `if (...)` rather than asserting: a local dev machine
+        // with no release env vars set should still be able to run
+        // `assembleDebug` / open the project in Android Studio without this
+        // block blowing up the whole Gradle sync.
+        val releaseStorePath = System.getenv("KEY_STORE_PATH") ?: "release.keystore"
+        val releaseStorePassword = System.getenv("KEY_STORE_PASSWORD")
+        val releaseKeyAlias = System.getenv("KEY_ALIAS")
+        val releaseKeyPassword = System.getenv("KEY_PASSWORD")
+        val releaseStoreFile = file(releaseStorePath)
+
+        if (releaseStorePassword != null && releaseKeyAlias != null &&
+            releaseKeyPassword != null && releaseStoreFile.exists()
+        ) {
+            create("release") {
+                storeFile = releaseStoreFile
+                storePassword = releaseStorePassword
+                keyAlias = releaseKeyAlias
+                keyPassword = releaseKeyPassword
+            }
+        }
     }
 
     buildTypes {
@@ -49,6 +77,11 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            // Only attach the release signing config when the environment
+            // actually provided one (see signingConfigs above) — otherwise
+            // fall back to Android Gradle Plugin's default behavior
+            // (unsigned release output), so this still builds locally.
+            signingConfigs.findByName("release")?.let { signingConfig = it }
         }
     }
 
@@ -92,6 +125,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
     implementation("androidx.lifecycle:lifecycle-service:2.8.4")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.4")
+    // ProcessLifecycleOwner — used to re-check subscription status whenever
+    // the app returns to the foreground (see WayArsApplication).
+    implementation("androidx.lifecycle:lifecycle-process:2.8.4")
     implementation("androidx.savedstate:savedstate-ktx:1.2.1")
     implementation("androidx.navigation:navigation-compose:2.7.7")
 
@@ -113,4 +149,8 @@ dependencies {
     ksp("androidx.room:room-compiler:2.6.1")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
+
+    // RevenueCat — subscription management (Play Billing wrapper +
+    // server-verified entitlements). See com.wayars.app.billing.RevenueCatConfig.
+    implementation("com.revenuecat.purchases:purchases:10.21.1")
 }
