@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -87,6 +88,7 @@ import com.wayars.app.presentation.ui.theme.WaNeonGreen
 import com.wayars.app.presentation.ui.theme.WaRed
 import com.wayars.app.presentation.ui.theme.WaSurface
 import com.wayars.app.presentation.ui.theme.WaSurfaceVariant
+import com.wayars.app.presentation.ui.theme.WaTextPrimary
 import com.wayars.app.presentation.ui.theme.WaTextSecondary
 import com.wayars.app.util.AccessibilityUtils
 import com.wayars.app.util.CurrencyFormatter
@@ -1573,23 +1575,37 @@ private fun InfoDialog(doc: InfoDoc, onDismiss: () -> Unit) {
                     .padding(top = 14.dp, bottom = 8.dp)
             )
 
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
+            Column(modifier = Modifier.fillMaxWidth().padding(top = 12.dp)) {
                 if (doc == InfoDoc.ABOUT) {
-                    TextButton(onClick = {
-                        val url = context.getString(R.string.settings_developer_website_url)
-                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-                    }) {
-                        Text(stringResource(R.string.settings_visit_website), color = WaNeonGreen)
+                    androidx.compose.material3.OutlinedButton(
+                        onClick = {
+                            val url = context.getString(R.string.settings_developer_website_url)
+                            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, WaNeonGreen),
+                        colors = ButtonDefaults.outlinedButtonColors(contentColor = WaNeonGreen)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.settings_visit_website),
+                            maxLines = 1,
+                            softWrap = false,
+                            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                        )
                     }
-                } else {
-                    Spacer(Modifier.weight(1f))
+                    Spacer(Modifier.height(10.dp))
                 }
-                TextButton(onClick = onDismiss) {
-                    Text(stringResource(R.string.settings_close))
+                Button(
+                    onClick = onDismiss,
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(containerColor = WaSurfaceVariant, contentColor = WaTextPrimary)
+                ) {
+                    Text(
+                        text = stringResource(R.string.settings_close),
+                        maxLines = 1,
+                        softWrap = false,
+                        overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                    )
                 }
             }
         }
