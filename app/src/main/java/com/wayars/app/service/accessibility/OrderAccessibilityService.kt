@@ -61,6 +61,11 @@ class OrderAccessibilityService : AccessibilityService() {
     // onAccessibilityEvent for why a single shared timer let noise from
     // unrelated apps starve out real order-popup events (Uber especially).
     private val lastProcessedAtByPackage = HashMap<String, Long>()
+    // Raw texts from the last event actually PROCESSED for a package (not
+    // just the last one seen). Used to turn the 500ms debounce below from
+    // time-based into content-based — see the comment at its use site for
+    // why a pure time gate silently ate Wolt's real order data.
+    private val lastProcessedTextsByPackage = HashMap<String, List<String>>()
     private var lastCandidate: RawOrderCandidate? = null
     // One in-flight poll job per package. Uber (and occasionally others)
     // draws its incoming-order popup as a non-focusable SYSTEM_ALERT_WINDOW
@@ -199,8 +204,7 @@ class OrderAccessibilityService : AccessibilityService() {
         // after that package's last event (it wasn't in the foreground a
         // moment ago), so Uber's popup still gets caught on first sight.
         val isNewWindowAppearing = event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED
-        if (!isNewWindowAppearing && now - lastForPackage < 500) return
-        lastProcessedAtByPackage[eventPackage] = now
+        val withinDebounceWindow = !isNewWindowAppearing && now - lastForPackage < 500
 
         val root = windowsChangedRoot ?: findSupportedWindowRoot(eventPackage)
         if (root == null) {
@@ -219,6 +223,26 @@ class OrderAccessibilityService : AccessibilityService() {
             event.text?.forEach { if (it.isNotBlank()) texts.add(it.toString()) }
             event.source?.let { collectText(it, texts, maxDepth = 40) }
         }
+
+        // Content-based debounce, not time-based. A plain "<500ms since last
+        // processed -> skip" gate (the old behavior) drops events purely by
+        // clock, with no regard for whether they actually carry anything
+        // new — which silently ate real order data on Wolt (field logs,
+        // 2026-09-12): its order card renders a "Lorem"-placeholder
+        // skeleton, then the REAL price/distance for a single ~600ms-wide
+        // CONTENT_CHANGED event, then collapses to a shortened view with no
+        // price at all. Whenever that one real-data event happened to land
+        // within 500ms of the previous (skeleton) event, it was dropped
+        // outright and every later scan only ever saw the collapsed,
+        // priceless view — the order never became isComplete and the
+        // overlay never showed. Comparing the collected texts instead keeps
+        // the debounce's original job (collapse a burst of IDENTICAL
+        // content-changed spam, e.g. a ticking ETA re-firing the same
+        // numbers) without ever being able to swallow a genuinely different
+        // screen state, no matter how fast it appears.
+        if (withinDebounceWindow && texts == lastProcessedTextsByPackage[eventPackage]) return
+        lastProcessedAtByPackage[eventPackage] = now
+        lastProcessedTextsByPackage[eventPackage] = texts
 
         if (texts.isEmpty()) {
             // Fallback source #2: the window's semantics tree may simply not

@@ -393,8 +393,27 @@ private fun SupportedAppsSection(
                     color = WaTextSecondary,
                     style = MaterialTheme.typography.bodySmall
                 )
-                BUILTIN_SUPPORTED_PACKAGES_DISPLAY.forEach { line ->
-                    Text("• $line", color = WaTextSecondary, style = MaterialTheme.typography.bodySmall)
+                BUILTIN_SUPPORTED_APPS.forEach { app ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column(Modifier.weight(1f)) {
+                            Text("• ${app.displayName}", color = Color.White, style = MaterialTheme.typography.bodyMedium)
+                            val hasHint = packageHints[app.packageId]?.isEmpty == false
+                            Text(
+                                if (hasHint) {
+                                    stringResource(R.string.settings_calibrated)
+                                } else {
+                                    stringResource(R.string.settings_not_calibrated)
+                                },
+                                color = if (hasHint) WaNeonGreen else WaTextSecondary,
+                                style = MaterialTheme.typography.bodySmall,
+                                modifier = Modifier.clickable { calibratingPackage = app.packageId }
+                            )
+                        }
+                    }
                 }
 
                 if (customPackages.isNotEmpty()) {
@@ -521,17 +540,22 @@ private fun SupportedAppsSection(
     }
 }
 
-// Display-only — package ids match OrderAccessibilityService.SUPPORTED_PACKAGES.
+// Package ids kept alongside the display name (not shown in the UI per
+// product decision — a bare "com.bolt.deliverycourier" string meant
+// nothing to most users) because calibration below is keyed by package id,
+// not display name. Must match OrderAccessibilityService.SUPPORTED_PACKAGES.
 // Not read from there directly to avoid pulling an accessibility-service
 // class into a Compose screen just for a label list; keep the two in sync
 // by hand if that set changes.
-private val BUILTIN_SUPPORTED_PACKAGES_DISPLAY = listOf(
-    "Bolt Courier — com.bolt.deliverycourier",
-    "Bolt Driver — ee.mtakso.driver",
-    "Uber Driver — com.ubercab.driver",
-    "Wolt Courier — com.wolt.courierapp",
-    "FreeNow Driver — taxi.android.driver",
-    "Stuart Courier — com.stuart.courier"
+private data class BuiltInSupportedApp(val displayName: String, val packageId: String)
+
+private val BUILTIN_SUPPORTED_APPS = listOf(
+    BuiltInSupportedApp("Bolt Courier", "com.bolt.deliverycourier"),
+    BuiltInSupportedApp("Bolt Driver", "ee.mtakso.driver"),
+    BuiltInSupportedApp("Uber Driver", "com.ubercab.driver"),
+    BuiltInSupportedApp("Wolt Courier", "com.wolt.courierapp"),
+    BuiltInSupportedApp("FreeNow Driver", "taxi.android.driver"),
+    BuiltInSupportedApp("Stuart Courier", "com.stuart.courier")
 )
 
 /**
