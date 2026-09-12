@@ -52,11 +52,22 @@ android {
         // with no release env vars set should still be able to run
         // `assembleDebug` / open the project in Android Studio without this
         // block blowing up the whole Gradle sync.
-        val releaseStorePath = System.getenv("KEY_STORE_PATH") ?: "release.keystore"
+        //
+        // IMPORTANT: resolved via rootProject.file(), not file(). A bare
+        // file() call here resolves relative to THIS module's directory
+        // (app/), not the repo root — so a path like "app/release.keystore"
+        // silently pointed at the nonexistent app/app/release.keystore,
+        // releaseStoreFile.exists() was false, no "release" signingConfig
+        // was ever created, and the release build type quietly built an
+        // UNSIGNED apk (no Gradle error) that only failed much later at the
+        // separate "apksigner verify" CI step. rootProject.file() is always
+        // relative to the repo root regardless of which module reads it,
+        // matching exactly where the workflow's decode step writes the file.
+        val releaseStorePath = System.getenv("KEY_STORE_PATH") ?: "app/release.keystore"
         val releaseStorePassword = System.getenv("KEY_STORE_PASSWORD")
         val releaseKeyAlias = System.getenv("KEY_ALIAS")
         val releaseKeyPassword = System.getenv("KEY_PASSWORD")
-        val releaseStoreFile = file(releaseStorePath)
+        val releaseStoreFile = rootProject.file(releaseStorePath)
 
         if (releaseStorePassword != null && releaseKeyAlias != null &&
             releaseKeyPassword != null && releaseStoreFile.exists()
@@ -76,6 +87,21 @@ android {
                 enableV2Signing = true
                 enableV3Signing = true
             }
+        } else if (releaseStorePassword != null || releaseKeyAlias != null || releaseKeyPassword != null) {
+            // Passwords/alias are present, meaning a signed release build was
+            // clearly intended (a local dev sync with nothing set at all
+            // would never reach this branch) — but the keystore file is
+            // missing. Failing loudly here, at configuration time, is the
+            // whole point: the previous behavior silently produced an
+            // UNSIGNED release apk with no Gradle error at all, and the only
+            // symptom was an "apksigner verify" failure minutes later in CI,
+            // with no indication of the real cause.
+            throw GradleException(
+                "Release signing env vars are set but the keystore file was not found at " +
+                    "${releaseStoreFile.absolutePath} (KEY_STORE_PATH=\"$releaseStorePath\", " +
+                    "resolved from repo root). Check that the keystore-decoding step in " +
+                    ".github/workflows/build.yml writes to this exact path."
+            )
         }
     }
 
