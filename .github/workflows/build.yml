@@ -102,6 +102,14 @@ jobs:
         # signature (via apksigner from the Android SDK build-tools that
         # ships on the GitHub-hosted runner) rather than only trusting that
         # the right Gradle inputs were present.
+        #
+        # --min-sdk-version/--max-sdk-version must match app/build.gradle.kts
+        # (minSdk 26, targetSdk 34). Without them, apksigner verify defaults
+        # to checking compatibility all the way down to API 1, which requires
+        # a V1 (JAR) signature to be present. This app is V2/V3-signed only
+        # (V1 isn't needed for API 26+), so an unscoped check fails with a
+        # misleading "DOES NOT VERIFY - Missing META-INF/MANIFEST.MF" even
+        # though the APK's actual signature is completely valid.
         run: |
           APK_PATH=$(find app/build/outputs/apk/release -name "*.apk" | head -n 1)
           if [ -z "$APK_PATH" ]; then
@@ -114,7 +122,7 @@ jobs:
             echo "::error::apksigner not found under $SDK_ROOT/build-tools on this runner."
             exit 1
           fi
-          "$APKSIGNER" verify --print-certs "$APK_PATH"
+          "$APKSIGNER" verify --min-sdk-version 26 --max-sdk-version 34 --print-certs "$APK_PATH"
 
       - name: Upload signed release AAB
         uses: actions/upload-artifact@v4
