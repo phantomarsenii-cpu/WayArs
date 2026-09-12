@@ -115,4 +115,42 @@
     <string name="settings_supported_apps_custom_label">Adăugate de tine:</string>
     <string name="settings_supported_apps_hint">Listă inclusă + aplicații adăugate de tine</string>
     <string name="settings_supported_apps_title">Aplicații acceptate</string>
+
+    <!-- Paywall -->
+    <string name="paywall_badge_full_access">acces complet</string>
+    <string name="paywall_title">Deblochează întregul\npotențial WayArs</string>
+    <string name="paywall_subtitle">WayArs nu este doar un asistent, ci instrumentul tău personal pentru un venit stabil și maxim.</string>
+    <string name="paywall_chip_analysis">Analiză rapidă</string>
+    <string name="paywall_chip_filters">Filtre inteligente</string>
+    <string name="paywall_chip_income">Venit între ture</string>
+    <string name="paywall_chip_languages">Funcționează în 7 limbi</string>
+    <string name="paywall_section_eyebrow">ALEGE-ȚI PLANUL</string>
+    <string name="paywall_section_title">Planuri flexibile pentru obiectivele tale</string>
+    <string name="paywall_section_subtitle">Cu cât abonamentul este mai lung, cu atât este mai avantajos!</string>
+    <string name="paywall_plan_yearly_title">Anual</string>
+    <string name="paywall_plan_monthly_title">Lunar</string>
+    <string name="paywall_plan_weekly_title">Săptămânal</string>
+    <string name="paywall_plan_yearly_days">365 de zile de acces complet</string>
+    <string name="paywall_plan_monthly_days">30 de zile de acces complet</string>
+    <string name="paywall_plan_weekly_days">7 zile de acces complet</string>
+    <string name="paywall_badge_popular">Popular</string>
+    <string name="paywall_badge_trial7">7 zile gratuite</string>
+    <string name="paywall_period_year">/ an</string>
+    <string name="paywall_period_month">/ lună</string>
+    <string name="paywall_period_week">/ săptămână</string>
+    <string name="paywall_feature_all">Toate funcțiile aplicației</string>
+    <string name="paywall_feature_presets">Presetări inteligente</string>
+    <string name="paywall_feature_realtime">Analiză comenzi în timp real</string>
+    <string name="paywall_feature_languages">Suport pentru 7 limbi</string>
+    <string name="paywall_button_select">Alege</string>
+    <string name="paywall_button_restore">Restaurează achizițiile</string>
+    <string name="paywall_button_hide">Ascunde</string>
+    <string name="paywall_trial_notice">Abonamentul tău începe cu o perioadă de probă gratuită de 7 zile. Se reînnoiește automat pentru planul ales. Poți anula oricând.</string>
+    <string name="paywall_footer_secured_title">Plată securizată</string>
+    <string name="paywall_footer_secured_subtitle">Procesată prin Google Play și RevenueCat</string>
+    <string name="paywall_footer_google_title">Google Play</string>
+    <string name="paywall_footer_google_subtitle">Plăți securizate prin Google Play și RevenueCat</string>
+    <string name="paywall_footer_tagline">WayArs — drumul tău spre un venit stabil</string>
+    <string name="paywall_gate_error_title">Nu am putut verifica abonamentul</string>
+    <string name="paywall_gate_error_retry">Reîncearcă</string>
 </resources>

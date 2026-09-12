@@ -1,4 +1,4 @@
-name: Build APK
+name: Build APK & AAB
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     # GitHub Actions does not allow the `secrets` context inside `if:`
     # conditions anywhere (job or step level) — that's the "Unrecognized
     # named-value: 'secrets'" parse error. Fix: copy the secret into a
@@ -33,11 +34,14 @@ jobs:
       - name: Build debug APK
         run: gradle clean assembleDebug --no-daemon --stacktrace --no-build-cache
 
-      - name: Upload APK
+      - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
-          name: WayArs
-          path: app/build/outputs/apk/debug/WayArs.apk
+          name: WayArs-debug-apk
+          # Wildcard, not the exact filename, so a rename/AGP output-path
+          # change doesn't turn into a silent "file not found" upload step.
+          path: app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
 
       - name: Decode release keystore
         if: ${{ env.RELEASE_KEYSTORE_BASE64 != '' }}
@@ -49,14 +53,20 @@ jobs:
           KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        # Both outputs built in one invocation: bundleRelease -> .aab
+        # (Play Store upload format), assembleRelease -> .apk (direct
+        # install / sideload / QA).
         run: gradle bundleRelease assembleRelease --no-daemon --stacktrace --no-build-cache
 
-      - name: Upload signed AAB
+      - name: Upload signed release AAB
         if: ${{ env.RELEASE_KEYSTORE_BASE64 != '' }}
         uses: actions/upload-artifact@v4
         with:
           name: WayArs-release-aab
+          # Universal glob (not a hardcoded "app-release.aab"-style name)
+          # so this step survives applicationId/versionName-based renames.
           path: app/build/outputs/bundle/release/*.aab
+          if-no-files-found: error
 
       - name: Upload signed release APK
         if: ${{ env.RELEASE_KEYSTORE_BASE64 != '' }}
@@ -64,3 +74,4 @@ jobs:
         with:
           name: WayArs-release-apk
           path: app/build/outputs/apk/release/*.apk
+          if-no-files-found: error

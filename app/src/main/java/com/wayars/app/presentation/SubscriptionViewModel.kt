@@ -18,17 +18,48 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-/** One row on the paywall — a RevenueCat [Package] plus which card it renders as. */
+/**
+ * One row on the paywall.
+ *
+ * [rcPackage] is null until RevenueCat has actually returned a matching
+ * [Package] for this plan — e.g. offline, no network yet, or the products
+ * haven't been created in Play Console/RevenueCat. In that state the card
+ * still renders with [priceText]/[originalPriceText] (hardcoded fallback
+ * copy, see [MockPlans]) so the paywall never looks broken or empty, but
+ * the plan can't actually be purchased yet ([isLive] is false).
+ *
+ * As soon as [SubscriptionViewModel.loadOfferings] succeeds, the matching
+ * mock row is swapped for one built from the real [Package] — real price,
+ * real currency, purchasable — with no visible layout change.
+ */
 data class PlanOption(
     val plan: PlanType,
-    val rcPackage: Package
-)
+    val priceText: String,
+    val originalPriceText: String? = null,
+    val rcPackage: Package? = null
+) {
+    val isLive: Boolean get() = rcPackage != null
+}
 
 enum class PlanType { WEEKLY, MONTHLY, YEARLY }
 
+/**
+ * Hardcoded fallback pricing shown immediately, before (or in place of) a
+ * real RevenueCat response. Keeps the paywall's 3-card layout stable
+ * offline or before Play Console products exist. Values mirror the
+ * approved marketing design; update them here if list pricing changes.
+ */
+object MockPlans {
+    val fallback: List<PlanOption> = listOf(
+        PlanOption(plan = PlanType.YEARLY, priceText = "$83.99"),
+        PlanOption(plan = PlanType.MONTHLY, priceText = "$11.99", originalPriceText = "$13.99"),
+        PlanOption(plan = PlanType.WEEKLY, priceText = "$14.99")
+    )
+}
+
 data class PaywallUiState(
-    val isLoadingOfferings: Boolean = true,
-    val plans: List<PlanOption> = emptyList(),
+    val isLoadingOfferings: Boolean = false,
+    val plans: List<PlanOption> = MockPlans.fallback,
     val isPurchasing: Boolean = false,
     val errorMessage: String? = null
 )
@@ -53,34 +84,48 @@ class SubscriptionViewModel(private val container: AppContainer) : ViewModel() {
         viewModelScope.launch { repository.refreshCustomerInfo() }
     }
 
+    /**
+     * Loads real RevenueCat offerings and, for each plan that has a live
+     * match, replaces the mock row with a real one (real formatted price,
+     * purchasable package). Plans with no match — offline, no network yet,
+     * or a product simply doesn't exist in Play Console/RevenueCat — keep
+     * showing their [MockPlans] fallback row, so the three cards never
+     * disappear or show an empty/broken state.
+     */
     fun loadOfferings() {
         viewModelScope.launch {
-            _paywallState.value = _paywallState.value.copy(isLoadingOfferings = true, errorMessage = null)
             repository.getOfferings()
                 .onSuccess { offerings ->
                     val offering: Offering? = offerings.current
-                    val plans = listOfNotNull(
-                        offering?.availablePackages
-                            ?.find { it.identifier == RevenueCatConfig.PackageIds.WEEKLY }
-                            ?.let { PlanOption(PlanType.WEEKLY, it) },
-                        offering?.availablePackages
-                            ?.find { it.identifier == RevenueCatConfig.PackageIds.MONTHLY }
-                            ?.let { PlanOption(PlanType.MONTHLY, it) },
-                        offering?.availablePackages
-                            ?.find { it.identifier == RevenueCatConfig.PackageIds.YEARLY }
-                            ?.let { PlanOption(PlanType.YEARLY, it) }
-                    )
+                    val plans = _paywallState.value.plans.map { mock ->
+                        val packageId = when (mock.plan) {
+                            PlanType.WEEKLY -> RevenueCatConfig.PackageIds.WEEKLY
+                            PlanType.MONTHLY -> RevenueCatConfig.PackageIds.MONTHLY
+                            PlanType.YEARLY -> RevenueCatConfig.PackageIds.YEARLY
+                        }
+                        val realPackage = offering?.availablePackages?.find { it.identifier == packageId }
+                        if (realPackage != null) {
+                            PlanOption(
+                                plan = mock.plan,
+                                priceText = realPackage.product.price.formatted,
+                                originalPriceText = null,
+                                rcPackage = realPackage
+                            )
+                        } else {
+                            mock
+                        }
+                    }
                     _paywallState.value = _paywallState.value.copy(
                         isLoadingOfferings = false,
                         plans = plans,
-                        errorMessage = if (plans.isEmpty()) "No plans available right now." else null
+                        errorMessage = null
                     )
                 }
-                .onFailure { error ->
-                    _paywallState.value = _paywallState.value.copy(
-                        isLoadingOfferings = false,
-                        errorMessage = error.message ?: "Couldn't load plans."
-                    )
+                .onFailure {
+                    // Offline or RevenueCat unreachable — keep whatever mix of
+                    // real/mock rows is already showing rather than surfacing
+                    // a scary error over an otherwise-fine-looking paywall.
+                    _paywallState.value = _paywallState.value.copy(isLoadingOfferings = false)
                 }
         }
     }

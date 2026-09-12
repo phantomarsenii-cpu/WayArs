@@ -115,4 +115,42 @@
     <string name="settings_supported_apps_custom_label">Додані вами:</string>
     <string name="settings_supported_apps_hint">Вбудований список + додані вами додатки</string>
     <string name="settings_supported_apps_title">Підтримувані додатки</string>
+
+    <!-- Paywall -->
+    <string name="paywall_badge_full_access">повний доступ</string>
+    <string name="paywall_title">Відкрийте весь\nпотенціал WayArs</string>
+    <string name="paywall_subtitle">WayArs — це не просто помічник, а ваш особистий інструмент для стабільного й максимального доходу.</string>
+    <string name="paywall_chip_analysis">Швидкий аналіз</string>
+    <string name="paywall_chip_filters">Розумні фільтри</string>
+    <string name="paywall_chip_income">Дохід між змінами</string>
+    <string name="paywall_chip_languages">Працює 7 мовами</string>
+    <string name="paywall_section_eyebrow">ОБЕРІТЬ СВІЙ ПЛАН</string>
+    <string name="paywall_section_title">Гнучкі тарифи для ваших цілей</string>
+    <string name="paywall_section_subtitle">Чим довша підписка — тим вигідніше!</string>
+    <string name="paywall_plan_yearly_title">Річний</string>
+    <string name="paywall_plan_monthly_title">Місячний</string>
+    <string name="paywall_plan_weekly_title">Тижневий</string>
+    <string name="paywall_plan_yearly_days">365 днів повного доступу</string>
+    <string name="paywall_plan_monthly_days">30 днів повного доступу</string>
+    <string name="paywall_plan_weekly_days">7 днів повного доступу</string>
+    <string name="paywall_badge_popular">Популярний</string>
+    <string name="paywall_badge_trial7">7 днів безкоштовно</string>
+    <string name="paywall_period_year">/ рік</string>
+    <string name="paywall_period_month">/ місяць</string>
+    <string name="paywall_period_week">/ тиждень</string>
+    <string name="paywall_feature_all">Усі функції застосунку</string>
+    <string name="paywall_feature_presets">Розумні пресети</string>
+    <string name="paywall_feature_realtime">Аналіз замовлень у реальному часі</string>
+    <string name="paywall_feature_languages">Підтримка 7 мов</string>
+    <string name="paywall_button_select">Обрати</string>
+    <string name="paywall_button_restore">Відновити покупки</string>
+    <string name="paywall_button_hide">Приховати</string>
+    <string name="paywall_trial_notice">Ваша підписка починається з 7-денного безкоштовного періоду. Автоматично поновлюється для обраного плану. Ви можете скасувати в будь-який момент.</string>
+    <string name="paywall_footer_secured_title">Безпечна оплата</string>
+    <string name="paywall_footer_secured_subtitle">Через Google Play та RevenueCat</string>
+    <string name="paywall_footer_google_title">Google Play</string>
+    <string name="paywall_footer_google_subtitle">Перевірена оплата через Google Play та RevenueCat</string>
+    <string name="paywall_footer_tagline">WayArs — ваш шлях до стабільного доходу</string>
+    <string name="paywall_gate_error_title">Не вдалося перевірити підписку</string>
+    <string name="paywall_gate_error_retry">Повторити</string>
 </resources>

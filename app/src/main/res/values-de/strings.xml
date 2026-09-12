@@ -115,4 +115,42 @@
     <string name="settings_about_content">"**WayArs**\nDein persönlicher Assistent für Lieferungen und Fahrten\n\nVersion: %1$s\n\nWayArs ist ein kostenloses Tool für Fahrer und Kuriere, die mit Fahrdienst- und Lieferapps arbeiten.\n\nDie App analysiert automatisch Bildschirmdaten und Benachrichtigungen und hilft dir, die Rentabilität eines Auftrags schnell einzuschätzen und deine Verdienststatistik in Echtzeit zu verfolgen.\n\n**Konzept und Entwicklung:** AP STUDIO\n**Kontakt und Support:** apstudiomobile@gmail.com\n\nAlle Marken, Logos und App-Namen Dritter (unter anderem Bolt, Uber, Wolt, FreeNow, Stuart und weitere vom Nutzer hinzugefügte) gehören ihren jeweiligen Eigentümern und werden ausschließlich zu Informations- und Identifikationszwecken verwendet."</string>
     <string name="settings_privacy_content">"**Datenschutzerklärung der App WayArs**\nLetzte Aktualisierung: 12. September 2026\n\n**Schutz deiner Privatsphäre**\nWir respektieren deine Privatsphäre. WayArs wurde nach dem Prinzip Privacy by Design entwickelt — die zentralen Vorgänge zur Bildschirmanalyse und Tarifberechnung laufen lokal auf deinem Gerät.\n\n**Datenerhebung und -nutzung**\n• Bedienungshilfen (Accessibility Service): Die App nutzt diesen Zugriff ausschließlich, um Auftragsdetails (z. B. Preis, Entfernung) auszulesen, die auf dem Bildschirm der unterstützten Liefer- und Fahrdienst-Apps angezeigt werden (integrierte sowie vom Nutzer selbst hinzugefügte). Die App zeichnet keine eingegebenen Passwörter, personenbezogenen Daten oder Tastatureingaben auf.\n• Benachrichtigungen (Notification Listener): Der Zugriff auf Benachrichtigungen dient nur dazu, neue Auftragsangebote zu erkennen, während die App im Hintergrund läuft.\n• Fahrzeug- und Tarifdaten: Die in den Einstellungen eingegebenen Daten (Verbrauch, Kraftstoffpreis, Bewertungsschwellen) werden ausschließlich lokal auf dem Gerät gespeichert.\n\n**Abonnementverwaltung und externe Anbieter (Zahlungen)**\nDie App bietet Funktionen im Abonnementmodell an. Die App erhebt oder speichert keine detaillierten Zahlungsdaten (wie Kreditkartennummern). Zur Abwicklung von Transaktionen und zur Überprüfung des Abonnementstatus nutzen wir vertrauenswürdige externe Anbieter:\n• Google Play Billing (Google LLC): Zahlungen und Transaktionen werden direkt über den Google Play Store abgewickelt.\n• RevenueCat, Inc.: Überprüfung des Abonnementstatus anhand anonymer Geräte- und Transaktionskennungen.\n\n**Schutz der Privatsphäre von Kindern**\nWayArs richtet sich ausschließlich an Erwachsene, die berechtigt sind, als Fahrer oder Kurier zu arbeiten. Die App richtet sich nicht an Kinder unter 16 Jahren und sammelt oder verarbeitet wissentlich keine personenbezogenen Daten von Kindern. Solltest du erfahren, dass ein Kind uns Daten übermittelt hat, kontaktiere uns bitte unter apstudiomobile@gmail.com, damit wir umgehend geeignete Maßnahmen ergreifen können.\n\n**Verwaltung von Berechtigungen und Abonnement**\nDu kannst erteilte Berechtigungen jederzeit in den Android-Systemeinstellungen widerrufen oder dein Abonnement direkt in den Einstellungen deines Google Play-Kontos verwalten und kündigen."</string>
     <string name="settings_terms_content">"**Nutzungsbedingungen der App WayArs**\nLetzte Aktualisierung: 12. September 2026\n\n**Allgemeine Bestimmungen**\nDurch die Nutzung der App WayArs akzeptierst du die folgenden Bedingungen. Die App ist ein unabhängiges Hilfswerkzeug von AP STUDIO und steht in keiner Weise offiziell in Verbindung mit, wird nicht gesponsert von und ist nicht bestätigt von externen App-Anbietern (wie Bolt, Uber, Wolt, FreeNow, Stuart oder anderen vom Nutzer zur Liste hinzugefügten Apps).\n\n**Unterstützender Charakter und Drittanbieter-Apps**\n• Die App dient ausschließlich Informations- und Analysezwecken. Rentabilitätskennzahlen (Währung/km, geschätzter Gewinn) werden auf Basis der vom Nutzer eingegebenen Daten und der Bildschirmauswertungen berechnet.\n• Nutzer können unterstützte Drittanbieter-Apps selbst hinzufügen. AP STUDIO garantiert keine korrekte Datenauslesung für manuell hinzugefügte Apps.\n\n**Alter der Nutzer**\nDie App darf nur von Personen genutzt werden, die mindestens 18 Jahre alt sind (oder das Mindestalter für Fahrdienst-/Kurierleistungen im jeweiligen Land erreicht haben). Die App ist nicht für Kinder bestimmt.\n\n**Abonnements und Zahlungen**\n• Abonnementzahlungen werden vom Google Play Store gemäß dem gewählten Tarif erhoben.\n• Nutzer können die Verlängerung ihres Abonnements jederzeit in den Einstellungen ihres Google Play-Kontos kündigen.\n• Rückerstattungen erfolgen gemäß den Regeln und Richtlinien des Google Play Store.\n\n**Haftungsausschluss**\n• AP STUDIO haftet nicht für etwaige Abweichungen in den Berechnungen, die durch fehlerhafte Bildschirmauswertung oder durch Aktualisierungen bzw. Änderungen der Benutzeroberfläche von Drittanbieter-Apps entstehen.\n• AP STUDIO haftet nicht für finanzielle, geschäftliche oder verkehrsbezogene Entscheidungen, die der Nutzer auf Grundlage der Kennzahlen der App trifft.\n• Der Nutzer ist verpflichtet, das Telefon sicher zu nutzen und die Straßenverkehrsordnung beim Fahren strikt einzuhalten.\n\n**Kontakt**\nFragen, Anmerkungen und Fehlermeldungen richtest du bitte an: apstudiomobile@gmail.com."</string>
+
+    <!-- Paywall -->
+    <string name="paywall_badge_full_access">voller Zugriff</string>
+    <string name="paywall_title">Entfalte das volle\nPotenzial von WayArs</string>
+    <string name="paywall_subtitle">WayArs ist nicht nur ein Assistent, sondern dein persönliches Werkzeug für ein stabiles und maximales Einkommen.</string>
+    <string name="paywall_chip_analysis">Schnelle Analyse</string>
+    <string name="paywall_chip_filters">Intelligente Filter</string>
+    <string name="paywall_chip_income">Einkommen zwischen Schichten</string>
+    <string name="paywall_chip_languages">Verfügbar in 7 Sprachen</string>
+    <string name="paywall_section_eyebrow">WÄHLE DEINEN PLAN</string>
+    <string name="paywall_section_title">Flexible Pläne für deine Ziele</string>
+    <string name="paywall_section_subtitle">Je länger das Abo, desto günstiger!</string>
+    <string name="paywall_plan_yearly_title">Jährlich</string>
+    <string name="paywall_plan_monthly_title">Monatlich</string>
+    <string name="paywall_plan_weekly_title">Wöchentlich</string>
+    <string name="paywall_plan_yearly_days">365 Tage voller Zugriff</string>
+    <string name="paywall_plan_monthly_days">30 Tage voller Zugriff</string>
+    <string name="paywall_plan_weekly_days">7 Tage voller Zugriff</string>
+    <string name="paywall_badge_popular">Beliebt</string>
+    <string name="paywall_badge_trial7">7 Tage kostenlos</string>
+    <string name="paywall_period_year">/ Jahr</string>
+    <string name="paywall_period_month">/ Monat</string>
+    <string name="paywall_period_week">/ Woche</string>
+    <string name="paywall_feature_all">Alle App-Funktionen</string>
+    <string name="paywall_feature_presets">Intelligente Voreinstellungen</string>
+    <string name="paywall_feature_realtime">Auftragsanalyse in Echtzeit</string>
+    <string name="paywall_feature_languages">Unterstützung für 7 Sprachen</string>
+    <string name="paywall_button_select">Auswählen</string>
+    <string name="paywall_button_restore">Käufe wiederherstellen</string>
+    <string name="paywall_button_hide">Ausblenden</string>
+    <string name="paywall_trial_notice">Dein Abo beginnt mit einer 7-tägigen kostenlosen Testphase. Es verlängert sich automatisch für den gewählten Plan. Du kannst jederzeit kündigen.</string>
+    <string name="paywall_footer_secured_title">Sichere Zahlung</string>
+    <string name="paywall_footer_secured_subtitle">Abgewickelt über Google Play und RevenueCat</string>
+    <string name="paywall_footer_google_title">Google Play</string>
+    <string name="paywall_footer_google_subtitle">Sichere Zahlung über Google Play und RevenueCat</string>
+    <string name="paywall_footer_tagline">WayArs — dein Weg zu stabilem Einkommen</string>
+    <string name="paywall_gate_error_title">Abo konnte nicht überprüft werden</string>
+    <string name="paywall_gate_error_retry">Erneut versuchen</string>
 </resources>

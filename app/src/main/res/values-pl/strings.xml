@@ -115,4 +115,42 @@
     <string name="settings_supported_apps_custom_label">Dodane przez Ciebie:</string>
     <string name="settings_supported_apps_hint">Wbudowana lista + aplikacje dodane przez Ciebie</string>
     <string name="settings_supported_apps_title">Obsługiwane aplikacje</string>
+
+    <!-- Paywall -->
+    <string name="paywall_badge_full_access">pełny dostęp</string>
+    <string name="paywall_title">Odblokuj pełny\npotencjał WayArs</string>
+    <string name="paywall_subtitle">WayArs to nie tylko asystent — to Twoje osobiste narzędzie stabilnego i maksymalnego dochodu.</string>
+    <string name="paywall_chip_analysis">Szybka analiza</string>
+    <string name="paywall_chip_filters">Inteligentne filtry</string>
+    <string name="paywall_chip_income">Dochód między zmianami</string>
+    <string name="paywall_chip_languages">Działa w 7 językach</string>
+    <string name="paywall_section_eyebrow">WYBIERZ SWÓJ PLAN</string>
+    <string name="paywall_section_title">Elastyczne plany dopasowane do Twoich celów</string>
+    <string name="paywall_section_subtitle">Im dłuższa subskrypcja, tym lepsza cena!</string>
+    <string name="paywall_plan_yearly_title">Roczny</string>
+    <string name="paywall_plan_monthly_title">Miesięczny</string>
+    <string name="paywall_plan_weekly_title">Tygodniowy</string>
+    <string name="paywall_plan_yearly_days">365 dni pełnego dostępu</string>
+    <string name="paywall_plan_monthly_days">30 dni pełnego dostępu</string>
+    <string name="paywall_plan_weekly_days">7 dni pełnego dostępu</string>
+    <string name="paywall_badge_popular">Popularny</string>
+    <string name="paywall_badge_trial7">7 dni za darmo</string>
+    <string name="paywall_period_year">/ rok</string>
+    <string name="paywall_period_month">/ miesiąc</string>
+    <string name="paywall_period_week">/ tydzień</string>
+    <string name="paywall_feature_all">Wszystkie funkcje aplikacji</string>
+    <string name="paywall_feature_presets">Inteligentne presety</string>
+    <string name="paywall_feature_realtime">Analiza zleceń w czasie rzeczywistym</string>
+    <string name="paywall_feature_languages">Obsługa 7 języków</string>
+    <string name="paywall_button_select">Wybierz</string>
+    <string name="paywall_button_restore">Przywróć zakupy</string>
+    <string name="paywall_button_hide">Ukryj</string>
+    <string name="paywall_trial_notice">Twoja subskrypcja rozpoczyna się 7-dniowym okresem próbnym. Wybrany plan odnawia się automatycznie. Możesz anulować w dowolnym momencie.</string>
+    <string name="paywall_footer_secured_title">Bezpieczna płatność</string>
+    <string name="paywall_footer_secured_subtitle">Obsługiwana przez Google Play i RevenueCat</string>
+    <string name="paywall_footer_google_title">Google Play</string>
+    <string name="paywall_footer_google_subtitle">Bezpieczne płatności przez Google Play i RevenueCat</string>
+    <string name="paywall_footer_tagline">WayArs — Twoja droga do stabilnego dochodu</string>
+    <string name="paywall_gate_error_title">Nie udało się zweryfikować subskrypcji</string>
+    <string name="paywall_gate_error_retry">Ponów</string>
 </resources>

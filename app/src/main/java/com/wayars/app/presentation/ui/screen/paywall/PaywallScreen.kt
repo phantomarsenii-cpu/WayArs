@@ -18,11 +18,15 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Bolt
+import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Public
 import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.ShowChart
+import androidx.compose.material.icons.filled.Storefront
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -38,11 +42,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import com.revenuecat.purchases.Package
+import com.wayars.app.R
 import com.wayars.app.presentation.PaywallUiState
 import com.wayars.app.presentation.PlanOption
 import com.wayars.app.presentation.PlanType
@@ -56,30 +65,58 @@ import com.wayars.app.presentation.ui.theme.WaTextPrimary
 import com.wayars.app.presentation.ui.theme.WaTextSecondary
 
 /**
- * Marketing copy (discount badges, trial length) lives here as static UI
- * content — RevenueCat's Offering/Package objects only carry real store
- * price + duration, not promotional copy. Prices themselves (below) always
- * come from [Package.product.price.formatted], never hardcoded, so what's
- * shown always matches what Google Play will actually charge.
+ * Static per-plan copy (title, "days of access" subtitle, badges, period
+ * suffix). This is marketing/layout content, not pricing — pricing always
+ * comes from [PlanOption.priceText], which is either the live RevenueCat
+ * [Package.product.price.formatted] or the hardcoded fallback in
+ * [com.wayars.app.presentation.MockPlans] (see [SubscriptionViewModel]).
+ * That keeps what's shown always consistent with what Google Play will
+ * actually charge once real offerings load, while guaranteeing the layout
+ * never has a missing/blank card.
  */
 private data class PlanCopy(
     val title: String,
-    val badge: String?,
-    val badgeColor: Color,
+    val daysLabel: String,
+    val badges: List<Pair<String, Color>>,
     val periodSuffix: String
 )
 
-private val planCopy = mapOf(
-    PlanType.YEARLY to PlanCopy("Годовая", "-30% • 7 дней бесплатно", WaPurple, "/ год"),
-    PlanType.MONTHLY to PlanCopy("Месячная", "-15% • 7 дней бесплатно", WaNeonGreen, "/ месяц"),
-    PlanType.WEEKLY to PlanCopy("Недельная", "7 дней бесплатно", WaTextSecondary, "/ неделя")
-)
+@Composable
+private fun planCopyFor(plan: PlanType): PlanCopy = when (plan) {
+    PlanType.YEARLY -> PlanCopy(
+        title = stringResource(R.string.paywall_plan_yearly_title),
+        daysLabel = stringResource(R.string.paywall_plan_yearly_days),
+        badges = listOf(
+            "-30%" to WaPurple,
+            stringResource(R.string.paywall_badge_trial7) to WaTextSecondary
+        ),
+        periodSuffix = stringResource(R.string.paywall_period_year)
+    )
+    PlanType.MONTHLY -> PlanCopy(
+        title = stringResource(R.string.paywall_plan_monthly_title),
+        daysLabel = stringResource(R.string.paywall_plan_monthly_days),
+        badges = listOf(
+            "-15%" to WaNeonGreen,
+            stringResource(R.string.paywall_badge_trial7) to WaTextSecondary
+        ),
+        periodSuffix = stringResource(R.string.paywall_period_month)
+    )
+    PlanType.WEEKLY -> PlanCopy(
+        title = stringResource(R.string.paywall_plan_weekly_title),
+        daysLabel = stringResource(R.string.paywall_plan_weekly_days),
+        badges = listOf(
+            stringResource(R.string.paywall_badge_trial7) to WaTextSecondary
+        ),
+        periodSuffix = stringResource(R.string.paywall_period_week)
+    )
+}
 
-private val planFeatures = listOf(
-    "Все функции приложения",
-    "Умные пресеты",
-    "Анализ заказов в реальном времени",
-    "Поддержка 7 языков"
+@Composable
+private fun planFeatures(): List<String> = listOf(
+    stringResource(R.string.paywall_feature_all),
+    stringResource(R.string.paywall_feature_presets),
+    stringResource(R.string.paywall_feature_realtime),
+    stringResource(R.string.paywall_feature_languages)
 )
 
 @Composable
@@ -111,7 +148,7 @@ fun PaywallScreen(
         Spacer(Modifier.height(28.dp))
 
         Text(
-            "ВЫБЕРИТЕ СВОЙ ПЛАН",
+            stringResource(R.string.paywall_section_eyebrow),
             color = WaNeonGreen,
             fontSize = 12.sp,
             fontWeight = FontWeight.SemiBold,
@@ -119,32 +156,62 @@ fun PaywallScreen(
         )
         Spacer(Modifier.height(6.dp))
         Text(
-            "Гибкие тарифы для ваших целей",
+            stringResource(R.string.paywall_section_title),
             color = WaTextPrimary,
             fontSize = 24.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            lineHeight = 30.sp
         )
         Spacer(Modifier.height(4.dp))
         Text(
-            "Чем дольше подписка — тем выгоднее!",
+            stringResource(R.string.paywall_section_subtitle),
             color = WaTextSecondary,
             fontSize = 14.sp
         )
 
         Spacer(Modifier.height(20.dp))
 
-        when {
-            state.isLoadingOfferings -> Box(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 48.dp),
-                contentAlignment = Alignment.Center
-            ) { CircularProgressIndicator(color = WaNeonGreen) }
+        // Two-column "bento" grid matching the design: Yearly + Weekly
+        // stacked on the left, the featured Monthly card on the right.
+        // Columns share width via weight(1f); each card sizes to its own
+        // content rather than being forced to an exact matching height,
+        // since translated copy varies in length across the 7 supported
+        // languages and a hard height match would risk clipped text.
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(14.dp)
+        ) {
+            val yearly = state.plans.find { it.plan == PlanType.YEARLY }
+            val monthly = state.plans.find { it.plan == PlanType.MONTHLY }
+            val weekly = state.plans.find { it.plan == PlanType.WEEKLY }
 
-            else -> Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                state.plans.forEach { plan ->
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(14.dp)
+            ) {
+                yearly?.let {
                     PlanCard(
-                        plan = plan,
+                        plan = it,
                         isPurchasing = state.isPurchasing,
-                        onSelect = { onSelectPlan(plan.rcPackage) }
+                        onSelect = { pkg -> onSelectPlan(pkg) }
+                    )
+                }
+                weekly?.let {
+                    PlanCard(
+                        plan = it,
+                        isPurchasing = state.isPurchasing,
+                        onSelect = { pkg -> onSelectPlan(pkg) }
+                    )
+                }
+            }
+
+            Column(modifier = Modifier.weight(1f)) {
+                monthly?.let {
+                    PlanCard(
+                        plan = it,
+                        isPurchasing = state.isPurchasing,
+                        onSelect = { pkg -> onSelectPlan(pkg) },
+                        modifier = Modifier.fillMaxWidth()
                     )
                 }
             }
@@ -160,7 +227,7 @@ fun PaywallScreen(
                     modifier = Modifier.weight(1f)
                 )
                 TextButton(onClick = onDismissError) {
-                    Text("Скрыть", color = WaTextSecondary, fontSize = 12.sp)
+                    Text(stringResource(R.string.paywall_button_hide), color = WaTextSecondary, fontSize = 12.sp)
                 }
             }
         }
@@ -176,8 +243,12 @@ fun PaywallScreen(
             enabled = !state.isPurchasing,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Восстановить покупки", color = WaTextSecondary, fontSize = 14.sp)
+            Text(stringResource(R.string.paywall_button_restore), color = WaTextSecondary, fontSize = 14.sp)
         }
+
+        Spacer(Modifier.height(20.dp))
+
+        TrustFooter()
     }
 }
 
@@ -192,12 +263,17 @@ private fun GateErrorBanner(message: String, onRetry: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(modifier = Modifier.weight(1f)) {
-            Text("Не удалось проверить подписку", color = WaTextPrimary, fontSize = 13.sp, fontWeight = FontWeight.SemiBold)
+            Text(
+                stringResource(R.string.paywall_gate_error_title),
+                color = WaTextPrimary,
+                fontSize = 13.sp,
+                fontWeight = FontWeight.SemiBold
+            )
             Text(message, color = WaTextSecondary, fontSize = 12.sp)
         }
         Spacer(Modifier.width(8.dp))
         TextButton(onClick = onRetry) {
-            Text("Повторить", color = WaNeonGreen, fontSize = 13.sp, fontWeight = FontWeight.SemiBold)
+            Text(stringResource(R.string.paywall_gate_error_retry), color = WaNeonGreen, fontSize = 13.sp, fontWeight = FontWeight.SemiBold)
         }
     }
 }
@@ -211,11 +287,11 @@ private fun Header() {
                 .background(WaSurfaceVariant)
                 .padding(horizontal = 14.dp, vertical = 6.dp)
         ) {
-            Text("полный доступ", color = WaTextSecondary, fontSize = 12.sp)
+            Text(stringResource(R.string.paywall_badge_full_access), color = WaTextSecondary, fontSize = 12.sp)
         }
         Spacer(Modifier.height(12.dp))
         Text(
-            buildString { append("Откройте полный\nпотенциал WayArs") },
+            stringResource(R.string.paywall_title),
             color = WaTextPrimary,
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
@@ -223,36 +299,45 @@ private fun Header() {
         )
         Spacer(Modifier.height(10.dp))
         Text(
-            "WayArs — это не просто помощник, а ваш личный инструмент для стабильного и максимального дохода.",
+            stringResource(R.string.paywall_subtitle),
             color = WaTextSecondary,
             fontSize = 14.sp,
             lineHeight = 20.sp
         )
         Spacer(Modifier.height(16.dp))
-        Row(horizontalArrangement = Arrangement.spacedBy(20.dp)) {
-            FeatureChip(Icons.Filled.Bolt, "Быстрый анализ")
-            FeatureChip(Icons.Filled.Shield, "Умные фильтры")
-            FeatureChip(Icons.Filled.ShowChart, "Максимальный доход")
-            FeatureChip(Icons.Filled.Public, "7 языков")
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            FeatureChip(Icons.Filled.Bolt, stringResource(R.string.paywall_chip_analysis))
+            FeatureChip(Icons.Filled.Shield, stringResource(R.string.paywall_chip_filters))
+            FeatureChip(Icons.Filled.ShowChart, stringResource(R.string.paywall_chip_income))
+            FeatureChip(Icons.Filled.Public, stringResource(R.string.paywall_chip_languages))
         }
     }
 }
 
 @Composable
-private fun FeatureChip(icon: androidx.compose.ui.graphics.vector.ImageVector, label: String) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+private fun FeatureChip(icon: ImageVector, label: String) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.width(70.dp)
+    ) {
         Icon(icon, contentDescription = null, tint = WaNeonGreen, modifier = Modifier.size(18.dp))
         Spacer(Modifier.height(4.dp))
-        Text(label, color = WaTextSecondary, fontSize = 10.sp, textAlign = TextAlign.Center)
+        Text(label, color = WaTextSecondary, fontSize = 10.sp, lineHeight = 12.sp, textAlign = TextAlign.Center)
     }
 }
 
 @Composable
-private fun PlanCard(plan: PlanOption, isPurchasing: Boolean, onSelect: () -> Unit) {
-    val copy = planCopy.getValue(plan.plan)
+private fun PlanCard(
+    plan: PlanOption,
+    isPurchasing: Boolean,
+    onSelect: (Package) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val copy = planCopyFor(plan.plan)
     val isFeatured = plan.plan == PlanType.MONTHLY
-    val storeProduct = plan.rcPackage.product
-    val priceFormatted = storeProduct.price.formatted
 
     val borderColor = if (isFeatured) WaNeonGreen else WaSurfaceVariant
     val backgroundBrush = if (isFeatured) {
@@ -261,99 +346,134 @@ private fun PlanCard(plan: PlanOption, isPurchasing: Boolean, onSelect: () -> Un
         Brush.verticalGradient(listOf(WaSurface, WaSurface))
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(20.dp))
-            .background(backgroundBrush)
-            .border(BorderStroke(1.dp, borderColor), RoundedCornerShape(20.dp))
-    ) {
-        Column(
+    Box(modifier = modifier.fillMaxWidth()) {
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp)
+                .then(if (isFeatured) Modifier.padding(top = 14.dp) else Modifier)
+                .clip(RoundedCornerShape(20.dp))
+                .background(backgroundBrush)
+                .border(BorderStroke(1.dp, borderColor), RoundedCornerShape(20.dp))
         ) {
-            if (isFeatured) {
-                Box(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(50))
-                        .background(WaNeonGreen)
-                        .padding(horizontal = 12.dp, vertical = 4.dp)
-                ) {
-                    Text("Популярный", color = Color(0xFF04140C), fontSize = 11.sp, fontWeight = FontWeight.Bold)
-                }
-                Spacer(Modifier.height(10.dp))
-            }
-
-            Text(copy.title, color = WaTextPrimary, fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
-
-            copy.badge?.let { badge ->
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(18.dp)
+            ) {
+                Icon(
+                    Icons.Filled.CalendarMonth,
+                    contentDescription = null,
+                    tint = if (isFeatured) WaNeonGreen else WaTextSecondary,
+                    modifier = Modifier.size(22.dp)
+                )
                 Spacer(Modifier.height(8.dp))
-                Box(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(8.dp))
-                        .background(copy.badgeColor.copy(alpha = 0.18f))
-                        .padding(horizontal = 10.dp, vertical = 4.dp)
-                ) {
-                    Text(badge, color = copy.badgeColor, fontSize = 11.sp, fontWeight = FontWeight.SemiBold)
-                }
-            }
+                Text(copy.title, color = WaTextPrimary, fontSize = 17.sp, fontWeight = FontWeight.SemiBold)
+                Spacer(Modifier.height(2.dp))
+                Text(copy.daysLabel, color = WaTextSecondary, fontSize = 11.sp)
 
-            Spacer(Modifier.height(10.dp))
-            Row(verticalAlignment = Alignment.Bottom) {
-                Text(priceFormatted, color = WaTextPrimary, fontSize = 30.sp, fontWeight = FontWeight.Bold)
-                Spacer(Modifier.width(6.dp))
+                Spacer(Modifier.height(10.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    copy.badges.forEach { (label, color) ->
+                        Box(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(8.dp))
+                                .background(color.copy(alpha = 0.18f))
+                                .padding(horizontal = 8.dp, vertical = 4.dp)
+                        ) {
+                            Text(label, color = color, fontSize = 10.sp, fontWeight = FontWeight.SemiBold)
+                        }
+                    }
+                }
+
+                Spacer(Modifier.height(12.dp))
+                Row(verticalAlignment = Alignment.Bottom) {
+                    Text(plan.priceText, color = WaTextPrimary, fontSize = 26.sp, fontWeight = FontWeight.Bold)
+                    plan.originalPriceText?.let { original ->
+                        Spacer(Modifier.width(6.dp))
+                        Text(
+                            original,
+                            color = WaTextSecondary,
+                            fontSize = 15.sp,
+                            textDecoration = TextDecoration.LineThrough,
+                            modifier = Modifier.padding(bottom = 4.dp)
+                        )
+                    }
+                }
                 Text(
                     copy.periodSuffix,
                     color = WaTextSecondary,
-                    fontSize = 14.sp,
-                    modifier = Modifier.padding(bottom = 5.dp)
+                    fontSize = 13.sp
                 )
-            }
 
-            Spacer(Modifier.height(12.dp))
-            planFeatures.forEach { feature ->
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(vertical = 3.dp)
-                ) {
-                    Icon(
-                        Icons.Filled.Check,
-                        contentDescription = null,
-                        tint = WaNeonGreen,
-                        modifier = Modifier.size(16.dp)
-                    )
-                    Spacer(Modifier.width(8.dp))
-                    Text(feature, color = WaTextSecondary, fontSize = 13.sp)
-                }
-            }
-
-            Spacer(Modifier.height(16.dp))
-
-            if (isFeatured) {
-                Button(
-                    onClick = onSelect,
-                    enabled = !isPurchasing,
-                    modifier = Modifier.fillMaxWidth().height(52.dp),
-                    shape = RoundedCornerShape(50),
-                    colors = ButtonDefaults.buttonColors(containerColor = WaNeonGreen, contentColor = Color(0xFF04140C))
-                ) {
-                    if (isPurchasing) {
-                        CircularProgressIndicator(modifier = Modifier.size(20.dp), color = Color(0xFF04140C))
-                    } else {
-                        Text("Выбрать", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                Spacer(Modifier.height(12.dp))
+                planFeatures().forEach { feature ->
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(vertical = 3.dp)
+                    ) {
+                        Icon(
+                            Icons.Filled.Check,
+                            contentDescription = null,
+                            tint = WaNeonGreen,
+                            modifier = Modifier.size(15.dp)
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Text(feature, color = WaTextSecondary, fontSize = 12.sp)
                     }
                 }
-            } else {
-                OutlinedButton(
-                    onClick = onSelect,
-                    enabled = !isPurchasing,
-                    modifier = Modifier.fillMaxWidth().height(52.dp),
-                    shape = RoundedCornerShape(50),
-                    border = BorderStroke(1.dp, WaSurfaceVariant)
-                ) {
-                    Text("Выбрать", color = WaTextPrimary, fontWeight = FontWeight.SemiBold, fontSize = 16.sp)
+
+                Spacer(Modifier.height(16.dp))
+
+                val enabled = !isPurchasing && plan.isLive
+                if (isFeatured) {
+                    Button(
+                        onClick = { plan.rcPackage?.let(onSelect) },
+                        enabled = enabled,
+                        modifier = Modifier.fillMaxWidth().height(52.dp),
+                        shape = RoundedCornerShape(50),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = WaNeonGreen,
+                            contentColor = Color(0xFF04140C),
+                            disabledContainerColor = WaNeonGreen.copy(alpha = if (isPurchasing) 1f else 0.5f)
+                        )
+                    ) {
+                        if (isPurchasing) {
+                            CircularProgressIndicator(modifier = Modifier.size(20.dp), color = Color(0xFF04140C))
+                        } else {
+                            Text(stringResource(R.string.paywall_button_select), fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                            Spacer(Modifier.width(6.dp))
+                            Icon(Icons.Filled.ArrowForward, contentDescription = null, modifier = Modifier.size(18.dp))
+                        }
+                    }
+                } else {
+                    OutlinedButton(
+                        onClick = { plan.rcPackage?.let(onSelect) },
+                        enabled = enabled,
+                        modifier = Modifier.fillMaxWidth().height(52.dp),
+                        shape = RoundedCornerShape(50),
+                        border = BorderStroke(1.dp, WaSurfaceVariant)
+                    ) {
+                        Text(stringResource(R.string.paywall_button_select), color = WaTextPrimary, fontWeight = FontWeight.SemiBold, fontSize = 15.sp)
+                    }
                 }
+            }
+        }
+
+        if (isFeatured) {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .zIndex(1f)
+                    .clip(RoundedCornerShape(50))
+                    .background(WaNeonGreen)
+                    .padding(horizontal = 14.dp, vertical = 5.dp)
+            ) {
+                Text(
+                    stringResource(R.string.paywall_badge_popular),
+                    color = Color(0xFF04140C),
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold
+                )
             }
         }
     }
@@ -372,10 +492,54 @@ private fun TrialNotice() {
         Icon(Icons.Filled.Shield, contentDescription = null, tint = WaNeonGreen, modifier = Modifier.size(20.dp))
         Spacer(Modifier.width(12.dp))
         Text(
-            "Ваша подписка начнётся с 7-дневного пробного периода. Автоматическое продление выбранного плана. Вы можете отменить подписку в любой момент.",
+            stringResource(R.string.paywall_trial_notice),
             color = WaTextSecondary,
             fontSize = 12.sp,
             lineHeight = 17.sp
         )
+    }
+}
+
+@Composable
+private fun TrustFooter() {
+    Column {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            TrustItem(
+                icon = Icons.Filled.Lock,
+                title = stringResource(R.string.paywall_footer_secured_title),
+                subtitle = stringResource(R.string.paywall_footer_secured_subtitle),
+                modifier = Modifier.weight(1f)
+            )
+            Spacer(Modifier.width(12.dp))
+            TrustItem(
+                icon = Icons.Filled.Storefront,
+                title = stringResource(R.string.paywall_footer_google_title),
+                subtitle = stringResource(R.string.paywall_footer_google_subtitle),
+                modifier = Modifier.weight(1f)
+            )
+        }
+        Spacer(Modifier.height(18.dp))
+        Text(
+            stringResource(R.string.paywall_footer_tagline),
+            color = WaTextSecondary,
+            fontSize = 12.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+
+@Composable
+private fun TrustItem(icon: ImageVector, title: String, subtitle: String, modifier: Modifier = Modifier) {
+    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
+        Icon(icon, contentDescription = null, tint = WaTextSecondary, modifier = Modifier.size(16.dp))
+        Spacer(Modifier.width(8.dp))
+        Column {
+            Text(title, color = WaTextPrimary, fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
+            Text(subtitle, color = WaTextSecondary, fontSize = 10.sp, lineHeight = 12.sp)
+        }
     }
 }
