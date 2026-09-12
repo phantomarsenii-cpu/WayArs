@@ -105,9 +105,9 @@
     <string name="settings_calibration_time_token_label">Unité de temps (modifiez si nécessaire)</string>
     <string name="settings_calibration_clear">Réinitialiser la calibration</string>
 
-    <string name="settings_about_title">À propos de l'application</string>
+    <string name="settings_about_title">À propos de l\'application</string>
     <string name="settings_privacy_title">Politique de confidentialité</string>
-    <string name="settings_terms_title">Conditions d'utilisation</string>
+    <string name="settings_terms_title">Conditions d\'utilisation</string>
     <string name="settings_visit_website">Visiter le site du développeur</string>
     <string name="settings_close">Fermer</string>
     <string name="settings_about_content">"**WayArs**\nTon assistant personnel pour les livraisons et les courses\n\nVersion : %1$s\n\nWayArs est un outil gratuit conçu pour les chauffeurs et coursiers travaillant avec des applications de VTC et de livraison.\n\nL'application analyse automatiquement les données affichées à l'écran et les notifications, t'aidant à évaluer rapidement la rentabilité d'une commande et à suivre tes statistiques de gains en temps réel.\n\n**Conception et développement :** AP STUDIO\n**Contact et support :** apstudiomobile@gmail.com\n\nToutes les marques, logos et noms d'applications tiers (notamment, mais sans s'y limiter, Bolt, Uber, Wolt, FreeNow, Stuart et toute autre application ajoutée par l'utilisateur) appartiennent à leurs propriétaires respectifs et sont utilisés uniquement à des fins d'information et d'identification."</string>
