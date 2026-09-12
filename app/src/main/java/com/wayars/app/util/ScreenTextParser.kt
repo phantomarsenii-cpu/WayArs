@@ -49,24 +49,24 @@ object ScreenTextParser {
     // never matched those patterns AT ALL before. Now that it can, `\s?`
     // (which matches "\n") reopens the same cross-line risk the PREFIX
     // patterns were already hardened against (see the PLN comment below).
-    // So every suffix pattern's separator is tightened to `[ \t]?` too —
+    // So every suffix pattern's separator is tightened to `[ \t\u00A0]?` too —
     // same-line only, matching how a real currency suffix is always laid
     // out in practice.
     private val moneyPatterns: List<Pair<Regex, Currency>> = listOf(
-        Regex("""€[ \t]?(\d+(?:[.,]\d{1,2})?)""") to Currency.EUR,
-        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?€""") to Currency.EUR,
+        Regex("""€[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""") to Currency.EUR,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?€""") to Currency.EUR,
         // (?<!R) guards against matching the "$" inside Brazil's "R$" as a
         // bare USD sign — without it, "R$ 25,00" would be misread as USD
         // 25.00 by THIS pattern before ever reaching the BRL pattern below.
-        Regex("""(?<!R)\$[ \t]?(\d+(?:[.,]\d{1,2})?)""") to Currency.USD,
-        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?\$""") to Currency.USD,
-        Regex("""£[ \t]?(\d+(?:[.,]\d{1,2})?)""") to Currency.GBP,
-        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?£""") to Currency.GBP,
+        Regex("""(?<!R)\$[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""") to Currency.USD,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?\$""") to Currency.USD,
+        Regex("""£[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""") to Currency.GBP,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?£""") to Currency.GBP,
         // PLN/UAH/MDL: accept the currency marker BEFORE or AFTER the number,
         // since Bolt's combined-line format puts it before ("PLN 16.37").
         //
         // The "currency BEFORE number" variants are deliberately restricted
-        // to a single same-line space/tab (`[ \t]?`, not `\s?`) and forbid a
+        // to a single same-line space/tab (`[ \t\u00A0]?`, not `\s?`) and forbid a
         // digit immediately before the marker (`(?<!\d)`). Stuart was
         // observed rendering the real total and an unrelated bare per-km
         // rate as ONE multi-line node: "35.46zł\n2.18\n14.2 km total". With
@@ -77,24 +77,24 @@ object ScreenTextParser {
         // can only be a genuine prefix if it isn't glued to a preceding
         // number and doesn't need to reach across a line break to find its
         // number.
-        Regex("""(?<!\d)(?:zł|PLN|zl)[ \t]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.PLN,
-        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?(?:zł|PLN|zl)""", RegexOption.IGNORE_CASE) to Currency.PLN,
-        Regex("""(?<!\d)(?:₴|UAH|грн)[ \t]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.UAH,
-        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?(?:₴|UAH|грн)""", RegexOption.IGNORE_CASE) to Currency.UAH,
-        Regex("""(?<!\d)(?:MDL|lei)[ \t]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.MDL,
-        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?(?:MDL|lei|L\b)""", RegexOption.IGNORE_CASE) to Currency.MDL,
+        Regex("""(?<!\d)(?:zł|PLN|zl)[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.PLN,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:zł|PLN|zl)""", RegexOption.IGNORE_CASE) to Currency.PLN,
+        Regex("""(?<!\d)(?:₴|UAH|грн)[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.UAH,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:₴|UAH|грн)""", RegexOption.IGNORE_CASE) to Currency.UAH,
+        Regex("""(?<!\d)(?:MDL|lei)[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.MDL,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:MDL|lei|L\b)""", RegexOption.IGNORE_CASE) to Currency.MDL,
         // "R$" is always a prefix in practice (Brazilian apps never write
         // "25,00 R$") so only one direction is needed here.
-        Regex("""(?<!\d)R\$[ \t]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.BRL,
-        Regex("""(?<!\d)₹[ \t]?(\d+(?:[.,]\d{1,2})?)""") to Currency.INR,
-        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?₹""") to Currency.INR,
-        Regex("""(?<!\d)(?:₺|TRY|TL\b)[ \t]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.TRY,
-        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?(?:₺|TRY|TL\b)""", RegexOption.IGNORE_CASE) to Currency.TRY,
+        Regex("""(?<!\d)R\$[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.BRL,
+        Regex("""(?<!\d)₹[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""") to Currency.INR,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?₹""") to Currency.INR,
+        Regex("""(?<!\d)(?:₺|TRY|TL\b)[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.TRY,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:₺|TRY|TL\b)""", RegexOption.IGNORE_CASE) to Currency.TRY,
         // Yen has no minor unit in normal display ("¥850", not "¥850.00").
-        Regex("""(?<!\d)¥[ \t]?(\d+(?:[.,]\d{1,2})?)""") to Currency.JPY,
-        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?¥""") to Currency.JPY,
-        Regex("""(?<!\d)(?:JPY)[ \t]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.JPY,
-        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?(?:JPY)""", RegexOption.IGNORE_CASE) to Currency.JPY
+        Regex("""(?<!\d)¥[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""") to Currency.JPY,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?¥""") to Currency.JPY,
+        Regex("""(?<!\d)(?:JPY)[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.JPY,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:JPY)""", RegexOption.IGNORE_CASE) to Currency.JPY
     )
 
     /**
@@ -224,7 +224,7 @@ object ScreenTextParser {
      * A calibration hint's money token becomes an extra prefix AND suffix
      * pattern (we don't know which side of the number this app puts its
      * marker on from the token alone), with the same anti-cross-line
-     * guards ([ \t]? instead of \s?, (?<!\d) on the prefix form) as every
+     * guards ([ \t\u00A0]? instead of \s?, (?<!\d) on the prefix form) as every
      * built-in currency pattern above. Empty list when there's no hint or
      * it has no money token — the built-ins run unchanged either way.
      */
@@ -233,8 +233,8 @@ object ScreenTextParser {
         val currency = hint.moneyCurrency ?: return emptyList()
         val escaped = Regex.escape(token)
         return listOf(
-            Regex("""(?<!\d)$escaped[ \t]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to currency,
-            Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?$escaped""", RegexOption.IGNORE_CASE) to currency
+            Regex("""(?<!\d)$escaped[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to currency,
+            Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?$escaped""", RegexOption.IGNORE_CASE) to currency
         )
     }
 
