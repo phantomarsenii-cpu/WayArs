@@ -15,7 +15,7 @@ jobs:
     # job-level env var (env: at this level CAN read secrets), then check
     # env.X instead of secrets.X in every if: below — env IS allowed there.
     env:
-      RELEASE_KEYSTORE_BASE64: ${{ secrets.RELEASE_KEYSTORE_BASE64 }}
+      RELEASE_KEYSTORE_BASE64: ${{ secrets['SIGNING KEY'] }}
       KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
       KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
       KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
@@ -72,7 +72,9 @@ jobs:
           echo "All 4 release signing secrets are present — proceeding with a signed release build."
 
       - name: Decode release keystore
-        run: echo "$RELEASE_KEYSTORE_BASE64" | base64 -d > app/release.keystore
+        run: |
+          echo "$RELEASE_KEYSTORE_BASE64" | base64 -d > app/release.keystore
+          echo "KEY_STORE_PATH=app/release.keystore" >> $GITHUB_ENV
 
       - name: Verify decoded keystore matches the signing credentials
         # Fails fast, with a specific reason, instead of letting a wrong
