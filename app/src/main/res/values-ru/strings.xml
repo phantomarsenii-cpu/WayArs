@@ -153,4 +153,7 @@
     <string name="paywall_footer_tagline">WayArs — ваш путь к стабильному доходу</string>
     <string name="paywall_gate_error_title">Не удалось проверить подписку</string>
     <string name="paywall_gate_error_retry">Повторить</string>
+    <string name="paywall_tagline">УМНЫЙ ПОМОЩНИК ДЛЯ ДОСТАВКИ И ТАКСИ</string>
+    <string name="paywall_compat_label">Работает вместе с сервисами, в которых вы уже работаете</string>
+    <string name="paywall_mock_selected_toast">Выбран план «%1$s» — покупки станут доступны после публикации в Google Play</string>
 </resources>

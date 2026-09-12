@@ -153,4 +153,7 @@
     <string name="paywall_footer_tagline">WayArs — Twoja droga do stabilnego dochodu</string>
     <string name="paywall_gate_error_title">Nie udało się zweryfikować subskrypcji</string>
     <string name="paywall_gate_error_retry">Ponów</string>
+    <string name="paywall_tagline">INTELIGENTNY ASYSTENT DOSTAW I TAXI</string>
+    <string name="paywall_compat_label">Działa razem z aplikacjami, w których już jeździsz</string>
+    <string name="paywall_mock_selected_toast">Wybrano plan „%1$s” — zakupy będą dostępne po publikacji w Google Play</string>
 </resources>

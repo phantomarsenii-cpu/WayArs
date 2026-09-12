@@ -61,7 +61,15 @@ data class PaywallUiState(
     val isLoadingOfferings: Boolean = false,
     val plans: List<PlanOption> = MockPlans.fallback,
     val isPurchasing: Boolean = false,
-    val errorMessage: String? = null
+    val errorMessage: String? = null,
+    /**
+     * Which plan the user tapped while it had no live RevenueCat [Package]
+     * yet (offline, or before the product exists in Play Console). Not a
+     * real purchase — just a local UI acknowledgment so the tap has a
+     * visible effect (see [SubscriptionViewModel.selectMockPlan] and the
+     * paywall's fallback toast) instead of the card looking unresponsive.
+     */
+    val selectedMockPlan: PlanType? = null
 )
 
 class SubscriptionViewModel(private val container: AppContainer) : ViewModel() {
@@ -130,9 +138,22 @@ class SubscriptionViewModel(private val container: AppContainer) : ViewModel() {
         }
     }
 
+    /**
+     * Fallback path for a tap on a plan that has no live RevenueCat
+     * [Package] yet — offline, no network on first launch, or the product
+     * simply doesn't exist in Play Console/RevenueCat before release.
+     * Nothing is charged; this only records a local "selected" state so
+     * the card highlights and the caller (see [WayArsNavHost]) can show a
+     * toast, keeping the paywall interactive instead of dead-looking.
+     * Real purchases always go through [purchase] once offerings load.
+     */
+    fun selectMockPlan(plan: PlanType) {
+        _paywallState.value = _paywallState.value.copy(selectedMockPlan = plan)
+    }
+
     fun purchase(activity: Activity, packageToPurchase: Package) {
         viewModelScope.launch {
-            _paywallState.value = _paywallState.value.copy(isPurchasing = true, errorMessage = null)
+            _paywallState.value = _paywallState.value.copy(isPurchasing = true, errorMessage = null, selectedMockPlan = null)
             repository.purchase(activity, packageToPurchase)
                 .onSuccess {
                     _paywallState.value = _paywallState.value.copy(isPurchasing = false)

@@ -154,4 +154,7 @@
     <string name="paywall_footer_tagline">WayArs — your path to stable income</string>
     <string name="paywall_gate_error_title">Couldn\'t verify your subscription</string>
     <string name="paywall_gate_error_retry">Retry</string>
+    <string name="paywall_tagline">SMART DELIVERY &amp; TAXI ASSISTANT</string>
+    <string name="paywall_compat_label">Works alongside the apps you already drive for</string>
+    <string name="paywall_mock_selected_toast">%1$s plan selected — purchases unlock after the Google Play release</string>
 </resources>

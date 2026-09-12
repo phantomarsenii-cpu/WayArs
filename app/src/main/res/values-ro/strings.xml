@@ -153,4 +153,7 @@
     <string name="paywall_footer_tagline">WayArs — drumul tău spre un venit stabil</string>
     <string name="paywall_gate_error_title">Nu am putut verifica abonamentul</string>
     <string name="paywall_gate_error_retry">Reîncearcă</string>
+    <string name="paywall_tagline">ASISTENT INTELIGENT PENTRU LIVRARE ȘI TAXI</string>
+    <string name="paywall_compat_label">Funcționează alături de aplicațiile în care conduci deja</string>
+    <string name="paywall_mock_selected_toast">Planul „%1$s” a fost selectat — achizițiile vor fi disponibile după lansarea pe Google Play</string>
 </resources>

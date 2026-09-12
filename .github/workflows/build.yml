@@ -11,11 +11,14 @@ jobs:
     timeout-minutes: 30
     # GitHub Actions does not allow the `secrets` context inside `if:`
     # conditions anywhere (job or step level) — that's the "Unrecognized
-    # named-value: 'secrets'" parse error. Fix: copy the secret into a
+    # named-value: 'secrets'" parse error. Fix: copy every secret into a
     # job-level env var (env: at this level CAN read secrets), then check
     # env.X instead of secrets.X in every if: below — env IS allowed there.
     env:
       RELEASE_KEYSTORE_BASE64: ${{ secrets.RELEASE_KEYSTORE_BASE64 }}
+      KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+      KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+      KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -43,23 +46,75 @@ jobs:
           path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
 
+      # Safety net for a real release build: without this check, a missing
+      # secret used to make the old "if" guards simply SKIP the signed
+      # steps — the job still finished green, with no signed AAB/APK
+      # uploaded and no clear reason why. That's the worst possible
+      # failure mode right before shipping. Now the job stops here,
+      # loudly, and names exactly which secret is missing — instead of
+      # silently producing nothing, or (if only the keystore file were
+      # missing while the three passwords WERE set) an *unsigned* release
+      # build that Play Console would reject on upload anyway.
+      - name: Verify release signing secrets are configured
+        run: |
+          missing=""
+          [ -z "$RELEASE_KEYSTORE_BASE64" ] && missing="$missing RELEASE_KEYSTORE_BASE64"
+          [ -z "$KEY_STORE_PASSWORD" ] && missing="$missing KEY_STORE_PASSWORD"
+          [ -z "$KEY_ALIAS" ] && missing="$missing KEY_ALIAS"
+          [ -z "$KEY_PASSWORD" ] && missing="$missing KEY_PASSWORD"
+          if [ -n "$missing" ]; then
+            echo "::error::Release signing is not configured — missing repo secret(s):$missing"
+            echo "Add them under: Settings -> Secrets and variables -> Actions -> New repository secret."
+            echo "RELEASE_KEYSTORE_BASE64 must be the base64 of your .jks/.keystore file (see keystore_base64.txt)."
+            echo "KEY_STORE_PASSWORD / KEY_ALIAS / KEY_PASSWORD must match the values used when that keystore was created."
+            exit 1
+          fi
+          echo "All 4 release signing secrets are present — proceeding with a signed release build."
+
       - name: Decode release keystore
-        if: ${{ env.RELEASE_KEYSTORE_BASE64 != '' }}
         run: echo "$RELEASE_KEYSTORE_BASE64" | base64 -d > app/release.keystore
 
+      - name: Verify decoded keystore matches the signing credentials
+        # Fails fast, with a specific reason, instead of letting a wrong
+        # password/alias surface later as an opaque Gradle signing error
+        # deep in the bundleRelease/assembleRelease log.
+        run: |
+          keytool -list \
+            -keystore app/release.keystore \
+            -storepass "$KEY_STORE_PASSWORD" \
+            -alias "$KEY_ALIAS" \
+            -keypass "$KEY_PASSWORD" \
+            > /dev/null
+          echo "Keystore, store password, alias and key password all verified OK."
+
+      # Both outputs built in one invocation: bundleRelease -> .aab
+      # (Play Store upload format), assembleRelease -> .apk (direct
+      # install / sideload / QA). By this point release signing is
+      # guaranteed to be configured and verified, so both outputs are
+      # guaranteed to be signed, not just built.
       - name: Build signed release AAB + APK
-        if: ${{ env.RELEASE_KEYSTORE_BASE64 != '' }}
-        env:
-          KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        # Both outputs built in one invocation: bundleRelease -> .aab
-        # (Play Store upload format), assembleRelease -> .apk (direct
-        # install / sideload / QA).
         run: gradle bundleRelease assembleRelease --no-daemon --stacktrace --no-build-cache
 
+      - name: Confirm the release APK is actually signed
+        # Belt-and-suspenders: verifies the artifact itself carries a valid
+        # signature (via apksigner from the Android SDK build-tools that
+        # ships on the GitHub-hosted runner) rather than only trusting that
+        # the right Gradle inputs were present.
+        run: |
+          APK_PATH=$(find app/build/outputs/apk/release -name "*.apk" | head -n 1)
+          if [ -z "$APK_PATH" ]; then
+            echo "::error::No release APK found to verify."
+            exit 1
+          fi
+          SDK_ROOT="${ANDROID_HOME:-$ANDROID_SDK_ROOT}"
+          APKSIGNER=$(find "$SDK_ROOT/build-tools" -name apksigner | sort -V | tail -n 1)
+          if [ -z "$APKSIGNER" ]; then
+            echo "::error::apksigner not found under $SDK_ROOT/build-tools on this runner."
+            exit 1
+          fi
+          "$APKSIGNER" verify --print-certs "$APK_PATH"
+
       - name: Upload signed release AAB
-        if: ${{ env.RELEASE_KEYSTORE_BASE64 != '' }}
         uses: actions/upload-artifact@v4
         with:
           name: WayArs-release-aab
@@ -69,7 +124,6 @@ jobs:
           if-no-files-found: error
 
       - name: Upload signed release APK
-        if: ${{ env.RELEASE_KEYSTORE_BASE64 != '' }}
         uses: actions/upload-artifact@v4
         with:
           name: WayArs-release-apk

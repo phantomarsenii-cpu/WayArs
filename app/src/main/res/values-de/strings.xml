@@ -153,4 +153,7 @@
     <string name="paywall_footer_tagline">WayArs — dein Weg zu stabilem Einkommen</string>
     <string name="paywall_gate_error_title">Abo konnte nicht überprüft werden</string>
     <string name="paywall_gate_error_retry">Erneut versuchen</string>
+    <string name="paywall_tagline">INTELLIGENTER LIEFER- UND TAXI-ASSISTENT</string>
+    <string name="paywall_compat_label">Funktioniert zusammen mit den Apps, für die du bereits fährst</string>
+    <string name="paywall_mock_selected_toast">Plan „%1$s“ ausgewählt – Käufe sind nach der Veröffentlichung in Google Play verfügbar</string>
 </resources>

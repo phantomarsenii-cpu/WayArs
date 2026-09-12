@@ -13,3 +13,14 @@ local.properties
 # Release signing keystore is decoded from a CI secret at build time — it
 # must never be committed (see .github/workflows/build.yml).
 /app/release.keystore
+
+# The actual release keystore and its base64 dump must NEVER be committed
+# either — GitHub Actions gets the keystore from the RELEASE_KEYSTORE_BASE64
+# secret (see .github/workflows/build.yml), not from a file in the repo.
+# If you regenerate these locally with keytool, keep them OUTSIDE this repo
+# folder entirely so a stray `git add .` can't catch them.
+*.jks
+*.keystore
+!/app/debug.keystore
+keystore_base64.txt
+

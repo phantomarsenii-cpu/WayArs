@@ -153,4 +153,7 @@
     <string name="paywall_footer_tagline">WayArs — votre chemin vers un revenu stable</string>
     <string name="paywall_gate_error_title">Impossible de vérifier l\'abonnement</string>
     <string name="paywall_gate_error_retry">Réessayer</string>
+    <string name="paywall_tagline">ASSISTANT INTELLIGENT LIVRAISON ET TAXI</string>
+    <string name="paywall_compat_label">Fonctionne avec les applications que vous utilisez déjà</string>
+    <string name="paywall_mock_selected_toast">Forfait « %1$s » sélectionné — les achats seront disponibles après la publication sur Google Play</string>
 </resources>

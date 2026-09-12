@@ -1,5 +1,6 @@
 package com.wayars.app.presentation.ui.navigation
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,12 +14,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.wayars.app.R
 import com.wayars.app.domain.model.SubscriptionState
 import com.wayars.app.presentation.MainViewModel
+import com.wayars.app.presentation.PlanType
 import com.wayars.app.presentation.SubscriptionViewModel
 import com.wayars.app.presentation.ui.screen.onboarding.PresetSelectionScreen
 import com.wayars.app.presentation.ui.screen.paywall.PaywallScreen
@@ -108,6 +112,16 @@ fun WayArsNavHost(
                 val paywallState by subscriptionViewModel.paywallState.collectAsState()
                 val context = LocalContext.current
 
+                // Captured here (composable scope) rather than inside the
+                // click lambda below, since stringResource() can only be
+                // called from composable code.
+                val planTitles = mapOf(
+                    PlanType.YEARLY to stringResource(R.string.paywall_plan_yearly_title),
+                    PlanType.MONTHLY to stringResource(R.string.paywall_plan_monthly_title),
+                    PlanType.WEEKLY to stringResource(R.string.paywall_plan_weekly_title)
+                )
+                val mockSelectedToast = stringResource(R.string.paywall_mock_selected_toast)
+
                 // If a purchase/restore succeeds (or, e.g., the user's
                 // subscription was actually active all along and a retry
                 // just confirmed it), gateState flips to Subscribed on its
@@ -123,9 +137,25 @@ fun WayArsNavHost(
                 PaywallScreen(
                     state = paywallState,
                     onLoadOfferings = { subscriptionViewModel.loadOfferings() },
-                    onSelectPlan = { pkg ->
-                        context.findActivity()?.let { activity ->
-                            subscriptionViewModel.purchase(activity, pkg)
+                    onSelectPlan = { plan ->
+                        val rcPackage = plan.rcPackage
+                        if (rcPackage != null) {
+                            context.findActivity()?.let { activity ->
+                                subscriptionViewModel.purchase(activity, rcPackage)
+                            }
+                        } else {
+                            // Offline / offerings not loaded / product not
+                            // yet created in Play Console: no live Package
+                            // to purchase. Fall back to a local selection +
+                            // toast so the tap still visibly does something
+                            // instead of the button looking unresponsive.
+                            subscriptionViewModel.selectMockPlan(plan.plan)
+                            val planName = planTitles[plan.plan].orEmpty()
+                            Toast.makeText(
+                                context,
+                                String.format(mockSelectedToast, planName),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     },
                     onRestore = { subscriptionViewModel.restorePurchases() },
