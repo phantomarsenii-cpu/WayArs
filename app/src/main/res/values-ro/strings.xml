@@ -8,11 +8,11 @@
     <string name="onboarding_subtitle">Vom seta filtrele optime pentru tine</string>
     <string name="onboarding_customize_later">Personalizează mai târziu</string>
 
-    <string name="preset_economy_title">Economy</string>
+    <string name="preset_economy_title">Economic</string>
     <string name="preset_economy_desc">Cheltuieli reduse, venit moderat</string>
-    <string name="preset_balance_title">Balance</string>
+    <string name="preset_balance_title">Echilibrat</string>
     <string name="preset_balance_desc">Echilibru între timp și venit</string>
-    <string name="preset_profitable_title">Profitable Only</string>
+    <string name="preset_profitable_title">Doar profitabile</string>
     <string name="preset_profitable_desc">Doar comenzi profitabile</string>
 
     <string name="dashboard_today_summary">Rezumatul zilei</string>
@@ -88,4 +88,31 @@
     <string name="settings_about_content">"**WayArs**\nAsistentul tău personal pentru livrări și curse\n\nVersiune: %1$s\n\nWayArs este un instrument gratuit creat pentru șoferii și curierii care lucrează cu aplicații de transport și livrare.\n\nAplicația analizează automat datele de pe ecran și notificările, ajutându-te să evaluezi rapid rentabilitatea unei comenzi și să urmărești statisticile câștigurilor în timp real.\n\n**Concept și dezvoltare:** AP STUDIO\n**Contact și suport:** apstudiomobile@gmail.com\n\nToate mărcile comerciale, siglele și numele aplicațiilor terților (inclusiv, dar fără a se limita la, Bolt, Uber, Wolt, FreeNow, Stuart și altele adăugate de utilizator) aparțin proprietarilor respectivi și sunt folosite exclusiv în scopuri informative și de identificare."</string>
     <string name="settings_privacy_content">"**Politica de confidențialitate a aplicației WayArs**\nData ultimei actualizări: 12 septembrie 2026\n\n**Protecția confidențialității**\nRespectăm confidențialitatea ta. WayArs este proiectată conform principiului Privacy by Design — operațiunile esențiale de analiză a ecranului și de calcul al tarifelor se desfășoară local, pe dispozitivul tău.\n\n**Colectarea și utilizarea datelor**\n• Serviciul de accesibilitate (Accessibility Service): aplicația folosește acest acces exclusiv pentru a citi detaliile comenzii (de ex. sumă, distanță) afișate pe ecran în aplicațiile de livrare și transport acceptate (integrate sau adăugate de utilizator). Aplicația nu înregistrează parole, date personale sau apăsări de taste.\n• Notificări (Notification Listener): accesul la notificări este folosit doar pentru a detecta oferte noi de comenzi cât timp aplicația rulează în fundal.\n• Date despre vehicul și tarife: datele introduse în setări (consum de combustibil, preț combustibil, praguri de evaluare) sunt stocate exclusiv în memoria locală a dispozitivului.\n\n**Gestionarea abonamentelor și furnizori terți (plăți)**\nAplicația oferă funcții pe bază de abonament. Aplicația nu colectează și nu stochează date de plată detaliate (precum numerele cardurilor de credit). Pentru procesarea tranzacțiilor și verificarea valabilității abonamentului, folosim furnizori terți de încredere:\n• Google Play Billing (Google LLC): plățile și tranzacțiile sunt gestionate direct de magazinul Google Play.\n• RevenueCat, Inc.: verificarea stării abonamentului pe baza unor identificatori anonimi ai dispozitivului și tranzacției.\n\n**Protecția confidențialității copiilor**\nAplicația WayArs este destinată exclusiv persoanelor adulte, care au dreptul de a lucra ca șofer sau curier. Aplicația nu se adresează copiilor sub 16 ani și nu colectează sau prelucrează cu bună știință date personale de la copii. Dacă afli că un copil ne-a furnizat date, te rugăm să ne contactezi la apstudiomobile@gmail.com, pentru a putea lua măsurile potrivite cât mai curând.\n\n**Gestionarea permisiunilor și a abonamentului**\nPoți retrage oricând permisiunile acordate din setările sistemului Android sau poți gestiona și anula abonamentul direct din setările contului tău Google Play."</string>
     <string name="settings_terms_content">"**Regulamentul de utilizare a aplicației WayArs**\nData ultimei actualizări: 12 septembrie 2026\n\n**Prevederi generale**\nPrin utilizarea aplicației WayArs, accepți condițiile de mai jos. Aplicația este un instrument auxiliar independent, creat de AP STUDIO, și nu este în niciun fel afiliată oficial, sponsorizată sau aprobată de furnizorii terți de aplicații (precum Bolt, Uber, Wolt, FreeNow, Stuart sau oricare altele adăugate în listă de utilizator).\n\n**Caracterul auxiliar și aplicațiile terțe**\n• Aplicația are un scop exclusiv informativ și analitic. Indicatorii de rentabilitate (monedă/km, profit estimat) sunt calculați pe baza datelor introduse de utilizator și a citirilor de pe ecran.\n• Utilizatorul poate adăuga singur aplicații terțe acceptate. AP STUDIO nu garantează citirea corectă a datelor din aplicațiile adăugate manual de utilizator.\n\n**Vârsta utilizatorului**\nAplicația poate fi folosită doar de persoane care au împlinit 18 ani (sau vârsta necesară pentru a presta servicii de transport/curierat în țara respectivă). Aplicația nu este destinată copiilor.\n\n**Abonamente și plăți**\n• Plățile pentru abonament sunt colectate de magazinul Google Play, conform planului tarifar ales.\n• Utilizatorul poate anula oricând reînnoirea abonamentului din setările contului său Google Play.\n• Rambursările se efectuează conform regulilor și politicii magazinului Google Play.\n\n**Limitarea răspunderii**\n• AP STUDIO nu răspunde pentru eventualele discrepanțe din calcule rezultate din citirea greșită a ecranului sau din actualizări ori modificări ale interfeței aplicațiilor terțe.\n• AP STUDIO nu răspunde pentru deciziile financiare, comerciale sau rutiere luate de utilizator pe baza indicatorilor aplicației.\n• Utilizatorul este obligat să folosească telefonul în siguranță și să respecte cu strictețe regulile de circulație în timpul condusului.\n\n**Contact**\nOrice întrebări, observații sau raportări de erori trebuie trimise la adresa: apstudiomobile@gmail.com."</string>
+    <string name="dashboard_share_log">Trimite jurnalul de scanare</string>
+    <string name="settings_add">Adaugă</string>
+    <string name="settings_add_from_installed">Alege dintre cele instalate</string>
+    <string name="settings_add_manually">Introdu ID-ul pachetului</string>
+    <string name="settings_already_added">deja adăugat</string>
+    <string name="settings_calibrate_action">Editează calibrarea</string>
+    <string name="settings_calibrated">Calibrat ✓</string>
+    <string name="settings_calibration_clear">Șterge calibrarea</string>
+    <string name="settings_calibration_distance_token_label">Unitate de distanță (editează dacă e necesar)</string>
+    <string name="settings_calibration_instructions">Mai jos este textul pe care WayArs l-a citit ultima dată de pe ecranul acestei aplicații. Atinge linia cu prețul, apoi distanța, apoi timpul.</string>
+    <string name="settings_calibration_money_token_label">Simbol valută (editează dacă e necesar)</string>
+    <string name="settings_calibration_no_data">Încă nu există date de scanare pentru această aplicație. Deschide-o pe ecranul unei comenzi reale, active, așteaptă câteva secunde, apoi redeschide acest dialog.</string>
+    <string name="settings_calibration_role_distance">Distanță</string>
+    <string name="settings_calibration_role_money">Preț</string>
+    <string name="settings_calibration_role_time">Timp</string>
+    <string name="settings_calibration_time_token_label">Unitate de timp (editează dacă e necesar)</string>
+    <string name="settings_calibration_title">Calibrează această aplicație</string>
+    <string name="settings_cancel">Anulează</string>
+    <string name="settings_no_apps_found">Nu s-au găsit aplicații</string>
+    <string name="settings_not_calibrated">Necalibrat</string>
+    <string name="settings_package_id_label">ID pachet (ex. com.example.app)</string>
+    <string name="settings_pick_installed_app_title">Alege o aplicație</string>
+    <string name="settings_search_apps_label">Caută</string>
+    <string name="settings_supported_apps_builtin_label">Incluse:</string>
+    <string name="settings_supported_apps_custom_label">Adăugate de tine:</string>
+    <string name="settings_supported_apps_hint">Listă inclusă + aplicații adăugate de tine</string>
+    <string name="settings_supported_apps_title">Aplicații acceptate</string>
 </resources>

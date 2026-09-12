@@ -8,11 +8,11 @@
     <string name="onboarding_subtitle">Мы настроим оптимальные фильтры за вас</string>
     <string name="onboarding_customize_later">Настроить позже</string>
 
-    <string name="preset_economy_title">Economy</string>
+    <string name="preset_economy_title">Эконом</string>
     <string name="preset_economy_desc">Низкие расходы, умеренный доход</string>
-    <string name="preset_balance_title">Balance</string>
+    <string name="preset_balance_title">Баланс</string>
     <string name="preset_balance_desc">Баланс времени и дохода</string>
-    <string name="preset_profitable_title">Profitable Only</string>
+    <string name="preset_profitable_title">Только выгодные</string>
     <string name="preset_profitable_desc">Только выгодные заказы</string>
 
     <string name="dashboard_today_summary">Сводка за сегодня</string>
