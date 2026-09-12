@@ -11,9 +11,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -194,14 +197,18 @@ fun PaywallScreen(
 
         Spacer(Modifier.height(20.dp))
 
-        // Two-column "bento" grid matching the design: Yearly + Weekly
+        // Two-column "bento" grid matching the reference: Yearly + Weekly
         // stacked on the left, the featured Monthly card on the right.
-        // Columns share width via weight(1f); each card sizes to its own
-        // content rather than being forced to an exact matching height,
-        // since translated copy varies in length across the 7 supported
-        // languages and a hard height match would risk clipped text.
+        // IntrinsicSize.Min on the Row lets the right (Monthly) column stretch
+        // to match the combined height of the left column's two stacked cards
+        // (Yearly + gap + Weekly) — the reference's
+        // [ YEARLY ][ MONTHLY, tall ]
+        // [ WEEKLY ][           ]
+        // bento composition, not three independently-sized cards.
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(IntrinsicSize.Min),
             horizontalArrangement = Arrangement.spacedBy(14.dp)
         ) {
             val yearly = state.plans.find { it.plan == PlanType.YEARLY }
@@ -209,7 +216,9 @@ fun PaywallScreen(
             val weekly = state.plans.find { it.plan == PlanType.WEEKLY }
 
             Column(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight(),
                 verticalArrangement = Arrangement.spacedBy(14.dp)
             ) {
                 yearly?.let {
@@ -217,7 +226,8 @@ fun PaywallScreen(
                         plan = it,
                         isPurchasing = state.isPurchasing,
                         isMockSelected = state.selectedMockPlan == it.plan,
-                        onSelect = onSelectPlan
+                        onSelect = onSelectPlan,
+                        modifier = Modifier.weight(1f)
                     )
                 }
                 weekly?.let {
@@ -225,19 +235,26 @@ fun PaywallScreen(
                         plan = it,
                         isPurchasing = state.isPurchasing,
                         isMockSelected = state.selectedMockPlan == it.plan,
-                        onSelect = onSelectPlan
+                        onSelect = onSelectPlan,
+                        modifier = Modifier.weight(1f)
                     )
                 }
             }
 
-            Column(modifier = Modifier.weight(1f)) {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+            ) {
                 monthly?.let {
                     PlanCard(
                         plan = it,
                         isPurchasing = state.isPurchasing,
                         isMockSelected = state.selectedMockPlan == it.plan,
                         onSelect = onSelectPlan,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight()
                     )
                 }
             }
@@ -663,10 +680,11 @@ private fun PlanCard(
     val borderColor = if (isMockSelected) WaNeonGreen else accent.borderColor
     val borderWidth = if (isMockSelected) 2.5.dp else if (isFeatured) 1.5.dp else 1.dp
 
-    Box(modifier = modifier.fillMaxWidth()) {
+    Box(modifier = modifier.fillMaxWidth().fillMaxHeight()) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
+                .fillMaxHeight()
                 .then(if (isFeatured) Modifier.padding(top = 16.dp) else Modifier)
                 // Shadow MUST come before clip/background: elevation shadows
                 // are drawn outside the layout bounds, so clipping first
@@ -684,6 +702,7 @@ private fun PlanCard(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .fillMaxHeight()
                     .padding(18.dp)
             ) {
                 CalendarCrownIcon(tint = accent.iconTint, size = 24.dp)
@@ -761,7 +780,11 @@ private fun PlanCard(
                     }
                 }
 
-                Spacer(Modifier.height(16.dp))
+                // Flexible: absorbs whatever extra height this card was
+                // stretched to (see the height-matching Row in
+                // PaywallScreen), anchoring the CTA to the card's bottom
+                // edge in every column instead of leaving a fixed gap.
+                Spacer(Modifier.weight(1f).heightIn(min = 16.dp))
 
                 val purchasingThis = isPurchasing && plan.rcPackage != null
                 when (plan.plan) {
