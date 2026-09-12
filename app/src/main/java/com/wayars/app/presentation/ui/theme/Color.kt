@@ -16,3 +16,16 @@ val WaWeeklyCard = Color(0xFF141B2A)
 val WaWeeklyBorder = Color(0xFF2B3A55)
 val WaTextPrimary = Color(0xFFFFFFFF)
 val WaTextSecondary = Color(0xFF9CA3AF)
+
+// Hero illustration (paywall header) + partner-platform tag colors.
+// These are plain colored text tags, not recreations of partner logos/wordmarks.
+val WaHeroPhoneTop = Color(0xFF141B2E)
+val WaHeroPhoneBottom = Color(0xFF03050A)
+val WaHeroFrame = Color(0xFF2A3A55)
+val WaTagBolt = Color(0xFF34D399)
+val WaTagBoltDark = Color(0xFF0F6B4C)
+val WaTagUber = Color(0xFF161B26)
+val WaTagWolt = Color(0xFF29B6C8)
+val WaTagWoltDark = Color(0xFF0E7C93)
+val WaTagStuart = Color(0xFF1E2A44)
+val WaTagFreeNow = Color(0xFFDB3439)

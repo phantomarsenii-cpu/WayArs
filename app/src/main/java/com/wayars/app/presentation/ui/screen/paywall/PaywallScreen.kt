@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -23,14 +25,15 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Bolt
-import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.LocalShipping
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Public
 import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.ShowChart
 import androidx.compose.material.icons.filled.Storefront
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -40,9 +43,15 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -58,31 +67,42 @@ import com.wayars.app.presentation.PaywallUiState
 import com.wayars.app.presentation.PlanOption
 import com.wayars.app.presentation.PlanType
 import com.wayars.app.presentation.ui.theme.WaBackground
+import com.wayars.app.presentation.ui.theme.WaHeroPhoneBottom
+import com.wayars.app.presentation.ui.theme.WaHeroPhoneTop
 import com.wayars.app.presentation.ui.theme.WaNeonGreen
 import com.wayars.app.presentation.ui.theme.WaNeonGreenDark
 import com.wayars.app.presentation.ui.theme.WaPurple
 import com.wayars.app.presentation.ui.theme.WaPurpleLight
 import com.wayars.app.presentation.ui.theme.WaSurface
 import com.wayars.app.presentation.ui.theme.WaSurfaceVariant
+import com.wayars.app.presentation.ui.theme.WaTagBolt
+import com.wayars.app.presentation.ui.theme.WaTagBoltDark
+import com.wayars.app.presentation.ui.theme.WaTagFreeNow
+import com.wayars.app.presentation.ui.theme.WaTagStuart
+import com.wayars.app.presentation.ui.theme.WaTagUber
+import com.wayars.app.presentation.ui.theme.WaTagWolt
+import com.wayars.app.presentation.ui.theme.WaTagWoltDark
 import com.wayars.app.presentation.ui.theme.WaTextPrimary
 import com.wayars.app.presentation.ui.theme.WaTextSecondary
 import com.wayars.app.presentation.ui.theme.WaWeeklyBorder
 import com.wayars.app.presentation.ui.theme.WaWeeklyCard
 
 /**
- * Static per-plan copy (title, "days of access" subtitle, badges, period
- * suffix). This is marketing/layout content, not pricing — pricing always
- * comes from [PlanOption.priceText], which is either the live RevenueCat
- * [Package.product.price.formatted] or the hardcoded fallback in
- * [com.wayars.app.presentation.MockPlans] (see [SubscriptionViewModel]).
- * That keeps what's shown always consistent with what Google Play will
- * actually charge once real offerings load, while guaranteeing the layout
- * never has a missing/blank card.
+ * Static per-plan copy (title, "days of access" subtitle, discount/trial
+ * badge, period suffix). This is marketing/layout content, not pricing —
+ * pricing always comes from [PlanOption.priceText], which is either the
+ * live RevenueCat [Package.product.price.formatted] or the hardcoded
+ * fallback in [com.wayars.app.presentation.MockPlans] (see
+ * [SubscriptionViewModel]). That keeps what's shown always consistent
+ * with what Google Play will actually charge once real offerings load,
+ * while guaranteeing the layout never has a missing/blank card.
  */
 private data class PlanCopy(
     val title: String,
     val daysLabel: String,
-    val badges: List<Pair<String, Color>>,
+    val discountLabel: String?,
+    val discountColor: Color,
+    val trialLabel: String,
     val periodSuffix: String
 )
 
@@ -91,27 +111,25 @@ private fun planCopyFor(plan: PlanType): PlanCopy = when (plan) {
     PlanType.YEARLY -> PlanCopy(
         title = stringResource(R.string.paywall_plan_yearly_title),
         daysLabel = stringResource(R.string.paywall_plan_yearly_days),
-        badges = listOf(
-            "-30%" to WaPurpleLight,
-            stringResource(R.string.paywall_badge_trial7) to WaTextSecondary
-        ),
+        discountLabel = "-30%",
+        discountColor = WaPurpleLight,
+        trialLabel = stringResource(R.string.paywall_badge_trial7),
         periodSuffix = stringResource(R.string.paywall_period_year)
     )
     PlanType.MONTHLY -> PlanCopy(
         title = stringResource(R.string.paywall_plan_monthly_title),
         daysLabel = stringResource(R.string.paywall_plan_monthly_days),
-        badges = listOf(
-            "-15%" to WaNeonGreen,
-            stringResource(R.string.paywall_badge_trial7) to WaTextSecondary
-        ),
+        discountLabel = "-15%",
+        discountColor = WaNeonGreen,
+        trialLabel = stringResource(R.string.paywall_badge_trial7),
         periodSuffix = stringResource(R.string.paywall_period_month)
     )
     PlanType.WEEKLY -> PlanCopy(
         title = stringResource(R.string.paywall_plan_weekly_title),
         daysLabel = stringResource(R.string.paywall_plan_weekly_days),
-        badges = listOf(
-            stringResource(R.string.paywall_badge_trial7) to WaTextSecondary
-        ),
+        discountLabel = null,
+        discountColor = Color.Transparent,
+        trialLabel = stringResource(R.string.paywall_badge_trial7),
         periodSuffix = stringResource(R.string.paywall_period_week)
     )
 }
@@ -123,15 +141,6 @@ private fun planFeatures(): List<String> = listOf(
     stringResource(R.string.paywall_feature_realtime),
     stringResource(R.string.paywall_feature_languages)
 )
-
-/**
- * Partner platforms this app's data sources are compatible with. Rendered
- * as plain neutral-colored text chips — deliberately NOT recreations of
- * each brand's logo/wordmark styling, to avoid impersonating third-party
- * trademarks. Naming a compatible service in your own app's UI as plain
- * text is standard practice; redrawing their logo artwork is not.
- */
-private val compatiblePlatforms = listOf("Uber", "Bolt", "Wolt", "Stuart", "Free Now")
 
 @Composable
 fun PaywallScreen(
@@ -150,7 +159,7 @@ fun PaywallScreen(
             .fillMaxSize()
             .background(WaBackground)
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 20.dp, vertical = 24.dp)
+            .padding(horizontal = 18.dp, vertical = 22.dp)
     ) {
         gateErrorMessage?.let { message ->
             GateErrorBanner(message = message, onRetry = onRetryGateCheck)
@@ -159,22 +168,22 @@ fun PaywallScreen(
 
         Header()
 
-        Spacer(Modifier.height(28.dp))
+        Spacer(Modifier.height(22.dp))
 
         Text(
             stringResource(R.string.paywall_section_eyebrow),
             color = WaNeonGreen,
             fontSize = 12.sp,
-            fontWeight = FontWeight.SemiBold,
-            letterSpacing = 1.sp
+            fontWeight = FontWeight.Bold,
+            letterSpacing = 1.2.sp
         )
         Spacer(Modifier.height(6.dp))
         Text(
             stringResource(R.string.paywall_section_title),
             color = WaTextPrimary,
-            fontSize = 24.sp,
+            fontSize = 23.sp,
             fontWeight = FontWeight.Bold,
-            lineHeight = 30.sp
+            lineHeight = 28.sp
         )
         Spacer(Modifier.height(4.dp))
         Text(
@@ -297,10 +306,10 @@ private fun GateErrorBanner(message: String, onRetry: () -> Unit) {
 
 /**
  * Brand header: icon + "WayArs" wordmark + tagline, the "full access" pill,
- * the two-tone headline, subtitle, the 4 feature chips and — matching the
- * approved layout — a row naming the delivery/taxi platforms this app's
- * data sources are compatible with (see [compatiblePlatforms] for why this
- * is plain text rather than redrawn third-party logos).
+ * the two-tone headline and subtitle sitting alongside the hero
+ * illustration (phone mock-up + floating partner-platform tags), the 4
+ * feature chips row, and a hairline divider that closes the hero block —
+ * matching the approved design.
  */
 @Composable
 private fun Header() {
@@ -330,93 +339,256 @@ private fun Header() {
 
         Spacer(Modifier.height(18.dp))
 
-        Box(
-            modifier = Modifier
-                .clip(RoundedCornerShape(50))
-                .border(BorderStroke(1.dp, WaNeonGreen.copy(alpha = 0.5f)), RoundedCornerShape(50))
-                .padding(horizontal = 14.dp, vertical = 6.dp)
-        ) {
-            Text(stringResource(R.string.paywall_badge_full_access), color = WaNeonGreen, fontSize = 12.sp)
-        }
-        Spacer(Modifier.height(12.dp))
-        Column {
-            val titleLines = stringResource(R.string.paywall_title).split("\n")
-            Text(
-                titleLines.getOrElse(0) { "" },
-                color = WaTextPrimary,
-                fontSize = 28.sp,
-                fontWeight = FontWeight.Bold,
-                lineHeight = 34.sp
-            )
-            if (titleLines.size > 1) {
-                Text(
-                    titleLines[1],
-                    style = TextStyle(
-                        brush = Brush.horizontalGradient(listOf(WaNeonGreen, Color(0xFF22D3EE))),
-                        fontSize = 28.sp,
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Column(modifier = Modifier.weight(1f)) {
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(50))
+                        .border(BorderStroke(1.dp, WaNeonGreen.copy(alpha = 0.5f)), RoundedCornerShape(50))
+                        .padding(horizontal = 14.dp, vertical = 6.dp)
+                ) {
+                    Text(stringResource(R.string.paywall_badge_full_access), color = WaNeonGreen, fontSize = 11.sp)
+                }
+                Spacer(Modifier.height(12.dp))
+                Column {
+                    val titleLines = stringResource(R.string.paywall_title).split("\n")
+                    Text(
+                        titleLines.getOrElse(0) { "" },
+                        color = WaTextPrimary,
+                        fontSize = 23.sp,
                         fontWeight = FontWeight.Bold,
-                        lineHeight = 34.sp
+                        lineHeight = 28.sp
                     )
+                    if (titleLines.size > 1) {
+                        Text(
+                            titleLines[1],
+                            style = TextStyle(
+                                brush = Brush.horizontalGradient(listOf(WaNeonGreen, Color(0xFF22D3EE))),
+                                fontSize = 23.sp,
+                                fontWeight = FontWeight.Bold,
+                                lineHeight = 28.sp
+                            )
+                        )
+                    }
+                }
+                Spacer(Modifier.height(10.dp))
+                Text(
+                    stringResource(R.string.paywall_subtitle),
+                    color = WaTextSecondary,
+                    fontSize = 12.5.sp,
+                    lineHeight = 17.sp
                 )
             }
+            Spacer(Modifier.width(6.dp))
+            HeroIllustration(modifier = Modifier.width(126.dp).height(178.dp))
         }
-        Spacer(Modifier.height(10.dp))
-        Text(
-            stringResource(R.string.paywall_subtitle),
-            color = WaTextSecondary,
-            fontSize = 14.sp,
-            lineHeight = 20.sp
-        )
-        Spacer(Modifier.height(16.dp))
+
+        Spacer(Modifier.height(18.dp))
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            FeatureChip(Icons.Filled.Bolt, stringResource(R.string.paywall_chip_analysis))
-            FeatureChip(Icons.Filled.Shield, stringResource(R.string.paywall_chip_filters))
-            FeatureChip(Icons.Filled.ShowChart, stringResource(R.string.paywall_chip_income))
-            FeatureChip(Icons.Filled.Public, stringResource(R.string.paywall_chip_languages))
+            FeatureChip(Icons.Filled.Bolt, stringResource(R.string.paywall_chip_analysis), Modifier.weight(1f))
+            FeatureChip(Icons.Filled.Shield, stringResource(R.string.paywall_chip_filters), Modifier.weight(1f))
+            FeatureChip(Icons.Filled.ShowChart, stringResource(R.string.paywall_chip_income), Modifier.weight(1f))
+            FeatureChip(Icons.Filled.Public, stringResource(R.string.paywall_chip_languages), Modifier.weight(1f))
         }
 
-        Spacer(Modifier.height(16.dp))
-        Text(
-            stringResource(R.string.paywall_compat_label),
-            color = WaTextSecondary,
-            fontSize = 11.sp
+        Spacer(Modifier.height(20.dp))
+        Divider(color = WaSurfaceVariant.copy(alpha = 0.7f), thickness = 1.dp)
+    }
+}
+
+/**
+ * Stylized "phone + partner platforms" hero graphic, matching the
+ * approved design's composition: the app icon centered on a phone-shaped
+ * card with a glowing route line, surrounded by floating tags naming the
+ * delivery/taxi platforms this app's data sources are compatible with.
+ *
+ * The platform tags are plain colored text labels — deliberately NOT
+ * recreations of each brand's logo/wordmark artwork, to avoid
+ * impersonating third-party trademarks. Naming a compatible service in
+ * your own app's UI as plain text is standard practice; redrawing their
+ * logo artwork is not.
+ */
+@Composable
+private fun HeroIllustration(modifier: Modifier = Modifier) {
+    Box(modifier = modifier) {
+        // Ambient glow behind the phone.
+        Box(
+            modifier = Modifier
+                .align(Alignment.Center)
+                .size(110.dp)
+                .background(
+                    Brush.radialGradient(
+                        listOf(WaNeonGreen.copy(alpha = 0.28f), Color.Transparent)
+                    )
+                )
         )
-        Spacer(Modifier.height(8.dp))
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            compatiblePlatforms.take(3).forEach { PlatformChip(it) }
+
+        // Phone frame.
+        Box(
+            modifier = Modifier
+                .align(Alignment.Center)
+                .width(72.dp)
+                .height(150.dp)
+                .shadow(
+                    elevation = 14.dp,
+                    shape = RoundedCornerShape(20.dp),
+                    ambientColor = WaNeonGreen.copy(alpha = 0.5f),
+                    spotColor = WaNeonGreen.copy(alpha = 0.5f)
+                )
+                .clip(RoundedCornerShape(20.dp))
+                .background(Brush.verticalGradient(listOf(WaHeroPhoneTop, WaHeroPhoneBottom)))
+                .border(
+                    BorderStroke(1.5.dp, Brush.verticalGradient(listOf(WaNeonGreen, WaPurple))),
+                    RoundedCornerShape(20.dp)
+                )
+        ) {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .padding(top = 6.dp)
+                    .width(22.dp)
+                    .height(5.dp)
+                    .clip(RoundedCornerShape(50))
+                    .background(Color.Black)
+            )
+            Image(
+                painter = painterResource(R.drawable.wayars_icon_header),
+                contentDescription = null,
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .offset(y = (-8).dp)
+                    .size(34.dp)
+            )
+            RouteGlyph(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 14.dp)
+                    .size(width = 46.dp, height = 26.dp)
+            )
         }
-        Spacer(Modifier.height(8.dp))
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            compatiblePlatforms.drop(3).forEach { PlatformChip(it) }
+
+        PlatformTag(
+            "Bolt",
+            Brush.horizontalGradient(listOf(WaTagBoltDark, WaTagBolt)),
+            Color(0xFF04240F),
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .offset(x = (-4).dp, y = 8.dp)
+                .rotate(-7f)
+        )
+        PlatformTag(
+            "Uber",
+            Brush.horizontalGradient(listOf(WaTagUber, WaTagUber)),
+            WaTextPrimary,
+            modifier = Modifier
+                .align(Alignment.CenterStart)
+                .offset(x = (-10).dp, y = 4.dp)
+                .rotate(-3f)
+        )
+        PlatformTag(
+            "Wolt",
+            Brush.horizontalGradient(listOf(WaTagWoltDark, WaTagWolt)),
+            WaTextPrimary,
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .offset(x = 6.dp, y = 14.dp)
+                .rotate(6f)
+        )
+        PlatformTag(
+            "Stuart",
+            Brush.horizontalGradient(listOf(WaTagStuart, WaTagStuart)),
+            WaTextPrimary,
+            icon = Icons.Filled.LocalShipping,
+            modifier = Modifier
+                .align(Alignment.CenterEnd)
+                .offset(x = 10.dp, y = 30.dp)
+        )
+        PlatformTag(
+            "Free Now",
+            Brush.horizontalGradient(listOf(WaTagFreeNow, WaTagFreeNow)),
+            WaTextPrimary,
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .offset(x = 4.dp, y = (-2).dp)
+                .rotate(-4f)
+        )
+    }
+}
+
+/** Small glowing dashed route line with a pin, drawn inside the hero phone. */
+@Composable
+private fun RouteGlyph(modifier: Modifier = Modifier) {
+    Canvas(modifier = modifier) {
+        val path = Path().apply {
+            moveTo(2f, size.height * 0.85f)
+            cubicTo(
+                size.width * 0.25f, size.height * 0.9f,
+                size.width * 0.3f, size.height * 0.15f,
+                size.width * 0.55f, size.height * 0.35f
+            )
+            cubicTo(
+                size.width * 0.75f, size.height * 0.5f,
+                size.width * 0.8f, size.height * 0.1f,
+                size.width - 2f, size.height * 0.2f
+            )
         }
+        drawPath(
+            path,
+            color = WaNeonGreen,
+            style = Stroke(width = size.height * 0.09f, pathEffect = androidx.compose.ui.graphics.PathEffect.dashPathEffect(floatArrayOf(size.height * 0.22f, size.height * 0.16f)))
+        )
+        drawCircle(color = WaNeonGreen, radius = size.height * 0.11f, center = Offset(size.width - 2f, size.height * 0.2f))
+    }
+}
+
+/** A floating "compatible platform" tag used in [HeroIllustration]. Plain text, no logo artwork. */
+@Composable
+private fun PlatformTag(
+    name: String,
+    brush: Brush,
+    textColor: Color,
+    modifier: Modifier = Modifier,
+    icon: ImageVector? = null
+) {
+    Row(
+        modifier = modifier
+            .shadow(elevation = 6.dp, shape = RoundedCornerShape(9.dp))
+            .clip(RoundedCornerShape(9.dp))
+            .background(brush)
+            .padding(horizontal = 8.dp, vertical = 5.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        icon?.let {
+            Icon(it, contentDescription = null, tint = textColor, modifier = Modifier.size(11.dp))
+            Spacer(Modifier.width(3.dp))
+        }
+        Text(name, color = textColor, fontSize = 10.sp, fontWeight = FontWeight.Bold)
     }
 }
 
 @Composable
-private fun PlatformChip(name: String) {
-    Box(
-        modifier = Modifier
-            .wrapContentWidth()
-            .clip(RoundedCornerShape(10.dp))
-            .background(WaSurfaceVariant)
-            .padding(horizontal = 12.dp, vertical = 7.dp)
-    ) {
-        Text(name, color = WaTextPrimary, fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
-    }
-}
-
-@Composable
-private fun FeatureChip(icon: ImageVector, label: String) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.width(70.dp)
-    ) {
-        Icon(icon, contentDescription = null, tint = WaNeonGreen, modifier = Modifier.size(18.dp))
-        Spacer(Modifier.height(4.dp))
-        Text(label, color = WaTextSecondary, fontSize = 10.sp, lineHeight = 12.sp, textAlign = TextAlign.Center)
+private fun FeatureChip(icon: ImageVector, label: String, modifier: Modifier = Modifier) {
+    Row(verticalAlignment = Alignment.CenterVertically, modifier = modifier) {
+        Box(
+            modifier = Modifier
+                .size(30.dp)
+                .clip(RoundedCornerShape(9.dp))
+                .border(BorderStroke(1.dp, WaNeonGreen.copy(alpha = 0.55f)), RoundedCornerShape(9.dp)),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(icon, contentDescription = null, tint = WaNeonGreen, modifier = Modifier.size(15.dp))
+        }
+        Spacer(Modifier.width(6.dp))
+        Text(
+            label,
+            color = WaTextSecondary,
+            fontSize = 9.5.sp,
+            lineHeight = 11.sp,
+            maxLines = 2
+        )
     }
 }
 
@@ -426,11 +598,11 @@ private fun FeatureChip(icon: ImageVector, label: String) {
  * 26) the color is ignored by the platform and a plain neutral shadow is
  * drawn instead — a harmless, expected degrade, not a crash risk.
  */
-private fun Modifier.androidxShadowGlow(color: Color): Modifier = this.shadow(
-    elevation = 18.dp,
-    shape = RoundedCornerShape(20.dp),
-    ambientColor = color.copy(alpha = 0.55f),
-    spotColor = color.copy(alpha = 0.55f)
+private fun Modifier.androidxShadowGlow(color: Color, shape: RoundedCornerShape): Modifier = this.shadow(
+    elevation = 20.dp,
+    shape = shape,
+    ambientColor = color.copy(alpha = 0.6f),
+    spotColor = color.copy(alpha = 0.6f)
 )
 
 /** Visual accent per plan: border/glow color, card background and button style. */
@@ -474,6 +646,7 @@ private fun PlanCard(
     val copy = planCopyFor(plan.plan)
     val isFeatured = plan.plan == PlanType.MONTHLY
     val accent = accentFor(plan.plan)
+    val cardShape = RoundedCornerShape(24.dp)
 
     // Purchases stay disabled mid-flight, but the card is ALWAYS clickable
     // otherwise — even before real RevenueCat offerings have loaded (or
@@ -483,30 +656,29 @@ private fun PlanCard(
     // the UI never feels "dead".
     val clickEnabled = !isPurchasing
 
+    // A selected card always lights up with the same vivid green frame,
+    // regardless of its own accent color (purple/green/gray) — matching
+    // the approved design's selection state.
+    val glowColor = if (isMockSelected) WaNeonGreen else accent.glowColor
+    val borderColor = if (isMockSelected) WaNeonGreen else accent.borderColor
+    val borderWidth = if (isMockSelected) 2.5.dp else if (isFeatured) 1.5.dp else 1.dp
+
     Box(modifier = modifier.fillMaxWidth()) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .then(if (isFeatured) Modifier.padding(top = 14.dp) else Modifier)
+                .then(if (isFeatured) Modifier.padding(top = 16.dp) else Modifier)
                 // Shadow MUST come before clip/background: elevation shadows
                 // are drawn outside the layout bounds, so clipping first
                 // would cut the glow off entirely.
                 .then(
-                    if (accent.glowColor != Color.Transparent) {
-                        Modifier.androidxShadowGlow(accent.glowColor)
+                    if (glowColor != Color.Transparent) {
+                        Modifier.androidxShadowGlow(glowColor, cardShape)
                     } else Modifier
                 )
-                .clip(RoundedCornerShape(20.dp))
+                .clip(cardShape)
                 .background(accent.cardBrush)
-                .border(
-                    BorderStroke(if (isFeatured) 1.5.dp else 1.dp, accent.borderColor),
-                    RoundedCornerShape(20.dp)
-                )
-                .then(
-                    if (isMockSelected) {
-                        Modifier.border(BorderStroke(2.dp, WaTextPrimary.copy(alpha = 0.6f)), RoundedCornerShape(20.dp))
-                    } else Modifier
-                )
+                .border(BorderStroke(borderWidth, borderColor), cardShape)
                 .clickable(enabled = clickEnabled) { onSelect(plan) }
         ) {
             Column(
@@ -514,29 +686,42 @@ private fun PlanCard(
                     .fillMaxWidth()
                     .padding(18.dp)
             ) {
-                Icon(
-                    Icons.Filled.CalendarMonth,
-                    contentDescription = null,
-                    tint = accent.iconTint,
-                    modifier = Modifier.size(22.dp)
-                )
+                CalendarCrownIcon(tint = accent.iconTint, size = 24.dp)
                 Spacer(Modifier.height(8.dp))
                 Text(copy.title, color = WaTextPrimary, fontSize = 17.sp, fontWeight = FontWeight.SemiBold)
                 Spacer(Modifier.height(2.dp))
                 Text(copy.daysLabel, color = WaTextSecondary, fontSize = 11.sp)
 
-                Spacer(Modifier.height(10.dp))
-                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                    copy.badges.forEach { (label, color) ->
+                Spacer(Modifier.height(12.dp))
+                if (copy.discountLabel != null) {
+                    Row(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(50))
+                            .border(BorderStroke(1.dp, accent.borderColor.copy(alpha = 0.5f)), RoundedCornerShape(50))
+                            .padding(3.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
                         Box(
                             modifier = Modifier
-                                .clip(RoundedCornerShape(8.dp))
-                                .background(color.copy(alpha = 0.18f))
-                                .padding(horizontal = 8.dp, vertical = 4.dp)
+                                .clip(RoundedCornerShape(50))
+                                .background(
+                                    Brush.horizontalGradient(
+                                        listOf(copy.discountColor, copy.discountColor.copy(alpha = 0.65f))
+                                    )
+                                )
+                                .padding(horizontal = 12.dp, vertical = 6.dp)
                         ) {
-                            Text(label, color = color, fontSize = 10.sp, fontWeight = FontWeight.SemiBold)
+                            Text(copy.discountLabel, color = Color(0xFF04140C), fontSize = 12.sp, fontWeight = FontWeight.Bold)
                         }
+                        Text(
+                            copy.trialLabel,
+                            color = WaTextSecondary,
+                            fontSize = 11.sp,
+                            modifier = Modifier.padding(horizontal = 10.dp)
+                        )
                     }
+                } else {
+                    Text(copy.trialLabel, color = accent.iconTint, fontSize = 13.sp, fontWeight = FontWeight.Medium)
                 }
 
                 Spacer(Modifier.height(12.dp))
@@ -616,17 +801,64 @@ private fun PlanCard(
                     .align(Alignment.TopCenter)
                     .zIndex(1f)
                     .clip(RoundedCornerShape(50))
-                    .background(WaNeonGreen)
-                    .padding(horizontal = 14.dp, vertical = 5.dp)
+                    .background(Brush.horizontalGradient(listOf(WaNeonGreen, Color(0xFF22D3EE))))
+                    .padding(horizontal = 20.dp, vertical = 9.dp)
             ) {
                 Text(
                     stringResource(R.string.paywall_badge_popular),
                     color = Color(0xFF04140C),
-                    fontSize = 11.sp,
+                    fontSize = 13.sp,
                     fontWeight = FontWeight.Bold
                 )
             }
         }
+    }
+}
+
+/**
+ * Custom "calendar with a crown" glyph matching the approved design's plan
+ * icon (a plain calendar icon reads as generic; the crown communicates
+ * "premium access"). Drawn with [Canvas] rather than a bitmap asset so it
+ * scales cleanly and re-tints per plan accent color.
+ */
+@Composable
+private fun CalendarCrownIcon(tint: Color, size: androidx.compose.ui.unit.Dp) {
+    Canvas(modifier = Modifier.size(size)) {
+        val w = this.size.width
+        val h = this.size.height
+        val stroke = w * 0.09f
+
+        // Calendar body.
+        drawRoundRect(
+            color = tint,
+            topLeft = Offset(0f, h * 0.22f),
+            size = Size(w, h * 0.74f),
+            cornerRadius = CornerRadius(w * 0.16f, w * 0.16f),
+            style = Stroke(width = stroke)
+        )
+        // Binder rings.
+        val ringXs = listOf(w * 0.28f, w * 0.5f, w * 0.72f)
+        ringXs.forEach { x ->
+            drawLine(
+                color = tint,
+                start = Offset(x, 0f),
+                end = Offset(x, h * 0.32f),
+                strokeWidth = stroke,
+                cap = androidx.compose.ui.graphics.StrokeCap.Round
+            )
+        }
+        // Crown glyph inside the body.
+        val crown = Path().apply {
+            moveTo(w * 0.30f, h * 0.72f)
+            lineTo(w * 0.34f, h * 0.50f)
+            lineTo(w * 0.44f, h * 0.60f)
+            lineTo(w * 0.50f, h * 0.46f)
+            lineTo(w * 0.56f, h * 0.60f)
+            lineTo(w * 0.66f, h * 0.50f)
+            lineTo(w * 0.70f, h * 0.72f)
+            close()
+        }
+        drawPath(crown, color = tint)
     }
 }
 
@@ -695,18 +927,30 @@ private fun TrialNotice() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(16.dp))
+            .clip(RoundedCornerShape(18.dp))
             .background(WaSurface)
+            .border(BorderStroke(1.dp, WaSurfaceVariant), RoundedCornerShape(18.dp))
             .padding(16.dp),
         verticalAlignment = Alignment.Top
     ) {
-        Icon(Icons.Filled.Shield, contentDescription = null, tint = WaNeonGreen, modifier = Modifier.size(20.dp))
+        Box(
+            modifier = Modifier
+                .size(38.dp)
+                .clip(RoundedCornerShape(50))
+                .background(
+                    Brush.radialGradient(listOf(WaNeonGreen.copy(alpha = 0.28f), Color.Transparent))
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(Icons.Filled.Shield, contentDescription = null, tint = WaNeonGreen, modifier = Modifier.size(19.dp))
+        }
         Spacer(Modifier.width(12.dp))
         Text(
             stringResource(R.string.paywall_trial_notice),
             color = WaTextSecondary,
             fontSize = 12.sp,
-            lineHeight = 17.sp
+            lineHeight = 17.sp,
+            modifier = Modifier.padding(top = 8.dp)
         )
     }
 }
