@@ -34,18 +34,6 @@ jobs:
         with:
           gradle-version: '8.7'
 
-      - name: Build debug APK
-        run: gradle clean assembleDebug --no-daemon --stacktrace --no-build-cache
-
-      - name: Upload debug APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: WayArs-debug-apk
-          # Wildcard, not the exact filename, so a rename/AGP output-path
-          # change doesn't turn into a silent "file not found" upload step.
-          path: app/build/outputs/apk/debug/*.apk
-          if-no-files-found: error
-
       # Safety net for a real release build: without this check, a missing
       # secret used to make the old "if" guards simply SKIP the signed
       # steps — the job still finished green, with no signed AAB/APK
@@ -55,6 +43,14 @@ jobs:
       # silently producing nothing, or (if only the keystore file were
       # missing while the three passwords WERE set) an *unsigned* release
       # build that Play Console would reject on upload anyway.
+      #
+      # Runs before ANY Gradle task (even assembleDebug): Gradle configures
+      # the entire build.gradle.kts — including the release signingConfig
+      # block — for every task, regardless of which variant you actually
+      # build. That block now fails loudly if KEY_STORE_PASSWORD/KEY_ALIAS/
+      # KEY_PASSWORD are set but the keystore file is missing, so the file
+      # must already exist before the very first `gradle` invocation of the
+      # job, not just before the release build.
       - name: Verify release signing secrets are configured
         run: |
           missing=""
@@ -88,6 +84,18 @@ jobs:
             -keypass "$KEY_PASSWORD" \
             > /dev/null
           echo "Keystore, store password, alias and key password all verified OK."
+
+      - name: Build debug APK
+        run: gradle clean assembleDebug --no-daemon --stacktrace --no-build-cache
+
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: WayArs-debug-apk
+          # Wildcard, not the exact filename, so a rename/AGP output-path
+          # change doesn't turn into a silent "file not found" upload step.
+          path: app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
 
       # Both outputs built in one invocation: bundleRelease -> .aab
       # (Play Store upload format), assembleRelease -> .apk (direct
