@@ -66,6 +66,15 @@ android {
                 storePassword = releaseStorePassword
                 keyAlias = releaseKeyAlias
                 keyPassword = releaseKeyPassword
+                // Explicit, rather than leaving it to AGP's defaults: the CI
+                // workflow's post-build "apksigner verify" step failed with
+                // "DOES NOT VERIFY - Missing META-INF/MANIFEST.MF" because
+                // the V1 (JAR) signing scheme wasn't applied to the output.
+                // Forcing all three schemes on guarantees apksigner always
+                // finds a valid signature to verify, on every SDK level.
+                enableV1Signing = true
+                enableV2Signing = true
+                enableV3Signing = true
             }
         }
     }
