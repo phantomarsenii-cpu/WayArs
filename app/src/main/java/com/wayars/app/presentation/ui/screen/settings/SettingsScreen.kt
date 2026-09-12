@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,24 +18,28 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBalanceWallet
 import androidx.compose.material.icons.filled.Apps
+import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.DirectionsCar
+import androidx.compose.material.icons.filled.Gavel
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Language
+import androidx.compose.material.icons.filled.PrivacyTip
 import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material.icons.filled.VpnKey
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -57,9 +62,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import android.content.Intent
+import android.net.Uri
 import android.provider.Settings
 import android.widget.Toast
 import androidx.lifecycle.Lifecycle
@@ -155,6 +166,10 @@ fun SettingsScreen(
                 onSavePackageHint = onSavePackageHint,
                 onClearPackageHint = onClearPackageHint
             )
+        }
+
+        item {
+            InfoSection()
         }
     }
 }
@@ -1365,14 +1380,14 @@ private fun GeneralSettingsCard(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
             Icon(Icons.Filled.Language, contentDescription = null, tint = WaTextSecondary)
             Column(Modifier.weight(1f)) {
                 SectionLabel(stringResource(R.string.settings_language), bottomPadding = 6.dp)
                 LanguagePicker(current = languageCode, onSelect = onLanguageSelected)
             }
         }
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
             Icon(Icons.Filled.AccountBalanceWallet, contentDescription = null, tint = WaTextSecondary)
             Column(Modifier.weight(1f)) {
                 SectionLabel(stringResource(R.string.settings_currency), bottomPadding = 6.dp)
@@ -1382,64 +1397,243 @@ private fun GeneralSettingsCard(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+/**
+ * A tappable "field-look" row that opens a centered [Dialog] with the full
+ * option list, instead of a Material [DropdownMenu]. The old
+ * ExposedDropdownMenuBox + DropdownMenu combo anchored to the wrong edge and
+ * used the menu's default surface color (not [WaSurface]), which is what
+ * caused the green-tinted, left-clipped popup that overlapped the card icons.
+ * A dialog has no anchor to get wrong and always matches the app's own
+ * surface color, so this fixes the bug at the root instead of patching the
+ * anchor math.
+ */
 @Composable
-private fun LanguagePicker(current: String, onSelect: (String) -> Unit) {
-    var expanded by remember { mutableStateOf(false) }
-    ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = { expanded = it }) {
-        OutlinedTextField(
-            value = LocaleManager.displayName(current),
-            onValueChange = {},
-            readOnly = true,
-            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = WaNeonGreen,
-                unfocusedBorderColor = WaTextSecondary,
-                focusedTextColor = Color.White,
-                unfocusedTextColor = Color.White
-            ),
+private fun SelectorField(label: String, onClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .border(1.dp, WaTextSecondary.copy(alpha = 0.4f), RoundedCornerShape(12.dp))
+            .clickable(onClick = onClick)
+            .padding(horizontal = 14.dp, vertical = 14.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(label, color = Color.White, style = MaterialTheme.typography.bodyLarge)
+        Icon(Icons.Filled.KeyboardArrowDown, contentDescription = null, tint = WaTextSecondary)
+    }
+}
+
+/** Shared centered option-list dialog used by [LanguagePicker] and [CurrencyPicker]. */
+@Composable
+private fun <T> OptionListDialog(
+    options: List<T>,
+    labelFor: (T) -> String,
+    onSelect: (T) -> Unit,
+    onDismiss: () -> Unit
+) {
+    Dialog(onDismissRequest = onDismiss) {
+        Column(
             modifier = Modifier
-                .menuAnchor()
                 .fillMaxWidth()
-        )
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            LocaleManager.supported.forEach { code ->
-                DropdownMenuItem(
-                    text = { Text(LocaleManager.displayName(code)) },
-                    onClick = { onSelect(code); expanded = false }
-                )
+                .clip(RoundedCornerShape(16.dp))
+                .background(WaSurface)
+                .padding(vertical = 8.dp)
+        ) {
+            LazyColumn(modifier = Modifier.heightIn(max = 420.dp)) {
+                items(options) { option ->
+                    Text(
+                        labelFor(option),
+                        color = Color.White,
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { onSelect(option); onDismiss() }
+                            .padding(horizontal = 20.dp, vertical = 14.dp)
+                    )
+                }
             }
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun LanguagePicker(current: String, onSelect: (String) -> Unit) {
+    var expanded by remember { mutableStateOf(false) }
+    SelectorField(label = LocaleManager.displayName(current)) { expanded = true }
+    if (expanded) {
+        OptionListDialog(
+            options = LocaleManager.supported,
+            labelFor = { LocaleManager.displayName(it) },
+            onSelect = onSelect,
+            onDismiss = { expanded = false }
+        )
+    }
+}
+
 @Composable
 private fun CurrencyPicker(current: Currency, onSelect: (Currency) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
-    ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = { expanded = it }) {
-        OutlinedTextField(
-            value = "${current.code} (${current.symbol})",
-            onValueChange = {},
-            readOnly = true,
-            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = WaNeonGreen,
-                unfocusedBorderColor = WaTextSecondary,
-                focusedTextColor = Color.White,
-                unfocusedTextColor = Color.White
-            ),
-            modifier = Modifier
-                .menuAnchor()
-                .fillMaxWidth()
+    SelectorField(label = "${current.code} (${current.symbol})") { expanded = true }
+    if (expanded) {
+        OptionListDialog(
+            options = Currency.entries,
+            labelFor = { "${it.code} (${it.symbol})" },
+            onSelect = onSelect,
+            onDismiss = { expanded = false }
         )
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            Currency.entries.forEach { c ->
-                DropdownMenuItem(
-                    text = { Text("${c.code} (${c.symbol})") },
-                    onClick = { onSelect(c); expanded = false }
-                )
+    }
+}
+
+/**
+ * "About the app / Privacy Policy / Terms of Use" — required before
+ * publishing. Content is fully localized (see settings_about_content and
+ * friends in strings.xml for every supported language) and rendered from
+ * this screen so the wording always follows the app's own selected
+ * language, not the device locale.
+ */
+private enum class InfoDoc { ABOUT, PRIVACY, TERMS }
+
+@Composable
+private fun InfoSection() {
+    var activeDoc by remember { mutableStateOf<InfoDoc?>(null) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(14.dp))
+            .background(WaSurface)
+    ) {
+        InfoRow(Icons.Filled.Info, stringResource(R.string.settings_about_title)) { activeDoc = InfoDoc.ABOUT }
+        HorizontalDivider(color = WaSurfaceVariant)
+        InfoRow(Icons.Filled.PrivacyTip, stringResource(R.string.settings_privacy_title)) { activeDoc = InfoDoc.PRIVACY }
+        HorizontalDivider(color = WaSurfaceVariant)
+        InfoRow(Icons.Filled.Gavel, stringResource(R.string.settings_terms_title)) { activeDoc = InfoDoc.TERMS }
+    }
+
+    activeDoc?.let { doc ->
+        InfoDialog(doc = doc, onDismiss = { activeDoc = null })
+    }
+}
+
+@Composable
+private fun InfoRow(icon: androidx.compose.ui.graphics.vector.ImageVector, title: String, onClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .padding(horizontal = 16.dp, vertical = 16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Icon(icon, contentDescription = null, tint = WaTextSecondary)
+        Text(title, color = MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
+        Icon(Icons.Filled.ChevronRight, contentDescription = null, tint = WaTextSecondary)
+    }
+}
+
+@Composable
+private fun InfoDialog(doc: InfoDoc, onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    val title: String
+    val rawContent: String
+    when (doc) {
+        InfoDoc.ABOUT -> {
+            title = stringResource(R.string.settings_about_title)
+            rawContent = stringResource(R.string.settings_about_content, appVersionLabel(context))
+        }
+        InfoDoc.PRIVACY -> {
+            title = stringResource(R.string.settings_privacy_title)
+            rawContent = stringResource(R.string.settings_privacy_content)
+        }
+        InfoDoc.TERMS -> {
+            title = stringResource(R.string.settings_terms_title)
+            rawContent = stringResource(R.string.settings_terms_content)
+        }
+    }
+
+    Dialog(onDismissRequest = onDismiss) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(max = 560.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .background(WaSurface)
+                .padding(20.dp)
+        ) {
+            Text(title, color = MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.titleLarge)
+
+            Text(
+                text = parseSimpleMarkdown(rawContent),
+                color = WaTextSecondary,
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier
+                    .weight(1f, fill = false)
+                    .verticalScroll(rememberScrollState())
+                    .padding(top = 14.dp, bottom = 8.dp)
+            )
+
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                if (doc == InfoDoc.ABOUT) {
+                    TextButton(onClick = {
+                        val url = context.getString(R.string.settings_developer_website_url)
+                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                    }) {
+                        Text(stringResource(R.string.settings_visit_website), color = WaNeonGreen)
+                    }
+                } else {
+                    Spacer(Modifier.weight(1f))
+                }
+                TextButton(onClick = onDismiss) {
+                    Text(stringResource(R.string.settings_close))
+                }
             }
         }
+    }
+}
+
+/** e.g. "1.0.0 (3)" — read live from PackageManager so it never drifts from the real build. */
+private fun appVersionLabel(context: android.content.Context): String = try {
+    val pkgInfo = context.packageManager.getPackageInfo(context.packageName, 0)
+    val versionCode = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+        pkgInfo.longVersionCode
+    } else {
+        @Suppress("DEPRECATION")
+        pkgInfo.versionCode.toLong()
+    }
+    "${pkgInfo.versionName} ($versionCode)"
+} catch (e: Exception) {
+    ""
+}
+
+/**
+ * Tiny **bold** markdown parser for the legal/about text blocks — just
+ * enough to render section headings without needing HTML string resources
+ * (which don't survive Android's string-resource escaping rules well across
+ * 7 locales). Everything outside `**...**` renders as plain text.
+ */
+@Composable
+private fun parseSimpleMarkdown(raw: String) = buildAnnotatedString {
+    var i = 0
+    while (i < raw.length) {
+        val start = raw.indexOf("**", i)
+        if (start == -1) {
+            append(raw.substring(i))
+            break
+        }
+        append(raw.substring(i, start))
+        val end = raw.indexOf("**", start + 2)
+        if (end == -1) {
+            append(raw.substring(start))
+            break
+        }
+        withStyle(SpanStyle(fontWeight = FontWeight.Bold, color = Color.White)) {
+            append(raw.substring(start + 2, end))
+        }
+        i = end + 2
     }
 }
