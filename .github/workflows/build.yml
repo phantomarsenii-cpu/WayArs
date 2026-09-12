@@ -15,7 +15,7 @@ jobs:
     # job-level env var (env: at this level CAN read secrets), then check
     # env.X instead of secrets.X in every if: below — env IS allowed there.
     env:
-      RELEASE_KEYSTORE_BASE64: ${{ secrets['SIGNING KEY'] }}
+      RELEASE_KEYSTORE_BASE64: ${{ secrets.SIGNING_KEY }}
       KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
       KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
       KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
