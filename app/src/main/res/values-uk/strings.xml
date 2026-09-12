@@ -75,6 +75,7 @@
     <string name="settings_vehicle_price_electric">Ціна за кВт·год</string>
     <string name="settings_vehicle_save">Зберегти</string>
     <string name="settings_vehicle_summary_car">Автомобіль · %1$s · %2$s/100км</string>
+    <string name="settings_vehicle_summary_fuel">%1$s · %2$s · %3$s/100km</string>
     <string name="settings_vehicle_summary_no_fuel">%1$s · без витрат на паливо</string>
     <string name="verdict_net_profit">Чисто %1$s (паливо %2$s)</string>
     <string name="settings_saved">Збережено</string>

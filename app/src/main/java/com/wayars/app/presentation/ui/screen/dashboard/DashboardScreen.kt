@@ -160,9 +160,11 @@ fun DashboardScreen(
             }
         }
 
-        // Only shown once a completed scan-log file exists, and never while
-        // Active is still on (that file isn't finished yet — see ScanLogFile).
-        if (lastLogFile != null && !isActive) {
+        // "Share log" row hidden from the dashboard UI per product decision —
+        // the file itself is still written/tracked by ScanLogFile as before,
+        // it's just no longer surfaced as a button here. Flip this back to
+        // `lastLogFile != null && !isActive` to restore the button.
+        if (false) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End

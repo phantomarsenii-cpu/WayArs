@@ -76,6 +76,7 @@
     <string name="settings_vehicle_price_electric">Preis pro kWh</string>
     <string name="settings_vehicle_save">Speichern</string>
     <string name="settings_vehicle_summary_car">Auto · %1$s · %2$s/100km</string>
+    <string name="settings_vehicle_summary_fuel">%1$s · %2$s · %3$s/100km</string>
     <string name="settings_vehicle_summary_no_fuel">%1$s · keine Kraftstoffkosten</string>
     <string name="verdict_net_profit">Netto %1$s (Kraftstoff %2$s)</string>
     <string name="settings_saved">Gespeichert</string>

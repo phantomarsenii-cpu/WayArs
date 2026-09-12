@@ -71,6 +71,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import android.content.Intent
 import android.net.Uri
@@ -1072,10 +1073,10 @@ private fun VehicleSection(
         FuelType.ELECTRIC -> stringResource(R.string.settings_fuel_electric)
         null -> ""
     }
-    val summary = if (profile.category == VehicleCategory.CAR) {
-        stringResource(R.string.settings_vehicle_summary_car, fuelLabel, profile.consumptionPer100Km.toString())
-    } else {
+    val summary = if (profile.category == VehicleCategory.BICYCLE) {
         stringResource(R.string.settings_vehicle_summary_no_fuel, categoryLabel)
+    } else {
+        stringResource(R.string.settings_vehicle_summary_fuel, categoryLabel, fuelLabel, profile.consumptionPer100Km.toString())
     }
 
     Column(
@@ -1126,7 +1127,13 @@ private fun VehicleSection(
                     ChoiceChip(
                         label = stringResource(R.string.settings_vehicle_scooter),
                         selected = category == VehicleCategory.SCOOTER,
-                        onClick = { category = VehicleCategory.SCOOTER },
+                        onClick = {
+                            category = VehicleCategory.SCOOTER
+                            // Scooter only offers Petrol/Electric — drop DIESEL/LPG carried over from Car.
+                            if (fuelType == FuelType.DIESEL || fuelType == FuelType.LPG) {
+                                fuelType = FuelType.PETROL
+                            }
+                        },
                         modifier = Modifier.weight(1f)
                     )
                     ChoiceChip(
@@ -1137,7 +1144,9 @@ private fun VehicleSection(
                     )
                 }
 
-                // Step 2: fuel type + consumption/price — only for Car.
+                // Step 2: fuel type + consumption/price — Car (4 options) and
+                // Scooter (Petrol/Electric only) both burn fuel/energy.
+                // Bicycle never shows these — nothing to enter, cost is 0.
                 if (category == VehicleCategory.CAR) {
                     Spacer(Modifier.padding(top = 12.dp))
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
@@ -1187,14 +1196,48 @@ private fun VehicleSection(
                         accent = WaNeonGreen,
                         onValueChange = { priceText = it }
                     )
+                } else if (category == VehicleCategory.SCOOTER) {
+                    Spacer(Modifier.padding(top = 12.dp))
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
+                        ChoiceChip(
+                            label = stringResource(R.string.settings_fuel_petrol),
+                            selected = fuelType == FuelType.PETROL,
+                            onClick = { fuelType = FuelType.PETROL },
+                            modifier = Modifier.weight(1f)
+                        )
+                        ChoiceChip(
+                            label = stringResource(R.string.settings_fuel_electric),
+                            selected = fuelType == FuelType.ELECTRIC,
+                            onClick = { fuelType = FuelType.ELECTRIC },
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+
+                    Spacer(Modifier.padding(top = 12.dp))
+                    ThresholdField(
+                        label = stringResource(R.string.settings_vehicle_consumption),
+                        value = consumptionText,
+                        accent = WaNeonGreen,
+                        onValueChange = { consumptionText = it }
+                    )
+                    Spacer(Modifier.padding(top = 10.dp))
+                    ThresholdField(
+                        label = if (fuelType == FuelType.ELECTRIC)
+                            stringResource(R.string.settings_vehicle_price_electric)
+                        else
+                            "${stringResource(R.string.settings_vehicle_price_fuel)} (${currency.symbol})",
+                        value = priceText,
+                        accent = WaNeonGreen,
+                        onValueChange = { priceText = it }
+                    )
                 }
 
                 Spacer(Modifier.padding(top = 14.dp))
                 TextButton(
                     onClick = {
-                        val newProfile = if (category == VehicleCategory.CAR) {
+                        val newProfile = if (category == VehicleCategory.CAR || category == VehicleCategory.SCOOTER) {
                             VehicleProfile(
-                                category = VehicleCategory.CAR,
+                                category = category,
                                 fuelType = fuelType,
                                 consumptionPer100Km = consumptionText.toDoubleOrNull() ?: 0.0,
                                 fuelPricePerUnit = priceText.toDoubleOrNull() ?: 0.0
@@ -1221,14 +1264,23 @@ private fun ChoiceChip(label: String, selected: Boolean, onClick: () -> Unit, mo
             .clip(RoundedCornerShape(10.dp))
             .background(if (selected) WaNeonGreen.copy(alpha = 0.18f) else WaSurfaceVariant)
             .clickable(onClick = onClick)
-            .padding(vertical = 10.dp, horizontal = 6.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .heightIn(min = 40.dp)
+            .padding(vertical = 8.dp, horizontal = 6.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
+        // Long labels (e.g. "Bicycle / e-scooter") wrap onto a second line at a
+        // slightly smaller size instead of being cut off with "…" — the chip
+        // keeps its normal width/weight, it just grows a little taller when needed.
         Text(
             label,
             color = if (selected) WaNeonGreen else WaTextSecondary,
-            style = MaterialTheme.typography.bodySmall,
-            maxLines = 1,
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 11.sp,
+                lineHeight = 13.sp
+            ),
+            textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+            maxLines = 2,
             overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
         )
     }

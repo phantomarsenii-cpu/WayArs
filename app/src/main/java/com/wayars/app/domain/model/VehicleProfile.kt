@@ -2,14 +2,19 @@ package com.wayars.app.domain.model
 
 enum class VehicleCategory { CAR, SCOOTER, BICYCLE }
 
-/** Only meaningful when [VehicleCategory.CAR] is selected. */
+/**
+ * Meaningful for [VehicleCategory.CAR] (all four values) and
+ * [VehicleCategory.SCOOTER] (PETROL or ELECTRIC only). Never set for
+ * [VehicleCategory.BICYCLE], which has no fuel/energy cost.
+ */
 enum class FuelType { PETROL, DIESEL, LPG, ELECTRIC }
 
 /**
- * Driver's own vehicle running costs. For SCOOTER/BICYCLE, consumption and
- * price are always 0 — those simply have no fuel cost in this model
- * (electric scooter charging cost is negligible enough to ignore, matching
- * the spec's "for two-wheelers, costs are 0").
+ * Driver's own vehicle running costs. CAR and SCOOTER both carry a real
+ * fuel/energy cost (petrol scooters burn fuel just like cars; electric
+ * scooters draw charging cost same as an electric car). Only BICYCLE
+ * (human-powered / e-scooter with negligible charge cost) always has
+ * consumption and price at 0 — there is nothing to enter for it.
  */
 data class VehicleProfile(
     val category: VehicleCategory,
@@ -19,7 +24,7 @@ data class VehicleProfile(
 ) {
     /** Fuel/energy cost for covering [distanceKm], in the driver's currency. */
     fun fuelCostForDistance(distanceKm: Double): Double {
-        if (category != VehicleCategory.CAR) return 0.0
+        if (category == VehicleCategory.BICYCLE) return 0.0
         return (distanceKm / 100.0) * consumptionPer100Km * fuelPricePerUnit
     }
 
