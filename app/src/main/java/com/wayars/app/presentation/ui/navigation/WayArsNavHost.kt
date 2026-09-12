@@ -3,6 +3,7 @@ package com.wayars.app.presentation.ui.navigation
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -54,8 +55,21 @@ fun WayArsNavHost(
     // tint the system bar itself via Window APIs was fighting edge-to-edge
     // and behaving inconsistently across devices; painting our own
     // background behind everything sidesteps that entirely.
+    //
+    // The NavHost itself gets `.statusBarsPadding()` on top of that — edge-
+    // to-edge means content draws UNDER the status bar unless something
+    // explicitly insets it, which is exactly what screenshots showed
+    // (2026-09-12): screen titles ("Wybierz swój profil", "Ustawienia")
+    // rendering flush against/under the status bar icons. Only the TOP
+    // inset is applied here — the bottom nav bar's own floating pill
+    // spacing already clears the system nav bar correctly on its own, so
+    // padding for that stays where it already was rather than doubling up.
     Box(modifier = Modifier.fillMaxSize().background(WaBackground)) {
-        NavHost(navController = navController, startDestination = Routes.SPLASH) {
+        NavHost(
+            navController = navController,
+            startDestination = Routes.SPLASH,
+            modifier = Modifier.fillMaxSize().statusBarsPadding()
+        ) {
             composable(Routes.SPLASH) {
                 SplashScreen(onFinished = {
                     val dest = if (onboardingDone) Routes.MAIN else Routes.ONBOARDING

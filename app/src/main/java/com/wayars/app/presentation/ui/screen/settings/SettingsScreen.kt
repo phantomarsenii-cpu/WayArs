@@ -34,7 +34,6 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenu
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -1403,7 +1402,7 @@ private fun LanguagePicker(current: String, onSelect: (String) -> Unit) {
                 .menuAnchor()
                 .fillMaxWidth()
         )
-        ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             LocaleManager.supported.forEach { code ->
                 DropdownMenuItem(
                     text = { Text(LocaleManager.displayName(code)) },
@@ -1434,7 +1433,7 @@ private fun CurrencyPicker(current: Currency, onSelect: (Currency) -> Unit) {
                 .menuAnchor()
                 .fillMaxWidth()
         )
-        ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             Currency.entries.forEach { c ->
                 DropdownMenuItem(
                     text = { Text("${c.code} (${c.symbol})") },
