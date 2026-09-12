@@ -92,8 +92,9 @@
     <string name="settings_cancel">Cancel</string>
     <string name="settings_already_added">already added</string>
     <string name="settings_no_apps_found">No apps found</string>
-    <string name="settings_calibrated">Calibrated ✓ (tap to edit)</string>
-    <string name="settings_not_calibrated">Not calibrated — tap to teach this app</string>
+    <string name="settings_calibrated">Calibrated ✓</string>
+    <string name="settings_calibrate_action">Edit calibration</string>
+    <string name="settings_not_calibrated">Not calibrated</string>
     <string name="settings_calibration_title">Calibrate this app</string>
     <string name="settings_calibration_no_data">No scan data yet for this app. Open it to a real, active order screen and wait a few seconds, then reopen this dialog.</string>
     <string name="settings_calibration_instructions">Below is the text WayArs last read from this app\'s screen. Tap the line with the price, then the distance, then the time.</string>

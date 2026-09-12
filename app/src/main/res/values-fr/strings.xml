@@ -92,8 +92,9 @@
     <string name="settings_cancel">Annuler</string>
     <string name="settings_already_added">déjà ajoutée</string>
     <string name="settings_no_apps_found">Aucune application trouvée</string>
-    <string name="settings_calibrated">Calibrée ✓ (appuyez pour modifier)</string>
-    <string name="settings_not_calibrated">Non calibrée — appuyez pour l\'enseigner</string>
+    <string name="settings_calibrated">Calibrée ✓</string>
+    <string name="settings_calibrate_action">Modifier le calibrage</string>
+    <string name="settings_not_calibrated">Non calibrée</string>
     <string name="settings_calibration_title">Calibrer cette application</string>
     <string name="settings_calibration_no_data">Aucune donnée de scan pour cette application pour l\'instant. Ouvrez-la sur l\'écran d\'une commande réelle et active, attendez quelques secondes, puis rouvrez cette fenêtre.</string>
     <string name="settings_calibration_instructions">Voici le texte que WayArs a lu pour la dernière fois sur l\'écran de cette application. Appuyez sur la ligne contenant le prix, puis la distance, puis le temps.</string>

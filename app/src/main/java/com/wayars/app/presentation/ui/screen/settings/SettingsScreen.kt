@@ -28,6 +28,7 @@ import androidx.compose.material.icons.filled.AccountBalanceWallet
 import androidx.compose.material.icons.filled.Apps
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.DirectionsCar
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Gavel
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -42,6 +43,7 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -409,9 +411,11 @@ private fun SupportedAppsSection(
                                     stringResource(R.string.settings_not_calibrated)
                                 },
                                 color = if (hasHint) WaNeonGreen else WaTextSecondary,
-                                style = MaterialTheme.typography.bodySmall,
-                                modifier = Modifier.clickable { calibratingPackage = app.packageId }
+                                style = MaterialTheme.typography.bodySmall
                             )
+                        }
+                        IconButton(onClick = { calibratingPackage = app.packageId }) {
+                            Icon(Icons.Filled.Edit, contentDescription = stringResource(R.string.settings_calibrate_action), tint = WaTextSecondary)
                         }
                     }
                 }
@@ -439,9 +443,11 @@ private fun SupportedAppsSection(
                                         stringResource(R.string.settings_not_calibrated)
                                     },
                                     color = if (hasHint) WaNeonGreen else WaTextSecondary,
-                                    style = MaterialTheme.typography.bodySmall,
-                                    modifier = Modifier.clickable { calibratingPackage = pkg }
+                                    style = MaterialTheme.typography.bodySmall
                                 )
+                            }
+                            IconButton(onClick = { calibratingPackage = pkg }) {
+                                Icon(Icons.Filled.Edit, contentDescription = stringResource(R.string.settings_calibrate_action), tint = WaTextSecondary)
                             }
                             Text(
                                 "✕",

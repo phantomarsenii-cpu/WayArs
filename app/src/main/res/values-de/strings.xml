@@ -92,8 +92,9 @@
     <string name="settings_cancel">Abbrechen</string>
     <string name="settings_already_added">bereits hinzugefügt</string>
     <string name="settings_no_apps_found">Keine Apps gefunden</string>
-    <string name="settings_calibrated">Kalibriert ✓ (zum Bearbeiten tippen)</string>
-    <string name="settings_not_calibrated">Nicht kalibriert — zum Anlernen tippen</string>
+    <string name="settings_calibrated">Kalibriert ✓</string>
+    <string name="settings_calibrate_action">Kalibrierung bearbeiten</string>
+    <string name="settings_not_calibrated">Nicht kalibriert</string>
     <string name="settings_calibration_title">Diese App kalibrieren</string>
     <string name="settings_calibration_no_data">Noch keine Scan-Daten für diese App. Öffnen Sie sie bei einem echten, aktiven Auftragsbildschirm, warten Sie einige Sekunden und öffnen Sie diesen Dialog erneut.</string>
     <string name="settings_calibration_instructions">Unten sehen Sie den zuletzt von dieser App gelesenen Text. Tippen Sie auf die Zeile mit dem Preis, dann der Distanz, dann der Zeit.</string>
