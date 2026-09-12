@@ -2,6 +2,7 @@ package com.wayars.app.util
 
 import android.content.Context
 import android.provider.Settings
+import androidx.core.app.NotificationManagerCompat
 import com.wayars.app.service.accessibility.OrderAccessibilityService
 
 object AccessibilityUtils {
@@ -20,4 +21,8 @@ object AccessibilityUtils {
         ) ?: return false
         return enabledServices.split(':').any { it.equals(expectedComponent, ignoreCase = true) }
     }
+
+    /** Same idea as [isServiceEnabled] but for the notification-listener backstop. */
+    fun isNotificationListenerEnabled(context: Context): Boolean =
+        NotificationManagerCompat.getEnabledListenerPackages(context).contains(context.packageName)
 }

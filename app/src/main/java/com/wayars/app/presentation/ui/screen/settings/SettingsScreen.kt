@@ -20,19 +20,32 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBalanceWallet
+import androidx.compose.material.icons.filled.Apps
+import androidx.compose.material.icons.filled.DirectionsCar
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.filled.Language
+import androidx.compose.material.icons.filled.Tune
+import androidx.compose.material.icons.filled.VpnKey
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenu
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -43,11 +56,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import android.provider.Settings
 import android.widget.Toast
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import com.wayars.app.R
 import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.Currency
@@ -61,6 +78,7 @@ import com.wayars.app.presentation.ui.theme.WaRed
 import com.wayars.app.presentation.ui.theme.WaSurface
 import com.wayars.app.presentation.ui.theme.WaSurfaceVariant
 import com.wayars.app.presentation.ui.theme.WaTextSecondary
+import com.wayars.app.util.AccessibilityUtils
 import com.wayars.app.util.CurrencyFormatter
 import com.wayars.app.util.LocaleManager
 
@@ -96,13 +114,12 @@ fun SettingsScreen(
         }
 
         item {
-            SectionLabel(stringResource(R.string.settings_language))
-            LanguagePicker(current = languageCode, onSelect = onLanguageSelected)
-        }
-
-        item {
-            SectionLabel(stringResource(R.string.settings_currency))
-            CurrencyPicker(current = currency, onSelect = onCurrencySelected)
+            GeneralSettingsCard(
+                languageCode = languageCode,
+                currency = currency,
+                onLanguageSelected = onLanguageSelected,
+                onCurrencySelected = onCurrencySelected
+            )
         }
 
         item {
@@ -143,7 +160,38 @@ fun SettingsScreen(
     }
 }
 
-/** Collapsed by default — groups all three permission buttons into one compact row. */
+/**
+ * Reflects the REAL OS-level permission state (not an app-side toggle —
+ * these three permissions can only be granted/revoked in system Settings,
+ * WayArs can only send the user there). Rechecked on ON_RESUME so coming
+ * back from the system Settings screen the row/switch just opened updates
+ * without needing to reopen this screen.
+ */
+private data class PermissionStates(val accessibility: Boolean, val overlay: Boolean, val notifications: Boolean)
+
+@Composable
+private fun rememberPermissionStates(): PermissionStates {
+    val context = LocalContext.current
+    val lifecycleOwner = LocalLifecycleOwner.current
+
+    fun snapshot() = PermissionStates(
+        accessibility = AccessibilityUtils.isServiceEnabled(context),
+        overlay = Settings.canDrawOverlays(context),
+        notifications = AccessibilityUtils.isNotificationListenerEnabled(context)
+    )
+
+    var state by remember { mutableStateOf(snapshot()) }
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) state = snapshot()
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
+    }
+    return state
+}
+
+/** Collapsed by default — groups all three permission rows into one compact card. */
 @Composable
 private fun PermissionsSection(
     onOpenAccessibilitySettings: () -> Unit,
@@ -151,6 +199,7 @@ private fun PermissionsSection(
     onOpenNotificationSettings: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
+    val states = rememberPermissionStates()
 
     Column(
         modifier = Modifier
@@ -165,7 +214,8 @@ private fun PermissionsSection(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(Modifier.weight(1f)) {
+            Icon(Icons.Filled.VpnKey, contentDescription = null, tint = WaTextSecondary)
+            Column(Modifier.weight(1f).padding(start = 12.dp)) {
                 Text(
                     stringResource(R.string.settings_permissions_title),
                     color = MaterialTheme.colorScheme.onSurface,
@@ -189,21 +239,24 @@ private fun PermissionsSection(
         AnimatedVisibility(visible = expanded, enter = expandVertically(), exit = shrinkVertically()) {
             Column(
                 modifier = Modifier.padding(top = 14.dp),
-                verticalArrangement = Arrangement.spacedBy(14.dp)
+                verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                InnerPermissionButton(
+                PermissionRow(
                     title = stringResource(R.string.settings_enable_accessibility),
                     hint = stringResource(R.string.settings_accessibility_hint),
+                    granted = states.accessibility,
                     onClick = onOpenAccessibilitySettings
                 )
-                InnerPermissionButton(
+                PermissionRow(
                     title = stringResource(R.string.settings_enable_overlay),
                     hint = stringResource(R.string.settings_overlay_hint),
+                    granted = states.overlay,
                     onClick = onOpenOverlaySettings
                 )
-                InnerPermissionButton(
+                PermissionRow(
                     title = stringResource(R.string.settings_enable_notifications),
                     hint = stringResource(R.string.settings_notifications_hint),
+                    granted = states.notifications,
                     onClick = onOpenNotificationSettings
                 )
             }
@@ -211,23 +264,42 @@ private fun PermissionsSection(
     }
 }
 
+/**
+ * A Switch here is a STATUS indicator, not a direct toggle — Android
+ * doesn't let an app grant/revoke these three permissions on its own
+ * either way, only send the user to the right system Settings screen. So
+ * tapping the row or the switch always opens that screen regardless of
+ * current state (to grant, or to double-check/revoke there); what changes
+ * with [granted] is purely visual — a granted permission doesn't need a
+ * loud call-to-action sitting under it forever, so the hint text only
+ * shows while it's still off.
+ */
 @Composable
-private fun InnerPermissionButton(title: String, hint: String, onClick: () -> Unit) {
-    Column(
+private fun PermissionRow(title: String, hint: String, granted: Boolean, onClick: () -> Unit) {
+    Row(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(12.dp))
-            .background(WaSurfaceVariant)
-            .padding(14.dp)
+            .clickable(onClick = onClick)
+            .padding(vertical = 10.dp, horizontal = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(title, color = MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.bodyLarge)
-        Text(hint, color = WaTextSecondary, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(top = 4.dp, bottom = 10.dp))
-        Button(
-            onClick = onClick,
-            colors = ButtonDefaults.buttonColors(containerColor = WaNeonGreen, contentColor = Color.Black)
-        ) {
-            Text(title)
+        Column(Modifier.weight(1f)) {
+            Text(title, color = MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.bodyLarge)
+            if (!granted) {
+                Text(
+                    hint,
+                    color = WaTextSecondary,
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(top = 2.dp)
+                )
+            }
         }
+        Switch(
+            checked = granted,
+            onCheckedChange = { onClick() },
+            colors = SwitchDefaults.colors(checkedTrackColor = WaNeonGreen, checkedThumbColor = Color.Black)
+        )
     }
 }
 
@@ -273,7 +345,8 @@ private fun SupportedAppsSection(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(Modifier.weight(1f)) {
+            Icon(Icons.Filled.Apps, contentDescription = null, tint = WaTextSecondary)
+            Column(Modifier.weight(1f).padding(start = 12.dp)) {
                 Text(
                     stringResource(R.string.settings_supported_apps_title),
                     color = MaterialTheme.colorScheme.onSurface,
@@ -840,7 +913,8 @@ private fun CustomThresholdsSection(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(Modifier.weight(1f)) {
+            Icon(Icons.Filled.Tune, contentDescription = null, tint = WaTextSecondary)
+            Column(Modifier.weight(1f).padding(start = 12.dp)) {
                 Text(
                     stringResource(R.string.settings_custom_thresholds_title),
                     color = MaterialTheme.colorScheme.onSurface,
@@ -890,21 +964,18 @@ private fun CustomThresholdsSection(
                     onValueChange = { goodText = it }
                 )
 
-                Row(modifier = Modifier.padding(top = 14.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Button(
-                        onClick = {
-                            val bad = badText.toDoubleOrNull()
-                            val avg = averageText.toDoubleOrNull()
-                            val good = goodText.toDoubleOrNull()
-                            if (bad != null && avg != null && good != null) {
-                                onSave(bad, avg, good)
-                                expanded = false
-                                Toast.makeText(context, context.getString(R.string.settings_saved), Toast.LENGTH_SHORT).show()
-                            }
-                        },
-                        colors = ButtonDefaults.buttonColors(containerColor = WaNeonGreen, contentColor = Color.Black)
-                    ) {
-                        Text(stringResource(R.string.settings_custom_save))
+                Row(modifier = Modifier.padding(top = 14.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                    TextButton(onClick = {
+                        val bad = badText.toDoubleOrNull()
+                        val avg = averageText.toDoubleOrNull()
+                        val good = goodText.toDoubleOrNull()
+                        if (bad != null && avg != null && good != null) {
+                            onSave(bad, avg, good)
+                            expanded = false
+                            Toast.makeText(context, context.getString(R.string.settings_saved), Toast.LENGTH_SHORT).show()
+                        }
+                    }) {
+                        Text(stringResource(R.string.settings_custom_save), color = WaNeonGreen)
                     }
                     if (existing != null) {
                         TextButton(onClick = {
@@ -974,7 +1045,8 @@ private fun VehicleSection(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(Modifier.weight(1f)) {
+            Icon(Icons.Filled.DirectionsCar, contentDescription = null, tint = WaTextSecondary)
+            Column(Modifier.weight(1f).padding(start = 12.dp)) {
                 Text(
                     stringResource(R.string.settings_vehicle_title),
                     color = MaterialTheme.colorScheme.onSurface,
@@ -1072,7 +1144,7 @@ private fun VehicleSection(
                 }
 
                 Spacer(Modifier.padding(top = 14.dp))
-                Button(
+                TextButton(
                     onClick = {
                         val newProfile = if (category == VehicleCategory.CAR) {
                             VehicleProfile(
@@ -1087,10 +1159,9 @@ private fun VehicleSection(
                         onSave(newProfile)
                         expanded = false
                         Toast.makeText(context, context.getString(R.string.settings_saved), Toast.LENGTH_SHORT).show()
-                    },
-                    colors = ButtonDefaults.buttonColors(containerColor = WaNeonGreen, contentColor = Color.Black)
+                    }
                 ) {
-                    Text(stringResource(R.string.settings_vehicle_save))
+                    Text(stringResource(R.string.settings_vehicle_save), color = WaNeonGreen)
                 }
             }
         }
@@ -1273,26 +1344,66 @@ private fun ThresholdField(
 }
 
 @Composable
-private fun SectionLabel(text: String) {
+private fun SectionLabel(text: String, bottomPadding: androidx.compose.ui.unit.Dp = 8.dp) {
     if (text.isNotEmpty()) {
-        Text(text, style = MaterialTheme.typography.titleMedium, color = WaTextSecondary, modifier = Modifier.padding(bottom = 8.dp))
+        Text(text, style = MaterialTheme.typography.titleMedium, color = WaTextSecondary, modifier = Modifier.padding(bottom = bottomPadding))
     }
 }
 
+/** Groups Language + Currency into one card with row icons, instead of two separate floating cards. */
 @Composable
-private fun LanguagePicker(current: String, onSelect: (String) -> Unit) {
-    var expanded by remember { mutableStateOf(false) }
-    Row(
+private fun GeneralSettingsCard(
+    languageCode: String,
+    currency: Currency,
+    onLanguageSelected: (String) -> Unit,
+    onCurrencySelected: (Currency) -> Unit
+) {
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(14.dp))
             .background(WaSurface)
-            .clickable { expanded = true }
             .padding(16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+        verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
-        Text(LocaleManager.displayName(current), color = MaterialTheme.colorScheme.onSurface)
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            Icon(Icons.Filled.Language, contentDescription = null, tint = WaTextSecondary)
+            Column(Modifier.weight(1f)) {
+                SectionLabel(stringResource(R.string.settings_language), bottomPadding = 6.dp)
+                LanguagePicker(current = languageCode, onSelect = onLanguageSelected)
+            }
+        }
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            Icon(Icons.Filled.AccountBalanceWallet, contentDescription = null, tint = WaTextSecondary)
+            Column(Modifier.weight(1f)) {
+                SectionLabel(stringResource(R.string.settings_currency), bottomPadding = 6.dp)
+                CurrencyPicker(current = currency, onSelect = onCurrencySelected)
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun LanguagePicker(current: String, onSelect: (String) -> Unit) {
+    var expanded by remember { mutableStateOf(false) }
+    ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = { expanded = it }) {
+        OutlinedTextField(
+            value = LocaleManager.displayName(current),
+            onValueChange = {},
+            readOnly = true,
+            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = WaNeonGreen,
+                unfocusedBorderColor = WaTextSecondary,
+                focusedTextColor = Color.White,
+                unfocusedTextColor = Color.White
+            ),
+            modifier = Modifier
+                .menuAnchor()
+                .fillMaxWidth()
+        )
+        ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             LocaleManager.supported.forEach { code ->
                 DropdownMenuItem(
                     text = { Text(LocaleManager.displayName(code)) },
@@ -1303,20 +1414,27 @@ private fun LanguagePicker(current: String, onSelect: (String) -> Unit) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun CurrencyPicker(current: Currency, onSelect: (Currency) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(14.dp))
-            .background(WaSurface)
-            .clickable { expanded = true }
-            .padding(16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text("${current.code} (${current.symbol})", color = MaterialTheme.colorScheme.onSurface)
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+    ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = { expanded = it }) {
+        OutlinedTextField(
+            value = "${current.code} (${current.symbol})",
+            onValueChange = {},
+            readOnly = true,
+            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = WaNeonGreen,
+                unfocusedBorderColor = WaTextSecondary,
+                focusedTextColor = Color.White,
+                unfocusedTextColor = Color.White
+            ),
+            modifier = Modifier
+                .menuAnchor()
+                .fillMaxWidth()
+        )
+        ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             Currency.entries.forEach { c ->
                 DropdownMenuItem(
                     text = { Text("${c.code} (${c.symbol})") },
