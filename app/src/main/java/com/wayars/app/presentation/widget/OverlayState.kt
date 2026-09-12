@@ -16,13 +16,22 @@ object OverlayState {
     private val _pendingRecordId = MutableStateFlow<Long?>(null)
     val pendingRecordId: StateFlow<Long?> = _pendingRecordId
 
-    fun publish(evaluation: OrderEvaluation, recordId: Long?) {
+    // Which app's screen the currently-shown evaluation came from — needed
+    // so a decision (Accept/Reject) can suppress re-scanning of THAT
+    // specific app only, not every supported app (see
+    // ScanningState.suppressScanningBriefly).
+    private val _sourcePackage = MutableStateFlow<String?>(null)
+    val sourcePackage: StateFlow<String?> = _sourcePackage
+
+    fun publish(evaluation: OrderEvaluation, recordId: Long?, sourcePackage: String) {
         _latestEvaluation.value = evaluation
         _pendingRecordId.value = recordId
+        _sourcePackage.value = sourcePackage
     }
 
     fun clear() {
         _latestEvaluation.value = null
         _pendingRecordId.value = null
+        _sourcePackage.value = null
     }
 }

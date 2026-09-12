@@ -1,6 +1,7 @@
 package com.wayars.app.util
 
 import com.wayars.app.domain.model.Currency
+import com.wayars.app.domain.model.PackageHint
 import com.wayars.app.domain.model.RawOrderCandidate
 
 /**
@@ -28,16 +29,39 @@ import com.wayars.app.domain.model.RawOrderCandidate
  */
 object ScreenTextParser {
 
+    // Every amount group below now allows the decimal part to be OPTIONAL
+    // ((?:[.,]\d{1,2})? instead of a mandatory [.,]\d{1,2}) — confirmed
+    // on-device, 2026-09-11 (screenshots): Uber orders of exactly "40 zł"
+    // and "80 zł" (no grosze at all, a common real amount, not just a
+    // rounding coincidence) never matched ANY pattern here, since every one
+    // of them required a decimal point + 1-2 digits. With no match at all,
+    // earnings stayed at whatever the PREVIOUS candidate had, so the
+    // overlay kept showing a stale order's numbers instead of the new
+    // round-amount one — looked like "wrong data", was actually "no data,
+    // silently displaying old data instead". JPY already had this shape
+    // (yen has no minor unit); every currency can show a round amount, not
+    // just yen, so the same optional-decimal shape now applies everywhere.
+    //
+    // Side effect of making the decimal optional: a mandatory decimal used
+    // to double as an accidental safety net on the SUFFIX (number-then-
+    // currency) patterns' `\s?` — a bare integer could never accidentally
+    // reach across a newline to an unrelated "zł" because a bare integer
+    // never matched those patterns AT ALL before. Now that it can, `\s?`
+    // (which matches "\n") reopens the same cross-line risk the PREFIX
+    // patterns were already hardened against (see the PLN comment below).
+    // So every suffix pattern's separator is tightened to `[ \t]?` too —
+    // same-line only, matching how a real currency suffix is always laid
+    // out in practice.
     private val moneyPatterns: List<Pair<Regex, Currency>> = listOf(
-        Regex("""€\s?(\d+[.,]\d{1,2})""") to Currency.EUR,
-        Regex("""(\d+[.,]\d{1,2})\s?€""") to Currency.EUR,
+        Regex("""€[ \t]?(\d+(?:[.,]\d{1,2})?)""") to Currency.EUR,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?€""") to Currency.EUR,
         // (?<!R) guards against matching the "$" inside Brazil's "R$" as a
         // bare USD sign — without it, "R$ 25,00" would be misread as USD
         // 25.00 by THIS pattern before ever reaching the BRL pattern below.
-        Regex("""(?<!R)\$\s?(\d+[.,]\d{1,2})""") to Currency.USD,
-        Regex("""(\d+[.,]\d{1,2})\s?\$""") to Currency.USD,
-        Regex("""£\s?(\d+[.,]\d{1,2})""") to Currency.GBP,
-        Regex("""(\d+[.,]\d{1,2})\s?£""") to Currency.GBP,
+        Regex("""(?<!R)\$[ \t]?(\d+(?:[.,]\d{1,2})?)""") to Currency.USD,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?\$""") to Currency.USD,
+        Regex("""£[ \t]?(\d+(?:[.,]\d{1,2})?)""") to Currency.GBP,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?£""") to Currency.GBP,
         // PLN/UAH/MDL: accept the currency marker BEFORE or AFTER the number,
         // since Bolt's combined-line format puts it before ("PLN 16.37").
         //
@@ -53,26 +77,24 @@ object ScreenTextParser {
         // can only be a genuine prefix if it isn't glued to a preceding
         // number and doesn't need to reach across a line break to find its
         // number.
-        Regex("""(?<!\d)(?:zł|PLN|zl)[ \t]?(\d+[.,]\d{1,2})""", RegexOption.IGNORE_CASE) to Currency.PLN,
-        Regex("""(\d+[.,]\d{1,2})\s?(?:zł|PLN|zl)""", RegexOption.IGNORE_CASE) to Currency.PLN,
-        Regex("""(?<!\d)(?:₴|UAH|грн)[ \t]?(\d+[.,]\d{1,2})""", RegexOption.IGNORE_CASE) to Currency.UAH,
-        Regex("""(\d+[.,]\d{1,2})\s?(?:₴|UAH|грн)""", RegexOption.IGNORE_CASE) to Currency.UAH,
-        Regex("""(?<!\d)(?:MDL|lei)[ \t]?(\d+[.,]\d{1,2})""", RegexOption.IGNORE_CASE) to Currency.MDL,
-        Regex("""(\d+[.,]\d{1,2})\s?(?:MDL|lei|L\b)""", RegexOption.IGNORE_CASE) to Currency.MDL,
+        Regex("""(?<!\d)(?:zł|PLN|zl)[ \t]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.PLN,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?(?:zł|PLN|zl)""", RegexOption.IGNORE_CASE) to Currency.PLN,
+        Regex("""(?<!\d)(?:₴|UAH|грн)[ \t]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.UAH,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?(?:₴|UAH|грн)""", RegexOption.IGNORE_CASE) to Currency.UAH,
+        Regex("""(?<!\d)(?:MDL|lei)[ \t]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.MDL,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?(?:MDL|lei|L\b)""", RegexOption.IGNORE_CASE) to Currency.MDL,
         // "R$" is always a prefix in practice (Brazilian apps never write
         // "25,00 R$") so only one direction is needed here.
-        Regex("""(?<!\d)R\$[ \t]?(\d+[.,]\d{1,2})""", RegexOption.IGNORE_CASE) to Currency.BRL,
-        Regex("""(?<!\d)₹[ \t]?(\d+[.,]\d{1,2})""") to Currency.INR,
-        Regex("""(\d+[.,]\d{1,2})\s?₹""") to Currency.INR,
-        Regex("""(?<!\d)(?:₺|TRY|TL\b)[ \t]?(\d+[.,]\d{1,2})""", RegexOption.IGNORE_CASE) to Currency.TRY,
-        Regex("""(\d+[.,]\d{1,2})\s?(?:₺|TRY|TL\b)""", RegexOption.IGNORE_CASE) to Currency.TRY,
-        // Yen has no minor unit in normal display ("¥850", not "¥850.00"),
-        // so unlike every other currency here the amount group has NO
-        // required decimal part.
+        Regex("""(?<!\d)R\$[ \t]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.BRL,
+        Regex("""(?<!\d)₹[ \t]?(\d+(?:[.,]\d{1,2})?)""") to Currency.INR,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?₹""") to Currency.INR,
+        Regex("""(?<!\d)(?:₺|TRY|TL\b)[ \t]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.TRY,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?(?:₺|TRY|TL\b)""", RegexOption.IGNORE_CASE) to Currency.TRY,
+        // Yen has no minor unit in normal display ("¥850", not "¥850.00").
         Regex("""(?<!\d)¥[ \t]?(\d+(?:[.,]\d{1,2})?)""") to Currency.JPY,
-        Regex("""(\d+(?:[.,]\d{1,2})?)\s?¥""") to Currency.JPY,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?¥""") to Currency.JPY,
         Regex("""(?<!\d)(?:JPY)[ \t]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.JPY,
-        Regex("""(\d+(?:[.,]\d{1,2})?)\s?(?:JPY)""", RegexOption.IGNORE_CASE) to Currency.JPY
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?(?:JPY)""", RegexOption.IGNORE_CASE) to Currency.JPY
     )
 
     /**
@@ -114,7 +136,18 @@ object ScreenTextParser {
      */
     private val perUnitSuffixRegex = Regex("""^\s*/\s?km|^\s*per\s?km""", RegexOption.IGNORE_CASE)
 
-    fun parse(texts: List<String>): RawOrderCandidate {
+    fun parse(texts: List<String>, hint: PackageHint? = null): RawOrderCandidate {
+        // A calibration hint's patterns are tried FIRST (prepended), the
+        // built-ins still apply after — a hint exists specifically because
+        // the built-ins didn't match THIS app's notation, but if that app's
+        // screen also has an ordinary "zł"-style figure somewhere (a tip,
+        // a bonus line), falling through to the generic patterns for
+        // anything the hint's own pattern doesn't match is strictly better
+        // than only ever trying the hint.
+        val effectiveMoneyPatterns = buildHintMoneyPatterns(hint) + moneyPatterns
+        val effectiveDistanceRegex = buildHintDistanceRegex(hint) ?: distanceRegex
+        val effectiveTimeRegex = buildHintTimeRegex(hint) ?: timeRegex
+
         var earnings: Double? = null
         var currency: Currency? = null
         var moneyIndex = -1
@@ -123,7 +156,7 @@ object ScreenTextParser {
             val text = texts[index].trim()
             if (text.isEmpty() || acceptCounterLineRegex.matches(text)) continue
 
-            for ((regex, cur) in moneyPatterns) {
+            for ((regex, cur) in effectiveMoneyPatterns) {
                 val match = regex.find(text) ?: continue
 
                 // Guard: a rating badge (e.g. "★ 1.67") is never the
@@ -176,14 +209,49 @@ object ScreenTextParser {
         // zł | Łącznie 34 min (14.7 km)"); every currently-working layout
         // already has distance/time at or after the money node, so this is
         // a no-op for them.
-        val distanceKm = findValue(texts, distanceRegex, moneyIndex)
-        val timeMinutes = findValue(texts, timeRegex, moneyIndex)
+        val distanceKm = findValue(texts, effectiveDistanceRegex, moneyIndex)
+        val timeMinutes = findValue(texts, effectiveTimeRegex, moneyIndex)
 
         return RawOrderCandidate(
             earnings = earnings,
             distanceKm = distanceKm,
             timeMinutes = timeMinutes,
             currency = currency
+        )
+    }
+
+    /**
+     * A calibration hint's money token becomes an extra prefix AND suffix
+     * pattern (we don't know which side of the number this app puts its
+     * marker on from the token alone), with the same anti-cross-line
+     * guards ([ \t]? instead of \s?, (?<!\d) on the prefix form) as every
+     * built-in currency pattern above. Empty list when there's no hint or
+     * it has no money token — the built-ins run unchanged either way.
+     */
+    private fun buildHintMoneyPatterns(hint: PackageHint?): List<Pair<Regex, Currency>> {
+        val token = hint?.moneyToken?.takeIf { it.isNotBlank() } ?: return emptyList()
+        val currency = hint.moneyCurrency ?: return emptyList()
+        val escaped = Regex.escape(token)
+        return listOf(
+            Regex("""(?<!\d)$escaped[ \t]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to currency,
+            Regex("""(\d+(?:[.,]\d{1,2})?)[ \t]?$escaped""", RegexOption.IGNORE_CASE) to currency
+        )
+    }
+
+    /** Hint's distance unit word (e.g. "mi") tried alongside "km"/"км", not instead of them. */
+    private fun buildHintDistanceRegex(hint: PackageHint?): Regex? {
+        val token = hint?.distanceUnitToken?.takeIf { it.isNotBlank() } ?: return null
+        val escaped = Regex.escape(token)
+        return Regex("""(\d+[.,]\d+|\d+)\s?(?:$escaped|km|км)\b""", RegexOption.IGNORE_CASE)
+    }
+
+    /** Hint's time unit word (e.g. "hrs") tried alongside the built-in list, not instead of it. */
+    private fun buildHintTimeRegex(hint: PackageHint?): Regex? {
+        val token = hint?.timeUnitToken?.takeIf { it.isNotBlank() } ?: return null
+        val escaped = Regex.escape(token)
+        return Regex(
+            """(\d+)\s?(?:$escaped|min\.?|mins?|mín|хв|мин|minut[ay]?)\b""",
+            RegexOption.IGNORE_CASE
         )
     }
 

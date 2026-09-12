@@ -7,6 +7,7 @@ import com.wayars.app.AppContainer
 import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.Currency
 import com.wayars.app.domain.model.OrderEvaluation
+import com.wayars.app.domain.model.PackageHint
 import com.wayars.app.domain.model.PresetType
 import com.wayars.app.domain.model.VehicleProfile
 import com.wayars.app.domain.repository.OrderRecord
@@ -51,6 +52,9 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
     val customPackages: StateFlow<Set<String>> =
         settings.customPackages.stateIn(viewModelScope, SharingStarted.Eagerly, emptySet())
 
+    val packageHints: StateFlow<Map<String, PackageHint>> =
+        settings.packageHints.stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
+
     val todayOrders: StateFlow<List<OrderRecord>> =
         container.orderRepository.observeToday().stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
@@ -93,6 +97,8 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
     fun setVehicleProfile(profile: VehicleProfile) = viewModelScope.launch { settings.setVehicleProfile(profile) }
     fun addCustomPackage(packageName: String) = viewModelScope.launch { settings.addCustomPackage(packageName) }
     fun removeCustomPackage(packageName: String) = viewModelScope.launch { settings.removeCustomPackage(packageName) }
+    fun savePackageHint(hint: PackageHint) = viewModelScope.launch { settings.savePackageHint(hint) }
+    fun clearPackageHint(packageName: String) = viewModelScope.launch { settings.clearPackageHint(packageName) }
 
     class Factory(private val container: AppContainer) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")

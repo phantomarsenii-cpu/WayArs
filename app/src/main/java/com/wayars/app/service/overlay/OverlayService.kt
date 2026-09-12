@@ -179,8 +179,11 @@ class OverlayService : LifecycleService() {
      */
     private fun onDecision(accepted: Boolean) {
         val evaluation = OverlayState.latestEvaluation.value
+        val sourcePackage = OverlayState.sourcePackage.value
         OverlayState.clear()
-        ScanningState.suppressScanningBriefly()
+        if (sourcePackage != null) {
+            ScanningState.suppressScanningBriefly(sourcePackage)
+        }
         if (accepted && evaluation != null) {
             lifecycleScope.launch {
                 runCatching {

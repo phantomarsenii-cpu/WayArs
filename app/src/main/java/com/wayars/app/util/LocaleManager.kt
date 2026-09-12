@@ -11,7 +11,7 @@ import java.util.Locale
  */
 object LocaleManager {
 
-    val supported = listOf("en", "pl", "ro", "uk", "ru")
+    val supported = listOf("en", "pl", "ro", "uk", "ru", "de", "fr")
     const val fallback = "en"
 
     fun resolveInitialLanguage(): String {
@@ -34,6 +34,8 @@ object LocaleManager {
         "ro" -> "Română"
         "uk" -> "Українська"
         "ru" -> "Русский"
+        "de" -> "Deutsch"
+        "fr" -> "Français"
         else -> code
     }
 }

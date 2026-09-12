@@ -92,4 +92,16 @@
     <string name="settings_cancel">Отмена</string>
     <string name="settings_already_added">уже добавлено</string>
     <string name="settings_no_apps_found">Приложения не найдены</string>
+    <string name="settings_calibrated">Откалибровано ✓ (нажмите, чтобы изменить)</string>
+    <string name="settings_not_calibrated">Не откалибровано — нажмите, чтобы обучить</string>
+    <string name="settings_calibration_title">Калибровка приложения</string>
+    <string name="settings_calibration_no_data">Пока нет данных сканирования для этого приложения. Откройте его на экране реального активного заказа, подождите пару секунд и откройте это окно снова.</string>
+    <string name="settings_calibration_instructions">Ниже — текст, который WayArs последний раз считал с экрана этого приложения. Нажмите на строку с ценой, затем с расстоянием, затем со временем.</string>
+    <string name="settings_calibration_role_money">Цена</string>
+    <string name="settings_calibration_role_distance">Расстояние</string>
+    <string name="settings_calibration_role_time">Время</string>
+    <string name="settings_calibration_money_token_label">Обозначение валюты (при необходимости отредактируйте)</string>
+    <string name="settings_calibration_distance_token_label">Единица расстояния (при необходимости отредактируйте)</string>
+    <string name="settings_calibration_time_token_label">Единица времени (при необходимости отредактируйте)</string>
+    <string name="settings_calibration_clear">Сбросить калибровку</string>
 </resources>

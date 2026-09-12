@@ -10,6 +10,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.Currency
 import com.wayars.app.domain.model.FuelType
+import com.wayars.app.domain.model.PackageHint
 import com.wayars.app.domain.model.PresetType
 import com.wayars.app.domain.model.VehicleCategory
 import com.wayars.app.domain.model.VehicleProfile
@@ -42,6 +43,9 @@ class SettingsDataStore(private val context: Context) {
         // User-added package ids for delivery/taxi apps beyond the built-in
         // list — see the "universal support" comment on customPackages below.
         val CUSTOM_PACKAGES = stringSetPreferencesKey("custom_scanned_packages")
+        // Calibration hints (see PackageHint) for custom apps whose screen
+        // doesn't match the built-in generic money/km/min patterns.
+        val PACKAGE_HINTS = stringSetPreferencesKey("package_parsing_hints")
     }
 
     val languageCode: Flow<String?> = context.dataStore.data.map { it[Keys.LANGUAGE] }
@@ -84,6 +88,13 @@ class SettingsDataStore(private val context: Context) {
      */
     val customPackages: Flow<Set<String>> =
         context.dataStore.data.map { it[Keys.CUSTOM_PACKAGES] ?: emptySet() }
+
+    /** Keyed by packageName. Packages with no saved hint just aren't in the map. */
+    val packageHints: Flow<Map<String, PackageHint>> = context.dataStore.data.map { prefs ->
+        (prefs[Keys.PACKAGE_HINTS] ?: emptySet())
+            .mapNotNull { PackageHintCodec.decode(it) }
+            .associateBy { it.packageName }
+    }
 
     suspend fun setLanguage(code: String) {
         context.dataStore.edit { it[Keys.LANGUAGE] = code }
@@ -144,6 +155,24 @@ class SettingsDataStore(private val context: Context) {
         context.dataStore.edit { prefs ->
             val current = prefs[Keys.CUSTOM_PACKAGES] ?: emptySet()
             prefs[Keys.CUSTOM_PACKAGES] = current - packageName
+        }
+    }
+
+    suspend fun savePackageHint(hint: PackageHint) {
+        context.dataStore.edit { prefs ->
+            val current = (prefs[Keys.PACKAGE_HINTS] ?: emptySet())
+                .mapNotNull { PackageHintCodec.decode(it) }
+                .filterNot { it.packageName == hint.packageName }
+            prefs[Keys.PACKAGE_HINTS] = (current + hint).map { PackageHintCodec.encode(it) }.toSet()
+        }
+    }
+
+    suspend fun clearPackageHint(packageName: String) {
+        context.dataStore.edit { prefs ->
+            val current = (prefs[Keys.PACKAGE_HINTS] ?: emptySet())
+                .mapNotNull { PackageHintCodec.decode(it) }
+                .filterNot { it.packageName == packageName }
+            prefs[Keys.PACKAGE_HINTS] = current.map { PackageHintCodec.encode(it) }.toSet()
         }
     }
 }

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WayArs</string>
+    <string name="splash_slogan">Intelligenter Assistent für Fahrer &amp; Kuriere</string>
+    <string name="splash_start">Loslegen</string>
+
+    <string name="onboarding_title">Wählen Sie Ihr Profil</string>
+    <string name="onboarding_subtitle">Wir stellen optimale Filter für Sie ein</string>
+    <string name="onboarding_customize_later">Später anpassen</string>
+
+    <string name="preset_economy_title">Sparsam</string>
+    <string name="preset_economy_desc">Geringe Ausgaben, moderates Einkommen</string>
+    <string name="preset_balance_title">Ausgewogen</string>
+    <string name="preset_balance_desc">Ausgewogenes Verhältnis von Zeit und Einkommen</string>
+    <string name="preset_profitable_title">Nur profitabel</string>
+    <string name="preset_profitable_desc">Nur gut bezahlte Aufträge</string>
+
+    <string name="dashboard_today_summary">Übersicht heute</string>
+    <string name="dashboard_active_time">Aktive Zeit</string>
+    <string name="dashboard_distance">Strecke</string>
+    <string name="dashboard_avg_rate">Ø Rate</string>
+    <string name="dashboard_order_evaluation">Auftragsbewertung</string>
+    <string name="dashboard_orders">Aufträge</string>
+    <string name="dashboard_no_order">Warten auf einen neuen Auftrag…</string>
+
+    <string name="verdict_good">GUT</string>
+    <string name="verdict_bad">SCHLECHT</string>
+    <string name="action_accept">Annehmen</string>
+    <string name="action_reject">Ablehnen</string>
+
+    <string name="nav_home">Start</string>
+    <string name="nav_stats">Statistik</string>
+    <string name="nav_presets">Profile</string>
+    <string name="nav_settings">Einstellungen</string>
+
+    <string name="settings_title">Einstellungen</string>
+    <string name="settings_language">Sprache</string>
+    <string name="settings_currency">Währung</string>
+    <string name="settings_preset">Profil</string>
+    <string name="settings_enable_accessibility">Bildschirmerkennung aktivieren</string>
+    <string name="settings_enable_overlay">Schwebendes Fenster aktivieren</string>
+    <string name="settings_accessibility_hint">Erforderlich, um eingehende Aufträge zu erkennen (nur Lesezugriff, keine automatischen Klicks)</string>
+    <string name="settings_overlay_hint">Erforderlich, um das schwebende Bewertungsfenster über anderen Apps anzuzeigen</string>
+
+    <string name="overlay_new_order">Neuer Auftrag</string>
+    <string name="overlay_min_km">Min</string>
+
+    <string name="accessibility_service_description">WayArs liest die von Liefer-/Taxi-Apps auf dem Bildschirm angezeigten Auftragsdetails (Preis, Distanz, Zeit), um Ihnen eine schnellere Entscheidung zu ermöglichen. Es tippt oder ändert niemals automatisch etwas.</string>
+
+    <string name="stats_empty">Noch keine Aufträge</string>
+    <string name="settings_custom_thresholds_title">Eigene Ratenschwellen</string>
+    <string name="settings_custom_thresholds_hint">Optional — eigene %1$s/km-Werte, werden anstelle des Profils verwendet</string>
+    <string name="settings_custom_bad">Schlechter Auftrag, bis zu</string>
+    <string name="settings_custom_average">Durchschnittlicher Auftrag, ab</string>
+    <string name="settings_custom_good">Guter Auftrag, ab</string>
+    <string name="settings_custom_save">Speichern</string>
+    <string name="settings_custom_clear">Stattdessen Profil verwenden</string>
+    <string name="active_requires_permissions">Aktivieren Sie zuerst die Bildschirmerkennung und das schwebende Fenster in den Einstellungen</string>
+    <string name="dashboard_share_log">Scan-Protokoll senden</string>
+    <string name="verdict_average">DURCHSCHNITT</string>
+    <string name="settings_enable_notifications">Benachrichtigungszugriff aktivieren</string>
+    <string name="settings_notifications_hint">Optionaler Ersatzkanal — erfasst Aufträge, die als Benachrichtigung gesendet werden, während die App minimiert ist</string>
+    <string name="settings_permissions_title">Berechtigungen</string>
+    <string name="settings_permissions_hint">Bildschirmerkennung, schwebendes Fenster, Benachrichtigungen</string>
+
+    <string name="settings_vehicle_title">Fahrzeug</string>
+    <string name="settings_vehicle_car">Auto</string>
+    <string name="settings_vehicle_scooter">Roller</string>
+    <string name="settings_vehicle_bicycle">Fahrrad / E-Scooter</string>
+    <string name="settings_fuel_petrol">Benzin</string>
+    <string name="settings_fuel_diesel">Diesel</string>
+    <string name="settings_fuel_lpg">LPG / Autogas</string>
+    <string name="settings_fuel_electric">Elektro</string>
+    <string name="settings_vehicle_consumption">Verbrauch pro 100 km</string>
+    <string name="settings_vehicle_price_fuel">Preis pro Liter</string>
+    <string name="settings_vehicle_price_electric">Preis pro kWh</string>
+    <string name="settings_vehicle_save">Speichern</string>
+    <string name="settings_vehicle_summary_car">Auto · %1$s · %2$s/100km</string>
+    <string name="settings_vehicle_summary_no_fuel">%1$s · keine Kraftstoffkosten</string>
+    <string name="verdict_net_profit">Netto %1$s (Kraftstoff %2$s)</string>
+    <string name="settings_saved">Gespeichert</string>
+    <string name="settings_supported_apps_title">Unterstützte Apps</string>
+    <string name="settings_supported_apps_hint">Integrierte Liste + selbst hinzugefügte Apps</string>
+    <string name="settings_supported_apps_builtin_label">Integriert:</string>
+    <string name="settings_supported_apps_custom_label">Von Ihnen hinzugefügt:</string>
+    <string name="settings_add_from_installed">Aus installierten Apps wählen</string>
+    <string name="settings_add_manually">Paket-ID eingeben</string>
+    <string name="settings_package_id_label">Paket-ID (z. B. com.example.app)</string>
+    <string name="settings_add">Hinzufügen</string>
+    <string name="settings_pick_installed_app_title">App auswählen</string>
+    <string name="settings_search_apps_label">Suchen</string>
+    <string name="settings_cancel">Abbrechen</string>
+    <string name="settings_already_added">bereits hinzugefügt</string>
+    <string name="settings_no_apps_found">Keine Apps gefunden</string>
+    <string name="settings_calibrated">Kalibriert ✓ (zum Bearbeiten tippen)</string>
+    <string name="settings_not_calibrated">Nicht kalibriert — zum Anlernen tippen</string>
+    <string name="settings_calibration_title">Diese App kalibrieren</string>
+    <string name="settings_calibration_no_data">Noch keine Scan-Daten für diese App. Öffnen Sie sie bei einem echten, aktiven Auftragsbildschirm, warten Sie einige Sekunden und öffnen Sie diesen Dialog erneut.</string>
+    <string name="settings_calibration_instructions">Unten sehen Sie den zuletzt von dieser App gelesenen Text. Tippen Sie auf die Zeile mit dem Preis, dann der Distanz, dann der Zeit.</string>
+    <string name="settings_calibration_role_money">Preis</string>
+    <string name="settings_calibration_role_distance">Distanz</string>
+    <string name="settings_calibration_role_time">Zeit</string>
+    <string name="settings_calibration_money_token_label">Währungszeichen (bei Bedarf bearbeiten)</string>
+    <string name="settings_calibration_distance_token_label">Distanzeinheit (bei Bedarf bearbeiten)</string>
+    <string name="settings_calibration_time_token_label">Zeiteinheit (bei Bedarf bearbeiten)</string>
+    <string name="settings_calibration_clear">Kalibrierung zurücksetzen</string>
+</resources>

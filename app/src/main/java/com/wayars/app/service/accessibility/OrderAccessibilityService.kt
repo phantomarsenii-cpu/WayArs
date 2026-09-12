@@ -102,6 +102,9 @@ class OrderAccessibilityService : AccessibilityService() {
         scope.launch {
             container.settingsRepository.customPackages.collect { CustomPackagesState.update(it) }
         }
+        scope.launch {
+            container.settingsRepository.packageHints.collect { PackageHintsState.update(it) }
+        }
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
@@ -110,8 +113,17 @@ class OrderAccessibilityService : AccessibilityService() {
         // Hard gate #1: the app-wide "Active" switch.
         if (!ScanningState.isActive.value) return
 
-        // Hard gate #1b: brief cooldown right after Accept/Reject.
-        if (ScanningState.isSuppressed()) return
+        // Hard gate #1b: brief cooldown right after Accept/Reject — scoped
+        // to the SPECIFIC app that was just decided on, not global (see
+        // ScanningState.suppressScanningBriefly's comment). Uses
+        // event.packageName directly rather than the resolved
+        // windowsChangedRoot below, so a TYPE_WINDOWS_CHANGED event (whose
+        // packageName is often null/unreliable per the comment further
+        // down) simply won't match a real suppressed key here and passes
+        // this gate — an acceptable gap for that one event type, since the
+        // debounce window and the lastCandidate equality check downstream
+        // still catch an exact-duplicate re-trigger of the same order.
+        if (ScanningState.isSuppressed(event.packageName?.toString().orEmpty())) return
 
         if (event.eventType != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED &&
             event.eventType != AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED &&
@@ -294,7 +306,7 @@ class OrderAccessibilityService : AccessibilityService() {
      * complete and new — publishes it to the overlay.
      */
     private fun handleCollectedTexts(eventPackage: String, texts: List<String>) {
-        val candidate = ScreenTextParser.parse(texts)
+        val candidate = ScreenTextParser.parse(texts, hint = PackageHintsState.hints[eventPackage])
         val candidateSummary = "earnings=${candidate.earnings} km=${candidate.distanceKm} min=${candidate.timeMinutes} cur=${candidate.currency}"
 
         if (!candidate.isComplete) {
@@ -334,7 +346,7 @@ class OrderAccessibilityService : AccessibilityService() {
 
         // NOTE: nothing is written to Room here. A row is only ever inserted
         // when the driver taps Accept in the overlay (see OverlayService).
-        OverlayState.publish(evaluation, recordId = null)
+        OverlayState.publish(evaluation, recordId = null, sourcePackage = eventPackage)
 
         if (Settings.canDrawOverlays(applicationContext)) {
             startForegroundService(Intent(applicationContext, OverlayService::class.java))

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WayArs</string>
+    <string name="splash_slogan">Assistant intelligent pour chauffeurs et livreurs</string>
+    <string name="splash_start">Commencer</string>
+
+    <string name="onboarding_title">Choisissez votre profil</string>
+    <string name="onboarding_subtitle">Nous allons régler les filtres optimaux pour vous</string>
+    <string name="onboarding_customize_later">Personnaliser plus tard</string>
+
+    <string name="preset_economy_title">Économique</string>
+    <string name="preset_economy_desc">Dépenses faibles, revenu modéré</string>
+    <string name="preset_balance_title">Équilibré</string>
+    <string name="preset_balance_desc">Équilibre entre temps et revenu</string>
+    <string name="preset_profitable_title">Rentable uniquement</string>
+    <string name="preset_profitable_desc">Uniquement les commandes bien payées</string>
+
+    <string name="dashboard_today_summary">Résumé du jour</string>
+    <string name="dashboard_active_time">Temps actif</string>
+    <string name="dashboard_distance">Distance</string>
+    <string name="dashboard_avg_rate">Taux moyen</string>
+    <string name="dashboard_order_evaluation">Évaluation de la commande</string>
+    <string name="dashboard_orders">commandes</string>
+    <string name="dashboard_no_order">En attente d\'une nouvelle commande…</string>
+
+    <string name="verdict_good">BON</string>
+    <string name="verdict_bad">MAUVAIS</string>
+    <string name="action_accept">Accepter</string>
+    <string name="action_reject">Refuser</string>
+
+    <string name="nav_home">Accueil</string>
+    <string name="nav_stats">Statistiques</string>
+    <string name="nav_presets">Profils</string>
+    <string name="nav_settings">Paramètres</string>
+
+    <string name="settings_title">Paramètres</string>
+    <string name="settings_language">Langue</string>
+    <string name="settings_currency">Devise</string>
+    <string name="settings_preset">Profil</string>
+    <string name="settings_enable_accessibility">Activer la lecture d\'écran</string>
+    <string name="settings_enable_overlay">Activer la fenêtre flottante</string>
+    <string name="settings_accessibility_hint">Nécessaire pour détecter les nouvelles commandes (lecture seule, aucun clic automatique)</string>
+    <string name="settings_overlay_hint">Nécessaire pour afficher la fenêtre flottante de verdict par-dessus les autres applications</string>
+
+    <string name="overlay_new_order">Nouvelle commande</string>
+    <string name="overlay_min_km">min</string>
+
+    <string name="accessibility_service_description">WayArs lit les détails de la commande (prix, distance, temps) affichés à l\'écran par les applications de livraison ou de VTC pour vous aider à décider plus rapidement. L\'application ne clique ni ne modifie jamais rien automatiquement.</string>
+
+    <string name="stats_empty">Aucune commande pour le moment</string>
+    <string name="settings_custom_thresholds_title">Vos propres seuils de tarif</string>
+    <string name="settings_custom_thresholds_hint">Facultatif — vos propres valeurs %1$s/km, utilisées à la place du profil</string>
+    <string name="settings_custom_bad">Mauvaise commande, jusqu\'à</string>
+    <string name="settings_custom_average">Commande moyenne, à partir de</string>
+    <string name="settings_custom_good">Bonne commande, à partir de</string>
+    <string name="settings_custom_save">Enregistrer</string>
+    <string name="settings_custom_clear">Utiliser le profil à la place</string>
+    <string name="active_requires_permissions">Activez d\'abord la lecture d\'écran et la fenêtre flottante dans les Paramètres</string>
+    <string name="dashboard_share_log">Envoyer le journal de scan</string>
+    <string name="verdict_average">MOYEN</string>
+    <string name="settings_enable_notifications">Activer l\'accès aux notifications</string>
+    <string name="settings_notifications_hint">Canal de secours facultatif — capte les commandes envoyées sous forme de notification lorsque l\'application est réduite</string>
+    <string name="settings_permissions_title">Autorisations</string>
+    <string name="settings_permissions_hint">Lecture d\'écran, fenêtre flottante, notifications</string>
+
+    <string name="settings_vehicle_title">Véhicule</string>
+    <string name="settings_vehicle_car">Voiture</string>
+    <string name="settings_vehicle_scooter">Scooter</string>
+    <string name="settings_vehicle_bicycle">Vélo / trottinette électrique</string>
+    <string name="settings_fuel_petrol">Essence</string>
+    <string name="settings_fuel_diesel">Diesel</string>
+    <string name="settings_fuel_lpg">GPL</string>
+    <string name="settings_fuel_electric">Électrique</string>
+    <string name="settings_vehicle_consumption">Consommation aux 100 km</string>
+    <string name="settings_vehicle_price_fuel">Prix par litre</string>
+    <string name="settings_vehicle_price_electric">Prix par kWh</string>
+    <string name="settings_vehicle_save">Enregistrer</string>
+    <string name="settings_vehicle_summary_car">Voiture · %1$s · %2$s/100km</string>
+    <string name="settings_vehicle_summary_no_fuel">%1$s · aucun coût de carburant</string>
+    <string name="verdict_net_profit">Net %1$s (carburant %2$s)</string>
+    <string name="settings_saved">Enregistré</string>
+    <string name="settings_supported_apps_title">Applications prises en charge</string>
+    <string name="settings_supported_apps_hint">Liste intégrée + applications que vous ajoutez</string>
+    <string name="settings_supported_apps_builtin_label">Intégrées :</string>
+    <string name="settings_supported_apps_custom_label">Ajoutées par vous :</string>
+    <string name="settings_add_from_installed">Choisir parmi les applications installées</string>
+    <string name="settings_add_manually">Saisir l\'ID du package</string>
+    <string name="settings_package_id_label">ID du package (ex. com.example.app)</string>
+    <string name="settings_add">Ajouter</string>
+    <string name="settings_pick_installed_app_title">Choisir une application</string>
+    <string name="settings_search_apps_label">Rechercher</string>
+    <string name="settings_cancel">Annuler</string>
+    <string name="settings_already_added">déjà ajoutée</string>
+    <string name="settings_no_apps_found">Aucune application trouvée</string>
+    <string name="settings_calibrated">Calibrée ✓ (appuyez pour modifier)</string>
+    <string name="settings_not_calibrated">Non calibrée — appuyez pour l\'enseigner</string>
+    <string name="settings_calibration_title">Calibrer cette application</string>
+    <string name="settings_calibration_no_data">Aucune donnée de scan pour cette application pour l\'instant. Ouvrez-la sur l\'écran d\'une commande réelle et active, attendez quelques secondes, puis rouvrez cette fenêtre.</string>
+    <string name="settings_calibration_instructions">Voici le texte que WayArs a lu pour la dernière fois sur l\'écran de cette application. Appuyez sur la ligne contenant le prix, puis la distance, puis le temps.</string>
+    <string name="settings_calibration_role_money">Prix</string>
+    <string name="settings_calibration_role_distance">Distance</string>
+    <string name="settings_calibration_role_time">Temps</string>
+    <string name="settings_calibration_money_token_label">Symbole de devise (modifiez si nécessaire)</string>
+    <string name="settings_calibration_distance_token_label">Unité de distance (modifiez si nécessaire)</string>
+    <string name="settings_calibration_time_token_label">Unité de temps (modifiez si nécessaire)</string>
+    <string name="settings_calibration_clear">Réinitialiser la calibration</string>
+</resources>

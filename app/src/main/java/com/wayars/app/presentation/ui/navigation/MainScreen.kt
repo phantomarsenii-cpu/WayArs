@@ -54,7 +54,10 @@ fun MainScreen(
     onSaveVehicleProfile: (VehicleProfile) -> Unit,
     customPackages: Set<String>,
     onAddCustomPackage: (String) -> Unit,
-    onRemoveCustomPackage: (String) -> Unit
+    onRemoveCustomPackage: (String) -> Unit,
+    packageHints: Map<String, com.wayars.app.domain.model.PackageHint>,
+    onSavePackageHint: (com.wayars.app.domain.model.PackageHint) -> Unit,
+    onClearPackageHint: (String) -> Unit
 ) {
     var tab by remember { mutableStateOf(MainTab.HOME) }
 
@@ -90,7 +93,10 @@ fun MainScreen(
                 onSaveVehicleProfile = onSaveVehicleProfile,
                 customPackages = customPackages,
                 onAddCustomPackage = onAddCustomPackage,
-                onRemoveCustomPackage = onRemoveCustomPackage
+                onRemoveCustomPackage = onRemoveCustomPackage,
+                packageHints = packageHints,
+                onSavePackageHint = onSavePackageHint,
+                onClearPackageHint = onClearPackageHint
             )
         }
 

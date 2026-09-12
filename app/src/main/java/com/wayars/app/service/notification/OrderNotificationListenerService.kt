@@ -11,6 +11,7 @@ import com.wayars.app.domain.model.VehicleProfile
 import com.wayars.app.presentation.widget.OverlayState
 import com.wayars.app.service.accessibility.CustomPackagesState
 import com.wayars.app.service.accessibility.OrderAccessibilityService
+import com.wayars.app.service.accessibility.PackageHintsState
 import com.wayars.app.service.accessibility.ScanningState
 import com.wayars.app.util.ScreenTextParser
 import kotlinx.coroutines.CoroutineScope
@@ -52,12 +53,15 @@ class OrderNotificationListenerService : NotificationListenerService() {
         scope.launch {
             container.settingsRepository.customPackages.collect { CustomPackagesState.update(it) }
         }
+        scope.launch {
+            container.settingsRepository.packageHints.collect { PackageHintsState.update(it) }
+        }
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         sbn ?: return
         if (!ScanningState.isActive.value) return
-        if (ScanningState.isSuppressed()) return
+        if (ScanningState.isSuppressed(sbn.packageName)) return
         if (!OrderAccessibilityService.isSupportedPackage(sbn.packageName)) return
 
         val extras = sbn.notification.extras
@@ -68,7 +72,7 @@ class OrderNotificationListenerService : NotificationListenerService() {
         )
         if (texts.isEmpty()) return
 
-        val candidate = ScreenTextParser.parse(texts)
+        val candidate = ScreenTextParser.parse(texts, hint = PackageHintsState.hints[sbn.packageName])
         if (!candidate.isComplete) return
 
         val earnings = candidate.earnings ?: return
@@ -89,7 +93,7 @@ class OrderNotificationListenerService : NotificationListenerService() {
             customThresholds = currentCustomThresholds
         )
         Log.d(TAG, "Parsed order from notification: $evaluation")
-        OverlayState.publish(evaluation, recordId = null)
+        OverlayState.publish(evaluation, recordId = null, sourcePackage = sbn.packageName)
     }
 
     override fun onDestroy() {
