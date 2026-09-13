@@ -97,8 +97,15 @@ fun VerdictCard(evaluation: OrderEvaluation?, emptyLabel: String, modifier: Modi
                 .background(gaugeColor.copy(alpha = 0.16f))
                 .padding(horizontal = 14.dp, vertical = 6.dp)
         ) {
+            // Same "under 1 km -> show net profit, not €/km" rule as the
+            // overlay card — see OrderEvaluation.SHORT_TRIP_THRESHOLD_KM.
+            val badgeText = if (evaluation.distanceKm < com.wayars.app.domain.model.OrderEvaluation.SHORT_TRIP_THRESHOLD_KM) {
+                stringResource(R.string.verdict_short_trip_net, CurrencyFormatter.format(evaluation.netProfit, evaluation.currency))
+            } else {
+                CurrencyFormatter.formatRatePerKm(evaluation.ratePerKm, evaluation.currency)
+            }
             Text(
-                CurrencyFormatter.formatRatePerKm(evaluation.ratePerKm, evaluation.currency),
+                badgeText,
                 style = MaterialTheme.typography.labelSmall,
                 color = gaugeColor
             )

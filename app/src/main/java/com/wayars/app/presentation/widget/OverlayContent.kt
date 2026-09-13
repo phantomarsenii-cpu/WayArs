@@ -141,8 +141,16 @@ fun OverlayContent(
                     .background(WaSurfaceVariant)
                     .padding(horizontal = 10.dp, vertical = 4.dp)
             ) {
+                // Under 1 km a €/km figure is technically correct but reads
+                // as nonsense (it can exceed the order's own total) — show
+                // net profit instead so short orders don't look broken.
+                val badgeText = if (evaluation.distanceKm < OrderEvaluation.SHORT_TRIP_THRESHOLD_KM) {
+                    stringResource(R.string.verdict_short_trip_net, CurrencyFormatter.format(evaluation.netProfit, evaluation.currency))
+                } else {
+                    CurrencyFormatter.formatRatePerKm(evaluation.ratePerKm, evaluation.currency)
+                }
                 Text(
-                    CurrencyFormatter.formatRatePerKm(evaluation.ratePerKm, evaluation.currency),
+                    badgeText,
                     style = MaterialTheme.typography.labelSmall,
                     color = WaNeonGreen
                 )

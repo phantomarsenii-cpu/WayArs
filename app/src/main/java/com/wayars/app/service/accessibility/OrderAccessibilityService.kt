@@ -51,7 +51,23 @@ import kotlinx.coroutines.launch
  */
 class OrderAccessibilityService : AccessibilityService() {
 
-    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+    // Any AccessibilityNodeInfo work (windows, root.getChild, etc.) is only
+    // safe to touch from the same thread the system delivers events on —
+    // the main thread. pollForTexts() used to run its retry loop on
+    // Dispatchers.Default, a multi-thread pool, which read/walked the same
+    // node tree the main thread was simultaneously handling a fresh event
+    // for. Under a quiet trickle of orders that race rarely lined up; back
+    // to back Uber orders (many pollForTexts jobs in flight close together)
+    // hit it far more often, and an off-main-thread AccessibilityNodeInfo
+    // call throwing mid-walk was an UNCAUGHT exception on a background
+    // coroutine — with no exception handler installed, that crashes the
+    // whole app, not just the service. Main.immediate + a handler below
+    // fixes both: node access now happens only on the right thread, and if
+    // something still throws, it's logged instead of taking the app down.
+    private val exceptionHandler = kotlinx.coroutines.CoroutineExceptionHandler { _, error ->
+        Log.e(TAG, "Unhandled error in scan coroutine — ignored, service keeps running", error)
+    }
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate + exceptionHandler)
 
     private var currentCurrency: Currency = Currency.default
     private var currentPreset: Preset = Preset.BALANCE

@@ -79,6 +79,7 @@
     <string name="settings_vehicle_summary_fuel">%1$s · %2$s · %3$s/100km</string>
     <string name="settings_vehicle_summary_no_fuel">%1$s · aucun coût de carburant</string>
     <string name="verdict_net_profit">Net %1$s (carburant %2$s)</string>
+    <string name="verdict_short_trip_net">Net %1$s (trajet de moins d\'1 km)</string>
     <string name="settings_saved">Enregistré</string>
     <string name="settings_supported_apps_title">Applications prises en charge</string>
     <string name="settings_supported_apps_hint">Liste intégrée + applications que vous ajoutez</string>

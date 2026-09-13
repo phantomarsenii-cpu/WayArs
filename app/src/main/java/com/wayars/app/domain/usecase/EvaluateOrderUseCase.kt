@@ -14,20 +14,22 @@ import com.wayars.app.domain.model.VehicleProfile
  *  1. Fuel/energy cost = (distanceKm / 100) * consumption * pricePerUnit
  *     (always 0 for scooters/bicycles — see VehicleProfile).
  *  2. Net profit = earnings - fuel cost.
- *  3. Real time = the order's own reported time + [HIDDEN_TIME_MINUTES] —
- *     apps report only active drive/prep time, never the parking search, the
- *     red lights, or the wait at the restaurant counter. Padding it by a
- *     fixed amount gives an honest €/hour instead of an inflated one.
  *
- * The verdict itself is computed on NET €/km and NET €/(real)minute, not the
+ * The verdict itself is computed on NET €/km and NET €/minute, not the
  * gross numbers — a order can look great on paper and still lose money once
  * fuel is subtracted.
  *
  * If the user has set [customThresholds] (Settings screen), those take
  * priority over the selected preset and produce a 3-tier verdict
  * (GOOD / AVERAGE / BAD) based on net €/km. Otherwise falls back to the
- * preset-based logic, with one hard rule that always wins regardless of
- * preset: net €/km clearing [ABSOLUTE_GOOD_RATE_PER_KM_PLN] is ALWAYS GOOD.
+ * preset-based logic, with one rule that can still mark an order GOOD even
+ * if it misses the preset's own €/km bar: net €/km clearing
+ * [ABSOLUTE_GOOD_RATE_PER_KM_PLN]. That override ALSO requires the order to
+ * clear the preset's minimum €/minute — a €/km figure alone is misleading on
+ * very short trips (a 400m order can show a huge €/km purely because the
+ * distance is tiny, while still paying badly for the time it took), so a
+ * short, poorly-paid-per-minute order is no longer waved through as GOOD
+ * just because its distance was small.
  */
 class EvaluateOrderUseCase {
 
@@ -44,16 +46,20 @@ class EvaluateOrderUseCase {
         // >= 0, not > 0: apps like Stuart don't always expose a parseable
         // minutes figure, and the candidate then reaches here with
         // timeMinutes defaulted to 0 rather than being dropped entirely.
-        // realTimeMinutes below still gets the full HIDDEN_TIME_MINUTES
-        // padding, so the rate-per-minute math stays sane (no div-by-zero).
         require(timeMinutes >= 0) { "timeMinutes must be >= 0" }
 
         val fuelCost = vehicleProfile.fuelCostForDistance(distanceKm)
         val netProfit = earnings - fuelCost
-        val realTimeMinutes = timeMinutes + HIDDEN_TIME_MINUTES
 
+        // No hidden padding here anymore — this used to add a flat, fake
+        // "parking/red lights/waiting" constant on top of the order's own
+        // reported minutes before computing €/minute. That number never came
+        // from anything the app actually reported, so it silently skewed
+        // every order's real time (worst on short/quick ones, where a fixed
+        // 10 minutes is a huge fraction of the real duration) — removed so
+        // €/minute reflects only the time the source app actually reported.
         val ratePerKm = netProfit / distanceKm
-        val ratePerMinute = netProfit / realTimeMinutes
+        val ratePerMinute = if (timeMinutes > 0) netProfit / timeMinutes else 0.0
 
         val verdict = if (customThresholds != null) {
             when {
@@ -63,9 +69,17 @@ class EvaluateOrderUseCase {
             }
         } else {
             val absoluteGoodRate = ABSOLUTE_GOOD_RATE_PER_KM_PLN / currency.rateToPln
-            if (ratePerKm >= absoluteGoodRate) {
+            val clearsPresetBar = ratePerKm >= preset.minRatePerKm(currency) && ratePerMinute >= preset.minRatePerMinute(currency)
+            // The absolute-rate override used to fire on ratePerKm ALONE.
+            // On a short trip (e.g. 0.4 km) €/km can look huge purely because
+            // the distance is tiny, even while €/minute is terrible — that
+            // let a genuinely bad, barely-paid order get marked GOOD. Now the
+            // override also requires clearing the preset's own €/minute bar,
+            // same as the normal path below, so a big €/km number can no
+            // longer paper over a bad €/minute one.
+            if (ratePerKm >= absoluteGoodRate && ratePerMinute >= preset.minRatePerMinute(currency)) {
                 Verdict.GOOD
-            } else if (ratePerKm >= preset.minRatePerKm(currency) && ratePerMinute >= preset.minRatePerMinute(currency)) {
+            } else if (clearsPresetBar) {
                 Verdict.GOOD
             } else {
                 Verdict.BAD
@@ -86,15 +100,11 @@ class EvaluateOrderUseCase {
     }
 
     companion object {
-        /** Any order clearing this NET €/km bar (converted to the user's currency) is always GOOD. */
-        const val ABSOLUTE_GOOD_RATE_PER_KM_PLN = 4.0
-
         /**
-         * Default hidden time added to every order's own reported duration —
-         * parking, traffic lights, waiting at the pickup counter. This is a
-         * flat constant, not per-app tuned; adjust here if you want a
-         * different baseline.
+         * Any order clearing this NET €/km bar (converted to the user's
+         * currency) is GOOD provided it also clears the preset's own
+         * €/minute bar — see the override comment above.
          */
-        const val HIDDEN_TIME_MINUTES = 10.0
+        const val ABSOLUTE_GOOD_RATE_PER_KM_PLN = 4.0
     }
 }
