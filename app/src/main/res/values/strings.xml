@@ -164,5 +164,5 @@
     <string name="paywall_badge_popular_discount">★ Popular • -15%</string>
     <string name="paywall_per_month_hint">Just %1$s / month</string>
     <string name="paywall_data_safe">Your data is safe</string>
-    <string name="paywall_no_charge_notice">No charge for the first 7 days. Cancel anytime in Google Play.</string>
+    <string name="paywall_no_charge_notice">No charge for the first 7 days. Cancel anytime in Google Play.</string>
 </resources>

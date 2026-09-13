@@ -163,5 +163,5 @@
     <string name="paywall_badge_popular_discount">★ Популярный • -15%</string>
     <string name="paywall_per_month_hint">Только %1$s / месяц</string>
     <string name="paywall_data_safe">Ваши данные в безопасности</string>
-    <string name="paywall_no_charge_notice">Без оплаты первые 7 дней. Отмените в любой момент в Google Play.</string>
+    <string name="paywall_no_charge_notice">Без оплаты первые 7 дней. Отмените в любой момент в Google Play.</string>
 </resources>
