@@ -125,30 +125,82 @@ private object Ref {
     /** Reference content width: 672 - 32 = 640px (the span both card columns fill together). */
     const val CONTENT_W = 640f
 
-    // --- Header: text block vs. hero illustration, same row, split at ref X=330 ---
-    const val HEADER_TEXT_W = 298f   // 32..330
-    const val HEADER_HERO_X = 298f   // local X where the hero block starts
-    const val HEADER_HERO_W = 342f   // 330..672(screen right edge)
-    // Hero bounding box measured within its own 342-wide slot (local to that slot):
-    // the phone illustration + its glow sits centered, floating tags orbit it.
-    const val HERO_H = 275f          // ref Y 25..300 (title top-align to divider)
+    // --- Header: ONE local coordinate system, 0..640 — the same PHYSICAL
+    // content-column span as the cards block (screen-capture X 32..672),
+    // but NOT the same number system: the cards block below was
+    // re-measured against the 2388px high-resolution capture and now
+    // uses CARDS_REF_W = 2162; Header/Hero here are still measured
+    // against the original 704px capture (640 = 672-32 in THAT image),
+    // not yet redone at the higher resolution. Every X below is
+    // (screen-capture X) - 32, consistent within this 640-unit system —
+    // just don't mix a raw number from here with a raw number from the
+    // cards block; each is only valid scaled through its own RefCanvas.
+    // This local-640 system also replaces an earlier version of this file
+    // that mixed screen-space and content-space on one number line: it
+    // declared `RefCanvas(refW = 704f, ...)` (screen-space) while also
+    // computing HEADER_TEXT_W/HEADER_HERO_W as 32..330/330..672 spans
+    // (content-space). Fixed here; every constant below is content-local.
+    //
+    // refH is not a round guess either: it's the max(Y+H) over every
+    // child placed below (subtitle ends at 428+70=498), so nothing can
+    // be placed outside the canvas's own declared height — the previous
+    // version fixed refH=345 while the subtitle box's own Y (428) already
+    // exceeded it.
+    const val HEADER_REF_W = 640f
+    const val HEADER_REF_H = 498f   // max(Y+H): subtitle 428+70
+
+    const val LOGO_X = 33f;     const val LOGO_Y = 38f;  const val LOGO_W = 44f;  const val LOGO_H = 52f
+    const val WORDMARK_X = 83f; const val WORDMARK_Y = 45f; const val WORDMARK_W = 250f; const val WORDMARK_H = 40f
+    const val TAGLINE_X = 83f;  const val TAGLINE_Y = 112f; const val TAGLINE_W = 350f; const val TAGLINE_H = 18f
+    const val BADGE_FA_X = 0f;  const val BADGE_FA_Y = 203f; const val BADGE_FA_W = 268f; const val BADGE_FA_H = 42f
+    const val TITLE_X = 0f;     const val TITLE_Y = 258f; const val TITLE_W = 300f; const val TITLE_H = 155f
+    const val SUBTITLE_X = 0f;  const val SUBTITLE_Y = 428f; const val SUBTITLE_W = 300f; const val SUBTITLE_H = 70f
+
+    // Hero slot: content-local X 298..640 (== screen-space 330..672) — its
+    // WIDTH (342) must equal [HEADER_HERO_W] below exactly, because
+    // [HeroIllustration] runs its OWN nested RefCanvas with
+    // refW = HEADER_HERO_W: if the outer box here reported a different
+    // width (an earlier version used 374, i.e. 704-330 — the distance to
+    // the raw image edge, not to the 672 content-right-margin), the two
+    // canvases would disagree on scale and the inner content would
+    // render at the wrong size for its own slot. Height matches
+    // [HERO_H] for the same reason — Compose requires a measured child
+    // to satisfy the exact (fixed) constraints its parent gave it.
+    const val HERO_SLOT_X = 298f
+    const val HEADER_HERO_W = 342f   // 330..672 — must equal HeroIllustration's own refW
+    const val HERO_H = 275f          // must equal HeroIllustration's own refH
     // Phone frame and floating-tag anchor points, LOCAL to the hero slot
     // (i.e. already offset by ref X=330, ref Y=25 — the slot's own
-    // origin). Read off the same grid-overlay analysis as the cards.
+    // origin, NOT the header's).
+    //
+    // RE-ESTIMATED against the 2388×5120 high-res capture (previous
+    // values were read off the original 704px capture at much coarser
+    // grid spacing). Method: crop the hero region from the high-res
+    // image, read each shape's corners visually against a 50px grid,
+    // then convert back into this slot's own 342-wide unit system via
+    // (highRes_px − slot_origin_highRes_px) / 3.391. This is a step up in
+    // confidence from the original pass, but — unlike the pricing
+    // cards' button/price/pill boxes — it is a human read of a rotated
+    // shape's corners, not a brightness-threshold scan (the tags'
+    // rotation and overlapping text made a clean threshold unreliable
+    // here), so treat these as "re-estimated," not "measured," the same
+    // distinction the compact table below draws explicitly. The phone's
+    // real silhouette is also rotated (~15°) and reported here only as
+    // its axis-aligned bounding box, same as before.
     // Rotation angles are the tags' visible tilt in the reference.
-    const val PHONE_X = 165f;       const val PHONE_Y = 15f
-    const val PHONE_W = 100f;       const val PHONE_H = 210f
+    const val PHONE_X = 136f;       const val PHONE_Y = 0f
+    const val PHONE_W = 127f;       const val PHONE_H = 249f
     const val GLOW_W = 130f;        const val GLOW_H = 130f
-    const val TAG_BOLT_X = 90f;     const val TAG_BOLT_Y = 55f;  const val TAG_BOLT_ROT = -7f
-    const val TAG_BOLT_W = 95f;     const val TAG_BOLT_H = 55f
-    const val TAG_UBER_X = 0f;      const val TAG_UBER_Y = 115f; const val TAG_UBER_ROT = -3f
-    const val TAG_UBER_W = 100f;    const val TAG_UBER_H = 55f
-    const val TAG_WOLT_X = 250f;    const val TAG_WOLT_Y = 55f;  const val TAG_WOLT_ROT = 6f
-    const val TAG_WOLT_W = 90f;     const val TAG_WOLT_H = 55f
-    const val TAG_STUART_X = 255f;  const val TAG_STUART_Y = 165f; const val TAG_STUART_ROT = 0f
-    const val TAG_STUART_W = 90f;   const val TAG_STUART_H = 70f
-    const val TAG_FREENOW_X = 255f; const val TAG_FREENOW_Y = 195f; const val TAG_FREENOW_ROT = -4f
-    const val TAG_FREENOW_W = 90f;  const val TAG_FREENOW_H = 70f
+    const val TAG_BOLT_X = 86f;     const val TAG_BOLT_Y = 24f;  const val TAG_BOLT_ROT = -7f
+    const val TAG_BOLT_W = 52f;     const val TAG_BOLT_H = 46f
+    const val TAG_UBER_X = 52f;     const val TAG_UBER_Y = 77f;  const val TAG_UBER_ROT = -3f
+    const val TAG_UBER_W = 60f;     const val TAG_UBER_H = 50f
+    const val TAG_WOLT_X = 266f;    const val TAG_WOLT_Y = 32f;  const val TAG_WOLT_ROT = 6f
+    const val TAG_WOLT_W = 55f;     const val TAG_WOLT_H = 55f
+    const val TAG_STUART_X = 266f;  const val TAG_STUART_Y = 102f; const val TAG_STUART_ROT = 0f
+    const val TAG_STUART_W = 49f;   const val TAG_STUART_H = 56f
+    const val TAG_FREENOW_X = 230f; const val TAG_FREENOW_Y = 167f; const val TAG_FREENOW_ROT = -4f
+    const val TAG_FREENOW_W = 52f;  const val TAG_FREENOW_H = 55f
 
     // --- Pricing cards block ---
     // Re-measured directly against the higher-resolution reference
@@ -178,17 +230,24 @@ private object Ref {
     const val MONTHLY_X = 908f; const val MONTHLY_Y = 120f   // ref-image y 1950..4028
     const val MONTHLY_W = 1254f; const val MONTHLY_H = 2078f
     /**
-     * NOT independently edge-detected — the badge pill sits on top of the
-     * Monthly card's own top-of-card glow, which is nearly the same green
-     * and defeats the brightness-spike method used above (tried it; the
-     * "outside the badge" readings were just as bright as "inside" it,
-     * because both are inside the card's own gradient). This is a
-     * proportion-based estimate off the rendered image (~40% of the
-     * Monthly card's width, centered), not a measured value — flagged
-     * rather than presented as equal-confidence to the box above it.
+     * Third pass, per direct request to re-verify independently — not on
+     * the upscale, but on the actually-uploaded native file
+     * (1000160199.jpg, verified via PIL as 704×1510px; despite the
+     * "716×1536" label used in conversation, that number does not match
+     * either uploaded file's actual pixel dimensions and isn't used
+     * anywhere in this math).
+     *
+     * Native-file measurement (clean, text-free rows/columns):
+     * left=407, right=567 (row y=560-565), top=548, bottom=592 (column
+     * x=420) → 160×44px. Scaled ×3.392 (2388/704) to the high-res
+     * system: 543×149, center-x 1382. Independently re-checking the
+     * PRIOR high-res-only measurement (552×155, center-x 1649... i.e.
+     * center converts to 1649/3.392=486 native-px, vs 487 from this
+     * pass — consistent): both passes agree on center and are within
+     * ~2% of each other on size. Averaged and rounded below.
      */
-    const val BADGE_W = 500f;   const val BADGE_H = 150f
-    const val BADGE_Y = 48f     // top-edge spike WAS found cleanly: ref-image y 1878
+    const val BADGE_W = 550f;   const val BADGE_H = 154f
+    const val BADGE_Y = 28f
     /** Bottom-most edge across both columns: max(Weekly bottom 1312+1096=2408, Monthly bottom 120+1908=2028). */
     const val CARDS_BLOCK_H = 2408f
 }
@@ -580,10 +639,11 @@ private fun PricingCardsBlock(
         }
 
         // "Популярный" badge — sibling of the cards, not nested inside
-        // PlanCard, positioned by its own measured coordinates so it
-        // overhangs the Monthly card's top border by exactly the
-        // measured 10px, instead of being simulated with card-content
-        // padding. zIndex keeps it above the Monthly card it overlaps.
+        // PlanCard, positioned by its own coordinates (Ref.BADGE_W/H/Y —
+        // cross-checked on two independent files, see that doc comment).
+        // At BADGE_Y=28, BADGE_H=154, MONTHLY_Y=120: badge sits 92px
+        // above the Monthly card's top border and 62px below it.
+        // zIndex keeps the badge above the Monthly card it overlaps.
         Box(
             modifier = Modifier
                 .refBounds(
@@ -645,24 +705,35 @@ private fun Header() {
     // Single coordinate canvas for the whole header block — logo, wordmark,
     // tagline, badge, title, subtitle and the hero slot are all placed by
     // their own [Ref] coordinates via [refBounds], not by nested Row/Column
-    // flow. Coordinates here are in the ORIGINAL reference capture's own
-    // pixel space (0..704 wide) rather than re-localized to content-left,
-    // to avoid introducing new arithmetic errors converting them — these
-    // were NOT re-verified against the higher-resolution capture this
-    // round (unlike the pricing cards above); they carry the same
-    // moderate-confidence caveat as before.
+    // flow. Fixed from an earlier version of this file that mixed two
+    // coordinate systems: it declared `RefCanvas(refW = 704f, ...)`
+    // (raw screen-capture space) while the width split comments below it
+    // were already expressed content-local (32..330 / 330..672) — same
+    // number line, two meanings. Now the canvas and every constant it
+    // reads are BOTH content-local (0..640, X = screen-capture X − 32) —
+    // internally consistent with itself.
+    //
+    // This is a DIFFERENT unit system from the cards block's
+    // (Ref.CARDS_REF_W = 2162), not the same one: the cards were
+    // re-measured against the 2388px-wide high-resolution capture, while
+    // Header/Hero below are still measured against the original 704px
+    // capture and were not redone at the higher resolution. Both
+    // represent the same physical content-column span (screen-left+32 to
+    // screen-right-32) and both scale correctly on their own via
+    // [RefCanvas] — a number from one must never be plugged into the
+    // other without going through actual screen-space pixels first.
     // Text elements use `autoHeight = true`: their width and top position
     // are still pinned by the reference, but their rendered height is left
     // free so a longer translation wraps instead of getting clipped.
-    RefCanvas(refW = 704f, refH = 345f, modifier = Modifier.fillMaxWidth()) {
+    RefCanvas(refW = Ref.HEADER_REF_W, refH = Ref.HEADER_REF_H, modifier = Modifier.fillMaxWidth()) {
         Image(
             painter = painterResource(R.drawable.wayars_icon_header),
             contentDescription = null,
             modifier = Modifier
-                .refBounds(65f, 38f, 44f, 52f)
+                .refBounds(Ref.LOGO_X, Ref.LOGO_Y, Ref.LOGO_W, Ref.LOGO_H)
                 .clip(RoundedCornerShape(11.dp))
         )
-        Row(modifier = Modifier.refBounds(115f, 45f, 250f, 40f, autoHeight = true)) {
+        Row(modifier = Modifier.refBounds(Ref.WORDMARK_X, Ref.WORDMARK_Y, Ref.WORDMARK_W, Ref.WORDMARK_H, autoHeight = true)) {
             Text("Way", color = WaTextPrimary, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
             Text("Ars", color = WaNeonGreen, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
         }
@@ -671,12 +742,12 @@ private fun Header() {
             color = WaTextSecondary,
             fontSize = 9.sp,
             letterSpacing = 1.2.sp,
-            modifier = Modifier.refBounds(115f, 112f, 350f, 18f, autoHeight = true)
+            modifier = Modifier.refBounds(Ref.TAGLINE_X, Ref.TAGLINE_Y, Ref.TAGLINE_W, Ref.TAGLINE_H, autoHeight = true)
         )
 
         Box(
             modifier = Modifier
-                .refBounds(32f, 203f, 268f, 42f, autoHeight = true)
+                .refBounds(Ref.BADGE_FA_X, Ref.BADGE_FA_Y, Ref.BADGE_FA_W, Ref.BADGE_FA_H, autoHeight = true)
                 .clip(RoundedCornerShape(50))
                 .border(BorderStroke(1.dp, WaNeonGreen.copy(alpha = 0.5f)), RoundedCornerShape(50))
                 .padding(horizontal = 14.dp, vertical = 6.dp)
@@ -684,7 +755,7 @@ private fun Header() {
             Text(stringResource(R.string.paywall_badge_full_access), color = WaNeonGreen, fontSize = 11.sp)
         }
 
-        Column(modifier = Modifier.refBounds(32f, 258f, 300f, 155f, autoHeight = true)) {
+        Column(modifier = Modifier.refBounds(Ref.TITLE_X, Ref.TITLE_Y, Ref.TITLE_W, Ref.TITLE_H, autoHeight = true)) {
             val titleLines = stringResource(R.string.paywall_title).split("\n")
             Text(
                 titleLines.getOrElse(0) { "" },
@@ -710,10 +781,19 @@ private fun Header() {
             color = WaTextSecondary,
             fontSize = 12.5.sp,
             lineHeight = 17.sp,
-            modifier = Modifier.refBounds(32f, 428f, 300f, 70f, autoHeight = true)
+            modifier = Modifier.refBounds(Ref.SUBTITLE_X, Ref.SUBTITLE_Y, Ref.SUBTITLE_W, Ref.SUBTITLE_H, autoHeight = true)
         )
 
-        HeroIllustration(modifier = Modifier.refBounds(330f, 20f, 374f, 280f))
+        // Width/height here MUST equal Ref.HEADER_HERO_W / Ref.HERO_H
+        // exactly (342 / 275) — HeroIllustration's own internal RefCanvas
+        // uses those same two constants as ITS refW/refH. An earlier
+        // version passed width=374 here (704 − 330, distance to the raw
+        // image edge) while HeroIllustration measured itself against 342
+        // (672 − 330, distance to the content-right margin): two
+        // different reference widths for the same box, which would have
+        // scaled the phone/tags inside it by the wrong factor relative
+        // to their own slot.
+        HeroIllustration(modifier = Modifier.refBounds(Ref.HERO_SLOT_X, 20f, Ref.HEADER_HERO_W, Ref.HERO_H))
     }
 
     Spacer(Modifier.height(18.dp))
