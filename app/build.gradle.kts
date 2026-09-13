@@ -1,3 +1,5 @@
+import java.io.File
+
 plugins {
     id("com.android.application")
     // Built-in Kotlin (AGP 9+) replaces org.jetbrains.kotlin.android — see
@@ -168,8 +170,8 @@ abstract class RenameApkTask : DefaultTask() {
         val builtArtifacts = builtArtifactsLoader.get().load(apkFolder.get())
             ?: throw RuntimeException("Cannot load APKs from ${apkFolder.get()}")
         builtArtifacts.elements.forEach { artifact ->
-            val original = java.io.File(artifact.outputFile)
-            val renamed = java.io.File(original.parentFile, "WayArs.apk")
+            val original = File(artifact.outputFile)
+            val renamed = File(original.parentFile, "WayArs.apk")
             if (renamed != original) {
                 original.copyTo(renamed, overwrite = true)
                 original.delete()
