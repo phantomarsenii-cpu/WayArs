@@ -148,14 +148,52 @@ android {
 
 // Rename the output file itself (not just the artifact zip) to WayArs.apk
 // instead of the default app-debug.apk / app-release.apk. This replaces the
-// old applicationVariants.all { ... BaseVariantOutputImpl ... } API, which
-// AGP 9's new DSL no longer recognizes — androidComponents.onVariants is the
-// stable, public replacement (outputFileName has been a real Property<String>
-// on VariantOutput since AGP 4.1, unlike the internal type used before).
+// old applicationVariants.all { ... BaseVariantOutputImpl ... } API.
+//
+// Note this is NOT simply VariantOutput.outputFileName under a new name —
+// AGP 9's new DSL removed the ability to mutate the output filename directly
+// at all (confirmed by Google's own gradle-recipes migration notes: renaming
+// an APK now requires reading the built artifact via the Artifacts API and
+// copying/renaming it with a real task — there is no property to set).
+// This mirrors that officially documented pattern.
+abstract class RenameApkTask : DefaultTask() {
+    @get:InputFiles
+    abstract val apkFolder: DirectoryProperty
+
+    @get:Internal
+    abstract val builtArtifactsLoader: Property<com.android.build.api.variant.BuiltArtifactsLoader>
+
+    @TaskAction
+    fun taskAction() {
+        val builtArtifacts = builtArtifactsLoader.get().load(apkFolder.get())
+            ?: throw RuntimeException("Cannot load APKs from ${apkFolder.get()}")
+        builtArtifacts.elements.forEach { artifact ->
+            val original = java.io.File(artifact.outputFile)
+            val renamed = java.io.File(original.parentFile, "WayArs.apk")
+            if (renamed != original) {
+                original.copyTo(renamed, overwrite = true)
+                original.delete()
+            }
+        }
+    }
+}
+
 androidComponents {
     onVariants { variant ->
-        variant.outputs.forEach { output ->
-            output.outputFileName.set("WayArs.apk")
+        val renameApkTask = tasks.register(
+            "rename${variant.name.replaceFirstChar { it.uppercase() }}Apk",
+            RenameApkTask::class.java
+        ) {
+            apkFolder.set(variant.artifacts.get(com.android.build.api.artifact.SingleArtifact.APK))
+            builtArtifactsLoader.set(variant.artifacts.getBuiltArtifactsLoader())
+        }
+        // assembleDebug / assembleRelease don't know about this task by
+        // default, so finalizedBy makes sure it always runs right after —
+        // task dependency on the actual APK is inferred from apkFolder above.
+        afterEvaluate {
+            tasks.named("assemble${variant.name.replaceFirstChar { it.uppercase() }}") {
+                finalizedBy(renameApkTask)
+            }
         }
     }
 }
