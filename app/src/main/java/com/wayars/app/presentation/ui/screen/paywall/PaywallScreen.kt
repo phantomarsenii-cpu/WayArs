@@ -219,77 +219,81 @@ private data class CardGeom(
 )
 
 /**
- * The [CardGeom] literals below were originally measured relative to the
- * low-resolution reference's card sizes (240/330/372 wide). [Ref]'s card
- * boxes have since been re-measured against the higher-resolution
- * reference and are now expressed in that image's own pixel scale
- * (840/840/1254 wide) — a ~3.37–3.5x bigger number space. Rather than
- * silently rewriting every internal literal into that new scale (easy to
- * introduce transcription errors, and it would hide what actually
- * changed), [sb] rescales the ORIGINAL small measured numbers by the
- * same ratio so they land correctly inside the new, bigger card boxes:
- * the numbers you read below (33, 20, 44, 45, ...) are still the
- * original per-element measurements.
+ * Directly measured against the 2388×5120 reference — NOT the old
+ * `sb()`/`YW_K`/`MO_K` scaling of smaller approximate numbers (that
+ * function and those constants are gone from this file). Method per
+ * card: crop the card to its own measured [Ref] box, overlay a 40px
+ * grid, and read boundaries off that; for clean rectangular shapes
+ * (discount pill, price digits, CTA button) a brightness-threshold scan
+ * found the exact edge instead of an eyeballed one — those are marked
+ * "(auto)" below. Text block edges (title, subtitle, feature lines) are
+ * grid-reads at this resolution — much tighter than the old low-res
+ * pass, but still a human read, not a threshold scan, so they're marked
+ * "(grid)". Nothing here is pixel-exact for sub-pixel glyph edges; both
+ * tiers are reported as what they are, not both as "measured."
+ *
+ * NOT separately verified this round (kept as reasonable defaults, not
+ * reference-derived): check-icon size, icon-to-text gap within a
+ * feature row, card corner radius, border thickness. A corner-radius
+ * pixel trace was attempted for Yearly and came back too noisy (3
+ * samples, inconsistent curve) to report as a number rather than a
+ * guess, so it was dropped rather than presented with false confidence.
  */
-private fun sb(x: Float, y: Float, w: Float, h: Float, k: Float) = RefBox(x * k, y * k, w * k, h * k)
-private val YW_K = Ref.YEARLY_W / 240f   // = WEEKLY_W / 240f too — both share the old 240 base
-private val MO_K = Ref.MONTHLY_W / 372f
-
 private val YearlyGeom = CardGeom(
     cardW = Ref.YEARLY_W, cardH = Ref.YEARLY_H,
-    icon = sb(33f, 20f, 44f, 45f, YW_K),
-    title = sb(86f, 20f, 150f, 24f, YW_K),
-    subtitle = sb(86f, 48f, 150f, 16f, YW_K),
-    pill = sb(33f, 73f, 110f, 40f, YW_K),
-    trial = sb(150f, 73f, 90f, 40f, YW_K),
-    price = sb(33f, 122f, 140f, 42f, YW_K),
+    icon = RefBox(76f, 65f, 124f, 135f),          // (grid)
+    title = RefBox(258f, 60f, 300f, 80f),          // (grid)
+    subtitle = RefBox(258f, 155f, 520f, 55f),      // (grid)
+    pill = RefBox(70f, 272f, 230f, 110f),          // (auto)
+    trial = RefBox(335f, 290f, 430f, 80f),         // (grid)
+    price = RefBox(73f, 425f, 390f, 100f),         // (auto)
     original = null,
-    period = sb(178f, 150f, 60f, 20f, YW_K),
+    period = RefBox(465f, 470f, 95f, 60f),         // (grid)
     features = listOf(
-        sb(33f, 190f, 175f, 20f, YW_K),
-        sb(33f, 215f, 175f, 20f, YW_K),
-        sb(33f, 240f, 175f, 40f, YW_K),
-        sb(33f, 288f, 175f, 20f, YW_K)
+        RefBox(76f, 598f, 700f, 60f),              // (grid; checkmark-column spike confirmed row centers)
+        RefBox(76f, 678f, 700f, 60f),
+        RefBox(76f, 754f, 700f, 140f),             // wraps to 2 lines
+        RefBox(76f, 896f, 700f, 60f)
     ),
-    button = sb(33f, 323f, 174f, 37f, YW_K)
+    button = RefBox(68f, 1020f, 708f, 131f)        // (auto)
 )
 
 private val WeeklyGeom = CardGeom(
     cardW = Ref.WEEKLY_W, cardH = Ref.WEEKLY_H,
-    icon = sb(33f, 20f, 44f, 45f, YW_K),
-    title = sb(86f, 20f, 150f, 24f, YW_K),
-    subtitle = sb(86f, 48f, 150f, 16f, YW_K),
-    pill = null,
-    trial = sb(33f, 80f, 180f, 20f, YW_K),
-    price = sb(33f, 103f, 140f, 42f, YW_K),
+    icon = RefBox(75f, 62f, 125f, 135f),           // (grid)
+    title = RefBox(258f, 62f, 300f, 75f),          // (grid)
+    subtitle = RefBox(258f, 155f, 460f, 50f),      // (grid)
+    pill = null,                                   // Weekly has no discount — plain trial text only
+    trial = RefBox(75f, 235f, 530f, 70f),          // (grid)
+    price = RefBox(72f, 330f, 300f, 100f),         // (auto bbox, period trimmed off)
     original = null,
-    period = sb(168f, 130f, 70f, 20f, YW_K),
+    period = RefBox(430f, 375f, 200f, 55f),        // (grid)
     features = listOf(
-        sb(33f, 170f, 175f, 20f, YW_K),
-        sb(33f, 195f, 175f, 20f, YW_K),
-        sb(33f, 220f, 175f, 40f, YW_K),
-        sb(33f, 268f, 175f, 20f, YW_K)
+        RefBox(76f, 480f, 700f, 60f),              // (grid)
+        RefBox(76f, 560f, 700f, 60f),
+        RefBox(76f, 640f, 700f, 140f),             // wraps to 2 lines
+        RefBox(76f, 782f, 700f, 60f)
     ),
-    button = sb(33f, 288f, 174f, 35f, YW_K)
+    button = RefBox(68f, 910f, 702f, 132f)         // (auto)
 )
 
 private val MonthlyGeom = CardGeom(
     cardW = Ref.MONTHLY_W, cardH = Ref.MONTHLY_H,
-    icon = sb(55f, 45f, 55f, 55f, MO_K),
-    title = sb(125f, 45f, 200f, 30f, MO_K),
-    subtitle = sb(125f, 82f, 220f, 20f, MO_K),
-    pill = sb(55f, 140f, 135f, 55f, MO_K),
-    trial = sb(210f, 140f, 140f, 55f, MO_K),
-    price = sb(55f, 225f, 190f, 55f, MO_K),
-    original = sb(255f, 245f, 100f, 30f, MO_K),
-    period = sb(55f, 285f, 100f, 25f, MO_K),
+    icon = RefBox(75f, 95f, 155f, 165f),           // (grid)
+    title = RefBox(285f, 105f, 290f, 75f),         // (grid)
+    subtitle = RefBox(285f, 200f, 500f, 55f),      // (grid)
+    pill = RefBox(75f, 320f, 245f, 115f),          // (grid — auto scan inconclusive, dark-text-on-pill defeated the threshold)
+    trial = RefBox(340f, 340f, 460f, 75f),         // (grid)
+    price = RefBox(75f, 505f, 395f, 110f),         // (grid)
+    original = RefBox(500f, 530f, 200f, 75f),      // (grid)
+    period = RefBox(140f, 630f, 230f, 70f),        // (grid)
     features = listOf(
-        sb(55f, 345f, 300f, 25f, MO_K),
-        sb(55f, 385f, 300f, 25f, MO_K),
-        sb(55f, 425f, 300f, 50f, MO_K),
-        sb(55f, 485f, 300f, 25f, MO_K)
+        RefBox(75f, 745f, 1100f, 80f),             // (grid)
+        RefBox(75f, 825f, 1100f, 80f),
+        RefBox(75f, 905f, 1100f, 160f),            // wraps to 2 lines
+        RefBox(75f, 1065f, 1100f, 80f)
     ),
-    button = sb(55f, 555f, 262f, 75f, MO_K)
+    button = RefBox(93f, 1778f, 1070f, 200f)       // (auto)
 )
 
 private fun geomFor(plan: PlanType): CardGeom = when (plan) {
@@ -1123,7 +1127,6 @@ private fun PlanCard(
                         showArrow = true,
                         isLoading = purchasingThis,
                         enabled = clickEnabled,
-                        height = 52.dp,
                         onClick = { onSelect(plan) }
                     )
                     PlanType.YEARLY -> GradientSelectButton(
@@ -1133,7 +1136,6 @@ private fun PlanCard(
                         showArrow = false,
                         isLoading = purchasingThis,
                         enabled = clickEnabled,
-                        height = 48.dp,
                         onClick = { onSelect(plan) }
                     )
                     PlanType.WEEKLY -> OutlinePlainButton(
@@ -1204,13 +1206,15 @@ private fun GradientSelectButton(
     showArrow: Boolean,
     isLoading: Boolean,
     enabled: Boolean,
-    height: androidx.compose.ui.unit.Dp,
     onClick: () -> Unit
 ) {
+    // Height comes from the parent Box, which is sized to CardGeom.button
+    // (a measured reference box) by the caller — not a fixed dp here, so
+    // there's no second, independent size system fighting the geometry
+    // the card was laid out with.
     Box(
         modifier = Modifier
-            .fillMaxWidth()
-            .height(height)
+            .fillMaxSize()
             .clip(RoundedCornerShape(50))
             .background(if (enabled) brush else Brush.horizontalGradient(listOf(WaSurfaceVariant, WaSurfaceVariant)))
             .clickable(enabled = enabled && !isLoading, onClick = onClick),
@@ -1230,7 +1234,8 @@ private fun GradientSelectButton(
     }
 }
 
-/** Outlined "Select" button used for the Weekly plan. */
+/** Outlined "Select" button used for the Weekly plan. Height likewise comes
+ *  from the parent Box (CardGeom.button), not a fixed dp. */
 @Composable
 private fun OutlinePlainButton(
     text: String,
@@ -1240,8 +1245,7 @@ private fun OutlinePlainButton(
 ) {
     Box(
         modifier = Modifier
-            .fillMaxWidth()
-            .height(52.dp)
+            .fillMaxSize()
             .clip(RoundedCornerShape(50))
             .border(BorderStroke(1.dp, WaSurfaceVariant), RoundedCornerShape(50))
             .clickable(enabled = enabled && !isLoading, onClick = onClick),
