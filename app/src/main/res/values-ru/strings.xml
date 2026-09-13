@@ -156,4 +156,11 @@
     <string name="paywall_tagline">УМНЫЙ ПОМОЩНИК ДЛЯ ДОСТАВКИ И ТАКСИ</string>
     <string name="paywall_compat_label">Работает вместе с сервисами, в которых вы уже работаете</string>
     <string name="paywall_mock_selected_toast">Выбран план «%1$s» — покупки станут доступны после публикации в Google Play</string>
+    <string name="paywall_pro_header">WayArs Pro</string>
+    <string name="paywall_cta_trial">Попробовать 7 дней за 0 $</string>
+    <string name="paywall_badge_best_value">★ НАИПОПУЛЯРНЕЙШИЙ • ЭКОНОМИШЬ 30%</string>
+    <string name="paywall_badge_popular_discount">★ Популярный • -15%</string>
+    <string name="paywall_per_month_hint">Только %1$s / месяц</string>
+    <string name="paywall_data_safe">Ваши данные в безопасности</string>
+    <string name="paywall_no_charge_notice">Без оплаты первые 7 дней. Отмените в любой момент в Google Play.</string>
 </resources>

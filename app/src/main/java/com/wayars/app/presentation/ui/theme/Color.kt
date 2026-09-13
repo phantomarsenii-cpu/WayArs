@@ -29,3 +29,21 @@ val WaTagWolt = Color(0xFF29B6C8)
 val WaTagWoltDark = Color(0xFF0E7C93)
 val WaTagStuart = Color(0xFF1E2A44)
 val WaTagFreeNow = Color(0xFFDB3439)
+
+// "WayArs Pro" paywall — dark aurora theme, colors taken directly from the
+// approved HTML reference (wayars_pro_original_logo.html). Kept separate
+// from the palette above since this screen's background/greens/purples are
+// a different, slightly more saturated set than the rest of the app.
+val WaProBackground = Color(0xFF050A18)
+val WaProGreen = Color(0xFF1EDE8A)
+val WaProCyan = Color(0xFF00B4D8)
+val WaProPurpleBadge = Color(0xFF7C3AED)
+val WaProGreenBadge = Color(0xFF10B981)
+val WaProAuroraGreen = Color(0xFF00E676)
+val WaProCardBg = Color(0xFF0F1629)
+val WaProCardBgSelected = Color(0xFF121A2F)
+val WaProCardBorder = Color(0xFF2A3A5A)
+val WaProTextMuted = Color(0xFF8B93A7)
+val WaProTextMuted2 = Color(0xFF6B7289)
+val WaProTextMuted3 = Color(0xFF5A647D)
+val WaProTextFaint = Color(0xFFC2C8D5)

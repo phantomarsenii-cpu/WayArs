@@ -156,4 +156,11 @@
     <string name="paywall_tagline">ASISTENT INTELIGENT PENTRU LIVRARE ȘI TAXI</string>
     <string name="paywall_compat_label">Funcționează alături de aplicațiile în care conduci deja</string>
     <string name="paywall_mock_selected_toast">Planul „%1$s” a fost selectat — achizițiile vor fi disponibile după lansarea pe Google Play</string>
+    <string name="paywall_pro_header">WayArs Pro</string>
+    <string name="paywall_cta_trial">Încearcă 7 zile pentru 0 $</string>
+    <string name="paywall_badge_best_value">★ CEA MAI POPULARĂ • ECONOMISEȘTI 30%</string>
+    <string name="paywall_badge_popular_discount">★ Popular • -15%</string>
+    <string name="paywall_per_month_hint">Doar %1$s / lună</string>
+    <string name="paywall_data_safe">Datele tale sunt în siguranță</string>
+    <string name="paywall_no_charge_notice">Fără costuri primele 7 zile. Anulează oricând din Google Play.</string>
 </resources>

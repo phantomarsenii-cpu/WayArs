@@ -1,486 +1,109 @@
 package com.wayars.app.presentation.ui.screen.paywall
 
-import androidx.compose.foundation.BorderStroke
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.Bolt
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.LocalShipping
-import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Public
+import androidx.compose.material.icons.filled.Sell
 import androidx.compose.material.icons.filled.Shield
-import androidx.compose.material.icons.filled.ShowChart
-import androidx.compose.material.icons.filled.Storefront
+import androidx.compose.material.icons.filled.WorkspacePremium
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.layout.Measurable
-import androidx.compose.ui.layout.ParentDataModifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.unit.Constraints
-import androidx.compose.ui.unit.Density
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.zIndex
 import com.wayars.app.R
 import com.wayars.app.presentation.PaywallUiState
 import com.wayars.app.presentation.PlanOption
 import com.wayars.app.presentation.PlanType
-import com.wayars.app.presentation.ui.theme.WaHeroPhoneBottom
-import com.wayars.app.presentation.ui.theme.WaHeroPhoneTop
-import com.wayars.app.presentation.ui.theme.WaNeonGreen
-import com.wayars.app.presentation.ui.theme.WaNeonGreenDark
-import com.wayars.app.presentation.ui.theme.WaPurple
-import com.wayars.app.presentation.ui.theme.WaPurpleLight
-import com.wayars.app.presentation.ui.theme.WaSurface
-import com.wayars.app.presentation.ui.theme.WaSurfaceVariant
-import com.wayars.app.presentation.ui.theme.WaTagBolt
-import com.wayars.app.presentation.ui.theme.WaTagBoltDark
-import com.wayars.app.presentation.ui.theme.WaTagFreeNow
-import com.wayars.app.presentation.ui.theme.WaTagStuart
-import com.wayars.app.presentation.ui.theme.WaTagUber
-import com.wayars.app.presentation.ui.theme.WaTagWolt
-import com.wayars.app.presentation.ui.theme.WaTagWoltDark
-import com.wayars.app.presentation.ui.theme.WaTextPrimary
-import com.wayars.app.presentation.ui.theme.WaTextSecondary
-import com.wayars.app.presentation.ui.theme.WaWeeklyBorder
-import com.wayars.app.presentation.ui.theme.WaWeeklyCard
+import com.wayars.app.presentation.ui.theme.WaProAuroraGreen
+import com.wayars.app.presentation.ui.theme.WaProBackground
+import com.wayars.app.presentation.ui.theme.WaProCardBg
+import com.wayars.app.presentation.ui.theme.WaProCardBgSelected
+import com.wayars.app.presentation.ui.theme.WaProCardBorder
+import com.wayars.app.presentation.ui.theme.WaProCyan
+import com.wayars.app.presentation.ui.theme.WaProGreen
+import com.wayars.app.presentation.ui.theme.WaProGreenBadge
+import com.wayars.app.presentation.ui.theme.WaProPurpleBadge
+import com.wayars.app.presentation.ui.theme.WaProTextFaint
+import com.wayars.app.presentation.ui.theme.WaProTextMuted
+import com.wayars.app.presentation.ui.theme.WaProTextMuted2
+import com.wayars.app.presentation.ui.theme.WaProTextMuted3
+import java.util.Locale
 
-/**
- * Pixel geometry measured directly off the approved reference screenshot
- * (native size 704×1510 px; the brief calls it 716×1536 — same 2x-density
- * frame, off by rounding from re-export/compression) via a grid-overlay
- * pixel analysis: the reference was cropped in 20px bands, a ruled grid
- * was drawn over each band, and every border/badge edge below was read
- * off that grid rather than guessed. Values are NOT proportions or
- * weights — they are the actual measured spans, kept in the same
- * reference-pixel unit so the ratios between them are exactly the
- * reference's ratios (e.g. Monthly is 372px wide vs. 240px for
- * Yearly/Weekly — 1.55x, not the 1x a `weight(1f)`/`weight(1f)` split
- * would produce).
+/*
+ * WayArs Pro paywall — full rewrite, per the approved HTML reference
+ * (wayars_pro_original_logo.html): a dark "aurora" theme replacing the
+ * previous light-hero paywall design entirely. Every visual on this
+ * screen is new; none of the old layout/geometry code was reused.
  *
- * All X values below are LOCAL to the content column, i.e. already
- * offset by the reference's 32px left margin (so X=0 means "at the
- * screen's content edge", matching this screen's own 18dp padding).
- * All Y values in CARDS_* are local to the pricing-cards block, with
- * Y=0 = the Yearly card's top border (reference Y=535) — the topmost
- * edge in that block (the "Популярный" badge, reference Y=555, sits at
- * local Y=20 — i.e. it overhangs the Monthly card's OWN top border by
- * 10px, not the block's top).
+ * Billing/business logic is untouched: this screen still reads
+ * [PaywallUiState] (real-or-mock [PlanOption]s, loading/purchasing/error
+ * flags) and calls the same [onLoadOfferings]/[onSelectPlan]/[onRestore]/
+ * [onDismissError]/[onRetryGateCheck] callbacks the nav layer already
+ * wires up — nothing in WayArsNavHost or SubscriptionViewModel needed to
+ * change.
  *
- * [scaleFor] turns these into dp for the device at hand: it divides the
- * width Compose actually measured for the content column by this
- * object's reference content width, and every element is scaled by that
- * single factor on both axes — true proportional scaling to the
- * reference (not a fixed dp copy, and not a weight-based guess).
+ * The one behavioral difference from before: the HTML reference decouples
+ * "which plan is highlighted" (a radio a user can tap to preview) from
+ * "start the purchase" (a single CTA button below the cards). So plan
+ * selection is now local UI state ([selectedPlan]), and the CTA is what
+ * actually invokes [onSelectPlan] for whichever plan is currently
+ * highlighted — the real purchase/mock-selection routing in
+ * WayArsNavHost.onSelectPlan is unchanged and still decides whether that
+ * turns into a real RevenueCat purchase or the offline mock-selection
+ * toast.
  */
-private object Ref {
-    /** Reference content width: 672 - 32 = 640px (the span both card columns fill together). */
-    const val CONTENT_W = 640f
-
-    // --- Header: ONE local coordinate system, 0..640 — the same PHYSICAL
-    // content-column span as the cards block (screen-capture X 32..672),
-    // but NOT the same number system: the cards block below was
-    // re-measured against the 2388px high-resolution capture and now
-    // uses CARDS_REF_W = 2162; Header/Hero here are still measured
-    // against the original 704px capture (640 = 672-32 in THAT image),
-    // not yet redone at the higher resolution. Every X below is
-    // (screen-capture X) - 32, consistent within this 640-unit system —
-    // just don't mix a raw number from here with a raw number from the
-    // cards block; each is only valid scaled through its own RefCanvas.
-    // This local-640 system also replaces an earlier version of this file
-    // that mixed screen-space and content-space on one number line: it
-    // declared `RefCanvas(refW = 704f, ...)` (screen-space) while also
-    // computing HEADER_TEXT_W/HEADER_HERO_W as 32..330/330..672 spans
-    // (content-space). Fixed here; every constant below is content-local.
-    //
-    // refH is not a round guess either: it's the max(Y+H) over every
-    // child placed below (subtitle ends at 428+70=498), so nothing can
-    // be placed outside the canvas's own declared height — the previous
-    // version fixed refH=345 while the subtitle box's own Y (428) already
-    // exceeded it.
-    const val HEADER_REF_W = 640f
-    const val HEADER_REF_H = 498f   // max(Y+H): subtitle 428+70
-
-    const val LOGO_X = 33f;     const val LOGO_Y = 38f;  const val LOGO_W = 44f;  const val LOGO_H = 52f
-    const val WORDMARK_X = 83f; const val WORDMARK_Y = 45f; const val WORDMARK_W = 250f; const val WORDMARK_H = 40f
-    const val TAGLINE_X = 83f;  const val TAGLINE_Y = 112f; const val TAGLINE_W = 350f; const val TAGLINE_H = 18f
-    const val BADGE_FA_X = 0f;  const val BADGE_FA_Y = 203f; const val BADGE_FA_W = 268f; const val BADGE_FA_H = 42f
-    const val TITLE_X = 0f;     const val TITLE_Y = 258f; const val TITLE_W = 300f; const val TITLE_H = 155f
-    const val SUBTITLE_X = 0f;  const val SUBTITLE_Y = 428f; const val SUBTITLE_W = 300f; const val SUBTITLE_H = 70f
-
-    // Hero slot: content-local X 298..640 (== screen-space 330..672) — its
-    // WIDTH (342) must equal [HEADER_HERO_W] below exactly, because
-    // [HeroIllustration] runs its OWN nested RefCanvas with
-    // refW = HEADER_HERO_W: if the outer box here reported a different
-    // width (an earlier version used 374, i.e. 704-330 — the distance to
-    // the raw image edge, not to the 672 content-right-margin), the two
-    // canvases would disagree on scale and the inner content would
-    // render at the wrong size for its own slot. Height matches
-    // [HERO_H] for the same reason — Compose requires a measured child
-    // to satisfy the exact (fixed) constraints its parent gave it.
-    const val HERO_SLOT_X = 298f
-    const val HEADER_HERO_W = 342f   // 330..672 — must equal HeroIllustration's own refW
-    const val HERO_H = 275f          // must equal HeroIllustration's own refH
-    // Phone frame and floating-tag anchor points, LOCAL to the hero slot
-    // (i.e. already offset by ref X=330, ref Y=25 — the slot's own
-    // origin, NOT the header's).
-    //
-    // RE-ESTIMATED against the 2388×5120 high-res capture (previous
-    // values were read off the original 704px capture at much coarser
-    // grid spacing). Method: crop the hero region from the high-res
-    // image, read each shape's corners visually against a 50px grid,
-    // then convert back into this slot's own 342-wide unit system via
-    // (highRes_px − slot_origin_highRes_px) / 3.391. This is a step up in
-    // confidence from the original pass, but — unlike the pricing
-    // cards' button/price/pill boxes — it is a human read of a rotated
-    // shape's corners, not a brightness-threshold scan (the tags'
-    // rotation and overlapping text made a clean threshold unreliable
-    // here), so treat these as "re-estimated," not "measured," the same
-    // distinction the compact table below draws explicitly. The phone's
-    // real silhouette is also rotated (~15°) and reported here only as
-    // its axis-aligned bounding box, same as before.
-    // Rotation angles are the tags' visible tilt in the reference.
-    const val PHONE_X = 136f;       const val PHONE_Y = 0f
-    const val PHONE_W = 127f;       const val PHONE_H = 249f
-    const val GLOW_W = 130f;        const val GLOW_H = 130f
-    const val TAG_BOLT_X = 86f;     const val TAG_BOLT_Y = 24f;  const val TAG_BOLT_ROT = -7f
-    const val TAG_BOLT_W = 52f;     const val TAG_BOLT_H = 46f
-    const val TAG_UBER_X = 52f;     const val TAG_UBER_Y = 77f;  const val TAG_UBER_ROT = -3f
-    const val TAG_UBER_W = 60f;     const val TAG_UBER_H = 50f
-    const val TAG_WOLT_X = 266f;    const val TAG_WOLT_Y = 32f;  const val TAG_WOLT_ROT = 6f
-    const val TAG_WOLT_W = 55f;     const val TAG_WOLT_H = 55f
-    const val TAG_STUART_X = 266f;  const val TAG_STUART_Y = 102f; const val TAG_STUART_ROT = 0f
-    const val TAG_STUART_W = 49f;   const val TAG_STUART_H = 56f
-    const val TAG_FREENOW_X = 230f; const val TAG_FREENOW_Y = 167f; const val TAG_FREENOW_ROT = -4f
-    const val TAG_FREENOW_W = 52f;  const val TAG_FREENOW_H = 55f
-
-    // --- Pricing cards block ---
-    // Re-measured directly against the higher-resolution reference
-    // (quality_restoration_...jpg, 2388×5120 — same screenshot upscaled
-    // ~3.39x, confirmed by matching aspect ratio) using automated edge
-    // detection: for a given row/column of pixels, the card border shows
-    // up as a sharp, localized brightness spike against the flat
-    // background/fill on either side (e.g. the Yearly/Monthly gap was
-    // found by scanning row y=2374 and finding spikes at x=952 and
-    // x=1020 — not by eye). This replaced the previous grid-overlay
-    // readings, which were reasonably close but measurably off in two
-    // places: the Yearly/Weekly card WIDTH (was 240, is 247–248 relative
-    // to this block's own scale) and, more materially, the GAP between
-    // Yearly and Weekly (was ~22 relative-px, is actually closer to 30 —
-    // about 40% more) and the Monthly card's HEIGHT (was overstated by
-    // roughly 6%). Coordinates below are local to this block's own
-    // top-left (reference pixel 112, 1830 in the 2388-wide image) and
-    // carry their own reference width, [CARDS_REF_W] — unrelated to
-    // [CONTENT_W]/[HEADER_*] below, which are still expressed in the
-    // original 704px capture and were not re-verified this round (see
-    // the Header/Hero comments for what that does and doesn't cover).
-    const val CARDS_REF_W = 2162f   // 2274 - 112 (measured content right/left border positions)
-    const val YEARLY_X = 0f;    const val YEARLY_Y = 0f
-    const val YEARLY_W = 840f;  const val YEARLY_H = 1208f   // ref-image y 1830..3038
-    const val WEEKLY_X = 0f;    const val WEEKLY_Y = 1312f   // ref-image y 3142..4238 (gap = 104)
-    const val WEEKLY_W = 840f;  const val WEEKLY_H = 1096f
-    const val MONTHLY_X = 908f; const val MONTHLY_Y = 120f   // ref-image y 1950..4028
-    const val MONTHLY_W = 1254f; const val MONTHLY_H = 2078f
-    /**
-     * Third pass, per direct request to re-verify independently — not on
-     * the upscale, but on the actually-uploaded native file
-     * (1000160199.jpg, verified via PIL as 704×1510px; despite the
-     * "716×1536" label used in conversation, that number does not match
-     * either uploaded file's actual pixel dimensions and isn't used
-     * anywhere in this math).
-     *
-     * Native-file measurement (clean, text-free rows/columns):
-     * left=407, right=567 (row y=560-565), top=548, bottom=592 (column
-     * x=420) → 160×44px. Scaled ×3.392 (2388/704) to the high-res
-     * system: 543×149, center-x 1382. Independently re-checking the
-     * PRIOR high-res-only measurement (552×155, center-x 1649... i.e.
-     * center converts to 1649/3.392=486 native-px, vs 487 from this
-     * pass — consistent): both passes agree on center and are within
-     * ~2% of each other on size. Averaged and rounded below.
-     */
-    const val BADGE_W = 550f;   const val BADGE_H = 154f
-    const val BADGE_Y = 28f
-    /** Bottom-most edge across both columns: max(Weekly bottom 1312+1096=2408, Monthly bottom 120+1908=2028). */
-    const val CARDS_BLOCK_H = 2408f
-}
-
-/**
- * Internal geometry of one plan card, local to that card's own top-left
- * (i.e. its own [RefBox] fed straight into a per-card [RefCanvas] whose
- * refW/refH are the card's own measured width/height from [Ref]). Read
- * off the same grid-overlay analysis as the outer card boxes — these
- * inner element positions carry more manual-reading error than the
- * outer boxes (small text baselines are harder to pin to a pixel than a
- * card border is), so treat them as "measured, moderate confidence"
- * rather than exact.
- */
-private data class CardGeom(
-    val cardW: Float,
-    val cardH: Float,
-    val icon: RefBox,
-    val title: RefBox,
-    val subtitle: RefBox,
-    val pill: RefBox?,       // discount pill background; null for Weekly (no discount)
-    val trial: RefBox,       // "7 дней бесплатно" text (sits beside the pill, or alone for Weekly)
-    val price: RefBox,
-    val original: RefBox?,   // struck-through original price; Monthly only
-    val period: RefBox,
-    val features: List<RefBox>,
-    val button: RefBox
-)
-
-/**
- * Directly measured against the 2388×5120 reference — NOT the old
- * `sb()`/`YW_K`/`MO_K` scaling of smaller approximate numbers (that
- * function and those constants are gone from this file). Method per
- * card: crop the card to its own measured [Ref] box, overlay a 40px
- * grid, and read boundaries off that; for clean rectangular shapes
- * (discount pill, price digits, CTA button) a brightness-threshold scan
- * found the exact edge instead of an eyeballed one — those are marked
- * "(auto)" below. Text block edges (title, subtitle, feature lines) are
- * grid-reads at this resolution — much tighter than the old low-res
- * pass, but still a human read, not a threshold scan, so they're marked
- * "(grid)". Nothing here is pixel-exact for sub-pixel glyph edges; both
- * tiers are reported as what they are, not both as "measured."
- *
- * NOT separately verified this round (kept as reasonable defaults, not
- * reference-derived): check-icon size, icon-to-text gap within a
- * feature row, card corner radius, border thickness. A corner-radius
- * pixel trace was attempted for Yearly and came back too noisy (3
- * samples, inconsistent curve) to report as a number rather than a
- * guess, so it was dropped rather than presented with false confidence.
- */
-private val YearlyGeom = CardGeom(
-    cardW = Ref.YEARLY_W, cardH = Ref.YEARLY_H,
-    icon = RefBox(76f, 65f, 124f, 135f),          // (grid)
-    title = RefBox(258f, 60f, 300f, 80f),          // (grid)
-    subtitle = RefBox(258f, 155f, 520f, 55f),      // (grid)
-    pill = RefBox(70f, 272f, 230f, 110f),          // (auto)
-    trial = RefBox(335f, 290f, 430f, 80f),         // (grid)
-    price = RefBox(73f, 425f, 390f, 100f),         // (auto)
-    original = null,
-    period = RefBox(465f, 470f, 95f, 60f),         // (grid)
-    features = listOf(
-        RefBox(76f, 598f, 700f, 60f),              // (grid; checkmark-column spike confirmed row centers)
-        RefBox(76f, 678f, 700f, 60f),
-        RefBox(76f, 754f, 700f, 140f),             // wraps to 2 lines
-        RefBox(76f, 896f, 700f, 60f)
-    ),
-    button = RefBox(68f, 1020f, 708f, 131f)        // (auto)
-)
-
-private val WeeklyGeom = CardGeom(
-    cardW = Ref.WEEKLY_W, cardH = Ref.WEEKLY_H,
-    icon = RefBox(75f, 62f, 125f, 135f),           // (grid)
-    title = RefBox(258f, 62f, 300f, 75f),          // (grid)
-    subtitle = RefBox(258f, 155f, 460f, 50f),      // (grid)
-    pill = null,                                   // Weekly has no discount — plain trial text only
-    trial = RefBox(75f, 235f, 530f, 70f),          // (grid)
-    price = RefBox(72f, 330f, 300f, 100f),         // (auto bbox, period trimmed off)
-    original = null,
-    period = RefBox(430f, 375f, 200f, 55f),        // (grid)
-    features = listOf(
-        RefBox(76f, 480f, 700f, 60f),              // (grid)
-        RefBox(76f, 560f, 700f, 60f),
-        RefBox(76f, 640f, 700f, 140f),             // wraps to 2 lines
-        RefBox(76f, 782f, 700f, 60f)
-    ),
-    button = RefBox(68f, 910f, 702f, 132f)         // (auto)
-)
-
-private val MonthlyGeom = CardGeom(
-    cardW = Ref.MONTHLY_W, cardH = Ref.MONTHLY_H,
-    icon = RefBox(75f, 95f, 155f, 165f),           // (grid)
-    title = RefBox(285f, 105f, 290f, 75f),         // (grid)
-    subtitle = RefBox(285f, 200f, 500f, 55f),      // (grid)
-    pill = RefBox(75f, 320f, 245f, 115f),          // (grid — auto scan inconclusive, dark-text-on-pill defeated the threshold)
-    trial = RefBox(340f, 340f, 460f, 75f),         // (grid)
-    price = RefBox(75f, 505f, 395f, 110f),         // (grid)
-    original = RefBox(500f, 530f, 200f, 75f),      // (grid)
-    period = RefBox(140f, 630f, 230f, 70f),        // (grid)
-    features = listOf(
-        RefBox(75f, 745f, 1100f, 80f),             // (grid)
-        RefBox(75f, 825f, 1100f, 80f),
-        RefBox(75f, 905f, 1100f, 160f),            // wraps to 2 lines
-        RefBox(75f, 1065f, 1100f, 80f)
-    ),
-    button = RefBox(93f, 1778f, 1070f, 200f)       // (auto)
-)
-
-private fun geomFor(plan: PlanType): CardGeom = when (plan) {
-    PlanType.YEARLY -> YearlyGeom
-    PlanType.WEEKLY -> WeeklyGeom
-    PlanType.MONTHLY -> MonthlyGeom
-}
-
-/** RefBox with a free-height escape hatch: [autoHeight] = true means this
- *  child gets its width pinned (and its top-left x/y placed) exactly like
- *  any other child, but is measured with an UNBOUNDED max height instead
- *  of `h` forced exact — so a text block can wrap to whatever height its
- *  actual (possibly-longer-than-reference) content needs instead of
- *  being clipped to the reference's own text length. `h` is still read
- *  as this child's height contribution when [RefCanvas] computes its own
- *  total height, so layout below it keeps its reference position; only
- *  THIS child's own render height is allowed to exceed it. */
-private data class RefBox(val x: Float, val y: Float, val w: Float, val h: Float, val autoHeight: Boolean = false)
-
-private class RefBoundsElement(val box: RefBox) : ParentDataModifier {
-    override fun Density.modifyParentData(parentData: Any?): Any = box
-}
-
-/** Attaches this child's reference-pixel box to it for [RefCanvas] to read at layout time. */
-private fun Modifier.refBounds(x: Float, y: Float, w: Float, h: Float, autoHeight: Boolean = false): Modifier =
-    this.then(RefBoundsElement(RefBox(x, y, w, h, autoHeight)))
-
-/**
- * A single coordinate canvas, addressing the "не Row/Column для позиционирования"
- * requirement directly: every child is placed by [Modifier.refBounds] alone —
- * no `Row`, no `Column`, no `weight()`, no `fillMaxHeight()` decides where
- * anything goes.
- *
- * This is Compose's own [Layout] primitive, not [Modifier.offset]/[Modifier.size]
- * with a pre-computed dp value: [Constraints.maxWidth] here is the ACTUAL
- * measured width of the container in real device pixels (post-density,
- * i.e. what the compositor will rasterize), and every child's target
- * rectangle is computed from that in the SAME pixel space — `refW`/`refH`
- * (the reference image's own pixel dimensions for this canvas) map onto
- * `constraints.maxWidth`/an implied height by one multiply, then each
- * child's [RefBox] (also in reference pixels) is scaled by that same
- * factor and handed to `placeable.place(xPx, yPx)` in that same real-pixel
- * space. There is no dp anywhere in this function — dp only exists where
- * [Ref] constants get authored as literals, and it never mixes with the
- * px math done here.
- */
-@Composable
-private fun RefCanvas(
-    refW: Float,
-    refH: Float,
-    modifier: Modifier = Modifier,
-    content: @Composable () -> Unit
-) {
-    Layout(content = content, modifier = modifier) { measurables, constraints ->
-        val scale = constraints.maxWidth / refW
-        val heightPx = (refH * scale).toInt().coerceAtLeast(0)
-        val placed = measurables.map { m ->
-            val box = (m.parentData as? RefBox) ?: RefBox(0f, 0f, refW, refH)
-            val wPx = (box.w * scale).toInt().coerceAtLeast(0)
-            val xPx = (box.x * scale).toInt()
-            val yPx = (box.y * scale).toInt()
-            val constraints = if (box.autoHeight) {
-                Constraints(minWidth = wPx, maxWidth = wPx, minHeight = 0, maxHeight = Constraints.Infinity)
-            } else {
-                Constraints.fixed(wPx, (box.h * scale).toInt().coerceAtLeast(0))
-            }
-            Triple(m.measure(constraints), xPx, yPx)
-        }
-        layout(constraints.maxWidth, heightPx) {
-            placed.forEach { (placeable, x, y) -> placeable.place(x, y) }
-        }
-    }
-}
-
-/**
- * Static per-plan copy (title, "days of access" subtitle, discount/trial
- * badge, period suffix). This is marketing/layout content, not pricing —
- * pricing always comes from [PlanOption.priceText], which is either the
- * live RevenueCat [Package.product.price.formatted] or the hardcoded
- * fallback in [com.wayars.app.presentation.MockPlans] (see
- * [SubscriptionViewModel]). That keeps what's shown always consistent
- * with what Google Play will actually charge once real offerings load,
- * while guaranteeing the layout never has a missing/blank card.
- */
-private data class PlanCopy(
-    val title: String,
-    val daysLabel: String,
-    val discountLabel: String?,
-    val discountColor: Color,
-    val trialLabel: String,
-    val periodSuffix: String
-)
-
-@Composable
-private fun planCopyFor(plan: PlanType): PlanCopy = when (plan) {
-    PlanType.YEARLY -> PlanCopy(
-        title = stringResource(R.string.paywall_plan_yearly_title),
-        daysLabel = stringResource(R.string.paywall_plan_yearly_days),
-        discountLabel = "-30%",
-        discountColor = WaPurpleLight,
-        trialLabel = stringResource(R.string.paywall_badge_trial7),
-        periodSuffix = stringResource(R.string.paywall_period_year)
-    )
-    PlanType.MONTHLY -> PlanCopy(
-        title = stringResource(R.string.paywall_plan_monthly_title),
-        daysLabel = stringResource(R.string.paywall_plan_monthly_days),
-        discountLabel = "-15%",
-        discountColor = WaNeonGreen,
-        trialLabel = stringResource(R.string.paywall_badge_trial7),
-        periodSuffix = stringResource(R.string.paywall_period_month)
-    )
-    PlanType.WEEKLY -> PlanCopy(
-        title = stringResource(R.string.paywall_plan_weekly_title),
-        daysLabel = stringResource(R.string.paywall_plan_weekly_days),
-        discountLabel = null,
-        discountColor = Color.Transparent,
-        trialLabel = stringResource(R.string.paywall_badge_trial7),
-        periodSuffix = stringResource(R.string.paywall_period_week)
-    )
-}
-
-@Composable
-private fun planFeatures(): List<String> = listOf(
-    stringResource(R.string.paywall_feature_all),
-    stringResource(R.string.paywall_feature_presets),
-    stringResource(R.string.paywall_feature_realtime),
-    stringResource(R.string.paywall_feature_languages)
-)
 
 @Composable
 fun PaywallScreen(
@@ -494,924 +117,550 @@ fun PaywallScreen(
 ) {
     LaunchedEffect(Unit) { onLoadOfferings() }
 
-    Column(
+    var selectedPlan by rememberSaveable { mutableStateOf(PlanType.YEARLY) }
+
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            // Measured directly off the reference at ~30 sample points away
-            // from the hero/card glow zones: it is a NEAR-FLAT dark
-            // teal-navy (~RGB 7,20,29 / #071420), not the near-black
-            // #040608 this screen used before, and not a strong gradient
-            // or decorative background layer either — direct pixel
-            // sampling found none. The visual "background interest" in the
-            // reference comes entirely from the hero glow and each card's
-            // own border/shadow glow, both of which already exist as
-            // separate layers in this screen.
-            .background(Brush.verticalGradient(listOf(Color(0xFF081826), Color(0xFF071420), Color(0xFF061119))))
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = 18.dp, vertical = 22.dp)
+            .background(WaProBackground)
     ) {
-        gateErrorMessage?.let { message ->
-            GateErrorBanner(message = message, onRetry = onRetryGateCheck)
-            Spacer(Modifier.height(16.dp))
-        }
+        AuroraGlow()
 
-        Header()
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 18.dp)
+                .padding(top = 12.dp, bottom = 24.dp)
+        ) {
+            gateErrorMessage?.let { message ->
+                ProGateErrorBanner(message = message, onRetry = onRetryGateCheck)
+                Spacer(Modifier.height(16.dp))
+            }
 
-        Spacer(Modifier.height(22.dp))
+            Text(
+                stringResource(R.string.paywall_pro_header),
+                color = Color.White,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
 
-        Text(
-            stringResource(R.string.paywall_section_eyebrow),
-            color = WaNeonGreen,
-            fontSize = 12.sp,
-            fontWeight = FontWeight.Bold,
-            letterSpacing = 1.2.sp
-        )
-        Spacer(Modifier.height(6.dp))
-        Text(
-            stringResource(R.string.paywall_section_title),
-            color = WaTextPrimary,
-            fontSize = 23.sp,
-            fontWeight = FontWeight.Bold,
-            lineHeight = 28.sp
-        )
-        Spacer(Modifier.height(4.dp))
-        Text(
-            stringResource(R.string.paywall_section_subtitle),
-            color = WaTextSecondary,
-            fontSize = 14.sp
-        )
-
-        Spacer(Modifier.height(20.dp))
-
-        PricingCardsBlock(
-            state = state,
-            onSelectPlan = onSelectPlan
-        )
-
-        state.errorMessage?.let { message ->
+            Spacer(Modifier.height(8.dp))
+            LogoWithGlow()
             Spacer(Modifier.height(12.dp))
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    message,
-                    color = MaterialTheme.colorScheme.error,
-                    fontSize = 13.sp,
-                    modifier = Modifier.weight(1f)
-                )
-                TextButton(onClick = onDismissError) {
-                    Text(stringResource(R.string.paywall_button_hide), color = WaTextSecondary, fontSize = 12.sp)
+
+            HighlightedHeadline(stringResource(R.string.paywall_title))
+            Spacer(Modifier.height(10.dp))
+            Text(
+                stringResource(R.string.paywall_subtitle),
+                color = WaProTextMuted,
+                fontSize = 14.sp,
+                lineHeight = 19.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(Modifier.height(24.dp))
+            FeatureList()
+            Spacer(Modifier.height(26.dp))
+
+            val yearly = state.plans.find { it.plan == PlanType.YEARLY }
+            val monthly = state.plans.find { it.plan == PlanType.MONTHLY }
+            val weekly = state.plans.find { it.plan == PlanType.WEEKLY }
+
+            Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                yearly?.let { plan ->
+                    val perMonth = estimateMonthlyFromYearly(plan.priceText)
+                    PlanCard(
+                        title = stringResource(R.string.paywall_plan_yearly_title),
+                        priceLine = "${plan.priceText} ${stringResource(R.string.paywall_period_year)}",
+                        originalPriceText = null,
+                        trialText = stringResource(R.string.paywall_badge_trial7),
+                        tagText = perMonth?.let { stringResource(R.string.paywall_per_month_hint, it) },
+                        badge = BadgeSpec(stringResource(R.string.paywall_badge_best_value), WaProPurpleBadge),
+                        selected = selectedPlan == PlanType.YEARLY,
+                        onClick = { selectedPlan = PlanType.YEARLY }
+                    )
+                }
+                monthly?.let { plan ->
+                    PlanCard(
+                        title = stringResource(R.string.paywall_plan_monthly_title),
+                        priceLine = "${plan.priceText} ${stringResource(R.string.paywall_period_month)}",
+                        originalPriceText = plan.originalPriceText,
+                        trialText = stringResource(R.string.paywall_badge_trial7),
+                        tagText = null,
+                        badge = BadgeSpec(stringResource(R.string.paywall_badge_popular_discount), WaProGreenBadge),
+                        selected = selectedPlan == PlanType.MONTHLY,
+                        onClick = { selectedPlan = PlanType.MONTHLY }
+                    )
+                }
+                weekly?.let { plan ->
+                    PlanCard(
+                        title = stringResource(R.string.paywall_plan_weekly_title),
+                        priceLine = "${plan.priceText} ${stringResource(R.string.paywall_period_week)}",
+                        originalPriceText = null,
+                        trialText = null,
+                        tagText = null,
+                        badge = null,
+                        selected = selectedPlan == PlanType.WEEKLY,
+                        onClick = { selectedPlan = PlanType.WEEKLY }
+                    )
                 }
             }
+
+            state.errorMessage?.let { message ->
+                Spacer(Modifier.height(14.dp))
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        message,
+                        color = MaterialTheme.colorScheme.error,
+                        fontSize = 13.sp,
+                        modifier = Modifier.weight(1f)
+                    )
+                    TextButton(onClick = onDismissError) {
+                        Text(stringResource(R.string.paywall_button_hide), color = WaProTextMuted, fontSize = 12.sp)
+                    }
+                }
+            }
+
+            Spacer(Modifier.height(24.dp))
+
+            AuroraCtaButton(
+                text = stringResource(R.string.paywall_cta_trial),
+                isLoading = state.isPurchasing,
+                enabled = !state.isPurchasing,
+                onClick = {
+                    state.plans.find { it.plan == selectedPlan }?.let(onSelectPlan)
+                }
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                TextButton(onClick = onRestore, enabled = !state.isPurchasing) {
+                    Text(
+                        stringResource(R.string.paywall_button_restore),
+                        color = WaProTextFaint,
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Medium,
+                        textDecoration = TextDecoration.Underline
+                    )
+                }
+            }
+
+            Spacer(Modifier.height(18.dp))
+            FooterLegal()
         }
-
-        Spacer(Modifier.height(20.dp))
-
-        TrialNotice()
-
-        Spacer(Modifier.height(16.dp))
-
-        TextButton(
-            onClick = onRestore,
-            enabled = !state.isPurchasing,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(stringResource(R.string.paywall_button_restore), color = WaTextSecondary, fontSize = 14.sp)
-        }
-
-        Spacer(Modifier.height(20.dp))
-
-        TrustFooter()
     }
 }
 
-/**
- * The pricing-cards bento grid, laid out by absolute coordinate — via
- * [RefCanvas], not `Row`/`Column` weights — using the measurements in
- * [Ref]. [RefCanvas] measures the actual pixel width Compose gives the
- * content column and scales every [Ref] value by that one factor on both
- * axes, so the block reproduces the reference's exact card proportions
- * (Monthly 372:240 wide vs. Yearly/Weekly, not a 1:1 split) at whatever
- * size the device gives it. The "Популярный" badge is drawn here, as its
- * own absolutely-positioned sibling overhanging the Monthly card's top
- * edge — not inside [PlanCard] — because that's what the reference
- * actually is: one badge floating above the border line, not padding
- * baked into the card.
- */
+/** Soft blurred-glow bands across the top of the screen — a lightweight
+ *  stand-in for the reference's multi-layer animated aurora background
+ *  (three skewed, blurred gradient bands + a large radial glow). Built
+ *  from plain radial/linear gradients that already fade to transparent,
+ *  so no blur modifier (API 31+ only) is needed to get a soft look. */
 @Composable
-private fun PricingCardsBlock(
-    state: PaywallUiState,
-    onSelectPlan: (PlanOption) -> Unit
-) {
-    val yearly = state.plans.find { it.plan == PlanType.YEARLY }
-    val weekly = state.plans.find { it.plan == PlanType.WEEKLY }
-    val monthly = state.plans.find { it.plan == PlanType.MONTHLY }
+private fun AuroraGlow() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(340.dp)
+            .background(
+                Brush.radialGradient(
+                    colorStops = arrayOf(
+                        0.0f to WaProAuroraGreen.copy(alpha = 0.20f),
+                        0.35f to WaProCyan.copy(alpha = 0.12f),
+                        0.7f to WaProPurpleBadge.copy(alpha = 0.08f),
+                        1.0f to Color.Transparent
+                    ),
+                    center = androidx.compose.ui.geometry.Offset.Unspecified,
+                    radius = 900f
+                )
+            )
+    )
+}
 
-    RefCanvas(
-        refW = Ref.CARDS_REF_W,
-        refH = Ref.CARDS_BLOCK_H,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        yearly?.let {
-            PlanCard(
-                plan = it,
-                isPurchasing = state.isPurchasing,
-                isMockSelected = state.selectedMockPlan == it.plan,
-                onSelect = onSelectPlan,
-                modifier = Modifier.refBounds(Ref.YEARLY_X, Ref.YEARLY_Y, Ref.YEARLY_W, Ref.YEARLY_H)
-            )
-        }
-        weekly?.let {
-            PlanCard(
-                plan = it,
-                isPurchasing = state.isPurchasing,
-                isMockSelected = state.selectedMockPlan == it.plan,
-                onSelect = onSelectPlan,
-                modifier = Modifier.refBounds(Ref.WEEKLY_X, Ref.WEEKLY_Y, Ref.WEEKLY_W, Ref.WEEKLY_H)
-            )
-        }
-        monthly?.let {
-            PlanCard(
-                plan = it,
-                isPurchasing = state.isPurchasing,
-                isMockSelected = state.selectedMockPlan == it.plan,
-                onSelect = onSelectPlan,
-                modifier = Modifier.refBounds(Ref.MONTHLY_X, Ref.MONTHLY_Y, Ref.MONTHLY_W, Ref.MONTHLY_H)
-            )
-        }
-
-        // "Популярный" badge — sibling of the cards, not nested inside
-        // PlanCard, positioned by its own coordinates (Ref.BADGE_W/H/Y —
-        // cross-checked on two independent files, see that doc comment).
-        // At BADGE_Y=28, BADGE_H=154, MONTHLY_Y=120: badge sits 92px
-        // above the Monthly card's top border and 62px below it.
-        // zIndex keeps the badge above the Monthly card it overlaps.
+@Composable
+private fun LogoWithGlow() {
+    val infinite = rememberInfiniteTransition(label = "logo_glow")
+    val glowAlpha by infinite.animateFloat(
+        initialValue = 0.85f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(tween(2000, easing = LinearEasing), RepeatMode.Reverse),
+        label = "logo_glow_alpha"
+    )
+    Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxWidth()) {
         Box(
             modifier = Modifier
-                .refBounds(
-                    Ref.MONTHLY_X + Ref.MONTHLY_W / 2f - Ref.BADGE_W / 2f,
-                    Ref.BADGE_Y,
-                    Ref.BADGE_W,
-                    Ref.BADGE_H
+                .size(180.dp)
+                .background(
+                    Brush.radialGradient(
+                        listOf(WaProGreen.copy(alpha = 0.32f * glowAlpha), Color.Transparent)
+                    )
                 )
-                .zIndex(2f)
-                .clip(RoundedCornerShape(50))
-                .background(Brush.horizontalGradient(listOf(WaNeonGreen, Color(0xFF22D3EE)))),
-            contentAlignment = Alignment.Center
+        )
+        Image(
+            painter = painterResource(R.drawable.wayars_icon_header),
+            contentDescription = null,
+            modifier = Modifier.size(120.dp)
+        )
+    }
+}
+
+@Composable
+private fun HighlightedHeadline(rawTitle: String) {
+    val brandWord = "WayArs"
+    val idx = rawTitle.lastIndexOf(brandWord)
+    val annotated = buildAnnotatedString {
+        if (idx >= 0) {
+            append(rawTitle.substring(0, idx))
+            withStyle(SpanStyle(color = WaProGreen)) { append(brandWord) }
+            append(rawTitle.substring(idx + brandWord.length))
+        } else {
+            append(rawTitle)
+        }
+    }
+    Text(
+        annotated,
+        color = Color.White,
+        fontSize = 26.sp,
+        fontWeight = FontWeight.Bold,
+        lineHeight = 30.sp,
+        textAlign = TextAlign.Center,
+        modifier = Modifier.fillMaxWidth()
+    )
+}
+
+@Composable
+private fun FeatureList() {
+    val features = listOf(
+        stringResource(R.string.paywall_feature_all),
+        stringResource(R.string.paywall_feature_presets),
+        stringResource(R.string.paywall_feature_realtime),
+        stringResource(R.string.paywall_feature_languages)
+    )
+    Column(verticalArrangement = Arrangement.spacedBy(13.dp)) {
+        features.forEach { feature ->
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    modifier = Modifier
+                        .size(22.dp)
+                        .clip(CircleShape)
+                        .background(WaProGreen),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        Icons.Filled.Check,
+                        contentDescription = null,
+                        tint = WaProBackground,
+                        modifier = Modifier.size(14.dp)
+                    )
+                }
+                Spacer(Modifier.width(12.dp))
+                Text(feature, color = Color.White, fontSize = 14.sp, fontWeight = FontWeight.Medium)
+            }
+        }
+    }
+}
+
+private data class BadgeSpec(val text: String, val color: Color)
+
+@Composable
+private fun PlanCard(
+    title: String,
+    priceLine: String,
+    originalPriceText: String?,
+    trialText: String?,
+    tagText: String?,
+    badge: BadgeSpec?,
+    selected: Boolean,
+    onClick: () -> Unit
+) {
+    Box(modifier = Modifier.fillMaxWidth()) {
+        val shape = RoundedCornerShape(16.dp)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .then(
+                    if (selected) {
+                        Modifier.shadow(10.dp, shape, ambientColor = WaProGreen, spotColor = WaProGreen)
+                    } else Modifier
+                )
+                .clip(shape)
+                .background(if (selected) WaProCardBgSelected else WaProCardBg)
+                .border(
+                    width = if (selected) 2.dp else 1.5.dp,
+                    color = if (selected) WaProGreen else WaProCardBorder,
+                    shape = shape
+                )
+                .clickable(onClick = onClick)
+                .padding(14.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                stringResource(R.string.paywall_badge_popular),
-                color = Color(0xFF04140C),
-                fontSize = 13.sp,
-                fontWeight = FontWeight.Bold
-            )
+            Column(modifier = Modifier.weight(1f)) {
+                Text(title, color = Color.White, fontSize = 15.sp, fontWeight = FontWeight.Bold)
+                Spacer(Modifier.height(2.dp))
+                Row(verticalAlignment = Alignment.Bottom) {
+                    Text(priceLine, color = Color.White, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                    originalPriceText?.let {
+                        Spacer(Modifier.width(8.dp))
+                        Text(
+                            it,
+                            color = WaProTextMuted2,
+                            fontSize = 12.sp,
+                            textDecoration = TextDecoration.LineThrough
+                        )
+                    }
+                }
+                trialText?.let {
+                    Spacer(Modifier.height(1.dp))
+                    Text(
+                        it,
+                        color = if (selected) WaProGreen else WaProGreen.copy(alpha = 0.7f),
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+                tagText?.let {
+                    Spacer(Modifier.height(3.dp))
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Filled.Sell, contentDescription = null, tint = WaProTextMuted2, modifier = Modifier.size(11.dp))
+                        Spacer(Modifier.width(4.dp))
+                        Text(it, color = WaProTextMuted2, fontSize = 11.sp)
+                    }
+                }
+            }
+            Spacer(Modifier.width(8.dp))
+            SelectionRadio(selected = selected)
+        }
+
+        badge?.let {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .offset(x = 16.dp, y = (-10).dp)
+                    .clip(RoundedCornerShape(50))
+                    .background(it.color)
+                    .padding(horizontal = 10.dp, vertical = 4.dp)
+            ) {
+                Text(
+                    it.text,
+                    color = Color.White,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.3.sp
+                )
+            }
         }
     }
 }
 
 @Composable
-private fun GateErrorBanner(message: String, onRetry: () -> Unit) {
+private fun SelectionRadio(selected: Boolean) {
+    if (selected) {
+        val infinite = rememberInfiniteTransition(label = "radio_ping")
+        val pingScale by infinite.animateFloat(
+            initialValue = 1f,
+            targetValue = 1.9f,
+            animationSpec = infiniteRepeatable(tween(1800, easing = LinearEasing), RepeatMode.Restart),
+            label = "ping_scale"
+        )
+        val pingAlpha by infinite.animateFloat(
+            initialValue = 0.35f,
+            targetValue = 0f,
+            animationSpec = infiniteRepeatable(tween(1800, easing = LinearEasing), RepeatMode.Restart),
+            label = "ping_alpha"
+        )
+        Box(modifier = Modifier.size(22.dp), contentAlignment = Alignment.Center) {
+            Box(
+                modifier = Modifier
+                    .size(22.dp)
+                    .scale(pingScale)
+                    .clip(CircleShape)
+                    .background(WaProGreen.copy(alpha = pingAlpha))
+            )
+            Box(
+                modifier = Modifier
+                    .size(22.dp)
+                    .clip(CircleShape)
+                    .background(WaProGreen),
+                contentAlignment = Alignment.Center
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(8.dp)
+                        .clip(CircleShape)
+                        .background(Color.White)
+                )
+            }
+        }
+    } else {
+        Box(
+            modifier = Modifier
+                .size(22.dp)
+                .clip(CircleShape)
+                .border(1.5.dp, WaProCardBorder, CircleShape)
+        )
+    }
+}
+
+/** The animated tri-color "aurora" CTA: a shifting green→cyan→purple
+ *  gradient fill plus a diagonal shimmer sweep, matching the reference's
+ *  `.cta-aurora-btn` (gradientShift + shimmerSweep keyframes). */
+@Composable
+private fun AuroraCtaButton(
+    text: String,
+    isLoading: Boolean,
+    enabled: Boolean,
+    onClick: () -> Unit
+) {
+    val infinite = rememberInfiniteTransition(label = "cta_shimmer")
+    val shimmer by infinite.animateFloat(
+        initialValue = -0.4f,
+        targetValue = 1.4f,
+        animationSpec = infiniteRepeatable(tween(2500, easing = LinearEasing), RepeatMode.Restart),
+        label = "shimmer_x"
+    )
+    val interactionSource = remember { MutableInteractionSource() }
+    val pressed by interactionSource.collectIsPressedAsState()
+    val pressScale = if (pressed) 0.98f else 1f
+
+    val shape = RoundedCornerShape(16.dp)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(56.dp)
+            .scale(pressScale)
+            .shadow(12.dp, shape, ambientColor = WaProGreen, spotColor = WaProCyan)
+            .clip(shape)
+            .background(Brush.horizontalGradient(listOf(WaProAuroraGreen, WaProCyan, WaProPurpleBadge)))
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null,
+                enabled = enabled,
+                onClick = onClick
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        // Diagonal shimmer highlight sweeping left to right, clipped to the button.
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(shape)
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.linearGradient(
+                            colors = listOf(Color.Transparent, Color.White.copy(alpha = 0.35f), Color.Transparent),
+                            start = androidx.compose.ui.geometry.Offset(shimmer * 800f - 200f, 0f),
+                            end = androidx.compose.ui.geometry.Offset(shimmer * 800f + 100f, 200f)
+                        )
+                    )
+            )
+        }
+
+        if (isLoading) {
+            CircularProgressIndicator(modifier = Modifier.size(22.dp), color = Color.White)
+        } else {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    modifier = Modifier
+                        .size(26.dp)
+                        .clip(CircleShape)
+                        .background(Color.White.copy(alpha = 0.25f)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        Icons.Filled.WorkspacePremium,
+                        contentDescription = null,
+                        tint = Color.White,
+                        modifier = Modifier.size(14.dp)
+                    )
+                }
+                Spacer(Modifier.width(10.dp))
+                Text(text, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+            }
+        }
+    }
+}
+
+@Composable
+private fun FooterLegal() {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(
+            stringResource(R.string.paywall_no_charge_notice),
+            color = WaProTextMuted,
+            fontSize = 11.sp,
+            lineHeight = 15.sp,
+            textAlign = TextAlign.Center
+        )
+        Spacer(Modifier.height(10.dp))
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(Icons.Filled.Shield, contentDescription = null, tint = WaProTextMuted2, modifier = Modifier.size(12.dp))
+            Spacer(Modifier.width(6.dp))
+            Text(stringResource(R.string.paywall_data_safe), color = WaProTextMuted2, fontSize = 11.sp)
+        }
+        Spacer(Modifier.height(10.dp))
+        Text(
+            stringResource(R.string.paywall_trial_notice),
+            color = WaProTextMuted3,
+            fontSize = 10.sp,
+            lineHeight = 13.sp,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
+private fun ProGateErrorBanner(message: String, onRetry: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(14.dp))
-            .background(WaSurface)
+            .background(WaProCardBg)
+            .border(1.dp, WaProCardBorder, RoundedCornerShape(14.dp))
             .padding(14.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 stringResource(R.string.paywall_gate_error_title),
-                color = WaTextPrimary,
+                color = Color.White,
                 fontSize = 13.sp,
                 fontWeight = FontWeight.SemiBold
             )
-            Text(message, color = WaTextSecondary, fontSize = 12.sp)
+            Text(message, color = WaProTextMuted, fontSize = 12.sp)
         }
         Spacer(Modifier.width(8.dp))
         TextButton(onClick = onRetry) {
-            Text(stringResource(R.string.paywall_gate_error_retry), color = WaNeonGreen, fontSize = 13.sp, fontWeight = FontWeight.SemiBold)
-        }
-    }
-}
-
-/**
- * Brand header: icon + "WayArs" wordmark + tagline, the "full access" pill,
- * the two-tone headline and subtitle sitting alongside the hero
- * illustration (phone mock-up + floating partner-platform tags), the 4
- * feature chips row, and a hairline divider that closes the hero block —
- * matching the approved design.
- */
-@Composable
-private fun Header() {
-    // Single coordinate canvas for the whole header block — logo, wordmark,
-    // tagline, badge, title, subtitle and the hero slot are all placed by
-    // their own [Ref] coordinates via [refBounds], not by nested Row/Column
-    // flow. Fixed from an earlier version of this file that mixed two
-    // coordinate systems: it declared `RefCanvas(refW = 704f, ...)`
-    // (raw screen-capture space) while the width split comments below it
-    // were already expressed content-local (32..330 / 330..672) — same
-    // number line, two meanings. Now the canvas and every constant it
-    // reads are BOTH content-local (0..640, X = screen-capture X − 32) —
-    // internally consistent with itself.
-    //
-    // This is a DIFFERENT unit system from the cards block's
-    // (Ref.CARDS_REF_W = 2162), not the same one: the cards were
-    // re-measured against the 2388px-wide high-resolution capture, while
-    // Header/Hero below are still measured against the original 704px
-    // capture and were not redone at the higher resolution. Both
-    // represent the same physical content-column span (screen-left+32 to
-    // screen-right-32) and both scale correctly on their own via
-    // [RefCanvas] — a number from one must never be plugged into the
-    // other without going through actual screen-space pixels first.
-    // Text elements use `autoHeight = true`: their width and top position
-    // are still pinned by the reference, but their rendered height is left
-    // free so a longer translation wraps instead of getting clipped.
-    RefCanvas(refW = Ref.HEADER_REF_W, refH = Ref.HEADER_REF_H, modifier = Modifier.fillMaxWidth()) {
-        Image(
-            painter = painterResource(R.drawable.wayars_icon_header),
-            contentDescription = null,
-            modifier = Modifier
-                .refBounds(Ref.LOGO_X, Ref.LOGO_Y, Ref.LOGO_W, Ref.LOGO_H)
-                .clip(RoundedCornerShape(11.dp))
-        )
-        Row(modifier = Modifier.refBounds(Ref.WORDMARK_X, Ref.WORDMARK_Y, Ref.WORDMARK_W, Ref.WORDMARK_H, autoHeight = true)) {
-            Text("Way", color = WaTextPrimary, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
-            Text("Ars", color = WaNeonGreen, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
-        }
-        Text(
-            stringResource(R.string.paywall_tagline),
-            color = WaTextSecondary,
-            fontSize = 9.sp,
-            letterSpacing = 1.2.sp,
-            modifier = Modifier.refBounds(Ref.TAGLINE_X, Ref.TAGLINE_Y, Ref.TAGLINE_W, Ref.TAGLINE_H, autoHeight = true)
-        )
-
-        Box(
-            modifier = Modifier
-                .refBounds(Ref.BADGE_FA_X, Ref.BADGE_FA_Y, Ref.BADGE_FA_W, Ref.BADGE_FA_H, autoHeight = true)
-                .clip(RoundedCornerShape(50))
-                .border(BorderStroke(1.dp, WaNeonGreen.copy(alpha = 0.5f)), RoundedCornerShape(50))
-                .padding(horizontal = 14.dp, vertical = 6.dp)
-        ) {
-            Text(stringResource(R.string.paywall_badge_full_access), color = WaNeonGreen, fontSize = 11.sp)
-        }
-
-        Column(modifier = Modifier.refBounds(Ref.TITLE_X, Ref.TITLE_Y, Ref.TITLE_W, Ref.TITLE_H, autoHeight = true)) {
-            val titleLines = stringResource(R.string.paywall_title).split("\n")
             Text(
-                titleLines.getOrElse(0) { "" },
-                color = WaTextPrimary,
-                fontSize = 23.sp,
-                fontWeight = FontWeight.Bold,
-                lineHeight = 28.sp
-            )
-            if (titleLines.size > 1) {
-                Text(
-                    titleLines[1],
-                    style = TextStyle(
-                        brush = Brush.horizontalGradient(listOf(WaNeonGreen, Color(0xFF22D3EE))),
-                        fontSize = 23.sp,
-                        fontWeight = FontWeight.Bold,
-                        lineHeight = 28.sp
-                    )
-                )
-            }
-        }
-        Text(
-            stringResource(R.string.paywall_subtitle),
-            color = WaTextSecondary,
-            fontSize = 12.5.sp,
-            lineHeight = 17.sp,
-            modifier = Modifier.refBounds(Ref.SUBTITLE_X, Ref.SUBTITLE_Y, Ref.SUBTITLE_W, Ref.SUBTITLE_H, autoHeight = true)
-        )
-
-        // Width/height here MUST equal Ref.HEADER_HERO_W / Ref.HERO_H
-        // exactly (342 / 275) — HeroIllustration's own internal RefCanvas
-        // uses those same two constants as ITS refW/refH. An earlier
-        // version passed width=374 here (704 − 330, distance to the raw
-        // image edge) while HeroIllustration measured itself against 342
-        // (672 − 330, distance to the content-right margin): two
-        // different reference widths for the same box, which would have
-        // scaled the phone/tags inside it by the wrong factor relative
-        // to their own slot.
-        HeroIllustration(modifier = Modifier.refBounds(Ref.HERO_SLOT_X, 20f, Ref.HEADER_HERO_W, Ref.HERO_H))
-    }
-
-    Spacer(Modifier.height(18.dp))
-
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(6.dp)
-    ) {
-        FeatureChip(Icons.Filled.Bolt, stringResource(R.string.paywall_chip_analysis), Modifier.weight(1f))
-        FeatureChip(Icons.Filled.Shield, stringResource(R.string.paywall_chip_filters), Modifier.weight(1f))
-        FeatureChip(Icons.Filled.ShowChart, stringResource(R.string.paywall_chip_income), Modifier.weight(1f))
-        FeatureChip(Icons.Filled.Public, stringResource(R.string.paywall_chip_languages), Modifier.weight(1f))
-    }
-
-    Spacer(Modifier.height(20.dp))
-    Divider(color = WaSurfaceVariant.copy(alpha = 0.7f), thickness = 1.dp)
-}
-
-/**
- * Stylized "phone + partner platforms" hero graphic. Every element here —
- * the phone frame and each floating tag — is placed by absolute offset
- * from [Ref]'s measured coordinates (via [px]), not by `Alignment` plus a
- * guessed `.offset()`/`.rotate()` like the previous version.
- *
- * The platform tags are plain colored text labels — deliberately NOT
- * pixel copies of each brand's actual logo/wordmark artwork. Uber, Bolt,
- * Wolt, Stuart and FreeNow are real, currently-trademarked brands; baking
- * a bitmap of their stylized app-icon art into a shipping app risks
- * implying an official partnership that may not exist, independent of
- * how faithfully it's redrawn. Naming a compatible service in your own
- * UI as plain text is standard, safe practice — reproducing their logo
- * art is not something I'll do without that partnership/license
- * actually being confirmed. Position, size, and rotation of each tag
- * are matched to the reference; the glyph inside is not.
- */
-@Composable
-private fun HeroIllustration(modifier: Modifier = Modifier) {
-    RefCanvas(refW = Ref.HEADER_HERO_W, refH = Ref.HERO_H, modifier = modifier) {
-        // Ambient glow, centered on the measured phone bounding box.
-        Box(
-            modifier = Modifier
-                .refBounds(
-                    Ref.PHONE_X + Ref.PHONE_W / 2f - Ref.GLOW_W / 2f,
-                    Ref.PHONE_Y + Ref.PHONE_H / 2f - Ref.GLOW_H / 2f,
-                    Ref.GLOW_W,
-                    Ref.GLOW_H
-                )
-                .background(
-                    Brush.radialGradient(
-                        listOf(WaNeonGreen.copy(alpha = 0.28f), Color.Transparent)
-                    )
-                )
-        )
-
-        // Phone frame — placed at its own measured top-left, not centered
-        // in the whole slot (the reference's phone sits right-of-center).
-        Box(
-            modifier = Modifier
-                .refBounds(Ref.PHONE_X, Ref.PHONE_Y, Ref.PHONE_W, Ref.PHONE_H)
-                .shadow(
-                    elevation = 14.dp,
-                    shape = RoundedCornerShape(20.dp),
-                    ambientColor = WaNeonGreen.copy(alpha = 0.5f),
-                    spotColor = WaNeonGreen.copy(alpha = 0.5f)
-                )
-                .clip(RoundedCornerShape(20.dp))
-                .background(Brush.verticalGradient(listOf(WaHeroPhoneTop, WaHeroPhoneBottom)))
-                .border(
-                    BorderStroke(1.5.dp, Brush.verticalGradient(listOf(WaNeonGreen, WaPurple))),
-                    RoundedCornerShape(20.dp)
-                )
-        ) {
-            Box(
-                modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .padding(top = 6.dp)
-                    .width(22.dp)
-                    .height(5.dp)
-                    .clip(RoundedCornerShape(50))
-                    .background(Color.Black)
-            )
-            Image(
-                painter = painterResource(R.drawable.wayars_icon_header),
-                contentDescription = null,
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .offset(y = (-8).dp)
-                    .size(34.dp)
-            )
-            RouteGlyph(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(bottom = 14.dp)
-                    .size(width = 46.dp, height = 26.dp)
-            )
-        }
-
-        PlatformTag(
-            "Bolt",
-            Brush.horizontalGradient(listOf(WaTagBoltDark, WaTagBolt)),
-            Color(0xFF04240F),
-            icon = Icons.Filled.Bolt,
-            modifier = Modifier
-                .refBounds(Ref.TAG_BOLT_X, Ref.TAG_BOLT_Y, Ref.TAG_BOLT_W, Ref.TAG_BOLT_H)
-                .rotate(Ref.TAG_BOLT_ROT)
-        )
-        PlatformTag(
-            "Uber",
-            Brush.horizontalGradient(listOf(WaTagUber, WaTagUber)),
-            WaTextPrimary,
-            modifier = Modifier
-                .refBounds(Ref.TAG_UBER_X, Ref.TAG_UBER_Y, Ref.TAG_UBER_W, Ref.TAG_UBER_H)
-                .rotate(Ref.TAG_UBER_ROT)
-        )
-        PlatformTag(
-            "Wolt",
-            Brush.horizontalGradient(listOf(WaTagWoltDark, WaTagWolt)),
-            WaTextPrimary,
-            modifier = Modifier
-                .refBounds(Ref.TAG_WOLT_X, Ref.TAG_WOLT_Y, Ref.TAG_WOLT_W, Ref.TAG_WOLT_H)
-                .rotate(Ref.TAG_WOLT_ROT)
-        )
-        PlatformTag(
-            "Stuart",
-            Brush.horizontalGradient(listOf(WaTagStuart, WaTagStuart)),
-            WaTextPrimary,
-            icon = Icons.Filled.LocalShipping,
-            modifier = Modifier
-                .refBounds(Ref.TAG_STUART_X, Ref.TAG_STUART_Y, Ref.TAG_STUART_W, Ref.TAG_STUART_H)
-                .rotate(Ref.TAG_STUART_ROT)
-        )
-        PlatformTag(
-            "Free Now",
-            Brush.horizontalGradient(listOf(WaTagFreeNow, WaTagFreeNow)),
-            WaTextPrimary,
-            icon = Icons.Filled.ArrowForward,
-            modifier = Modifier
-                .refBounds(Ref.TAG_FREENOW_X, Ref.TAG_FREENOW_Y, Ref.TAG_FREENOW_W, Ref.TAG_FREENOW_H)
-                .rotate(Ref.TAG_FREENOW_ROT)
-        )
-    }
-}
-
-/** Small glowing dashed route line with a pin, drawn inside the hero phone. */
-@Composable
-private fun RouteGlyph(modifier: Modifier = Modifier) {
-    Canvas(modifier = modifier) {
-        val path = Path().apply {
-            moveTo(2f, size.height * 0.85f)
-            cubicTo(
-                size.width * 0.25f, size.height * 0.9f,
-                size.width * 0.3f, size.height * 0.15f,
-                size.width * 0.55f, size.height * 0.35f
-            )
-            cubicTo(
-                size.width * 0.75f, size.height * 0.5f,
-                size.width * 0.8f, size.height * 0.1f,
-                size.width - 2f, size.height * 0.2f
-            )
-        }
-        drawPath(
-            path,
-            color = WaNeonGreen,
-            style = Stroke(width = size.height * 0.09f, pathEffect = androidx.compose.ui.graphics.PathEffect.dashPathEffect(floatArrayOf(size.height * 0.22f, size.height * 0.16f)))
-        )
-        drawCircle(color = WaNeonGreen, radius = size.height * 0.11f, center = Offset(size.width - 2f, size.height * 0.2f))
-    }
-}
-
-/** A floating "compatible platform" tag used in [HeroIllustration]. Plain text, no logo artwork. */
-@Composable
-private fun PlatformTag(
-    name: String,
-    brush: Brush,
-    textColor: Color,
-    modifier: Modifier = Modifier,
-    icon: ImageVector? = null
-) {
-    Row(
-        modifier = modifier
-            .shadow(elevation = 6.dp, shape = RoundedCornerShape(9.dp))
-            .clip(RoundedCornerShape(9.dp))
-            .background(brush)
-            .padding(horizontal = 8.dp, vertical = 5.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        icon?.let {
-            Icon(it, contentDescription = null, tint = textColor, modifier = Modifier.size(11.dp))
-            Spacer(Modifier.width(3.dp))
-        }
-        Text(name, color = textColor, fontSize = 10.sp, fontWeight = FontWeight.Bold)
-    }
-}
-
-@Composable
-private fun FeatureChip(icon: ImageVector, label: String, modifier: Modifier = Modifier) {
-    Row(verticalAlignment = Alignment.CenterVertically, modifier = modifier) {
-        Box(
-            modifier = Modifier
-                .size(30.dp)
-                .clip(RoundedCornerShape(9.dp))
-                .border(BorderStroke(1.dp, WaNeonGreen.copy(alpha = 0.55f)), RoundedCornerShape(9.dp)),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(icon, contentDescription = null, tint = WaNeonGreen, modifier = Modifier.size(15.dp))
-        }
-        Spacer(Modifier.width(6.dp))
-        Text(
-            label,
-            color = WaTextSecondary,
-            fontSize = 9.5.sp,
-            lineHeight = 11.sp,
-            maxLines = 2
-        )
-    }
-}
-
-/**
- * Colored "neon" elevation behind a plan card. Uses [shadow]'s ambient/spot
- * color parameters (API 28+); on API 26-27 devices (this app's minSdk is
- * 26) the color is ignored by the platform and a plain neutral shadow is
- * drawn instead — a harmless, expected degrade, not a crash risk.
- */
-private fun Modifier.androidxShadowGlow(color: Color, shape: RoundedCornerShape): Modifier = this.shadow(
-    elevation = 20.dp,
-    shape = shape,
-    ambientColor = color.copy(alpha = 0.6f),
-    spotColor = color.copy(alpha = 0.6f)
-)
-
-/** Visual accent per plan: border/glow color, card background and button style. */
-private data class PlanAccent(
-    val borderColor: Color,
-    val glowColor: Color,
-    val cardBrush: Brush,
-    val iconTint: Color
-)
-
-@Composable
-private fun accentFor(plan: PlanType): PlanAccent = when (plan) {
-    PlanType.YEARLY -> PlanAccent(
-        borderColor = WaPurpleLight,
-        glowColor = WaPurple,
-        cardBrush = Brush.verticalGradient(listOf(WaPurple.copy(alpha = 0.22f), WaSurface)),
-        iconTint = WaPurpleLight
-    )
-    PlanType.MONTHLY -> PlanAccent(
-        borderColor = WaNeonGreen,
-        glowColor = WaNeonGreen,
-        cardBrush = Brush.verticalGradient(listOf(WaSurface, WaNeonGreenDark.copy(alpha = 0.18f))),
-        iconTint = WaNeonGreen
-    )
-    PlanType.WEEKLY -> PlanAccent(
-        borderColor = WaWeeklyBorder,
-        glowColor = Color.Transparent,
-        cardBrush = Brush.verticalGradient(listOf(WaWeeklyCard, WaWeeklyCard)),
-        iconTint = WaTextSecondary
-    )
-}
-
-@Composable
-private fun PlanCard(
-    plan: PlanOption,
-    isPurchasing: Boolean,
-    isMockSelected: Boolean,
-    onSelect: (PlanOption) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val copy = planCopyFor(plan.plan)
-    val isFeatured = plan.plan == PlanType.MONTHLY
-    val accent = accentFor(plan.plan)
-    val cardShape = RoundedCornerShape(24.dp)
-
-    // Purchases stay disabled mid-flight, but the card is ALWAYS clickable
-    // otherwise — even before real RevenueCat offerings have loaded (or
-    // when they never will, e.g. offline / pre-Play-Store-release). See
-    // PaywallScreen's onSelectPlan wiring: a plan with no live [Package]
-    // yet falls back to a local mock selection instead of a no-op tap, so
-    // the UI never feels "dead".
-    val clickEnabled = !isPurchasing
-
-    // A selected card always lights up with the same vivid green frame,
-    // regardless of its own accent color (purple/green/gray) — matching
-    // the approved design's selection state.
-    val glowColor = if (isMockSelected) WaNeonGreen else accent.glowColor
-    val borderColor = if (isMockSelected) WaNeonGreen else accent.borderColor
-    val borderWidth = if (isMockSelected) 2.5.dp else if (isFeatured) 1.5.dp else 1.dp
-
-    // Sizing and position come entirely from [modifier] — the caller
-    // (PricingCardsBlock) places every card by the exact reference
-    // coordinates in [Ref]. This composable no longer guesses a size for
-    // itself, and — for the Monthly card — no longer reserves its own
-    // top padding for the "Популярный" badge: that badge is drawn as an
-    // independent sibling at its own measured coordinates, since in the
-    // reference it overhangs the card's border, it isn't inset from it.
-    Box(
-        modifier = modifier
-            // Shadow MUST come before clip/background: elevation shadows
-            // are drawn outside the layout bounds, so clipping first
-            // would cut the glow off entirely.
-            .then(
-                if (glowColor != Color.Transparent) {
-                    Modifier.androidxShadowGlow(glowColor, cardShape)
-                } else Modifier
-            )
-            .clip(cardShape)
-            .background(accent.cardBrush)
-            .border(BorderStroke(borderWidth, borderColor), cardShape)
-            .clickable(enabled = clickEnabled) { onSelect(plan) }
-    ) {
-        val geom = geomFor(plan.plan)
-        RefCanvas(refW = geom.cardW, refH = geom.cardH, modifier = Modifier.fillMaxSize()) {
-            Box(Modifier.refBounds(geom.icon.x, geom.icon.y, geom.icon.w, geom.icon.h)) {
-                CalendarCrownIcon(tint = accent.iconTint, size = 24.dp)
-            }
-            Text(
-                copy.title,
-                color = WaTextPrimary,
-                fontSize = 17.sp,
-                fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.refBounds(geom.title.x, geom.title.y, geom.title.w, geom.title.h)
-            )
-            Text(
-                copy.daysLabel,
-                color = WaTextSecondary,
-                fontSize = 11.sp,
-                modifier = Modifier.refBounds(geom.subtitle.x, geom.subtitle.y, geom.subtitle.w, geom.subtitle.h)
-            )
-
-            if (copy.discountLabel != null && geom.pill != null) {
-                Box(
-                    modifier = Modifier
-                        .refBounds(geom.pill.x, geom.pill.y, geom.pill.w, geom.pill.h)
-                        .clip(RoundedCornerShape(50))
-                        .background(
-                            Brush.horizontalGradient(listOf(copy.discountColor, copy.discountColor.copy(alpha = 0.65f)))
-                        ),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(copy.discountLabel, color = Color(0xFF04140C), fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                }
-                Box(
-                    modifier = Modifier.refBounds(geom.trial.x, geom.trial.y, geom.trial.w, geom.trial.h),
-                    contentAlignment = Alignment.CenterStart
-                ) {
-                    Text(copy.trialLabel, color = WaTextSecondary, fontSize = 11.sp)
-                }
-            } else {
-                Box(
-                    modifier = Modifier.refBounds(geom.trial.x, geom.trial.y, geom.trial.w, geom.trial.h),
-                    contentAlignment = Alignment.CenterStart
-                ) {
-                    Text(copy.trialLabel, color = accent.iconTint, fontSize = 13.sp, fontWeight = FontWeight.Medium)
-                }
-            }
-
-            Box(
-                modifier = Modifier.refBounds(geom.price.x, geom.price.y, geom.price.w, geom.price.h),
-                contentAlignment = Alignment.CenterStart
-            ) {
-                Text(plan.priceText, color = WaTextPrimary, fontSize = 26.sp, fontWeight = FontWeight.Bold)
-            }
-            if (geom.original != null) {
-                plan.originalPriceText?.let { original ->
-                    Box(
-                        modifier = Modifier.refBounds(geom.original.x, geom.original.y, geom.original.w, geom.original.h),
-                        contentAlignment = Alignment.CenterStart
-                    ) {
-                        Text(
-                            original,
-                            color = WaTextSecondary,
-                            fontSize = 15.sp,
-                            textDecoration = TextDecoration.LineThrough
-                        )
-                    }
-                }
-            }
-            Text(
-                copy.periodSuffix,
-                color = WaTextSecondary,
+                stringResource(R.string.paywall_gate_error_retry),
+                color = WaProGreen,
                 fontSize = 13.sp,
-                modifier = Modifier.refBounds(geom.period.x, geom.period.y, geom.period.w, geom.period.h)
+                fontWeight = FontWeight.SemiBold
             )
-
-            val features = planFeatures()
-            geom.features.forEachIndexed { index, box ->
-                features.getOrNull(index)?.let { feature ->
-                    Row(
-                        verticalAlignment = Alignment.Top,
-                        modifier = Modifier.refBounds(box.x, box.y, box.w, box.h)
-                    ) {
-                        Icon(
-                            Icons.Filled.Check,
-                            contentDescription = null,
-                            tint = WaNeonGreen,
-                            modifier = Modifier.size(15.dp)
-                        )
-                        Spacer(Modifier.width(8.dp))
-                        Text(feature, color = WaTextSecondary, fontSize = 12.sp, lineHeight = 15.sp)
-                    }
-                }
-            }
-
-            val purchasingThis = isPurchasing && plan.rcPackage != null
-            Box(Modifier.refBounds(geom.button.x, geom.button.y, geom.button.w, geom.button.h)) {
-                when (plan.plan) {
-                    PlanType.MONTHLY -> GradientSelectButton(
-                        text = stringResource(R.string.paywall_button_select),
-                        brush = Brush.horizontalGradient(listOf(WaNeonGreen, Color(0xFF22D3EE))),
-                        contentColor = Color(0xFF04140C),
-                        showArrow = true,
-                        isLoading = purchasingThis,
-                        enabled = clickEnabled,
-                        onClick = { onSelect(plan) }
-                    )
-                    PlanType.YEARLY -> GradientSelectButton(
-                        text = stringResource(R.string.paywall_button_select),
-                        brush = Brush.horizontalGradient(listOf(WaPurple, WaPurpleLight)),
-                        contentColor = Color.White,
-                        showArrow = false,
-                        isLoading = purchasingThis,
-                        enabled = clickEnabled,
-                        onClick = { onSelect(plan) }
-                    )
-                    PlanType.WEEKLY -> OutlinePlainButton(
-                        text = stringResource(R.string.paywall_button_select),
-                        isLoading = purchasingThis,
-                        enabled = clickEnabled,
-                        onClick = { onSelect(plan) }
-                    )
-                }
-            }
         }
     }
 }
 
 /**
- * Custom "calendar with a crown" glyph matching the approved design's plan
- * icon (a plain calendar icon reads as generic; the crown communicates
- * "premium access"). Drawn with [Canvas] rather than a bitmap asset so it
- * scales cleanly and re-tints per plan accent color.
+ * Best-effort "$X.XX / month" breakdown for the Yearly card, computed
+ * from the plan's OWN real price text (whether that's a live RevenueCat
+ * formatted price or the [MockPlans] fallback) — never a separately
+ * hardcoded number. Returns null (hiding the row entirely) if the price
+ * text can't be parsed as a leading-currency-symbol + amount, e.g. an
+ * unusual locale formatting this doesn't recognize, rather than showing
+ * a guessed value.
  */
-@Composable
-private fun CalendarCrownIcon(tint: Color, size: androidx.compose.ui.unit.Dp) {
-    Canvas(modifier = Modifier.size(size)) {
-        val w = this.size.width
-        val h = this.size.height
-        val stroke = w * 0.09f
-
-        // Calendar body.
-        drawRoundRect(
-            color = tint,
-            topLeft = Offset(0f, h * 0.22f),
-            size = Size(w, h * 0.74f),
-            cornerRadius = CornerRadius(w * 0.16f, w * 0.16f),
-            style = Stroke(width = stroke)
-        )
-        // Binder rings.
-        val ringXs = listOf(w * 0.28f, w * 0.5f, w * 0.72f)
-        ringXs.forEach { x ->
-            drawLine(
-                color = tint,
-                start = Offset(x, 0f),
-                end = Offset(x, h * 0.32f),
-                strokeWidth = stroke,
-                cap = androidx.compose.ui.graphics.StrokeCap.Round
-            )
-        }
-        // Crown glyph inside the body.
-        val crown = Path().apply {
-            moveTo(w * 0.30f, h * 0.72f)
-            lineTo(w * 0.34f, h * 0.50f)
-            lineTo(w * 0.44f, h * 0.60f)
-            lineTo(w * 0.50f, h * 0.46f)
-            lineTo(w * 0.56f, h * 0.60f)
-            lineTo(w * 0.66f, h * 0.50f)
-            lineTo(w * 0.70f, h * 0.72f)
-            close()
-        }
-        drawPath(crown, color = tint)
-    }
-}
-
-/** Filled, gradient-background pill button used for the Yearly and Monthly "Select" CTAs. */
-@Composable
-private fun GradientSelectButton(
-    text: String,
-    brush: Brush,
-    contentColor: Color,
-    showArrow: Boolean,
-    isLoading: Boolean,
-    enabled: Boolean,
-    onClick: () -> Unit
-) {
-    // Height comes from the parent Box, which is sized to CardGeom.button
-    // (a measured reference box) by the caller — not a fixed dp here, so
-    // there's no second, independent size system fighting the geometry
-    // the card was laid out with.
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .clip(RoundedCornerShape(50))
-            .background(if (enabled) brush else Brush.horizontalGradient(listOf(WaSurfaceVariant, WaSurfaceVariant)))
-            .clickable(enabled = enabled && !isLoading, onClick = onClick),
-        contentAlignment = Alignment.Center
-    ) {
-        if (isLoading) {
-            CircularProgressIndicator(modifier = Modifier.size(20.dp), color = contentColor)
-        } else {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(text, color = contentColor, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                if (showArrow) {
-                    Spacer(Modifier.width(6.dp))
-                    Icon(Icons.Filled.ArrowForward, contentDescription = null, tint = contentColor, modifier = Modifier.size(18.dp))
-                }
-            }
-        }
-    }
-}
-
-/** Outlined "Select" button used for the Weekly plan. Height likewise comes
- *  from the parent Box (CardGeom.button), not a fixed dp. */
-@Composable
-private fun OutlinePlainButton(
-    text: String,
-    isLoading: Boolean,
-    enabled: Boolean,
-    onClick: () -> Unit
-) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .clip(RoundedCornerShape(50))
-            .border(BorderStroke(1.dp, WaSurfaceVariant), RoundedCornerShape(50))
-            .clickable(enabled = enabled && !isLoading, onClick = onClick),
-        contentAlignment = Alignment.Center
-    ) {
-        if (isLoading) {
-            CircularProgressIndicator(modifier = Modifier.size(20.dp), color = WaTextPrimary)
-        } else {
-            Text(text, color = WaTextPrimary, fontWeight = FontWeight.SemiBold, fontSize = 15.sp)
-        }
-    }
-}
-
-@Composable
-private fun TrialNotice() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(18.dp))
-            .background(WaSurface)
-            .border(BorderStroke(1.dp, WaSurfaceVariant), RoundedCornerShape(18.dp))
-            .padding(16.dp),
-        verticalAlignment = Alignment.Top
-    ) {
-        Box(
-            modifier = Modifier
-                .size(38.dp)
-                .clip(RoundedCornerShape(50))
-                .background(
-                    Brush.radialGradient(listOf(WaNeonGreen.copy(alpha = 0.28f), Color.Transparent))
-                ),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(Icons.Filled.Shield, contentDescription = null, tint = WaNeonGreen, modifier = Modifier.size(19.dp))
-        }
-        Spacer(Modifier.width(12.dp))
-        Text(
-            stringResource(R.string.paywall_trial_notice),
-            color = WaTextSecondary,
-            fontSize = 12.sp,
-            lineHeight = 17.sp,
-            modifier = Modifier.padding(top = 8.dp)
-        )
-    }
-}
-
-@Composable
-private fun TrustFooter() {
-    Column {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            TrustItem(
-                icon = Icons.Filled.Lock,
-                title = stringResource(R.string.paywall_footer_secured_title),
-                subtitle = stringResource(R.string.paywall_footer_secured_subtitle),
-                modifier = Modifier.weight(1f)
-            )
-            Spacer(Modifier.width(12.dp))
-            TrustItem(
-                icon = Icons.Filled.Storefront,
-                title = stringResource(R.string.paywall_footer_google_title),
-                subtitle = stringResource(R.string.paywall_footer_google_subtitle),
-                modifier = Modifier.weight(1f)
-            )
-        }
-        Spacer(Modifier.height(18.dp))
-        Text(
-            stringResource(R.string.paywall_footer_tagline),
-            color = WaTextSecondary,
-            fontSize = 12.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
-        )
-    }
-}
-
-@Composable
-private fun TrustItem(icon: ImageVector, title: String, subtitle: String, modifier: Modifier = Modifier) {
-    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
-        Icon(icon, contentDescription = null, tint = WaTextSecondary, modifier = Modifier.size(16.dp))
-        Spacer(Modifier.width(8.dp))
-        Column {
-            Text(title, color = WaTextPrimary, fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
-            Text(subtitle, color = WaTextSecondary, fontSize = 10.sp, lineHeight = 12.sp)
-        }
-    }
+private fun estimateMonthlyFromYearly(priceText: String): String? {
+    val match = Regex("""^([^\d]*)([\d]+(?:[.,]\d+)?)(.*)$""").find(priceText.trim()) ?: return null
+    val prefix = match.groupValues[1]
+    val amount = match.groupValues[2].replace(',', '.').toFloatOrNull() ?: return null
+    val perMonth = amount / 12f
+    return prefix + String.format(Locale.US, "%.2f", perMonth)
 }

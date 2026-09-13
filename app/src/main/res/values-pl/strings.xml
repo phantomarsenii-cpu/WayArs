@@ -156,4 +156,11 @@
     <string name="paywall_tagline">INTELIGENTNY ASYSTENT DOSTAW I TAXI</string>
     <string name="paywall_compat_label">Działa razem z aplikacjami, w których już jeździsz</string>
     <string name="paywall_mock_selected_toast">Wybrano plan „%1$s” — zakupy będą dostępne po publikacji w Google Play</string>
+    <string name="paywall_pro_header">WayArs Pro</string>
+    <string name="paywall_cta_trial">Wypróbuj 7 dni za 0 $</string>
+    <string name="paywall_badge_best_value">★ NAJPOPULARNIEJSZY • OSZCZĘDŹ 30%</string>
+    <string name="paywall_badge_popular_discount">★ Popularny • -15%</string>
+    <string name="paywall_per_month_hint">Tylko %1$s / miesiąc</string>
+    <string name="paywall_data_safe">Twoje dane są bezpieczne</string>
+    <string name="paywall_no_charge_notice">Bez opłat przez pierwsze 7 dni. Anuluj w dowolnym momencie w Google Play.</string>
 </resources>
