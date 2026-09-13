@@ -15,12 +15,12 @@ val appVersionCode = ciPatch + 1 // versionCode must be >= 1 and strictly increa
 
 android {
     namespace = "com.wayars.app"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.wayars.app"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = appVersionCode
         versionName = appVersionName
     }
