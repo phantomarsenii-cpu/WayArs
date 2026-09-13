@@ -29,10 +29,15 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      # AGP 9.0.1 (see build.gradle.kts) requires Gradle 9.1.0 or newer —
+      # pinning to 8.7 here fails configuration with "Minimum supported
+      # Gradle version is 9.1.0. Current version is 8.7." before a single
+      # task even runs. 9.7.1 is the latest stable Gradle 9.x release and
+      # is within AGP 9's documented compatibility range.
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.7'
+          gradle-version: '9.7.1'
 
       # Safety net for a real release build: without this check, a missing
       # secret used to make the old "if" guards simply SKIP the signed

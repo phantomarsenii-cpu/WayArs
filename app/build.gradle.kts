@@ -1,6 +1,9 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    // Built-in Kotlin (AGP 9+) replaces org.jetbrains.kotlin.android — see
+    // the root build.gradle.kts comment. The Compose compiler now ships as
+    // its own plugin instead of composeOptions.kotlinCompilerExtensionVersion.
+    id("org.jetbrains.kotlin.plugin.compose")
     id("com.google.devtools.ksp")
 }
 
@@ -125,16 +128,14 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
-    }
+    // No kotlinOptions{} block needed: with built-in Kotlin, the Kotlin
+    // compiler's jvmTarget defaults to compileOptions.targetCompatibility
+    // above (17), and the Compose compiler version now comes from the
+    // org.jetbrains.kotlin.plugin.compose plugin (see plugins{} block)
+    // instead of composeOptions.kotlinCompilerExtensionVersion.
 
     buildFeatures {
         compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
     }
 
     packaging {
@@ -143,12 +144,18 @@ android {
         }
     }
 
-    // Rename the output file itself (not just the artifact zip) to WayArs.apk
-    // instead of the default app-debug.apk / app-release.apk.
-    applicationVariants.all {
-        outputs.all {
-            val output = this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
-            output.outputFileName = "WayArs.apk"
+}
+
+// Rename the output file itself (not just the artifact zip) to WayArs.apk
+// instead of the default app-debug.apk / app-release.apk. This replaces the
+// old applicationVariants.all { ... BaseVariantOutputImpl ... } API, which
+// AGP 9's new DSL no longer recognizes — androidComponents.onVariants is the
+// stable, public replacement (outputFileName has been a real Property<String>
+// on VariantOutput since AGP 4.1, unlike the internal type used before).
+androidComponents {
+    onVariants { variant ->
+        variant.outputs.forEach { output ->
+            output.outputFileName.set("WayArs.apk")
         }
     }
 }
