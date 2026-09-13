@@ -8,6 +8,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,7 +17,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -89,6 +89,73 @@ import com.wayars.app.presentation.ui.theme.WaTextPrimary
 import com.wayars.app.presentation.ui.theme.WaTextSecondary
 import com.wayars.app.presentation.ui.theme.WaWeeklyBorder
 import com.wayars.app.presentation.ui.theme.WaWeeklyCard
+
+/**
+ * Pixel geometry measured directly off the approved reference screenshot
+ * (native size 704×1510 px; the brief calls it 716×1536 — same 2x-density
+ * frame, off by rounding from re-export/compression) via a grid-overlay
+ * pixel analysis: the reference was cropped in 20px bands, a ruled grid
+ * was drawn over each band, and every border/badge edge below was read
+ * off that grid rather than guessed. Values are NOT proportions or
+ * weights — they are the actual measured spans, kept in the same
+ * reference-pixel unit so the ratios between them are exactly the
+ * reference's ratios (e.g. Monthly is 372px wide vs. 240px for
+ * Yearly/Weekly — 1.55x, not the 1x a `weight(1f)`/`weight(1f)` split
+ * would produce).
+ *
+ * All X values below are LOCAL to the content column, i.e. already
+ * offset by the reference's 32px left margin (so X=0 means "at the
+ * screen's content edge", matching this screen's own 18dp padding).
+ * All Y values in CARDS_* are local to the pricing-cards block, with
+ * Y=0 = the Yearly card's top border (reference Y=535) — the topmost
+ * edge in that block (the "Популярный" badge, reference Y=555, sits at
+ * local Y=20 — i.e. it overhangs the Monthly card's OWN top border by
+ * 10px, not the block's top).
+ *
+ * [scaleFor] turns these into dp for the device at hand: it divides the
+ * width Compose actually measured for the content column by this
+ * object's reference content width, and every element is scaled by that
+ * single factor on both axes — true proportional scaling to the
+ * reference (not a fixed dp copy, and not a weight-based guess).
+ */
+private object Ref {
+    /** Reference content width: 672 - 32 = 640px (the span both card columns fill together). */
+    const val CONTENT_W = 640f
+
+    // --- Header: text block vs. hero illustration, same row, split at ref X=330 ---
+    const val HEADER_TEXT_W = 298f   // 32..330
+    const val HEADER_HERO_X = 298f   // local X where the hero block starts
+    const val HEADER_HERO_W = 342f   // 330..672(screen right edge)
+    // Hero bounding box measured within its own 342-wide slot (local to that slot):
+    // the phone illustration + its glow sits centered, floating tags orbit it.
+    const val HERO_H = 275f          // ref Y 25..300 (title top-align to divider)
+    // Phone frame and floating-tag anchor points, LOCAL to the hero slot
+    // (i.e. already offset by ref X=330, ref Y=25 — the slot's own
+    // origin). Read off the same grid-overlay analysis as the cards.
+    // Rotation angles are the tags' visible tilt in the reference.
+    const val PHONE_X = 165f;       const val PHONE_Y = 15f
+    const val PHONE_W = 100f;       const val PHONE_H = 210f
+    const val TAG_BOLT_X = 90f;     const val TAG_BOLT_Y = 55f;  const val TAG_BOLT_ROT = -7f
+    const val TAG_UBER_X = 0f;      const val TAG_UBER_Y = 115f; const val TAG_UBER_ROT = -3f
+    const val TAG_WOLT_X = 250f;    const val TAG_WOLT_Y = 55f;  const val TAG_WOLT_ROT = 6f
+    const val TAG_STUART_X = 255f;  const val TAG_STUART_Y = 165f; const val TAG_STUART_ROT = 0f
+    const val TAG_FREENOW_X = 255f; const val TAG_FREENOW_Y = 195f; const val TAG_FREENOW_ROT = -4f
+
+    // --- Pricing cards block (local origin: X=0 at ref X=32, Y=0 at ref Y=535) ---
+    const val YEARLY_X = 0f;    const val YEARLY_Y = 0f
+    const val YEARLY_W = 240f;  const val YEARLY_H = 363f   // ref 535..898
+    const val WEEKLY_X = 0f;    const val WEEKLY_Y = 385f   // ref 920..1250 -> local 385..715
+    const val WEEKLY_W = 240f;  const val WEEKLY_H = 330f
+    const val MONTHLY_X = 268f; const val MONTHLY_Y = 30f   // ref 565..1218 -> local 30..683
+    const val MONTHLY_W = 372f; const val MONTHLY_H = 653f
+    const val BADGE_W = 150f;   const val BADGE_H = 45f
+    const val BADGE_Y = 20f     // ref 555 -> local 20 (overhangs Monthly's own top by 10px)
+    /** Bottom-most edge across both columns: max(Weekly bottom 715, Monthly bottom 683). */
+    const val CARDS_BLOCK_H = 715f
+}
+
+/** Scale factor: actual measured content width / [Ref.CONTENT_W]. Multiply any Ref.* value by this, then `.dp`, to place it. */
+private fun scaleFor(actualContentWidthDp: Float): Float = actualContentWidthDp / Ref.CONTENT_W
 
 /**
  * Static per-plan copy (title, "days of access" subtitle, discount/trial
@@ -197,68 +264,10 @@ fun PaywallScreen(
 
         Spacer(Modifier.height(20.dp))
 
-        // Two-column "bento" grid matching the reference: Yearly + Weekly
-        // stacked on the left, the featured Monthly card on the right.
-        // IntrinsicSize.Min on the Row lets the right (Monthly) column stretch
-        // to match the combined height of the left column's two stacked cards
-        // (Yearly + gap + Weekly) — the reference's
-        // [ YEARLY ][ MONTHLY, tall ]
-        // [ WEEKLY ][           ]
-        // bento composition, not three independently-sized cards.
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(IntrinsicSize.Min),
-            horizontalArrangement = Arrangement.spacedBy(14.dp)
-        ) {
-            val yearly = state.plans.find { it.plan == PlanType.YEARLY }
-            val monthly = state.plans.find { it.plan == PlanType.MONTHLY }
-            val weekly = state.plans.find { it.plan == PlanType.WEEKLY }
-
-            Column(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxHeight(),
-                verticalArrangement = Arrangement.spacedBy(14.dp)
-            ) {
-                yearly?.let {
-                    PlanCard(
-                        plan = it,
-                        isPurchasing = state.isPurchasing,
-                        isMockSelected = state.selectedMockPlan == it.plan,
-                        onSelect = onSelectPlan,
-                        modifier = Modifier.weight(1f)
-                    )
-                }
-                weekly?.let {
-                    PlanCard(
-                        plan = it,
-                        isPurchasing = state.isPurchasing,
-                        isMockSelected = state.selectedMockPlan == it.plan,
-                        onSelect = onSelectPlan,
-                        modifier = Modifier.weight(1f)
-                    )
-                }
-            }
-
-            Column(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxHeight()
-            ) {
-                monthly?.let {
-                    PlanCard(
-                        plan = it,
-                        isPurchasing = state.isPurchasing,
-                        isMockSelected = state.selectedMockPlan == it.plan,
-                        onSelect = onSelectPlan,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight()
-                    )
-                }
-            }
-        }
+        PricingCardsBlock(
+            state = state,
+            onSelectPlan = onSelectPlan
+        )
 
         state.errorMessage?.let { message ->
             Spacer(Modifier.height(12.dp))
@@ -292,6 +301,100 @@ fun PaywallScreen(
         Spacer(Modifier.height(20.dp))
 
         TrustFooter()
+    }
+}
+
+@Composable
+/**
+ * The pricing-cards bento grid, laid out by absolute coordinate — not by
+ * `Row`/`Column` weights — using the measurements in [Ref]. A single
+ * `BoxWithConstraints` reads the width Compose actually has for the
+ * content column; [scaleFor] turns that into one multiplier applied to
+ * every [Ref] value on both axes, so the block reproduces the
+ * reference's exact card proportions (Monthly 372:240 wide vs.
+ * Yearly/Weekly, not a 1:1 split) at whatever size the device gives it.
+ * The "Популярный" badge is drawn here, as its own absolutely-positioned
+ * sibling overhanging the Monthly card's top edge — not inside
+ * [PlanCard] — because that's what the reference actually is: one badge
+ * floating above the border line, not padding baked into the card.
+ */
+@Composable
+private fun PricingCardsBlock(
+    state: PaywallUiState,
+    onSelectPlan: (PlanOption) -> Unit
+) {
+    val yearly = state.plans.find { it.plan == PlanType.YEARLY }
+    val weekly = state.plans.find { it.plan == PlanType.WEEKLY }
+    val monthly = state.plans.find { it.plan == PlanType.MONTHLY }
+
+    BoxWithConstraints(Modifier.fillMaxWidth()) {
+        val scale = scaleFor(maxWidth.value)
+        fun px(v: Float) = (v * scale).dp
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(px(Ref.CARDS_BLOCK_H))
+        ) {
+            yearly?.let {
+                PlanCard(
+                    plan = it,
+                    isPurchasing = state.isPurchasing,
+                    isMockSelected = state.selectedMockPlan == it.plan,
+                    onSelect = onSelectPlan,
+                    modifier = Modifier
+                        .offset(x = px(Ref.YEARLY_X), y = px(Ref.YEARLY_Y))
+                        .size(px(Ref.YEARLY_W), px(Ref.YEARLY_H))
+                )
+            }
+            weekly?.let {
+                PlanCard(
+                    plan = it,
+                    isPurchasing = state.isPurchasing,
+                    isMockSelected = state.selectedMockPlan == it.plan,
+                    onSelect = onSelectPlan,
+                    modifier = Modifier
+                        .offset(x = px(Ref.WEEKLY_X), y = px(Ref.WEEKLY_Y))
+                        .size(px(Ref.WEEKLY_W), px(Ref.WEEKLY_H))
+                )
+            }
+            monthly?.let {
+                PlanCard(
+                    plan = it,
+                    isPurchasing = state.isPurchasing,
+                    isMockSelected = state.selectedMockPlan == it.plan,
+                    onSelect = onSelectPlan,
+                    modifier = Modifier
+                        .offset(x = px(Ref.MONTHLY_X), y = px(Ref.MONTHLY_Y))
+                        .size(px(Ref.MONTHLY_W), px(Ref.MONTHLY_H))
+                )
+            }
+
+            // "Популярный" badge — sibling of the cards, not nested inside
+            // PlanCard, positioned by its own measured coordinates so it
+            // overhangs the Monthly card's top border by exactly the
+            // measured 10px (scaled), instead of being simulated with
+            // card-content padding.
+            Box(
+                modifier = Modifier
+                    .offset(
+                        x = px(Ref.MONTHLY_X + Ref.MONTHLY_W / 2f - Ref.BADGE_W / 2f),
+                        y = px(Ref.BADGE_Y)
+                    )
+                    .size(px(Ref.BADGE_W), px(Ref.BADGE_H))
+                    .zIndex(2f)
+                    .clip(RoundedCornerShape(50))
+                    .background(Brush.horizontalGradient(listOf(WaNeonGreen, Color(0xFF22D3EE)))),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    stringResource(R.string.paywall_badge_popular),
+                    color = Color(0xFF04140C),
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
     }
 }
 
@@ -356,48 +459,61 @@ private fun Header() {
 
         Spacer(Modifier.height(18.dp))
 
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Column(modifier = Modifier.weight(1f)) {
-                Box(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(50))
-                        .border(BorderStroke(1.dp, WaNeonGreen.copy(alpha = 0.5f)), RoundedCornerShape(50))
-                        .padding(horizontal = 14.dp, vertical = 6.dp)
-                ) {
-                    Text(stringResource(R.string.paywall_badge_full_access), color = WaNeonGreen, fontSize = 11.sp)
-                }
-                Spacer(Modifier.height(12.dp))
-                Column {
-                    val titleLines = stringResource(R.string.paywall_title).split("\n")
-                    Text(
-                        titleLines.getOrElse(0) { "" },
-                        color = WaTextPrimary,
-                        fontSize = 23.sp,
-                        fontWeight = FontWeight.Bold,
-                        lineHeight = 28.sp
-                    )
-                    if (titleLines.size > 1) {
-                        Text(
-                            titleLines[1],
-                            style = TextStyle(
-                                brush = Brush.horizontalGradient(listOf(WaNeonGreen, Color(0xFF22D3EE))),
-                                fontSize = 23.sp,
-                                fontWeight = FontWeight.Bold,
-                                lineHeight = 28.sp
-                            )
-                        )
+        // Text block vs. hero illustration, split by the measured reference
+        // widths (298px : 342px, i.e. roughly 47:53) via BoxWithConstraints
+        // + [scaleFor] — NOT `Modifier.weight(1f)` on both sides, which
+        // would force an inaccurate 1:1 split.
+        BoxWithConstraints(Modifier.fillMaxWidth()) {
+            val scale = scaleFor(maxWidth.value)
+            fun px(v: Float) = (v * scale).dp
+
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Column(modifier = Modifier.width(px(Ref.HEADER_TEXT_W))) {
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(50))
+                            .border(BorderStroke(1.dp, WaNeonGreen.copy(alpha = 0.5f)), RoundedCornerShape(50))
+                            .padding(horizontal = 14.dp, vertical = 6.dp)
+                    ) {
+                        Text(stringResource(R.string.paywall_badge_full_access), color = WaNeonGreen, fontSize = 11.sp)
                     }
+                    Spacer(Modifier.height(12.dp))
+                    Column {
+                        val titleLines = stringResource(R.string.paywall_title).split("\n")
+                        Text(
+                            titleLines.getOrElse(0) { "" },
+                            color = WaTextPrimary,
+                            fontSize = 23.sp,
+                            fontWeight = FontWeight.Bold,
+                            lineHeight = 28.sp
+                        )
+                        if (titleLines.size > 1) {
+                            Text(
+                                titleLines[1],
+                                style = TextStyle(
+                                    brush = Brush.horizontalGradient(listOf(WaNeonGreen, Color(0xFF22D3EE))),
+                                    fontSize = 23.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    lineHeight = 28.sp
+                                )
+                            )
+                        }
+                    }
+                    Spacer(Modifier.height(10.dp))
+                    Text(
+                        stringResource(R.string.paywall_subtitle),
+                        color = WaTextSecondary,
+                        fontSize = 12.5.sp,
+                        lineHeight = 17.sp
+                    )
                 }
-                Spacer(Modifier.height(10.dp))
-                Text(
-                    stringResource(R.string.paywall_subtitle),
-                    color = WaTextSecondary,
-                    fontSize = 12.5.sp,
-                    lineHeight = 17.sp
+                HeroIllustration(
+                    modifier = Modifier
+                        .width(px(Ref.HEADER_HERO_W))
+                        .height(px(Ref.HERO_H)),
+                    px = ::px
                 )
             }
-            Spacer(Modifier.width(6.dp))
-            HeroIllustration(modifier = Modifier.width(126.dp).height(178.dp))
         }
 
         Spacer(Modifier.height(18.dp))
@@ -417,24 +533,29 @@ private fun Header() {
 }
 
 /**
- * Stylized "phone + partner platforms" hero graphic, matching the
- * approved design's composition: the app icon centered on a phone-shaped
- * card with a glowing route line, surrounded by floating tags naming the
- * delivery/taxi platforms this app's data sources are compatible with.
+ * Stylized "phone + partner platforms" hero graphic. Every element here —
+ * the phone frame and each floating tag — is placed by absolute offset
+ * from [Ref]'s measured coordinates (via [px]), not by `Alignment` plus a
+ * guessed `.offset()`/`.rotate()` like the previous version.
  *
  * The platform tags are plain colored text labels — deliberately NOT
- * recreations of each brand's logo/wordmark artwork, to avoid
- * impersonating third-party trademarks. Naming a compatible service in
- * your own app's UI as plain text is standard practice; redrawing their
- * logo artwork is not.
+ * pixel copies of each brand's actual logo/wordmark artwork. Uber, Bolt,
+ * Wolt, Stuart and FreeNow are real, currently-trademarked brands; baking
+ * a bitmap of their stylized app-icon art into a shipping app risks
+ * implying an official partnership that may not exist, independent of
+ * how faithfully it's redrawn. Naming a compatible service in your own
+ * UI as plain text is standard, safe practice — reproducing their logo
+ * art is not something I'll do without that partnership/license
+ * actually being confirmed. Position, size, and rotation of each tag
+ * are matched to the reference; the glyph inside is not.
  */
 @Composable
-private fun HeroIllustration(modifier: Modifier = Modifier) {
+private fun HeroIllustration(modifier: Modifier = Modifier, px: (Float) -> androidx.compose.ui.unit.Dp) {
     Box(modifier = modifier) {
-        // Ambient glow behind the phone.
+        // Ambient glow + phone, centered on the measured phone bounding box.
         Box(
             modifier = Modifier
-                .align(Alignment.Center)
+                .offset(x = px(Ref.PHONE_X + Ref.PHONE_W / 2f - 55f), y = px(Ref.PHONE_Y + Ref.PHONE_H / 2f - 55f))
                 .size(110.dp)
                 .background(
                     Brush.radialGradient(
@@ -443,12 +564,13 @@ private fun HeroIllustration(modifier: Modifier = Modifier) {
                 )
         )
 
-        // Phone frame.
+        // Phone frame — placed at its own measured top-left, not centered
+        // in the whole slot (the reference's phone sits right-of-center).
         Box(
             modifier = Modifier
-                .align(Alignment.Center)
-                .width(72.dp)
-                .height(150.dp)
+                .offset(x = px(Ref.PHONE_X), y = px(Ref.PHONE_Y))
+                .width(px(Ref.PHONE_W))
+                .height(px(Ref.PHONE_H))
                 .shadow(
                     elevation = 14.dp,
                     shape = RoundedCornerShape(20.dp),
@@ -492,27 +614,24 @@ private fun HeroIllustration(modifier: Modifier = Modifier) {
             Brush.horizontalGradient(listOf(WaTagBoltDark, WaTagBolt)),
             Color(0xFF04240F),
             modifier = Modifier
-                .align(Alignment.TopStart)
-                .offset(x = (-4).dp, y = 8.dp)
-                .rotate(-7f)
+                .offset(x = px(Ref.TAG_BOLT_X), y = px(Ref.TAG_BOLT_Y))
+                .rotate(Ref.TAG_BOLT_ROT)
         )
         PlatformTag(
             "Uber",
             Brush.horizontalGradient(listOf(WaTagUber, WaTagUber)),
             WaTextPrimary,
             modifier = Modifier
-                .align(Alignment.CenterStart)
-                .offset(x = (-10).dp, y = 4.dp)
-                .rotate(-3f)
+                .offset(x = px(Ref.TAG_UBER_X), y = px(Ref.TAG_UBER_Y))
+                .rotate(Ref.TAG_UBER_ROT)
         )
         PlatformTag(
             "Wolt",
             Brush.horizontalGradient(listOf(WaTagWoltDark, WaTagWolt)),
             WaTextPrimary,
             modifier = Modifier
-                .align(Alignment.TopEnd)
-                .offset(x = 6.dp, y = 14.dp)
-                .rotate(6f)
+                .offset(x = px(Ref.TAG_WOLT_X), y = px(Ref.TAG_WOLT_Y))
+                .rotate(Ref.TAG_WOLT_ROT)
         )
         PlatformTag(
             "Stuart",
@@ -520,17 +639,16 @@ private fun HeroIllustration(modifier: Modifier = Modifier) {
             WaTextPrimary,
             icon = Icons.Filled.LocalShipping,
             modifier = Modifier
-                .align(Alignment.CenterEnd)
-                .offset(x = 10.dp, y = 30.dp)
+                .offset(x = px(Ref.TAG_STUART_X), y = px(Ref.TAG_STUART_Y))
+                .rotate(Ref.TAG_STUART_ROT)
         )
         PlatformTag(
             "Free Now",
             Brush.horizontalGradient(listOf(WaTagFreeNow, WaTagFreeNow)),
             WaTextPrimary,
             modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .offset(x = 4.dp, y = (-2).dp)
-                .rotate(-4f)
+                .offset(x = px(Ref.TAG_FREENOW_X), y = px(Ref.TAG_FREENOW_Y))
+                .rotate(Ref.TAG_FREENOW_ROT)
         )
     }
 }
@@ -680,32 +798,35 @@ private fun PlanCard(
     val borderColor = if (isMockSelected) WaNeonGreen else accent.borderColor
     val borderWidth = if (isMockSelected) 2.5.dp else if (isFeatured) 1.5.dp else 1.dp
 
-    Box(modifier = modifier.fillMaxWidth().fillMaxHeight()) {
-        Box(
+    // Sizing and position come entirely from [modifier] — the caller
+    // (PricingCardsBlock) places every card by the exact reference
+    // coordinates in [Ref]. This composable no longer guesses a size for
+    // itself, and — for the Monthly card — no longer reserves its own
+    // top padding for the "Популярный" badge: that badge is drawn as an
+    // independent sibling at its own measured coordinates, since in the
+    // reference it overhangs the card's border, it isn't inset from it.
+    Box(
+        modifier = modifier
+            // Shadow MUST come before clip/background: elevation shadows
+            // are drawn outside the layout bounds, so clipping first
+            // would cut the glow off entirely.
+            .then(
+                if (glowColor != Color.Transparent) {
+                    Modifier.androidxShadowGlow(glowColor, cardShape)
+                } else Modifier
+            )
+            .clip(cardShape)
+            .background(accent.cardBrush)
+            .border(BorderStroke(borderWidth, borderColor), cardShape)
+            .clickable(enabled = clickEnabled) { onSelect(plan) }
+    ) {
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
-                .then(if (isFeatured) Modifier.padding(top = 16.dp) else Modifier)
-                // Shadow MUST come before clip/background: elevation shadows
-                // are drawn outside the layout bounds, so clipping first
-                // would cut the glow off entirely.
-                .then(
-                    if (glowColor != Color.Transparent) {
-                        Modifier.androidxShadowGlow(glowColor, cardShape)
-                    } else Modifier
-                )
-                .clip(cardShape)
-                .background(accent.cardBrush)
-                .border(BorderStroke(borderWidth, borderColor), cardShape)
-                .clickable(enabled = clickEnabled) { onSelect(plan) }
+                .padding(18.dp)
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-                    .padding(18.dp)
-            ) {
-                CalendarCrownIcon(tint = accent.iconTint, size = 24.dp)
+            CalendarCrownIcon(tint = accent.iconTint, size = 24.dp)
                 Spacer(Modifier.height(8.dp))
                 Text(copy.title, color = WaTextPrimary, fontSize = 17.sp, fontWeight = FontWeight.SemiBold)
                 Spacer(Modifier.height(2.dp))
@@ -816,25 +937,6 @@ private fun PlanCard(
                     )
                 }
             }
-        }
-
-        if (isFeatured) {
-            Box(
-                modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .zIndex(1f)
-                    .clip(RoundedCornerShape(50))
-                    .background(Brush.horizontalGradient(listOf(WaNeonGreen, Color(0xFF22D3EE))))
-                    .padding(horizontal = 20.dp, vertical = 9.dp)
-            ) {
-                Text(
-                    stringResource(R.string.paywall_badge_popular),
-                    color = Color(0xFF04140C),
-                    fontSize = 13.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-        }
     }
 }
 
