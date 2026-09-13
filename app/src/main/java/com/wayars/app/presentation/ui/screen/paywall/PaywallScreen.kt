@@ -56,12 +56,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.Measurable
+import androidx.compose.ui.layout.ParentDataModifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
@@ -69,7 +74,6 @@ import com.wayars.app.R
 import com.wayars.app.presentation.PaywallUiState
 import com.wayars.app.presentation.PlanOption
 import com.wayars.app.presentation.PlanType
-import com.wayars.app.presentation.ui.theme.WaBackground
 import com.wayars.app.presentation.ui.theme.WaHeroPhoneBottom
 import com.wayars.app.presentation.ui.theme.WaHeroPhoneTop
 import com.wayars.app.presentation.ui.theme.WaNeonGreen
@@ -135,11 +139,17 @@ private object Ref {
     // Rotation angles are the tags' visible tilt in the reference.
     const val PHONE_X = 165f;       const val PHONE_Y = 15f
     const val PHONE_W = 100f;       const val PHONE_H = 210f
+    const val GLOW_W = 130f;        const val GLOW_H = 130f
     const val TAG_BOLT_X = 90f;     const val TAG_BOLT_Y = 55f;  const val TAG_BOLT_ROT = -7f
+    const val TAG_BOLT_W = 95f;     const val TAG_BOLT_H = 55f
     const val TAG_UBER_X = 0f;      const val TAG_UBER_Y = 115f; const val TAG_UBER_ROT = -3f
+    const val TAG_UBER_W = 100f;    const val TAG_UBER_H = 55f
     const val TAG_WOLT_X = 250f;    const val TAG_WOLT_Y = 55f;  const val TAG_WOLT_ROT = 6f
+    const val TAG_WOLT_W = 90f;     const val TAG_WOLT_H = 55f
     const val TAG_STUART_X = 255f;  const val TAG_STUART_Y = 165f; const val TAG_STUART_ROT = 0f
+    const val TAG_STUART_W = 90f;   const val TAG_STUART_H = 70f
     const val TAG_FREENOW_X = 255f; const val TAG_FREENOW_Y = 195f; const val TAG_FREENOW_ROT = -4f
+    const val TAG_FREENOW_W = 90f;  const val TAG_FREENOW_H = 70f
 
     // --- Pricing cards block (local origin: X=0 at ref X=32, Y=0 at ref Y=535) ---
     const val YEARLY_X = 0f;    const val YEARLY_Y = 0f
@@ -154,8 +164,154 @@ private object Ref {
     const val CARDS_BLOCK_H = 715f
 }
 
+/**
+ * Internal geometry of one plan card, local to that card's own top-left
+ * (i.e. its own [RefBox] fed straight into a per-card [RefCanvas] whose
+ * refW/refH are the card's own measured width/height from [Ref]). Read
+ * off the same grid-overlay analysis as the outer card boxes — these
+ * inner element positions carry more manual-reading error than the
+ * outer boxes (small text baselines are harder to pin to a pixel than a
+ * card border is), so treat them as "measured, moderate confidence"
+ * rather than exact.
+ */
+private data class CardGeom(
+    val cardW: Float,
+    val cardH: Float,
+    val icon: RefBox,
+    val title: RefBox,
+    val subtitle: RefBox,
+    val pill: RefBox?,       // discount pill background; null for Weekly (no discount)
+    val trial: RefBox,       // "7 дней бесплатно" text (sits beside the pill, or alone for Weekly)
+    val price: RefBox,
+    val original: RefBox?,   // struck-through original price; Monthly only
+    val period: RefBox,
+    val features: List<RefBox>,
+    val button: RefBox
+)
+
+private val YearlyGeom = CardGeom(
+    cardW = Ref.YEARLY_W, cardH = Ref.YEARLY_H,
+    icon = RefBox(33f, 20f, 44f, 45f),
+    title = RefBox(86f, 20f, 150f, 24f),
+    subtitle = RefBox(86f, 48f, 150f, 16f),
+    pill = RefBox(33f, 73f, 110f, 40f),
+    trial = RefBox(150f, 73f, 90f, 40f),
+    price = RefBox(33f, 122f, 140f, 42f),
+    original = null,
+    period = RefBox(178f, 150f, 60f, 20f),
+    features = listOf(
+        RefBox(33f, 190f, 175f, 20f),
+        RefBox(33f, 215f, 175f, 20f),
+        RefBox(33f, 240f, 175f, 40f),
+        RefBox(33f, 288f, 175f, 20f)
+    ),
+    button = RefBox(33f, 323f, 174f, 37f)
+)
+
+private val WeeklyGeom = CardGeom(
+    cardW = Ref.WEEKLY_W, cardH = Ref.WEEKLY_H,
+    icon = RefBox(33f, 20f, 44f, 45f),
+    title = RefBox(86f, 20f, 150f, 24f),
+    subtitle = RefBox(86f, 48f, 150f, 16f),
+    pill = null,
+    trial = RefBox(33f, 80f, 180f, 20f),
+    price = RefBox(33f, 103f, 140f, 42f),
+    original = null,
+    period = RefBox(168f, 130f, 70f, 20f),
+    features = listOf(
+        RefBox(33f, 170f, 175f, 20f),
+        RefBox(33f, 195f, 175f, 20f),
+        RefBox(33f, 220f, 175f, 40f),
+        RefBox(33f, 268f, 175f, 20f)
+    ),
+    button = RefBox(33f, 288f, 174f, 35f)
+)
+
+private val MonthlyGeom = CardGeom(
+    cardW = Ref.MONTHLY_W, cardH = Ref.MONTHLY_H,
+    icon = RefBox(55f, 45f, 55f, 55f),
+    title = RefBox(125f, 45f, 200f, 30f),
+    subtitle = RefBox(125f, 82f, 220f, 20f),
+    pill = RefBox(55f, 140f, 135f, 55f),
+    trial = RefBox(210f, 140f, 140f, 55f),
+    price = RefBox(55f, 225f, 190f, 55f),
+    original = RefBox(255f, 245f, 100f, 30f),
+    period = RefBox(55f, 285f, 100f, 25f),
+    features = listOf(
+        RefBox(55f, 345f, 300f, 25f),
+        RefBox(55f, 385f, 300f, 25f),
+        RefBox(55f, 425f, 300f, 50f),
+        RefBox(55f, 485f, 300f, 25f)
+    ),
+    button = RefBox(55f, 555f, 262f, 75f)
+)
+
+private fun geomFor(plan: PlanType): CardGeom = when (plan) {
+    PlanType.YEARLY -> YearlyGeom
+    PlanType.WEEKLY -> WeeklyGeom
+    PlanType.MONTHLY -> MonthlyGeom
+}
+
 /** Scale factor: actual measured content width / [Ref.CONTENT_W]. Multiply any Ref.* value by this, then `.dp`, to place it. */
 private fun scaleFor(actualContentWidthDp: Float): Float = actualContentWidthDp / Ref.CONTENT_W
+
+/**
+ * Reference-pixel coordinates for one child of [RefCanvas]: x, y, width,
+ * height, all in the SAME unit as the [Ref] constants (reference-image
+ * pixels), local to that canvas's own top-left.
+ */
+private data class RefBox(val x: Float, val y: Float, val w: Float, val h: Float)
+
+private class RefBoundsElement(val box: RefBox) : ParentDataModifier {
+    override fun Density.modifyParentData(parentData: Any?): Any = box
+}
+
+/** Attaches this child's reference-pixel box to it for [RefCanvas] to read at layout time. */
+private fun Modifier.refBounds(x: Float, y: Float, w: Float, h: Float): Modifier =
+    this.then(RefBoundsElement(RefBox(x, y, w, h)))
+
+/**
+ * A single coordinate canvas, addressing the "не Row/Column для позиционирования"
+ * requirement directly: every child is placed by [Modifier.refBounds] alone —
+ * no `Row`, no `Column`, no `weight()`, no `fillMaxHeight()` decides where
+ * anything goes.
+ *
+ * This is Compose's own [Layout] primitive, not [Modifier.offset]/[Modifier.size]
+ * with a pre-computed dp value: [Constraints.maxWidth] here is the ACTUAL
+ * measured width of the container in real device pixels (post-density,
+ * i.e. what the compositor will rasterize), and every child's target
+ * rectangle is computed from that in the SAME pixel space — `refW`/`refH`
+ * (the reference image's own pixel dimensions for this canvas) map onto
+ * `constraints.maxWidth`/an implied height by one multiply, then each
+ * child's [RefBox] (also in reference pixels) is scaled by that same
+ * factor and handed to `placeable.place(xPx, yPx)` in that same real-pixel
+ * space. There is no dp anywhere in this function — dp only exists where
+ * [Ref] constants get authored as literals, and it never mixes with the
+ * px math done here.
+ */
+@Composable
+private fun RefCanvas(
+    refW: Float,
+    refH: Float,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
+    Layout(content = content, modifier = modifier) { measurables, constraints ->
+        val scale = constraints.maxWidth / refW
+        val heightPx = (refH * scale).toInt().coerceAtLeast(0)
+        val placed = measurables.map { m ->
+            val box = (m.parentData as? RefBox) ?: RefBox(0f, 0f, refW, refH)
+            val wPx = (box.w * scale).toInt().coerceAtLeast(0)
+            val hPx = (box.h * scale).toInt().coerceAtLeast(0)
+            val xPx = (box.x * scale).toInt()
+            val yPx = (box.y * scale).toInt()
+            Triple(m.measure(Constraints.fixed(wPx, hPx)), xPx, yPx)
+        }
+        layout(constraints.maxWidth, heightPx) {
+            placed.forEach { (placeable, x, y) -> placeable.place(x, y) }
+        }
+    }
+}
 
 /**
  * Static per-plan copy (title, "days of access" subtitle, discount/trial
@@ -227,7 +383,16 @@ fun PaywallScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(WaBackground)
+            // Measured directly off the reference at ~30 sample points away
+            // from the hero/card glow zones: it is a NEAR-FLAT dark
+            // teal-navy (~RGB 7,20,29 / #071420), not the near-black
+            // #040608 this screen used before, and not a strong gradient
+            // or decorative background layer either — direct pixel
+            // sampling found none. The visual "background interest" in the
+            // reference comes entirely from the hero glow and each card's
+            // own border/shadow glow, both of which already exist as
+            // separate layers in this screen.
+            .background(Brush.verticalGradient(listOf(Color(0xFF081826), Color(0xFF071420), Color(0xFF061119))))
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 18.dp, vertical = 22.dp)
     ) {
@@ -304,19 +469,18 @@ fun PaywallScreen(
     }
 }
 
-@Composable
 /**
- * The pricing-cards bento grid, laid out by absolute coordinate — not by
- * `Row`/`Column` weights — using the measurements in [Ref]. A single
- * `BoxWithConstraints` reads the width Compose actually has for the
- * content column; [scaleFor] turns that into one multiplier applied to
- * every [Ref] value on both axes, so the block reproduces the
- * reference's exact card proportions (Monthly 372:240 wide vs.
- * Yearly/Weekly, not a 1:1 split) at whatever size the device gives it.
- * The "Популярный" badge is drawn here, as its own absolutely-positioned
- * sibling overhanging the Monthly card's top edge — not inside
- * [PlanCard] — because that's what the reference actually is: one badge
- * floating above the border line, not padding baked into the card.
+ * The pricing-cards bento grid, laid out by absolute coordinate — via
+ * [RefCanvas], not `Row`/`Column` weights — using the measurements in
+ * [Ref]. [RefCanvas] measures the actual pixel width Compose gives the
+ * content column and scales every [Ref] value by that one factor on both
+ * axes, so the block reproduces the reference's exact card proportions
+ * (Monthly 372:240 wide vs. Yearly/Weekly, not a 1:1 split) at whatever
+ * size the device gives it. The "Популярный" badge is drawn here, as its
+ * own absolutely-positioned sibling overhanging the Monthly card's top
+ * edge — not inside [PlanCard] — because that's what the reference
+ * actually is: one badge floating above the border line, not padding
+ * baked into the card.
  */
 @Composable
 private fun PricingCardsBlock(
@@ -327,73 +491,63 @@ private fun PricingCardsBlock(
     val weekly = state.plans.find { it.plan == PlanType.WEEKLY }
     val monthly = state.plans.find { it.plan == PlanType.MONTHLY }
 
-    BoxWithConstraints(Modifier.fillMaxWidth()) {
-        val scale = scaleFor(maxWidth.value)
-        fun px(v: Float) = (v * scale).dp
+    RefCanvas(
+        refW = Ref.CONTENT_W,
+        refH = Ref.CARDS_BLOCK_H,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        yearly?.let {
+            PlanCard(
+                plan = it,
+                isPurchasing = state.isPurchasing,
+                isMockSelected = state.selectedMockPlan == it.plan,
+                onSelect = onSelectPlan,
+                modifier = Modifier.refBounds(Ref.YEARLY_X, Ref.YEARLY_Y, Ref.YEARLY_W, Ref.YEARLY_H)
+            )
+        }
+        weekly?.let {
+            PlanCard(
+                plan = it,
+                isPurchasing = state.isPurchasing,
+                isMockSelected = state.selectedMockPlan == it.plan,
+                onSelect = onSelectPlan,
+                modifier = Modifier.refBounds(Ref.WEEKLY_X, Ref.WEEKLY_Y, Ref.WEEKLY_W, Ref.WEEKLY_H)
+            )
+        }
+        monthly?.let {
+            PlanCard(
+                plan = it,
+                isPurchasing = state.isPurchasing,
+                isMockSelected = state.selectedMockPlan == it.plan,
+                onSelect = onSelectPlan,
+                modifier = Modifier.refBounds(Ref.MONTHLY_X, Ref.MONTHLY_Y, Ref.MONTHLY_W, Ref.MONTHLY_H)
+            )
+        }
 
+        // "Популярный" badge — sibling of the cards, not nested inside
+        // PlanCard, positioned by its own measured coordinates so it
+        // overhangs the Monthly card's top border by exactly the
+        // measured 10px, instead of being simulated with card-content
+        // padding. zIndex keeps it above the Monthly card it overlaps.
         Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(px(Ref.CARDS_BLOCK_H))
+                .refBounds(
+                    Ref.MONTHLY_X + Ref.MONTHLY_W / 2f - Ref.BADGE_W / 2f,
+                    Ref.BADGE_Y,
+                    Ref.BADGE_W,
+                    Ref.BADGE_H
+                )
+                .zIndex(2f)
+                .clip(RoundedCornerShape(50))
+                .background(Brush.horizontalGradient(listOf(WaNeonGreen, Color(0xFF22D3EE)))),
+            contentAlignment = Alignment.Center
         ) {
-            yearly?.let {
-                PlanCard(
-                    plan = it,
-                    isPurchasing = state.isPurchasing,
-                    isMockSelected = state.selectedMockPlan == it.plan,
-                    onSelect = onSelectPlan,
-                    modifier = Modifier
-                        .offset(x = px(Ref.YEARLY_X), y = px(Ref.YEARLY_Y))
-                        .size(px(Ref.YEARLY_W), px(Ref.YEARLY_H))
-                )
-            }
-            weekly?.let {
-                PlanCard(
-                    plan = it,
-                    isPurchasing = state.isPurchasing,
-                    isMockSelected = state.selectedMockPlan == it.plan,
-                    onSelect = onSelectPlan,
-                    modifier = Modifier
-                        .offset(x = px(Ref.WEEKLY_X), y = px(Ref.WEEKLY_Y))
-                        .size(px(Ref.WEEKLY_W), px(Ref.WEEKLY_H))
-                )
-            }
-            monthly?.let {
-                PlanCard(
-                    plan = it,
-                    isPurchasing = state.isPurchasing,
-                    isMockSelected = state.selectedMockPlan == it.plan,
-                    onSelect = onSelectPlan,
-                    modifier = Modifier
-                        .offset(x = px(Ref.MONTHLY_X), y = px(Ref.MONTHLY_Y))
-                        .size(px(Ref.MONTHLY_W), px(Ref.MONTHLY_H))
-                )
-            }
-
-            // "Популярный" badge — sibling of the cards, not nested inside
-            // PlanCard, positioned by its own measured coordinates so it
-            // overhangs the Monthly card's top border by exactly the
-            // measured 10px (scaled), instead of being simulated with
-            // card-content padding.
-            Box(
-                modifier = Modifier
-                    .offset(
-                        x = px(Ref.MONTHLY_X + Ref.MONTHLY_W / 2f - Ref.BADGE_W / 2f),
-                        y = px(Ref.BADGE_Y)
-                    )
-                    .size(px(Ref.BADGE_W), px(Ref.BADGE_H))
-                    .zIndex(2f)
-                    .clip(RoundedCornerShape(50))
-                    .background(Brush.horizontalGradient(listOf(WaNeonGreen, Color(0xFF22D3EE)))),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    stringResource(R.string.paywall_badge_popular),
-                    color = Color(0xFF04140C),
-                    fontSize = 13.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
+            Text(
+                stringResource(R.string.paywall_badge_popular),
+                color = Color(0xFF04140C),
+                fontSize = 13.sp,
+                fontWeight = FontWeight.Bold
+            )
         }
     }
 }
@@ -460,9 +614,15 @@ private fun Header() {
         Spacer(Modifier.height(18.dp))
 
         // Text block vs. hero illustration, split by the measured reference
-        // widths (298px : 342px, i.e. roughly 47:53) via BoxWithConstraints
-        // + [scaleFor] — NOT `Modifier.weight(1f)` on both sides, which
-        // would force an inaccurate 1:1 split.
+        // widths (298px : 342px) — NOT `Modifier.weight(1f)` on both sides,
+        // which would force an inaccurate 1:1 split. This one spot keeps
+        // `BoxWithConstraints` + a dp scale rather than [RefCanvas]
+        // deliberately: [RefCanvas] forces each child to an exact
+        // reference-derived height via `Constraints.fixed`, which is right
+        // for the hero graphic (fixed decorative content) but would clip
+        // the title/subtitle text block in any language whose translation
+        // runs longer than the reference's Russian copy. The width split
+        // itself is still the measured ratio, not a guess.
         BoxWithConstraints(Modifier.fillMaxWidth()) {
             val scale = scaleFor(maxWidth.value)
             fun px(v: Float) = (v * scale).dp
@@ -510,8 +670,7 @@ private fun Header() {
                 HeroIllustration(
                     modifier = Modifier
                         .width(px(Ref.HEADER_HERO_W))
-                        .height(px(Ref.HERO_H)),
-                    px = ::px
+                        .height(px(Ref.HERO_H))
                 )
             }
         }
@@ -550,13 +709,17 @@ private fun Header() {
  * are matched to the reference; the glyph inside is not.
  */
 @Composable
-private fun HeroIllustration(modifier: Modifier = Modifier, px: (Float) -> androidx.compose.ui.unit.Dp) {
-    Box(modifier = modifier) {
-        // Ambient glow + phone, centered on the measured phone bounding box.
+private fun HeroIllustration(modifier: Modifier = Modifier) {
+    RefCanvas(refW = Ref.HEADER_HERO_W, refH = Ref.HERO_H, modifier = modifier) {
+        // Ambient glow, centered on the measured phone bounding box.
         Box(
             modifier = Modifier
-                .offset(x = px(Ref.PHONE_X + Ref.PHONE_W / 2f - 55f), y = px(Ref.PHONE_Y + Ref.PHONE_H / 2f - 55f))
-                .size(110.dp)
+                .refBounds(
+                    Ref.PHONE_X + Ref.PHONE_W / 2f - Ref.GLOW_W / 2f,
+                    Ref.PHONE_Y + Ref.PHONE_H / 2f - Ref.GLOW_H / 2f,
+                    Ref.GLOW_W,
+                    Ref.GLOW_H
+                )
                 .background(
                     Brush.radialGradient(
                         listOf(WaNeonGreen.copy(alpha = 0.28f), Color.Transparent)
@@ -568,9 +731,7 @@ private fun HeroIllustration(modifier: Modifier = Modifier, px: (Float) -> andro
         // in the whole slot (the reference's phone sits right-of-center).
         Box(
             modifier = Modifier
-                .offset(x = px(Ref.PHONE_X), y = px(Ref.PHONE_Y))
-                .width(px(Ref.PHONE_W))
-                .height(px(Ref.PHONE_H))
+                .refBounds(Ref.PHONE_X, Ref.PHONE_Y, Ref.PHONE_W, Ref.PHONE_H)
                 .shadow(
                     elevation = 14.dp,
                     shape = RoundedCornerShape(20.dp),
@@ -614,7 +775,7 @@ private fun HeroIllustration(modifier: Modifier = Modifier, px: (Float) -> andro
             Brush.horizontalGradient(listOf(WaTagBoltDark, WaTagBolt)),
             Color(0xFF04240F),
             modifier = Modifier
-                .offset(x = px(Ref.TAG_BOLT_X), y = px(Ref.TAG_BOLT_Y))
+                .refBounds(Ref.TAG_BOLT_X, Ref.TAG_BOLT_Y, Ref.TAG_BOLT_W, Ref.TAG_BOLT_H)
                 .rotate(Ref.TAG_BOLT_ROT)
         )
         PlatformTag(
@@ -622,7 +783,7 @@ private fun HeroIllustration(modifier: Modifier = Modifier, px: (Float) -> andro
             Brush.horizontalGradient(listOf(WaTagUber, WaTagUber)),
             WaTextPrimary,
             modifier = Modifier
-                .offset(x = px(Ref.TAG_UBER_X), y = px(Ref.TAG_UBER_Y))
+                .refBounds(Ref.TAG_UBER_X, Ref.TAG_UBER_Y, Ref.TAG_UBER_W, Ref.TAG_UBER_H)
                 .rotate(Ref.TAG_UBER_ROT)
         )
         PlatformTag(
@@ -630,7 +791,7 @@ private fun HeroIllustration(modifier: Modifier = Modifier, px: (Float) -> andro
             Brush.horizontalGradient(listOf(WaTagWoltDark, WaTagWolt)),
             WaTextPrimary,
             modifier = Modifier
-                .offset(x = px(Ref.TAG_WOLT_X), y = px(Ref.TAG_WOLT_Y))
+                .refBounds(Ref.TAG_WOLT_X, Ref.TAG_WOLT_Y, Ref.TAG_WOLT_W, Ref.TAG_WOLT_H)
                 .rotate(Ref.TAG_WOLT_ROT)
         )
         PlatformTag(
@@ -639,7 +800,7 @@ private fun HeroIllustration(modifier: Modifier = Modifier, px: (Float) -> andro
             WaTextPrimary,
             icon = Icons.Filled.LocalShipping,
             modifier = Modifier
-                .offset(x = px(Ref.TAG_STUART_X), y = px(Ref.TAG_STUART_Y))
+                .refBounds(Ref.TAG_STUART_X, Ref.TAG_STUART_Y, Ref.TAG_STUART_W, Ref.TAG_STUART_H)
                 .rotate(Ref.TAG_STUART_ROT)
         )
         PlatformTag(
@@ -647,7 +808,7 @@ private fun HeroIllustration(modifier: Modifier = Modifier, px: (Float) -> andro
             Brush.horizontalGradient(listOf(WaTagFreeNow, WaTagFreeNow)),
             WaTextPrimary,
             modifier = Modifier
-                .offset(x = px(Ref.TAG_FREENOW_X), y = px(Ref.TAG_FREENOW_Y))
+                .refBounds(Ref.TAG_FREENOW_X, Ref.TAG_FREENOW_Y, Ref.TAG_FREENOW_W, Ref.TAG_FREENOW_H)
                 .rotate(Ref.TAG_FREENOW_ROT)
         )
     }
@@ -820,75 +981,86 @@ private fun PlanCard(
             .border(BorderStroke(borderWidth, borderColor), cardShape)
             .clickable(enabled = clickEnabled) { onSelect(plan) }
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-                .padding(18.dp)
-        ) {
-            CalendarCrownIcon(tint = accent.iconTint, size = 24.dp)
-                Spacer(Modifier.height(8.dp))
-                Text(copy.title, color = WaTextPrimary, fontSize = 17.sp, fontWeight = FontWeight.SemiBold)
-                Spacer(Modifier.height(2.dp))
-                Text(copy.daysLabel, color = WaTextSecondary, fontSize = 11.sp)
+        val geom = geomFor(plan.plan)
+        RefCanvas(refW = geom.cardW, refH = geom.cardH, modifier = Modifier.fillMaxSize()) {
+            Box(Modifier.refBounds(geom.icon.x, geom.icon.y, geom.icon.w, geom.icon.h)) {
+                CalendarCrownIcon(tint = accent.iconTint, size = 24.dp)
+            }
+            Text(
+                copy.title,
+                color = WaTextPrimary,
+                fontSize = 17.sp,
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.refBounds(geom.title.x, geom.title.y, geom.title.w, geom.title.h)
+            )
+            Text(
+                copy.daysLabel,
+                color = WaTextSecondary,
+                fontSize = 11.sp,
+                modifier = Modifier.refBounds(geom.subtitle.x, geom.subtitle.y, geom.subtitle.w, geom.subtitle.h)
+            )
 
-                Spacer(Modifier.height(12.dp))
-                if (copy.discountLabel != null) {
-                    Row(
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(50))
-                            .border(BorderStroke(1.dp, accent.borderColor.copy(alpha = 0.5f)), RoundedCornerShape(50))
-                            .padding(3.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(50))
-                                .background(
-                                    Brush.horizontalGradient(
-                                        listOf(copy.discountColor, copy.discountColor.copy(alpha = 0.65f))
-                                    )
-                                )
-                                .padding(horizontal = 12.dp, vertical = 6.dp)
-                        ) {
-                            Text(copy.discountLabel, color = Color(0xFF04140C), fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                        }
-                        Text(
-                            copy.trialLabel,
-                            color = WaTextSecondary,
-                            fontSize = 11.sp,
-                            modifier = Modifier.padding(horizontal = 10.dp)
-                        )
-                    }
-                } else {
+            if (copy.discountLabel != null && geom.pill != null) {
+                Box(
+                    modifier = Modifier
+                        .refBounds(geom.pill.x, geom.pill.y, geom.pill.w, geom.pill.h)
+                        .clip(RoundedCornerShape(50))
+                        .background(
+                            Brush.horizontalGradient(listOf(copy.discountColor, copy.discountColor.copy(alpha = 0.65f)))
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(copy.discountLabel, color = Color(0xFF04140C), fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                }
+                Box(
+                    modifier = Modifier.refBounds(geom.trial.x, geom.trial.y, geom.trial.w, geom.trial.h),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    Text(copy.trialLabel, color = WaTextSecondary, fontSize = 11.sp)
+                }
+            } else {
+                Box(
+                    modifier = Modifier.refBounds(geom.trial.x, geom.trial.y, geom.trial.w, geom.trial.h),
+                    contentAlignment = Alignment.CenterStart
+                ) {
                     Text(copy.trialLabel, color = accent.iconTint, fontSize = 13.sp, fontWeight = FontWeight.Medium)
                 }
+            }
 
-                Spacer(Modifier.height(12.dp))
-                Row(verticalAlignment = Alignment.Bottom) {
-                    Text(plan.priceText, color = WaTextPrimary, fontSize = 26.sp, fontWeight = FontWeight.Bold)
-                    plan.originalPriceText?.let { original ->
-                        Spacer(Modifier.width(6.dp))
+            Box(
+                modifier = Modifier.refBounds(geom.price.x, geom.price.y, geom.price.w, geom.price.h),
+                contentAlignment = Alignment.CenterStart
+            ) {
+                Text(plan.priceText, color = WaTextPrimary, fontSize = 26.sp, fontWeight = FontWeight.Bold)
+            }
+            if (geom.original != null) {
+                plan.originalPriceText?.let { original ->
+                    Box(
+                        modifier = Modifier.refBounds(geom.original.x, geom.original.y, geom.original.w, geom.original.h),
+                        contentAlignment = Alignment.CenterStart
+                    ) {
                         Text(
                             original,
                             color = WaTextSecondary,
                             fontSize = 15.sp,
-                            textDecoration = TextDecoration.LineThrough,
-                            modifier = Modifier.padding(bottom = 4.dp)
+                            textDecoration = TextDecoration.LineThrough
                         )
                     }
                 }
-                Text(
-                    copy.periodSuffix,
-                    color = WaTextSecondary,
-                    fontSize = 13.sp
-                )
+            }
+            Text(
+                copy.periodSuffix,
+                color = WaTextSecondary,
+                fontSize = 13.sp,
+                modifier = Modifier.refBounds(geom.period.x, geom.period.y, geom.period.w, geom.period.h)
+            )
 
-                Spacer(Modifier.height(12.dp))
-                planFeatures().forEach { feature ->
+            val features = planFeatures()
+            geom.features.forEachIndexed { index, box ->
+                features.getOrNull(index)?.let { feature ->
                     Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.padding(vertical = 3.dp)
+                        verticalAlignment = Alignment.Top,
+                        modifier = Modifier.refBounds(box.x, box.y, box.w, box.h)
                     ) {
                         Icon(
                             Icons.Filled.Check,
@@ -897,17 +1069,13 @@ private fun PlanCard(
                             modifier = Modifier.size(15.dp)
                         )
                         Spacer(Modifier.width(8.dp))
-                        Text(feature, color = WaTextSecondary, fontSize = 12.sp)
+                        Text(feature, color = WaTextSecondary, fontSize = 12.sp, lineHeight = 15.sp)
                     }
                 }
+            }
 
-                // Flexible: absorbs whatever extra height this card was
-                // stretched to (see the height-matching Row in
-                // PaywallScreen), anchoring the CTA to the card's bottom
-                // edge in every column instead of leaving a fixed gap.
-                Spacer(Modifier.weight(1f).heightIn(min = 16.dp))
-
-                val purchasingThis = isPurchasing && plan.rcPackage != null
+            val purchasingThis = isPurchasing && plan.rcPackage != null
+            Box(Modifier.refBounds(geom.button.x, geom.button.y, geom.button.w, geom.button.h)) {
                 when (plan.plan) {
                     PlanType.MONTHLY -> GradientSelectButton(
                         text = stringResource(R.string.paywall_button_select),
@@ -937,6 +1105,7 @@ private fun PlanCard(
                     )
                 }
             }
+        }
     }
 }
 
