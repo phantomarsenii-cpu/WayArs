@@ -8,7 +8,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -151,17 +150,47 @@ private object Ref {
     const val TAG_FREENOW_X = 255f; const val TAG_FREENOW_Y = 195f; const val TAG_FREENOW_ROT = -4f
     const val TAG_FREENOW_W = 90f;  const val TAG_FREENOW_H = 70f
 
-    // --- Pricing cards block (local origin: X=0 at ref X=32, Y=0 at ref Y=535) ---
+    // --- Pricing cards block ---
+    // Re-measured directly against the higher-resolution reference
+    // (quality_restoration_...jpg, 2388×5120 — same screenshot upscaled
+    // ~3.39x, confirmed by matching aspect ratio) using automated edge
+    // detection: for a given row/column of pixels, the card border shows
+    // up as a sharp, localized brightness spike against the flat
+    // background/fill on either side (e.g. the Yearly/Monthly gap was
+    // found by scanning row y=2374 and finding spikes at x=952 and
+    // x=1020 — not by eye). This replaced the previous grid-overlay
+    // readings, which were reasonably close but measurably off in two
+    // places: the Yearly/Weekly card WIDTH (was 240, is 247–248 relative
+    // to this block's own scale) and, more materially, the GAP between
+    // Yearly and Weekly (was ~22 relative-px, is actually closer to 30 —
+    // about 40% more) and the Monthly card's HEIGHT (was overstated by
+    // roughly 6%). Coordinates below are local to this block's own
+    // top-left (reference pixel 112, 1830 in the 2388-wide image) and
+    // carry their own reference width, [CARDS_REF_W] — unrelated to
+    // [CONTENT_W]/[HEADER_*] below, which are still expressed in the
+    // original 704px capture and were not re-verified this round (see
+    // the Header/Hero comments for what that does and doesn't cover).
+    const val CARDS_REF_W = 2162f   // 2274 - 112 (measured content right/left border positions)
     const val YEARLY_X = 0f;    const val YEARLY_Y = 0f
-    const val YEARLY_W = 240f;  const val YEARLY_H = 363f   // ref 535..898
-    const val WEEKLY_X = 0f;    const val WEEKLY_Y = 385f   // ref 920..1250 -> local 385..715
-    const val WEEKLY_W = 240f;  const val WEEKLY_H = 330f
-    const val MONTHLY_X = 268f; const val MONTHLY_Y = 30f   // ref 565..1218 -> local 30..683
-    const val MONTHLY_W = 372f; const val MONTHLY_H = 653f
-    const val BADGE_W = 150f;   const val BADGE_H = 45f
-    const val BADGE_Y = 20f     // ref 555 -> local 20 (overhangs Monthly's own top by 10px)
-    /** Bottom-most edge across both columns: max(Weekly bottom 715, Monthly bottom 683). */
-    const val CARDS_BLOCK_H = 715f
+    const val YEARLY_W = 840f;  const val YEARLY_H = 1208f   // ref-image y 1830..3038
+    const val WEEKLY_X = 0f;    const val WEEKLY_Y = 1312f   // ref-image y 3142..4238 (gap = 104)
+    const val WEEKLY_W = 840f;  const val WEEKLY_H = 1096f
+    const val MONTHLY_X = 908f; const val MONTHLY_Y = 120f   // ref-image y 1950..4028
+    const val MONTHLY_W = 1254f; const val MONTHLY_H = 2078f
+    /**
+     * NOT independently edge-detected — the badge pill sits on top of the
+     * Monthly card's own top-of-card glow, which is nearly the same green
+     * and defeats the brightness-spike method used above (tried it; the
+     * "outside the badge" readings were just as bright as "inside" it,
+     * because both are inside the card's own gradient). This is a
+     * proportion-based estimate off the rendered image (~40% of the
+     * Monthly card's width, centered), not a measured value — flagged
+     * rather than presented as equal-confidence to the box above it.
+     */
+    const val BADGE_W = 500f;   const val BADGE_H = 150f
+    const val BADGE_Y = 48f     // top-edge spike WAS found cleanly: ref-image y 1878
+    /** Bottom-most edge across both columns: max(Weekly bottom 1312+1096=2408, Monthly bottom 120+1908=2028). */
+    const val CARDS_BLOCK_H = 2408f
 }
 
 /**
@@ -189,61 +218,78 @@ private data class CardGeom(
     val button: RefBox
 )
 
+/**
+ * The [CardGeom] literals below were originally measured relative to the
+ * low-resolution reference's card sizes (240/330/372 wide). [Ref]'s card
+ * boxes have since been re-measured against the higher-resolution
+ * reference and are now expressed in that image's own pixel scale
+ * (840/840/1254 wide) — a ~3.37–3.5x bigger number space. Rather than
+ * silently rewriting every internal literal into that new scale (easy to
+ * introduce transcription errors, and it would hide what actually
+ * changed), [sb] rescales the ORIGINAL small measured numbers by the
+ * same ratio so they land correctly inside the new, bigger card boxes:
+ * the numbers you read below (33, 20, 44, 45, ...) are still the
+ * original per-element measurements.
+ */
+private fun sb(x: Float, y: Float, w: Float, h: Float, k: Float) = RefBox(x * k, y * k, w * k, h * k)
+private val YW_K = Ref.YEARLY_W / 240f   // = WEEKLY_W / 240f too — both share the old 240 base
+private val MO_K = Ref.MONTHLY_W / 372f
+
 private val YearlyGeom = CardGeom(
     cardW = Ref.YEARLY_W, cardH = Ref.YEARLY_H,
-    icon = RefBox(33f, 20f, 44f, 45f),
-    title = RefBox(86f, 20f, 150f, 24f),
-    subtitle = RefBox(86f, 48f, 150f, 16f),
-    pill = RefBox(33f, 73f, 110f, 40f),
-    trial = RefBox(150f, 73f, 90f, 40f),
-    price = RefBox(33f, 122f, 140f, 42f),
+    icon = sb(33f, 20f, 44f, 45f, YW_K),
+    title = sb(86f, 20f, 150f, 24f, YW_K),
+    subtitle = sb(86f, 48f, 150f, 16f, YW_K),
+    pill = sb(33f, 73f, 110f, 40f, YW_K),
+    trial = sb(150f, 73f, 90f, 40f, YW_K),
+    price = sb(33f, 122f, 140f, 42f, YW_K),
     original = null,
-    period = RefBox(178f, 150f, 60f, 20f),
+    period = sb(178f, 150f, 60f, 20f, YW_K),
     features = listOf(
-        RefBox(33f, 190f, 175f, 20f),
-        RefBox(33f, 215f, 175f, 20f),
-        RefBox(33f, 240f, 175f, 40f),
-        RefBox(33f, 288f, 175f, 20f)
+        sb(33f, 190f, 175f, 20f, YW_K),
+        sb(33f, 215f, 175f, 20f, YW_K),
+        sb(33f, 240f, 175f, 40f, YW_K),
+        sb(33f, 288f, 175f, 20f, YW_K)
     ),
-    button = RefBox(33f, 323f, 174f, 37f)
+    button = sb(33f, 323f, 174f, 37f, YW_K)
 )
 
 private val WeeklyGeom = CardGeom(
     cardW = Ref.WEEKLY_W, cardH = Ref.WEEKLY_H,
-    icon = RefBox(33f, 20f, 44f, 45f),
-    title = RefBox(86f, 20f, 150f, 24f),
-    subtitle = RefBox(86f, 48f, 150f, 16f),
+    icon = sb(33f, 20f, 44f, 45f, YW_K),
+    title = sb(86f, 20f, 150f, 24f, YW_K),
+    subtitle = sb(86f, 48f, 150f, 16f, YW_K),
     pill = null,
-    trial = RefBox(33f, 80f, 180f, 20f),
-    price = RefBox(33f, 103f, 140f, 42f),
+    trial = sb(33f, 80f, 180f, 20f, YW_K),
+    price = sb(33f, 103f, 140f, 42f, YW_K),
     original = null,
-    period = RefBox(168f, 130f, 70f, 20f),
+    period = sb(168f, 130f, 70f, 20f, YW_K),
     features = listOf(
-        RefBox(33f, 170f, 175f, 20f),
-        RefBox(33f, 195f, 175f, 20f),
-        RefBox(33f, 220f, 175f, 40f),
-        RefBox(33f, 268f, 175f, 20f)
+        sb(33f, 170f, 175f, 20f, YW_K),
+        sb(33f, 195f, 175f, 20f, YW_K),
+        sb(33f, 220f, 175f, 40f, YW_K),
+        sb(33f, 268f, 175f, 20f, YW_K)
     ),
-    button = RefBox(33f, 288f, 174f, 35f)
+    button = sb(33f, 288f, 174f, 35f, YW_K)
 )
 
 private val MonthlyGeom = CardGeom(
     cardW = Ref.MONTHLY_W, cardH = Ref.MONTHLY_H,
-    icon = RefBox(55f, 45f, 55f, 55f),
-    title = RefBox(125f, 45f, 200f, 30f),
-    subtitle = RefBox(125f, 82f, 220f, 20f),
-    pill = RefBox(55f, 140f, 135f, 55f),
-    trial = RefBox(210f, 140f, 140f, 55f),
-    price = RefBox(55f, 225f, 190f, 55f),
-    original = RefBox(255f, 245f, 100f, 30f),
-    period = RefBox(55f, 285f, 100f, 25f),
+    icon = sb(55f, 45f, 55f, 55f, MO_K),
+    title = sb(125f, 45f, 200f, 30f, MO_K),
+    subtitle = sb(125f, 82f, 220f, 20f, MO_K),
+    pill = sb(55f, 140f, 135f, 55f, MO_K),
+    trial = sb(210f, 140f, 140f, 55f, MO_K),
+    price = sb(55f, 225f, 190f, 55f, MO_K),
+    original = sb(255f, 245f, 100f, 30f, MO_K),
+    period = sb(55f, 285f, 100f, 25f, MO_K),
     features = listOf(
-        RefBox(55f, 345f, 300f, 25f),
-        RefBox(55f, 385f, 300f, 25f),
-        RefBox(55f, 425f, 300f, 50f),
-        RefBox(55f, 485f, 300f, 25f)
+        sb(55f, 345f, 300f, 25f, MO_K),
+        sb(55f, 385f, 300f, 25f, MO_K),
+        sb(55f, 425f, 300f, 50f, MO_K),
+        sb(55f, 485f, 300f, 25f, MO_K)
     ),
-    button = RefBox(55f, 555f, 262f, 75f)
+    button = sb(55f, 555f, 262f, 75f, MO_K)
 )
 
 private fun geomFor(plan: PlanType): CardGeom = when (plan) {
@@ -252,23 +298,24 @@ private fun geomFor(plan: PlanType): CardGeom = when (plan) {
     PlanType.MONTHLY -> MonthlyGeom
 }
 
-/** Scale factor: actual measured content width / [Ref.CONTENT_W]. Multiply any Ref.* value by this, then `.dp`, to place it. */
-private fun scaleFor(actualContentWidthDp: Float): Float = actualContentWidthDp / Ref.CONTENT_W
-
-/**
- * Reference-pixel coordinates for one child of [RefCanvas]: x, y, width,
- * height, all in the SAME unit as the [Ref] constants (reference-image
- * pixels), local to that canvas's own top-left.
- */
-private data class RefBox(val x: Float, val y: Float, val w: Float, val h: Float)
+/** RefBox with a free-height escape hatch: [autoHeight] = true means this
+ *  child gets its width pinned (and its top-left x/y placed) exactly like
+ *  any other child, but is measured with an UNBOUNDED max height instead
+ *  of `h` forced exact — so a text block can wrap to whatever height its
+ *  actual (possibly-longer-than-reference) content needs instead of
+ *  being clipped to the reference's own text length. `h` is still read
+ *  as this child's height contribution when [RefCanvas] computes its own
+ *  total height, so layout below it keeps its reference position; only
+ *  THIS child's own render height is allowed to exceed it. */
+private data class RefBox(val x: Float, val y: Float, val w: Float, val h: Float, val autoHeight: Boolean = false)
 
 private class RefBoundsElement(val box: RefBox) : ParentDataModifier {
     override fun Density.modifyParentData(parentData: Any?): Any = box
 }
 
 /** Attaches this child's reference-pixel box to it for [RefCanvas] to read at layout time. */
-private fun Modifier.refBounds(x: Float, y: Float, w: Float, h: Float): Modifier =
-    this.then(RefBoundsElement(RefBox(x, y, w, h)))
+private fun Modifier.refBounds(x: Float, y: Float, w: Float, h: Float, autoHeight: Boolean = false): Modifier =
+    this.then(RefBoundsElement(RefBox(x, y, w, h, autoHeight)))
 
 /**
  * A single coordinate canvas, addressing the "не Row/Column для позиционирования"
@@ -302,10 +349,14 @@ private fun RefCanvas(
         val placed = measurables.map { m ->
             val box = (m.parentData as? RefBox) ?: RefBox(0f, 0f, refW, refH)
             val wPx = (box.w * scale).toInt().coerceAtLeast(0)
-            val hPx = (box.h * scale).toInt().coerceAtLeast(0)
             val xPx = (box.x * scale).toInt()
             val yPx = (box.y * scale).toInt()
-            Triple(m.measure(Constraints.fixed(wPx, hPx)), xPx, yPx)
+            val constraints = if (box.autoHeight) {
+                Constraints(minWidth = wPx, maxWidth = wPx, minHeight = 0, maxHeight = Constraints.Infinity)
+            } else {
+                Constraints.fixed(wPx, (box.h * scale).toInt().coerceAtLeast(0))
+            }
+            Triple(m.measure(constraints), xPx, yPx)
         }
         layout(constraints.maxWidth, heightPx) {
             placed.forEach { (placeable, x, y) -> placeable.place(x, y) }
@@ -492,7 +543,7 @@ private fun PricingCardsBlock(
     val monthly = state.plans.find { it.plan == PlanType.MONTHLY }
 
     RefCanvas(
-        refW = Ref.CONTENT_W,
+        refW = Ref.CARDS_REF_W,
         refH = Ref.CARDS_BLOCK_H,
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -587,108 +638,94 @@ private fun GateErrorBanner(message: String, onRetry: () -> Unit) {
  */
 @Composable
 private fun Header() {
-    Column(horizontalAlignment = Alignment.Start) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Image(
-                painter = painterResource(R.drawable.wayars_icon_header),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(40.dp)
-                    .clip(RoundedCornerShape(11.dp))
-            )
-            Spacer(Modifier.width(10.dp))
-            Column {
-                Row {
-                    Text("Way", color = WaTextPrimary, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
-                    Text("Ars", color = WaNeonGreen, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
-                }
-                Text(
-                    stringResource(R.string.paywall_tagline),
-                    color = WaTextSecondary,
-                    fontSize = 9.sp,
-                    letterSpacing = 1.2.sp
-                )
-            }
+    // Single coordinate canvas for the whole header block — logo, wordmark,
+    // tagline, badge, title, subtitle and the hero slot are all placed by
+    // their own [Ref] coordinates via [refBounds], not by nested Row/Column
+    // flow. Coordinates here are in the ORIGINAL reference capture's own
+    // pixel space (0..704 wide) rather than re-localized to content-left,
+    // to avoid introducing new arithmetic errors converting them — these
+    // were NOT re-verified against the higher-resolution capture this
+    // round (unlike the pricing cards above); they carry the same
+    // moderate-confidence caveat as before.
+    // Text elements use `autoHeight = true`: their width and top position
+    // are still pinned by the reference, but their rendered height is left
+    // free so a longer translation wraps instead of getting clipped.
+    RefCanvas(refW = 704f, refH = 345f, modifier = Modifier.fillMaxWidth()) {
+        Image(
+            painter = painterResource(R.drawable.wayars_icon_header),
+            contentDescription = null,
+            modifier = Modifier
+                .refBounds(65f, 38f, 44f, 52f)
+                .clip(RoundedCornerShape(11.dp))
+        )
+        Row(modifier = Modifier.refBounds(115f, 45f, 250f, 40f, autoHeight = true)) {
+            Text("Way", color = WaTextPrimary, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
+            Text("Ars", color = WaNeonGreen, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
         }
+        Text(
+            stringResource(R.string.paywall_tagline),
+            color = WaTextSecondary,
+            fontSize = 9.sp,
+            letterSpacing = 1.2.sp,
+            modifier = Modifier.refBounds(115f, 112f, 350f, 18f, autoHeight = true)
+        )
 
-        Spacer(Modifier.height(18.dp))
-
-        // Text block vs. hero illustration, split by the measured reference
-        // widths (298px : 342px) — NOT `Modifier.weight(1f)` on both sides,
-        // which would force an inaccurate 1:1 split. This one spot keeps
-        // `BoxWithConstraints` + a dp scale rather than [RefCanvas]
-        // deliberately: [RefCanvas] forces each child to an exact
-        // reference-derived height via `Constraints.fixed`, which is right
-        // for the hero graphic (fixed decorative content) but would clip
-        // the title/subtitle text block in any language whose translation
-        // runs longer than the reference's Russian copy. The width split
-        // itself is still the measured ratio, not a guess.
-        BoxWithConstraints(Modifier.fillMaxWidth()) {
-            val scale = scaleFor(maxWidth.value)
-            fun px(v: Float) = (v * scale).dp
-
-            Row(modifier = Modifier.fillMaxWidth()) {
-                Column(modifier = Modifier.width(px(Ref.HEADER_TEXT_W))) {
-                    Box(
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(50))
-                            .border(BorderStroke(1.dp, WaNeonGreen.copy(alpha = 0.5f)), RoundedCornerShape(50))
-                            .padding(horizontal = 14.dp, vertical = 6.dp)
-                    ) {
-                        Text(stringResource(R.string.paywall_badge_full_access), color = WaNeonGreen, fontSize = 11.sp)
-                    }
-                    Spacer(Modifier.height(12.dp))
-                    Column {
-                        val titleLines = stringResource(R.string.paywall_title).split("\n")
-                        Text(
-                            titleLines.getOrElse(0) { "" },
-                            color = WaTextPrimary,
-                            fontSize = 23.sp,
-                            fontWeight = FontWeight.Bold,
-                            lineHeight = 28.sp
-                        )
-                        if (titleLines.size > 1) {
-                            Text(
-                                titleLines[1],
-                                style = TextStyle(
-                                    brush = Brush.horizontalGradient(listOf(WaNeonGreen, Color(0xFF22D3EE))),
-                                    fontSize = 23.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    lineHeight = 28.sp
-                                )
-                            )
-                        }
-                    }
-                    Spacer(Modifier.height(10.dp))
-                    Text(
-                        stringResource(R.string.paywall_subtitle),
-                        color = WaTextSecondary,
-                        fontSize = 12.5.sp,
-                        lineHeight = 17.sp
-                    )
-                }
-                HeroIllustration(
-                    modifier = Modifier
-                        .width(px(Ref.HEADER_HERO_W))
-                        .height(px(Ref.HERO_H))
-                )
-            }
-        }
-
-        Spacer(Modifier.height(18.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(6.dp)
+        Box(
+            modifier = Modifier
+                .refBounds(32f, 203f, 268f, 42f, autoHeight = true)
+                .clip(RoundedCornerShape(50))
+                .border(BorderStroke(1.dp, WaNeonGreen.copy(alpha = 0.5f)), RoundedCornerShape(50))
+                .padding(horizontal = 14.dp, vertical = 6.dp)
         ) {
-            FeatureChip(Icons.Filled.Bolt, stringResource(R.string.paywall_chip_analysis), Modifier.weight(1f))
-            FeatureChip(Icons.Filled.Shield, stringResource(R.string.paywall_chip_filters), Modifier.weight(1f))
-            FeatureChip(Icons.Filled.ShowChart, stringResource(R.string.paywall_chip_income), Modifier.weight(1f))
-            FeatureChip(Icons.Filled.Public, stringResource(R.string.paywall_chip_languages), Modifier.weight(1f))
+            Text(stringResource(R.string.paywall_badge_full_access), color = WaNeonGreen, fontSize = 11.sp)
         }
 
-        Spacer(Modifier.height(20.dp))
-        Divider(color = WaSurfaceVariant.copy(alpha = 0.7f), thickness = 1.dp)
+        Column(modifier = Modifier.refBounds(32f, 258f, 300f, 155f, autoHeight = true)) {
+            val titleLines = stringResource(R.string.paywall_title).split("\n")
+            Text(
+                titleLines.getOrElse(0) { "" },
+                color = WaTextPrimary,
+                fontSize = 23.sp,
+                fontWeight = FontWeight.Bold,
+                lineHeight = 28.sp
+            )
+            if (titleLines.size > 1) {
+                Text(
+                    titleLines[1],
+                    style = TextStyle(
+                        brush = Brush.horizontalGradient(listOf(WaNeonGreen, Color(0xFF22D3EE))),
+                        fontSize = 23.sp,
+                        fontWeight = FontWeight.Bold,
+                        lineHeight = 28.sp
+                    )
+                )
+            }
+        }
+        Text(
+            stringResource(R.string.paywall_subtitle),
+            color = WaTextSecondary,
+            fontSize = 12.5.sp,
+            lineHeight = 17.sp,
+            modifier = Modifier.refBounds(32f, 428f, 300f, 70f, autoHeight = true)
+        )
+
+        HeroIllustration(modifier = Modifier.refBounds(330f, 20f, 374f, 280f))
     }
+
+    Spacer(Modifier.height(18.dp))
+
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(6.dp)
+    ) {
+        FeatureChip(Icons.Filled.Bolt, stringResource(R.string.paywall_chip_analysis), Modifier.weight(1f))
+        FeatureChip(Icons.Filled.Shield, stringResource(R.string.paywall_chip_filters), Modifier.weight(1f))
+        FeatureChip(Icons.Filled.ShowChart, stringResource(R.string.paywall_chip_income), Modifier.weight(1f))
+        FeatureChip(Icons.Filled.Public, stringResource(R.string.paywall_chip_languages), Modifier.weight(1f))
+    }
+
+    Spacer(Modifier.height(20.dp))
+    Divider(color = WaSurfaceVariant.copy(alpha = 0.7f), thickness = 1.dp)
 }
 
 /**
@@ -774,6 +811,7 @@ private fun HeroIllustration(modifier: Modifier = Modifier) {
             "Bolt",
             Brush.horizontalGradient(listOf(WaTagBoltDark, WaTagBolt)),
             Color(0xFF04240F),
+            icon = Icons.Filled.Bolt,
             modifier = Modifier
                 .refBounds(Ref.TAG_BOLT_X, Ref.TAG_BOLT_Y, Ref.TAG_BOLT_W, Ref.TAG_BOLT_H)
                 .rotate(Ref.TAG_BOLT_ROT)
@@ -807,6 +845,7 @@ private fun HeroIllustration(modifier: Modifier = Modifier) {
             "Free Now",
             Brush.horizontalGradient(listOf(WaTagFreeNow, WaTagFreeNow)),
             WaTextPrimary,
+            icon = Icons.Filled.ArrowForward,
             modifier = Modifier
                 .refBounds(Ref.TAG_FREENOW_X, Ref.TAG_FREENOW_Y, Ref.TAG_FREENOW_W, Ref.TAG_FREENOW_H)
                 .rotate(Ref.TAG_FREENOW_ROT)
