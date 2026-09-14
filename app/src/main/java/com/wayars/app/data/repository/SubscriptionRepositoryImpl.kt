@@ -16,6 +16,7 @@ import com.revenuecat.purchases.awaitRestore
 import com.wayars.app.billing.RevenueCatConfig
 import com.wayars.app.domain.model.SubscriptionState
 import com.wayars.app.domain.repository.SubscriptionRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -40,7 +41,41 @@ class SubscriptionRepositoryImpl : SubscriptionRepository {
             // sync). FETCH_CURRENT forces this specific check to always hit
             // the network so it reflects true server state, same as Restore.
             val info = Purchases.sharedInstance.awaitCustomerInfo(CacheFetchPolicy.FETCH_CURRENT)
-            applyCustomerInfo(info)
+            logCustomerInfo(info)
+
+            val wasSubscribed = _subscriptionState.value is SubscriptionState.Subscribed
+            val isActiveNow = info.entitlements[RevenueCatConfig.ENTITLEMENT_PRO]?.isActive == true
+
+            if (wasSubscribed && !isActiveNow) {
+                // A single flip from Subscribed -> NotSubscribed is treated as
+                // suspect rather than trusted immediately. Observed case: right
+                // after a fresh purchase (even within the first minute), a
+                // plain CustomerInfo re-fetch can still read a not-yet-fully-
+                // synced backend record — RevenueCat's own eventual consistency
+                // right after a new Play purchase, not a renewal-boundary blip
+                // and not a client-side cache issue (FETCH_CURRENT already
+                // rules that out). A plain re-fetch hits that same lagging
+                // read. What actually and reliably fixes it (confirmed
+                // manually via "Restore") is a real resync of the purchase
+                // with Play Store, so do exactly that here instead of another
+                // bare fetch — retrying a couple of times with backoff — before
+                // actually gating the user out. A genuine expiration still
+                // gates correctly, just a little later.
+                Log.w(TAG, "Entitlement flipped Subscribed -> NotSubscribed, resyncing with Play before gating...")
+                var confirmed: CustomerInfo? = null
+                for (attempt in 1..3) {
+                    delay(2_000L * attempt)
+                    val resynced = runCatching { Purchases.sharedInstance.awaitRestore() }.getOrNull()
+                    if (resynced != null) {
+                        logCustomerInfo(resynced)
+                        confirmed = resynced
+                        if (resynced.entitlements[RevenueCatConfig.ENTITLEMENT_PRO]?.isActive == true) break
+                    }
+                }
+                applyCustomerInfo(confirmed ?: info)
+            } else {
+                applyCustomerInfo(info)
+            }
         } catch (e: PurchasesException) {
             Log.w(TAG, "Failed to fetch CustomerInfo", e)
             // Don't blindly fall back to "not subscribed" on a network hiccup —
@@ -49,6 +84,17 @@ class SubscriptionRepositoryImpl : SubscriptionRepository {
             // the UI can retry instead of silently re-locking the app.
             _subscriptionState.value = SubscriptionState.Error(e.error.message)
         }
+    }
+
+    /** Diagnostic only — helps tell a genuine expiration apart from a sync blip in Logcat. */
+    private fun logCustomerInfo(info: CustomerInfo) {
+        val entitlement = info.entitlements[RevenueCatConfig.ENTITLEMENT_PRO]
+        Log.d(
+            TAG,
+            "entitlement=${RevenueCatConfig.ENTITLEMENT_PRO} isActive=${entitlement?.isActive} " +
+                "willRenew=${entitlement?.willRenew} expirationDate=${entitlement?.expirationDate} " +
+                "latestPurchaseDate=${entitlement?.latestPurchaseDate} requestDate=${info.requestDate}"
+        )
     }
 
     override suspend fun getOfferings(): Result<Offerings> = runCatching {
