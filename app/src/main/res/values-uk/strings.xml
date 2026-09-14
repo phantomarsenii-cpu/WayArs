@@ -41,6 +41,7 @@
     <string name="settings_enable_overlay">Увімкнути плаваючий віджет</string>
     <string name="settings_accessibility_hint">Потрібно для розпізнавання замовлень (лише читання, без автокліків)</string>
     <string name="settings_overlay_hint">Потрібно для показу віджета поверх інших застосунків</string>
+    <string name="notification_stop_action">Зупинити</string>
 
     <string name="overlay_new_order">Нове замовлення</string>
     <string name="overlay_min_km">хв</string>

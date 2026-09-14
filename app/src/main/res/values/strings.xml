@@ -41,6 +41,7 @@
     <string name="settings_enable_overlay">Enable floating widget</string>
     <string name="settings_accessibility_hint">Required to detect incoming orders (read-only, no auto-clicks)</string>
     <string name="settings_overlay_hint">Required to show the floating verdict widget over other apps</string>
+    <string name="notification_stop_action">Stop</string>
 
     <string name="overlay_new_order">New Order</string>
     <string name="overlay_min_km">min</string>

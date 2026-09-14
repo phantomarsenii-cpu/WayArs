@@ -41,6 +41,7 @@
     <string name="settings_enable_overlay">Включить плавающий виджет</string>
     <string name="settings_accessibility_hint">Нужно для распознавания заказов (только чтение, без автокликов)</string>
     <string name="settings_overlay_hint">Нужно для показа виджета поверх других приложений</string>
+    <string name="notification_stop_action">Остановить</string>
 
     <string name="overlay_new_order">Новый заказ</string>
     <string name="overlay_min_km">мин</string>

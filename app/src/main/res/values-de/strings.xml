@@ -41,6 +41,7 @@
     <string name="settings_enable_overlay">Schwebendes Fenster aktivieren</string>
     <string name="settings_accessibility_hint">Erforderlich, um eingehende Aufträge zu erkennen (nur Lesezugriff, keine automatischen Klicks)</string>
     <string name="settings_overlay_hint">Erforderlich, um das schwebende Bewertungsfenster über anderen Apps anzuzeigen</string>
+    <string name="notification_stop_action">Stopp</string>
 
     <string name="overlay_new_order">Neuer Auftrag</string>
     <string name="overlay_min_km">Min</string>

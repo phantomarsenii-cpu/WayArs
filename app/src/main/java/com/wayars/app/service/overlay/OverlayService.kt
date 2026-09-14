@@ -86,6 +86,14 @@ class OverlayService : LifecycleService() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
+        if (intent?.action == ACTION_STOP) {
+            // Same off-switch as the Dashboard "Active" toggle — stopping
+            // scanning here also tears down this service via the
+            // ScanningState.isActive collector in onCreate() above, and
+            // stops the file logger for this session.
+            ScanningState.setActive(false, applicationContext)
+            return START_NOT_STICKY
+        }
         return START_STICKY
     }
 
@@ -216,11 +224,23 @@ class OverlayService : LifecycleService() {
             PendingIntent.FLAG_IMMUTABLE
         )
 
+        val stopIntent = PendingIntent.getService(
+            this, 0,
+            Intent(this, OverlayService::class.java).setAction(ACTION_STOP),
+            PendingIntent.FLAG_IMMUTABLE
+        )
+        val stopAction = Notification.Action.Builder(
+            android.graphics.drawable.Icon.createWithResource(this, R.drawable.ic_stat_wayars),
+            getString(R.string.notification_stop_action),
+            stopIntent
+        ).build()
+
         return Notification.Builder(this, CHANNEL_ID)
             .setContentTitle(getString(R.string.app_name))
             .setContentText(getString(R.string.settings_overlay_hint))
             .setSmallIcon(R.drawable.ic_stat_wayars)
             .setContentIntent(openAppIntent)
+            .addAction(stopAction)
             .setOngoing(true)
             .build()
     }
@@ -235,5 +255,6 @@ class OverlayService : LifecycleService() {
         private const val TAG = "WayArsOverlay"
         private const val NOTIFICATION_ID = 42
         private const val CHANNEL_ID = "wayars_overlay"
+        private const val ACTION_STOP = "com.wayars.app.action.STOP_OVERLAY"
     }
 }

@@ -41,6 +41,7 @@
     <string name="settings_enable_overlay">Włącz pływający widget</string>
     <string name="settings_accessibility_hint">Wymagane do wykrywania zleceń (tylko odczyt, bez auto-kliknięć)</string>
     <string name="settings_overlay_hint">Wymagane do wyświetlania widgetu nad innymi aplikacjami</string>
+    <string name="notification_stop_action">Zatrzymaj</string>
 
     <string name="overlay_new_order">Nowe zlecenie</string>
     <string name="overlay_min_km">min</string>

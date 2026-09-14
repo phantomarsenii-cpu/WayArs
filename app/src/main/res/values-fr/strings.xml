@@ -41,6 +41,7 @@
     <string name="settings_enable_overlay">Activer la fenêtre flottante</string>
     <string name="settings_accessibility_hint">Nécessaire pour détecter les nouvelles commandes (lecture seule, aucun clic automatique)</string>
     <string name="settings_overlay_hint">Nécessaire pour afficher la fenêtre flottante de verdict par-dessus les autres applications</string>
+    <string name="notification_stop_action">Arrêter</string>
 
     <string name="overlay_new_order">Nouvelle commande</string>
     <string name="overlay_min_km">min</string>

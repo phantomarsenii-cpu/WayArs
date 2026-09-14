@@ -41,6 +41,7 @@
     <string name="settings_enable_overlay">Activează widgetul plutitor</string>
     <string name="settings_accessibility_hint">Necesar pentru detectarea comenzilor (doar citire, fără clicuri automate)</string>
     <string name="settings_overlay_hint">Necesar pentru a afișa widgetul peste alte aplicații</string>
+    <string name="notification_stop_action">Oprește</string>
 
     <string name="overlay_new_order">Comandă nouă</string>
     <string name="overlay_min_km">min</string>
