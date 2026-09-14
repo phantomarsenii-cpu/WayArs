@@ -47,6 +47,11 @@
 
     <string name="accessibility_service_description">WayArs liest die von Liefer-/Taxi-Apps auf dem Bildschirm angezeigten Auftragsdetails (Preis, Distanz, Zeit), um Ihnen eine schnellere Entscheidung zu ermöglichen. Es tippt oder ändert niemals automatisch etwas.</string>
 
+    <string name="accessibility_consent_title">Berechtigung zum Bildschirmlesen</string>
+    <string name="accessibility_consent_body">Um neue Aufträge automatisch zu erkennen, muss WayArs den auf dem Bildschirm angezeigten Text der Liefer- und Taxi-Apps lesen, die Sie verwenden — etwa Preis, Distanz und geschätzte Zeit.\n\nWas das bedeutet:\n• WayArs liest nur Auftragsdetails aus den von Ihnen ausgewählten, unterstützten Apps. Es liest niemals Passwörter, Nachrichten oder Ihre Eingaben.\n• WayArs tippt, füllt oder ändert niemals etwas auf dem Bildschirm — es liest nur.\n• Alles wird auf diesem Gerät verarbeitet. Nichts wird an einen Server gesendet.\n\nSie können dies jederzeit in den Einstellungen deaktivieren.</string>
+    <string name="accessibility_consent_allow">Erlauben und fortfahren</string>
+    <string name="accessibility_consent_decline">Nicht jetzt</string>
+
     <string name="stats_empty">Noch keine Aufträge</string>
     <string name="settings_custom_thresholds_title">Eigene Ratenschwellen</string>
     <string name="settings_custom_thresholds_hint">Optional — eigene %1$s/km-Werte, werden anstelle des Profils verwendet</string>

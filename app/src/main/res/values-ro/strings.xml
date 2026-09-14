@@ -47,6 +47,11 @@
 
     <string name="accessibility_service_description">WayArs citește detaliile comenzii (preț, distanță, timp) afișate pe ecranul aplicațiilor de livrare/taxi pentru a te ajuta să decizi mai repede. Nu apasă și nu modifică niciodată nimic automat.</string>
 
+    <string name="accessibility_consent_title">Permisiune de citire a ecranului</string>
+    <string name="accessibility_consent_body">Pentru a detecta automat comenzile noi, WayArs trebuie să citească textul afișat pe ecran de aplicațiile de livrare și taxi pe care le folosești — precum prețul, distanța și timpul estimat.\n\nCe înseamnă asta:\n• WayArs citește doar detaliile comenzii din aplicațiile acceptate pe care le alegi. Nu citește niciodată parolele, mesajele sau ce introduci.\n• WayArs nu apasă, nu completează și nu modifică niciodată nimic pe ecran — doar citește.\n• Totul este procesat pe acest dispozitiv. Nimic nu este trimis către un server.\n\nPoți dezactiva asta oricând din Setări.</string>
+    <string name="accessibility_consent_allow">Permite și continuă</string>
+    <string name="accessibility_consent_decline">Nu acum</string>
+
     <string name="stats_empty">Încă nu au fost comenzi</string>
     <string name="settings_custom_thresholds_title">Praguri proprii de evaluare</string>
     <string name="settings_custom_thresholds_hint">Opțional — valori proprii %1$s/km în loc de profil</string>

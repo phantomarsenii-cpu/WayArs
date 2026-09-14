@@ -47,6 +47,16 @@
 
     <string name="accessibility_service_description">WayArs reads order details (price, distance, time) shown on screen by delivery/taxi apps to help you decide faster. It never taps or modifies anything automatically.</string>
 
+    <!-- Dedicated consent screen, shown once before the first request to enable
+         the AccessibilityService (and re-accessible from Settings). Kept
+         separate from the Privacy Policy screen per Google Play's Prominent
+         Disclosure requirement — this must be its own affirmative-action
+         screen, not folded into the privacy policy text. -->
+    <string name="accessibility_consent_title">Screen reading permission</string>
+    <string name="accessibility_consent_body">To detect new orders automatically, WayArs needs to read text shown on screen by the delivery and rideshare apps you use — things like price, distance, and estimated time.\n\nWhat this means:\n• WayArs only reads order details from the supported apps you choose. It never reads passwords, messages, or anything you type.\n• WayArs never taps, fills in, or changes anything on screen — it only reads.\n• Everything is processed on this device. Nothing is sent to a server.\n\nYou can turn this off at any time in Settings.</string>
+    <string name="accessibility_consent_allow">Allow and continue</string>
+    <string name="accessibility_consent_decline">Not now</string>
+
     <string name="stats_empty">No orders yet</string>
     <string name="settings_custom_thresholds_title">Your own rate thresholds</string>
     <string name="settings_custom_thresholds_hint">Optional — your own %1$s/km numbers, used instead of the preset</string>

@@ -47,6 +47,11 @@
 
     <string name="accessibility_service_description">WayArs odczytuje szczegóły zlecenia (cenę, dystans, czas) wyświetlane na ekranie aplikacji dostawczych/taxi, aby pomóc Ci szybciej podjąć decyzję. Nigdy nie klika ani nie modyfikuje niczego automatycznie.</string>
 
+    <string name="accessibility_consent_title">Uprawnienie do odczytu ekranu</string>
+    <string name="accessibility_consent_body">Aby automatycznie wykrywać nowe zlecenia, WayArs musi odczytywać tekst wyświetlany na ekranie przez używane przez Ciebie aplikacje dostawcze i taxi — np. cenę, dystans i szacowany czas.\n\nCo to oznacza:\n• WayArs odczytuje tylko szczegóły zlecenia z wybranych przez Ciebie obsługiwanych aplikacji. Nigdy nie odczytuje haseł, wiadomości ani tego, co wpisujesz.\n• WayArs nigdy nie klika, nie wypełnia ani nie zmienia niczego na ekranie — tylko odczytuje.\n• Wszystko jest przetwarzane na tym urządzeniu. Nic nie jest wysyłane na serwer.\n\nMożesz to wyłączyć w dowolnym momencie w Ustawieniach.</string>
+    <string name="accessibility_consent_allow">Zezwól i kontynuuj</string>
+    <string name="accessibility_consent_decline">Nie teraz</string>
+
     <string name="stats_empty">Jeszcze nie było zleceń</string>
     <string name="settings_custom_thresholds_title">Własne progi oceny</string>
     <string name="settings_custom_thresholds_hint">Opcjonalnie — własne wartości %1$s/km zamiast profilu</string>

@@ -218,7 +218,18 @@ private fun PermissionsSection(
     onOpenNotificationSettings: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
+    var showAccessibilityConsent by remember { mutableStateOf(false) }
     val states = rememberPermissionStates()
+
+    if (showAccessibilityConsent) {
+        AccessibilityConsentDialog(
+            onAllow = {
+                showAccessibilityConsent = false
+                onOpenAccessibilitySettings()
+            },
+            onDecline = { showAccessibilityConsent = false }
+        )
+    }
 
     Column(
         modifier = Modifier
@@ -264,7 +275,10 @@ private fun PermissionsSection(
                     title = stringResource(R.string.settings_enable_accessibility),
                     hint = stringResource(R.string.settings_accessibility_hint),
                     granted = states.accessibility,
-                    onClick = onOpenAccessibilitySettings
+                    onClick = {
+                        if (states.accessibility) onOpenAccessibilitySettings()
+                        else showAccessibilityConsent = true
+                    }
                 )
                 PermissionRow(
                     title = stringResource(R.string.settings_enable_overlay),
@@ -281,6 +295,32 @@ private fun PermissionsSection(
             }
         }
     }
+}
+
+/**
+ * Prominent-disclosure screen shown before the FIRST request to enable the
+ * AccessibilityService, kept as its own affirmative-action dialog separate
+ * from the Privacy Policy screen (Google Play requires this — the
+ * disclosure cannot only live inside the privacy policy). Only proceeds to
+ * system Settings if the user explicitly taps Allow.
+ */
+@Composable
+private fun AccessibilityConsentDialog(onAllow: () -> Unit, onDecline: () -> Unit) {
+    androidx.compose.material3.AlertDialog(
+        onDismissRequest = onDecline,
+        title = { Text(stringResource(R.string.accessibility_consent_title)) },
+        text = { Text(stringResource(R.string.accessibility_consent_body)) },
+        confirmButton = {
+            Button(onClick = onAllow) {
+                Text(stringResource(R.string.accessibility_consent_allow))
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDecline) {
+                Text(stringResource(R.string.accessibility_consent_decline))
+            }
+        }
+    )
 }
 
 /**

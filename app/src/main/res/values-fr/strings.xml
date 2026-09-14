@@ -47,6 +47,11 @@
 
     <string name="accessibility_service_description">WayArs lit les détails de la commande (prix, distance, temps) affichés à l\'écran par les applications de livraison ou de VTC pour vous aider à décider plus rapidement. L\'application ne clique ni ne modifie jamais rien automatiquement.</string>
 
+    <string name="accessibility_consent_title">Autorisation de lecture d\'écran</string>
+    <string name="accessibility_consent_body">Pour détecter automatiquement les nouvelles commandes, WayArs doit lire le texte affiché à l\'écran par les applications de livraison et de VTC que vous utilisez — comme le prix, la distance et le temps estimé.\n\nCe que cela signifie :\n• WayArs lit uniquement les détails de commande des applications prises en charge que vous choisissez. Il ne lit jamais vos mots de passe, vos messages, ni ce que vous saisissez.\n• WayArs ne clique jamais, ne remplit jamais et ne modifie jamais rien à l\'écran — il ne fait que lire.\n• Tout est traité sur cet appareil. Rien n\'est envoyé à un serveur.\n\nVous pouvez désactiver cela à tout moment dans les Paramètres.</string>
+    <string name="accessibility_consent_allow">Autoriser et continuer</string>
+    <string name="accessibility_consent_decline">Pas maintenant</string>
+
     <string name="stats_empty">Aucune commande pour le moment</string>
     <string name="settings_custom_thresholds_title">Vos propres seuils de tarif</string>
     <string name="settings_custom_thresholds_hint">Facultatif — vos propres valeurs %1$s/km, utilisées à la place du profil</string>
