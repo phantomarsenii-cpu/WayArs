@@ -2,6 +2,7 @@ package com.wayars.app.data.repository
 
 import android.app.Activity
 import android.util.Log
+import com.revenuecat.purchases.CacheFetchPolicy
 import com.revenuecat.purchases.CustomerInfo
 import com.revenuecat.purchases.Offerings
 import com.revenuecat.purchases.Package
@@ -28,7 +29,17 @@ class SubscriptionRepositoryImpl : SubscriptionRepository {
 
     override suspend fun refreshCustomerInfo() {
         try {
-            val info = Purchases.sharedInstance.awaitCustomerInfo()
+            // IMPORTANT: the default fetch policy (cachedOrFetched) is allowed
+            // to return the on-device cache even when it's stale, with no
+            // network call at all. Right after a fresh purchase that stale
+            // cache can still be the pre-purchase snapshot (e.g. process was
+            // killed before the post-purchase cache write settled), which
+            // made the gate check wrongly report NotSubscribed and show the
+            // paywall — even though the entitlement was active on the server
+            // (confirmed by Restore, which always forces a real network
+            // sync). FETCH_CURRENT forces this specific check to always hit
+            // the network so it reflects true server state, same as Restore.
+            val info = Purchases.sharedInstance.awaitCustomerInfo(CacheFetchPolicy.FETCH_CURRENT)
             applyCustomerInfo(info)
         } catch (e: PurchasesException) {
             Log.w(TAG, "Failed to fetch CustomerInfo", e)
