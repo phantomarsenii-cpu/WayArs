@@ -13,7 +13,7 @@ package com.wayars.app.billing
 object RevenueCatConfig {
 
     /** RevenueCat project "Android API key". Safe to embed client-side. */
-    const val API_KEY = "test_pbcBfGxsqSzHoeTgXEIKqIWDJxh"
+    const val API_KEY = "goog_jVegtueDjSiNmPMzOvXzdrKxpvy"
 
     /** Entitlement identifier configured in the RevenueCat dashboard. */
     const val ENTITLEMENT_PRO = "wayars_pro"
