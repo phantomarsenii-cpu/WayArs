@@ -79,6 +79,7 @@ import com.wayars.app.presentation.ui.theme.WaProTextFaint
 import com.wayars.app.presentation.ui.theme.WaProTextMuted
 import com.wayars.app.presentation.ui.theme.WaProTextMuted2
 import com.wayars.app.presentation.ui.theme.WaProTextMuted3
+import com.wayars.app.util.PriceFormatter
 import java.util.Locale
 
 /*
@@ -227,8 +228,14 @@ fun PaywallScreen(
 
             Spacer(Modifier.height(24.dp))
 
+            // "0" in whichever currency the highlighted plan actually
+            // charges in (e.g. "0 zł" for a PLN purchase), not a hardcoded
+            // "$0" — falls back to "$0" while only mock pricing has loaded.
+            val selectedCurrencyCode = state.plans.find { it.plan == selectedPlan }?.priceCurrencyCode
+            val zeroPriceText = PriceFormatter.zero(selectedCurrencyCode, fallback = "$0")
+
             AuroraCtaButton(
-                text = stringResource(R.string.paywall_cta_trial),
+                text = stringResource(R.string.paywall_cta_trial, zeroPriceText),
                 isLoading = state.isPurchasing,
                 enabled = !state.isPurchasing,
                 onClick = {

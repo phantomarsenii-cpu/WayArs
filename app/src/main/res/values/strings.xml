@@ -170,7 +170,7 @@
     <string name="paywall_compat_label">Works alongside the apps you already drive for</string>
     <string name="paywall_mock_selected_toast">%1$s plan selected — purchases unlock after the Google Play release</string>
     <string name="paywall_pro_header">WayArs Pro</string>
-    <string name="paywall_cta_trial">Try 7 days for $0</string>
+    <string name="paywall_cta_trial">Try 7 days for %1$s</string>
     <string name="paywall_badge_best_value">★ BEST VALUE • SAVE 30%</string>
     <string name="paywall_badge_popular_discount">★ Popular • -15%</string>
     <string name="paywall_per_month_hint">Just %1$s / month</string>

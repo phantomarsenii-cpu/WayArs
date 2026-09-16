@@ -11,6 +11,7 @@ import com.revenuecat.purchases.PurchasesTransactionException
 import com.wayars.app.AppContainer
 import com.wayars.app.billing.RevenueCatConfig
 import com.wayars.app.domain.model.SubscriptionState
+import com.wayars.app.util.PriceFormatter
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -36,7 +37,10 @@ data class PlanOption(
     val plan: PlanType,
     val priceText: String,
     val originalPriceText: String? = null,
-    val rcPackage: Package? = null
+    val rcPackage: Package? = null,
+    /** ISO 4217 code of [priceText]'s currency, e.g. "PLN". Null for mock
+     *  rows (no real RevenueCat package loaded yet). */
+    val priceCurrencyCode: String? = null
 ) {
     val isLive: Boolean get() = rcPackage != null
 }
@@ -113,11 +117,24 @@ class SubscriptionViewModel(private val container: AppContainer) : ViewModel() {
                         }
                         val realPackage = offering?.availablePackages?.find { it.identifier == packageId }
                         if (realPackage != null) {
+                            val price = realPackage.product.price
                             PlanOption(
                                 plan = mock.plan,
-                                priceText = realPackage.product.price.formatted,
+                                // Play Billing's own .formatted string is built using
+                                // the device's UI locale, so a PLN price can render as
+                                // "139,99 PLN" instead of "139,99 zł" on a non-Polish
+                                // device. Reformat with the currency's own conventions
+                                // (falling back to Play's string for currencies we
+                                // don't have a home locale for) so the symbol is always
+                                // correct regardless of the app's display language.
+                                priceText = PriceFormatter.format(
+                                    amountMicros = price.amountMicros,
+                                    currencyCode = price.currencyCode,
+                                    fallback = price.formatted
+                                ),
                                 originalPriceText = null,
-                                rcPackage = realPackage
+                                rcPackage = realPackage,
+                                priceCurrencyCode = price.currencyCode
                             )
                         } else {
                             mock

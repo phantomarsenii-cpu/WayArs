@@ -164,7 +164,7 @@
     <string name="paywall_compat_label">Работает вместе с сервисами, в которых вы уже работаете</string>
     <string name="paywall_mock_selected_toast">Выбран план «%1$s» — покупки станут доступны после публикации в Google Play</string>
     <string name="paywall_pro_header">WayArs Pro</string>
-    <string name="paywall_cta_trial">Попробовать 7 дней за 0 $</string>
+    <string name="paywall_cta_trial">Попробовать 7 дней за %1$s</string>
     <string name="paywall_badge_best_value">★ НАИПОПУЛЯРНЕЙШИЙ • ЭКОНОМИШЬ 30%</string>
     <string name="paywall_badge_popular_discount">★ Популярный • -15%</string>
     <string name="paywall_per_month_hint">Только %1$s / месяц</string>
