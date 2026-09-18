@@ -28,6 +28,7 @@ import com.wayars.app.presentation.ui.screen.onboarding.PresetSelectionScreen
 import com.wayars.app.presentation.ui.screen.paywall.PaywallScreen
 import com.wayars.app.presentation.ui.screen.splash.SplashScreen
 import com.wayars.app.presentation.ui.theme.WaBackground
+import com.wayars.app.service.accessibility.ScanningState
 import com.wayars.app.util.findActivity
 
 private object Routes {
@@ -182,8 +183,19 @@ fun WayArsNavHost(
                 // foreground, per WayArsApplication's ProcessLifecycleOwner
                 // observer), drop them back to the paywall immediately
                 // instead of waiting for their next app restart.
+                //
+                // Getting bounced to the paywall isn't enough on its own,
+                // though: scanning (ScanningState) is a separate switch that
+                // keeps running until something explicitly turns it off, so
+                // without this the accessibility service just kept scanning
+                // behind the paywall for anyone who didn't also flip the
+                // Dashboard "Active" toggle by hand. Turn it off here, same
+                // as tapping that toggle off, the moment the paywall shows
+                // for a lapsed subscription.
+                val mainContext = LocalContext.current
                 LaunchedEffect(gateState) {
                     if (gateState is SubscriptionState.NotSubscribed) {
+                        ScanningState.setActive(false, mainContext)
                         navController.navigate(Routes.PAYWALL) {
                             popUpTo(Routes.MAIN) { inclusive = true }
                         }

@@ -31,6 +31,26 @@ class WayArsApplication : Application() {
         container = AppContainer(this)
         configureRevenueCat()
         observeAppForeground()
+        persistResolvedLanguageIfMissing()
+    }
+
+    /**
+     * attachBaseContext() below resolves and *applies* a language on every
+     * cold start (device locale, if supported, else English), but until now
+     * that resolved value was never written back to LanguagePrefs/DataStore
+     * unless the user explicitly opened Settings and picked a language.
+     * Result: the UI could be running in Russian (correctly auto-detected)
+     * while MainViewModel.languageCode stayed null and the Settings screen
+     * fell back to its "en" default — a real mismatch between what's
+     * displayed and what's shown as selected. Persist the resolved value
+     * once, right after first launch, so both stay in sync from then on.
+     */
+    private fun persistResolvedLanguageIfMissing() {
+        if (LanguagePrefs.read(this) != null) return
+        val resolved = LocaleManager.resolveInitialLanguage()
+        applicationScope.launch {
+            container.settingsRepository.setLanguage(resolved)
+        }
     }
 
     private fun configureRevenueCat() {
