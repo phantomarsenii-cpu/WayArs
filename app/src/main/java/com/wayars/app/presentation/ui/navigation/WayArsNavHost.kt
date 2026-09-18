@@ -27,12 +27,14 @@ import com.wayars.app.presentation.SubscriptionViewModel
 import com.wayars.app.presentation.ui.screen.onboarding.PresetSelectionScreen
 import com.wayars.app.presentation.ui.screen.paywall.PaywallScreen
 import com.wayars.app.presentation.ui.screen.splash.SplashScreen
+import com.wayars.app.presentation.ui.screen.terms.TermsGateScreen
 import com.wayars.app.presentation.ui.theme.WaBackground
 import com.wayars.app.service.accessibility.ScanningState
 import com.wayars.app.util.findActivity
 
 private object Routes {
     const val SPLASH = "splash"
+    const val TERMS = "terms"
     const val PAYWALL = "paywall"
     const val ONBOARDING = "onboarding"
     const val MAIN = "main"
@@ -49,6 +51,7 @@ fun WayArsNavHost(
     val navController: NavHostController = rememberNavController()
 
     val onboardingDone by viewModel.onboardingDone.collectAsState()
+    val termsAcceptedAt by viewModel.termsAcceptedAt.collectAsState()
     val preset by viewModel.preset.collectAsState()
     val currency by viewModel.currency.collectAsState()
     val languageCode by viewModel.languageCode.collectAsState()
@@ -63,6 +66,25 @@ fun WayArsNavHost(
     val gateState by subscriptionViewModel.gateState.collectAsState()
 
     fun destinationAfterGate(): String = if (onboardingDone) Routes.MAIN else Routes.ONBOARDING
+
+    // Shared by both the Splash and Terms screens: once whichever of them
+    // is currently showing has nothing left to wait on, this is what
+    // decides where to go next — the paywall, or straight into the app —
+    // based on the server-verified subscription state. Kept in one place
+    // so the two screens can't drift into different gating behavior.
+    fun navigateFromGate(fromRoute: String) {
+        when (gateState) {
+            is SubscriptionState.Loading -> Unit // keep waiting
+            is SubscriptionState.Subscribed -> navController.navigate(destinationAfterGate()) {
+                popUpTo(fromRoute) { inclusive = true }
+            }
+            is SubscriptionState.NotSubscribed, is SubscriptionState.Error -> {
+                navController.navigate(Routes.PAYWALL) {
+                    popUpTo(fromRoute) { inclusive = true }
+                }
+            }
+        }
+    }
 
     // Fills the ENTIRE screen, including the area behind the (now
     // transparent, edge-to-edge) system status/navigation bars, with the
@@ -86,27 +108,50 @@ fun WayArsNavHost(
         ) {
             composable(Routes.SPLASH) {
                 // Strict gate: splash never hands off to onboarding/main on
-                // its own. It waits for the splash animation AND a
-                // resolved (non-Loading) subscription check, then routes to
-                // either the paywall or the app based on server-verified
-                // entitlement — never a locally cached flag.
+                // its own. It waits for the splash animation, then — the
+                // very first thing checked, before subscription status —
+                // whether the Terms of Use have ever been accepted on this
+                // install. Unaccepted terms always win: the user is sent to
+                // the Terms gate regardless of subscription state, and only
+                // reaches the paywall/app afterward (see Routes.TERMS
+                // below). Once terms are accepted, this falls through to
+                // the same subscription check as before: a resolved
+                // (non-Loading) check, then routes to either the paywall or
+                // the app based on server-verified entitlement — never a
+                // locally cached flag.
                 var splashAnimationDone by remember { mutableStateOf(false) }
 
                 SplashScreen(onFinished = { splashAnimationDone = true })
 
-                LaunchedEffect(splashAnimationDone, gateState) {
+                LaunchedEffect(splashAnimationDone, termsAcceptedAt, gateState) {
                     if (!splashAnimationDone) return@LaunchedEffect
-                    when (gateState) {
-                        is SubscriptionState.Loading -> Unit // keep waiting on splash
-                        is SubscriptionState.Subscribed -> navController.navigate(destinationAfterGate()) {
+                    if (termsAcceptedAt == null) {
+                        navController.navigate(Routes.TERMS) {
                             popUpTo(Routes.SPLASH) { inclusive = true }
                         }
-                        is SubscriptionState.NotSubscribed, is SubscriptionState.Error -> {
-                            navController.navigate(Routes.PAYWALL) {
-                                popUpTo(Routes.SPLASH) { inclusive = true }
-                            }
-                        }
+                        return@LaunchedEffect
                     }
+                    navigateFromGate(Routes.SPLASH)
+                }
+            }
+            composable(Routes.TERMS) {
+                // No back button, no dismiss, no "decide later" — this
+                // route is only ever left via TermsGateScreen's own Accept
+                // button, which is itself disabled until the checkbox is
+                // ticked (see TermsGateScreen). Accepting persists a
+                // one-way timestamp (MainViewModel.acceptTerms ->
+                // SettingsDataStore.setTermsAccepted) that this app never
+                // offers a way to clear, so this screen only ever shows
+                // once per install.
+                TermsGateScreen(onAccept = { viewModel.acceptTerms() })
+
+                // Mirrors the Splash screen's own gate logic (see above),
+                // just entered from here: once acceptance has actually
+                // persisted (termsAcceptedAt flips non-null), proceed to
+                // the paywall or the app the same way Splash would have.
+                LaunchedEffect(termsAcceptedAt, gateState) {
+                    if (termsAcceptedAt == null) return@LaunchedEffect
+                    navigateFromGate(Routes.TERMS)
                 }
             }
             composable(Routes.PAYWALL) {
@@ -209,6 +254,7 @@ fun WayArsNavHost(
                     languageCode = languageCode ?: "en",
                     currency = currency,
                     preset = preset,
+                    termsAcceptedAt = termsAcceptedAt,
                     onLanguageSelected = { viewModel.setLanguage(it) },
                     onCurrencySelected = { viewModel.setCurrency(it) },
                     onPresetSelected = { viewModel.setPreset(it) },

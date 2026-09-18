@@ -41,6 +41,7 @@ fun MainScreen(
     languageCode: String,
     currency: Currency,
     preset: PresetType,
+    termsAcceptedAt: Long?,
     customThresholds: CustomThresholds?,
     vehicleProfile: VehicleProfile,
     onLanguageSelected: (String) -> Unit,
@@ -96,7 +97,8 @@ fun MainScreen(
                 onRemoveCustomPackage = onRemoveCustomPackage,
                 packageHints = packageHints,
                 onSavePackageHint = onSavePackageHint,
-                onClearPackageHint = onClearPackageHint
+                onClearPackageHint = onClearPackageHint,
+                termsAcceptedAt = termsAcceptedAt
             )
         }
 

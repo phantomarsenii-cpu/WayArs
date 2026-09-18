@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.doublePreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -33,6 +34,11 @@ class SettingsDataStore(private val context: Context) {
         val CURRENCY = stringPreferencesKey("currency")
         val PRESET = stringPreferencesKey("preset")
         val ONBOARDING_DONE = booleanPreferencesKey("onboarding_done")
+        // Epoch millis of the moment the user accepted the Terms of Use
+        // gate screen. Absent until accepted; once set it is never cleared
+        // or overwritten (see setTermsAccepted below) — acceptance is a
+        // one-way, permanent record, not a togglable setting.
+        val TERMS_ACCEPTED_AT = longPreferencesKey("terms_accepted_at")
         val CUSTOM_BAD_RATE = doublePreferencesKey("custom_bad_rate")
         val CUSTOM_AVERAGE_RATE = doublePreferencesKey("custom_average_rate")
         val CUSTOM_GOOD_RATE = doublePreferencesKey("custom_good_rate")
@@ -54,6 +60,9 @@ class SettingsDataStore(private val context: Context) {
         it[Keys.PRESET]?.let { name -> runCatching { PresetType.valueOf(name) }.getOrNull() } ?: PresetType.BALANCE
     }
     val onboardingDone: Flow<Boolean> = context.dataStore.data.map { it[Keys.ONBOARDING_DONE] ?: false }
+
+    /** Null until the user has accepted the Terms of Use gate; then the epoch-millis timestamp of that moment. */
+    val termsAcceptedAt: Flow<Long?> = context.dataStore.data.map { it[Keys.TERMS_ACCEPTED_AT] }
 
     /** Null unless the user has entered all three of their own rate boundaries. */
     val customThresholds: Flow<CustomThresholds?> = context.dataStore.data.map { prefs ->
@@ -111,6 +120,20 @@ class SettingsDataStore(private val context: Context) {
 
     suspend fun setOnboardingDone(done: Boolean) {
         context.dataStore.edit { it[Keys.ONBOARDING_DONE] = done }
+    }
+
+    /**
+     * Records terms acceptance, once. Per spec this is permanent and
+     * cannot be changed or revoked — a second call (e.g. a stray retry)
+     * must never overwrite the original timestamp, so this only ever
+     * writes when no value is present yet.
+     */
+    suspend fun setTermsAccepted(atEpochMillis: Long) {
+        context.dataStore.edit {
+            if (it[Keys.TERMS_ACCEPTED_AT] == null) {
+                it[Keys.TERMS_ACCEPTED_AT] = atEpochMillis
+            }
+        }
     }
 
     suspend fun setCustomThresholds(bad: Double, average: Double, good: Double) {

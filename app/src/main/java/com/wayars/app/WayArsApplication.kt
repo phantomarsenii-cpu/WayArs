@@ -13,8 +13,17 @@ import com.wayars.app.data.prefs.LanguagePrefs
 import com.wayars.app.util.LocaleManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+
+// How often the subscription entitlement is re-checked while the app stays
+// in the foreground. Short enough that a lapsed trial/subscription is
+// caught within one interval of it actually expiring, long enough not to
+// hammer RevenueCat/Play Billing for an app that's just sitting open.
+private const val SUBSCRIPTION_POLL_INTERVAL_MS = 60_000L
 
 class WayArsApplication : Application() {
 
@@ -69,13 +78,34 @@ class WayArsApplication : Application() {
      * app was backgrounded). ProcessLifecycleOwner fires ON_START exactly
      * once per app-wide foreground transition — not per Activity — so this
      * doesn't double-fire on every screen rotation or Activity recreation.
+     *
+     * ON_START alone isn't enough on its own, though: a driver who leaves
+     * the app open and in the foreground the whole time (the normal case —
+     * they're actively working with it running) never triggers another
+     * ON_START, so a subscription/trial that expires mid-session was never
+     * being re-checked at all until the user backgrounded and reopened the
+     * app. Keep polling on an interval for as long as the app stays
+     * foregrounded, and stop the moment it backgrounds (ON_STOP) so this
+     * never runs, and never burns battery/network, while the app isn't
+     * actually in use.
      */
+    private var foregroundPollingJob: Job? = null
+
     private fun observeAppForeground() {
         ProcessLifecycleOwner.get().lifecycle.addObserver(object : DefaultLifecycleObserver {
             override fun onStart(owner: LifecycleOwner) {
-                applicationScope.launch {
-                    container.subscriptionRepository.refreshCustomerInfo()
+                foregroundPollingJob?.cancel()
+                foregroundPollingJob = applicationScope.launch {
+                    while (isActive) {
+                        container.subscriptionRepository.refreshCustomerInfo()
+                        delay(SUBSCRIPTION_POLL_INTERVAL_MS)
+                    }
                 }
+            }
+
+            override fun onStop(owner: LifecycleOwner) {
+                foregroundPollingJob?.cancel()
+                foregroundPollingJob = null
             }
         })
     }

@@ -43,6 +43,10 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
     val onboardingDone: StateFlow<Boolean> =
         settings.onboardingDone.stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
+    /** Null until the Terms of Use gate has been accepted; then the epoch-millis moment it was. */
+    val termsAcceptedAt: StateFlow<Long?> =
+        settings.termsAcceptedAt.stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
     val customThresholds: StateFlow<CustomThresholds?> =
         settings.customThresholds.stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
@@ -91,6 +95,13 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
     fun setCurrency(currency: Currency) = viewModelScope.launch { settings.setCurrency(currency) }
     fun setPreset(preset: PresetType) = viewModelScope.launch { settings.setPreset(preset) }
     fun completeOnboarding() = viewModelScope.launch { settings.setOnboardingDone(true) }
+
+    /**
+     * Called exactly once, the moment the user taps Accept on the Terms
+     * gate screen. setTermsAccepted() itself is idempotent (first write
+     * wins), so this is safe even if the gate screen were ever re-entered.
+     */
+    fun acceptTerms() = viewModelScope.launch { settings.setTermsAccepted(System.currentTimeMillis()) }
     fun setCustomThresholds(bad: Double, average: Double, good: Double) =
         viewModelScope.launch { settings.setCustomThresholds(bad, average, good) }
     fun clearCustomThresholds() = viewModelScope.launch { settings.clearCustomThresholds() }

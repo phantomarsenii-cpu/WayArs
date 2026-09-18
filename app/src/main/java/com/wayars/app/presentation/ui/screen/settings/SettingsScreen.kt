@@ -117,6 +117,7 @@ fun SettingsScreen(
     packageHints: Map<String, PackageHint>,
     onSavePackageHint: (PackageHint) -> Unit,
     onClearPackageHint: (String) -> Unit,
+    termsAcceptedAt: Long?,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -174,7 +175,7 @@ fun SettingsScreen(
         }
 
         item {
-            InfoSection()
+            InfoSection(termsAcceptedAt = termsAcceptedAt)
         }
     }
 }
@@ -1619,7 +1620,7 @@ private fun CurrencyPicker(current: Currency, onSelect: (Currency) -> Unit) {
 private enum class InfoDoc { ABOUT, PRIVACY, TERMS }
 
 @Composable
-private fun InfoSection() {
+private fun InfoSection(termsAcceptedAt: Long?) {
     var activeDoc by remember { mutableStateOf<InfoDoc?>(null) }
 
     Column(
@@ -1636,7 +1637,7 @@ private fun InfoSection() {
     }
 
     activeDoc?.let { doc ->
-        InfoDialog(doc = doc, onDismiss = { activeDoc = null })
+        InfoDialog(doc = doc, termsAcceptedAt = termsAcceptedAt, onDismiss = { activeDoc = null })
     }
 }
 
@@ -1657,7 +1658,7 @@ private fun InfoRow(icon: androidx.compose.ui.graphics.vector.ImageVector, title
 }
 
 @Composable
-private fun InfoDialog(doc: InfoDoc, onDismiss: () -> Unit) {
+private fun InfoDialog(doc: InfoDoc, termsAcceptedAt: Long?, onDismiss: () -> Unit) {
     val context = LocalContext.current
     val title: String
     val rawContent: String
@@ -1696,6 +1697,24 @@ private fun InfoDialog(doc: InfoDoc, onDismiss: () -> Unit) {
                     .verticalScroll(rememberScrollState())
                     .padding(top = 14.dp, bottom = 8.dp)
             )
+
+            // Read-only, permanent record: once terms_accepted_at is set
+            // (TermsGateScreen -> MainViewModel.acceptTerms(), first write
+            // wins per SettingsDataStore.setTermsAccepted) there is no
+            // control anywhere in Settings that changes or clears it — this
+            // is display-only, matching the "cannot be revoked" spec.
+            if (doc == InfoDoc.TERMS && termsAcceptedAt != null) {
+                val formatted = remember(termsAcceptedAt) {
+                    java.text.SimpleDateFormat("dd.MM.yyyy HH:mm", java.util.Locale.getDefault())
+                        .format(java.util.Date(termsAcceptedAt))
+                }
+                Text(
+                    text = stringResource(R.string.settings_terms_accepted_at, formatted),
+                    color = WaTextSecondary,
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(bottom = 4.dp)
+                )
+            }
 
             Column(modifier = Modifier.fillMaxWidth().padding(top = 12.dp)) {
                 if (doc == InfoDoc.ABOUT) {
@@ -1754,8 +1773,13 @@ private fun appVersionLabel(context: android.content.Context): String = try {
  * (which don't survive Android's string-resource escaping rules well across
  * 7 locales). Everything outside `**...**` renders as plain text.
  */
+/**
+ * Made internal (not private) so [com.wayars.app.presentation.ui.screen.terms.TermsGateScreen]
+ * can reuse the exact same renderer for the identical Terms of Use text —
+ * one parser, not a second copy that could drift from this one.
+ */
 @Composable
-private fun parseSimpleMarkdown(raw: String) = buildAnnotatedString {
+internal fun parseSimpleMarkdown(raw: String) = buildAnnotatedString {
     var i = 0
     while (i < raw.length) {
         val start = raw.indexOf("**", i)
