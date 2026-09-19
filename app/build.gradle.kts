@@ -212,6 +212,14 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-process:2.8.4")
     implementation("androidx.savedstate:savedstate-ktx:1.2.1")
     implementation("androidx.navigation:navigation-compose:2.7.7")
+    // Explicit, current version — some dependency below (RevenueCat / Play
+    // Billing) transitively pulls in the ancient androidx.fragment:fragment
+    // 1.1.0 (2019), which Google Play's SDK console flags as outdated.
+    // Gradle resolves conflicting transitive versions to the HIGHEST one
+    // requested anywhere in the graph, so declaring a current version here
+    // directly overrides that old transitive pull without needing a
+    // resolutionStrategy.force block.
+    implementation("androidx.fragment:fragment-ktx:1.8.4")
 
     // Compose
     implementation(platform("androidx.compose:compose-bom:2024.06.00"))
