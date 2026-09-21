@@ -20,8 +20,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -120,6 +122,15 @@ fun PaywallScreen(
 
     var selectedPlan by rememberSaveable { mutableStateOf(PlanType.YEARLY) }
 
+    // This outer Box is intentionally left WITHOUT any statusBarsPadding/
+    // navigationBarsPadding of its own: it needs to fill the true screen
+    // bounds edge-to-edge so WaProBackground and AuroraGlow paint all the
+    // way behind the system status bar, instead of stopping short and
+    // leaving a visible seam where a different background color (or none)
+    // showed through above it. Only the inner, scrollable Column below is
+    // inset — that's the actual text/buttons content, which does need to
+    // clear both the status bar (top) and the system navigation bar
+    // (bottom, e.g. gesture-nav phones) so nothing sits underneath it.
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -130,6 +141,8 @@ fun PaywallScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .statusBarsPadding()
+                .navigationBarsPadding()
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 18.dp)
                 .padding(top = 12.dp, bottom = 24.dp)

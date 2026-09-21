@@ -82,6 +82,12 @@ class OrderAccessibilityService : AccessibilityService() {
     // time-based into content-based — see the comment at its use site for
     // why a pure time gate silently ate Wolt's real order data.
     private val lastProcessedTextsByPackage = HashMap<String, List<String>>()
+    // Throttle for the unsupported-package diagnostic write above — keyed
+    // separately from lastProcessedAtByPackage since that one only tracks
+    // SUPPORTED packages and uses a much shorter (500ms) window meant for
+    // real order-popup debouncing, not for capping log volume from the rest
+    // of the phone.
+    private val lastUnsupportedLoggedAtByPackage = HashMap<String, Long>()
     private var lastCandidate: RawOrderCandidate? = null
     // One in-flight poll job per package. Uber (and occasionally others)
     // draws its incoming-order popup as a non-focusable SYSTEM_ALERT_WINDOW
@@ -188,11 +194,25 @@ class OrderAccessibilityService : AccessibilityService() {
         }
         val isSupported = isSupportedPackage(eventPackage)
         if (!isSupported) {
-            // Still worth a diagnostic line (see Settings -> Диагностика) so
-            // the real Bolt/Wolt/Uber package name can be confirmed
-            // on-device — but nothing more expensive than that for apps we
-            // don't care about.
-            ScanDiagnostics.record(eventPackage, matchedSupportedApp = false)
+            // A diagnostic line here is still useful (see Settings ->
+            // Диагностика) to confirm a real Bolt/Wolt/Uber package name on
+            // device — but WINDOW_STATE_CHANGED/CONTENT_CHANGED/WINDOWS_
+            // CHANGED fire for the ENTIRE system while scanning is Active,
+            // not just delivery apps: any keyboard press, scroll, or
+            // notification anywhere on the phone lands here too. Logging
+            // every single one, unthrottled, meant hours of ordinary phone
+            // use wrote a near-continuous stream of synchronous file I/O on
+            // the main thread — a real source of both "app not responding"
+            // and the log file growing large enough to trigger a system
+            // low-storage prompt. Throttled the same way the per-package
+            // debounce below already works: once per package per window is
+            // plenty to confirm a package name, no need for every event.
+            val now = System.currentTimeMillis()
+            val lastLoggedAt = lastUnsupportedLoggedAtByPackage[eventPackage] ?: 0L
+            if (now - lastLoggedAt >= UNSUPPORTED_LOG_THROTTLE_MS) {
+                lastUnsupportedLoggedAtByPackage[eventPackage] = now
+                ScanDiagnostics.record(eventPackage, matchedSupportedApp = false)
+            }
             return
         }
 
@@ -559,6 +579,10 @@ class OrderAccessibilityService : AccessibilityService() {
 
     companion object {
         private const val TAG = "WayArsAccessibility"
+
+        /** How often an unsupported package's diagnostic line is allowed to
+         *  repeat — see the throttle at its call site above. */
+        private const val UNSUPPORTED_LOG_THROTTLE_MS = 10_000L
 
         /**
          * Runtime backstop allow-list — keep in sync with

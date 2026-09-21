@@ -94,17 +94,23 @@ fun WayArsNavHost(
     // and behaving inconsistently across devices; painting our own
     // background behind everything sidesteps that entirely.
     //
-    // The NavHost itself gets `.statusBarsPadding()` on top of that — edge-
-    // to-edge means content draws UNDER the status bar unless something
-    // explicitly insets it. Only the TOP inset is applied here — the bottom
-    // nav bar's own floating pill spacing already clears the system nav bar
-    // correctly on its own, so padding for that stays where it already was
-    // rather than doubling up.
+    // IMPORTANT: the NavHost itself is deliberately NOT given a blanket
+    // `.statusBarsPadding()` anymore. Doing that here used to inset every
+    // route's ROOT composable — including its background — below the status
+    // bar, so on any screen whose own background differed even slightly
+    // from [WaBackground] (e.g. PaywallScreen's WaProBackground/aurora), you
+    // could see a visible seam: this Box's flat WaBackground showing through
+    // behind the status bar, then a hard line where the screen's own
+    // background began. Each route now insets its own CONTENT instead (see
+    // the per-route Box wrappers below), while letting its background paint
+    // fully edge-to-edge behind the status bar. PaywallScreen applies its
+    // own status/navigation-bar padding internally for the same reason, so
+    // it's the one route below that isn't wrapped here.
     Box(modifier = Modifier.fillMaxSize().background(WaBackground)) {
         NavHost(
             navController = navController,
             startDestination = Routes.SPLASH,
-            modifier = Modifier.fillMaxSize().statusBarsPadding()
+            modifier = Modifier.fillMaxSize()
         ) {
             composable(Routes.SPLASH) {
                 // Strict gate: splash never hands off to onboarding/main on
@@ -121,7 +127,9 @@ fun WayArsNavHost(
                 // locally cached flag.
                 var splashAnimationDone by remember { mutableStateOf(false) }
 
-                SplashScreen(onFinished = { splashAnimationDone = true })
+                Box(modifier = Modifier.fillMaxSize().statusBarsPadding()) {
+                    SplashScreen(onFinished = { splashAnimationDone = true })
+                }
 
                 LaunchedEffect(splashAnimationDone, termsAcceptedAt, gateState) {
                     if (!splashAnimationDone) return@LaunchedEffect
@@ -143,7 +151,9 @@ fun WayArsNavHost(
                 // SettingsDataStore.setTermsAccepted) that this app never
                 // offers a way to clear, so this screen only ever shows
                 // once per install.
-                TermsGateScreen(onAccept = { viewModel.acceptTerms() })
+                Box(modifier = Modifier.fillMaxSize().statusBarsPadding()) {
+                    TermsGateScreen(onAccept = { viewModel.acceptTerms() })
+                }
 
                 // Mirrors the Splash screen's own gate logic (see above),
                 // just entered from here: once acceptance has actually
@@ -211,16 +221,18 @@ fun WayArsNavHost(
                 )
             }
             composable(Routes.ONBOARDING) {
-                PresetSelectionScreen(
-                    selected = preset,
-                    onSelect = { viewModel.setPreset(it) },
-                    onContinue = {
-                        viewModel.completeOnboarding()
-                        navController.navigate(Routes.MAIN) {
-                            popUpTo(Routes.ONBOARDING) { inclusive = true }
+                Box(modifier = Modifier.fillMaxSize().statusBarsPadding()) {
+                    PresetSelectionScreen(
+                        selected = preset,
+                        onSelect = { viewModel.setPreset(it) },
+                        onContinue = {
+                            viewModel.completeOnboarding()
+                            navController.navigate(Routes.MAIN) {
+                                popUpTo(Routes.ONBOARDING) { inclusive = true }
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
             composable(Routes.MAIN) {
                 // Belt-and-suspenders: if the entitlement lapses while the
@@ -247,6 +259,7 @@ fun WayArsNavHost(
                     }
                 }
 
+                Box(modifier = Modifier.fillMaxSize().statusBarsPadding()) {
                 MainScreen(
                     summary = summary,
                     latestEvaluation = latestEvaluation,
@@ -273,6 +286,7 @@ fun WayArsNavHost(
                     onSavePackageHint = { viewModel.savePackageHint(it) },
                     onClearPackageHint = { viewModel.clearPackageHint(it) }
                 )
+                }
             }
         }
     }

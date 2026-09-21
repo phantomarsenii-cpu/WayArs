@@ -1,8 +1,12 @@
 package com.wayars.app.service.accessibility
 
 import android.content.Context
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileWriter
 import java.text.SimpleDateFormat
@@ -21,14 +25,23 @@ import java.util.Locale
  *    next [start]).
  *
  * Design notes:
- *  - No stream is kept open between calls: each [append] opens the file in
- *    append mode, writes one line, and closes it again. This keeps the
- *    object simple and crash-safe (nothing to leak or forget to flush) at
- *    the cost of a per-line file open, which is fine for the volume of
- *    lines a screen scan produces.
- *  - Every public method is `@Synchronized`, so concurrent calls from the
- *    AccessibilityService's callback thread, a coroutine, or the UI thread
- *    can never interleave and corrupt the file.
+ *  - Every actual file write happens on [ioScope] — a single-thread-
+ *    equivalent background dispatcher, chosen specifically so writes stay
+ *    strictly ORDERED (never interleaved/reordered) without needing to hold
+ *    a lock on the calling thread. [append] used to do its file I/O
+ *    synchronously, inline, on whatever thread called it — which in
+ *    practice was the AccessibilityService's main thread, called on EVERY
+ *    qualifying accessibility event system-wide. During ordinary phone use
+ *    that's a near-continuous stream of open/write/close calls blocking the
+ *    main thread, a real source of "app not responding". Dispatching the
+ *    write instead keeps the caller (onAccessibilityEvent) non-blocking.
+ *  - [MAX_FILE_SIZE_BYTES] bounds how large a single log file can grow
+ *    during one long-running session — previously only the FILE COUNT was
+ *    capped (via [cleanupOldFiles], which only prunes at the START of a new
+ *    session), so one session left running for many hours/days (e.g. while
+ *    the app kept scanning in the background) could grow one file
+ *    indefinitely. [append] now rotates to a fresh file, pruning old ones
+ *    the same way [start] does, once the current file crosses that size.
  *  - Every filesystem operation is wrapped in try/catch: a logging failure
  *    (storage unmounted, permission revoked, disk full, ...) must never
  *    crash the app or interrupt scanning.
@@ -39,14 +52,28 @@ object ScanLogFile {
     private const val FILE_PREFIX = "scan_"
     private const val FILE_SUFFIX = ".log"
 
-    /** How many most-recent log files to keep; older ones are deleted on [start]. */
+    /** How many most-recent log files to keep; older ones are deleted on [start] and on rotation. */
     private const val MAX_KEPT_FILES = 10
+
+    /** Rotate to a fresh file once the current one reaches this size. */
+    private const val MAX_FILE_SIZE_BYTES = 5L * 1024 * 1024 // 5 MB
 
     private val fileNameFormat = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US)
     private val lineTimeFormat = SimpleDateFormat("HH:mm:ss.SSS", Locale.US)
 
+    // limitedParallelism(1) on the IO dispatcher: real background threads
+    // (unlike Dispatchers.Main), but only one at a time, so writes queued
+    // one after another from any calling thread still land in the file in
+    // the order they were queued.
+    private val ioScope = CoroutineScope(SupervisorJob() + Dispatchers.IO.limitedParallelism(1))
+
     /** The file currently being written to, or null if no session is active. */
     private var currentFile: File? = null
+
+    /** The Context passed to [start], kept only so a mid-session rotation
+     *  (triggered from [append], off the caller's thread) can re-derive the
+     *  same log directory without needing the caller to pass one again. */
+    private var currentContext: Context? = null
 
     /**
      * Points at the most recently FINISHED (i.e. [stop]-closed) log file,
@@ -67,8 +94,12 @@ object ScanLogFile {
      * whose external storage is unavailable: on any failure, [currentFile]
      * is left `null` and subsequent [append] calls are silently no-ops.
      */
-    @Synchronized
     fun start(context: Context) {
+        currentContext = context.applicationContext
+        ioScope.launch { startOnIoThread(context.applicationContext) }
+    }
+
+    private fun startOnIoThread(context: Context) {
         try {
             val baseDir = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS) ?: context.filesDir
             val logDir = File(baseDir, LOG_DIR_NAME)
@@ -100,15 +131,25 @@ object ScanLogFile {
     /**
      * Appends one timestamped line to the current log file.
      *
-     * Does nothing (no exception) if [start] was never called, if [stop]
-     * has already been called, or if the write itself fails for any reason.
+     * Does nothing if [start] was never called, if [stop] has already been
+     * called, or if the write itself fails for any reason. The actual write
+     * (and the size check that may trigger a rotation) happens on
+     * [ioScope], never on the calling thread.
      */
-    @Synchronized
     fun append(text: String) {
+        val timestamp = lineTimeFormat.format(Date()) // cheap; fine to format on the caller's thread
+        ioScope.launch { appendOnIoThread(timestamp, text) }
+    }
+
+    private fun appendOnIoThread(timestamp: String, text: String) {
         val file = currentFile ?: return
         try {
-            FileWriter(file, true).use { writer ->
-                writer.write("[${lineTimeFormat.format(Date())}] $text")
+            if (file.length() >= MAX_FILE_SIZE_BYTES) {
+                rotateOnIoThread(file)
+            }
+            val target = currentFile ?: return
+            FileWriter(target, true).use { writer ->
+                writer.write("[$timestamp] $text")
                 writer.write(System.lineSeparator())
             }
         } catch (_: Exception) {
@@ -116,12 +157,34 @@ object ScanLogFile {
         }
     }
 
+    /** Closes off [full] (marks it as completed, same as [stop] would) and
+     *  opens a brand-new file to keep writing to, pruning old ones exactly
+     *  like [start] does. */
+    private fun rotateOnIoThread(full: File) {
+        try {
+            FileWriter(full, true).use { writer ->
+                writer.write("=== WayArs scan log rotated (size limit) ${Date()} ===")
+                writer.write(System.lineSeparator())
+            }
+            if (full.length() > 0) {
+                _lastCompletedLogFile.value = full
+            }
+        } catch (_: Exception) {
+            // Ignore — still try to open the next file below.
+        }
+        val context = currentContext ?: return
+        startOnIoThread(context)
+    }
+
     /**
      * Ends the current logging session. After this call, [append] is a
      * no-op until [start] is called again.
      */
-    @Synchronized
     fun stop() {
+        ioScope.launch { stopOnIoThread() }
+    }
+
+    private fun stopOnIoThread() {
         val file = currentFile
         currentFile = null
         if (file != null) {

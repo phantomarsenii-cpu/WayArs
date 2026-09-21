@@ -10,6 +10,8 @@ import com.revenuecat.purchases.Purchases
 import com.revenuecat.purchases.PurchasesConfiguration
 import com.wayars.app.billing.RevenueCatConfig
 import com.wayars.app.data.prefs.LanguagePrefs
+import com.wayars.app.domain.model.SubscriptionState
+import com.wayars.app.service.accessibility.ScanningState
 import com.wayars.app.util.LocaleManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,11 +21,11 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
-// How often the subscription entitlement is re-checked while the app stays
-// in the foreground. Short enough that a lapsed trial/subscription is
-// caught within one interval of it actually expiring, long enough not to
-// hammer RevenueCat/Play Billing for an app that's just sitting open.
-private const val SUBSCRIPTION_POLL_INTERVAL_MS = 60_000L
+// How often the subscription entitlement is re-checked. Short enough that a
+// lapsed trial/subscription is caught reasonably quickly after it actually
+// expires, long enough not to hammer RevenueCat/Play Billing for an app
+// that's just sitting open or scanning in the background.
+private const val SUBSCRIPTION_POLL_INTERVAL_MS = 30_000L
 
 class WayArsApplication : Application() {
 
@@ -75,39 +77,80 @@ class WayArsApplication : Application() {
     /**
      * Requirement: subscription status must be re-checked whenever the app
      * returns to the foreground (e.g. a trial/subscription lapsed while the
-     * app was backgrounded). ProcessLifecycleOwner fires ON_START exactly
-     * once per app-wide foreground transition — not per Activity — so this
-     * doesn't double-fire on every screen rotation or Activity recreation.
+     * app was backgrounded), AND for as long as background order-scanning
+     * keeps running — that's the whole point of the accessibility service:
+     * it's designed to keep monitoring other apps (Uber/Bolt/Wolt/...)
+     * while WayArs itself is minimized. Only stopping the poll on ON_STOP
+     * (as before) meant a subscription that expired while the app was
+     * minimized was never re-checked at all until the user manually
+     * reopened it — scanning kept running the whole time regardless of
+     * entitlement. So this now keeps polling in the background too, as
+     * long as [ScanningState.isActive] is true, and only pauses once
+     * neither condition holds (app backgrounded AND scanning off).
      *
-     * ON_START alone isn't enough on its own, though: a driver who leaves
-     * the app open and in the foreground the whole time (the normal case —
-     * they're actively working with it running) never triggers another
-     * ON_START, so a subscription/trial that expires mid-session was never
-     * being re-checked at all until the user backgrounded and reopened the
-     * app. Keep polling on an interval for as long as the app stays
-     * foregrounded, and stop the moment it backgrounds (ON_STOP) so this
-     * never runs, and never burns battery/network, while the app isn't
-     * actually in use.
+     * It also gates scanning off DIRECTLY from here the moment a lapsed
+     * entitlement is confirmed, instead of only relying on the UI layer's
+     * own LaunchedEffect(gateState) in WayArsNavHost. That UI-side gate
+     * still runs (and still handles navigating to the paywall) whenever the
+     * app is actually visible, but Compose recomposition is paused while
+     * the window is backgrounded, so that effect alone could sit un-fired
+     * for as long as the app stayed minimized. Turning ScanningState off
+     * here doesn't depend on recomposition at all, so scanning stops the
+     * moment expiration is detected, foreground or not.
      */
-    private var foregroundPollingJob: Job? = null
+    private var pollingJob: Job? = null
+    private var isAppForegrounded = false
 
     private fun observeAppForeground() {
         ProcessLifecycleOwner.get().lifecycle.addObserver(object : DefaultLifecycleObserver {
             override fun onStart(owner: LifecycleOwner) {
-                foregroundPollingJob?.cancel()
-                foregroundPollingJob = applicationScope.launch {
-                    while (isActive) {
-                        container.subscriptionRepository.refreshCustomerInfo()
-                        delay(SUBSCRIPTION_POLL_INTERVAL_MS)
-                    }
-                }
+                isAppForegrounded = true
+                startPollingIfNeeded()
             }
 
             override fun onStop(owner: LifecycleOwner) {
-                foregroundPollingJob?.cancel()
-                foregroundPollingJob = null
+                isAppForegrounded = false
+                // Keep the loop alive if scanning is still running in the
+                // background — see the class doc above. If scanning is off,
+                // there's nothing left to check for until the app is opened
+                // again, so let the loop stop itself on its next iteration.
             }
         })
+
+        // Scanning can be switched on from the Dashboard toggle while the
+        // app is in the foreground (the normal case) — already covered by
+        // onStart above since the app is foregrounded at that point too.
+        // This extra observer only matters for the (rarer) case where
+        // scanning state changes while the polling loop had already
+        // stopped — e.g. a manual retry — so a fresh loop always exists to
+        // pick it back up.
+        applicationScope.launch {
+            ScanningState.isActive.collect { active ->
+                if (active) startPollingIfNeeded()
+            }
+        }
+    }
+
+    private fun startPollingIfNeeded() {
+        if (pollingJob?.isActive == true) return
+        pollingJob = applicationScope.launch {
+            while (isActive) {
+                container.subscriptionRepository.refreshCustomerInfo()
+
+                val stillSubscribed =
+                    container.subscriptionRepository.subscriptionState.value is SubscriptionState.Subscribed
+                if (!stillSubscribed && ScanningState.isActive.value) {
+                    ScanningState.setActive(false, this@WayArsApplication)
+                }
+
+                // Nothing left to watch for: the app isn't visible and
+                // scanning isn't running — stop until either comes back.
+                if (!isAppForegrounded && !ScanningState.isActive.value) break
+
+                delay(SUBSCRIPTION_POLL_INTERVAL_MS)
+            }
+            pollingJob = null
+        }
     }
 
     override fun attachBaseContext(base: Context) {
