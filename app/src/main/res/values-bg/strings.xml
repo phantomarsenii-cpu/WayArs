@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WayArs</string>
+    <string name="splash_slogan">Умен асистент за шофьори и куриери</string>
+    <string name="splash_start">Начало</string>
+
+    <string name="onboarding_title">Изберете своя режим</string>
+    <string name="onboarding_subtitle">Ще настроим оптимални филтри за вас</string>
+    <string name="onboarding_customize_later">Персонализиране по-късно</string>
+
+    <string name="preset_economy_title">Икономичен</string>
+    <string name="preset_economy_desc">Ниски разходи, умерен доход</string>
+    <string name="preset_balance_title">Баланс</string>
+    <string name="preset_balance_desc">Баланс между време и доход</string>
+    <string name="preset_profitable_title">Само изгодни</string>
+    <string name="preset_profitable_desc">Само добре платени поръчки</string>
+
+    <string name="dashboard_today_summary">Обобщение за днес</string>
+    <string name="dashboard_active_time">Активно време</string>
+    <string name="dashboard_distance">Разстояние</string>
+    <string name="dashboard_avg_rate">Средна тарифа</string>
+    <string name="dashboard_order_evaluation">Оценка на поръчката</string>
+    <string name="dashboard_orders">поръчки</string>
+    <string name="dashboard_no_order">Изчакване на нова поръчка…</string>
+
+    <string name="verdict_good">ДОБРА</string>
+    <string name="verdict_bad">ЛОША</string>
+    <string name="action_accept">Приемане</string>
+    <string name="action_reject">Отказ</string>
+
+    <string name="nav_home">Начало</string>
+    <string name="nav_stats">Статистика</string>
+    <string name="nav_presets">Режими</string>
+    <string name="nav_settings">Настройки</string>
+
+    <string name="settings_title">Настройки</string>
+    <string name="settings_language">Език</string>
+    <string name="settings_currency">Валута</string>
+    <string name="settings_preset">Режим</string>
+    <string name="settings_enable_accessibility">Активиране на услугата за четене на екрана</string>
+    <string name="settings_enable_overlay">Активиране на плаващия widget</string>
+    <string name="settings_accessibility_hint">Необходимо за откриване на входящи поръчки (само четене, без автоматични докосвания)</string>
+    <string name="settings_overlay_hint">Необходимо за показване на плаващия widget с резултата над други приложения</string>
+    <string name="notification_stop_action">Спиране</string>
+
+    <string name="overlay_new_order">Нова поръчка</string>
+    <string name="overlay_min_km">мин</string>
+
+    <string name="accessibility_service_description">WayArs чете детайлите за поръчката (цена, разстояние, време), показани на екрана от приложенията за доставка/такси, за да ви помогне да решите по-бързо. Никога не докосва или променя нищо автоматично.</string>
+
+    <string name="accessibility_consent_title">Разрешение за четене на екрана</string>
+    <string name="accessibility_consent_body">За да открива автоматично нови поръчки, WayArs трябва да чете текста, показван на екрана от приложенията за доставка и такси, които използвате — неща като цена, разстояние и очаквано време.\n\nКакво означава това:\n• WayArs чете детайли за поръчки само от избраните от вас поддържани приложения. Никога не чете пароли, съобщения или каквото и да е, което въвеждате.\n• WayArs никога не докосва, попълва или променя нищо на екрана — само чете.\n• Всичко се обработва на това устройство. Нищо не се изпраща на сървър.\n\nМожете да изключите това по всяко време в Настройки.</string>
+    <string name="accessibility_consent_allow">Разреши и продължи</string>
+    <string name="accessibility_consent_decline">Не сега</string>
+
+    <string name="stats_empty">Все още няма поръчки</string>
+    <string name="settings_custom_thresholds_title">Ваши собствени прагове на тарифата</string>
+    <string name="settings_custom_thresholds_hint">По избор — вашите собствени стойности %1$s/км, използвани вместо режима</string>
+    <string name="settings_custom_bad">Лоша поръчка, до</string>
+    <string name="settings_custom_average">Средна поръчка, от</string>
+    <string name="settings_custom_good">Добра поръчка, от</string>
+    <string name="settings_custom_save">Запази</string>
+    <string name="settings_custom_clear">Използвай режима</string>
+    <string name="active_requires_permissions">Първо активирайте четенето на екрана и плаващия widget в Настройки</string>
+    <string name="dashboard_share_log">Изпрати дневник на сканирането</string>
+    <string name="verdict_average">СРЕДНА</string>
+    <string name="settings_enable_notifications">Активиране на достъп до известия</string>
+    <string name="settings_notifications_hint">Незадължителен резервен канал — улавя поръчки, изпратени като известие, докато приложението е минимизирано</string>
+    <string name="settings_permissions_title">Разрешения</string>
+    <string name="settings_permissions_hint">Четене на екрана, плаващ widget, известия</string>
+
+    <string name="settings_vehicle_title">Превозно средство</string>
+    <string name="settings_vehicle_car">Автомобил</string>
+    <string name="settings_vehicle_scooter">Скутер</string>
+    <string name="settings_vehicle_bicycle">Велосипед / електрическа тротинетка</string>
+    <string name="settings_fuel_petrol">Бензин</string>
+    <string name="settings_fuel_diesel">Дизел</string>
+    <string name="settings_fuel_lpg">Газ (LPG)</string>
+    <string name="settings_fuel_electric">Електрически</string>
+    <string name="settings_vehicle_consumption">Разход на 100 км</string>
+    <string name="settings_vehicle_price_fuel">Цена за литър</string>
+    <string name="settings_vehicle_price_electric">Цена за kWh</string>
+    <string name="settings_vehicle_save">Запази</string>
+    <string name="settings_vehicle_summary_car">Автомобил · %1$s · %2$s/100км</string>
+    <string name="settings_vehicle_summary_fuel">%1$s · %2$s · %3$s/100км</string>
+    <string name="settings_vehicle_summary_no_fuel">%1$s · без разход за гориво</string>
+    <string name="verdict_net_profit">Чиста %1$s (гориво %2$s)</string>
+    <string name="verdict_short_trip_net">Чиста %1$s (пътуване под 1 км)</string>
+    <string name="settings_saved">Запазено</string>
+    <string name="settings_supported_apps_title">Поддържани приложения</string>
+    <string name="settings_supported_apps_hint">Вграден списък + приложения, добавени от вас</string>
+    <string name="settings_supported_apps_builtin_label">Вградени:</string>
+    <string name="settings_supported_apps_custom_label">Добавени от вас:</string>
+    <string name="settings_add_from_installed">Избери от инсталираните</string>
+    <string name="settings_add_manually">Въведи ID на пакета</string>
+    <string name="settings_package_id_label">ID на пакета (напр. com.example.app)</string>
+    <string name="settings_add">Добави</string>
+    <string name="settings_pick_installed_app_title">Изберете приложение</string>
+    <string name="settings_search_apps_label">Търсене</string>
+    <string name="settings_cancel">Отказ</string>
+    <string name="settings_already_added">вече добавено</string>
+    <string name="settings_no_apps_found">Не са намерени приложения</string>
+    <string name="settings_calibrated">Калибрирано ✓</string>
+    <string name="settings_calibrate_action">Редактиране на калибрирането</string>
+    <string name="settings_not_calibrated">Не е калибрирано</string>
+    <string name="settings_calibration_title">Калибриране на това приложение</string>
+    <string name="settings_calibration_no_data">За това приложение все още няма данни от сканиране. Отворете го на реален, активен екран с поръчка и изчакайте няколко секунди, след което отворете отново този диалог.</string>
+    <string name="settings_calibration_instructions">По-долу е текстът, който WayArs последно прочете от екрана на това приложение. Докоснете реда с цената, след това разстоянието, след това времето.</string>
+    <string name="settings_calibration_role_money">Цена</string>
+    <string name="settings_calibration_role_distance">Разстояние</string>
+    <string name="settings_calibration_role_time">Време</string>
+    <string name="settings_calibration_money_token_label">Маркер за валута (редактирайте при нужда)</string>
+    <string name="settings_calibration_distance_token_label">Единица за разстояние (редактирайте при нужда)</string>
+    <string name="settings_calibration_time_token_label">Единица за време (редактирайте при нужда)</string>
+    <string name="settings_calibration_clear">Изчисти калибрирането</string>
+
+    <string name="settings_developer_website_url" translatable="false">https://phantomarsenii-cpu.github.io/AP-STUDIO/</string>
+    <string name="settings_about_title">За приложението</string>
+    <string name="settings_privacy_title">Политика за поверителност</string>
+    <string name="settings_terms_title">Условия за ползване</string>
+    <string name="terms_gate_title">Условия за ползване</string>
+    <string name="terms_gate_subtitle">Моля, прочетете и приемете Условията за ползване, преди да продължите.</string>
+    <string name="terms_gate_checkbox_label">Прочетох и приемам Условията за ползване</string>
+    <string name="terms_gate_accept_button">Приеми и продължи</string>
+    <string name="settings_terms_accepted_at">Прието на: %1$s</string>
+    <string name="settings_visit_website">Посетете уебсайта на разработчика</string>
+    <string name="settings_close">Затвори</string>
+    <string name="settings_about_content">"**WayArs**\nВашият личен асистент за доставки и такси\n\nВерсия: %1$s\n\nWayArs е безплатен инструмент, създаден за шофьори и куриери, работещи с приложения за такси и доставки.\n\nПриложението автоматично анализира данните на екрана и известията, помагайки ви бързо да прецените дали си струва да приемете поръчката и да проследявате доходите си в реално време.\n\n**Дизайн и разработка:** AP STUDIO\n**Контакт и поддръжка:** apstudiomobile@gmail.com\n\nВсички търговски марки, лога и имена на приложения на трети страни (включително, но не само Bolt, Uber, Wolt, FreeNow, Stuart и всички други, добавени от потребителя) принадлежат на съответните им собственици и се използват единствено за информационни и идентификационни цели."</string>
+    <string name="settings_privacy_content">"**Политика за поверителност на WayArs**\nПоследна актуализация: 12 септември 2026 г.\n\n**Защита на вашата поверителност**\nНие уважаваме вашата поверителност. WayArs е проектиран около принципа Privacy by Design — основните операции по анализ на екрана и изчисляване на тарифата се изпълняват локално на вашето устройство.\n\n**Събиране и използване на данни**\n• Accessibility Service: приложението използва този достъп единствено за четене на детайли за поръчката (напр. цена, разстояние), показвани на екрана от поддържаните приложения за доставка и такси (вградени и добавени от вас). Приложението никога не записва пароли, лични данни или натискания на клавиши.\n• Известия (Notification Listener): достъпът до известия се използва само за откриване на нови предложения за работа, докато приложението работи във фонов режим.\n• Данни за превозното средство и тарифата: данните, които въвеждате в Настройки (разход на гориво, цена на горивото, прагове на оценяване), се съхраняват само в локалната памет на устройството.\n\n**Абонаменти и доставчици от трети страни (плащания)**\nПриложението предлага функции на абонаментна основа. Приложението не събира и не съхранява подробни данни за плащане (като номера на карти). За обработка на транзакции и проверка на статуса на абонамента разчитаме на доверени доставчици от трети страни:\n• Google Play Billing (Google LLC): плащанията и транзакциите се обработват директно от Google Play Store.\n• RevenueCat, Inc.: проверка на статуса на абонамента въз основа на анонимни идентификатори на устройството и транзакцията.\n\n**Поверителност на децата**\nWayArs е предназначен единствено за възрастни, които имат законно право да работят като шофьор или куриер. Приложението не е насочено към деца под 16 години и съзнателно не събира и не обработва лични данни на деца. Ако научите, че дете ни е предоставило данни, моля, свържете се с нас на apstudiomobile@gmail.com, за да можем своевременно да предприемем подходящи действия.\n\n**Управление на разрешенията и абонамента**\nМожете да отмените дадените разрешения по всяко време в системните Настройки на Android или да управлявате и отмените абонамента си директно в настройките на профила си в Google Play."</string>
+    <string name="settings_terms_content">"**Условия за ползване на WayArs**\nПоследна актуализация: 12 септември 2026 г.\n\n**Общи разпоредби**\nИзползвайки приложението WayArs, вие приемате условията по-долу. Приложението е независим помощен инструмент, създаден от AP STUDIO, и не е официално свързано, спонсорирано или одобрено от никой доставчик на приложения на трети страни (като Bolt, Uber, Wolt, FreeNow, Stuart или всеки друг, добавен към списъка от потребителя).\n\n**Спомагателен характер и приложения на трети страни**\n• Приложението е само за информационни и аналитични цели. Показателите за рентабилност (валута/км, прогнозна печалба) се изчисляват от данни, въведени от потребителя, и показания, взети от екрана.\n• Потребителите могат сами да добавят поддържани приложения на трети страни. AP STUDIO не гарантира правилно четене на данни за приложения, добавени ръчно от потребителя.\n\n**Възраст на потребителя**\nПриложението може да се използва само от лица на поне 18 години (или достигнали изискваната възраст за предоставяне на услуги за такси/куриер в тяхната страна). Приложението не е предназначено за деца.\n\n**Абонаменти и плащания**\n• Плащанията за абонамент се събират от Google Play Store съгласно избрания план.\n• Потребителите могат по всяко време да отменят подновяването на абонамента в настройките на своя профил в Google Play.\n• Възстановяванията се обработват съгласно политиките и правилата на Google Play Store.\n\n**Отказ от отговорност**\n• AP STUDIO не носи отговорност за несъответствия в изчисленията, произтичащи от неправилно четене на екрана или актуализации/промени в интерфейсите на приложения на трети страни.\n• AP STUDIO не носи отговорност за финансови, бизнес или свързани с шофирането решения, взети от потребителя въз основа на показателите на приложението.\n• Потребителите са длъжни да използват безопасно телефона си и стриктно да спазват правилата за движение по пътищата по време на шофиране.\n• AP STUDIO не носи отговорност за никакви блокирания, временни или постоянни спирания на акаунтите на потребителя в услуги на трети страни (Uber, Bolt, Wolt и др.).\n• Потребителят използва приложението изцяло на свой собствен риск и самостоятелно решава дали да го използва.\n• Приложението е независим помощен инструмент и няма официална връзка с никоя платформа за такси или доставки.\n\n**Контакт**\nВсички въпроси, коментари или доклади за грешки трябва да се изпращат на: apstudiomobile@gmail.com."</string>
+
+    <!-- Paywall -->
+    <string name="paywall_badge_full_access">Пълен достъп</string>
+    <string name="paywall_title">Отключете пълния\nпотенциал на WayArs</string>
+    <string name="paywall_subtitle">WayArs не е просто асистент — това е вашият личен инструмент за стабилен и максимален доход.</string>
+    <string name="paywall_chip_analysis">Бърз анализ</string>
+    <string name="paywall_chip_filters">Умни филтри</string>
+    <string name="paywall_chip_income">Доход между смени</string>
+    <string name="paywall_chip_languages">Работи на 16 езика</string>
+    <string name="paywall_section_eyebrow">ИЗБЕРЕТЕ ВАШИЯ ПЛАН</string>
+    <string name="paywall_section_title">Гъвкави планове за вашите цели</string>
+    <string name="paywall_section_subtitle">Колкото по-дълъг е абонаментът, толкова по-добра е стойността!</string>
+    <string name="paywall_plan_yearly_title">Годишен</string>
+    <string name="paywall_plan_monthly_title">Месечен</string>
+    <string name="paywall_plan_weekly_title">Седмичен</string>
+    <string name="paywall_plan_yearly_days">365 дни пълен достъп</string>
+    <string name="paywall_plan_monthly_days">30 дни пълен достъп</string>
+    <string name="paywall_plan_weekly_days">7 дни пълен достъп</string>
+    <string name="paywall_badge_popular">Популярен</string>
+    <string name="paywall_badge_trial7">7 дни безплатно</string>
+    <string name="paywall_period_year">/ година</string>
+    <string name="paywall_period_month">/ месец</string>
+    <string name="paywall_period_week">/ седмица</string>
+    <string name="paywall_feature_all">Всички функции на приложението</string>
+    <string name="paywall_feature_presets">Умни режими</string>
+    <string name="paywall_feature_realtime">Анализ на поръчки в реално време</string>
+    <string name="paywall_feature_languages">Поддръжка на 16 езика</string>
+    <string name="paywall_button_select">Избери</string>
+    <string name="paywall_button_restore">Възстанови покупки</string>
+    <string name="paywall_button_hide">Затвори</string>
+    <string name="paywall_trial_notice">Абонаментът ви започва с 7-дневен безплатен пробен период. Той се подновява автоматично според избрания план. Можете да отмените по всяко време.</string>
+    <string name="paywall_footer_secured_title">Защитено плащане</string>
+    <string name="paywall_footer_secured_subtitle">Обработва се от Google Play и RevenueCat</string>
+    <string name="paywall_footer_google_title">Google Play</string>
+    <string name="paywall_footer_google_subtitle">Сигурно разплащане чрез Google Play и RevenueCat</string>
+    <string name="paywall_footer_tagline">WayArs — вашият път към стабилен доход</string>
+    <string name="paywall_gate_error_title">Не успяхме да проверим вашия абонамент</string>
+    <string name="paywall_gate_error_retry">Опитай отново</string>
+    <string name="paywall_tagline">УМЕН АСИСТЕНТ ЗА ДОСТАВКИ И ТАКСИ</string>
+    <string name="paywall_compat_label">Работи заедно с приложенията, с които вече шофирате</string>
+    <string name="paywall_mock_selected_toast">Избран е план %1$s — покупките ще се отключат след пускането в Google Play</string>
+    <string name="paywall_pro_header">WayArs Pro</string>
+    <string name="paywall_cta_trial">Пробвайте 7 дни за %1$s</string>
+    <string name="paywall_badge_best_value">★ НАЙ-ИЗГОДНО • СПЕСТЕТЕ 30%</string>
+    <string name="paywall_badge_popular_discount">★ Популярен • -15%</string>
+    <string name="paywall_per_month_hint">Само %1$s / месец</string>
+    <string name="paywall_data_safe">Вашите данни са в безопасност</string>
+    <string name="paywall_no_charge_notice">Без такса за първите 7 дни. Отменете по всяко време в Google Play.</string>
+</resources>

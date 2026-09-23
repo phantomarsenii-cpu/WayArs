@@ -135,7 +135,7 @@
     <string name="paywall_chip_analysis">Analiză rapidă</string>
     <string name="paywall_chip_filters">Filtre inteligente</string>
     <string name="paywall_chip_income">Venit între ture</string>
-    <string name="paywall_chip_languages">Funcționează în 7 limbi</string>
+    <string name="paywall_chip_languages">Funcționează în 16 limbi</string>
     <string name="paywall_section_eyebrow">ALEGE-ȚI PLANUL</string>
     <string name="paywall_section_title">Planuri flexibile pentru obiectivele tale</string>
     <string name="paywall_section_subtitle">Cu cât abonamentul este mai lung, cu atât este mai avantajos!</string>
@@ -153,7 +153,7 @@
     <string name="paywall_feature_all">Toate funcțiile aplicației</string>
     <string name="paywall_feature_presets">Presetări inteligente</string>
     <string name="paywall_feature_realtime">Analiză comenzi în timp real</string>
-    <string name="paywall_feature_languages">Suport pentru 7 limbi</string>
+    <string name="paywall_feature_languages">Suport pentru 16 limbi</string>
     <string name="paywall_button_select">Alege</string>
     <string name="paywall_button_restore">Restaurează achizițiile</string>
     <string name="paywall_button_hide">Ascunde</string>

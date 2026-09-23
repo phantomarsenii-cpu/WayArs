@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WayArs</string>
+    <string name="splash_slogan">Haydovchilar va kuryerlar uchun aqlli yordamchi</string>
+    <string name="splash_start">Boshlash</string>
+
+    <string name="onboarding_title">Rejimni tanlang</string>
+    <string name="onboarding_subtitle">Siz uchun optimal filtrlarni sozlaymiz</string>
+    <string name="onboarding_customize_later">Keyinroq sozlash</string>
+
+    <string name="preset_economy_title">Tejamkor</string>
+    <string name="preset_economy_desc">Kam xarajat, o\'rtacha daromad</string>
+    <string name="preset_balance_title">Muvozanat</string>
+    <string name="preset_balance_desc">Vaqt va daromad muvozanati</string>
+    <string name="preset_profitable_title">Faqat foydali</string>
+    <string name="preset_profitable_desc">Faqat yuqori haq to\'lanadigan buyurtmalar</string>
+
+    <string name="dashboard_today_summary">Bugungi natijalar</string>
+    <string name="dashboard_active_time">Faol vaqt</string>
+    <string name="dashboard_distance">Masofa</string>
+    <string name="dashboard_avg_rate">O\'rtacha tarif</string>
+    <string name="dashboard_order_evaluation">Buyurtmani baholash</string>
+    <string name="dashboard_orders">buyurtma</string>
+    <string name="dashboard_no_order">Yangi buyurtma kutilmoqda…</string>
+
+    <string name="verdict_good">YAXSHI</string>
+    <string name="verdict_bad">YOMON</string>
+    <string name="action_accept">Qabul qilish</string>
+    <string name="action_reject">Rad etish</string>
+
+    <string name="nav_home">Bosh sahifa</string>
+    <string name="nav_stats">Statistika</string>
+    <string name="nav_presets">Rejimlar</string>
+    <string name="nav_settings">Sozlamalar</string>
+
+    <string name="settings_title">Sozlamalar</string>
+    <string name="settings_language">Til</string>
+    <string name="settings_currency">Valyuta</string>
+    <string name="settings_preset">Rejim</string>
+    <string name="settings_enable_accessibility">Ekranni o\'qish xizmatini yoqish</string>
+    <string name="settings_enable_overlay">Suzuvchi vidjetni yoqish</string>
+    <string name="settings_accessibility_hint">Kiruvchi buyurtmalarni aniqlash uchun zarur (faqat o\'qish, avtomatik bosishlarsiz)</string>
+    <string name="settings_overlay_hint">Boshqa ilovalar ustida suzuvchi natija vidjetini ko\'rsatish uchun zarur</string>
+    <string name="notification_stop_action">To\'xtatish</string>
+
+    <string name="overlay_new_order">Yangi buyurtma</string>
+    <string name="overlay_min_km">min</string>
+
+    <string name="accessibility_service_description">WayArs yetkazib berish/taksi ilovalarida ekranda ko\'rsatilgan buyurtma tafsilotlarini (narx, masofa, vaqt) o\'qiydi, bu tezroq qaror qabul qilishga yordam beradi. U hech qachon avtomatik ravishda biror narsani bosmaydi yoki o\'zgartirmaydi.</string>
+
+    <string name="accessibility_consent_title">Ekranni o\'qish uchun ruxsat</string>
+    <string name="accessibility_consent_body">Yangi buyurtmalarni avtomatik aniqlash uchun WayArs siz foydalanadigan yetkazib berish va taksi ilovalarida ekranda ko\'rsatilgan matnni (narx, masofa, taxminiy vaqt kabi) o\'qishi kerak.\n\nBu nimani anglatadi:\n• WayArs faqat siz tanlagan qo\'llab-quvvatlanadigan ilovalardan buyurtma tafsilotlarini o\'qiydi. U hech qachon parollarni, xabarlarni yoki siz kiritgan boshqa narsalarni o\'qimaydi.\n• WayArs ekranda hech narsani bosmaydi, to\'ldirmaydi yoki o\'zgartirmaydi — faqat o\'qiydi.\n• Hamma narsa shu qurilmada qayta ishlanadi. Hech narsa serverga yuborilmaydi.\n\nBuni istalgan vaqtda Sozlamalarda o\'chirib qo\'yishingiz mumkin.</string>
+    <string name="accessibility_consent_allow">Ruxsat berish va davom etish</string>
+    <string name="accessibility_consent_decline">Hozir emas</string>
+
+    <string name="stats_empty">Hali buyurtmalar yo\'q</string>
+    <string name="settings_custom_thresholds_title">O\'zingizning tarif chegaralaringiz</string>
+    <string name="settings_custom_thresholds_hint">Ixtiyoriy — rejim o\'rniga ishlatiladigan o\'zingizning %1$s/km ko\'rsatkichlaringiz</string>
+    <string name="settings_custom_bad">Yomon buyurtma, gacha</string>
+    <string name="settings_custom_average">O\'rtacha buyurtma, dan</string>
+    <string name="settings_custom_good">Yaxshi buyurtma, dan</string>
+    <string name="settings_custom_save">Saqlash</string>
+    <string name="settings_custom_clear">Rejimdan foydalanish</string>
+    <string name="active_requires_permissions">Avval Sozlamalarda ekranni o\'qish va suzuvchi vidjetni yoqing</string>
+    <string name="dashboard_share_log">Skanerlash jurnalini yuborish</string>
+    <string name="verdict_average">O\'RTACHA</string>
+    <string name="settings_enable_notifications">Bildirishnomalarga kirishni yoqish</string>
+    <string name="settings_notifications_hint">Ixtiyoriy zaxira kanal — ilova yig\'ilgan holatda bildirishnoma sifatida kelgan buyurtmalarni ushlaydi</string>
+    <string name="settings_permissions_title">Ruxsatlar</string>
+    <string name="settings_permissions_hint">Ekranni o\'qish, suzuvchi vidjet, bildirishnomalar</string>
+
+    <string name="settings_vehicle_title">Transport</string>
+    <string name="settings_vehicle_car">Avtomobil</string>
+    <string name="settings_vehicle_scooter">Moped</string>
+    <string name="settings_vehicle_bicycle">Velosiped / elektrosamokat</string>
+    <string name="settings_fuel_petrol">Benzin</string>
+    <string name="settings_fuel_diesel">Dizel</string>
+    <string name="settings_fuel_lpg">Gaz (LPG)</string>
+    <string name="settings_fuel_electric">Elektr</string>
+    <string name="settings_vehicle_consumption">100 km uchun sarf</string>
+    <string name="settings_vehicle_price_fuel">1 litr narxi</string>
+    <string name="settings_vehicle_price_electric">1 kVt-soat narxi</string>
+    <string name="settings_vehicle_save">Saqlash</string>
+    <string name="settings_vehicle_summary_car">Avtomobil · %1$s · %2$s/100km</string>
+    <string name="settings_vehicle_summary_fuel">%1$s · %2$s · %3$s/100km</string>
+    <string name="settings_vehicle_summary_no_fuel">%1$s · yoqilg\'i xarajatisiz</string>
+    <string name="verdict_net_profit">Sof %1$s (yoqilg\'i %2$s)</string>
+    <string name="verdict_short_trip_net">Sof %1$s (1 km dan qisqa safar)</string>
+    <string name="settings_saved">Saqlandi</string>
+    <string name="settings_supported_apps_title">Qo\'llab-quvvatlanadigan ilovalar</string>
+    <string name="settings_supported_apps_hint">O\'rnatilgan ro\'yxat + siz qo\'shgan ilovalar</string>
+    <string name="settings_supported_apps_builtin_label">O\'rnatilgan:</string>
+    <string name="settings_supported_apps_custom_label">Siz qo\'shgan:</string>
+    <string name="settings_add_from_installed">O\'rnatilganlardan tanlash</string>
+    <string name="settings_add_manually">Paket ID sini kiriting</string>
+    <string name="settings_package_id_label">Paket ID (masalan, com.example.app)</string>
+    <string name="settings_add">Qo\'shish</string>
+    <string name="settings_pick_installed_app_title">Ilovani tanlang</string>
+    <string name="settings_search_apps_label">Qidirish</string>
+    <string name="settings_cancel">Bekor qilish</string>
+    <string name="settings_already_added">allaqachon qo\'shilgan</string>
+    <string name="settings_no_apps_found">Ilovalar topilmadi</string>
+    <string name="settings_calibrated">Kalibrlangan ✓</string>
+    <string name="settings_calibrate_action">Kalibrlashni tahrirlash</string>
+    <string name="settings_not_calibrated">Kalibrlanmagan</string>
+    <string name="settings_calibration_title">Ushbu ilovani kalibrlash</string>
+    <string name="settings_calibration_no_data">Bu ilova uchun hali skanerlash ma\'lumotlari yo\'q. Uni faol buyurtma ekraniga oching va bir necha soniya kuting, so\'ng bu oynani qayta oching.</string>
+    <string name="settings_calibration_instructions">Quyida WayArs ushbu ilova ekranidan oxirgi marta o\'qigan matn keltirilgan. Avval narxi bo\'lgan qatorni, keyin masofani, so\'ng vaqtni bosing.</string>
+    <string name="settings_calibration_role_money">Narx</string>
+    <string name="settings_calibration_role_distance">Masofa</string>
+    <string name="settings_calibration_role_time">Vaqt</string>
+    <string name="settings_calibration_money_token_label">Valyuta belgisi (kerak bo\'lsa tahrirlang)</string>
+    <string name="settings_calibration_distance_token_label">Masofa birligi (kerak bo\'lsa tahrirlang)</string>
+    <string name="settings_calibration_time_token_label">Vaqt birligi (kerak bo\'lsa tahrirlang)</string>
+    <string name="settings_calibration_clear">Kalibrlashni tozalash</string>
+
+    <string name="settings_developer_website_url" translatable="false">https://phantomarsenii-cpu.github.io/AP-STUDIO/</string>
+    <string name="settings_about_title">Ilova haqida</string>
+    <string name="settings_privacy_title">Maxfiylik siyosati</string>
+    <string name="settings_terms_title">Foydalanish shartlari</string>
+    <string name="terms_gate_title">Foydalanish shartlari</string>
+    <string name="terms_gate_subtitle">Davom etishdan oldin Foydalanish shartlarini o\'qib chiqing va qabul qiling.</string>
+    <string name="terms_gate_checkbox_label">Men Foydalanish shartlarini o\'qib chiqdim va qabul qilaman</string>
+    <string name="terms_gate_accept_button">Qabul qilish va davom etish</string>
+    <string name="settings_terms_accepted_at">Qabul qilingan sana: %1$s</string>
+    <string name="settings_visit_website">Dasturchi veb-saytiga o\'tish</string>
+    <string name="settings_close">Yopish</string>
+    <string name="settings_about_content">"**WayArs**\nYetkazib berish va taksi uchun shaxsiy yordamchingiz\n\nVersiya: %1$s\n\nWayArs — taksi va yetkazib berish ilovalarida ishlaydigan haydovchilar va kuryerlar uchun yaratilgan bepul vosita.\n\nIlova ekrandagi ma\'lumotlar va bildirishnomalarni avtomatik tahlil qiladi, bu esa buyurtmani olish arziydimi yoki yo\'qmi tezda baholashga va daromadingizni real vaqt rejimida kuzatishga yordam beradi.\n\n**Dizayn va ishlab chiqish:** AP STUDIO\n**Aloqa va yordam:** apstudiomobile@gmail.com\n\nBarcha uchinchi tomon savdo belgilari, logotiplari va ilova nomlari (jumladan, lekin ular bilan cheklanmagan holda Bolt, Uber, Wolt, FreeNow, Stuart va foydalanuvchi tomonidan qo\'shilgan boshqalar) o\'z egalariga tegishli va faqat ma\'lumot va identifikatsiya maqsadlarida ishlatiladi."</string>
+    <string name="settings_privacy_content">"**WayArs maxfiylik siyosati**\nOxirgi yangilanish: 2026-yil 12-sentyabr\n\n**Sizning maxfiyligingizni himoya qilish**\nBiz sizning maxfiyligingizni hurmat qilamiz. WayArs Privacy by Design tamoyili asosida yaratilgan — asosiy ekranni tahlil qilish va tarifni hisoblash amallari qurilmangizda mahalliy ravishda bajariladi.\n\n**Ma\'lumot to\'plash va foydalanish**\n• Accessibility Service: ilova bu ruxsatdan faqat qo\'llab-quvvatlanadigan yetkazib berish va taksi ilovalarida (o\'rnatilgan va siz qo\'shgan) ekranda ko\'rsatilgan buyurtma tafsilotlarini (masalan, narx, masofa) o\'qish uchun foydalanadi. Ilova hech qachon parollarni, shaxsiy ma\'lumotlarni yoki tugma bosishlarni yozib olmaydi.\n• Bildirishnomalar (Notification Listener): bildirishnomalarga kirish faqat ilova fonda ishlayotganda yangi buyurtma takliflarini aniqlash uchun ishlatiladi.\n• Transport va tarif ma\'lumotlari: Sozlamalarda kiritgan ma\'lumotlaringiz (yoqilg\'i sarfi, yoqilg\'i narxi, baholash chegaralari) faqat qurilmaning mahalliy xotirasida saqlanadi.\n\n**Obunalar va uchinchi tomon provayderlari (to\'lovlar)**\nIlova funksiyalarni obuna asosida taklif qiladi. Ilova batafsil to\'lov ma\'lumotlarini (masalan, karta raqamlarini) to\'plamaydi yoki saqlamaydi. Tranzaksiyalarni qayta ishlash va obuna holatini tekshirish uchun biz ishonchli uchinchi tomon provayderlariga tayanamiz:\n• Google Play Billing (Google LLC): to\'lovlar va tranzaksiyalar to\'g\'ridan-to\'g\'ri Google Play Store orqali amalga oshiriladi.\n• RevenueCat, Inc.: anonim qurilma va tranzaksiya identifikatorlari asosida obuna holatini tekshirish.\n\n**Bolalar maxfiyligi**\nWayArs faqat haydovchi yoki kuryer sifatida ishlashga qonuniy ruxsati bo\'lgan kattalar uchun mo\'ljallangan. Ilova 16 yoshdan kichik bolalarga qaratilmagan va bolalardan bilib turib shaxsiy ma\'lumot to\'plamaydi. Agar bola bizga biror ma\'lumot bergani haqida bilib qolsangiz, tegishli chora ko\'rishimiz uchun apstudiomobile@gmail.com manziliga murojaat qiling.\n\n**Ruxsatlar va obunangizni boshqarish**\nBerilgan ruxsatlarni istalgan vaqtda Android tizim Sozlamalarida bekor qilishingiz yoki obunangizni to\'g\'ridan-to\'g\'ri Google Play hisobingiz sozlamalarida boshqarishingiz va bekor qilishingiz mumkin."</string>
+    <string name="settings_terms_content">"**WayArs foydalanish shartlari**\nOxirgi yangilanish: 2026-yil 12-sentyabr\n\n**Umumiy qoidalar**\nWayArs ilovasidan foydalanish orqali siz quyidagi shartlarni qabul qilasiz. Ilova AP STUDIO tomonidan yaratilgan mustaqil yordamchi vosita bo\'lib, u hech qanday uchinchi tomon ilova provayderlari (Bolt, Uber, Wolt, FreeNow, Stuart yoki foydalanuvchi qo\'shgan boshqalar kabi) bilan rasmiy aloqada emas, ular tomonidan homiylik qilinmagan yoki tasdiqlanmagan.\n\n**Yordamchi xarakter va uchinchi tomon ilovalari**\n• Ilova faqat ma\'lumot va tahlil maqsadlarida mo\'ljallangan. Foydalilik ko\'rsatkichlari (valyuta/km, taxminiy foyda) foydalanuvchi kiritgan ma\'lumotlar va ekrandan olingan o\'qishlar asosida hisoblanadi.\n• Foydalanuvchilar qo\'llab-quvvatlanadigan uchinchi tomon ilovalarini o\'zlari qo\'shishlari mumkin. AP STUDIO foydalanuvchi qo\'lda qo\'shgan ilovalar uchun ma\'lumotlarning to\'g\'ri o\'qilishiga kafolat bermaydi.\n\n**Foydalanuvchi yoshi**\nIlovadan faqat kamida 18 yoshga to\'lgan (yoki o\'z mamlakatida taksi/kuryerlik xizmatlarini ko\'rsatish uchun zarur yoshga yetgan) shaxslar foydalanishi mumkin. Ilova bolalar uchun mo\'ljallanmagan.\n\n**Obunalar va to\'lovlar**\n• Obuna to\'lovlari tanlangan rejaga muvofiq Google Play Store tomonidan yig\'iladi.\n• Foydalanuvchilar istalgan vaqtda Google Play hisob sozlamalarida obunani yangilanishini bekor qilishlari mumkin.\n• Pul qaytarish Google Play Store qoidalari va siyosatiga muvofiq amalga oshiriladi.\n\n**Javobgarlikdan voz kechish**\n• AP STUDIO ekranni noto\'g\'ri o\'qish yoki uchinchi tomon ilovalari interfeysidagi yangilanishlar/o\'zgarishlar natijasida yuzaga kelgan hisob-kitoblardagi nomuvofiqliklar uchun javobgar emas.\n• AP STUDIO foydalanuvchi ilova ko\'rsatkichlari asosida qabul qilgan moliyaviy, tijorat yoki haydash qarorlari uchun javobgar emas.\n• Foydalanuvchilar telefondan xavfsiz foydalanishlari va haydash paytida yo\'l harakati qoidalariga qat\'iy rioya qilishlari shart.\n• AP STUDIO foydalanuvchining uchinchi tomon xizmatlaridagi (Uber, Bolt, Wolt va h.k.) hisoblarining vaqtinchalik yoki doimiy bloklanishi uchun javobgar emas.\n• Foydalanuvchi ilovadan to\'liq o\'z xavf-xatari ostida foydalanadi va undan foydalanish yoki foydalanmaslikni mustaqil hal qiladi.\n• Ilova mustaqil yordamchi vosita bo\'lib, biror taksi yoki yetkazib berish platformasi bilan rasmiy aloqasi yo\'q.\n\n**Aloqa**\nSavollar, izohlar yoki xatoliklar haqida xabarlarni quyidagi manzilga yuboring: apstudiomobile@gmail.com."</string>
+
+    <!-- Paywall -->
+    <string name="paywall_badge_full_access">To\'liq kirish</string>
+    <string name="paywall_title">WayArs\'ning to\'liq imkoniyatlarini\noching</string>
+    <string name="paywall_subtitle">WayArs — bu shunchaki yordamchi emas, balki barqaror va maksimal daromad uchun shaxsiy vositangiz.</string>
+    <string name="paywall_chip_analysis">Tezkor tahlil</string>
+    <string name="paywall_chip_filters">Aqlli filtrlar</string>
+    <string name="paywall_chip_income">Smenalar orasidagi daromad</string>
+    <string name="paywall_chip_languages">16 tilda ishlaydi</string>
+    <string name="paywall_section_eyebrow">REJANI TANLANG</string>
+    <string name="paywall_section_title">Maqsadlaringizga mos moslashuvchan rejalar</string>
+    <string name="paywall_section_subtitle">Obuna qancha uzoq bo\'lsa, foyda shuncha katta!</string>
+    <string name="paywall_plan_yearly_title">Yillik</string>
+    <string name="paywall_plan_monthly_title">Oylik</string>
+    <string name="paywall_plan_weekly_title">Haftalik</string>
+    <string name="paywall_plan_yearly_days">365 kun to\'liq kirish</string>
+    <string name="paywall_plan_monthly_days">30 kun to\'liq kirish</string>
+    <string name="paywall_plan_weekly_days">7 kun to\'liq kirish</string>
+    <string name="paywall_badge_popular">Ommabop</string>
+    <string name="paywall_badge_trial7">7 kun bepul</string>
+    <string name="paywall_period_year">/ yil</string>
+    <string name="paywall_period_month">/ oy</string>
+    <string name="paywall_period_week">/ hafta</string>
+    <string name="paywall_feature_all">Ilovaning barcha funksiyalari</string>
+    <string name="paywall_feature_presets">Aqlli rejimlar</string>
+    <string name="paywall_feature_realtime">Real vaqtda buyurtmalarni tahlil qilish</string>
+    <string name="paywall_feature_languages">16 tilni qo\'llab-quvvatlash</string>
+    <string name="paywall_button_select">Tanlash</string>
+    <string name="paywall_button_restore">Xaridlarni tiklash</string>
+    <string name="paywall_button_hide">Yopish</string>
+    <string name="paywall_trial_notice">Obunangiz 7 kunlik bepul sinov bilan boshlanadi. U tanlangan reja bo\'yicha avtomatik yangilanadi. Istalgan vaqtda bekor qilishingiz mumkin.</string>
+    <string name="paywall_footer_secured_title">Xavfsiz to\'lov</string>
+    <string name="paywall_footer_secured_subtitle">Google Play va RevenueCat orqali amalga oshiriladi</string>
+    <string name="paywall_footer_google_title">Google Play</string>
+    <string name="paywall_footer_google_subtitle">Google Play va RevenueCat orqali xavfsiz to\'lov</string>
+    <string name="paywall_footer_tagline">WayArs — barqaror daromadga bo\'lgan yo\'lingiz</string>
+    <string name="paywall_gate_error_title">Obunangizni tekshirib bo\'lmadi</string>
+    <string name="paywall_gate_error_retry">Qayta urinish</string>
+    <string name="paywall_tagline">AQLLI YETKAZIB BERISH VA TAKSI YORDAMCHISI</string>
+    <string name="paywall_compat_label">Siz allaqachon ishlayotgan ilovalar bilan birga ishlaydi</string>
+    <string name="paywall_mock_selected_toast">%1$s rejasi tanlandi — xaridlar Google Play\'da chiqarilgandan keyin ochiladi</string>
+    <string name="paywall_pro_header">WayArs Pro</string>
+    <string name="paywall_cta_trial">%1$s ga 7 kun sinab ko\'ring</string>
+    <string name="paywall_badge_best_value">★ ENG FOYDALI • 30% TEJANG</string>
+    <string name="paywall_badge_popular_discount">★ Ommabop • -15%</string>
+    <string name="paywall_per_month_hint">Atigi %1$s / oy</string>
+    <string name="paywall_data_safe">Ma\'lumotlaringiz xavfsiz</string>
+    <string name="paywall_no_charge_notice">Birinchi 7 kun uchun to\'lov olinmaydi. Google Play\'da istalgan vaqtda bekor qilishingiz mumkin.</string>
+</resources>

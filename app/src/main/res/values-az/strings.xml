@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WayArs</string>
+    <string name="splash_slogan">Sürücülər və kuryerlər üçün ağıllı köməkçi</string>
+    <string name="splash_start">Başlayın</string>
+
+    <string name="onboarding_title">Rejiminizi seçin</string>
+    <string name="onboarding_subtitle">Sizin üçün optimal filtrlər quracağıq</string>
+    <string name="onboarding_customize_later">Sonra tənzimlə</string>
+
+    <string name="preset_economy_title">Qənaətcil</string>
+    <string name="preset_economy_desc">Aşağı xərclər, orta gəlir</string>
+    <string name="preset_balance_title">Tarazlıq</string>
+    <string name="preset_balance_desc">Vaxt və gəlirin tarazlığı</string>
+    <string name="preset_profitable_title">Yalnız sərfəli</string>
+    <string name="preset_profitable_desc">Yalnız yüksək ödənişli sifarişlər</string>
+
+    <string name="dashboard_today_summary">Bugünkü nəticələr</string>
+    <string name="dashboard_active_time">Fəal vaxt</string>
+    <string name="dashboard_distance">Məsafə</string>
+    <string name="dashboard_avg_rate">Orta tarif</string>
+    <string name="dashboard_order_evaluation">Sifarişin qiymətləndirilməsi</string>
+    <string name="dashboard_orders">sifariş</string>
+    <string name="dashboard_no_order">Yeni sifariş gözlənilir…</string>
+
+    <string name="verdict_good">YAXŞI</string>
+    <string name="verdict_bad">PİS</string>
+    <string name="action_accept">Qəbul et</string>
+    <string name="action_reject">Rədd et</string>
+
+    <string name="nav_home">Əsas</string>
+    <string name="nav_stats">Statistika</string>
+    <string name="nav_presets">Rejimlər</string>
+    <string name="nav_settings">Parametrlər</string>
+
+    <string name="settings_title">Parametrlər</string>
+    <string name="settings_language">Dil</string>
+    <string name="settings_currency">Valyuta</string>
+    <string name="settings_preset">Rejim</string>
+    <string name="settings_enable_accessibility">Ekran oxuma xidmətini aktiv et</string>
+    <string name="settings_enable_overlay">Üzən vidjeti aktiv et</string>
+    <string name="settings_accessibility_hint">Yeni sifarişləri aşkarlamaq üçün lazımdır (yalnız oxumaq, avtomatik basmalar olmadan)</string>
+    <string name="settings_overlay_hint">Digər tətbiqlərin üzərində üzən nəticə vidjetini göstərmək üçün lazımdır</string>
+    <string name="notification_stop_action">Dayandır</string>
+
+    <string name="overlay_new_order">Yeni sifariş</string>
+    <string name="overlay_min_km">dəq</string>
+
+    <string name="accessibility_service_description">WayArs çatdırılma/taksi tətbiqlərinin ekranında göstərilən sifariş təfərrüatlarını (qiymət, məsafə, vaxt) oxuyur ki, siz daha sürətli qərar verə biləsiniz. O, heç vaxt heç nəyə avtomatik toxunmur və ya dəyişmir.</string>
+
+    <string name="accessibility_consent_title">Ekran oxuma icazəsi</string>
+    <string name="accessibility_consent_body">Yeni sifarişləri avtomatik aşkarlamaq üçün WayArs-a istifadə etdiyiniz çatdırılma və taksi tətbiqlərinin ekranında göstərilən mətni — qiymət, məsafə və təxmini vaxt kimi — oxumaq lazımdır.\n\nBu nə deməkdir:\n• WayArs yalnız sizin seçdiyiniz dəstəklənən tətbiqlərdən sifariş təfərrüatlarını oxuyur. O, heç vaxt parolları, mesajları və ya sizin daxil etdiyiniz hər hansı digər şeyi oxumur.\n• WayArs ekranda heç nəyə toxunmur, doldurmuş və ya dəyişmir — yalnız oxuyur.\n• Hər şey bu cihazda emal olunur. Heç nə serverə göndərilmir.\n\nBunu istənilən vaxt Parametrlərdə söndürə bilərsiniz.</string>
+    <string name="accessibility_consent_allow">İcazə ver və davam et</string>
+    <string name="accessibility_consent_decline">İndi yox</string>
+
+    <string name="stats_empty">Hələ sifariş yoxdur</string>
+    <string name="settings_custom_thresholds_title">Öz tarif hədləriniz</string>
+    <string name="settings_custom_thresholds_hint">İstəyə bağlı — rejim əvəzinə istifadə olunan öz %1$s/km göstəricilərinizi</string>
+    <string name="settings_custom_bad">Pis sifariş, qədər</string>
+    <string name="settings_custom_average">Orta sifariş, dən</string>
+    <string name="settings_custom_good">Yaxşı sifariş, dən</string>
+    <string name="settings_custom_save">Yadda saxla</string>
+    <string name="settings_custom_clear">Rejimdən istifadə et</string>
+    <string name="active_requires_permissions">Əvvəlcə Parametrlərdə ekran oxumanı və üzən vidjeti aktiv edin</string>
+    <string name="dashboard_share_log">Skan jurnalını göndər</string>
+    <string name="verdict_average">ORTA</string>
+    <string name="settings_enable_notifications">Bildiriş girişini aktiv et</string>
+    <string name="settings_notifications_hint">İstəyə bağlı ehtiyat kanal — tətbiq minimuma endirildikdə bildiriş kimi gələn sifarişləri tutur</string>
+    <string name="settings_permissions_title">İcazələr</string>
+    <string name="settings_permissions_hint">Ekran oxuma, üzən vidjet, bildirişlər</string>
+
+    <string name="settings_vehicle_title">Nəqliyyat vasitəsi</string>
+    <string name="settings_vehicle_car">Avtomobil</string>
+    <string name="settings_vehicle_scooter">Motoroller</string>
+    <string name="settings_vehicle_bicycle">Velosiped / elektrik skuter</string>
+    <string name="settings_fuel_petrol">Benzin</string>
+    <string name="settings_fuel_diesel">Dizel</string>
+    <string name="settings_fuel_lpg">Qaz (LPG)</string>
+    <string name="settings_fuel_electric">Elektrik</string>
+    <string name="settings_vehicle_consumption">100 km-ə sərf</string>
+    <string name="settings_vehicle_price_fuel">Litrin qiyməti</string>
+    <string name="settings_vehicle_price_electric">kVt-saatın qiyməti</string>
+    <string name="settings_vehicle_save">Yadda saxla</string>
+    <string name="settings_vehicle_summary_car">Avtomobil · %1$s · %2$s/100km</string>
+    <string name="settings_vehicle_summary_fuel">%1$s · %2$s · %3$s/100km</string>
+    <string name="settings_vehicle_summary_no_fuel">%1$s · yanacaq xərci olmadan</string>
+    <string name="verdict_net_profit">Xalis %1$s (yanacaq %2$s)</string>
+    <string name="verdict_short_trip_net">Xalis %1$s (1 km-dən az səyahət)</string>
+    <string name="settings_saved">Yadda saxlanıldı</string>
+    <string name="settings_supported_apps_title">Dəstəklənən tətbiqlər</string>
+    <string name="settings_supported_apps_hint">Daxili siyahı + sizin əlavə etdiyiniz tətbiqlər</string>
+    <string name="settings_supported_apps_builtin_label">Daxili:</string>
+    <string name="settings_supported_apps_custom_label">Sizin əlavə etdikləriniz:</string>
+    <string name="settings_add_from_installed">Quraşdırılmışlardan seç</string>
+    <string name="settings_add_manually">Paket ID daxil edin</string>
+    <string name="settings_package_id_label">Paket ID (məs. com.example.app)</string>
+    <string name="settings_add">Əlavə et</string>
+    <string name="settings_pick_installed_app_title">Tətbiq seçin</string>
+    <string name="settings_search_apps_label">Axtar</string>
+    <string name="settings_cancel">Ləğv et</string>
+    <string name="settings_already_added">artıq əlavə edilib</string>
+    <string name="settings_no_apps_found">Tətbiq tapılmadı</string>
+    <string name="settings_calibrated">Kalibrlənib ✓</string>
+    <string name="settings_calibrate_action">Kalibrləməni redaktə et</string>
+    <string name="settings_not_calibrated">Kalibrlənməyib</string>
+    <string name="settings_calibration_title">Bu tətbiqi kalibrlə</string>
+    <string name="settings_calibration_no_data">Bu tətbiq üçün hələ skan məlumatı yoxdur. Onu həqiqi, aktiv sifariş ekranına açın və bir neçə saniyə gözləyin, sonra bu dialoqu yenidən açın.</string>
+    <string name="settings_calibration_instructions">Aşağıda WayArs-ın bu tətbiqin ekranından son oxuduğu mətn var. Əvvəlcə qiyməti olan sətrə, sonra məsafəyə, sonra vaxta toxunun.</string>
+    <string name="settings_calibration_role_money">Qiymət</string>
+    <string name="settings_calibration_role_distance">Məsafə</string>
+    <string name="settings_calibration_role_time">Vaxt</string>
+    <string name="settings_calibration_money_token_label">Valyuta nişanı (lazım olarsa redaktə edin)</string>
+    <string name="settings_calibration_distance_token_label">Məsafə vahidi (lazım olarsa redaktə edin)</string>
+    <string name="settings_calibration_time_token_label">Vaxt vahidi (lazım olarsa redaktə edin)</string>
+    <string name="settings_calibration_clear">Kalibrləməni təmizlə</string>
+
+    <string name="settings_developer_website_url" translatable="false">https://phantomarsenii-cpu.github.io/AP-STUDIO/</string>
+    <string name="settings_about_title">Tətbiq haqqında</string>
+    <string name="settings_privacy_title">Məxfilik siyasəti</string>
+    <string name="settings_terms_title">İstifadə şərtləri</string>
+    <string name="terms_gate_title">İstifadə şərtləri</string>
+    <string name="terms_gate_subtitle">Davam etməzdən əvvəl zəhmət olmasa İstifadə şərtlərini oxuyun və qəbul edin.</string>
+    <string name="terms_gate_checkbox_label">Mən İstifadə şərtlərini oxudum və qəbul edirəm</string>
+    <string name="terms_gate_accept_button">Qəbul et və davam et</string>
+    <string name="settings_terms_accepted_at">Qəbul edilib: %1$s</string>
+    <string name="settings_visit_website">Tərtibatçının veb saytına baxın</string>
+    <string name="settings_close">Bağla</string>
+    <string name="settings_about_content">"**WayArs**\nÇatdırılma və taksi işində şəxsi köməkçiniz\n\nVersiya: %1$s\n\nWayArs — taksi və çatdırılma tətbiqləri ilə işləyən sürücülər və kuryerlər üçün hazırlanmış pulsuz alətdir.\n\nTətbiq ekrandakı məlumatları və bildirişləri avtomatik təhlil edir, bu da sifarişi götürməyə dəyərmi deyə tez qiymətləndirməyə və gəlirinizi real vaxtda izləməyə kömək edir.\n\n**Dizayn və inkişaf:** AP STUDIO\n**Əlaqə və dəstək:** apstudiomobile@gmail.com\n\nBütün üçüncü tərəf ticarət nişanları, loqolar və tətbiq adları (o cümlədən, lakin bunlarla məhdudlaşmayaraq Bolt, Uber, Wolt, FreeNow, Stuart və istifadəçi tərəfindən əlavə edilən digərləri) müvafiq sahiblərinə məxsusdur və yalnız məlumat və identifikasiya məqsədləri üçün istifadə olunur."</string>
+    <string name="settings_privacy_content">"**WayArs Məxfilik Siyasəti**\nSon yenilənmə: 12 sentyabr 2026\n\n**Məxfiliyinizin qorunması**\nBiz məxfiliyinizə hörmət edirik. WayArs Privacy by Design prinsipi əsasında hazırlanmışdır — əsas ekran təhlili və tarif hesablama əməliyyatları yerli olaraq cihazınızda işləyir.\n\n**Məlumatların toplanması və istifadəsi**\n• Accessibility Service: tətbiq bu girişdən yalnız dəstəklənən çatdırılma və taksi tətbiqlərinin (daxili və sizin əlavə etdikləriniz) ekranında göstərilən sifariş təfərrüatlarını (məs. qiymət, məsafə) oxumaq üçün istifadə edir. Tətbiq heç vaxt parolları, şəxsi məlumatları və ya düymə basmalarını qeyd etmir.\n• Bildirişlər (Notification Listener): bildiriş girişi yalnız tətbiq arxa planda işləyərkən yeni iş təkliflərini aşkarlamaq üçün istifadə olunur.\n• Nəqliyyat vasitəsi və tarif məlumatları: Parametrlərdə daxil etdiyiniz məlumatlar (yanacaq sərfi, yanacaq qiyməti, qiymətləndirmə hədləri) yalnız cihazın yerli yaddaşında saxlanılır.\n\n**Abunəliklər və üçüncü tərəf provayderləri (ödənişlər)**\nTətbiq funksiyaları abunəlik əsasında təklif edir. Tətbiq ətraflı ödəniş məlumatlarını (məsələn, kart nömrələrini) toplamır və ya saxlamır. Əməliyyatları emal etmək və abunəlik statusunu yoxlamaq üçün biz etibarlı üçüncü tərəf provayderlərinə arxalanırıq:\n• Google Play Billing (Google LLC): ödənişlər və əməliyyatlar birbaşa Google Play Store tərəfindən idarə olunur.\n• RevenueCat, Inc.: anonim cihaz və əməliyyat identifikatorları əsasında abunəlik statusunun yoxlanması.\n\n**Uşaqların məxfiliyi**\nWayArs yalnız sürücü və ya kuryer kimi işləməyə qanuni icazəsi olan yetkinlik yaşına çatmış şəxslər üçün nəzərdə tutulmuşdur. Tətbiq 16 yaşından kiçik uşaqlara yönəlməyib və bilərəkdən uşaqlardan heç bir şəxsi məlumat toplamır. Əgər uşağın bizə hər hansı məlumat verdiyini öyrənsəniz, dərhal müvafiq tədbir görməyimiz üçün apstudiomobile@gmail.com ünvanı ilə bizimlə əlaqə saxlayın.\n\n**İcazələrin və abunəliyin idarə edilməsi**\nVerilmiş icazələri istənilən vaxt Android sistem Parametrlərində ləğv edə və ya abunəliyinizi birbaşa Google Play hesab parametrlərində idarə edə və ləğv edə bilərsiniz."</string>
+    <string name="settings_terms_content">"**WayArs İstifadə Şərtləri**\nSon yenilənmə: 12 sentyabr 2026\n\n**Ümumi müddəalar**\nWayArs tətbiqindən istifadə etməklə siz aşağıdakı şərtləri qəbul edirsiniz. Tətbiq AP STUDIO tərəfindən yaradılmış müstəqil köməkçi vasitədir və heç bir üçüncü tərəf tətbiq provayderi (Bolt, Uber, Wolt, FreeNow, Stuart və ya istifadəçi tərəfindən siyahıya əlavə edilən digərləri kimi) ilə rəsmi əlaqədə deyil, onlar tərəfindən sponsorluq edilmir və ya təsdiqlənmir.\n\n**Köməkçi xarakter və üçüncü tərəf tətbiqləri**\n• Tətbiq yalnız məlumat və analitik məqsədlər üçün nəzərdə tutulmuşdur. Rentabellik göstəriciləri (valyuta/km, təxmini mənfəət) istifadəçi tərəfindən daxil edilən məlumatlar və ekrandan götürülən göstəricilər əsasında hesablanır.\n• İstifadəçilər dəstəklənən üçüncü tərəf tətbiqlərini özləri əlavə edə bilərlər. AP STUDIO istifadəçi tərəfindən əl ilə əlavə edilən tətbiqlər üçün düzgün məlumat oxunmasına zəmanət vermir.\n\n**İstifadəçi yaşı**\nTətbiqdən yalnız ən azı 18 yaşında (və ya öz ölkəsində taksi/kuryer xidmətləri göstərmək üçün lazım olan yaşa çatmış) şəxslər istifadə edə bilər. Tətbiq uşaqlar üçün nəzərdə tutulmayıb.\n\n**Abunəliklər və ödənişlər**\n• Abunəlik ödənişləri seçilmiş plana uyğun olaraq Google Play Store tərəfindən toplanır.\n• İstifadəçilər istənilən vaxt Google Play hesab parametrlərində abunəliyin yenilənməsini ləğv edə bilərlər.\n• Geri qaytarma Google Play Store siyasəti və qaydalarına uyğun həyata keçirilir.\n\n**Məsuliyyətdən imtina**\n• AP STUDIO ekranın səhv oxunması və ya üçüncü tərəf tətbiqlərinin interfeysindəki yeniləmə/dəyişikliklər nəticəsində yaranan hesablama uyğunsuzluqlarına görə məsuliyyət daşımır.\n• AP STUDIO istifadəçinin tətbiqin göstəricilərinə əsaslanaraq qəbul etdiyi maliyyə, biznes və ya sürücülük qərarlarına görə məsuliyyət daşımır.\n• İstifadəçilər telefonlarından təhlükəsiz istifadə etməli və sürərkən yol hərəkəti qaydalarına ciddi əməl etməlidirlər.\n• AP STUDIO istifadəçinin üçüncü tərəf xidmətlərindəki (Uber, Bolt, Wolt və s.) hesablarının müvəqqəti və ya daimi bloklanmasına görə məsuliyyət daşımır.\n• İstifadəçi tətbiqi tamamilə öz riski ilə istifadə edir və ondan istifadə edib-etməməyi müstəqil şəkildə qərara alır.\n• Tətbiq müstəqil köməkçi vasitədir və heç bir taksi və ya çatdırılma platforması ilə rəsmi əlaqəsi yoxdur.\n\n**Əlaqə**\nHər hansı sual, şərh və ya səhv hesabatı bu ünvana göndərilməlidir: apstudiomobile@gmail.com."</string>
+
+    <!-- Paywall -->
+    <string name="paywall_badge_full_access">Tam giriş</string>
+    <string name="paywall_title">WayArs-ın tam potensialını\naçın</string>
+    <string name="paywall_subtitle">WayArs sadəcə köməkçi deyil — bu, sabit və maksimum gəlir üçün sizin şəxsi alətinizdir.</string>
+    <string name="paywall_chip_analysis">Sürətli təhlil</string>
+    <string name="paywall_chip_filters">Ağıllı filtrlər</string>
+    <string name="paywall_chip_income">Növbələr arasında gəlir</string>
+    <string name="paywall_chip_languages">16 dildə işləyir</string>
+    <string name="paywall_section_eyebrow">PLANINIZI SEÇİN</string>
+    <string name="paywall_section_title">Məqsədləriniz üçün çevik planlar</string>
+    <string name="paywall_section_subtitle">Abunəlik nə qədər uzun olsa, dəyər bir o qədər yüksəkdir!</string>
+    <string name="paywall_plan_yearly_title">İllik</string>
+    <string name="paywall_plan_monthly_title">Aylıq</string>
+    <string name="paywall_plan_weekly_title">Həftəlik</string>
+    <string name="paywall_plan_yearly_days">365 gün tam giriş</string>
+    <string name="paywall_plan_monthly_days">30 gün tam giriş</string>
+    <string name="paywall_plan_weekly_days">7 gün tam giriş</string>
+    <string name="paywall_badge_popular">Populyar</string>
+    <string name="paywall_badge_trial7">7 gün pulsuz</string>
+    <string name="paywall_period_year">/ il</string>
+    <string name="paywall_period_month">/ ay</string>
+    <string name="paywall_period_week">/ həftə</string>
+    <string name="paywall_feature_all">Tətbiqin bütün funksiyaları</string>
+    <string name="paywall_feature_presets">Ağıllı rejimlər</string>
+    <string name="paywall_feature_realtime">Real vaxtda sifariş təhlili</string>
+    <string name="paywall_feature_languages">16 dilə dəstək</string>
+    <string name="paywall_button_select">Seç</string>
+    <string name="paywall_button_restore">Alışları bərpa et</string>
+    <string name="paywall_button_hide">Bağla</string>
+    <string name="paywall_trial_notice">Abunəliyiniz 7 günlük pulsuz sınaq müddəti ilə başlayır. O, seçilmiş plana uyğun avtomatik yenilənir. İstənilən vaxt ləğv edə bilərsiniz.</string>
+    <string name="paywall_footer_secured_title">Təhlükəsiz ödəniş</string>
+    <string name="paywall_footer_secured_subtitle">Google Play və RevenueCat tərəfindən idarə olunur</string>
+    <string name="paywall_footer_google_title">Google Play</string>
+    <string name="paywall_footer_google_subtitle">Google Play və RevenueCat vasitəsilə təhlükəsiz ödəniş</string>
+    <string name="paywall_footer_tagline">WayArs — sabit gəlirə gedən yolunuz</string>
+    <string name="paywall_gate_error_title">Abunəliyinizi yoxlamaq mümkün olmadı</string>
+    <string name="paywall_gate_error_retry">Yenidən cəhd et</string>
+    <string name="paywall_tagline">AĞILLI ÇATDIRILMA VƏ TAKSİ KÖMƏKÇİSİ</string>
+    <string name="paywall_compat_label">Artıq işlədiyiniz tətbiqlərlə birlikdə işləyir</string>
+    <string name="paywall_mock_selected_toast">%1$s planı seçildi — alışlar Google Play buraxılışından sonra açılacaq</string>
+    <string name="paywall_pro_header">WayArs Pro</string>
+    <string name="paywall_cta_trial">%1$s-a 7 gün sınayın</string>
+    <string name="paywall_badge_best_value">★ ƏN SƏRFƏLİ • 30% QƏNAƏT EDİN</string>
+    <string name="paywall_badge_popular_discount">★ Populyar • -15%</string>
+    <string name="paywall_per_month_hint">Cəmi %1$s / ay</string>
+    <string name="paywall_data_safe">Məlumatlarınız təhlükəsizdir</string>
+    <string name="paywall_no_charge_notice">İlk 7 gün üçün ödəniş alınmır. İstənilən vaxt Google Play-də ləğv edin.</string>
+</resources>

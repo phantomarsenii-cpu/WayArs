@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -61,6 +62,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -1557,6 +1559,7 @@ private fun <T> OptionListDialog(
     onSelect: (T) -> Unit,
     onDismiss: () -> Unit
 ) {
+    val listState = rememberLazyListState()
     Dialog(onDismissRequest = onDismiss) {
         Column(
             modifier = Modifier
@@ -1565,16 +1568,34 @@ private fun <T> OptionListDialog(
                 .background(WaSurface)
                 .padding(vertical = 8.dp)
         ) {
-            LazyColumn(modifier = Modifier.heightIn(max = 420.dp)) {
-                items(options) { option ->
-                    Text(
-                        labelFor(option),
-                        color = Color.White,
-                        style = MaterialTheme.typography.bodyLarge,
+            Box {
+                LazyColumn(state = listState, modifier = Modifier.heightIn(max = 420.dp)) {
+                    items(options) { option ->
+                        Text(
+                            labelFor(option),
+                            color = Color.White,
+                            style = MaterialTheme.typography.bodyLarge,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { onSelect(option); onDismiss() }
+                                .padding(horizontal = 20.dp, vertical = 14.dp)
+                        )
+                    }
+                }
+                // Scroll hint: a soft fade at the bottom edge of the list,
+                // shown only while there's more content below the visible
+                // area (canScrollForward). This is the cue that the list —
+                // now much longer for both languages and currencies — can
+                // be scrolled, without adding any extra text of its own
+                // that would need translating and could get in the way. It
+                // disappears once the user scrolls to the very bottom.
+                if (listState.canScrollForward) {
+                    Box(
                         modifier = Modifier
+                            .align(Alignment.BottomCenter)
                             .fillMaxWidth()
-                            .clickable { onSelect(option); onDismiss() }
-                            .padding(horizontal = 20.dp, vertical = 14.dp)
+                            .height(28.dp)
+                            .background(Brush.verticalGradient(listOf(Color.Transparent, WaSurface)))
                     )
                 }
             }

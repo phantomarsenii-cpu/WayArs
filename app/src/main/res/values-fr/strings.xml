@@ -135,7 +135,7 @@
     <string name="paywall_chip_analysis">Analyse rapide</string>
     <string name="paywall_chip_filters">Filtres intelligents</string>
     <string name="paywall_chip_income">Revenu entre les tournées</string>
-    <string name="paywall_chip_languages">Disponible en 7 langues</string>
+    <string name="paywall_chip_languages">Disponible en 16 langues</string>
     <string name="paywall_section_eyebrow">CHOISISSEZ VOTRE FORMULE</string>
     <string name="paywall_section_title">Des formules flexibles pour vos objectifs</string>
     <string name="paywall_section_subtitle">Plus l\'abonnement est long, plus c\'est avantageux !</string>
@@ -153,7 +153,7 @@
     <string name="paywall_feature_all">Toutes les fonctionnalités de l\'application</string>
     <string name="paywall_feature_presets">Préréglages intelligents</string>
     <string name="paywall_feature_realtime">Analyse des commandes en temps réel</string>
-    <string name="paywall_feature_languages">Prise en charge de 7 langues</string>
+    <string name="paywall_feature_languages">Prise en charge de 16 langues</string>
     <string name="paywall_button_select">Choisir</string>
     <string name="paywall_button_restore">Restaurer les achats</string>
     <string name="paywall_button_hide">Masquer</string>

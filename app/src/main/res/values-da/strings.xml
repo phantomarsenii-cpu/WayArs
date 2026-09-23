@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WayArs</string>
+    <string name="splash_slogan">Smart assistent for chauffører og bude</string>
+    <string name="splash_start">Kom i gang</string>
+
+    <string name="onboarding_title">Vælg din tilstand</string>
+    <string name="onboarding_subtitle">Vi indstiller optimale filtre til dig</string>
+    <string name="onboarding_customize_later">Tilpas senere</string>
+
+    <string name="preset_economy_title">Økonomi</string>
+    <string name="preset_economy_desc">Lave omkostninger, moderat indtægt</string>
+    <string name="preset_balance_title">Balance</string>
+    <string name="preset_balance_desc">Balanceret tid og indtægt</string>
+    <string name="preset_profitable_title">Kun rentable</string>
+    <string name="preset_profitable_desc">Kun højtbetalte ordrer</string>
+
+    <string name="dashboard_today_summary">Dagens oversigt</string>
+    <string name="dashboard_active_time">Aktiv tid</string>
+    <string name="dashboard_distance">Afstand</string>
+    <string name="dashboard_avg_rate">Gennemsnitlig takst</string>
+    <string name="dashboard_order_evaluation">Vurdering af ordre</string>
+    <string name="dashboard_orders">ordrer</string>
+    <string name="dashboard_no_order">Venter på ny ordre…</string>
+
+    <string name="verdict_good">GOD</string>
+    <string name="verdict_bad">DÅRLIG</string>
+    <string name="action_accept">Accepter</string>
+    <string name="action_reject">Afvis</string>
+
+    <string name="nav_home">Hjem</string>
+    <string name="nav_stats">Statistik</string>
+    <string name="nav_presets">Tilstande</string>
+    <string name="nav_settings">Indstillinger</string>
+
+    <string name="settings_title">Indstillinger</string>
+    <string name="settings_language">Sprog</string>
+    <string name="settings_currency">Valuta</string>
+    <string name="settings_preset">Tilstand</string>
+    <string name="settings_enable_accessibility">Aktivér skærmlæsningstjeneste</string>
+    <string name="settings_enable_overlay">Aktivér flydende widget</string>
+    <string name="settings_accessibility_hint">Kræves for at registrere indkommende ordrer (kun læsning, ingen automatiske tryk)</string>
+    <string name="settings_overlay_hint">Kræves for at vise den flydende resultatwidget over andre apps</string>
+    <string name="notification_stop_action">Stop</string>
+
+    <string name="overlay_new_order">Ny ordre</string>
+    <string name="overlay_min_km">min</string>
+
+    <string name="accessibility_service_description">WayArs læser ordredetaljer (pris, afstand, tid), der vises på skærmen af leverings-/taxiapps, for at hjælpe dig med at beslutte hurtigere. Den trykker eller ændrer aldrig noget automatisk.</string>
+
+    <string name="accessibility_consent_title">Tilladelse til skærmlæsning</string>
+    <string name="accessibility_consent_body">For automatisk at registrere nye ordrer skal WayArs læse tekst, der vises på skærmen af de leverings- og kørselsapps, du bruger — som pris, afstand og estimeret tid.\n\nHvad dette betyder:\n• WayArs læser kun ordredetaljer fra de understøttede apps, du vælger. Den læser aldrig adgangskoder, beskeder eller noget andet, du skriver.\n• WayArs trykker, udfylder eller ændrer aldrig noget på skærmen — den læser kun.\n• Alt behandles på denne enhed. Intet sendes til en server.\n\nDu kan slå dette fra når som helst i Indstillinger.</string>
+    <string name="accessibility_consent_allow">Tillad og fortsæt</string>
+    <string name="accessibility_consent_decline">Ikke nu</string>
+
+    <string name="stats_empty">Endnu ingen ordrer</string>
+    <string name="settings_custom_thresholds_title">Dine egne taksttærskler</string>
+    <string name="settings_custom_thresholds_hint">Valgfrit — dine egne %1$s/km-tal, bruges i stedet for tilstanden</string>
+    <string name="settings_custom_bad">Dårlig ordre, op til</string>
+    <string name="settings_custom_average">Gennemsnitlig ordre, fra</string>
+    <string name="settings_custom_good">God ordre, fra</string>
+    <string name="settings_custom_save">Gem</string>
+    <string name="settings_custom_clear">Brug tilstand i stedet</string>
+    <string name="active_requires_permissions">Aktivér først skærmlæsning og den flydende widget i Indstillinger</string>
+    <string name="dashboard_share_log">Send scanningslog</string>
+    <string name="verdict_average">GENNEMSNITLIG</string>
+    <string name="settings_enable_notifications">Aktivér adgang til notifikationer</string>
+    <string name="settings_notifications_hint">Valgfri backup-kanal — fanger ordrer, der sendes som notifikation, mens appen er minimeret</string>
+    <string name="settings_permissions_title">Tilladelser</string>
+    <string name="settings_permissions_hint">Skærmlæsning, flydende widget, notifikationer</string>
+
+    <string name="settings_vehicle_title">Køretøj</string>
+    <string name="settings_vehicle_car">Bil</string>
+    <string name="settings_vehicle_scooter">Scooter</string>
+    <string name="settings_vehicle_bicycle">Cykel / el-løbehjul</string>
+    <string name="settings_fuel_petrol">Benzin</string>
+    <string name="settings_fuel_diesel">Diesel</string>
+    <string name="settings_fuel_lpg">Gas (LPG)</string>
+    <string name="settings_fuel_electric">El</string>
+    <string name="settings_vehicle_consumption">Forbrug pr. 100 km</string>
+    <string name="settings_vehicle_price_fuel">Pris pr. liter</string>
+    <string name="settings_vehicle_price_electric">Pris pr. kWh</string>
+    <string name="settings_vehicle_save">Gem</string>
+    <string name="settings_vehicle_summary_car">Bil · %1$s · %2$s/100km</string>
+    <string name="settings_vehicle_summary_fuel">%1$s · %2$s · %3$s/100km</string>
+    <string name="settings_vehicle_summary_no_fuel">%1$s · ingen brændstofomkostning</string>
+    <string name="verdict_net_profit">Netto %1$s (brændstof %2$s)</string>
+    <string name="verdict_short_trip_net">Netto %1$s (tur under 1 km)</string>
+    <string name="settings_saved">Gemt</string>
+    <string name="settings_supported_apps_title">Understøttede apps</string>
+    <string name="settings_supported_apps_hint">Indbygget liste + apps du selv tilføjer</string>
+    <string name="settings_supported_apps_builtin_label">Indbygget:</string>
+    <string name="settings_supported_apps_custom_label">Tilføjet af dig:</string>
+    <string name="settings_add_from_installed">Vælg fra installerede</string>
+    <string name="settings_add_manually">Indtast pakke-id</string>
+    <string name="settings_package_id_label">Pakke-id (f.eks. com.example.app)</string>
+    <string name="settings_add">Tilføj</string>
+    <string name="settings_pick_installed_app_title">Vælg en app</string>
+    <string name="settings_search_apps_label">Søg</string>
+    <string name="settings_cancel">Annuller</string>
+    <string name="settings_already_added">allerede tilføjet</string>
+    <string name="settings_no_apps_found">Ingen apps fundet</string>
+    <string name="settings_calibrated">Kalibreret ✓</string>
+    <string name="settings_calibrate_action">Rediger kalibrering</string>
+    <string name="settings_not_calibrated">Ikke kalibreret</string>
+    <string name="settings_calibration_title">Kalibrer denne app</string>
+    <string name="settings_calibration_no_data">Ingen scanningsdata endnu for denne app. Åbn den på en rigtig, aktiv ordreskærm og vent et par sekunder, åbn derefter denne dialog igen.</string>
+    <string name="settings_calibration_instructions">Nedenfor er teksten, WayArs sidst læste fra denne apps skærm. Tryk på linjen med prisen, derefter afstanden, derefter tiden.</string>
+    <string name="settings_calibration_role_money">Pris</string>
+    <string name="settings_calibration_role_distance">Afstand</string>
+    <string name="settings_calibration_role_time">Tid</string>
+    <string name="settings_calibration_money_token_label">Valutamærke (rediger om nødvendigt)</string>
+    <string name="settings_calibration_distance_token_label">Afstandsenhed (rediger om nødvendigt)</string>
+    <string name="settings_calibration_time_token_label">Tidsenhed (rediger om nødvendigt)</string>
+    <string name="settings_calibration_clear">Ryd kalibrering</string>
+
+    <string name="settings_developer_website_url" translatable="false">https://phantomarsenii-cpu.github.io/AP-STUDIO/</string>
+    <string name="settings_about_title">Om appen</string>
+    <string name="settings_privacy_title">Privatlivspolitik</string>
+    <string name="settings_terms_title">Servicevilkår</string>
+    <string name="terms_gate_title">Servicevilkår</string>
+    <string name="terms_gate_subtitle">Læs og accepter venligst servicevilkårene, før du fortsætter.</string>
+    <string name="terms_gate_checkbox_label">Jeg har læst og accepterer servicevilkårene</string>
+    <string name="terms_gate_accept_button">Accepter og fortsæt</string>
+    <string name="settings_terms_accepted_at">Accepteret: %1$s</string>
+    <string name="settings_visit_website">Besøg udviklerens hjemmeside</string>
+    <string name="settings_close">Luk</string>
+    <string name="settings_about_content">"**WayArs**\nDin personlige assistent til levering og kørsel\n\nVersion: %1$s\n\nWayArs er et gratis værktøj bygget til chauffører og bude, der arbejder med taxi- og leveringsapps.\n\nAppen analyserer automatisk data og notifikationer på skærmen og hjælper dig med hurtigt at vurdere, om en ordre er værd at tage, og følge din indtjening i realtid.\n\n**Design og udvikling:** AP STUDIO\n**Kontakt og support:** apstudiomobile@gmail.com\n\nAlle tredjeparts varemærker, logoer og appnavne (herunder, men ikke begrænset til Bolt, Uber, Wolt, FreeNow, Stuart og andre tilføjet af brugeren) tilhører deres respektive ejere og bruges udelukkende til informations- og identifikationsformål."</string>
+    <string name="settings_privacy_content">"**WayArs privatlivspolitik**\nSenest opdateret: 12. september 2026\n\n**Beskyttelse af dit privatliv**\nVi respekterer dit privatliv. WayArs er bygget omkring princippet Privacy by Design — de centrale skærmanalyse- og taksberegningsoperationer kører lokalt på din enhed.\n\n**Indsamling og brug af data**\n• Accessibility Service: appen bruger udelukkende denne adgang til at læse ordredetaljer (f.eks. pris, afstand), der vises på skærmen af understøttede leverings- og kørselsapps (indbyggede og dem, du har tilføjet). Appen registrerer aldrig adgangskoder, personlige data eller tastetryk.\n• Notifikationer (Notification Listener): adgang til notifikationer bruges kun til at registrere nye jobtilbud, mens appen kører i baggrunden.\n• Køretøjs- og taksdata: data, du indtaster i Indstillinger (brændstofforbrug, brændstofpris, vurderingstærskler), gemmes kun i enhedens lokale lager.\n\n**Abonnementer og tredjepartsudbydere (betalinger)**\nAppen tilbyder funktioner på abonnementsbasis. Appen indsamler eller gemmer ikke detaljerede betalingsdata (som kortnumre). For at behandle transaktioner og verificere abonnementsstatus stoler vi på pålidelige tredjepartsudbydere:\n• Google Play Billing (Google LLC): betalinger og transaktioner håndteres direkte af Google Play Store.\n• RevenueCat, Inc.: verifikation af abonnementsstatus baseret på anonyme enheds- og transaktionsidentifikatorer.\n\n**Børns privatliv**\nWayArs er udelukkende beregnet til voksne, der lovligt må arbejde som chauffør eller bud. Appen er ikke rettet mod børn under 16 år og indsamler eller behandler ikke bevidst personlige data fra børn. Hvis du bliver opmærksom på, at et barn har givet os data, bedes du kontakte os på apstudiomobile@gmail.com, så vi hurtigt kan tage de nødvendige skridt.\n\n**Administrer tilladelser og dit abonnement**\nDu kan til enhver tid tilbagekalde givne tilladelser i Androids systemindstillinger eller administrere og opsige dit abonnement direkte i dine Google Play-kontoindstillinger."</string>
+    <string name="settings_terms_content">"**WayArs servicevilkår**\nSenest opdateret: 12. september 2026\n\n**Generelle bestemmelser**\nVed at bruge WayArs-appen accepterer du vilkårene nedenfor. Appen er et uafhængigt hjælpeværktøj bygget af AP STUDIO og er ikke officielt tilknyttet, sponsoreret af eller godkendt af nogen tredjepartsudbyder af apps (som Bolt, Uber, Wolt, FreeNow, Stuart eller andre tilføjet til listen af brugeren).\n\n**Supplerende karakter og tredjepartsapps**\n• Appen er kun til informations- og analyseformål. Rentabilitetsindikatorer (valuta/km, estimeret fortjeneste) beregnes ud fra data indtastet af brugeren og aflæsninger taget fra skærmen.\n• Brugere kan selv tilføje understøttede tredjepartsapps. AP STUDIO garanterer ikke korrekt dataaflæsning for apps, der tilføjes manuelt af brugeren.\n\n**Brugerens alder**\nKun personer, der er mindst 18 år (eller har nået den alder, der kræves for at levere kørsels-/kurertjenester i deres land), må bruge appen. Appen er ikke beregnet til børn.\n\n**Abonnementer og betalinger**\n• Abonnementsbetalinger opkræves af Google Play Store i henhold til den valgte plan.\n• Brugere kan til enhver tid annullere fornyelse af abonnementet i deres Google Play-kontoindstillinger.\n• Tilbagebetalinger håndteres i henhold til Google Play Stores politikker og regler.\n\n**Ansvarsfraskrivelse**\n• AP STUDIO er ikke ansvarlig for uoverensstemmelser i beregninger som følge af forkert skærmlæsning eller opdateringer/ændringer i tredjepartsappers grænseflader.\n• AP STUDIO er ikke ansvarlig for finansielle, forretningsmæssige eller køremæssige beslutninger truffet af brugeren baseret på appens indikatorer.\n• Brugere er forpligtet til at bruge deres telefon sikkert og nøje overholde færdselsreglerne under kørsel.\n• AP STUDIO er ikke ansvarlig for eventuelle midlertidige eller permanente blokeringer af brugerens konti hos tredjepartstjenester (Uber, Bolt, Wolt osv.).\n• Brugeren bruger appen helt på egen risiko og beslutter selvstændigt, om den skal bruges.\n• Appen er et uafhængigt hjælpeværktøj og har ingen officiel forbindelse til nogen kørsels- eller leveringsplatform.\n\n**Kontakt**\nEventuelle spørgsmål, kommentarer eller fejlrapporter skal sendes til: apstudiomobile@gmail.com."</string>
+
+    <!-- Paywall -->
+    <string name="paywall_badge_full_access">Fuld adgang</string>
+    <string name="paywall_title">Lås op for WayArs\nfulde potentiale</string>
+    <string name="paywall_subtitle">WayArs er ikke bare en assistent — det er dit personlige værktøj til stabil og maksimal indtægt.</string>
+    <string name="paywall_chip_analysis">Hurtig analyse</string>
+    <string name="paywall_chip_filters">Smarte filtre</string>
+    <string name="paywall_chip_income">Indtægt mellem vagter</string>
+    <string name="paywall_chip_languages">Virker på 16 sprog</string>
+    <string name="paywall_section_eyebrow">VÆLG DIN PLAN</string>
+    <string name="paywall_section_title">Fleksible planer til dine mål</string>
+    <string name="paywall_section_subtitle">Jo længere abonnement, jo bedre værdi!</string>
+    <string name="paywall_plan_yearly_title">Årlig</string>
+    <string name="paywall_plan_monthly_title">Månedlig</string>
+    <string name="paywall_plan_weekly_title">Ugentlig</string>
+    <string name="paywall_plan_yearly_days">365 dages fuld adgang</string>
+    <string name="paywall_plan_monthly_days">30 dages fuld adgang</string>
+    <string name="paywall_plan_weekly_days">7 dages fuld adgang</string>
+    <string name="paywall_badge_popular">Populær</string>
+    <string name="paywall_badge_trial7">7 dage gratis</string>
+    <string name="paywall_period_year">/ år</string>
+    <string name="paywall_period_month">/ måned</string>
+    <string name="paywall_period_week">/ uge</string>
+    <string name="paywall_feature_all">Alle appens funktioner</string>
+    <string name="paywall_feature_presets">Smarte tilstande</string>
+    <string name="paywall_feature_realtime">Realtidsanalyse af ordrer</string>
+    <string name="paywall_feature_languages">Understøttelse af 16 sprog</string>
+    <string name="paywall_button_select">Vælg</string>
+    <string name="paywall_button_restore">Gendan køb</string>
+    <string name="paywall_button_hide">Luk</string>
+    <string name="paywall_trial_notice">Dit abonnement starter med en 7-dages gratis prøveperiode. Det fornyes automatisk for den valgte plan. Du kan annullere når som helst.</string>
+    <string name="paywall_footer_secured_title">Sikker betaling</string>
+    <string name="paywall_footer_secured_subtitle">Håndteres af Google Play og RevenueCat</string>
+    <string name="paywall_footer_google_title">Google Play</string>
+    <string name="paywall_footer_google_subtitle">Sikker betaling via Google Play og RevenueCat</string>
+    <string name="paywall_footer_tagline">WayArs — din vej til stabil indtægt</string>
+    <string name="paywall_gate_error_title">Kunne ikke verificere dit abonnement</string>
+    <string name="paywall_gate_error_retry">Prøv igen</string>
+    <string name="paywall_tagline">SMART ASSISTENT TIL LEVERING OG TAXI</string>
+    <string name="paywall_compat_label">Fungerer sammen med de apps, du allerede kører for</string>
+    <string name="paywall_mock_selected_toast">%1$s-plan valgt — køb låses op efter lanceringen på Google Play</string>
+    <string name="paywall_pro_header">WayArs Pro</string>
+    <string name="paywall_cta_trial">Prøv 7 dage for %1$s</string>
+    <string name="paywall_badge_best_value">★ BEDSTE VÆRDI • SPAR 30 %</string>
+    <string name="paywall_badge_popular_discount">★ Populær • -15 %</string>
+    <string name="paywall_per_month_hint">Kun %1$s / måned</string>
+    <string name="paywall_data_safe">Dine data er sikre</string>
+    <string name="paywall_no_charge_notice">Ingen betaling de første 7 dage. Annuller når som helst i Google Play.</string>
+</resources>

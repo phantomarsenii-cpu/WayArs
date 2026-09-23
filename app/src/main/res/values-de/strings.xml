@@ -135,7 +135,7 @@
     <string name="paywall_chip_analysis">Schnelle Analyse</string>
     <string name="paywall_chip_filters">Intelligente Filter</string>
     <string name="paywall_chip_income">Einkommen zwischen Schichten</string>
-    <string name="paywall_chip_languages">Verfügbar in 7 Sprachen</string>
+    <string name="paywall_chip_languages">Verfügbar in 16 Sprachen</string>
     <string name="paywall_section_eyebrow">WÄHLE DEINEN PLAN</string>
     <string name="paywall_section_title">Flexible Pläne für deine Ziele</string>
     <string name="paywall_section_subtitle">Je länger das Abo, desto günstiger!</string>
@@ -153,7 +153,7 @@
     <string name="paywall_feature_all">Alle App-Funktionen</string>
     <string name="paywall_feature_presets">Intelligente Voreinstellungen</string>
     <string name="paywall_feature_realtime">Auftragsanalyse in Echtzeit</string>
-    <string name="paywall_feature_languages">Unterstützung für 7 Sprachen</string>
+    <string name="paywall_feature_languages">Unterstützung für 16 Sprachen</string>
     <string name="paywall_button_select">Auswählen</string>
     <string name="paywall_button_restore">Käufe wiederherstellen</string>
     <string name="paywall_button_hide">Ausblenden</string>

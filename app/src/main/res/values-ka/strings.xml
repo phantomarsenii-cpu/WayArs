@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WayArs</string>
+    <string name="splash_slogan">ჭკვიანი ასისტენტი მძღოლებისა და კურიერებისთვის</string>
+    <string name="splash_start">დაწყება</string>
+
+    <string name="onboarding_title">აირჩიეთ რეჟიმი</string>
+    <string name="onboarding_subtitle">დაგისეთავთ ოპტიმალურ ფილტრებს</string>
+    <string name="onboarding_customize_later">მოგვიანებით მორგება</string>
+
+    <string name="preset_economy_title">ეკონომი</string>
+    <string name="preset_economy_desc">დაბალი ხარჯები, საშუალო შემოსავალი</string>
+    <string name="preset_balance_title">ბალანსი</string>
+    <string name="preset_balance_desc">დროისა და შემოსავლის ბალანსი</string>
+    <string name="preset_profitable_title">მხოლოდ მომგებიანი</string>
+    <string name="preset_profitable_desc">მხოლოდ მაღალანაზღაურებადი შეკვეთები</string>
+
+    <string name="dashboard_today_summary">დღევანდელი შედეგები</string>
+    <string name="dashboard_active_time">აქტიური დრო</string>
+    <string name="dashboard_distance">მანძილი</string>
+    <string name="dashboard_avg_rate">საშუალო ტარიფი</string>
+    <string name="dashboard_order_evaluation">შეკვეთის შეფასება</string>
+    <string name="dashboard_orders">შეკვეთა</string>
+    <string name="dashboard_no_order">ველოდებით ახალ შეკვეთას…</string>
+
+    <string name="verdict_good">კარგი</string>
+    <string name="verdict_bad">ცუდი</string>
+    <string name="action_accept">მიღება</string>
+    <string name="action_reject">უარყოფა</string>
+
+    <string name="nav_home">მთავარი</string>
+    <string name="nav_stats">სტატისტიკა</string>
+    <string name="nav_presets">რეჟიმები</string>
+    <string name="nav_settings">პარამეტრები</string>
+
+    <string name="settings_title">პარამეტრები</string>
+    <string name="settings_language">ენა</string>
+    <string name="settings_currency">ვალუტა</string>
+    <string name="settings_preset">რეჟიმი</string>
+    <string name="settings_enable_accessibility">ეკრანის წაკითხვის სერვისის ჩართვა</string>
+    <string name="settings_enable_overlay">მცურავი ვიჯეტის ჩართვა</string>
+    <string name="settings_accessibility_hint">საჭიროა შემომავალი შეკვეთების აღმოსაჩენად (მხოლოდ წაკითხვა, ავტომატური დაჭერების გარეშე)</string>
+    <string name="settings_overlay_hint">საჭიროა შედეგის მცურავი ვიჯეტის სხვა აპებზე ჩვენებისთვის</string>
+    <string name="notification_stop_action">შეჩერება</string>
+
+    <string name="overlay_new_order">ახალი შეკვეთა</string>
+    <string name="overlay_min_km">წთ</string>
+
+    <string name="accessibility_service_description">WayArs კითხულობს შეკვეთის დეტალებს (ფასი, მანძილი, დრო), რომლებსაც აჩვენებს მიწოდების/ტაქსის აპები ეკრანზე, რათა უფრო სწრაფად მიიღოთ გადაწყვეტილება. ის არასდროს აჭერს ან ცვლის რაიმეს ავტომატურად.</string>
+
+    <string name="accessibility_consent_title">ეკრანის წაკითხვის ნებართვა</string>
+    <string name="accessibility_consent_body">ახალი შეკვეთების ავტომატურად აღმოსაჩენად, WayArs-ს სჭირდება წაიკითხოს ტექსტი, რომელსაც თქვენ მიერ გამოყენებული მიწოდებისა და ტაქსის აპები აჩვენებენ ეკრანზე — მაგალითად, ფასი, მანძილი და სავარაუდო დრო.\n\nეს ნიშნავს:\n• WayArs კითხულობს შეკვეთის დეტალებს მხოლოდ თქვენ მიერ არჩეული მხარდაჭერილი აპებიდან. ის არასდროს კითხულობს პაროლებს, შეტყობინებებს ან რასაც თქვენ აკრეფთ.\n• WayArs არასდროს აჭერს, ავსებს ან ცვლის რაიმეს ეკრანზე — ის მხოლოდ კითხულობს.\n• ყველაფერი მუშავდება ამ მოწყობილობაზე. არაფერი იგზავნება სერვერზე.\n\nთქვენ ამის გამორთვა ნებისმიერ დროს შეგიძლიათ პარამეტრებში.</string>
+    <string name="accessibility_consent_allow">დაშვება და გაგრძელება</string>
+    <string name="accessibility_consent_decline">ახლა არა</string>
+
+    <string name="stats_empty">ჯერ არ არის შეკვეთები</string>
+    <string name="settings_custom_thresholds_title">თქვენი საკუთარი ტარიფის ზღვრები</string>
+    <string name="settings_custom_thresholds_hint">არასავალდებულო — თქვენი საკუთარი %1$s/კმ მაჩვენებლები, გამოიყენება რეჟიმის ნაცვლად</string>
+    <string name="settings_custom_bad">ცუდი შეკვეთა, მდე</string>
+    <string name="settings_custom_average">საშუალო შეკვეთა, დან</string>
+    <string name="settings_custom_good">კარგი შეკვეთა, დან</string>
+    <string name="settings_custom_save">შენახვა</string>
+    <string name="settings_custom_clear">რეჟიმის გამოყენება</string>
+    <string name="active_requires_permissions">ჯერ ჩართეთ ეკრანის წაკითხვა და მცურავი ვიჯეტი პარამეტრებში</string>
+    <string name="dashboard_share_log">სკანირების ჟურნალის გაგზავნა</string>
+    <string name="verdict_average">საშუალო</string>
+    <string name="settings_enable_notifications">შეტყობინებებზე წვდომის ჩართვა</string>
+    <string name="settings_notifications_hint">არასავალდებულო სარეზერვო არხი — იჭერს შეკვეთებს, რომლებიც შეტყობინების სახით მოდის, სანამ აპი ჩაკეცილია</string>
+    <string name="settings_permissions_title">ნებართვები</string>
+    <string name="settings_permissions_hint">ეკრანის წაკითხვა, მცურავი ვიჯეტი, შეტყობინებები</string>
+
+    <string name="settings_vehicle_title">ტრანსპორტი</string>
+    <string name="settings_vehicle_car">მანქანა</string>
+    <string name="settings_vehicle_scooter">სკუტერი</string>
+    <string name="settings_vehicle_bicycle">ველოსიპედი / ელექტროსამოქატი</string>
+    <string name="settings_fuel_petrol">ბენზინი</string>
+    <string name="settings_fuel_diesel">დიზელი</string>
+    <string name="settings_fuel_lpg">გაზი (LPG)</string>
+    <string name="settings_fuel_electric">ელექტრო</string>
+    <string name="settings_vehicle_consumption">ხარჯი 100 კმ-ზე</string>
+    <string name="settings_vehicle_price_fuel">ფასი ლიტრზე</string>
+    <string name="settings_vehicle_price_electric">ფასი კვტ.სთ-ზე</string>
+    <string name="settings_vehicle_save">შენახვა</string>
+    <string name="settings_vehicle_summary_car">მანქანა · %1$s · %2$s/100კმ</string>
+    <string name="settings_vehicle_summary_fuel">%1$s · %2$s · %3$s/100კმ</string>
+    <string name="settings_vehicle_summary_no_fuel">%1$s · საწვავის ხარჯის გარეშე</string>
+    <string name="verdict_net_profit">სუფთა %1$s (საწვავი %2$s)</string>
+    <string name="verdict_short_trip_net">სუფთა %1$s (მოგზაურობა 1 კმ-ზე ნაკლები)</string>
+    <string name="settings_saved">შენახულია</string>
+    <string name="settings_supported_apps_title">მხარდაჭერილი აპები</string>
+    <string name="settings_supported_apps_hint">ჩაშენებული სია + თქვენ მიერ დამატებული აპები</string>
+    <string name="settings_supported_apps_builtin_label">ჩაშენებული:</string>
+    <string name="settings_supported_apps_custom_label">თქვენ მიერ დამატებული:</string>
+    <string name="settings_add_from_installed">არჩევა დაინსტალირებულთაგან</string>
+    <string name="settings_add_manually">შეიყვანეთ პაკეტის ID</string>
+    <string name="settings_package_id_label">პაკეტის ID (მაგ. com.example.app)</string>
+    <string name="settings_add">დამატება</string>
+    <string name="settings_pick_installed_app_title">აირჩიეთ აპი</string>
+    <string name="settings_search_apps_label">ძებნა</string>
+    <string name="settings_cancel">გაუქმება</string>
+    <string name="settings_already_added">უკვე დამატებულია</string>
+    <string name="settings_no_apps_found">აპები ვერ მოიძებნა</string>
+    <string name="settings_calibrated">დაკალიბრებულია ✓</string>
+    <string name="settings_calibrate_action">კალიბრაციის რედაქტირება</string>
+    <string name="settings_not_calibrated">არ არის დაკალიბრებული</string>
+    <string name="settings_calibration_title">ამ აპის კალიბრაცია</string>
+    <string name="settings_calibration_no_data">ამ აპისთვის ჯერ არ არის სკანირების მონაცემები. გახსენით ის რეალურ, აქტიურ შეკვეთის ეკრანზე, დაელოდეთ რამდენიმე წამს და შემდეგ ხელახლა გახსენით ეს დიალოგი.</string>
+    <string name="settings_calibration_instructions">ქვემოთ მოცემულია ტექსტი, რომელიც WayArs-მა ბოლოს წაიკითხა ამ აპის ეკრანიდან. შეეხეთ ჯერ ფასის, შემდეგ მანძილის, შემდეგ დროის ხაზს.</string>
+    <string name="settings_calibration_role_money">ფასი</string>
+    <string name="settings_calibration_role_distance">მანძილი</string>
+    <string name="settings_calibration_role_time">დრო</string>
+    <string name="settings_calibration_money_token_label">ვალუტის ნიშანი (საჭიროების შემთხვევაში შეასწორეთ)</string>
+    <string name="settings_calibration_distance_token_label">მანძილის ერთეული (საჭიროების შემთხვევაში შეასწორეთ)</string>
+    <string name="settings_calibration_time_token_label">დროის ერთეული (საჭიროების შემთხვევაში შეასწორეთ)</string>
+    <string name="settings_calibration_clear">კალიბრაციის გასუფთავება</string>
+
+    <string name="settings_developer_website_url" translatable="false">https://phantomarsenii-cpu.github.io/AP-STUDIO/</string>
+    <string name="settings_about_title">აპის შესახებ</string>
+    <string name="settings_privacy_title">კონფიდენციალურობის პოლიტიკა</string>
+    <string name="settings_terms_title">გამოყენების პირობები</string>
+    <string name="terms_gate_title">გამოყენების პირობები</string>
+    <string name="terms_gate_subtitle">გთხოვთ, გაგრძელებამდე წაიკითხოთ და დაეთანხმოთ გამოყენების პირობებს.</string>
+    <string name="terms_gate_checkbox_label">წავიკითხე და ვეთანხმები გამოყენების პირობებს</string>
+    <string name="terms_gate_accept_button">დათანხმება და გაგრძელება</string>
+    <string name="settings_terms_accepted_at">დათანხმების თარიღი: %1$s</string>
+    <string name="settings_visit_website">დეველოპერის ვებსაიტის მონახულება</string>
+    <string name="settings_close">დახურვა</string>
+    <string name="settings_about_content">"**WayArs**\nთქვენი პირადი ასისტენტი მიწოდებისა და ტაქსისთვის\n\nვერსია: %1$s\n\nWayArs არის უფასო ინსტრუმენტი, შექმნილი მძღოლებისა და კურიერებისთვის, რომლებიც მუშაობენ ტაქსისა და მიწოდების აპებთან.\n\nაპი ავტომატურად აანალიზებს ეკრანზე არსებულ მონაცემებსა და შეტყობინებებს, რაც გეხმარებათ სწრაფად შეაფასოთ, ღირს თუ არა შეკვეთის აღება და თვალი ადევნოთ თქვენს შემოსავალს რეალურ დროში.\n\n**დიზაინი და დეველოპმენტი:** AP STUDIO\n**კონტაქტი და მხარდაჭერა:** apstudiomobile@gmail.com\n\nყველა მესამე მხარის სავაჭრო ნიშანი, ლოგო და აპის სახელი (მათ შორის, მაგრამ არა მხოლოდ Bolt, Uber, Wolt, FreeNow, Stuart და მომხმარებლის მიერ დამატებული სხვები) ეკუთვნის მათ შესაბამის მფლობელებს და გამოიყენება მხოლოდ საინფორმაციო და საიდენტიფიკაციო მიზნებისთვის."</string>
+    <string name="settings_privacy_content">"**WayArs-ის კონფიდენციალურობის პოლიტიკა**\nბოლო განახლება: 12 სექტემბერი, 2026\n\n**თქვენი კონფიდენციალურობის დაცვა**\nჩვენ ვაფასებთ თქვენს კონფიდენციალურობას. WayArs აგებულია Privacy by Design პრინციპზე — ეკრანის ანალიზისა და ტარიფის გამოთვლის ძირითადი ოპერაციები სრულდება ლოკალურად, თქვენს მოწყობილობაზე.\n\n**მონაცემთა შეგროვება და გამოყენება**\n• Accessibility Service: აპი ამ წვდომას იყენებს მხოლოდ იმისთვის, რომ წაიკითხოს შეკვეთის დეტალები (მაგ. ფასი, მანძილი), რომლებსაც ეკრანზე აჩვენებენ მხარდაჭერილი მიწოდებისა და ტაქსის აპები (ჩაშენებული და თქვენ მიერ დამატებული). აპი არასდროს იწერს პაროლებს, პირად მონაცემებს ან კლავიშების დაჭერებს.\n• შეტყობინებები (Notification Listener): შეტყობინებებზე წვდომა გამოიყენება მხოლოდ ახალი შეკვეთის შეთავაზებების აღმოსაჩენად, როცა აპი ფონურ რეჟიმში მუშაობს.\n• ტრანსპორტისა და ტარიფის მონაცემები: მონაცემები, რომლებსაც შეიყვანთ პარამეტრებში (საწვავის ხარჯი, საწვავის ფასი, შეფასების ზღვრები), ინახება მხოლოდ მოწყობილობის ლოკალურ მეხსიერებაში.\n\n**გამოწერები და მესამე მხარის პროვაიდერები (გადახდები)**\nაპი გთავაზობთ ფუნქციებს გამოწერის საფუძველზე. აპი არ აგროვებს და არ ინახავს გადახდის დეტალურ მონაცემებს (მაგ. ბარათის ნომრებს). ტრანზაქციების დასამუშავებლად და გამოწერის სტატუსის დასადასტურებლად ჩვენ ვეყრდნობით სანდო მესამე მხარის პროვაიდერებს:\n• Google Play Billing (Google LLC): გადახდები და ტრანზაქციები მუშავდება პირდაპირ Google Play Store-ის მიერ.\n• RevenueCat, Inc.: გამოწერის სტატუსის დადასტურება ანონიმური მოწყობილობისა და ტრანზაქციის იდენტიფიკატორების საფუძველზე.\n\n**ბავშვთა კონფიდენციალურობა**\nWayArs განკუთვნილია მხოლოდ სრულწლოვნებისთვის, რომლებსაც კანონიერად აქვთ ნება იმუშაონ მძღოლად ან კურიერად. აპი არ არის მიმართული 16 წლამდე ბავშვებისთვის და შეგნებულად არ აგროვებს ან ამუშავებს ბავშვების პირად მონაცემებს. თუ შეიტყობთ, რომ ბავშვმა მოგვაწოდა რაიმე მონაცემი, გთხოვთ დაგვიკავშირდეთ apstudiomobile@gmail.com-ზე, რათა დროულად მივიღოთ შესაბამისი ზომები.\n\n**ნებართვებისა და გამოწერის მართვა**\nთქვენ ნებისმიერ დროს შეგიძლიათ გააუქმოთ მინიჭებული ნებართვები Android-ის სისტემურ პარამეტრებში, ან მართოთ და გააუქმოთ თქვენი გამოწერა პირდაპირ Google Play ანგარიშის პარამეტრებში."</string>
+    <string name="settings_terms_content">"**WayArs-ის გამოყენების პირობები**\nბოლო განახლება: 12 სექტემბერი, 2026\n\n**ზოგადი დებულებები**\nWayArs აპის გამოყენებით თქვენ ეთანხმებით ქვემოთ მოცემულ პირობებს. აპი წარმოადგენს AP STUDIO-ს მიერ შექმნილ დამოუკიდებელ დამხმარე ინსტრუმენტს და არ არის ოფიციალურად დაკავშირებული, სპონსირებული ან დამტკიცებული რომელიმე მესამე მხარის აპის პროვაიდერის (როგორიცაა Bolt, Uber, Wolt, FreeNow, Stuart ან მომხმარებლის მიერ სიაში დამატებული სხვები) მიერ.\n\n**დამხმარე ხასიათი და მესამე მხარის აპები**\n• აპი განკუთვნილია მხოლოდ საინფორმაციო და ანალიტიკური მიზნებისთვის. მომგებიანობის მაჩვენებლები (ვალუტა/კმ, სავარაუდო მოგება) გამოითვლება მომხმარებლის მიერ შეყვანილი მონაცემებისა და ეკრანიდან აღებული მაჩვენებლების საფუძველზე.\n• მომხმარებლებს შეუძლიათ თავად დაამატონ მხარდაჭერილი მესამე მხარის აპები. AP STUDIO არ იძლევა გარანტიას მომხმარებლის მიერ ხელით დამატებული აპებისთვის მონაცემების სწორად წაკითხვაზე.\n\n**მომხმარებლის ასაკი**\nაპის გამოყენება შეუძლიათ მხოლოდ პირებს, რომლებიც არიან მინიმუმ 18 წლის (ან მიაღწიეს ასაკს, რომელიც საჭიროა მათ ქვეყანაში ტაქსის/კურიერის მომსახურების გასაწევად). აპი არ არის განკუთვნილი ბავშვებისთვის.\n\n**გამოწერები და გადახდები**\n• გამოწერის გადახდები გროვდება Google Play Store-ის მიერ არჩეული გეგმის შესაბამისად.\n• მომხმარებლებს შეუძლიათ ნებისმიერ დროს გააუქმონ გამოწერის განახლება Google Play ანგარიშის პარამეტრებში.\n• თანხის დაბრუნება ხდება Google Play Store-ის პოლიტიკისა და წესების შესაბამისად.\n\n**პასუხისმგებლობის შეზღუდვა**\n• AP STUDIO არ არის პასუხისმგებელი გამოთვლებში არსებულ შეუსაბამობებზე, რომლებიც გამოწვეულია ეკრანის არასწორი წაკითხვით ან მესამე მხარის აპების ინტერფეისის განახლებით/ცვლილებით.\n• AP STUDIO არ არის პასუხისმგებელი მომხმარებლის მიერ აპის მაჩვენებლებზე დაყრდნობით მიღებულ ფინანსურ, ბიზნეს ან სამძღოლო გადაწყვეტილებებზე.\n• მომხმარებლები ვალდებულნი არიან უსაფრთხოდ გამოიყენონ ტელეფონი და მკაცრად დაიცვან საგზაო მოძრაობის წესები მართვისას.\n• AP STUDIO არ არის პასუხისმგებელი მომხმარებლის ანგარიშის დროებით ან მუდმივ დაბლოკვაზე მესამე მხარის სერვისებში (Uber, Bolt, Wolt და სხვ.).\n• მომხმარებელი აპს იყენებს მთლიანად საკუთარი რისკით და დამოუკიდებლად წყვეტს, გამოიყენოს თუ არა ის.\n• აპი წარმოადგენს დამოუკიდებელ დამხმარე ინსტრუმენტს და არ აქვს ოფიციალური კავშირი რომელიმე ტაქსის ან მიწოდების პლატფორმასთან.\n\n**კონტაქტი**\nნებისმიერი კითხვა, კომენტარი ან ხარვეზის შესახებ შეტყობინება გამოაგზავნეთ: apstudiomobile@gmail.com."</string>
+
+    <!-- Paywall -->
+    <string name="paywall_badge_full_access">სრული წვდომა</string>
+    <string name="paywall_title">გახსენით WayArs-ის\nსრული პოტენციალი</string>
+    <string name="paywall_subtitle">WayArs არ არის უბრალო ასისტენტი — ეს არის თქვენი პირადი ინსტრუმენტი სტაბილური და მაქსიმალური შემოსავლისთვის.</string>
+    <string name="paywall_chip_analysis">სწრაფი ანალიზი</string>
+    <string name="paywall_chip_filters">ჭკვიანი ფილტრები</string>
+    <string name="paywall_chip_income">შემოსავალი ცვლებს შორის</string>
+    <string name="paywall_chip_languages">მუშაობს 16 ენაზე</string>
+    <string name="paywall_section_eyebrow">აირჩიეთ თქვენი გეგმა</string>
+    <string name="paywall_section_title">მოქნილი გეგმები თქვენი მიზნებისთვის</string>
+    <string name="paywall_section_subtitle">რაც უფრო გრძელია გამოწერა, მით უფრო მეტია სარგებელი!</string>
+    <string name="paywall_plan_yearly_title">წლიური</string>
+    <string name="paywall_plan_monthly_title">თვიური</string>
+    <string name="paywall_plan_weekly_title">კვირეული</string>
+    <string name="paywall_plan_yearly_days">365 დღე სრული წვდომა</string>
+    <string name="paywall_plan_monthly_days">30 დღე სრული წვდომა</string>
+    <string name="paywall_plan_weekly_days">7 დღე სრული წვდომა</string>
+    <string name="paywall_badge_popular">პოპულარული</string>
+    <string name="paywall_badge_trial7">7 დღე უფასოდ</string>
+    <string name="paywall_period_year">/ წელი</string>
+    <string name="paywall_period_month">/ თვე</string>
+    <string name="paywall_period_week">/ კვირა</string>
+    <string name="paywall_feature_all">აპის ყველა ფუნქცია</string>
+    <string name="paywall_feature_presets">ჭკვიანი რეჟიმები</string>
+    <string name="paywall_feature_realtime">შეკვეთის ანალიზი რეალურ დროში</string>
+    <string name="paywall_feature_languages">16 ენის მხარდაჭერა</string>
+    <string name="paywall_button_select">არჩევა</string>
+    <string name="paywall_button_restore">შესყიდვების აღდგენა</string>
+    <string name="paywall_button_hide">დახურვა</string>
+    <string name="paywall_trial_notice">თქვენი გამოწერა იწყება 7-დღიანი უფასო საცდელი პერიოდით. ის ავტომატურად განახლდება არჩეული გეგმის მიხედვით. შეგიძლიათ გააუქმოთ ნებისმიერ დროს.</string>
+    <string name="paywall_footer_secured_title">დაცული გადახდა</string>
+    <string name="paywall_footer_secured_subtitle">მუშავდება Google Play-ისა და RevenueCat-ის მიერ</string>
+    <string name="paywall_footer_google_title">Google Play</string>
+    <string name="paywall_footer_google_subtitle">უსაფრთხო გადახდა Google Play-სა და RevenueCat-ის მეშვეობით</string>
+    <string name="paywall_footer_tagline">WayArs — თქვენი გზა სტაბილური შემოსავლისკენ</string>
+    <string name="paywall_gate_error_title">თქვენი გამოწერის შემოწმება ვერ მოხერხდა</string>
+    <string name="paywall_gate_error_retry">ხელახლა ცდა</string>
+    <string name="paywall_tagline">ჭკვიანი მიწოდებისა და ტაქსის ასისტენტი</string>
+    <string name="paywall_compat_label">მუშაობს იმ აპებთან ერთად, რომლებთანაც უკვე მუშაობთ</string>
+    <string name="paywall_mock_selected_toast">%1$s გეგმა არჩეულია — შესყიდვები გაიხსნება Google Play-ზე გამოშვების შემდეგ</string>
+    <string name="paywall_pro_header">WayArs Pro</string>
+    <string name="paywall_cta_trial">სცადეთ 7 დღე %1$s-ად</string>
+    <string name="paywall_badge_best_value">★ საუკეთესო ღირებულება • დაზოგეთ 30%</string>
+    <string name="paywall_badge_popular_discount">★ პოპულარული • -15%</string>
+    <string name="paywall_per_month_hint">მხოლოდ %1$s / თვეში</string>
+    <string name="paywall_data_safe">თქვენი მონაცემები დაცულია</string>
+    <string name="paywall_no_charge_notice">პირველი 7 დღის განმავლობაში გადახდა არ ხდება. გააუქმეთ ნებისმიერ დროს Google Play-ში.</string>
+</resources>

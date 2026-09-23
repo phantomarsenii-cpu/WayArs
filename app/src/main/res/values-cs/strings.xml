@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WayArs</string>
+    <string name="splash_slogan">Chytrý asistent pro řidiče a kurýry</string>
+    <string name="splash_start">Začít</string>
+
+    <string name="onboarding_title">Vyberte si režim</string>
+    <string name="onboarding_subtitle">Nastavíme vám optimální filtry</string>
+    <string name="onboarding_customize_later">Nastavit později</string>
+
+    <string name="preset_economy_title">Úsporný</string>
+    <string name="preset_economy_desc">Nízké náklady, mírný příjem</string>
+    <string name="preset_balance_title">Vyvážený</string>
+    <string name="preset_balance_desc">Vyvážený čas a příjem</string>
+    <string name="preset_profitable_title">Jen výhodné</string>
+    <string name="preset_profitable_desc">Jen dobře placené objednávky</string>
+
+    <string name="dashboard_today_summary">Dnešní přehled</string>
+    <string name="dashboard_active_time">Aktivní čas</string>
+    <string name="dashboard_distance">Vzdálenost</string>
+    <string name="dashboard_avg_rate">Průměrná sazba</string>
+    <string name="dashboard_order_evaluation">Vyhodnocení objednávky</string>
+    <string name="dashboard_orders">objednávek</string>
+    <string name="dashboard_no_order">Čeká se na novou objednávku…</string>
+
+    <string name="verdict_good">DOBRÁ</string>
+    <string name="verdict_bad">ŠPATNÁ</string>
+    <string name="action_accept">Přijmout</string>
+    <string name="action_reject">Odmítnout</string>
+
+    <string name="nav_home">Domů</string>
+    <string name="nav_stats">Statistika</string>
+    <string name="nav_presets">Režimy</string>
+    <string name="nav_settings">Nastavení</string>
+
+    <string name="settings_title">Nastavení</string>
+    <string name="settings_language">Jazyk</string>
+    <string name="settings_currency">Měna</string>
+    <string name="settings_preset">Režim</string>
+    <string name="settings_enable_accessibility">Povolit službu čtení obrazovky</string>
+    <string name="settings_enable_overlay">Povolit plovoucí widget</string>
+    <string name="settings_accessibility_hint">Nutné k rozpoznání příchozích objednávek (pouze čtení, bez automatických kliknutí)</string>
+    <string name="settings_overlay_hint">Nutné k zobrazení plovoucího widgetu s hodnocením nad ostatními aplikacemi</string>
+    <string name="notification_stop_action">Zastavit</string>
+
+    <string name="overlay_new_order">Nová objednávka</string>
+    <string name="overlay_min_km">min</string>
+
+    <string name="accessibility_service_description">WayArs čte údaje o objednávce (cena, vzdálenost, čas) zobrazené na obrazovce aplikacemi pro doručování/taxi, aby vám pomohl rychleji se rozhodnout. Nikdy nic automaticky neklepe ani neupravuje.</string>
+
+    <string name="accessibility_consent_title">Oprávnění ke čtení obrazovky</string>
+    <string name="accessibility_consent_body">Aby WayArs mohl automaticky rozpoznávat nové objednávky, potřebuje číst text zobrazovaný na obrazovce aplikacemi pro doručování a přepravu, které používáte — jako je cena, vzdálenost a odhadovaný čas.\n\nCo to znamená:\n• WayArs čte údaje o objednávkách pouze z vámi vybraných podporovaných aplikací. Nikdy nečte hesla, zprávy ani nic jiného, co píšete.\n• WayArs nikdy na obrazovce nic neklepe, nevyplňuje ani neupravuje — pouze čte.\n• Vše se zpracovává přímo v tomto zařízení. Nic se neodesílá na server.\n\nKdykoli to můžete vypnout v Nastavení.</string>
+    <string name="accessibility_consent_allow">Povolit a pokračovat</string>
+    <string name="accessibility_consent_decline">Teď ne</string>
+
+    <string name="stats_empty">Zatím žádné objednávky</string>
+    <string name="settings_custom_thresholds_title">Vlastní sazbové prahy</string>
+    <string name="settings_custom_thresholds_hint">Volitelné — vlastní hodnoty %1$s/km použité místo přednastaveného režimu</string>
+    <string name="settings_custom_bad">Špatná objednávka, do</string>
+    <string name="settings_custom_average">Průměrná objednávka, od</string>
+    <string name="settings_custom_good">Dobrá objednávka, od</string>
+    <string name="settings_custom_save">Uložit</string>
+    <string name="settings_custom_clear">Použít přednastavený režim</string>
+    <string name="active_requires_permissions">Nejprve v Nastavení povolte čtení obrazovky a plovoucí widget</string>
+    <string name="dashboard_share_log">Odeslat protokol skenování</string>
+    <string name="verdict_average">PRŮMĚRNÁ</string>
+    <string name="settings_enable_notifications">Povolit přístup k oznámením</string>
+    <string name="settings_notifications_hint">Volitelný záložní kanál — zachytí objednávky přijaté jako oznámení, když je aplikace minimalizovaná</string>
+    <string name="settings_permissions_title">Oprávnění</string>
+    <string name="settings_permissions_hint">Čtení obrazovky, plovoucí widget, oznámení</string>
+
+    <string name="settings_vehicle_title">Vozidlo</string>
+    <string name="settings_vehicle_car">Auto</string>
+    <string name="settings_vehicle_scooter">Skútr</string>
+    <string name="settings_vehicle_bicycle">Kolo / elektrokoloběžka</string>
+    <string name="settings_fuel_petrol">Benzín</string>
+    <string name="settings_fuel_diesel">Nafta</string>
+    <string name="settings_fuel_lpg">LPG / plyn</string>
+    <string name="settings_fuel_electric">Elektro</string>
+    <string name="settings_vehicle_consumption">Spotřeba na 100 km</string>
+    <string name="settings_vehicle_price_fuel">Cena za litr</string>
+    <string name="settings_vehicle_price_electric">Cena za kWh</string>
+    <string name="settings_vehicle_save">Uložit</string>
+    <string name="settings_vehicle_summary_car">Auto · %1$s · %2$s/100km</string>
+    <string name="settings_vehicle_summary_fuel">%1$s · %2$s · %3$s/100km</string>
+    <string name="settings_vehicle_summary_no_fuel">%1$s · bez nákladů na palivo</string>
+    <string name="verdict_net_profit">Čistě %1$s (palivo %2$s)</string>
+    <string name="verdict_short_trip_net">Čistě %1$s (jízda pod 1 km)</string>
+    <string name="settings_saved">Uloženo</string>
+    <string name="settings_supported_apps_title">Podporované aplikace</string>
+    <string name="settings_supported_apps_hint">Předdefinovaný seznam + aplikace, které přidáte vy</string>
+    <string name="settings_supported_apps_builtin_label">Předdefinované:</string>
+    <string name="settings_supported_apps_custom_label">Přidané vámi:</string>
+    <string name="settings_add_from_installed">Vybrat z nainstalovaných</string>
+    <string name="settings_add_manually">Zadat ID balíčku</string>
+    <string name="settings_package_id_label">ID balíčku (např. com.example.app)</string>
+    <string name="settings_add">Přidat</string>
+    <string name="settings_pick_installed_app_title">Vyberte aplikaci</string>
+    <string name="settings_search_apps_label">Hledat</string>
+    <string name="settings_cancel">Zrušit</string>
+    <string name="settings_already_added">již přidáno</string>
+    <string name="settings_no_apps_found">Nebyly nalezeny žádné aplikace</string>
+    <string name="settings_calibrated">Kalibrováno ✓</string>
+    <string name="settings_calibrate_action">Upravit kalibraci</string>
+    <string name="settings_not_calibrated">Nekalibrováno</string>
+    <string name="settings_calibration_title">Kalibrovat tuto aplikaci</string>
+    <string name="settings_calibration_no_data">Pro tuto aplikaci zatím nejsou žádná data ze skenování. Otevřete ji na skutečné, aktivní obrazovce objednávky, počkejte pár sekund a poté toto okno znovu otevřete.</string>
+    <string name="settings_calibration_instructions">Níže je text, který WayArs naposledy přečetl z obrazovky této aplikace. Klepněte na řádek s cenou, pak se vzdáleností, pak s časem.</string>
+    <string name="settings_calibration_role_money">Cena</string>
+    <string name="settings_calibration_role_distance">Vzdálenost</string>
+    <string name="settings_calibration_role_time">Čas</string>
+    <string name="settings_calibration_money_token_label">Označení měny (v případě potřeby upravte)</string>
+    <string name="settings_calibration_distance_token_label">Jednotka vzdálenosti (v případě potřeby upravte)</string>
+    <string name="settings_calibration_time_token_label">Jednotka času (v případě potřeby upravte)</string>
+    <string name="settings_calibration_clear">Vymazat kalibraci</string>
+
+    <string name="settings_developer_website_url" translatable="false">https://phantomarsenii-cpu.github.io/AP-STUDIO/</string>
+    <string name="settings_about_title">O aplikaci</string>
+    <string name="settings_privacy_title">Zásady ochrany osobních údajů</string>
+    <string name="settings_terms_title">Podmínky použití</string>
+    <string name="terms_gate_title">Podmínky použití</string>
+    <string name="terms_gate_subtitle">Před pokračováním si prosím přečtěte a přijměte Podmínky použití.</string>
+    <string name="terms_gate_checkbox_label">Přečetl(a) jsem si a přijímám Podmínky použití</string>
+    <string name="terms_gate_accept_button">Přijmout a pokračovat</string>
+    <string name="settings_terms_accepted_at">Přijato dne: %1$s</string>
+    <string name="settings_visit_website">Navštívit web vývojáře</string>
+    <string name="settings_close">Zavřít</string>
+    <string name="settings_about_content">"**WayArs**\nVáš osobní asistent pro doručování a přepravu\n\nVerze: %1$s\n\nWayArs je bezplatný nástroj vytvořený pro řidiče a kurýry pracující s aplikacemi pro přepravu a doručování.\n\nAplikace automaticky analyzuje data na obrazovce a oznámení, pomáhá vám rychle posoudit, zda se objednávka vyplatí, a sledovat vaše výdělky v reálném čase.\n\n**Design a vývoj:** AP STUDIO\n**Kontakt a podpora:** apstudiomobile@gmail.com\n\nVšechny ochranné známky, loga a názvy aplikací třetích stran (mimo jiné Bolt, Uber, Wolt, FreeNow, Stuart a další přidané uživatelem) patří jejich příslušným vlastníkům a jsou použity výhradně pro informační a identifikační účely."</string>
+    <string name="settings_privacy_content">"**Zásady ochrany osobních údajů WayArs**\nPoslední aktualizace: 12. září 2026\n\n**Ochrana vašeho soukromí**\nRespektujeme vaše soukromí. WayArs je navržen podle principu Privacy by Design — hlavní operace analýzy obrazovky a výpočtu sazby probíhají lokálně ve vašem zařízení.\n\n**Sběr a použití dat**\n• Accessibility Service: aplikace používá tento přístup výhradně ke čtení údajů o objednávkách (např. cena, vzdálenost) zobrazených na obrazovce podporovanými aplikacemi pro doručování a přepravu (vestavěnými i přidanými vámi). Aplikace nikdy nezaznamenává hesla, osobní údaje ani stisky kláves.\n• Oznámení (Notification Listener): přístup k oznámením se používá pouze k rozpoznání nových nabídek práce, zatímco aplikace běží na pozadí.\n• Údaje o vozidle a sazbě: údaje, které zadáte v Nastavení (spotřeba paliva, cena paliva, prahy hodnocení), jsou uloženy pouze v lokální paměti zařízení.\n\n**Předplatné a poskytovatelé třetích stran (platby)**\nAplikace nabízí funkce na základě předplatného. Aplikace neshromažďuje ani neukládá podrobné platební údaje (jako čísla platebních karet). Ke zpracování transakcí a ověření stavu předplatného spoléháme na důvěryhodné poskytovatele třetích stran:\n• Google Play Billing (Google LLC): platby a transakce zpracovává přímo Google Play Store.\n• RevenueCat, Inc.: ověření stavu předplatného na základě anonymních identifikátorů zařízení a transakcí.\n\n**Soukromí dětí**\nWayArs je určen výhradně pro dospělé, kteří mají zákonné oprávnění pracovat jako řidič nebo kurýr. Aplikace není určena dětem mladším 16 let a vědomě neshromažďuje ani nezpracovává žádné osobní údaje dětí. Pokud zjistíte, že nám dítě poskytlo jakékoli údaje, kontaktujte nás prosím na apstudiomobile@gmail.com, abychom mohli neprodleně podniknout příslušné kroky.\n\n**Správa oprávnění a předplatného**\nUdělená oprávnění můžete kdykoli odvolat v systémovém Nastavení Androidu nebo spravovat a zrušit své předplatné přímo v nastavení účtu Google Play."</string>
+    <string name="settings_terms_content">"**Podmínky použití WayArs**\nPoslední aktualizace: 12. září 2026\n\n**Obecná ustanovení**\nPoužíváním aplikace WayArs přijímáte níže uvedené podmínky. Aplikace je nezávislý pomocný nástroj vytvořený společností AP STUDIO a není oficiálně spojena, sponzorována ani schválena žádným poskytovatelem aplikací třetích stran (jako je Bolt, Uber, Wolt, FreeNow, Stuart nebo jakýkoli jiný přidaný uživatelem do seznamu).\n\n**Pomocný charakter a aplikace třetích stran**\n• Aplikace slouží pouze pro informační a analytické účely. Ukazatele výnosnosti (měna/km, odhadovaný zisk) se počítají z údajů zadaných uživatelem a údajů přečtených z obrazovky.\n• Uživatelé si mohou sami přidat podporované aplikace třetích stran. AP STUDIO nezaručuje správné čtení dat u aplikací přidaných uživatelem ručně.\n\n**Věk uživatele**\nAplikaci mohou používat pouze osoby starší 18 let (nebo osoby, které dosáhly věku vyžadovaného pro poskytování přepravních/kurýrních služeb ve své zemi). Aplikace není určena dětem.\n\n**Předplatné a platby**\n• Platby za předplatné vybírá Google Play Store podle zvoleného plánu.\n• Uživatelé mohou kdykoli zrušit obnovení předplatného v nastavení svého účtu Google Play.\n• Vrácení peněz se řídí zásadami a pravidly obchodu Google Play.\n\n**Vyloučení odpovědnosti**\n• AP STUDIO neodpovídá za nesrovnalosti ve výpočtech vzniklé nesprávným čtením obrazovky nebo aktualizacemi či změnami v rozhraní aplikací třetích stran.\n• AP STUDIO neodpovídá za finanční, obchodní nebo řidičská rozhodnutí učiněná uživatelem na základě ukazatelů aplikace.\n• Uživatelé jsou povinni bezpečně používat telefon a při jízdě důsledně dodržovat pravidla silničního provozu.\n• AP STUDIO neodpovídá za jakékoli dočasné či trvalé zablokování účtů uživatele u služeb třetích stran (Uber, Bolt, Wolt atd.).\n• Uživatel používá aplikaci zcela na vlastní riziko a sám rozhoduje, zda ji bude používat.\n• Aplikace je nezávislý pomocný nástroj a nemá žádné oficiální spojení s žádnou přepravní nebo doručovací platformou.\n\n**Kontakt**\nJakékoli dotazy, připomínky nebo hlášení chyb zasílejte na: apstudiomobile@gmail.com."</string>
+
+    <!-- Paywall -->
+    <string name="paywall_badge_full_access">Plný přístup</string>
+    <string name="paywall_title">Odemkněte plný\npotenciál WayArs</string>
+    <string name="paywall_subtitle">WayArs není jen asistent — je to váš osobní nástroj pro stabilní a maximální příjem.</string>
+    <string name="paywall_chip_analysis">Rychlá analýza</string>
+    <string name="paywall_chip_filters">Chytré filtry</string>
+    <string name="paywall_chip_income">Příjem mezi směnami</string>
+    <string name="paywall_chip_languages">Funguje v 16 jazycích</string>
+    <string name="paywall_section_eyebrow">VYBERTE SI PLÁN</string>
+    <string name="paywall_section_title">Flexibilní plány pro vaše cíle</string>
+    <string name="paywall_section_subtitle">Čím delší předplatné, tím lepší poměr ceny a výkonu!</string>
+    <string name="paywall_plan_yearly_title">Roční</string>
+    <string name="paywall_plan_monthly_title">Měsíční</string>
+    <string name="paywall_plan_weekly_title">Týdenní</string>
+    <string name="paywall_plan_yearly_days">365 dní plného přístupu</string>
+    <string name="paywall_plan_monthly_days">30 dní plného přístupu</string>
+    <string name="paywall_plan_weekly_days">7 dní plného přístupu</string>
+    <string name="paywall_badge_popular">Oblíbené</string>
+    <string name="paywall_badge_trial7">7 dní zdarma</string>
+    <string name="paywall_period_year">/ rok</string>
+    <string name="paywall_period_month">/ měsíc</string>
+    <string name="paywall_period_week">/ týden</string>
+    <string name="paywall_feature_all">Všechny funkce aplikace</string>
+    <string name="paywall_feature_presets">Chytré režimy</string>
+    <string name="paywall_feature_realtime">Analýza objednávek v reálném čase</string>
+    <string name="paywall_feature_languages">Podpora 16 jazyků</string>
+    <string name="paywall_button_select">Vybrat</string>
+    <string name="paywall_button_restore">Obnovit nákupy</string>
+    <string name="paywall_button_hide">Zavřít</string>
+    <string name="paywall_trial_notice">Vaše předplatné začíná 7denní zkušební verzí zdarma. Automaticky se obnovuje podle zvoleného plánu. Kdykoli jej můžete zrušit.</string>
+    <string name="paywall_footer_secured_title">Zabezpečená platba</string>
+    <string name="paywall_footer_secured_subtitle">Zpracováno přes Google Play a RevenueCat</string>
+    <string name="paywall_footer_google_title">Google Play</string>
+    <string name="paywall_footer_google_subtitle">Bezpečná platba přes Google Play a RevenueCat</string>
+    <string name="paywall_footer_tagline">WayArs — vaše cesta ke stabilnímu příjmu</string>
+    <string name="paywall_gate_error_title">Nepodařilo se ověřit vaše předplatné</string>
+    <string name="paywall_gate_error_retry">Zkusit znovu</string>
+    <string name="paywall_tagline">CHYTRÝ ASISTENT PRO DORUČOVÁNÍ A TAXI</string>
+    <string name="paywall_compat_label">Funguje spolu s aplikacemi, se kterými již jezdíte</string>
+    <string name="paywall_mock_selected_toast">Vybrán plán %1$s — nákupy budou dostupné po vydání na Google Play</string>
+    <string name="paywall_pro_header">WayArs Pro</string>
+    <string name="paywall_cta_trial">Vyzkoušejte 7 dní za %1$s</string>
+    <string name="paywall_badge_best_value">★ NEJLEPŠÍ HODNOTA • UŠETŘETE 30 %</string>
+    <string name="paywall_badge_popular_discount">★ Oblíbené • -15 %</string>
+    <string name="paywall_per_month_hint">Jen %1$s / měsíc</string>
+    <string name="paywall_data_safe">Vaše data jsou v bezpečí</string>
+    <string name="paywall_no_charge_notice">Za prvních 7 dní se neúčtuje žádný poplatek. Kdykoli zrušte v Google Play.</string>
+</resources>

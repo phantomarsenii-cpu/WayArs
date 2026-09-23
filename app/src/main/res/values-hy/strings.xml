@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WayArs</string>
+    <string name="splash_slogan">Խելացի օգնական վարորդների և առաքիչների համար</string>
+    <string name="splash_start">Սկսել</string>
+
+    <string name="onboarding_title">Ընտրեք ձեր ռեժիմը</string>
+    <string name="onboarding_subtitle">Կկարգավորենք ձեզ համար օպտիմալ ֆիլտրերը</string>
+    <string name="onboarding_customize_later">Կարգավորել ավելի ուշ</string>
+
+    <string name="preset_economy_title">Խնայող</string>
+    <string name="preset_economy_desc">Ցածր ծախսեր, չափավոր եկամուտ</string>
+    <string name="preset_balance_title">Հավասարակշռված</string>
+    <string name="preset_balance_desc">Ժամանակի և եկամտի հավասարակշռություն</string>
+    <string name="preset_profitable_title">Միայն շահութաբեր</string>
+    <string name="preset_profitable_desc">Միայն բարձր վարձատրվող պատվերներ</string>
+
+    <string name="dashboard_today_summary">Այսօրվա ամփոփում</string>
+    <string name="dashboard_active_time">Ակտիվ ժամանակ</string>
+    <string name="dashboard_distance">Հեռավորություն</string>
+    <string name="dashboard_avg_rate">Միջին սակագին</string>
+    <string name="dashboard_order_evaluation">Պատվերի գնահատում</string>
+    <string name="dashboard_orders">պատվեր</string>
+    <string name="dashboard_no_order">Սպասում ենք նոր պատվերի…</string>
+
+    <string name="verdict_good">ԼԱՎ</string>
+    <string name="verdict_bad">ՎԱՏ</string>
+    <string name="action_accept">Ընդունել</string>
+    <string name="action_reject">Մերժել</string>
+
+    <string name="nav_home">Գլխավոր</string>
+    <string name="nav_stats">Վիճակագրություն</string>
+    <string name="nav_presets">Ռեժիմներ</string>
+    <string name="nav_settings">Կարգավորումներ</string>
+
+    <string name="settings_title">Կարգավորումներ</string>
+    <string name="settings_language">Լեզու</string>
+    <string name="settings_currency">Արժույթ</string>
+    <string name="settings_preset">Ռեժիմ</string>
+    <string name="settings_enable_accessibility">Միացնել էկրանի ընթերցման ծառայությունը</string>
+    <string name="settings_enable_overlay">Միացնել լողացող վիջեթը</string>
+    <string name="settings_accessibility_hint">Անհրաժեշտ է մուտքային պատվերները հայտնաբերելու համար (միայն ընթերցում, առանց ավտոմատ սեղմումների)</string>
+    <string name="settings_overlay_hint">Անհրաժեշտ է այլ հավելվածների վրա լողացող վիջեթը ցուցադրելու համար</string>
+    <string name="notification_stop_action">Կանգնեցնել</string>
+
+    <string name="overlay_new_order">Նոր պատվեր</string>
+    <string name="overlay_min_km">ր</string>
+
+    <string name="accessibility_service_description">WayArs-ը կարդում է պատվերի մանրամասները (գին, հեռավորություն, ժամանակ), որոնք ցուցադրվում են առաքման/տաքսու հավելվածների էկրանին՝ ձեզ ավելի արագ որոշում կայացնելու համար օգնելու նպատակով։ Այն երբեք ավտոմատ կերպով ոչինչ չի սեղմում կամ փոփոխում։</string>
+
+    <string name="accessibility_consent_title">Էկրանի ընթերցման թույլտվություն</string>
+    <string name="accessibility_consent_body">Նոր պատվերներն ավտոմատ կերպով հայտնաբերելու համար WayArs-ին անհրաժեշտ է կարդալ ձեր օգտագործած առաքման և տաքսու հավելվածների էկրանին ցուցադրվող տեքստը՝ գին, հեռավորություն և գնահատված ժամանակ։\n\nԴա նշանակում է.\n• WayArs-ը կարդում է պատվերի մանրամասները միայն ձեր ընտրած աջակցվող հավելվածներից։ Այն երբեք չի կարդում գաղտնաբառեր, հաղորդագրություններ կամ ցանկացած ինչ դուք մուտքագրում եք։\n• WayArs-ը երբեք չի սեղմում, լրացնում կամ փոփոխում ոչինչ էկրանին — այն միայն կարդում է։\n• Ամեն ինչ մշակվում է այս սարքում։ Ոչինչ չի ուղարկվում սերվեր։\n\nԴուք կարող եք ցանկացած պահի անջատել սա Կարգավորումներում։</string>
+    <string name="accessibility_consent_allow">Թույլատրել և շարունակել</string>
+    <string name="accessibility_consent_decline">Ոչ հիմա</string>
+
+    <string name="stats_empty">Դեռևս պատվերներ չկան</string>
+    <string name="settings_custom_thresholds_title">Ձեր սեփական սակագնային շեմերը</string>
+    <string name="settings_custom_thresholds_hint">Ընտրովի — ձեր սեփական %1$s/կմ թվերը, օգտագործվում են ռեժիմի փոխարեն</string>
+    <string name="settings_custom_bad">Վատ պատվեր, մինչև</string>
+    <string name="settings_custom_average">Միջին պատվեր, սկսած</string>
+    <string name="settings_custom_good">Լավ պատվեր, սկսած</string>
+    <string name="settings_custom_save">Պահպանել</string>
+    <string name="settings_custom_clear">Օգտագործել ռեժիմը</string>
+    <string name="active_requires_permissions">Նախ միացրեք էկրանի ընթերցումը և լողացող վիջեթը Կարգավորումներում</string>
+    <string name="dashboard_share_log">Ուղարկել սկանավորման մատյանը</string>
+    <string name="verdict_average">ՄԻՋԻՆ</string>
+    <string name="settings_enable_notifications">Միացնել ծանուցումների հասանելիությունը</string>
+    <string name="settings_notifications_hint">Ընտրովի պահուստային ալիք — բռնում է պատվերները, որոնք ուղարկվում են որպես ծանուցում, երբ հավելվածը մինիմիզացված է</string>
+    <string name="settings_permissions_title">Թույլտվություններ</string>
+    <string name="settings_permissions_hint">Էկրանի ընթերցում, լողացող վիջեթ, ծանուցումներ</string>
+
+    <string name="settings_vehicle_title">Տրանսպորտ</string>
+    <string name="settings_vehicle_car">Մեքենա</string>
+    <string name="settings_vehicle_scooter">Մոպեդ</string>
+    <string name="settings_vehicle_bicycle">Հեծանիվ / էլեկտրական սամոկատ</string>
+    <string name="settings_fuel_petrol">Բենզին</string>
+    <string name="settings_fuel_diesel">Դիզել</string>
+    <string name="settings_fuel_lpg">Գազ (LPG)</string>
+    <string name="settings_fuel_electric">Էլեկտրական</string>
+    <string name="settings_vehicle_consumption">Ծախս 100 կմ-ի համար</string>
+    <string name="settings_vehicle_price_fuel">Գին լիտրի համար</string>
+    <string name="settings_vehicle_price_electric">Գին կՎտ/ժ-ի համար</string>
+    <string name="settings_vehicle_save">Պահպանել</string>
+    <string name="settings_vehicle_summary_car">Մեքենա · %1$s · %2$s/100կմ</string>
+    <string name="settings_vehicle_summary_fuel">%1$s · %2$s · %3$s/100կմ</string>
+    <string name="settings_vehicle_summary_no_fuel">%1$s · առանց վառելիքի ծախսի</string>
+    <string name="verdict_net_profit">Մաքուր %1$s (վառելիք %2$s)</string>
+    <string name="verdict_short_trip_net">Մաքուր %1$s (ուղևորություն 1 կմ-ից պակաս)</string>
+    <string name="settings_saved">Պահպանված է</string>
+    <string name="settings_supported_apps_title">Աջակցվող հավելվածներ</string>
+    <string name="settings_supported_apps_hint">Ներկառուցված ցանկ + ձեր ավելացրած հավելվածները</string>
+    <string name="settings_supported_apps_builtin_label">Ներկառուցված.</string>
+    <string name="settings_supported_apps_custom_label">Ավելացված ձեր կողմից.</string>
+    <string name="settings_add_from_installed">Ընտրել տեղադրվածներից</string>
+    <string name="settings_add_manually">Մուտքագրեք փաթեթի ID</string>
+    <string name="settings_package_id_label">Փաթեթի ID (օր.՝ com.example.app)</string>
+    <string name="settings_add">Ավելացնել</string>
+    <string name="settings_pick_installed_app_title">Ընտրեք հավելված</string>
+    <string name="settings_search_apps_label">Որոնում</string>
+    <string name="settings_cancel">Չեղարկել</string>
+    <string name="settings_already_added">արդեն ավելացված է</string>
+    <string name="settings_no_apps_found">Հավելվածներ չեն գտնվել</string>
+    <string name="settings_calibrated">Կարգաբերված է ✓</string>
+    <string name="settings_calibrate_action">Խմբագրել կարգաբերումը</string>
+    <string name="settings_not_calibrated">Կարգաբերված չէ</string>
+    <string name="settings_calibration_title">Կարգաբերել այս հավելվածը</string>
+    <string name="settings_calibration_no_data">Այս հավելվածի համար դեռևս սկանավորման տվյալներ չկան։ Բացեք այն իրական, ակտիվ պատվերի էկրանում և սպասեք մի քանի վայրկյան, ապա նորից բացեք այս պատուհանը։</string>
+    <string name="settings_calibration_instructions">Ստորև բերված է տեքստը, որը WayArs-ը վերջին անգամ կարդացել է այս հավելվածի էկրանից։ Հպեք գնի, ապա հեռավորության, ապա ժամանակի տողին։</string>
+    <string name="settings_calibration_role_money">Գին</string>
+    <string name="settings_calibration_role_distance">Հեռավորություն</string>
+    <string name="settings_calibration_role_time">Ժամանակ</string>
+    <string name="settings_calibration_money_token_label">Արժույթի նշան (խմբագրեք անհրաժեշտության դեպքում)</string>
+    <string name="settings_calibration_distance_token_label">Հեռավորության միավոր (խմբագրեք անհրաժեշտության դեպքում)</string>
+    <string name="settings_calibration_time_token_label">Ժամանակի միավոր (խմբագրեք անհրաժեշտության դեպքում)</string>
+    <string name="settings_calibration_clear">Մաքրել կարգաբերումը</string>
+
+    <string name="settings_developer_website_url" translatable="false">https://phantomarsenii-cpu.github.io/AP-STUDIO/</string>
+    <string name="settings_about_title">Հավելվածի մասին</string>
+    <string name="settings_privacy_title">Գաղտնիության քաղաքականություն</string>
+    <string name="settings_terms_title">Օգտագործման պայմաններ</string>
+    <string name="terms_gate_title">Օգտագործման պայմաններ</string>
+    <string name="terms_gate_subtitle">Խնդրում ենք կարդալ և ընդունել Օգտագործման պայմանները՝ նախքան շարունակելը։</string>
+    <string name="terms_gate_checkbox_label">Ես կարդացել եմ և ընդունում եմ Օգտագործման պայմանները</string>
+    <string name="terms_gate_accept_button">Ընդունել և շարունակել</string>
+    <string name="settings_terms_accepted_at">Ընդունված է. %1$s</string>
+    <string name="settings_visit_website">Այցելել մշակողի կայք</string>
+    <string name="settings_close">Փակել</string>
+    <string name="settings_about_content">"**WayArs**\nՁեր անձնական օգնականը առաքման և տաքսու աշխատանքում\n\nՏարբերակ՝ %1$s\n\nWayArs-ը անվճար գործիք է, ստեղծված վարորդների և առաքիչների համար, ովքեր աշխատում են տաքսու և առաքման հավելվածների հետ։\n\nՀավելվածն ավտոմատ կերպով վերլուծում է էկրանի տվյալները և ծանուցումները՝ օգնելով ձեզ արագ գնահատել, թե արժե՞ արդյոք ընդունել պատվերը, և հետևել ձեր եկամտին իրական ժամանակում։\n\n**Դիզայն և մշակում.** AP STUDIO\n**Կապ և աջակցություն.** apstudiomobile@gmail.com\n\nԲոլոր երրորդ կողմի ապրանքանիշերը, լոգոները և հավելվածների անունները (ներառյալ, բայց չսահմանափակվելով Bolt, Uber, Wolt, FreeNow, Stuart-ով և օգտատիրոջ կողմից ավելացված այլ անուններով) պատկանում են իրենց համապատասխան սեփականատերերին և օգտագործվում են բացառապես տեղեկատվական և նույնականացման նպատակներով։"</string>
+    <string name="settings_privacy_content">"**WayArs գաղտնիության քաղաքականություն**\nՎերջին թարմացումը՝ 12 սեպտեմբերի, 2026\n\n**Ձեր գաղտնիության պաշտպանությունը**\nՄենք հարգում ենք ձեր գաղտնիությունը։ WayArs-ը կառուցված է Privacy by Design սկզբունքի հիման վրա — էկրանի վերլուծության և սակագնի հաշվարկման հիմնական գործողությունները կատարվում են տեղական ձեր սարքում։\n\n**Տվյալների հավաքագրում և օգտագործում**\n• Accessibility Service. հավելվածն այս հասանելիությունն օգտագործում է բացառապես այն պատվերի մանրամասները (օր.՝ գին, հեռավորություն) կարդալու համար, որոնք ցուցադրվում են աջակցվող առաքման և տաքսու հավելվածների էկրանին (ներկառուցված և ձեր կողմից ավելացված)։ Հավելվածը երբեք չի գրանցում գաղտնաբառեր, անձնական տվյալներ կամ ստեղնաշարի սեղմումներ։\n• Ծանուցումներ (Notification Listener). ծանուցումների հասանելիությունն օգտագործվում է միայն նոր աշխատանքի առաջարկները հայտնաբերելու համար, երբ հավելվածն աշխատում է ֆոնային ռեժիմում։\n• Տրանսպորտային և սակագնային տվյալներ. Կարգավորումներում մուտքագրված տվյալները (վառելիքի ծախս, վառելիքի գին, գնահատման շեմեր) պահվում են միայն սարքի տեղական հիշողությունում։\n\n**Բաժանորդագրություններ և երրորդ կողմի մատակարարներ (վճարումներ)**\nՀավելվածն առաջարկում է հնարավորություններ բաժանորդագրության հիման վրա։ Հավելվածը չի հավաքագրում կամ պահպանում վճարային մանրամասն տվյալներ (օրինակ՝ քարտի համարներ)։ Գործարքները մշակելու և բաժանորդագրության կարգավիճակը հաստատելու համար մենք վստահում ենք հուսալի երրորդ կողմի մատակարարներին.\n• Google Play Billing (Google LLC). վճարումները և գործարքները մշակվում են ուղղակիորեն Google Play Store-ի կողմից։\n• RevenueCat, Inc.. բաժանորդագրության կարգավիճակի հաստատում՝ հիմնված անանուն սարքի և գործարքի նույնացուցիչների վրա։\n\n**Երեխաների գաղտնիությունը**\nWayArs-ը նախատեսված է բացառապես չափահասների համար, ովքեր օրինական իրավունք ունեն աշխատել որպես վարորդ կամ առաքիչ։ Հավելվածը ուղղված չէ 16 տարեկանից փոքր երեխաներին և գիտակցաբար չի հավաքագրում կամ մշակում երեխաների անձնական տվյալներ։ Եթե դուք տեղեկանում եք, որ երեխան մեզ տրամադրել է որևէ տվյալ, խնդրում ենք կապվել մեզ հետ apstudiomobile@gmail.com հասցեով, որպեսզի մենք ժամանակին ձեռնարկենք համապատասխան միջոցներ։\n\n**Թույլտվությունների և բաժանորդագրության կառավարում**\nԴուք կարող եք ցանկացած պահի չեղարկել տրված թույլտվությունները Android-ի համակարգային Կարգավորումներում կամ կառավարել և չեղարկել ձեր բաժանորդագրությունը ուղղակիորեն ձեր Google Play հաշվի կարգավորումներում։"</string>
+    <string name="settings_terms_content">"**WayArs օգտագործման պայմաններ**\nՎերջին թարմացումը՝ 12 սեպտեմբերի, 2026\n\n**Ընդհանուր դրույթներ**\nWayArs հավելվածն օգտագործելով՝ դուք ընդունում եք ստորև նշված պայմանները։ Հավելվածը AP STUDIO-ի կողմից ստեղծված անկախ օգնական գործիք է և պաշտոնապես կապված չէ, հովանավորված կամ հաստատված չէ որևէ երրորդ կողմի հավելվածի մատակարարի կողմից (ինչպիսիք են Bolt, Uber, Wolt, FreeNow, Stuart կամ օգտատիրոջ կողմից ցանկին ավելացված այլերը)։\n\n**Օժանդակ բնույթ և երրորդ կողմի հավելվածներ**\n• Հավելվածը նախատեսված է բացառապես տեղեկատվական և վերլուծական նպատակների համար։ Եկամտաբերության ցուցանիշները (արժույթ/կմ, գնահատված շահույթ) հաշվարկվում են օգտատիրոջ մուտքագրած տվյալների և էկրանից վերցված ցուցանիշների հիման վրա։\n• Օգտատերերն իրենք կարող են ավելացնել աջակցվող երրորդ կողմի հավելվածներ։ AP STUDIO-ն երաշխիք չի տալիս օգտատիրոջ կողմից ձեռքով ավելացված հավելվածների համար տվյալների ճիշտ ընթերցման վերաբերյալ։\n\n**Օգտատիրոջ տարիքը**\nՀավելվածը կարող են օգտագործել միայն առնվազն 18 տարեկան անձինք (կամ ում հասել են իրենց երկրում տաքսու/առաքման ծառայություններ մատուցելու համար անհրաժեշտ տարիքին)։ Հավելվածը նախատեսված չէ երեխաների համար։\n\n**Բաժանորդագրություններ և վճարումներ**\n• Բաժանորդագրության վճարումները հավաքագրվում են Google Play Store-ի կողմից ընտրված պլանին համապատասխան։\n• Օգտատերերը կարող են ցանկացած պահի չեղարկել բաժանորդագրության թարմացումը իրենց Google Play հաշվի կարգավորումներում։\n• Գումարի վերադարձն իրականացվում է Google Play Store-ի քաղաքականությանը և կանոններին համապատասխան։\n\n**Պատասխանատվության սահմանափակում**\n• AP STUDIO-ն պատասխանատվություն չի կրում հաշվարկների անհամապատասխանությունների համար, որոնք առաջացել են էկրանի սխալ ընթերցման կամ երրորդ կողմի հավելվածների ինտերֆեյսի թարմացումների/փոփոխությունների արդյունքում։\n• AP STUDIO-ն պատասխանատվություն չի կրում օգտատիրոջ կողմից հավելվածի ցուցանիշների հիման վրա կայացված ֆինանսական, բիզնես կամ վարորդական որոշումների համար։\n• Օգտատերերը պարտավոր են անվտանգ օգտագործել իրենց հեռախոսը և վարելիս խստորեն պահպանել ճանապարհային երթևեկության կանոնները։\n• AP STUDIO-ն պատասխանատվություն չի կրում օգտատիրոջ հաշիվների ժամանակավոր կամ մշտական արգելափակման համար երրորդ կողմի ծառայություններում (Uber, Bolt, Wolt և այլն)։\n• Օգտատերն ամբողջությամբ իր ռիսկով է օգտագործում հավելվածը և ինքնուրույն որոշում է՝ օգտագործել այն, թե ոչ։\n• Հավելվածն անկախ օգնական գործիք է և պաշտոնական կապ չունի որևէ տաքսու կամ առաքման հարթակի հետ։\n\n**Կապ**\nՑանկացած հարց, մեկնաբանություն կամ սխալի մասին հաղորդում խնդրում ենք ուղարկել՝ apstudiomobile@gmail.com։"</string>
+
+    <!-- Paywall -->
+    <string name="paywall_badge_full_access">Ամբողջական հասանելիություն</string>
+    <string name="paywall_title">Բացեք WayArs-ի\nամբողջ ներուժը</string>
+    <string name="paywall_subtitle">WayArs-ը ընդամենը օգնական չէ, այլ ձեր անձնական գործիքն է կայուն և առավելագույն եկամտի համար։</string>
+    <string name="paywall_chip_analysis">Արագ վերլուծություն</string>
+    <string name="paywall_chip_filters">Խելացի ֆիլտրեր</string>
+    <string name="paywall_chip_income">Եկամուտ հերթափոխերի միջև</string>
+    <string name="paywall_chip_languages">Աշխատում է 16 լեզվով</string>
+    <string name="paywall_section_eyebrow">ԸՆՏՐԵՔ ՁԵՐ ՊԼԱՆԸ</string>
+    <string name="paywall_section_title">Ճկուն պլաններ ձեր նպատակների համար</string>
+    <string name="paywall_section_subtitle">Որքան երկար է բաժանորդագրությունը, այնքան ավելի մեծ է օգուտը!</string>
+    <string name="paywall_plan_yearly_title">Տարեկան</string>
+    <string name="paywall_plan_monthly_title">Ամսական</string>
+    <string name="paywall_plan_weekly_title">Շաբաթական</string>
+    <string name="paywall_plan_yearly_days">365 օր ամբողջական հասանելիություն</string>
+    <string name="paywall_plan_monthly_days">30 օր ամբողջական հասանելիություն</string>
+    <string name="paywall_plan_weekly_days">7 օր ամբողջական հասանելիություն</string>
+    <string name="paywall_badge_popular">Հանրաճանաչ</string>
+    <string name="paywall_badge_trial7">7 օր անվճար</string>
+    <string name="paywall_period_year">/ տարի</string>
+    <string name="paywall_period_month">/ ամիս</string>
+    <string name="paywall_period_week">/ շաբաթ</string>
+    <string name="paywall_feature_all">Հավելվածի բոլոր հնարավորությունները</string>
+    <string name="paywall_feature_presets">Խելացի ռեժիմներ</string>
+    <string name="paywall_feature_realtime">Պատվերի վերլուծություն իրական ժամանակում</string>
+    <string name="paywall_feature_languages">16 լեզուների աջակցություն</string>
+    <string name="paywall_button_select">Ընտրել</string>
+    <string name="paywall_button_restore">Վերականգնել գնումները</string>
+    <string name="paywall_button_hide">Փակել</string>
+    <string name="paywall_trial_notice">Ձեր բաժանորդագրությունը սկսվում է 7-օրյա անվճար փորձաշրջանով։ Այն ինքնաբերաբար թարմացվում է ընտրված պլանով։ Կարող եք չեղարկել ցանկացած պահի։</string>
+    <string name="paywall_footer_secured_title">Ապահովված վճարում</string>
+    <string name="paywall_footer_secured_subtitle">Մշակվում է Google Play-ի և RevenueCat-ի կողմից</string>
+    <string name="paywall_footer_google_title">Google Play</string>
+    <string name="paywall_footer_google_subtitle">Ապահով վճարում Google Play-ի և RevenueCat-ի միջոցով</string>
+    <string name="paywall_footer_tagline">WayArs — ձեր ճանապարհը դեպի կայուն եկամուտ</string>
+    <string name="paywall_gate_error_title">Չհաջողվեց ստուգել ձեր բաժանորդագրությունը</string>
+    <string name="paywall_gate_error_retry">Կրկին փորձել</string>
+    <string name="paywall_tagline">ԽԵԼԱՑԻ ԱՌԱՔՄԱՆ ԵՎ ՏԱՔՍՈՒ ՕԳՆԱԿԱՆ</string>
+    <string name="paywall_compat_label">Աշխատում է այն հավելվածների հետ, որոնց հետ դուք արդեն աշխատում եք</string>
+    <string name="paywall_mock_selected_toast">%1$s պլանն ընտրված է — գնումները կբացվեն Google Play-ում թողարկումից հետո</string>
+    <string name="paywall_pro_header">WayArs Pro</string>
+    <string name="paywall_cta_trial">Փորձեք 7 օր %1$s-ով</string>
+    <string name="paywall_badge_best_value">★ ԱՄԵՆԱՇԱՀԵԿԱՆԸ • ԽՆԱՅԵՔ 30%</string>
+    <string name="paywall_badge_popular_discount">★ Հանրաճանաչ • -15%</string>
+    <string name="paywall_per_month_hint">Ընդամենը %1$s / ամսական</string>
+    <string name="paywall_data_safe">Ձեր տվյալներն ապահով են</string>
+    <string name="paywall_no_charge_notice">Առաջին 7 օրվա համար վճար չի գանձվում։ Չեղարկեք ցանկացած պահի Google Play-ում։</string>
+</resources>

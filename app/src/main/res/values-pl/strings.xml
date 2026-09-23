@@ -135,7 +135,7 @@
     <string name="paywall_chip_analysis">Szybka analiza</string>
     <string name="paywall_chip_filters">Inteligentne filtry</string>
     <string name="paywall_chip_income">Dochód między zmianami</string>
-    <string name="paywall_chip_languages">Działa w 7 językach</string>
+    <string name="paywall_chip_languages">Działa w 16 językach</string>
     <string name="paywall_section_eyebrow">WYBIERZ SWÓJ PLAN</string>
     <string name="paywall_section_title">Elastyczne plany dopasowane do Twoich celów</string>
     <string name="paywall_section_subtitle">Im dłuższa subskrypcja, tym lepsza cena!</string>
@@ -153,7 +153,7 @@
     <string name="paywall_feature_all">Wszystkie funkcje aplikacji</string>
     <string name="paywall_feature_presets">Inteligentne presety</string>
     <string name="paywall_feature_realtime">Analiza zleceń w czasie rzeczywistym</string>
-    <string name="paywall_feature_languages">Obsługa 7 języków</string>
+    <string name="paywall_feature_languages">Obsługa 16 języków</string>
     <string name="paywall_button_select">Wybierz</string>
     <string name="paywall_button_restore">Przywróć zakupy</string>
     <string name="paywall_button_hide">Ukryj</string>

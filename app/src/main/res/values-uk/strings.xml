@@ -135,7 +135,7 @@
     <string name="paywall_chip_analysis">Швидкий аналіз</string>
     <string name="paywall_chip_filters">Розумні фільтри</string>
     <string name="paywall_chip_income">Дохід між змінами</string>
-    <string name="paywall_chip_languages">Працює 7 мовами</string>
+    <string name="paywall_chip_languages">Працює 16 мовами</string>
     <string name="paywall_section_eyebrow">ОБЕРІТЬ СВІЙ ПЛАН</string>
     <string name="paywall_section_title">Гнучкі тарифи для ваших цілей</string>
     <string name="paywall_section_subtitle">Чим довша підписка — тим вигідніше!</string>
@@ -153,7 +153,7 @@
     <string name="paywall_feature_all">Усі функції застосунку</string>
     <string name="paywall_feature_presets">Розумні пресети</string>
     <string name="paywall_feature_realtime">Аналіз замовлень у реальному часі</string>
-    <string name="paywall_feature_languages">Підтримка 7 мов</string>
+    <string name="paywall_feature_languages">Підтримка 16 мов</string>
     <string name="paywall_button_select">Обрати</string>
     <string name="paywall_button_restore">Відновити покупки</string>
     <string name="paywall_button_hide">Приховати</string>

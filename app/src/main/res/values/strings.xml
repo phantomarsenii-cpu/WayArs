@@ -141,7 +141,7 @@
     <string name="paywall_chip_analysis">Fast analysis</string>
     <string name="paywall_chip_filters">Smart filters</string>
     <string name="paywall_chip_income">Income between shifts</string>
-    <string name="paywall_chip_languages">Works in 7 languages</string>
+    <string name="paywall_chip_languages">Works in 16 languages</string>
     <string name="paywall_section_eyebrow">CHOOSE YOUR PLAN</string>
     <string name="paywall_section_title">Flexible plans for your goals</string>
     <string name="paywall_section_subtitle">The longer the subscription, the better the value!</string>
@@ -159,7 +159,7 @@
     <string name="paywall_feature_all">All app features</string>
     <string name="paywall_feature_presets">Smart presets</string>
     <string name="paywall_feature_realtime">Real-time order analysis</string>
-    <string name="paywall_feature_languages">Support for 7 languages</string>
+    <string name="paywall_feature_languages">Support for 16 languages</string>
     <string name="paywall_button_select">Select</string>
     <string name="paywall_button_restore">Restore purchases</string>
     <string name="paywall_button_hide">Dismiss</string>

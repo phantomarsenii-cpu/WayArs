@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WayArs</string>
+    <string name="splash_slogan">Okos asszisztens sofőröknek és futároknak</string>
+    <string name="splash_start">Kezdés</string>
+
+    <string name="onboarding_title">Válaszd ki a módodat</string>
+    <string name="onboarding_subtitle">Beállítjuk neked az optimális szűrőket</string>
+    <string name="onboarding_customize_later">Testreszabás később</string>
+
+    <string name="preset_economy_title">Gazdaságos</string>
+    <string name="preset_economy_desc">Alacsony költségek, mérsékelt bevétel</string>
+    <string name="preset_balance_title">Kiegyensúlyozott</string>
+    <string name="preset_balance_desc">Kiegyensúlyozott idő és bevétel</string>
+    <string name="preset_profitable_title">Csak nyereséges</string>
+    <string name="preset_profitable_desc">Csak jól fizető rendelések</string>
+
+    <string name="dashboard_today_summary">Mai összesítő</string>
+    <string name="dashboard_active_time">Aktív idő</string>
+    <string name="dashboard_distance">Távolság</string>
+    <string name="dashboard_avg_rate">Átlagos díj</string>
+    <string name="dashboard_order_evaluation">Rendelés kiértékelése</string>
+    <string name="dashboard_orders">rendelés</string>
+    <string name="dashboard_no_order">Várakozás új rendelésre…</string>
+
+    <string name="verdict_good">JÓ</string>
+    <string name="verdict_bad">ROSSZ</string>
+    <string name="action_accept">Elfogadás</string>
+    <string name="action_reject">Elutasítás</string>
+
+    <string name="nav_home">Kezdőlap</string>
+    <string name="nav_stats">Statisztika</string>
+    <string name="nav_presets">Módok</string>
+    <string name="nav_settings">Beállítások</string>
+
+    <string name="settings_title">Beállítások</string>
+    <string name="settings_language">Nyelv</string>
+    <string name="settings_currency">Pénznem</string>
+    <string name="settings_preset">Mód</string>
+    <string name="settings_enable_accessibility">Képernyőolvasó szolgáltatás engedélyezése</string>
+    <string name="settings_enable_overlay">Lebegő widget engedélyezése</string>
+    <string name="settings_accessibility_hint">Szükséges a beérkező rendelések felismeréséhez (csak olvasás, automatikus koppintás nélkül)</string>
+    <string name="settings_overlay_hint">Szükséges a lebegő eredmény-widget megjelenítéséhez más alkalmazások felett</string>
+    <string name="notification_stop_action">Leállítás</string>
+
+    <string name="overlay_new_order">Új rendelés</string>
+    <string name="overlay_min_km">perc</string>
+
+    <string name="accessibility_service_description">A WayArs beolvassa a szállítási/taxi alkalmazások képernyőjén megjelenő rendelési adatokat (ár, távolság, idő), hogy segítsen gyorsabban dönteni. Soha nem koppint vagy módosít semmit automatikusan.</string>
+
+    <string name="accessibility_consent_title">Képernyőolvasási engedély</string>
+    <string name="accessibility_consent_body">Az új rendelések automatikus felismeréséhez a WayArs-nak el kell olvasnia az általad használt szállítási és taxi alkalmazások képernyőjén megjelenő szöveget — például az árat, a távolságot és a becsült időt.\n\nEz azt jelenti:\n• A WayArs csak az általad kiválasztott támogatott alkalmazásokból olvassa a rendelési adatokat. Soha nem olvas jelszavakat, üzeneteket vagy bármit, amit begépelsz.\n• A WayArs soha nem koppint, tölt ki vagy módosít semmit a képernyőn — csak olvas.\n• Minden ezen az eszközön kerül feldolgozásra. Semmi nem kerül elküldésre szerverre.\n\nEzt bármikor kikapcsolhatod a Beállításokban.</string>
+    <string name="accessibility_consent_allow">Engedélyezés és folytatás</string>
+    <string name="accessibility_consent_decline">Most nem</string>
+
+    <string name="stats_empty">Még nincs rendelés</string>
+    <string name="settings_custom_thresholds_title">Saját díjküszöbök</string>
+    <string name="settings_custom_thresholds_hint">Opcionális — saját %1$s/km értékeid, amelyeket a mód helyett használunk</string>
+    <string name="settings_custom_bad">Rossz rendelés, eddig</string>
+    <string name="settings_custom_average">Átlagos rendelés, ettől</string>
+    <string name="settings_custom_good">Jó rendelés, ettől</string>
+    <string name="settings_custom_save">Mentés</string>
+    <string name="settings_custom_clear">Mód használata helyette</string>
+    <string name="active_requires_permissions">Először engedélyezd a képernyőolvasást és a lebegő widgetet a Beállításokban</string>
+    <string name="dashboard_share_log">Beolvasási napló küldése</string>
+    <string name="verdict_average">ÁTLAGOS</string>
+    <string name="settings_enable_notifications">Értesítésekhez való hozzáférés engedélyezése</string>
+    <string name="settings_notifications_hint">Opcionális tartalék csatorna — elkapja az értesítésként érkező rendeléseket, amíg az alkalmazás minimalizálva van</string>
+    <string name="settings_permissions_title">Engedélyek</string>
+    <string name="settings_permissions_hint">Képernyőolvasás, lebegő widget, értesítések</string>
+
+    <string name="settings_vehicle_title">Jármű</string>
+    <string name="settings_vehicle_car">Autó</string>
+    <string name="settings_vehicle_scooter">Robogó</string>
+    <string name="settings_vehicle_bicycle">Kerékpár / elektromos roller</string>
+    <string name="settings_fuel_petrol">Benzin</string>
+    <string name="settings_fuel_diesel">Dízel</string>
+    <string name="settings_fuel_lpg">LPG / gáz</string>
+    <string name="settings_fuel_electric">Elektromos</string>
+    <string name="settings_vehicle_consumption">Fogyasztás 100 km-en</string>
+    <string name="settings_vehicle_price_fuel">Ár literenként</string>
+    <string name="settings_vehicle_price_electric">Ár kWh-ként</string>
+    <string name="settings_vehicle_save">Mentés</string>
+    <string name="settings_vehicle_summary_car">Autó · %1$s · %2$s/100km</string>
+    <string name="settings_vehicle_summary_fuel">%1$s · %2$s · %3$s/100km</string>
+    <string name="settings_vehicle_summary_no_fuel">%1$s · üzemanyagköltség nélkül</string>
+    <string name="verdict_net_profit">Nettó %1$s (üzemanyag %2$s)</string>
+    <string name="verdict_short_trip_net">Nettó %1$s (1 km alatti út)</string>
+    <string name="settings_saved">Mentve</string>
+    <string name="settings_supported_apps_title">Támogatott alkalmazások</string>
+    <string name="settings_supported_apps_hint">Beépített lista + az általad hozzáadott alkalmazások</string>
+    <string name="settings_supported_apps_builtin_label">Beépített:</string>
+    <string name="settings_supported_apps_custom_label">Általad hozzáadott:</string>
+    <string name="settings_add_from_installed">Kiválasztás a telepítettek közül</string>
+    <string name="settings_add_manually">Csomagazonosító megadása</string>
+    <string name="settings_package_id_label">Csomagazonosító (pl. com.example.app)</string>
+    <string name="settings_add">Hozzáadás</string>
+    <string name="settings_pick_installed_app_title">Válassz alkalmazást</string>
+    <string name="settings_search_apps_label">Keresés</string>
+    <string name="settings_cancel">Mégse</string>
+    <string name="settings_already_added">már hozzáadva</string>
+    <string name="settings_no_apps_found">Nem található alkalmazás</string>
+    <string name="settings_calibrated">Kalibrálva ✓</string>
+    <string name="settings_calibrate_action">Kalibráció szerkesztése</string>
+    <string name="settings_not_calibrated">Nincs kalibrálva</string>
+    <string name="settings_calibration_title">Ezen alkalmazás kalibrálása</string>
+    <string name="settings_calibration_no_data">Ehhez az alkalmazáshoz még nincsenek beolvasási adatok. Nyisd meg egy valós, aktív rendelési képernyőn, várj néhány másodpercet, majd nyisd meg újra ezt a párbeszédablakot.</string>
+    <string name="settings_calibration_instructions">Alább látható a szöveg, amelyet a WayArs legutóbb beolvasott ennek az alkalmazásnak a képernyőjéről. Koppints előbb az árat, majd a távolságot, majd az időt tartalmazó sorra.</string>
+    <string name="settings_calibration_role_money">Ár</string>
+    <string name="settings_calibration_role_distance">Távolság</string>
+    <string name="settings_calibration_role_time">Idő</string>
+    <string name="settings_calibration_money_token_label">Pénznem jelölő (szükség esetén szerkeszd)</string>
+    <string name="settings_calibration_distance_token_label">Távolság mértékegysége (szükség esetén szerkeszd)</string>
+    <string name="settings_calibration_time_token_label">Idő mértékegysége (szükség esetén szerkeszd)</string>
+    <string name="settings_calibration_clear">Kalibráció törlése</string>
+
+    <string name="settings_developer_website_url" translatable="false">https://phantomarsenii-cpu.github.io/AP-STUDIO/</string>
+    <string name="settings_about_title">Az alkalmazásról</string>
+    <string name="settings_privacy_title">Adatvédelmi irányelvek</string>
+    <string name="settings_terms_title">Felhasználási feltételek</string>
+    <string name="terms_gate_title">Felhasználási feltételek</string>
+    <string name="terms_gate_subtitle">A folytatás előtt kérjük, olvasd el és fogadd el a Felhasználási feltételeket.</string>
+    <string name="terms_gate_checkbox_label">Elolvastam és elfogadom a Felhasználási feltételeket</string>
+    <string name="terms_gate_accept_button">Elfogadás és folytatás</string>
+    <string name="settings_terms_accepted_at">Elfogadva: %1$s</string>
+    <string name="settings_visit_website">Fejlesztői weboldal megtekintése</string>
+    <string name="settings_close">Bezárás</string>
+    <string name="settings_about_content">"**WayArs**\nSzemélyes asszisztensed szállításhoz és taxizáshoz\n\nVerzió: %1$s\n\nA WayArs egy ingyenes eszköz, amelyet taxi- és szállítási alkalmazásokkal dolgozó sofőrök és futárok számára fejlesztettünk.\n\nAz alkalmazás automatikusan elemzi a képernyőn megjelenő adatokat és értesítéseket, segítve, hogy gyorsan eldöntsd, megéri-e elfogadni a rendelést, és valós időben nyomon kövesd a bevételedet.\n\n**Tervezés és fejlesztés:** AP STUDIO\n**Kapcsolat és támogatás:** apstudiomobile@gmail.com\n\nMinden harmadik féltől származó védjegy, logó és alkalmazásnév (beleértve, de nem kizárólagosan a Bolt, Uber, Wolt, FreeNow, Stuart és a felhasználó által hozzáadott egyéb neveket) a megfelelő tulajdonosaikhoz tartozik, és kizárólag tájékoztatási és azonosítási célokra használjuk."</string>
+    <string name="settings_privacy_content">"**WayArs adatvédelmi irányelvek**\nUtolsó frissítés: 2026. szeptember 12.\n\n**A magánéleted védelme**\nTiszteletben tartjuk a magánéletedet. A WayArs a Privacy by Design elv alapján készült — a fő képernyőelemzési és díjszámítási műveletek helyben, az eszközödön futnak.\n\n**Adatgyűjtés és -felhasználás**\n• Accessibility Service: az alkalmazás ezt a hozzáférést kizárólag a támogatott szállítási és taxi alkalmazások (beépített és az általad hozzáadott) képernyőjén megjelenő rendelési adatok (pl. ár, távolság) olvasására használja. Az alkalmazás soha nem rögzít jelszavakat, személyes adatokat vagy billentyűleütéseket.\n• Értesítések (Notification Listener): az értesítésekhez való hozzáférést csak az új munkaajánlatok felismerésére használjuk, amíg az alkalmazás a háttérben fut.\n• Jármű- és díjadatok: a Beállításokban megadott adatok (üzemanyag-fogyasztás, üzemanyagár, értékelési küszöbök) csak az eszköz helyi tárhelyén kerülnek tárolásra.\n\n**Előfizetések és harmadik féltől származó szolgáltatók (fizetések)**\nAz alkalmazás előfizetéses alapon kínál funkciókat. Az alkalmazás nem gyűjt és nem tárol részletes fizetési adatokat (például kártyaszámokat). A tranzakciók feldolgozásához és az előfizetési állapot ellenőrzéséhez megbízható, harmadik féltől származó szolgáltatókra támaszkodunk:\n• Google Play Billing (Google LLC): a fizetéseket és tranzakciókat közvetlenül a Google Play Áruház kezeli.\n• RevenueCat, Inc.: az előfizetési állapot ellenőrzése anonim eszköz- és tranzakcióazonosítók alapján.\n\n**Gyermekek adatvédelme**\nA WayArs kizárólag olyan felnőttek számára készült, akik jogosultak sofőrként vagy futárként dolgozni. Az alkalmazás nem irányul 16 év alatti gyermekekre, és tudatosan nem gyűjt vagy dolgoz fel gyermekek személyes adatait. Ha tudomást szerzel arról, hogy egy gyermek adatokat adott meg számunkra, kérjük, vedd fel velünk a kapcsolatot az apstudiomobile@gmail.com címen, hogy haladéktalanul megtehessük a szükséges lépéseket.\n\n**Engedélyek és előfizetés kezelése**\nA megadott engedélyeket bármikor visszavonhatod az Android rendszerbeállításokban, illetve előfizetésedet közvetlenül a Google Play fiókbeállításaidban kezelheted és mondhatod le."</string>
+    <string name="settings_terms_content">"**WayArs Felhasználási feltételek**\nUtolsó frissítés: 2026. szeptember 12.\n\n**Általános rendelkezések**\nA WayArs alkalmazás használatával elfogadod az alábbi feltételeket. Az alkalmazás egy önálló segédeszköz, amelyet az AP STUDIO fejlesztett, és nem áll hivatalos kapcsolatban, nem szponzorált és nem jóváhagyott semmilyen harmadik féltől származó alkalmazásszolgáltató (mint például Bolt, Uber, Wolt, FreeNow, Stuart, vagy bármely más, a felhasználó által a listához hozzáadott szolgáltató) által.\n\n**Segédjelleg és harmadik féltől származó alkalmazások**\n• Az alkalmazás kizárólag tájékoztatási és elemzési célokat szolgál. A jövedelmezőségi mutatókat (pénznem/km, becsült profit) a felhasználó által megadott adatok és a képernyőről leolvasott értékek alapján számítjuk ki.\n• A felhasználók saját maguk is hozzáadhatnak támogatott harmadik féltől származó alkalmazásokat. Az AP STUDIO nem garantálja a felhasználó által manuálisan hozzáadott alkalmazások helyes adatolvasását.\n\n**Felhasználói életkor**\nAz alkalmazást csak legalább 18 éves személyek használhatják (vagy azok, akik elérték az országukban a taxi/futár szolgáltatások nyújtásához szükséges életkort). Az alkalmazás nem gyermekeknek készült.\n\n**Előfizetések és fizetések**\n• Az előfizetési díjakat a kiválasztott csomagnak megfelelően a Google Play Áruház szedi be.\n• A felhasználók bármikor lemondhatják az előfizetés megújítását a Google Play fiókbeállításaikban.\n• A visszatérítéseket a Google Play Áruház szabályzata és szabályai szerint kezeljük.\n\n**Felelősség kizárása**\n• Az AP STUDIO nem felelős a helytelen képernyőolvasásból vagy a harmadik féltől származó alkalmazások felületének frissítéseiből/változásaiból eredő számítási eltérésekért.\n• Az AP STUDIO nem felelős a felhasználó által az alkalmazás mutatói alapján hozott pénzügyi, üzleti vagy vezetési döntésekért.\n• A felhasználók kötelesek biztonságosan használni telefonjukat, és vezetés közben szigorúan betartani a közlekedési szabályokat.\n• Az AP STUDIO nem felelős a felhasználó fiókjainak ideiglenes vagy végleges felfüggesztéséért harmadik féltől származó szolgáltatásoknál (Uber, Bolt, Wolt stb.).\n• A felhasználó teljes mértékben saját felelősségére használja az alkalmazást, és önállóan dönt annak használatáról.\n• Az alkalmazás önálló segédeszköz, és nincs hivatalos kapcsolatban semmilyen taxi- vagy szállítási platformmal.\n\n**Kapcsolat**\nBármilyen kérdést, megjegyzést vagy hibabejelentést az alábbi címre küldj: apstudiomobile@gmail.com."</string>
+
+    <!-- Paywall -->
+    <string name="paywall_badge_full_access">Teljes hozzáférés</string>
+    <string name="paywall_title">Oldd fel a WayArs\nteljes potenciálját</string>
+    <string name="paywall_subtitle">A WayArs nem csak egy asszisztens — ez a személyes eszközöd a stabil és maximális bevételhez.</string>
+    <string name="paywall_chip_analysis">Gyors elemzés</string>
+    <string name="paywall_chip_filters">Okos szűrők</string>
+    <string name="paywall_chip_income">Bevétel a műszakok között</string>
+    <string name="paywall_chip_languages">16 nyelven működik</string>
+    <string name="paywall_section_eyebrow">VÁLASZD KI A CSOMAGOT</string>
+    <string name="paywall_section_title">Rugalmas csomagok céljaidhoz</string>
+    <string name="paywall_section_subtitle">Minél hosszabb az előfizetés, annál jobb az ár-érték arány!</string>
+    <string name="paywall_plan_yearly_title">Éves</string>
+    <string name="paywall_plan_monthly_title">Havi</string>
+    <string name="paywall_plan_weekly_title">Heti</string>
+    <string name="paywall_plan_yearly_days">365 nap teljes hozzáférés</string>
+    <string name="paywall_plan_monthly_days">30 nap teljes hozzáférés</string>
+    <string name="paywall_plan_weekly_days">7 nap teljes hozzáférés</string>
+    <string name="paywall_badge_popular">Népszerű</string>
+    <string name="paywall_badge_trial7">7 nap ingyen</string>
+    <string name="paywall_period_year">/ év</string>
+    <string name="paywall_period_month">/ hónap</string>
+    <string name="paywall_period_week">/ hét</string>
+    <string name="paywall_feature_all">Az alkalmazás összes funkciója</string>
+    <string name="paywall_feature_presets">Okos módok</string>
+    <string name="paywall_feature_realtime">Valós idejű rendeléselemzés</string>
+    <string name="paywall_feature_languages">16 nyelv támogatása</string>
+    <string name="paywall_button_select">Kiválasztás</string>
+    <string name="paywall_button_restore">Vásárlások visszaállítása</string>
+    <string name="paywall_button_hide">Bezárás</string>
+    <string name="paywall_trial_notice">Az előfizetésed egy 7 napos ingyenes próbaidőszakkal kezdődik. A kiválasztott csomag szerint automatikusan megújul. Bármikor lemondhatod.</string>
+    <string name="paywall_footer_secured_title">Biztonságos fizetés</string>
+    <string name="paywall_footer_secured_subtitle">Google Play és RevenueCat kezeli</string>
+    <string name="paywall_footer_google_title">Google Play</string>
+    <string name="paywall_footer_google_subtitle">Biztonságos fizetés Google Play és RevenueCat révén</string>
+    <string name="paywall_footer_tagline">WayArs — utad a stabil bevétel felé</string>
+    <string name="paywall_gate_error_title">Nem sikerült ellenőrizni az előfizetésedet</string>
+    <string name="paywall_gate_error_retry">Újrapróbálás</string>
+    <string name="paywall_tagline">OKOS SZÁLLÍTÁSI ÉS TAXI ASSZISZTENS</string>
+    <string name="paywall_compat_label">Együtt működik azokkal az alkalmazásokkal, amelyekkel már dolgozol</string>
+    <string name="paywall_mock_selected_toast">%1$s csomag kiválasztva — a vásárlás a Google Play-es megjelenés után nyílik meg</string>
+    <string name="paywall_pro_header">WayArs Pro</string>
+    <string name="paywall_cta_trial">Próbáld ki 7 napig %1$s-ért</string>
+    <string name="paywall_badge_best_value">★ LEGJOBB ÉRTÉK • SPÓROLJ 30%-OT</string>
+    <string name="paywall_badge_popular_discount">★ Népszerű • -15%</string>
+    <string name="paywall_per_month_hint">Csak %1$s / hónap</string>
+    <string name="paywall_data_safe">Az adataid biztonságban vannak</string>
+    <string name="paywall_no_charge_notice">Az első 7 napért nem számítunk fel díjat. Bármikor lemondhatod a Google Play-ben.</string>
+</resources>
