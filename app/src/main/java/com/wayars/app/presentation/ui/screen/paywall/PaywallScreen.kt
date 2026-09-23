@@ -50,10 +50,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -276,29 +279,51 @@ fun PaywallScreen(
     }
 }
 
-/** Soft blurred-glow bands across the top of the screen — a lightweight
- *  stand-in for the reference's multi-layer animated aurora background
- *  (three skewed, blurred gradient bands + a large radial glow). Built
- *  from plain radial/linear gradients that already fade to transparent,
- *  so no blur modifier (API 31+ only) is needed to get a soft look. */
+/** A soft radial glow behind the paywall header.
+ *
+ *  Previously this was a `Box` with a fixed `.height(340.dp)`, filled with a
+ *  radial gradient whose color stops (0.0 -> 0.35 -> 0.7 -> 1.0 transparent)
+ *  are fractions of its `radius`. Because that radius (900px) covered more
+ *  vertical distance than the box was tall, the gradient hadn't reached
+ *  its fully-transparent stop yet by the time it hit the box's bottom edge
+ *  — so instead of fading out, it was hard-clipped there, leaving a visible
+ *  straight seam across the screen where the box ended and the flat
+ *  [WaProBackground] began.
+ *
+ *  Fixed by drawing across the ENTIRE screen instead of a short fixed-height
+ *  box: the gradient itself still fades out (and reaches full transparency)
+ *  within the same short distance near the top as before, but because
+ *  there's no rectangular box edge nearby to cut it off, it blends into
+ *  [WaProBackground] smoothly with nothing left to draw a hard line. The
+ *  gradient's center is pinned to a fixed distance from the top (not the
+ *  center of the draw area) so the glow still sits behind the header/logo,
+ *  exactly like before. */
 @Composable
 private fun AuroraGlow() {
+    val density = LocalDensity.current
+    val auroraGreen = WaProAuroraGreen
+    val auroraCyan = WaProCyan
+    val auroraPurple = WaProPurpleBadge
+
     Box(
         modifier = Modifier
-            .fillMaxWidth()
-            .height(340.dp)
-            .background(
-                Brush.radialGradient(
-                    colorStops = arrayOf(
-                        0.0f to WaProAuroraGreen.copy(alpha = 0.20f),
-                        0.35f to WaProCyan.copy(alpha = 0.12f),
-                        0.7f to WaProPurpleBadge.copy(alpha = 0.08f),
-                        1.0f to Color.Transparent
-                    ),
-                    center = androidx.compose.ui.geometry.Offset.Unspecified,
-                    radius = 900f
+            .fillMaxSize()
+            .drawBehind {
+                val radiusPx = with(density) { 300.dp.toPx() }
+                val centerYPx = with(density) { 150.dp.toPx() }
+                drawRect(
+                    brush = Brush.radialGradient(
+                        colorStops = arrayOf(
+                            0.0f to auroraGreen.copy(alpha = 0.20f),
+                            0.35f to auroraCyan.copy(alpha = 0.12f),
+                            0.7f to auroraPurple.copy(alpha = 0.08f),
+                            1.0f to Color.Transparent
+                        ),
+                        center = Offset(size.width / 2f, centerYPx),
+                        radius = radiusPx
+                    )
                 )
-            )
+            }
     )
 }
 
