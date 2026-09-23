@@ -94,7 +94,67 @@ object ScreenTextParser {
         Regex("""(?<!\d)¥[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""") to Currency.JPY,
         Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?¥""") to Currency.JPY,
         Regex("""(?<!\d)(?:JPY)[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.JPY,
-        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:JPY)""", RegexOption.IGNORE_CASE) to Currency.JPY
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:JPY)""", RegexOption.IGNORE_CASE) to Currency.JPY,
+
+        // --- CIS ---
+        Regex("""(?<!\d)(?:₽|RUB|руб\.?)[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.RUB,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:₽|RUB|руб\.?)""", RegexOption.IGNORE_CASE) to Currency.RUB,
+        Regex("""(?<!\d)(?:₸|KZT|тг\.?)[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.KZT,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:₸|KZT|тг\.?)""", RegexOption.IGNORE_CASE) to Currency.KZT,
+        // "Br" is Belarusian ruble's own Latin abbreviation (distinct from
+        // Russia's "руб") — word-bounded so it doesn't match "Br" glued
+        // inside unrelated text.
+        Regex("""(?<!\d)(?:BYN|Br\b)[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.BYN,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:BYN|Br\b)""", RegexOption.IGNORE_CASE) to Currency.BYN,
+        Regex("""(?<!\d)(?:UZS|so'?m|сум)[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.UZS,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:UZS|so'?m|сум)""", RegexOption.IGNORE_CASE) to Currency.UZS,
+        Regex("""(?<!\d)(?:₾|GEL)[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.GEL,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:₾|GEL)""", RegexOption.IGNORE_CASE) to Currency.GEL,
+        Regex("""(?<!\d)(?:֏|AMD)[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.AMD,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:֏|AMD)""", RegexOption.IGNORE_CASE) to Currency.AMD,
+        Regex("""(?<!\d)(?:₼|AZN)[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.AZN,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:₼|AZN)""", RegexOption.IGNORE_CASE) to Currency.AZN,
+        // "сом" is shared conversationally across a few Central Asian
+        // currencies, but paired here only with the unambiguous KGS code —
+        // relying on the bare word alone risked colliding with Uzbekistan's
+        // "сум" pattern above on OCR/rendering quirks, so it's intentionally
+        // left out; KGS detection falls back to the "KGS" code text only.
+        Regex("""(?<!\d)KGS[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.KGS,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?KGS""", RegexOption.IGNORE_CASE) to Currency.KGS,
+
+        // --- Europe ---
+        // NOTE: "lei" (no diacritics, plural of "leu") is the everyday name
+        // for BOTH Moldova's leu (MDL, pattern above) and Romania's leu
+        // (RON) — genuinely the same word in both countries, not a parsing
+        // bug. Text alone can't disambiguate them, so bare "lei" keeps
+        // resolving to MDL (pre-existing behavior, unchanged) and RON is
+        // only auto-detected via its distinct "RON" ISO code. A driver who
+        // needs Romanian "lei" text specifically recognized as RON (not
+        // MDL) should set that package's currency explicitly via the
+        // per-app hint in Settings, which always overrides this table.
+        Regex("""(?<!\d)RON[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.RON,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?RON""", RegexOption.IGNORE_CASE) to Currency.RON,
+        Regex("""(?<!\d)(?:Kč|CZK)[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.CZK,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:Kč|CZK)""", RegexOption.IGNORE_CASE) to Currency.CZK,
+        // Hungarian forint has no minor unit in normal display ("1500 Ft").
+        Regex("""(?<!\d)(?:Ft\b|HUF)[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.HUF,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:Ft\b|HUF)""", RegexOption.IGNORE_CASE) to Currency.HUF,
+        Regex("""(?<!\d)(?:лв\.?|BGN)[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.BGN,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:лв\.?|BGN)""", RegexOption.IGNORE_CASE) to Currency.BGN,
+        Regex("""(?<!\d)CHF[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.CHF,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?CHF""", RegexOption.IGNORE_CASE) to Currency.CHF,
+        // SEK/NOK/DKK all use the same bare "kr" symbol in everyday use, so
+        // — unlike every other currency above — matching on that symbol
+        // alone would make these three indistinguishable from each other.
+        // Detection is intentionally restricted to each one's distinct
+        // 3-letter ISO code; an app that only ever prints bare "kr" needs a
+        // per-package currency hint in Settings to resolve correctly.
+        Regex("""(?<!\d)SEK[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.SEK,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?SEK""", RegexOption.IGNORE_CASE) to Currency.SEK,
+        Regex("""(?<!\d)NOK[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.NOK,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?NOK""", RegexOption.IGNORE_CASE) to Currency.NOK,
+        Regex("""(?<!\d)DKK[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.DKK,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?DKK""", RegexOption.IGNORE_CASE) to Currency.DKK
     )
 
     /**
