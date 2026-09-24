@@ -52,7 +52,9 @@ fun StatsScreen(orders: List<OrderRecord>, modifier: Modifier = Modifier) {
     LazyColumn(
         modifier = modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
-        contentPadding = PaddingValues(bottom = 90.dp)
+        // See bottomNavBarClearance's doc: device-accurate clearance for
+        // the floating nav pill, instead of a fixed guess.
+        contentPadding = PaddingValues(bottom = com.wayars.app.presentation.ui.component.bottomNavBarClearance())
     ) {
         items(orders) { order ->
             Row(

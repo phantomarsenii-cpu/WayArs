@@ -260,8 +260,10 @@ fun DashboardScreen(
 
         // Bottom inset so content scrolls fully BEHIND the floating nav pill
         // instead of stopping short with a separately-colored reserved gap
-        // above it.
-        androidx.compose.foundation.layout.Spacer(Modifier.height(90.dp))
+        // above it. Computed from the device's actual system nav-bar inset
+        // (see bottomNavBarClearance) rather than a fixed guess, so it
+        // stays correct on 3-button nav devices too, not just gesture nav.
+        androidx.compose.foundation.layout.Spacer(Modifier.height(com.wayars.app.presentation.ui.component.bottomNavBarClearance()))
     }
 }
 

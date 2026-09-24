@@ -125,7 +125,9 @@ fun SettingsScreen(
     LazyColumn(
         modifier = modifier.fillMaxSize().padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
-        contentPadding = PaddingValues(bottom = 90.dp)
+        // See bottomNavBarClearance's doc: device-accurate clearance for
+        // the floating nav pill, instead of a fixed guess.
+        contentPadding = PaddingValues(bottom = com.wayars.app.presentation.ui.component.bottomNavBarClearance())
     ) {
         item {
             Text(stringResource(R.string.settings_title), style = MaterialTheme.typography.headlineMedium, color = MaterialTheme.colorScheme.onBackground)

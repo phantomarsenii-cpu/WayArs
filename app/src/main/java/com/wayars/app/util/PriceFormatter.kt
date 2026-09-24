@@ -74,12 +74,14 @@ object PriceFormatter {
 
     /**
      * Formats a zero amount in [currencyCode] with no decimals (e.g. "0 zł",
-     * "$0"), for copy like "Try 7 days for 0 zł". Returns [fallback]
-     * (normally "$0") when [currencyCode] is null/unknown — e.g. the
-     * paywall is still showing mock pricing and hasn't loaded a real
-     * currency yet.
+     * "$0"). Returns [fallback] (or null) when [currencyCode] is null or
+     * isn't one of the curated [homeLocales] — Play Billing supports far
+     * more currencies than that curated list covers, so callers with
+     * access to the currency's OWN live formatted price text should prefer
+     * deriving their fallback from that (see PaywallScreen's
+     * zeroPriceFromPriceText) rather than passing a hardcoded string here.
      */
-    fun zero(currencyCode: String?, fallback: String): String {
+    fun zero(currencyCode: String?, fallback: String? = null): String? {
         val formatter = currencyCode?.let { currencyFormatterFor(it) } ?: return fallback
         formatter.maximumFractionDigits = 0
         formatter.minimumFractionDigits = 0

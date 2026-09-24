@@ -245,10 +245,25 @@ fun PaywallScreen(
             Spacer(Modifier.height(24.dp))
 
             // "0" in whichever currency the highlighted plan actually
-            // charges in (e.g. "0 zł" for a PLN purchase), not a hardcoded
-            // "$0" — falls back to "$0" while only mock pricing has loaded.
-            val selectedCurrencyCode = state.plans.find { it.plan == selectedPlan }?.priceCurrencyCode
-            val zeroPriceText = PriceFormatter.zero(selectedCurrencyCode, fallback = "$0")
+            // charges in (e.g. "0 zł" for a PLN purchase, "₦0" for an NGN
+            // purchase) — never a hardcoded "$0".
+            //
+            // PriceFormatter.zero() only knows a curated list of home
+            // locales (see PriceFormatter.kt) and used to fall back to a
+            // literal "$0" for any currency outside that list. Google Play
+            // sells in far more currencies than that curated list covers —
+            // Nigeria's NGN, for one — so on a real NGN purchase this
+            // button kept showing "Try 7 days for $0" right next to plan
+            // cards correctly showing "₦43,500.00 / year", a mismatch a
+            // tester caught. The plan's own priceText is ALWAYS correct
+            // (it's either RevenueCat's live formatted price, or Play's own
+            // .formatted string used as fallback — see priceText's
+            // construction in SubscriptionViewModel), so that's what the
+            // fallback derives from now instead of a hardcoded symbol.
+            val selectedPlanEntry = state.plans.find { it.plan == selectedPlan }
+            val zeroPriceText = PriceFormatter.zero(selectedPlanEntry?.priceCurrencyCode, fallback = null)
+                ?: selectedPlanEntry?.priceText?.let(::zeroPriceFromPriceText)
+                ?: "$0"
 
             AuroraCtaButton(
                 text = stringResource(R.string.paywall_cta_trial, zeroPriceText),
@@ -691,6 +706,29 @@ private fun ProGateErrorBanner(message: String, onRetry: () -> Unit) {
             )
         }
     }
+}
+
+/**
+ * Turns a real price string like "₦43,500.00" or "43 500,00 zł" into a
+ * zero-amount version in the SAME currency and placement — "₦0" / "0 zł" —
+ * by keeping whatever comes before the first digit and after the last
+ * digit, and dropping the numeric span itself. Returns null if [priceText]
+ * has no digits at all.
+ *
+ * Deliberately span-based (first digit .. last digit) rather than a single
+ * capture-group regex: it stays correct regardless of whether the amount
+ * uses a comma, a space, or a dot as its thousands separator, which a
+ * simple "digits, then one optional separator+digits" pattern gets wrong
+ * for grouped amounts like "43,500.00" or "43 500,00".
+ */
+private fun zeroPriceFromPriceText(priceText: String): String? {
+    val trimmed = priceText.trim()
+    val firstDigit = trimmed.indexOfFirst { it.isDigit() }
+    if (firstDigit == -1) return null
+    val lastDigit = trimmed.indexOfLast { it.isDigit() }
+    val prefix = trimmed.substring(0, firstDigit)
+    val suffix = trimmed.substring(lastDigit + 1)
+    return "$prefix" + "0" + suffix
 }
 
 /**

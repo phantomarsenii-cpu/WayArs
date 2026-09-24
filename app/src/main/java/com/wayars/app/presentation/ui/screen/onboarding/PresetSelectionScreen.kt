@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -40,8 +39,19 @@ fun PresetSelectionScreen(
         PresetUi(PresetType.PROFITABLE_ONLY, stringResource(R.string.preset_profitable_title), stringResource(R.string.preset_profitable_desc))
     )
 
+    // Bottom padding reserves clearance for whichever sits below this
+    // screen: when shown standalone during onboarding, bottomNavBarClearance()
+    // over-reserves a little (harmless — just some extra blank space, since
+    // no floating pill exists yet), but when this SAME composable is reused
+    // as the "Presets" tab inside MainScreen (under the floating BottomNavBar
+    // pill), that space is what keeps "customize later" from ending up
+    // hidden behind the pill — a fixed navigationBarsPadding() alone only
+    // cleared the raw system nav bar, not the pill's own extra footprint.
     Column(
-        modifier = modifier.fillMaxSize().navigationBarsPadding().padding(24.dp),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(24.dp)
+            .padding(bottom = com.wayars.app.presentation.ui.component.bottomNavBarClearance()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
@@ -63,7 +73,7 @@ fun PresetSelectionScreen(
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(14.dp),
-            contentPadding = PaddingValues(bottom = 90.dp)
+            contentPadding = PaddingValues(bottom = 12.dp)
         ) {
             items(presets) { preset ->
                 PresetCard(
