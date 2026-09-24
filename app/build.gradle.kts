@@ -146,6 +146,26 @@ android {
         }
     }
 
+    // Without this, Google Play's Dynamic Delivery does its default thing
+    // for an Android App Bundle: it only ships the ONE language resource
+    // split matching each device's current OS language (plus the base/
+    // English default) to that specific install — every OTHER language's
+    // strings.xml is simply never downloaded to that device at all. The
+    // in-app language picker (LocaleManager) still successfully switches
+    // the Activity's Configuration locale on selection, but Android's
+    // resource resolution then can't find the matching values-XX/ split
+    // locally and silently falls through to the base values/ (English) —
+    // which is exactly the "picking most languages just shows English"
+    // bug a tester reported. Disabling the split bundles every language's
+    // resources into the base module for every install, regardless of the
+    // device's OS language, so every one of LocaleManager.supported is
+    // always actually present to switch to.
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
+
 }
 
 // Rename the output file itself (not just the artifact zip) to WayArs.apk

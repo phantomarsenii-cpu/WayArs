@@ -2,8 +2,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.WayArs" parent="android:Theme.Material.NoActionBar">
         <item name="android:windowBackground">@color/wa_background</item>
-        <item name="android:statusBarColor">@color/wa_background</item>
-        <item name="android:navigationBarColor">@color/wa_surface</item>
+        <!-- android:statusBarColor/navigationBarColor removed: these are
+             exactly the legacy attributes Google Play's pre-launch report
+             flags under "edge-to-edge may not work for all users" — they
+             directly contradict enableEdgeToEdge() (called in
+             MainActivity.onCreate), which already makes both system bars
+             transparent and draws our own Compose background behind them
+             (see WayArsNavHost). Having both set at once is a contradiction:
+             the system tries to honor a solid bar color here while
+             enableEdgeToEdge() tries to make it transparent, which is
+             unreliable across OEMs/versions — removing these two lines is
+             the actual fix, not just a suppressed warning. -->
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
     </style>
