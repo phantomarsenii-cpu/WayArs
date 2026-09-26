@@ -250,12 +250,22 @@ fun WayArsNavHost(
                 // as tapping that toggle off, the moment the paywall shows
                 // for a lapsed subscription.
                 val mainContext = LocalContext.current
+
+                // Shared by the reactive redirect below AND by the Dashboard
+                // "Active" switch (see DashboardScreen.onSubscriptionRequired):
+                // both need the exact same "send them to the paywall" action,
+                // so a lapsed user can never end up looking at MAIN with no
+                // way back to the paywall short of restarting the app.
+                fun goToPaywall() {
+                    ScanningState.setActive(false, mainContext)
+                    navController.navigate(Routes.PAYWALL) {
+                        popUpTo(Routes.MAIN) { inclusive = true }
+                    }
+                }
+
                 LaunchedEffect(gateState) {
                     if (gateState is SubscriptionState.NotSubscribed) {
-                        ScanningState.setActive(false, mainContext)
-                        navController.navigate(Routes.PAYWALL) {
-                            popUpTo(Routes.MAIN) { inclusive = true }
-                        }
+                        goToPaywall()
                     }
                 }
 
@@ -284,7 +294,9 @@ fun WayArsNavHost(
                     onRemoveCustomPackage = { viewModel.removeCustomPackage(it) },
                     packageHints = packageHints,
                     onSavePackageHint = { viewModel.savePackageHint(it) },
-                    onClearPackageHint = { viewModel.clearPackageHint(it) }
+                    onClearPackageHint = { viewModel.clearPackageHint(it) },
+                    isSubscribed = gateState is SubscriptionState.Subscribed,
+                    onSubscriptionRequired = { goToPaywall() }
                 )
                 }
             }

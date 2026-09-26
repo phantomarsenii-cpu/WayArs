@@ -58,7 +58,9 @@ fun MainScreen(
     onRemoveCustomPackage: (String) -> Unit,
     packageHints: Map<String, com.wayars.app.domain.model.PackageHint>,
     onSavePackageHint: (com.wayars.app.domain.model.PackageHint) -> Unit,
-    onClearPackageHint: (String) -> Unit
+    onClearPackageHint: (String) -> Unit,
+    isSubscribed: Boolean,
+    onSubscriptionRequired: () -> Unit
 ) {
     var tab by remember { mutableStateOf(MainTab.HOME) }
 
@@ -72,7 +74,12 @@ fun MainScreen(
     // separately-colored dead zone.
     Box(modifier = Modifier.fillMaxSize()) {
         when (tab) {
-            MainTab.HOME -> DashboardScreen(summary = summary, latestEvaluation = latestEvaluation)
+            MainTab.HOME -> DashboardScreen(
+                summary = summary,
+                latestEvaluation = latestEvaluation,
+                isSubscribed = isSubscribed,
+                onSubscriptionRequired = onSubscriptionRequired
+            )
             MainTab.STATS -> StatsScreen(orders = todayOrders)
             MainTab.PRESETS -> PresetSelectionScreen(
                 selected = preset,

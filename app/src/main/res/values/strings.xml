@@ -67,6 +67,7 @@
     <string name="settings_custom_save">Save</string>
     <string name="settings_custom_clear">Use preset instead</string>
     <string name="active_requires_permissions">Enable screen reading and the floating widget in Settings first</string>
+    <string name="active_requires_subscription">Your subscription has ended — subscribe again to turn scanning back on</string>
     <string name="dashboard_share_log">Send scan log</string>
     <string name="verdict_average">AVERAGE</string>
     <string name="settings_enable_notifications">Enable notification access</string>

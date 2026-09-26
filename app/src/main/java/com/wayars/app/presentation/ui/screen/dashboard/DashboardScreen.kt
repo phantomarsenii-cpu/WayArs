@@ -61,10 +61,13 @@ import com.wayars.app.util.CurrencyFormatter
 fun DashboardScreen(
     summary: TodaySummary,
     latestEvaluation: OrderEvaluation?,
+    isSubscribed: Boolean,
+    onSubscriptionRequired: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
     val isActive by ScanningState.isActive.collectAsState()
+    val requiresSubscriptionToast = stringResource(R.string.active_requires_subscription)
     // Only a FINISHED session's file ever lands here (see ScanLogFile), so
     // this is never offered while a scan is still being written to.
     val lastLogFile by ScanLogFile.lastCompletedLogFile.collectAsState()
@@ -80,6 +83,23 @@ fun DashboardScreen(
     ) { /* proceed regardless of the result — see activateScanning below */ }
 
     fun activateScanning() {
+        // Gate #1, right here at the source of truth for "Active": this is
+        // the ONE place the switch actually flips ScanningState on, so it's
+        // the one place that must refuse to do so without a live, server-
+        // verified subscription — the LaunchedEffect(gateState) redirect to
+        // the paywall in WayArsNavHost is a *reaction* to an already-lapsed
+        // subscription, not a gate on this action, and it only runs while
+        // MainScreen is composed. Without this check, a lapsed subscriber
+        // sitting on the Dashboard (e.g. in the brief window before that
+        // redirect fires, or if it's ever missed) could just flip Active
+        // back on with nothing to stop them. isSubscribed is derived the
+        // same way (from SubscriptionViewModel.gateState, server-verified
+        // via RevenueCat) so this can't be spoofed by anything on-device.
+        if (!isSubscribed) {
+            Toast.makeText(context, requiresSubscriptionToast, Toast.LENGTH_LONG).show()
+            onSubscriptionRequired()
+            return
+        }
         val overlayOk = Settings.canDrawOverlays(context)
         val accessibilityOk = AccessibilityUtils.isServiceEnabled(context)
         if (overlayOk && accessibilityOk) {
@@ -139,7 +159,15 @@ fun DashboardScreen(
                     checked = isActive,
                     onCheckedChange = { checked ->
                         if (checked) {
-                            val needsNotificationPermission = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+                            // Check the subscription BEFORE asking for the
+                            // notification permission — no point prompting a
+                            // lapsed subscriber for a system permission on
+                            // the way to a paywall redirect. activateScanning()
+                            // re-checks isSubscribed itself either way (it's
+                            // the real gate); this just skips the pointless
+                            // permission prompt when we already know it'll refuse.
+                            val needsNotificationPermission = isSubscribed &&
+                                Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
                                 ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) !=
                                 PackageManager.PERMISSION_GRANTED
                             if (needsNotificationPermission) {

@@ -21,11 +21,17 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
-// How often the subscription entitlement is re-checked. Short enough that a
-// lapsed trial/subscription is caught reasonably quickly after it actually
-// expires, long enough not to hammer RevenueCat/Play Billing for an app
-// that's just sitting open or scanning in the background.
-private const val SUBSCRIPTION_POLL_INTERVAL_MS = 30_000L
+// How often the subscription entitlement is re-checked while scanning keeps
+// running in the background (app minimized). Foreground re-opens are no
+// longer bound by this at all (see onStart's checkSubscriptionNow() call) —
+// this interval only matters for catching a lapse WHILE the app stays
+// minimized the whole time. 10s (was 30s): still nowhere near instant for
+// that specific case (nothing client-side can be, short of a push from
+// RevenueCat/FCM — a genuine server-push gate is a bigger change than this
+// fix), but tight enough that "keeps scanning for a full 30s after it
+// expired, background or not" is no longer true, without hammering
+// RevenueCat/Play Billing for an app that's just sitting minimized.
+private const val SUBSCRIPTION_POLL_INTERVAL_MS = 10_000L
 
 class WayArsApplication : Application() {
 
@@ -105,6 +111,19 @@ class WayArsApplication : Application() {
         ProcessLifecycleOwner.get().lifecycle.addObserver(object : DefaultLifecycleObserver {
             override fun onStart(owner: LifecycleOwner) {
                 isAppForegrounded = true
+                // startPollingIfNeeded() alone isn't enough here: if scanning
+                // was already running in the background, pollingJob is still
+                // alive and sitting inside its delay(), so the early-return
+                // in startPollingIfNeeded() means coming back to the
+                // foreground wouldn't actually re-check anything until that
+                // delay happened to elapse on its own — up to
+                // SUBSCRIPTION_POLL_INTERVAL_MS of showing a stale
+                // "Subscribed" gate right after reopening a lapsed app.
+                // Firing one immediate, independent check here — every time
+                // the app comes to the foreground, loop running or not — is
+                // what actually makes "reopen the app -> see the paywall
+                // right away" true instead of "...within ~30s".
+                applicationScope.launch { checkSubscriptionNow() }
                 startPollingIfNeeded()
             }
 
@@ -131,17 +150,26 @@ class WayArsApplication : Application() {
         }
     }
 
+    /**
+     * One-shot: refresh CustomerInfo and, if the entitlement isn't active,
+     * gate scanning off right now — same effect as tapping the Dashboard
+     * "Active" switch off. Shared by the periodic loop below and by the
+     * immediate on-foreground check in onStart().
+     */
+    private suspend fun checkSubscriptionNow() {
+        container.subscriptionRepository.refreshCustomerInfo()
+        val stillSubscribed =
+            container.subscriptionRepository.subscriptionState.value is SubscriptionState.Subscribed
+        if (!stillSubscribed && ScanningState.isActive.value) {
+            ScanningState.setActive(false, this@WayArsApplication)
+        }
+    }
+
     private fun startPollingIfNeeded() {
         if (pollingJob?.isActive == true) return
         pollingJob = applicationScope.launch {
             while (isActive) {
-                container.subscriptionRepository.refreshCustomerInfo()
-
-                val stillSubscribed =
-                    container.subscriptionRepository.subscriptionState.value is SubscriptionState.Subscribed
-                if (!stillSubscribed && ScanningState.isActive.value) {
-                    ScanningState.setActive(false, this@WayArsApplication)
-                }
+                checkSubscriptionNow()
 
                 // Nothing left to watch for: the app isn't visible and
                 // scanning isn't running — stop until either comes back.

@@ -62,6 +62,7 @@
     <string name="settings_custom_save">Сохранить</string>
     <string name="settings_custom_clear">Использовать пресет</string>
     <string name="active_requires_permissions">Сначала включите чтение экрана и плавающий виджет в Настройках</string>
+    <string name="active_requires_subscription">Подписка закончилась — оформите её снова, чтобы включить сканирование</string>
     <string name="dashboard_share_log">Отправить лог сканирования</string>
     <string name="verdict_average">ПРИЕМЛЕМЫЙ</string>
     <string name="settings_enable_notifications">Включить доступ к уведомлениям</string>
