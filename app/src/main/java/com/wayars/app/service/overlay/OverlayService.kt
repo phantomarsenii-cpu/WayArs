@@ -32,6 +32,7 @@ import com.wayars.app.presentation.widget.AnimatedOverlayCard
 import com.wayars.app.presentation.widget.OverlayContent
 import com.wayars.app.presentation.widget.OverlayLifecycleOwner
 import com.wayars.app.presentation.widget.OverlayState
+import com.wayars.app.service.accessibility.DecidedOrdersState
 import com.wayars.app.service.accessibility.ScanningState
 import com.wayars.app.util.LocaleManager
 import com.wayars.app.util.MotionPrefs
@@ -234,6 +235,14 @@ class OverlayService : LifecycleService() {
         OverlayState.clear()
         if (sourcePackage != null) {
             ScanningState.suppressScanningBriefly(sourcePackage)
+            if (evaluation != null) {
+                // Remembered regardless of Accept vs Reject — either way the
+                // driver has already made this call, so reopening the same
+                // order's screen later shouldn't ask again. See
+                // DecidedOrdersState's own doc for why earnings+distance is
+                // the key used instead of a real order ID.
+                DecidedOrdersState.markDecided(sourcePackage, evaluation.earnings, evaluation.distanceKm, evaluation.currency)
+            }
         }
         if (accepted && evaluation != null) {
             lifecycleScope.launch {

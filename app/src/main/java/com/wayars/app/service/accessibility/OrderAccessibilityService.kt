@@ -416,6 +416,14 @@ class OrderAccessibilityService : AccessibilityService() {
         val timeMinutes = candidate.timeMinutes ?: 0.0
         val currency = candidate.currency ?: currentCurrency
 
+        if (DecidedOrdersState.wasRecentlyDecided(eventPackage, earnings, distanceKm, currency)) {
+            // Driver already Accepted/Rejected this exact order — reopening
+            // its full-screen detail view (very normal, e.g. via "View
+            // tasks" right after accepting) must not ask again. See
+            // DecidedOrdersState's own doc for how "same order" is keyed.
+            return
+        }
+
         val container = applicationContext.appContainer()
         val evaluation = container.evaluateOrderUseCase(
             earnings = earnings,
