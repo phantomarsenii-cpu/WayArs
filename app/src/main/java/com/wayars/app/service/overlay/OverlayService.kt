@@ -27,6 +27,7 @@ import com.wayars.app.MainActivity
 import com.wayars.app.R
 import com.wayars.app.appContainer
 import com.wayars.app.data.prefs.LanguagePrefs
+import com.wayars.app.domain.model.OrderEvaluation
 import com.wayars.app.presentation.ui.theme.WayArsTheme
 import com.wayars.app.presentation.widget.AnimatedOverlayCard
 import com.wayars.app.presentation.widget.OverlayContent
@@ -150,6 +151,7 @@ class OverlayService : LifecycleService() {
 
             setContent {
                 val evaluation by OverlayState.latestEvaluation.collectAsStateWithLifecycle()
+                val sourcePackage by OverlayState.sourcePackage.collectAsStateWithLifecycle()
                 val visible by cardVisible
                 WayArsTheme {
                     AnimatedOverlayCard(
@@ -159,10 +161,30 @@ class OverlayService : LifecycleService() {
                     ) {
                         OverlayContent(
                             evaluation = evaluation,
-                            onAccept = { onDecision(accepted = true) },
-                            onReject = { onDecision(accepted = false) },
+                            // evaluation/sourcePackage captured HERE, at tap
+                            // time, from what's actually composed on screen
+                            // right now — not re-read fresh from the global
+                            // OverlayState inside onDecision(). Those two
+                            // StateFlows can legitimately change out from
+                            // under a fresh read between this card being
+                            // drawn and the user's tap landing (e.g. a
+                            // reevaluation of the order between frames, or
+                            // the auto-close-on-disappearance check from
+                            // handleCollectedTexts racing the tap) — if that
+                            // happens, a fresh OverlayState read at decision
+                            // time could see a DIFFERENT (or null)
+                            // evaluation than what the driver actually saw
+                            // and tapped Accept/Reject on, and
+                            // DecidedOrdersState would then get marked for
+                            // the wrong order — or not marked at all,
+                            // leaving the real one free to pop back up
+                            // later looking exactly like this bug.
+                            // Capturing what THIS composition actually
+                            // rendered removes that race entirely.
+                            onAccept = { onDecision(accepted = true, evaluation = evaluation, sourcePackage = sourcePackage) },
+                            onReject = { onDecision(accepted = false, evaluation = evaluation, sourcePackage = sourcePackage) },
                             onSettings = { openApp() },
-                            onClose = { onDecision(accepted = false) },
+                            onClose = { onDecision(accepted = false, evaluation = evaluation, sourcePackage = sourcePackage) },
                             onDragBy = ::moveWindowBy
                         )
                     }
@@ -228,10 +250,20 @@ class OverlayService : LifecycleService() {
      * scanning cooldown, since the order screen underneath often keeps
      * updating its own live text for a few seconds after a decision, which
      * used to make the card pop right back up.
+     *
+     * [evaluation]/[sourcePackage] are passed in by the caller from what
+     * was actually composed on screen at tap time (see the setContent block
+     * above for why) — this function deliberately does NOT re-read
+     * OverlayState itself, since by the time this runs that global state
+     * could already reflect a DIFFERENT scan (a live re-evaluation, or the
+     * auto-close-on-disappearance check in OrderAccessibilityService)
+     * that raced ahead of the tap. Using a stale/wrong pair here would mean
+     * DecidedOrdersState gets marked for the wrong order (or not marked at
+     * all), leaving the order the driver actually decided on free to
+     * resurface later — confirmed on-device 2026-09-27 (Stuart): the exact
+     * accepted order popped back up ~15s later with identical numbers.
      */
-    private fun onDecision(accepted: Boolean) {
-        val evaluation = OverlayState.latestEvaluation.value
-        val sourcePackage = OverlayState.sourcePackage.value
+    private fun onDecision(accepted: Boolean, evaluation: OrderEvaluation?, sourcePackage: String?) {
         OverlayState.clear()
         if (sourcePackage != null) {
             ScanningState.suppressScanningBriefly(sourcePackage)

@@ -50,8 +50,22 @@ object DecidedOrdersState {
         return System.currentTimeMillis() - decidedAt < TTL_MILLIS
     }
 
-    private fun key(packageName: String, earnings: Double, distanceKm: Double, currency: Currency): String =
-        "$packageName|$earnings|$distanceKm|$currency"
+    /**
+     * Rounded, not raw: some apps' order screens show a LIVE, continuously
+     * recalculated figure (Stuart confirmed on-device, 2026-09-27 — a
+     * pickup-distance/ETA pairing that can drift by hundredths of a km
+     * between two scans of the exact SAME order a few seconds apart, even
+     * with the driver stationary) — the on-screen text and WayArs' own
+     * display both still round to one decimal, so comparing at that same
+     * precision is what "same order" needs to mean here. Comparing raw
+     * Doubles risked a decided order's key never matching itself again on
+     * the very next scan.
+     */
+    private fun key(packageName: String, earnings: Double, distanceKm: Double, currency: Currency): String {
+        val roundedEarnings = Math.round(earnings * 100) / 100.0
+        val roundedDistanceKm = Math.round(distanceKm * 10) / 10.0
+        return "$packageName|$roundedEarnings|$roundedDistanceKm|$currency"
+    }
 
     private fun pruneExpired() {
         val now = System.currentTimeMillis()
