@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.Gravity
 import android.view.WindowManager
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.lifecycle.Lifecycle
@@ -27,11 +28,13 @@ import com.wayars.app.R
 import com.wayars.app.appContainer
 import com.wayars.app.data.prefs.LanguagePrefs
 import com.wayars.app.presentation.ui.theme.WayArsTheme
+import com.wayars.app.presentation.widget.AnimatedOverlayCard
 import com.wayars.app.presentation.widget.OverlayContent
 import com.wayars.app.presentation.widget.OverlayLifecycleOwner
 import com.wayars.app.presentation.widget.OverlayState
 import com.wayars.app.service.accessibility.ScanningState
 import com.wayars.app.util.LocaleManager
+import com.wayars.app.util.MotionPrefs
 import kotlinx.coroutines.launch
 
 /**
@@ -46,6 +49,12 @@ import kotlinx.coroutines.launch
  * cause of the overlay occasionally freezing with dead buttons after a
  * while — a fresh View each time costs very little and removes that whole
  * class of stuck-state bug.
+ *
+ * Showing/hiding is animated (fade + scale, see [AnimatedOverlayCard]) —
+ * [attachView] adds the WindowManager view immediately but composes it
+ * hidden and flips it visible right after, and [detachView] flips it
+ * hidden and only calls [removeViewNow] once that exit animation actually
+ * finishes (via the composable's onHidden callback) — never mid-fade.
  */
 class OverlayService : LifecycleService() {
 
@@ -53,6 +62,7 @@ class OverlayService : LifecycleService() {
     private var composeView: ComposeView? = null
     private var overlayLifecycleOwner: OverlayLifecycleOwner? = null
     private var layoutParams: WindowManager.LayoutParams? = null
+    private var cardVisible = mutableStateOf(false)
 
     // The Application's locale is only re-applied at process cold start, so a
     // language change made while the app was already running never reached a
@@ -112,7 +122,14 @@ class OverlayService : LifecycleService() {
     }
 
     private fun attachView() {
-        if (composeView != null) return // already showing
+        if (composeView != null) {
+            // Already attached — possibly mid exit-fade if a new order
+            // landed right as the previous card was hiding. Cancel the exit
+            // and animate back in from wherever the fade currently is,
+            // rather than tearing the view down and rebuilding it.
+            cardVisible.value = true
+            return
+        }
 
         val lifecycleOwner = OverlayLifecycleOwner().also {
             it.performRestore()
@@ -120,6 +137,9 @@ class OverlayService : LifecycleService() {
             it.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
         }
         overlayLifecycleOwner = lifecycleOwner
+
+        val reducedMotion = MotionPrefs.isReducedMotionPreferred(this)
+        cardVisible = mutableStateOf(false)
 
         val view = ComposeView(this).apply {
             setViewTreeLifecycleOwner(lifecycleOwner)
@@ -129,15 +149,22 @@ class OverlayService : LifecycleService() {
 
             setContent {
                 val evaluation by OverlayState.latestEvaluation.collectAsStateWithLifecycle()
+                val visible by cardVisible
                 WayArsTheme {
-                    OverlayContent(
-                        evaluation = evaluation,
-                        onAccept = { onDecision(accepted = true) },
-                        onReject = { onDecision(accepted = false) },
-                        onSettings = { openApp() },
-                        onClose = { onDecision(accepted = false) },
-                        onDragBy = ::moveWindowBy
-                    )
+                    AnimatedOverlayCard(
+                        visible = visible,
+                        reducedMotion = reducedMotion,
+                        onHidden = ::removeViewNow
+                    ) {
+                        OverlayContent(
+                            evaluation = evaluation,
+                            onAccept = { onDecision(accepted = true) },
+                            onReject = { onDecision(accepted = false) },
+                            onSettings = { openApp() },
+                            onClose = { onDecision(accepted = false) },
+                            onDragBy = ::moveWindowBy
+                        )
+                    }
                 }
             }
         }
@@ -163,11 +190,27 @@ class OverlayService : LifecycleService() {
         layoutParams = params
 
         runCatching { windowManager.addView(view, params) }
-            .onSuccess { composeView = view }
+            .onSuccess {
+                composeView = view
+                // First composition renders hidden (cardVisible starts
+                // false above); flipping it true now — after the view is
+                // already attached to the window — is what actually makes
+                // it a genuine animated transition instead of appearing
+                // already fully visible on frame one.
+                cardVisible.value = true
+            }
             .onFailure { Log.e(TAG, "addView failed", it) }
     }
 
     private fun detachView() {
+        if (composeView == null) return
+        cardVisible.value = false // AnimatedOverlayCard's onHidden -> removeViewNow() once faded out
+    }
+
+    /** Actually tears down the WindowManager view. Only ever called once the
+     *  exit animation has visibly finished (via onHidden), or directly from
+     *  [onDestroy] where there's no time left for an animation to play. */
+    private fun removeViewNow() {
         val view = composeView ?: return
         runCatching { windowManager.removeView(view) }
             .onFailure { Log.w(TAG, "removeView failed", it) }
@@ -246,7 +289,10 @@ class OverlayService : LifecycleService() {
     }
 
     override fun onDestroy() {
-        detachView()
+        // No time for an exit animation here — the service (and its
+        // Compose lifecycle) is going away regardless, so skip straight to
+        // the real teardown instead of going through detachView()'s fade.
+        removeViewNow()
         OverlayState.clear()
         super.onDestroy()
     }

@@ -2,7 +2,9 @@ package com.wayars.app.presentation.ui.screen.paywall
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
@@ -85,6 +87,7 @@ import com.wayars.app.presentation.ui.theme.WaProTextMuted
 import com.wayars.app.presentation.ui.theme.WaProTextMuted2
 import com.wayars.app.presentation.ui.theme.WaProTextMuted3
 import com.wayars.app.util.PriceFormatter
+import com.wayars.app.util.rememberReducedMotionPreferred
 import java.util.Locale
 
 /*
@@ -344,13 +347,15 @@ private fun AuroraGlow() {
 
 @Composable
 private fun LogoWithGlow() {
-    val infinite = rememberInfiniteTransition(label = "logo_glow")
-    val glowAlpha by infinite.animateFloat(
-        initialValue = 0.85f,
-        targetValue = 1f,
-        animationSpec = infiniteRepeatable(tween(2000, easing = LinearEasing), RepeatMode.Reverse),
-        label = "logo_glow_alpha"
-    )
+    // Was an infinite 2s pulse (glowAlpha 0.85↔1) running for as long as the
+    // paywall is on screen. Of the three loops on this screen (this one,
+    // the CTA shimmer, the selected-plan ping) this was the one carrying
+    // the least information — it doesn't draw attention to an action or
+    // show a state, it's purely decorative — so it's the one trimmed to
+    // keep the screen from feeling like three things competing for
+    // attention at once. A fixed mid-value glow keeps the visual without
+    // the perpetual motion.
+    val glowAlpha = 0.92f
     Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxWidth()) {
         Box(
             modifier = Modifier
@@ -440,6 +445,22 @@ private fun PlanCard(
 ) {
     Box(modifier = Modifier.fillMaxWidth()) {
         val shape = RoundedCornerShape(16.dp)
+        val reducedMotion = rememberReducedMotionPreferred()
+        val borderWidth by animateDpAsState(
+            targetValue = if (selected) 2.dp else 1.5.dp,
+            animationSpec = tween(durationMillis = if (reducedMotion) 0 else 160),
+            label = "plan_border_width"
+        )
+        val borderColor by animateColorAsState(
+            targetValue = if (selected) WaProGreen else WaProCardBorder,
+            animationSpec = tween(durationMillis = if (reducedMotion) 0 else 160),
+            label = "plan_border_color"
+        )
+        val backgroundColor by animateColorAsState(
+            targetValue = if (selected) WaProCardBgSelected else WaProCardBg,
+            animationSpec = tween(durationMillis = if (reducedMotion) 0 else 160),
+            label = "plan_background_color"
+        )
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -449,12 +470,8 @@ private fun PlanCard(
                     } else Modifier
                 )
                 .clip(shape)
-                .background(if (selected) WaProCardBgSelected else WaProCardBg)
-                .border(
-                    width = if (selected) 2.dp else 1.5.dp,
-                    color = if (selected) WaProGreen else WaProCardBorder,
-                    shape = shape
-                )
+                .background(backgroundColor)
+                .border(width = borderWidth, color = borderColor, shape = shape)
                 .clickable(onClick = onClick)
                 .padding(14.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -521,16 +538,17 @@ private fun PlanCard(
 @Composable
 private fun SelectionRadio(selected: Boolean) {
     if (selected) {
+        val reducedMotion = rememberReducedMotionPreferred()
         val infinite = rememberInfiniteTransition(label = "radio_ping")
         val pingScale by infinite.animateFloat(
             initialValue = 1f,
-            targetValue = 1.9f,
+            targetValue = if (reducedMotion) 1f else 1.9f,
             animationSpec = infiniteRepeatable(tween(1800, easing = LinearEasing), RepeatMode.Restart),
             label = "ping_scale"
         )
         val pingAlpha by infinite.animateFloat(
             initialValue = 0.35f,
-            targetValue = 0f,
+            targetValue = if (reducedMotion) 0.35f else 0f,
             animationSpec = infiniteRepeatable(tween(1800, easing = LinearEasing), RepeatMode.Restart),
             label = "ping_alpha"
         )
@@ -577,10 +595,11 @@ private fun AuroraCtaButton(
     enabled: Boolean,
     onClick: () -> Unit
 ) {
+    val reducedMotion = rememberReducedMotionPreferred()
     val infinite = rememberInfiniteTransition(label = "cta_shimmer")
     val shimmer by infinite.animateFloat(
         initialValue = -0.4f,
-        targetValue = 1.4f,
+        targetValue = if (reducedMotion) -0.4f else 1.4f,
         animationSpec = infiniteRepeatable(tween(2500, easing = LinearEasing), RepeatMode.Restart),
         label = "shimmer_x"
     )

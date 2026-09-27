@@ -245,6 +245,15 @@ class OrderAccessibilityService : AccessibilityService() {
         val root = windowsChangedRoot ?: findSupportedWindowRoot(eventPackage)
         if (root == null) {
             ScanDiagnostics.record(eventPackage, matchedSupportedApp = true, windowFound = false)
+            // eventPackage's own window is gone — if it's the package the
+            // overlay is currently showing an order FROM, that order screen
+            // just disappeared (closed/backed out of within the app), so the
+            // card shouldn't be left sitting there for the driver to close
+            // by hand. Scoped to sourcePackage specifically: this must never
+            // fire just because the driver switched to some OTHER app while
+            // the overlay keeps floating on top — that's the overlay doing
+            // its job, not a stale card.
+            clearOverlayIfSourceIsGone(eventPackage)
             return
         }
 
@@ -360,6 +369,22 @@ class OrderAccessibilityService : AccessibilityService() {
     }
 
     /**
+     * Clears the currently-shown overlay if — and only if — it's showing an
+     * order FROM [eventPackage] specifically. Never touches the overlay if
+     * it's currently showing a DIFFERENT supported app's order (two courier
+     * apps can be open side by side — see the collectTextsFromAllSupportedWindows
+     * doc above), and never fires just because the driver switched focus
+     * away to an unrelated app, since callers only invoke this from a
+     * package-specific scan result for [eventPackage] itself, not from a
+     * generic "some window disappeared somewhere" signal.
+     */
+    private fun clearOverlayIfSourceIsGone(eventPackage: String) {
+        if (OverlayState.sourcePackage.value != eventPackage) return
+        lastCandidate = null
+        OverlayState.clear()
+    }
+
+    /**
      * Parses the scraped [texts], updates diagnostics (always, with the raw
      * texts attached so misparsed layouts like Stuart's can be inspected
      * on-device instead of guessed at from logs), and — if the candidate is
@@ -374,6 +399,11 @@ class OrderAccessibilityService : AccessibilityService() {
                 eventPackage, matchedSupportedApp = true, windowFound = true,
                 textsCollected = texts.size, parsedSummary = candidateSummary, rawTexts = texts
             )
+            // The screen changed to something that no longer parses as a
+            // complete order (order taken by someone else, expired, or the
+            // driver navigated to a list/other screen within the SAME app).
+            // Same source-package scoping as above — see that comment.
+            clearOverlayIfSourceIsGone(eventPackage)
             return
         }
         if (candidate == lastCandidate) return // identical to what's already on screen — nothing changed
