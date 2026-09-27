@@ -37,6 +37,28 @@ object ScanDiagnostics {
     val recentPackages: StateFlow<List<DiagnosticEntry>> = _recentPackages
 
     /**
+     * The single freshest USEFUL entry (one with actual raw screen text) per
+     * package, kept OUTSIDE the shared 20-entry rolling log above and never
+     * evicted by unrelated traffic.
+     *
+     * Why this exists: [recentPackages] is a flat, shared ring buffer across
+     * EVERY supported package at once, and a real courier commonly runs
+     * 2-3 apps side by side (confirmed elsewhere in this codebase — see
+     * OrderAccessibilityService's own multi-window-scan doc). Each of those
+     * apps produces a fresh accessibility event on basically every tick of
+     * a live ETA/countdown. 20 slots shared across that much simultaneous
+     * traffic can turn over in well under the few seconds it takes a driver
+     * to back out of their order app and reach Settings -> Calibrate — the
+     * exact entry [CalibrationDialog] needs for the app being calibrated
+     * could already be gone by the time they open the dialog, even though
+     * the order was genuinely on screen moments earlier. Calibration reads
+     * from THIS map instead, so it's never at the mercy of how much traffic
+     * other running apps happened to generate in between.
+     */
+    private val _latestByPackage = MutableStateFlow<Map<String, DiagnosticEntry>>(emptyMap())
+    val latestByPackage: StateFlow<Map<String, DiagnosticEntry>> = _latestByPackage
+
+    /**
      * While true, [record] is a no-op. Lets the Diagnostics screen freeze
      * the list on demand — entries scroll off the capped list fast enough
      * (even after fixing the debounce bug that made it worse) that reading
@@ -79,7 +101,6 @@ object ScanDiagnostics {
             }
         }
 
-        if (_paused.value) return
         val entry = DiagnosticEntry(
             packageName = packageName,
             timestampMillis = System.currentTimeMillis(),
@@ -89,10 +110,19 @@ object ScanDiagnostics {
             parsedSummary = parsedSummary,
             rawTexts = rawTexts.take(MAX_RAW_TEXTS_PER_ENTRY)
         )
+
+        // Deliberately NOT gated on [_paused] and NOT capped — see this
+        // map's own doc above for why calibration needs it immune to both.
+        if (rawTexts.isNotEmpty()) {
+            _latestByPackage.value = _latestByPackage.value + (packageName to entry)
+        }
+
+        if (_paused.value) return
         _recentPackages.value = (listOf(entry) + _recentPackages.value).take(MAX_ENTRIES)
     }
 
     fun clear() {
         _recentPackages.value = emptyList()
+        _latestByPackage.value = emptyMap()
     }
 }

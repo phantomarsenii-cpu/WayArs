@@ -724,11 +724,14 @@ private fun InstalledAppsPickerDialog(
 
 /**
  * Lets the user teach WayArs how a specific custom app's screen is laid
- * out, without needing a code change — reuses the SAME live scan the
- * Diagnostics section already shows (see ScanDiagnostics), so no new
- * capture mechanism is needed: whatever this app's screen most recently
- * produced (while the user had a real order open, per the on-screen
- * instructions) is right here, tap the line that's the price/distance/
+ * out, without needing a code change — reads from
+ * [com.wayars.app.service.accessibility.ScanDiagnostics.latestByPackage],
+ * the freshest scan WayArs has for THIS package specifically, immune to
+ * being pushed out by other apps' traffic (see that map's own doc for why
+ * the plain rolling diagnostics log isn't safe to use here). No new capture
+ * mechanism is needed: whatever this app's screen most recently produced
+ * (while the user had a real order open, per the on-screen instructions)
+ * is right here, tap the line that's the price/distance/
  * time, and WayArs derives an extra pattern for JUST that package from the
  * literal unit word/symbol next to the number in that line (see
  * ScreenTextParser.buildHintMoneyPatterns and friends) — not the number
@@ -748,11 +751,9 @@ private fun CalibrationDialog(
     onSave: (PackageHint) -> Unit,
     onClearHint: () -> Unit
 ) {
-    val entries by com.wayars.app.service.accessibility.ScanDiagnostics.recentPackages.collectAsState()
-    // ScanDiagnostics prepends new entries (index 0 = most recent), so the
-    // first match for this package is the freshest thing it has seen.
-    val latestEntry = remember(entries, packageName) {
-        entries.firstOrNull { it.packageName == packageName && it.rawTexts.isNotEmpty() }
+    val latestByPackage by com.wayars.app.service.accessibility.ScanDiagnostics.latestByPackage.collectAsState()
+    val latestEntry = remember(latestByPackage, packageName) {
+        latestByPackage[packageName]
     }
 
     var moneyRowText by remember(packageName) { mutableStateOf<String?>(null) }
