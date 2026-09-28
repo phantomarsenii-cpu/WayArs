@@ -51,28 +51,17 @@ object DecidedOrdersState {
     fun markDecided(packageName: String, earnings: Double, distanceKm: Double, currency: Currency) {
         pruneExpired()
         entries.add(Entry(packageName, earnings, distanceKm, currency, System.currentTimeMillis()))
-        ScanLogFile.append(
-            "DECIDED mark pkg=$packageName earnings=$earnings km=$distanceKm cur=$currency (now ${entries.size} remembered)"
-        )
     }
 
     fun wasRecentlyDecided(packageName: String, earnings: Double, distanceKm: Double, currency: Currency): Boolean {
         val now = System.currentTimeMillis()
-        val hit = entries.any {
+        return entries.any {
             it.packageName == packageName &&
                 it.currency == currency &&
                 now - it.decidedAtMillis < TTL_MILLIS &&
                 abs(it.earnings - earnings) <= EARNINGS_TOLERANCE &&
                 abs(it.distanceKm - distanceKm) <= DISTANCE_TOLERANCE_KM
         }
-        // Logged on every check (hit AND miss) so a repeat popup can be
-        // diagnosed from the scan log: a miss right after a "DECIDED mark"
-        // line for the same order shows exactly which field differed.
-        ScanLogFile.append(
-            "DECIDED check pkg=$packageName earnings=$earnings km=$distanceKm cur=$currency -> " +
-                (if (hit) "HIT (suppressed)" else "miss") + " [remembered=${entries.size}]"
-        )
-        return hit
     }
 
     private fun pruneExpired() {

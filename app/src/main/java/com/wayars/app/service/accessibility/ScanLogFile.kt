@@ -1,6 +1,7 @@
 package com.wayars.app.service.accessibility
 
 import android.content.Context
+import android.content.pm.ApplicationInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -95,6 +96,12 @@ object ScanLogFile {
      * is left `null` and subsequent [append] calls are silently no-ops.
      */
     fun start(context: Context) {
+        // Release builds never write a scan log. The file holds raw text
+        // scraped from other apps' screens (customer names, addresses, order
+        // details) and lands in the public Downloads folder, which has no
+        // place on testers' or users' phones. currentFile/currentContext stay
+        // null, so every append() and rotation below is a silent no-op.
+        if (context.applicationContext.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE == 0) return
         currentContext = context.applicationContext
         ioScope.launch { startOnIoThread(context.applicationContext) }
     }
