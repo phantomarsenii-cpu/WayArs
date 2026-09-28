@@ -10,6 +10,7 @@ import com.wayars.app.domain.model.Preset
 import com.wayars.app.domain.model.VehicleProfile
 import com.wayars.app.presentation.widget.OverlayState
 import com.wayars.app.service.accessibility.CustomPackagesState
+import com.wayars.app.service.accessibility.DecidedOrdersState
 import com.wayars.app.service.accessibility.OrderAccessibilityService
 import com.wayars.app.service.accessibility.PackageHintsState
 import com.wayars.app.service.accessibility.ScanningState
@@ -81,6 +82,14 @@ class OrderNotificationListenerService : NotificationListenerService() {
         // order (Stuart routinely has no parseable minutes figure).
         val timeMinutes = candidate.timeMinutes ?: 0.0
         val currency = candidate.currency ?: currentCurrency
+
+        // Same "already decided" gate as the accessibility path
+        // (OrderAccessibilityService.handleCollectedTexts). This channel
+        // used to publish with no such check at all, so an app re-posting or
+        // updating its ongoing-order notification (Stuart does) could bring
+        // the overlay straight back for an order the driver had already
+        // accepted or rejected.
+        if (DecidedOrdersState.wasRecentlyDecided(sbn.packageName, earnings, distanceKm, currency)) return
 
         val container = applicationContext.appContainer()
         val evaluation = container.evaluateOrderUseCase(

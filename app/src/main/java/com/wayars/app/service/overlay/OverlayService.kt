@@ -153,6 +153,15 @@ class OverlayService : LifecycleService() {
                 val evaluation by OverlayState.latestEvaluation.collectAsStateWithLifecycle()
                 val sourcePackage by OverlayState.sourcePackage.collectAsStateWithLifecycle()
                 val visible by cardVisible
+                // Plain vals: a snapshot of what THIS composition is drawing.
+                // The `by` delegates above are re-read live every time they're
+                // referenced, including inside the click lambdas, so using
+                // them directly there would read whatever the state is at tap
+                // time, not what the driver was looking at. If the state was
+                // cleared or replaced between draw and tap, the decision
+                // would be recorded for the wrong (or no) order.
+                val shownEvaluation = evaluation
+                val shownSourcePackage = sourcePackage
                 WayArsTheme {
                     AnimatedOverlayCard(
                         visible = visible,
@@ -160,31 +169,11 @@ class OverlayService : LifecycleService() {
                         onHidden = ::removeViewNow
                     ) {
                         OverlayContent(
-                            evaluation = evaluation,
-                            // evaluation/sourcePackage captured HERE, at tap
-                            // time, from what's actually composed on screen
-                            // right now — not re-read fresh from the global
-                            // OverlayState inside onDecision(). Those two
-                            // StateFlows can legitimately change out from
-                            // under a fresh read between this card being
-                            // drawn and the user's tap landing (e.g. a
-                            // reevaluation of the order between frames, or
-                            // the auto-close-on-disappearance check from
-                            // handleCollectedTexts racing the tap) — if that
-                            // happens, a fresh OverlayState read at decision
-                            // time could see a DIFFERENT (or null)
-                            // evaluation than what the driver actually saw
-                            // and tapped Accept/Reject on, and
-                            // DecidedOrdersState would then get marked for
-                            // the wrong order — or not marked at all,
-                            // leaving the real one free to pop back up
-                            // later looking exactly like this bug.
-                            // Capturing what THIS composition actually
-                            // rendered removes that race entirely.
-                            onAccept = { onDecision(accepted = true, evaluation = evaluation, sourcePackage = sourcePackage) },
-                            onReject = { onDecision(accepted = false, evaluation = evaluation, sourcePackage = sourcePackage) },
+                            evaluation = shownEvaluation,
+                            onAccept = { onDecision(accepted = true, evaluation = shownEvaluation, sourcePackage = shownSourcePackage) },
+                            onReject = { onDecision(accepted = false, evaluation = shownEvaluation, sourcePackage = shownSourcePackage) },
                             onSettings = { openApp() },
-                            onClose = { onDecision(accepted = false, evaluation = evaluation, sourcePackage = sourcePackage) },
+                            onClose = { onDecision(accepted = false, evaluation = shownEvaluation, sourcePackage = shownSourcePackage) },
                             onDragBy = ::moveWindowBy
                         )
                     }
