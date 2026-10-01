@@ -263,4 +263,6 @@ dependencies {
     // RevenueCat — subscription management (Play Billing wrapper +
     // server-verified entitlements). See com.wayars.app.billing.RevenueCatConfig.
     implementation("com.revenuecat.purchases:purchases:10.21.1")
+    // Update 07: "update available" prompt (Google Play in-app updates API, availability check only)
+    implementation("com.google.android.play:app-update:2.1.0")
 }

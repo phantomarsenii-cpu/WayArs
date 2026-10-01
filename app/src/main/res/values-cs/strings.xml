@@ -176,4 +176,37 @@
     <string name="paywall_per_month_hint">Jen %1$s / měsíc</string>
     <string name="paywall_data_safe">Vaše data jsou v bezpečí</string>
     <string name="paywall_no_charge_notice">Za prvních 7 dní se neúčtuje žádný poplatek. Kdykoli zrušte v Google Play.</string>
+
+    <!-- ===== Update 07: first-run tour + update prompt ===== -->
+    <string name="tour_skip">Přeskočit</string>
+    <string name="tour_back">Zpět</string>
+    <string name="tour_next">Další</string>
+    <string name="tour_done">Rozumím</string>
+    <string name="tour_welcome_title">Vítejte ve WayArs</string>
+    <string name="tour_welcome_text">Krátká prohlídka ukáže, jak WayArs hodnotí vaše objednávky v reálném čase. Zabere asi minutu a v Nastavení ji můžete kdykoli zopakovat.</string>
+    <string name="tour_active_title">Přepínač Active</string>
+    <string name="tour_active_text">Zapněte ho, když začínáte pracovat. WayArs pak čte příchozí objednávky ve vašich aplikacích pro rozvoz a taxi a každou z nich ohodnotí.</string>
+    <string name="tour_summary_title">Dnešní přehled</string>
+    <string name="tour_summary_text">Objednávky, výdělek, aktivní čas, vzdálenost a průměrná sazba za km za dnešek. Aktualizuje se po každé objednávce.</string>
+    <string name="tour_verdict_title">Hodnocení objednávky</string>
+    <string name="tour_verdict_text">Každá objednávka dostane verdikt: dobrá, průměrná nebo špatná. Stejný verdikt se zobrazí i v malém plovoucím widgetu nad vaší aplikací pro rozvoz.</string>
+    <string name="tour_stats_title">Statistiky</string>
+    <string name="tour_stats_text">Seznam dnešních ohodnocených objednávek s odměnou, vzdáleností, časem a verdiktem.</string>
+    <string name="tour_presets_title">Předvolby</string>
+    <string name="tour_presets_text">Vyberte, jak přísné má hodnocení být: úsporné, vyvážené, nebo jen výdělečné objednávky.</string>
+    <string name="tour_thresholds_title">Vlastní hranice</string>
+    <string name="tour_thresholds_text">Volitelné. Nastavte si vlastní hranice sazby za km pro špatné, průměrné a dobré objednávky místo hotové předvolby.</string>
+    <string name="tour_vehicle_title">Vozidlo a palivo</string>
+    <string name="tour_vehicle_text">Zadejte vozidlo, druh paliva, spotřebu a cenu paliva, aby se čistý zisk každé objednávky počítal po odečtení nákladů na palivo.</string>
+    <string name="tour_permissions_title">Oprávnění</string>
+    <string name="tour_permissions_text">Před zapnutím Active povolte čtení obrazovky (pouze čtení, žádná automatická klepnutí) a plovoucí widget. Přístup k oznámením je volitelný.</string>
+    <string name="tour_apps_title">Podporované aplikace</string>
+    <string name="tour_apps_text">Oblíbené aplikace pro rozvoz a taxi jsou již zabudované. Pokud vaše chybí, přidejte ji tady ručně.</string>
+    <string name="tour_final_title">Hotovo!</string>
+    <string name="tour_final_text">Povolte oprávnění v Nastavení a poté zapněte Active na domovské obrazovce. Tuto nápovědu můžete kdykoli zopakovat v Nastavení.</string>
+    <string name="settings_tutorial_title">Nápověda</string>
+    <string name="update_available_title">Je dostupná aktualizace</string>
+    <string name="update_available_text">Je dostupná nová verze WayArs s vylepšeními a opravami.</string>
+    <string name="update_now">Aktualizovat</string>
+    <string name="update_later">Později</string>
 </resources>

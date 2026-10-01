@@ -52,6 +52,9 @@ class SettingsDataStore(private val context: Context) {
         // Calibration hints (see PackageHint) for custom apps whose screen
         // doesn't match the built-in generic money/km/min patterns.
         val PACKAGE_HINTS = stringSetPreferencesKey("package_parsing_hints")
+        // First-run tutorial finished/skipped, and the "update available" card snooze.
+        val TOUR_DONE = booleanPreferencesKey("tour_done")
+        val UPDATE_SNOOZE_UNTIL = longPreferencesKey("update_snooze_until")
     }
 
     val languageCode: Flow<String?> = context.dataStore.data.map { it[Keys.LANGUAGE] }
@@ -60,6 +63,11 @@ class SettingsDataStore(private val context: Context) {
         it[Keys.PRESET]?.let { name -> runCatching { PresetType.valueOf(name) }.getOrNull() } ?: PresetType.BALANCE
     }
     val onboardingDone: Flow<Boolean> = context.dataStore.data.map { it[Keys.ONBOARDING_DONE] ?: false }
+
+    val tourDone: Flow<Boolean> = context.dataStore.data.map { it[Keys.TOUR_DONE] ?: false }
+
+    /** Epoch millis until which the "update available" card stays hidden (0 = not snoozed). */
+    val updateSnoozeUntil: Flow<Long> = context.dataStore.data.map { it[Keys.UPDATE_SNOOZE_UNTIL] ?: 0L }
 
     /** Null until the user has accepted the Terms of Use gate; then the epoch-millis timestamp of that moment. */
     val termsAcceptedAt: Flow<Long?> = context.dataStore.data.map { it[Keys.TERMS_ACCEPTED_AT] }
@@ -120,6 +128,14 @@ class SettingsDataStore(private val context: Context) {
 
     suspend fun setOnboardingDone(done: Boolean) {
         context.dataStore.edit { it[Keys.ONBOARDING_DONE] = done }
+    }
+
+    suspend fun setTourDone(done: Boolean) {
+        context.dataStore.edit { it[Keys.TOUR_DONE] = done }
+    }
+
+    suspend fun setUpdateSnoozeUntil(epochMillis: Long) {
+        context.dataStore.edit { it[Keys.UPDATE_SNOOZE_UNTIL] = epochMillis }
     }
 
     /**

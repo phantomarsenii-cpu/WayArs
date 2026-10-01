@@ -182,4 +182,38 @@
     <string name="paywall_per_month_hint">Just %1$s / month</string>
     <string name="paywall_data_safe">Your data is safe</string>
     <string name="paywall_no_charge_notice">No charge for the first 7 days. Cancel anytime in Google Play.</string>
+
+    <!-- ===== Update 07: first-run tour + update prompt ===== -->
+    <string name="tour_counter" translatable="false">%1$d / %2$d</string>
+    <string name="tour_skip">Skip</string>
+    <string name="tour_back">Back</string>
+    <string name="tour_next">Next</string>
+    <string name="tour_done">Got it</string>
+    <string name="tour_welcome_title">Welcome to WayArs</string>
+    <string name="tour_welcome_text">A quick tour shows how WayArs rates your orders in real time. It takes about a minute, and you can replay it any time in Settings.</string>
+    <string name="tour_active_title">Active switch</string>
+    <string name="tour_active_text">Turn it on when you start working. WayArs then reads incoming orders in your delivery and taxi apps and rates each one for you.</string>
+    <string name="tour_summary_title">Today’s summary</string>
+    <string name="tour_summary_text">Orders, earnings, active time, distance and average rate per km for today. It updates after every order.</string>
+    <string name="tour_verdict_title">Order evaluation</string>
+    <string name="tour_verdict_text">Every order gets a verdict: good, average or bad. The same verdict also appears in a small floating widget over your delivery app.</string>
+    <string name="tour_stats_title">Stats</string>
+    <string name="tour_stats_text">The list of today’s rated orders with pay, distance, time and verdict.</string>
+    <string name="tour_presets_title">Presets</string>
+    <string name="tour_presets_text">Choose how strict the rating is: Economy, Balance or Profitable only.</string>
+    <string name="tour_thresholds_title">Your own thresholds</string>
+    <string name="tour_thresholds_text">Optional. Set your own rate-per-km limits for bad, average and good orders instead of using a preset.</string>
+    <string name="tour_vehicle_title">Vehicle and fuel</string>
+    <string name="tour_vehicle_text">Enter your vehicle, fuel type, consumption and fuel price, so the net profit of each order is calculated after fuel costs.</string>
+    <string name="tour_permissions_title">Permissions</string>
+    <string name="tour_permissions_text">Enable screen reading (read-only, no automatic taps) and the floating widget before turning Active on. Notification access is optional.</string>
+    <string name="tour_apps_title">Supported apps</string>
+    <string name="tour_apps_text">Popular delivery and taxi apps are built in. If yours is missing, add it here by hand.</string>
+    <string name="tour_final_title">You’re all set!</string>
+    <string name="tour_final_text">Enable the permissions in Settings, then switch Active on the Home screen. You can replay this tutorial any time in Settings.</string>
+    <string name="settings_tutorial_title">Tutorial</string>
+    <string name="update_available_title">Update available</string>
+    <string name="update_available_text">A new version of WayArs is available with improvements and fixes.</string>
+    <string name="update_now">Update</string>
+    <string name="update_later">Later</string>
 </resources>

@@ -176,4 +176,37 @@
     <string name="paywall_per_month_hint">Csak %1$s / hónap</string>
     <string name="paywall_data_safe">Az adataid biztonságban vannak</string>
     <string name="paywall_no_charge_notice">Az első 7 napért nem számítunk fel díjat. Bármikor lemondhatod a Google Play-ben.</string>
+
+    <!-- ===== Update 07: first-run tour + update prompt ===== -->
+    <string name="tour_skip">Kihagyás</string>
+    <string name="tour_back">Vissza</string>
+    <string name="tour_next">Tovább</string>
+    <string name="tour_done">Rendben</string>
+    <string name="tour_welcome_title">Üdvözöljük a WayArs alkalmazásban</string>
+    <string name="tour_welcome_text">Egy rövid bemutató megmutatja, hogyan értékeli a WayArs a rendeléseidet valós időben. Körülbelül egy percig tart, és a Beállításokban bármikor megismételheted.</string>
+    <string name="tour_active_title">Az Active kapcsoló</string>
+    <string name="tour_active_text">Kapcsold be, amikor elkezdesz dolgozni. A WayArs ilyenkor beolvassa a beérkező rendeléseket a futár- és taxialkalmazásaidban, és mindegyiket értékeli.</string>
+    <string name="tour_summary_title">Mai összegzés</string>
+    <string name="tour_summary_text">Mai rendelések, kereset, aktív idő, távolság és átlagos km-díj. Minden rendelés után frissül.</string>
+    <string name="tour_verdict_title">A rendelés értékelése</string>
+    <string name="tour_verdict_text">Minden rendelés kap egy értékelést: jó, közepes vagy rossz. Ugyanez az értékelés egy kis lebegő widgetben is megjelenik a futáralkalmazásod felett.</string>
+    <string name="tour_stats_title">Statisztika</string>
+    <string name="tour_stats_text">A mai értékelt rendelések listája fizetéssel, távolsággal, idővel és értékeléssel.</string>
+    <string name="tour_presets_title">Előbeállítások</string>
+    <string name="tour_presets_text">Válaszd ki, mennyire legyen szigorú az értékelés: takarékos, kiegyensúlyozott vagy csak a kifizetődő rendelések.</string>
+    <string name="tour_thresholds_title">Saját küszöbértékek</string>
+    <string name="tour_thresholds_text">Nem kötelező. Állítsd be saját km-díj-határaidat a rossz, közepes és jó rendelésekhez az előbeállítás helyett.</string>
+    <string name="tour_vehicle_title">Jármű és üzemanyag</string>
+    <string name="tour_vehicle_text">Add meg a járművet, az üzemanyag típusát, a fogyasztást és az üzemanyag árát, hogy minden rendelés nettó nyeresége az üzemanyagköltség levonása után legyen kiszámítva.</string>
+    <string name="tour_permissions_title">Engedélyek</string>
+    <string name="tour_permissions_text">Az Active bekapcsolása előtt engedélyezd a képernyő olvasását (csak olvasás, automatikus koppintások nélkül) és a lebegő widgetet. Az értesítésekhez való hozzáférés nem kötelező.</string>
+    <string name="tour_apps_title">Támogatott alkalmazások</string>
+    <string name="tour_apps_text">A népszerű futár- és taxialkalmazások már be vannak építve. Ha a tiéd hiányzik, add hozzá itt kézzel.</string>
+    <string name="tour_final_title">Minden kész!</string>
+    <string name="tour_final_text">Engedélyezd a jogosultságokat a Beállításokban, majd kapcsold be az Active-ot a főképernyőn. Ezt a bemutatót bármikor megismételheted a Beállításokban.</string>
+    <string name="settings_tutorial_title">Bemutató</string>
+    <string name="update_available_title">Frissítés érhető el</string>
+    <string name="update_available_text">A WayArs új verziója érhető el fejlesztésekkel és javításokkal.</string>
+    <string name="update_now">Frissítés</string>
+    <string name="update_later">Később</string>
 </resources>

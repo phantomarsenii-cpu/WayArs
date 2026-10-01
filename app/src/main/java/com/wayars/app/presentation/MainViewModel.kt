@@ -43,6 +43,14 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
     val onboardingDone: StateFlow<Boolean> =
         settings.onboardingDone.stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
+    /** Null until DataStore has loaded, so a returning user never gets a flash of the tutorial. */
+    val tourDone: StateFlow<Boolean?> =
+        settings.tourDone.stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
+    /** Null until loaded; epoch millis until which the "update available" card is snoozed. */
+    val updateSnoozeUntil: StateFlow<Long?> =
+        settings.updateSnoozeUntil.stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
     /** Null until the Terms of Use gate has been accepted; then the epoch-millis moment it was. */
     val termsAcceptedAt: StateFlow<Long?> =
         settings.termsAcceptedAt.stateIn(viewModelScope, SharingStarted.Eagerly, null)
@@ -95,6 +103,10 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
     fun setCurrency(currency: Currency) = viewModelScope.launch { settings.setCurrency(currency) }
     fun setPreset(preset: PresetType) = viewModelScope.launch { settings.setPreset(preset) }
     fun completeOnboarding() = viewModelScope.launch { settings.setOnboardingDone(true) }
+    fun setTourDone(done: Boolean) = viewModelScope.launch { settings.setTourDone(done) }
+    fun snoozeUpdatePrompt() = viewModelScope.launch {
+        settings.setUpdateSnoozeUntil(System.currentTimeMillis() + 3L * 24 * 60 * 60 * 1000)
+    }
 
     /**
      * Called exactly once, the moment the user taps Accept on the Terms

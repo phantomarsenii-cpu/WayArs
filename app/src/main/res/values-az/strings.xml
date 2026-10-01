@@ -176,4 +176,37 @@
     <string name="paywall_per_month_hint">Cəmi %1$s / ay</string>
     <string name="paywall_data_safe">Məlumatlarınız təhlükəsizdir</string>
     <string name="paywall_no_charge_notice">İlk 7 gün üçün ödəniş alınmır. İstənilən vaxt Google Play-də ləğv edin.</string>
+
+    <!-- ===== Update 07: first-run tour + update prompt ===== -->
+    <string name="tour_skip">Keç</string>
+    <string name="tour_back">Geri</string>
+    <string name="tour_next">Növbəti</string>
+    <string name="tour_done">Aydındır</string>
+    <string name="tour_welcome_title">WayArs-a xoş gəlmisiniz</string>
+    <string name="tour_welcome_text">Qısa tur WayArs-ın sifarişlərinizi real vaxtda necə qiymətləndirdiyini göstərir. Təxminən bir dəqiqə çəkir, istənilən vaxt Ayarlarda yenidən keçə bilərsiniz.</string>
+    <string name="tour_active_title">Active açarı</string>
+    <string name="tour_active_text">İşə başlayanda onu aktiv edin. Onda WayArs çatdırılma və taksi tətbiqlərinizdə gələn sifarişləri oxuyur və hər birini qiymətləndirir.</string>
+    <string name="tour_summary_title">Bugünkü yekun</string>
+    <string name="tour_summary_text">Bu günün sifarişləri, qazancı, aktiv vaxtı, məsafəsi və km üzrə orta tarifi. Hər sifarişdən sonra yenilənir.</string>
+    <string name="tour_verdict_title">Sifarişin qiymətləndirilməsi</string>
+    <string name="tour_verdict_text">Hər sifariş qiymət alır: yaxşı, orta və ya pis. Eyni qiymət çatdırılma tətbiqinizin üzərində kiçik üzən vidcetdə də göstərilir.</string>
+    <string name="tour_stats_title">Statistika</string>
+    <string name="tour_stats_text">Bu gün qiymətləndirilmiş sifarişlərin siyahısı: ödəniş, məsafə, vaxt və qiymət.</string>
+    <string name="tour_presets_title">Hazır rejimlər</string>
+    <string name="tour_presets_text">Qiymətləndirmənin nə qədər sərt olacağını seçin: qənaətcil, balanslı və ya yalnız sərfəli sifarişlər.</string>
+    <string name="tour_thresholds_title">Öz hədləriniz</string>
+    <string name="tour_thresholds_text">İstəyə bağlı. Hazır rejim əvəzinə pis, orta və yaxşı sifarişlər üçün km üzrə öz tarif hədlərinizi təyin edin.</string>
+    <string name="tour_vehicle_title">Nəqliyyat və yanacaq</string>
+    <string name="tour_vehicle_text">Nəqliyyat vasitəsini, yanacaq növünü, sərfiyyatı və yanacaq qiymətini daxil edin ki, hər sifarişin xalis mənfəəti yanacaq xərcləri çıxılmaqla hesablansın.</string>
+    <string name="tour_permissions_title">İcazələr</string>
+    <string name="tour_permissions_text">Active-i yandırmazdan əvvəl ekranın oxunmasına (yalnız oxuma, avtomatik toxunuşlar yoxdur) və üzən vidcetə icazə verin. Bildirişlərə giriş istəyə bağlıdır.</string>
+    <string name="tour_apps_title">Dəstəklənən tətbiqlər</string>
+    <string name="tour_apps_text">Məşhur çatdırılma və taksi tətbiqləri artıq daxildir. Sizinki yoxdursa, onu burada əl ilə əlavə edin.</string>
+    <string name="tour_final_title">Hər şey hazırdır!</string>
+    <string name="tour_final_text">İcazələri Ayarlarda aktiv edin, sonra əsas ekranda Active-i yandırın. Bu təlimatı istənilən vaxt Ayarlarda təkrar keçə bilərsiniz.</string>
+    <string name="settings_tutorial_title">Təlimat</string>
+    <string name="update_available_title">Yeniləmə mövcuddur</string>
+    <string name="update_available_text">WayArs-ın təkmilləşdirmələr və düzəlişlərlə yeni versiyası mövcuddur.</string>
+    <string name="update_now">Yenilə</string>
+    <string name="update_later">Sonra</string>
 </resources>

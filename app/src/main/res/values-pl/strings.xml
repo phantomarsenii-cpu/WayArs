@@ -176,4 +176,37 @@
     <string name="paywall_per_month_hint">Tylko %1$s / miesiąc</string>
     <string name="paywall_data_safe">Twoje dane są bezpieczne</string>
     <string name="paywall_no_charge_notice">Bez opłat przez pierwsze 7 dni. Anuluj w dowolnym momencie w Google\u00A0Play.</string>
+
+    <!-- ===== Update 07: first-run tour + update prompt ===== -->
+    <string name="tour_skip">Pomiń</string>
+    <string name="tour_back">Wstecz</string>
+    <string name="tour_next">Dalej</string>
+    <string name="tour_done">Rozumiem</string>
+    <string name="tour_welcome_title">Witaj w WayArs</string>
+    <string name="tour_welcome_text">Krótki przewodnik pokaże, jak WayArs ocenia Twoje zamówienia w czasie rzeczywistym. Zajmie około minuty, a w Ustawieniach możesz go powtórzyć w dowolnej chwili.</string>
+    <string name="tour_active_title">Przełącznik Active</string>
+    <string name="tour_active_text">Włącz go, gdy zaczynasz pracę. WayArs czyta wtedy przychodzące zamówienia w aplikacjach dowozu i taksówek i ocenia każde z nich.</string>
+    <string name="tour_summary_title">Podsumowanie dnia</string>
+    <string name="tour_summary_text">Zamówienia, zarobki, czas pracy, dystans i średnia stawka za km z dzisiaj. Dane odświeżają się po każdym zamówieniu.</string>
+    <string name="tour_verdict_title">Ocena zamówienia</string>
+    <string name="tour_verdict_text">Każde zamówienie dostaje werdykt: dobre, średnie lub złe. Ten sam werdykt pojawia się w małym pływającym widżecie nad aplikacją dowozu.</string>
+    <string name="tour_stats_title">Statystyki</string>
+    <string name="tour_stats_text">Lista dzisiejszych ocenionych zamówień: wynagrodzenie, dystans, czas i werdykt.</string>
+    <string name="tour_presets_title">Presety</string>
+    <string name="tour_presets_text">Wybierz, jak surowa ma być ocena: oszczędny, zrównoważony albo tylko opłacalne zamówienia.</string>
+    <string name="tour_thresholds_title">Własne progi</string>
+    <string name="tour_thresholds_text">Opcjonalnie. Ustaw własne granice stawki za km dla zamówień złych, średnich i dobrych zamiast gotowego presetu.</string>
+    <string name="tour_vehicle_title">Pojazd i paliwo</string>
+    <string name="tour_vehicle_text">Podaj pojazd, rodzaj paliwa, spalanie i cenę paliwa, aby zysk netto każdego zamówienia był liczony po odjęciu kosztów paliwa.</string>
+    <string name="tour_permissions_title">Uprawnienia</string>
+    <string name="tour_permissions_text">Przed włączeniem Active włącz odczyt ekranu (tylko odczyt, bez automatycznych kliknięć) i pływający widżet. Dostęp do powiadomień jest opcjonalny.</string>
+    <string name="tour_apps_title">Obsługiwane aplikacje</string>
+    <string name="tour_apps_text">Popularne aplikacje dowozu i taksówek są już wbudowane. Jeśli Twojej brakuje, dodaj ją tutaj ręcznie.</string>
+    <string name="tour_final_title">Wszystko gotowe!</string>
+    <string name="tour_final_text">Włącz uprawnienia w Ustawieniach, a potem włącz Active na ekranie głównym. Ten samouczek możesz powtórzyć w Ustawieniach w dowolnej chwili.</string>
+    <string name="settings_tutorial_title">Samouczek</string>
+    <string name="update_available_title">Dostępna aktualizacja</string>
+    <string name="update_available_text">Dostępna jest nowa wersja WayArs z ulepszeniami i poprawkami.</string>
+    <string name="update_now">Aktualizuj</string>
+    <string name="update_later">Później</string>
 </resources>

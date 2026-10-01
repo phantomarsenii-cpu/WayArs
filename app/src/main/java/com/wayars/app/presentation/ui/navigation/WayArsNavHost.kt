@@ -28,6 +28,8 @@ import com.wayars.app.presentation.ui.screen.onboarding.PresetSelectionScreen
 import com.wayars.app.presentation.ui.screen.paywall.PaywallScreen
 import com.wayars.app.presentation.ui.screen.splash.SplashScreen
 import com.wayars.app.presentation.ui.screen.terms.TermsGateScreen
+import com.wayars.app.presentation.ui.tour.TourController
+import com.wayars.app.presentation.ui.tour.TourHost
 import com.wayars.app.presentation.ui.theme.WaBackground
 import com.wayars.app.service.accessibility.ScanningState
 import com.wayars.app.util.findActivity
@@ -62,6 +64,11 @@ fun WayArsNavHost(
     val vehicleProfile by viewModel.vehicleProfile.collectAsState()
     val customPackages by viewModel.customPackages.collectAsState()
     val packageHints by viewModel.packageHints.collectAsState()
+    val tourDone by viewModel.tourDone.collectAsState()
+    val updateSnoozeUntil by viewModel.updateSnoozeUntil.collectAsState()
+    // One controller for the whole nav host: MainScreen drives the steps, TourHost (below) draws them
+    // above every route, including the status/navigation bar area.
+    val tour = remember { TourController() }
 
     val gateState by subscriptionViewModel.gateState.collectAsState()
 
@@ -296,10 +303,17 @@ fun WayArsNavHost(
                     onSavePackageHint = { viewModel.savePackageHint(it) },
                     onClearPackageHint = { viewModel.clearPackageHint(it) },
                     isSubscribed = gateState is SubscriptionState.Subscribed,
-                    onSubscriptionRequired = { goToPaywall() }
+                    onSubscriptionRequired = { goToPaywall() },
+                    tour = tour,
+                    tourDone = tourDone,
+                    onTourFinished = { viewModel.setTourDone(true) },
+                    updateSnoozeUntil = updateSnoozeUntil,
+                    onUpdateLater = { viewModel.snoozeUpdatePrompt() }
                 )
                 }
             }
         }
+
+        TourHost(tour)
     }
 }

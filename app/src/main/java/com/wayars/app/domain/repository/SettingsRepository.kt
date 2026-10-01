@@ -12,6 +12,8 @@ interface SettingsRepository {
     val currency: Flow<Currency>
     val preset: Flow<PresetType>
     val onboardingDone: Flow<Boolean>
+    val tourDone: Flow<Boolean>
+    val updateSnoozeUntil: Flow<Long>
     val termsAcceptedAt: Flow<Long?>
     val customThresholds: Flow<CustomThresholds?>
     val vehicleProfile: Flow<VehicleProfile>
@@ -22,6 +24,8 @@ interface SettingsRepository {
     suspend fun setCurrency(currency: Currency)
     suspend fun setPreset(preset: PresetType)
     suspend fun setOnboardingDone(done: Boolean)
+    suspend fun setTourDone(done: Boolean)
+    suspend fun setUpdateSnoozeUntil(epochMillis: Long)
     suspend fun setTermsAccepted(atEpochMillis: Long)
     suspend fun setCustomThresholds(bad: Double, average: Double, good: Double)
     suspend fun clearCustomThresholds()

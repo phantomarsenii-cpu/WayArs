@@ -176,4 +176,37 @@
     <string name="paywall_per_month_hint">Atigi %1$s / oy</string>
     <string name="paywall_data_safe">Ma\'lumotlaringiz xavfsiz</string>
     <string name="paywall_no_charge_notice">Birinchi 7 kun uchun to\'lov olinmaydi. Google Play\'da istalgan vaqtda bekor qilishingiz mumkin.</string>
+
+    <!-- ===== Update 07: first-run tour + update prompt ===== -->
+    <string name="tour_skip">O‘tkazib yuborish</string>
+    <string name="tour_back">Orqaga</string>
+    <string name="tour_next">Keyingi</string>
+    <string name="tour_done">Tushunarli</string>
+    <string name="tour_welcome_title">WayArs ilovasiga xush kelibsiz</string>
+    <string name="tour_welcome_text">Qisqa tur WayArs buyurtmalaringizni real vaqtda qanday baholashini ko‘rsatadi. U taxminan bir daqiqa davom etadi, uni istalgan vaqtda Sozlamalarda qayta ko‘rishingiz mumkin.</string>
+    <string name="tour_active_title">Active tugmasi</string>
+    <string name="tour_active_text">Ishni boshlaganda uni yoqing. Shunda WayArs yetkazib berish va taksi ilovalaringizdagi kelayotgan buyurtmalarni o‘qiydi va har birini baholaydi.</string>
+    <string name="tour_summary_title">Bugungi xulosa</string>
+    <string name="tour_summary_text">Bugungi buyurtmalar, daromad, faol vaqt, masofa va har km uchun o‘rtacha narx. Har bir buyurtmadan keyin yangilanadi.</string>
+    <string name="tour_verdict_title">Buyurtmani baholash</string>
+    <string name="tour_verdict_text">Har bir buyurtma baho oladi: yaxshi, o‘rtacha yoki yomon. Xuddi shu baho yetkazib berish ilovangiz ustidagi kichik suzuvchi vidjetda ham ko‘rsatiladi.</string>
+    <string name="tour_stats_title">Statistika</string>
+    <string name="tour_stats_text">Bugun baholangan buyurtmalar ro‘yxati: to‘lov, masofa, vaqt va baho.</string>
+    <string name="tour_presets_title">Tayyor rejimlar</string>
+    <string name="tour_presets_text">Baholash qanchalik qat’iy bo‘lishini tanlang: tejamkor, muvozanatli yoki faqat foydali buyurtmalar.</string>
+    <string name="tour_thresholds_title">O‘z chegaralaringiz</string>
+    <string name="tour_thresholds_text">Ixtiyoriy. Tayyor rejim o‘rniga yomon, o‘rtacha va yaxshi buyurtmalar uchun har km narxining o‘z chegaralarini belgilang.</string>
+    <string name="tour_vehicle_title">Transport va yoqilg‘i</string>
+    <string name="tour_vehicle_text">Transport vositasi, yoqilg‘i turi, sarfi va narxini kiriting, shunda har bir buyurtmaning sof foydasi yoqilg‘i xarajatlaridan keyin hisoblanadi.</string>
+    <string name="tour_permissions_title">Ruxsatlar</string>
+    <string name="tour_permissions_text">Active’ni yoqishdan oldin ekranni o‘qishga (faqat o‘qish, avtomatik bosishlarsiz) va suzuvchi vidjetga ruxsat bering. Bildirishnomalarga kirish ixtiyoriy.</string>
+    <string name="tour_apps_title">Qo‘llab-quvvatlanadigan ilovalar</string>
+    <string name="tour_apps_text">Mashhur yetkazib berish va taksi ilovalari allaqachon qo‘shilgan. Sizniki yo‘q bo‘lsa, uni shu yerda qo‘lda qo‘shing.</string>
+    <string name="tour_final_title">Hammasi tayyor!</string>
+    <string name="tour_final_text">Ruxsatlarni Sozlamalarda yoqing, so‘ng bosh ekranda Active’ni yoqing. Bu qo‘llanmani istalgan vaqtda Sozlamalarda qayta ko‘rishingiz mumkin.</string>
+    <string name="settings_tutorial_title">Qo‘llanma</string>
+    <string name="update_available_title">Yangilanish mavjud</string>
+    <string name="update_available_text">WayArs’ning yaxshilanishlar va tuzatishlar bilan yangi versiyasi mavjud.</string>
+    <string name="update_now">Yangilash</string>
+    <string name="update_later">Keyinroq</string>
 </resources>

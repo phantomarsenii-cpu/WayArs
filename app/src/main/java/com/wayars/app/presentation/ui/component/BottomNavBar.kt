@@ -30,6 +30,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.wayars.app.R
+import com.wayars.app.presentation.ui.tour.TourTarget
+import com.wayars.app.presentation.ui.tour.tourTarget
 import com.wayars.app.presentation.ui.theme.WaNeonGreen
 import com.wayars.app.presentation.ui.theme.WaSurface
 import com.wayars.app.presentation.ui.theme.WaTextSecondary
@@ -100,13 +102,15 @@ fun BottomNavBar(current: MainTab, onSelect: (MainTab) -> Unit, modifier: Modifi
             icon = Icons.Filled.BarChart,
             label = stringResource(R.string.nav_stats),
             selected = current == MainTab.STATS,
-            onClick = { onSelect(MainTab.STATS) }
+            onClick = { onSelect(MainTab.STATS) },
+            tourTarget = TourTarget.NAV_STATS
         )
         NavItem(
             icon = Icons.Filled.Tune,
             label = stringResource(R.string.nav_presets),
             selected = current == MainTab.PRESETS,
-            onClick = { onSelect(MainTab.PRESETS) }
+            onClick = { onSelect(MainTab.PRESETS) },
+            tourTarget = TourTarget.NAV_PRESETS
         )
         NavItem(
             icon = Icons.Filled.Settings,
@@ -122,10 +126,12 @@ private fun NavItem(
     icon: ImageVector,
     label: String,
     selected: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    tourTarget: TourTarget? = null
 ) {
     Column(
         modifier = Modifier
+            .tourTarget(tourTarget)
             .clip(RoundedCornerShape(22.dp))
             .background(if (selected) WaNeonGreen.copy(alpha = 0.16f) else androidx.compose.ui.graphics.Color.Transparent)
             .clickable(onClick = onClick)

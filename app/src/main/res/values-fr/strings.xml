@@ -175,4 +175,37 @@
     <string name="paywall_per_month_hint">Seulement %1$s / mois</string>
     <string name="paywall_data_safe">Vos données sont en sécurité</string>
     <string name="paywall_no_charge_notice">Aucun frais les 7 premiers jours. Annulez à tout moment sur Google Play.</string>
+
+    <!-- ===== Update 07: first-run tour + update prompt ===== -->
+    <string name="tour_skip">Passer</string>
+    <string name="tour_back">Retour</string>
+    <string name="tour_next">Suivant</string>
+    <string name="tour_done">Compris</string>
+    <string name="tour_welcome_title">Bienvenue dans WayArs</string>
+    <string name="tour_welcome_text">Une courte visite montre comment WayArs évalue vos commandes en temps réel. Elle dure environ une minute et vous pouvez la revoir à tout moment dans les Réglages.</string>
+    <string name="tour_active_title">Interrupteur Active</string>
+    <string name="tour_active_text">Activez-le quand vous commencez à travailler. WayArs lit alors les commandes reçues dans vos applications de livraison et de taxi et évalue chacune d’elles.</string>
+    <string name="tour_summary_title">Résumé du jour</string>
+    <string name="tour_summary_text">Commandes, gains, temps actif, distance et tarif moyen au km pour aujourd’hui. Les données se mettent à jour après chaque commande.</string>
+    <string name="tour_verdict_title">Évaluation de la commande</string>
+    <string name="tour_verdict_text">Chaque commande reçoit un verdict : bonne, moyenne ou mauvaise. Le même verdict s’affiche aussi dans un petit widget flottant au-dessus de votre application de livraison.</string>
+    <string name="tour_stats_title">Statistiques</string>
+    <string name="tour_stats_text">La liste des commandes évaluées aujourd’hui avec la rémunération, la distance, la durée et le verdict.</string>
+    <string name="tour_presets_title">Préréglages</string>
+    <string name="tour_presets_text">Choisissez la sévérité de l’évaluation : économe, équilibré ou uniquement les commandes rentables.</string>
+    <string name="tour_thresholds_title">Vos propres seuils</string>
+    <string name="tour_thresholds_text">Facultatif. Définissez vos propres limites de tarif au km pour les commandes mauvaises, moyennes et bonnes, au lieu d’un préréglage.</string>
+    <string name="tour_vehicle_title">Véhicule et carburant</string>
+    <string name="tour_vehicle_text">Indiquez votre véhicule, le type de carburant, la consommation et le prix du carburant pour que le bénéfice net de chaque commande soit calculé après les frais de carburant.</string>
+    <string name="tour_permissions_title">Autorisations</string>
+    <string name="tour_permissions_text">Avant d’activer Active, autorisez la lecture de l’écran (lecture seule, sans appuis automatiques) et le widget flottant. L’accès aux notifications est facultatif.</string>
+    <string name="tour_apps_title">Applications prises en charge</string>
+    <string name="tour_apps_text">Les applications de livraison et de taxi populaires sont déjà intégrées. Si la vôtre manque, ajoutez-la ici manuellement.</string>
+    <string name="tour_final_title">Tout est prêt !</string>
+    <string name="tour_final_text">Activez les autorisations dans les Réglages, puis activez Active sur l’écran d’accueil. Vous pouvez revoir ce tutoriel à tout moment dans les Réglages.</string>
+    <string name="settings_tutorial_title">Tutoriel</string>
+    <string name="update_available_title">Mise à jour disponible</string>
+    <string name="update_available_text">Une nouvelle version de WayArs est disponible avec des améliorations et des corrections.</string>
+    <string name="update_now">Mettre à jour</string>
+    <string name="update_later">Plus tard</string>
 </resources>

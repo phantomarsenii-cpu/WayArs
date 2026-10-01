@@ -175,4 +175,37 @@
     <string name="paywall_per_month_hint">Doar %1$s / lună</string>
     <string name="paywall_data_safe">Datele tale sunt în siguranță</string>
     <string name="paywall_no_charge_notice">Fără costuri primele 7 zile. Anulează oricând din Google Play.</string>
+
+    <!-- ===== Update 07: first-run tour + update prompt ===== -->
+    <string name="tour_skip">Omite</string>
+    <string name="tour_back">Înapoi</string>
+    <string name="tour_next">Înainte</string>
+    <string name="tour_done">Am înțeles</string>
+    <string name="tour_welcome_title">Bun venit în WayArs</string>
+    <string name="tour_welcome_text">Un scurt tur îți arată cum evaluează WayArs comenzile tale în timp real. Durează aproximativ un minut și îl poți relua oricând în Setări.</string>
+    <string name="tour_active_title">Comutatorul Active</string>
+    <string name="tour_active_text">Activează-l când începi lucrul. WayArs citește apoi comenzile primite în aplicațiile tale de livrare și taxi și le evaluează pe fiecare.</string>
+    <string name="tour_summary_title">Rezumatul de azi</string>
+    <string name="tour_summary_text">Comenzi, câștiguri, timp activ, distanță și tarif mediu pe km pentru azi. Se actualizează după fiecare comandă.</string>
+    <string name="tour_verdict_title">Evaluarea comenzii</string>
+    <string name="tour_verdict_text">Fiecare comandă primește un verdict: bună, medie sau slabă. Același verdict apare și într-un mic widget plutitor peste aplicația ta de livrare.</string>
+    <string name="tour_stats_title">Statistici</string>
+    <string name="tour_stats_text">Lista comenzilor evaluate azi, cu plata, distanța, timpul și verdictul.</string>
+    <string name="tour_presets_title">Presetări</string>
+    <string name="tour_presets_text">Alege cât de strictă să fie evaluarea: economă, echilibrată sau doar comenzi profitabile.</string>
+    <string name="tour_thresholds_title">Pragurile tale</string>
+    <string name="tour_thresholds_text">Opțional. Setează-ți propriile limite de tarif pe km pentru comenzile slabe, medii și bune, în loc de o presetare.</string>
+    <string name="tour_vehicle_title">Vehicul și combustibil</string>
+    <string name="tour_vehicle_text">Introdu vehiculul, tipul de combustibil, consumul și prețul combustibilului, astfel încât profitul net al fiecărei comenzi să fie calculat după costurile cu combustibilul.</string>
+    <string name="tour_permissions_title">Permisiuni</string>
+    <string name="tour_permissions_text">Înainte să pornești Active, activează citirea ecranului (doar citire, fără atingeri automate) și widgetul plutitor. Accesul la notificări este opțional.</string>
+    <string name="tour_apps_title">Aplicații acceptate</string>
+    <string name="tour_apps_text">Aplicațiile populare de livrare și taxi sunt deja incluse. Dacă a ta lipsește, adaug-o aici manual.</string>
+    <string name="tour_final_title">Totul este gata!</string>
+    <string name="tour_final_text">Activează permisiunile în Setări, apoi pornește Active pe ecranul principal. Poți relua acest tutorial oricând în Setări.</string>
+    <string name="settings_tutorial_title">Tutorial</string>
+    <string name="update_available_title">Actualizare disponibilă</string>
+    <string name="update_available_text">Este disponibilă o nouă versiune WayArs cu îmbunătățiri și remedieri.</string>
+    <string name="update_now">Actualizează</string>
+    <string name="update_later">Mai târziu</string>
 </resources>

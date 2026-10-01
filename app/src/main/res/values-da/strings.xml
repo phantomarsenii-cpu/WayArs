@@ -176,4 +176,37 @@
     <string name="paywall_per_month_hint">Kun %1$s / måned</string>
     <string name="paywall_data_safe">Dine data er sikre</string>
     <string name="paywall_no_charge_notice">Ingen betaling de første 7 dage. Annuller når som helst i Google Play.</string>
+
+    <!-- ===== Update 07: first-run tour + update prompt ===== -->
+    <string name="tour_skip">Spring over</string>
+    <string name="tour_back">Tilbage</string>
+    <string name="tour_next">Næste</string>
+    <string name="tour_done">Forstået</string>
+    <string name="tour_welcome_title">Velkommen til WayArs</string>
+    <string name="tour_welcome_text">En kort rundtur viser, hvordan WayArs vurderer dine ordrer i realtid. Den tager omkring et minut, og du kan gentage den når som helst i Indstillinger.</string>
+    <string name="tour_active_title">Kontakten Active</string>
+    <string name="tour_active_text">Slå den til, når du starter arbejdet. WayArs læser så indkommende ordrer i dine leverings- og taxa-apps og vurderer hver enkelt.</string>
+    <string name="tour_summary_title">Dagens oversigt</string>
+    <string name="tour_summary_text">Ordrer, indtjening, aktiv tid, afstand og gennemsnitlig takst pr. km for i dag. Den opdateres efter hver ordre.</string>
+    <string name="tour_verdict_title">Vurdering af ordre</string>
+    <string name="tour_verdict_text">Hver ordre får en dom: god, middel eller dårlig. Den samme dom vises også i en lille svævende widget over din leverings-app.</string>
+    <string name="tour_stats_title">Statistik</string>
+    <string name="tour_stats_text">Listen over dagens vurderede ordrer med betaling, afstand, tid og dom.</string>
+    <string name="tour_presets_title">Forudindstillinger</string>
+    <string name="tour_presets_text">Vælg, hvor streng vurderingen skal være: økonomisk, afbalanceret eller kun lønsomme ordrer.</string>
+    <string name="tour_thresholds_title">Dine egne grænser</string>
+    <string name="tour_thresholds_text">Valgfrit. Indstil dine egne grænser for takst pr. km for dårlige, middel og gode ordrer i stedet for en forudindstilling.</string>
+    <string name="tour_vehicle_title">Køretøj og brændstof</string>
+    <string name="tour_vehicle_text">Angiv køretøj, brændstoftype, forbrug og brændstofpris, så nettoindtjeningen for hver ordre beregnes efter brændstofudgifter.</string>
+    <string name="tour_permissions_title">Tilladelser</string>
+    <string name="tour_permissions_text">Før du slår Active til, skal du aktivere skærmlæsning (kun læsning, ingen automatiske tryk) og den svævende widget. Adgang til notifikationer er valgfri.</string>
+    <string name="tour_apps_title">Understøttede apps</string>
+    <string name="tour_apps_text">Populære leverings- og taxa-apps er indbygget. Mangler din, kan du tilføje den her manuelt.</string>
+    <string name="tour_final_title">Alt er klar!</string>
+    <string name="tour_final_text">Aktivér tilladelserne i Indstillinger, og slå derefter Active til på startskærmen. Du kan gentage denne vejledning når som helst i Indstillinger.</string>
+    <string name="settings_tutorial_title">Vejledning</string>
+    <string name="update_available_title">Opdatering tilgængelig</string>
+    <string name="update_available_text">En ny version af WayArs er tilgængelig med forbedringer og rettelser.</string>
+    <string name="update_now">Opdater</string>
+    <string name="update_later">Senere</string>
 </resources>

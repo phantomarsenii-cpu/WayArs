@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
@@ -32,6 +33,7 @@ import androidx.compose.material.icons.filled.DirectionsCar
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Gavel
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.School
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Language
@@ -82,6 +84,8 @@ import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import com.wayars.app.R
+import com.wayars.app.presentation.ui.tour.TourTarget
+import com.wayars.app.presentation.ui.tour.tourTarget
 import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.Currency
 import com.wayars.app.domain.model.FuelType
@@ -120,9 +124,12 @@ fun SettingsScreen(
     onSavePackageHint: (PackageHint) -> Unit,
     onClearPackageHint: (String) -> Unit,
     termsAcceptedAt: Long?,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    listState: LazyListState = rememberLazyListState(),
+    onReplayTour: () -> Unit = {}
 ) {
     LazyColumn(
+        state = listState,
         modifier = modifier.fillMaxSize().padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
         // See bottomNavBarClearance's doc: device-accurate clearance for
@@ -143,43 +150,51 @@ fun SettingsScreen(
         }
 
         item {
-            CustomThresholdsSection(
-                existing = customThresholds,
-                currency = currency,
-                onSave = onSaveCustomThresholds,
-                onClear = onClearCustomThresholds
-            )
+            Box(modifier = Modifier.tourTarget(TourTarget.SETTINGS_THRESHOLDS)) {
+                CustomThresholdsSection(
+                    existing = customThresholds,
+                    currency = currency,
+                    onSave = onSaveCustomThresholds,
+                    onClear = onClearCustomThresholds
+                )
+            }
         }
 
         item {
-            VehicleSection(
-                profile = vehicleProfile,
-                currency = currency,
-                onSave = onSaveVehicleProfile
-            )
+            Box(modifier = Modifier.tourTarget(TourTarget.SETTINGS_VEHICLE)) {
+                VehicleSection(
+                    profile = vehicleProfile,
+                    currency = currency,
+                    onSave = onSaveVehicleProfile
+                )
+            }
         }
 
         item {
-            PermissionsSection(
-                onOpenAccessibilitySettings = onOpenAccessibilitySettings,
-                onOpenOverlaySettings = onOpenOverlaySettings,
-                onOpenNotificationSettings = onOpenNotificationSettings
-            )
+            Box(modifier = Modifier.tourTarget(TourTarget.SETTINGS_PERMISSIONS)) {
+                PermissionsSection(
+                    onOpenAccessibilitySettings = onOpenAccessibilitySettings,
+                    onOpenOverlaySettings = onOpenOverlaySettings,
+                    onOpenNotificationSettings = onOpenNotificationSettings
+                )
+            }
         }
 
         item {
-            SupportedAppsSection(
-                customPackages = customPackages,
-                onAddCustomPackage = onAddCustomPackage,
-                onRemoveCustomPackage = onRemoveCustomPackage,
-                packageHints = packageHints,
-                onSavePackageHint = onSavePackageHint,
-                onClearPackageHint = onClearPackageHint
-            )
+            Box(modifier = Modifier.tourTarget(TourTarget.SETTINGS_APPS)) {
+                SupportedAppsSection(
+                    customPackages = customPackages,
+                    onAddCustomPackage = onAddCustomPackage,
+                    onRemoveCustomPackage = onRemoveCustomPackage,
+                    packageHints = packageHints,
+                    onSavePackageHint = onSavePackageHint,
+                    onClearPackageHint = onClearPackageHint
+                )
+            }
         }
 
         item {
-            InfoSection(termsAcceptedAt = termsAcceptedAt)
+            InfoSection(termsAcceptedAt = termsAcceptedAt, onReplayTour = onReplayTour)
         }
     }
 }
@@ -1644,7 +1659,7 @@ private fun CurrencyPicker(current: Currency, onSelect: (Currency) -> Unit) {
 private enum class InfoDoc { ABOUT, PRIVACY, TERMS }
 
 @Composable
-private fun InfoSection(termsAcceptedAt: Long?) {
+private fun InfoSection(termsAcceptedAt: Long?, onReplayTour: () -> Unit) {
     var activeDoc by remember { mutableStateOf<InfoDoc?>(null) }
 
     Column(
@@ -1653,6 +1668,8 @@ private fun InfoSection(termsAcceptedAt: Long?) {
             .clip(RoundedCornerShape(14.dp))
             .background(WaSurface)
     ) {
+        InfoRow(Icons.Filled.School, stringResource(R.string.settings_tutorial_title)) { onReplayTour() }
+        HorizontalDivider(color = WaSurfaceVariant)
         InfoRow(Icons.Filled.Info, stringResource(R.string.settings_about_title)) { activeDoc = InfoDoc.ABOUT }
         HorizontalDivider(color = WaSurfaceVariant)
         InfoRow(Icons.Filled.PrivacyTip, stringResource(R.string.settings_privacy_title)) { activeDoc = InfoDoc.PRIVACY }

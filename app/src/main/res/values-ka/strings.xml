@@ -176,4 +176,37 @@
     <string name="paywall_per_month_hint">მხოლოდ %1$s / თვეში</string>
     <string name="paywall_data_safe">თქვენი მონაცემები დაცულია</string>
     <string name="paywall_no_charge_notice">პირველი 7 დღის განმავლობაში გადახდა არ ხდება. გააუქმეთ ნებისმიერ დროს Google Play-ში.</string>
+
+    <!-- ===== Update 07: first-run tour + update prompt ===== -->
+    <string name="tour_skip">გამოტოვება</string>
+    <string name="tour_back">უკან</string>
+    <string name="tour_next">შემდეგი</string>
+    <string name="tour_done">გასაგებია</string>
+    <string name="tour_welcome_title">კეთილი იყოს თქვენი მობრძანება WayArs-ში</string>
+    <string name="tour_welcome_text">მოკლე ტური გაჩვენებთ, როგორ აფასებს WayArs თქვენს შეკვეთებს რეალურ დროში. ის დაახლოებით ერთ წუთს გრძელდება და მის გამეორებას ნებისმიერ დროს შეძლებთ პარამეტრებში.</string>
+    <string name="tour_active_title">Active-ის გადამრთველი</string>
+    <string name="tour_active_text">ჩართეთ, როცა მუშაობას იწყებთ. მაშინ WayArs კითხულობს შემომავალ შეკვეთებს თქვენს მიწოდებისა და ტაქსის აპებში და თითოეულს აფასებს.</string>
+    <string name="tour_summary_title">დღევანდელი შეჯამება</string>
+    <string name="tour_summary_text">დღევანდელი შეკვეთები, შემოსავალი, აქტიური დრო, მანძილი და საშუალო ტარიფი კმ-ზე. ახლდება ყოველი შეკვეთის შემდეგ.</string>
+    <string name="tour_verdict_title">შეკვეთის შეფასება</string>
+    <string name="tour_verdict_text">თითოეული შეკვეთა იღებს შეფასებას: კარგი, საშუალო ან ცუდი. იგივე შეფასება გამოჩნდება პატარა მოტივტივე ვიჯეტშიც მიწოდების აპზე.</string>
+    <string name="tour_stats_title">სტატისტიკა</string>
+    <string name="tour_stats_text">დღეს შეფასებული შეკვეთების სია: ანაზღაურება, მანძილი, დრო და შეფასება.</string>
+    <string name="tour_presets_title">წინასწარი რეჟიმები</string>
+    <string name="tour_presets_text">აირჩიეთ, რამდენად მკაცრი იყოს შეფასება: ეკონომიური, დაბალანსებული ან მხოლოდ მომგებიანი შეკვეთები.</string>
+    <string name="tour_thresholds_title">თქვენი საკუთარი ზღვრები</string>
+    <string name="tour_thresholds_text">არასავალდებულო. წინასწარი რეჟიმის ნაცვლად დააყენეთ საკუთარი ტარიფის ზღვრები კმ-ზე ცუდი, საშუალო და კარგი შეკვეთებისთვის.</string>
+    <string name="tour_vehicle_title">ტრანსპორტი და საწვავი</string>
+    <string name="tour_vehicle_text">მიუთითეთ ტრანსპორტი, საწვავის ტიპი, ხარჯი და საწვავის ფასი, რათა თითოეული შეკვეთის წმინდა მოგება საწვავის ხარჯის გათვალისწინებით დაითვალოს.</string>
+    <string name="tour_permissions_title">ნებართვები</string>
+    <string name="tour_permissions_text">Active-ის ჩართვამდე ჩართეთ ეკრანის წაკითხვა (მხოლოდ წაკითხვა, ავტომატური შეხებების გარეშე) და მოტივტივე ვიჯეტი. შეტყობინებებზე წვდომა არასავალდებულოა.</string>
+    <string name="tour_apps_title">მხარდაჭერილი აპები</string>
+    <string name="tour_apps_text">პოპულარული მიწოდებისა და ტაქსის აპები უკვე ჩაშენებულია. თუ თქვენი აკლია, დაამატეთ აქ ხელით.</string>
+    <string name="tour_final_title">ყველაფერი მზადაა!</string>
+    <string name="tour_final_text">ჩართეთ ნებართვები პარამეტრებში, შემდეგ ჩართეთ Active მთავარ ეკრანზე. ამ სახელმძღვანელოს ნებისმიერ დროს გაიმეორებთ პარამეტრებში.</string>
+    <string name="settings_tutorial_title">სახელმძღვანელო</string>
+    <string name="update_available_title">ხელმისაწვდომია განახლება</string>
+    <string name="update_available_text">ხელმისაწვდომია WayArs-ის ახალი ვერსია გაუმჯობესებებით და შესწორებებით.</string>
+    <string name="update_now">განახლება</string>
+    <string name="update_later">მოგვიანებით</string>
 </resources>

@@ -176,4 +176,37 @@
     <string name="paywall_per_month_hint">Ընդամենը %1$s / ամսական</string>
     <string name="paywall_data_safe">Ձեր տվյալներն ապահով են</string>
     <string name="paywall_no_charge_notice">Առաջին 7 օրվա համար վճար չի գանձվում։ Չեղարկեք ցանկացած պահի Google Play-ում։</string>
+
+    <!-- ===== Update 07: first-run tour + update prompt ===== -->
+    <string name="tour_skip">Բաց թողնել</string>
+    <string name="tour_back">Հետ</string>
+    <string name="tour_next">Հաջորդը</string>
+    <string name="tour_done">Հասկանալի է</string>
+    <string name="tour_welcome_title">Բարի գալուստ WayArs</string>
+    <string name="tour_welcome_text">Կարճ շրջայցը ցույց կտա, թե ինչպես է WayArs-ը իրական ժամանակում գնահատում ձեր պատվերները։ Այն տևում է մոտ մեկ րոպե, և այն կարող եք ցանկացած ժամանակ կրկնել Կարգավորումներում։</string>
+    <string name="tour_active_title">Active անջատիչը</string>
+    <string name="tour_active_text">Միացրեք այն, երբ սկսում եք աշխատել։ Այդ ժամանակ WayArs-ը կարդում է ձեր առաքման և տաքսիի հավելվածներում մուտք եղած պատվերները և գնահատում յուրաքանչյուրը։</string>
+    <string name="tour_summary_title">Այսօրվա ամփոփումը</string>
+    <string name="tour_summary_text">Այսօրվա պատվերները, եկամուտը, ակտիվ ժամանակը, հեռավորությունը և միջին սակագինը մեկ կմ-ի համար։ Թարմացվում է յուրաքանչյուր պատվերից հետո։</string>
+    <string name="tour_verdict_title">Պատվերի գնահատումը</string>
+    <string name="tour_verdict_text">Յուրաքանչյուր պատվեր ստանում է գնահատական՝ լավ, միջին կամ վատ։ Նույն գնահատականը երևում է նաև առաքման հավելվածի վրա լողացող փոքր վիջեթում։</string>
+    <string name="tour_stats_title">Վիճակագրություն</string>
+    <string name="tour_stats_text">Այսօր գնահատված պատվերների ցանկը՝ վճարով, հեռավորությամբ, ժամանակով և գնահատականով։</string>
+    <string name="tour_presets_title">Պատրաստի ռեժիմներ</string>
+    <string name="tour_presets_text">Ընտրեք՝ որքան խիստ լինի գնահատումը՝ խնայող, հավասարակշռված կամ միայն շահութաբեր պատվերներ։</string>
+    <string name="tour_thresholds_title">Ձեր սեփական շեմերը</string>
+    <string name="tour_thresholds_text">Ըստ ցանկության։ Պատրաստի ռեժիմի փոխարեն սահմանեք ձեր սեփական սակագնի սահմանները մեկ կմ-ի համար վատ, միջին և լավ պատվերների համար։</string>
+    <string name="tour_vehicle_title">Տրանսպորտ և վառելիք</string>
+    <string name="tour_vehicle_text">Նշեք տրանսպորտը, վառելիքի տեսակը, ծախսը և վառելիքի գինը, որպեսզի յուրաքանչյուր պատվերի զուտ շահույթը հաշվարկվի վառելիքի ծախսերը հանելուց հետո։</string>
+    <string name="tour_permissions_title">Թույլտվություններ</string>
+    <string name="tour_permissions_text">Active-ը միացնելուց առաջ թույլատրեք էկրանի ընթերցումը (միայն ընթերցում, առանց ավտոմատ հպումների) և լողացող վիջեթը։ Ծանուցումներին հասանելիությունը պարտադիր չէ։</string>
+    <string name="tour_apps_title">Աջակցվող հավելվածներ</string>
+    <string name="tour_apps_text">Առաքման և տաքսիի հանրաճանաչ հավելվածներն արդեն ներառված են։ Եթե ձերը չկա, ավելացրեք այն այստեղ ձեռքով։</string>
+    <string name="tour_final_title">Ամեն ինչ պատրաստ է։</string>
+    <string name="tour_final_text">Թույլատրեք հասանելիությունը Կարգավորումներում, ապա միացրեք Active-ը գլխավոր էկրանին։ Այս ուղեցույցը կարող եք ցանկացած ժամանակ կրկնել Կարգավորումներում։</string>
+    <string name="settings_tutorial_title">Ուղեցույց</string>
+    <string name="update_available_title">Հասանելի է թարմացում</string>
+    <string name="update_available_text">Հասանելի է WayArs-ի նոր տարբերակը՝ բարելավումներով և շտկումներով։</string>
+    <string name="update_now">Թարմացնել</string>
+    <string name="update_later">Ավելի ուշ</string>
 </resources>

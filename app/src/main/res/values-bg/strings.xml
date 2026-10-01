@@ -176,4 +176,37 @@
     <string name="paywall_per_month_hint">Само %1$s / месец</string>
     <string name="paywall_data_safe">Вашите данни са в безопасност</string>
     <string name="paywall_no_charge_notice">Без такса за първите 7 дни. Отменете по всяко време в Google Play.</string>
+
+    <!-- ===== Update 07: first-run tour + update prompt ===== -->
+    <string name="tour_skip">Пропусни</string>
+    <string name="tour_back">Назад</string>
+    <string name="tour_next">Напред</string>
+    <string name="tour_done">Разбрах</string>
+    <string name="tour_welcome_title">Добре дошли във WayArs</string>
+    <string name="tour_welcome_text">Кратка обиколка показва как WayArs оценява поръчките ви в реално време. Отнема около минута и можете да я повторите по всяко време в Настройки.</string>
+    <string name="tour_active_title">Превключвателят Active</string>
+    <string name="tour_active_text">Включвайте го, когато започвате работа. Тогава WayArs чете входящите поръчки във вашите приложения за доставка и такси и оценява всяка от тях.</string>
+    <string name="tour_summary_title">Обобщение за днес</string>
+    <string name="tour_summary_text">Поръчки, приходи, активно време, разстояние и средна ставка за км за днес. Обновява се след всяка поръчка.</string>
+    <string name="tour_verdict_title">Оценка на поръчката</string>
+    <string name="tour_verdict_text">Всяка поръчка получава оценка: добра, средна или лоша. Същата оценка се показва и в малък плаващ уиджет над приложението за доставка.</string>
+    <string name="tour_stats_title">Статистика</string>
+    <string name="tour_stats_text">Списъкът с оценените днес поръчки с плащане, разстояние, време и оценка.</string>
+    <string name="tour_presets_title">Предварителни настройки</string>
+    <string name="tour_presets_text">Изберете колко строга да е оценката: икономична, балансирана или само изгодни поръчки.</string>
+    <string name="tour_thresholds_title">Собствени прагове</string>
+    <string name="tour_thresholds_text">По избор. Задайте собствени граници на ставката за км за лоши, средни и добри поръчки вместо готова настройка.</string>
+    <string name="tour_vehicle_title">Превозно средство и гориво</string>
+    <string name="tour_vehicle_text">Въведете превозното средство, вида гориво, разхода и цената на горивото, за да се изчислява нетната печалба от всяка поръчка след разходите за гориво.</string>
+    <string name="tour_permissions_title">Разрешения</string>
+    <string name="tour_permissions_text">Преди да включите Active, разрешете четенето на екрана (само четене, без автоматични докосвания) и плаващия уиджет. Достъпът до известия е по избор.</string>
+    <string name="tour_apps_title">Поддържани приложения</string>
+    <string name="tour_apps_text">Популярните приложения за доставка и такси са вградени. Ако вашето липсва, добавете го тук ръчно.</string>
+    <string name="tour_final_title">Всичко е готово!</string>
+    <string name="tour_final_text">Разрешете достъпа в Настройки, след това включете Active на началния екран. Можете да повторите това обучение по всяко време в Настройки.</string>
+    <string name="settings_tutorial_title">Обучение</string>
+    <string name="update_available_title">Налична е актуализация</string>
+    <string name="update_available_text">Налична е нова версия на WayArs с подобрения и поправки.</string>
+    <string name="update_now">Актуализирай</string>
+    <string name="update_later">По-късно</string>
 </resources>

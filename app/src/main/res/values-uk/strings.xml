@@ -175,4 +175,37 @@
     <string name="paywall_per_month_hint">Лише %1$s / місяць</string>
     <string name="paywall_data_safe">Ваші дані в безпеці</string>
     <string name="paywall_no_charge_notice">Без оплати перші 7 днів. Скасуйте будь-коли в Google Play.</string>
+
+    <!-- ===== Update 07: first-run tour + update prompt ===== -->
+    <string name="tour_skip">Пропустити</string>
+    <string name="tour_back">Назад</string>
+    <string name="tour_next">Далі</string>
+    <string name="tour_done">Зрозуміло</string>
+    <string name="tour_welcome_title">Ласкаво просимо до WayArs</string>
+    <string name="tour_welcome_text">Коротке навчання покаже, як WayArs оцінює ваші замовлення в реальному часі. Це займе близько хвилини, а пройти його знову можна будь-коли в Налаштуваннях.</string>
+    <string name="tour_active_title">Перемикач Active</string>
+    <string name="tour_active_text">Вмикайте його, коли виходите на лінію. Тоді WayArs читає вхідні замовлення в застосунках доставки й таксі та оцінює кожне з них.</string>
+    <string name="tour_summary_title">Підсумки за сьогодні</string>
+    <string name="tour_summary_text">Замовлення, заробіток, час у роботі, відстань і середня ставка за км за сьогодні. Дані оновлюються після кожного замовлення.</string>
+    <string name="tour_verdict_title">Оцінка замовлення</string>
+    <string name="tour_verdict_text">Кожне замовлення отримує вердикт: хороше, середнє чи погане. Той самий вердикт показується в невеликому плаваючому віджеті поверх застосунку доставки.</string>
+    <string name="tour_stats_title">Статистика</string>
+    <string name="tour_stats_text">Список оцінених за сьогодні замовлень: оплата, відстань, час і вердикт.</string>
+    <string name="tour_presets_title">Пресети</string>
+    <string name="tour_presets_text">Оберіть, наскільки суворою буде оцінка: економний, збалансований або лише вигідні замовлення.</string>
+    <string name="tour_thresholds_title">Власні пороги</string>
+    <string name="tour_thresholds_text">Необов’язково. Задайте власні межі ставки за км для поганих, середніх і хороших замовлень замість готового пресету.</string>
+    <string name="tour_vehicle_title">Транспорт і пальне</string>
+    <string name="tour_vehicle_text">Вкажіть транспорт, тип пального, витрату й ціну пального, щоб чистий прибуток за кожне замовлення рахувався з урахуванням витрат на пальне.</string>
+    <string name="tour_permissions_title">Дозволи</string>
+    <string name="tour_permissions_text">Перед вмиканням Active увімкніть читання екрана (лише читання, без автоматичних натискань) і плаваючий віджет. Доступ до сповіщень — за бажанням.</string>
+    <string name="tour_apps_title">Підтримувані застосунки</string>
+    <string name="tour_apps_text">Популярні застосунки доставки й таксі вже додано. Якщо вашого немає в списку, додайте його вручну.</string>
+    <string name="tour_final_title">Усе готово!</string>
+    <string name="tour_final_text">Увімкніть дозволи в Налаштуваннях, а потім увімкніть Active на головному екрані. Пройти навчання знову можна будь-коли в Налаштуваннях.</string>
+    <string name="settings_tutorial_title">Навчання</string>
+    <string name="update_available_title">Доступне оновлення</string>
+    <string name="update_available_text">Вийшла нова версія WayArs з покращеннями та виправленнями.</string>
+    <string name="update_now">Оновити</string>
+    <string name="update_later">Пізніше</string>
 </resources>

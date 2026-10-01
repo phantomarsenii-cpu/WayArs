@@ -14,6 +14,8 @@ class SettingsRepositoryImpl(private val store: SettingsDataStore) : SettingsRep
     override val currency: Flow<Currency> = store.currency
     override val preset: Flow<PresetType> = store.preset
     override val onboardingDone: Flow<Boolean> = store.onboardingDone
+    override val tourDone: Flow<Boolean> = store.tourDone
+    override val updateSnoozeUntil: Flow<Long> = store.updateSnoozeUntil
     override val termsAcceptedAt: Flow<Long?> = store.termsAcceptedAt
     override val customThresholds: Flow<CustomThresholds?> = store.customThresholds
     override val vehicleProfile: Flow<VehicleProfile> = store.vehicleProfile
@@ -24,6 +26,8 @@ class SettingsRepositoryImpl(private val store: SettingsDataStore) : SettingsRep
     override suspend fun setCurrency(currency: Currency) = store.setCurrency(currency)
     override suspend fun setPreset(preset: PresetType) = store.setPreset(preset)
     override suspend fun setOnboardingDone(done: Boolean) = store.setOnboardingDone(done)
+    override suspend fun setTourDone(done: Boolean) = store.setTourDone(done)
+    override suspend fun setUpdateSnoozeUntil(epochMillis: Long) = store.setUpdateSnoozeUntil(epochMillis)
     override suspend fun setTermsAccepted(atEpochMillis: Long) = store.setTermsAccepted(atEpochMillis)
     override suspend fun setCustomThresholds(bad: Double, average: Double, good: Double) =
         store.setCustomThresholds(bad, average, good)

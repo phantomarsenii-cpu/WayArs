@@ -44,6 +44,8 @@ import android.provider.Settings
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.wayars.app.R
+import com.wayars.app.presentation.ui.tour.TourTarget
+import com.wayars.app.presentation.ui.tour.tourTarget
 import com.wayars.app.domain.model.OrderEvaluation
 import com.wayars.app.presentation.TodaySummary
 import com.wayars.app.presentation.ui.component.VerdictCard
@@ -146,7 +148,10 @@ fun DashboardScreen(
                     modifier = Modifier.padding(start = 8.dp)
                 )
             }
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                modifier = Modifier.tourTarget(TourTarget.ACTIVE_SWITCH),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Text(
                     "Active",
                     color = WaTextSecondary,
@@ -224,6 +229,7 @@ fun DashboardScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .tourTarget(TourTarget.SUMMARY_CARD)
                 .clip(RoundedCornerShape(20.dp))
                 .background(WaSurface)
                 .padding(18.dp),
@@ -283,7 +289,8 @@ fun DashboardScreen(
         )
         VerdictCard(
             evaluation = latestEvaluation,
-            emptyLabel = stringResource(R.string.dashboard_no_order)
+            emptyLabel = stringResource(R.string.dashboard_no_order),
+            modifier = Modifier.tourTarget(TourTarget.VERDICT_CARD)
         )
 
         // Bottom inset so content scrolls fully BEHIND the floating nav pill
