@@ -17,6 +17,7 @@
 
     <string name="dashboard_today_summary">Այսօրվա ամփոփում</string>
     <string name="dashboard_active_time">Ակտիվ ժամանակ</string>
+    <string name="dashboard_order_time">Պատվերների ժամանակ</string>
     <string name="dashboard_distance">Հեռավորություն</string>
     <string name="dashboard_avg_rate">Միջին սակագին</string>
     <string name="dashboard_order_evaluation">Պատվերի գնահատում</string>

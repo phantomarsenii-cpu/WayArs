@@ -17,6 +17,7 @@
 
     <string name="dashboard_today_summary">Résumé du jour</string>
     <string name="dashboard_active_time">Temps actif</string>
+    <string name="dashboard_order_time">Durée des commandes</string>
     <string name="dashboard_distance">Distance</string>
     <string name="dashboard_avg_rate">Taux moyen</string>
     <string name="dashboard_order_evaluation">Évaluation de la commande</string>

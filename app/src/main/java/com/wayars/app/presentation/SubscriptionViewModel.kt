@@ -12,6 +12,7 @@ import com.wayars.app.AppContainer
 import com.wayars.app.billing.RevenueCatConfig
 import com.wayars.app.domain.model.SubscriptionState
 import com.wayars.app.util.PriceFormatter
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -104,8 +105,13 @@ class SubscriptionViewModel(private val container: AppContainer) : ViewModel() {
      * showing their [MockPlans] fallback row, so the three cards never
      * disappear or show an empty/broken state.
      */
+    private var offeringsJob: Job? = null
+
     fun loadOfferings() {
-        viewModelScope.launch {
+        // Paywall asks for offerings on open, on resume and once more
+        // shortly after open; never run two requests at the same time.
+        if (offeringsJob?.isActive == true) return
+        offeringsJob = viewModelScope.launch {
             repository.getOfferings()
                 .onSuccess { offerings ->
                     val offering: Offering? = offerings.current

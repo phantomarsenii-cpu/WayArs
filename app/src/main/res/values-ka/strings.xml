@@ -17,6 +17,7 @@
 
     <string name="dashboard_today_summary">დღევანდელი შედეგები</string>
     <string name="dashboard_active_time">აქტიური დრო</string>
+    <string name="dashboard_order_time">შეკვეთების დრო</string>
     <string name="dashboard_distance">მანძილი</string>
     <string name="dashboard_avg_rate">საშუალო ტარიფი</string>
     <string name="dashboard_order_evaluation">შეკვეთის შეფასება</string>

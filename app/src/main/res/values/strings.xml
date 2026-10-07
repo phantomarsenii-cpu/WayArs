@@ -17,6 +17,7 @@
 
     <string name="dashboard_today_summary">Today\'s Summary</string>
     <string name="dashboard_active_time">Active Time</string>
+    <string name="dashboard_order_time">Order Time</string>
     <string name="dashboard_distance">Distance</string>
     <string name="dashboard_avg_rate">Avg Rate</string>
     <string name="dashboard_order_evaluation">Order Evaluation</string>

@@ -17,6 +17,7 @@
 
     <string name="dashboard_today_summary">Dagens oppsummering</string>
     <string name="dashboard_active_time">Aktiv tid</string>
+    <string name="dashboard_order_time">Ordretid</string>
     <string name="dashboard_distance">Avstand</string>
     <string name="dashboard_avg_rate">Gjennomsnittlig sats</string>
     <string name="dashboard_order_evaluation">Vurdering av bestilling</string>

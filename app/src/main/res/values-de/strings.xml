@@ -17,6 +17,7 @@
 
     <string name="dashboard_today_summary">Übersicht heute</string>
     <string name="dashboard_active_time">Aktive Zeit</string>
+    <string name="dashboard_order_time">Auftragszeit</string>
     <string name="dashboard_distance">Strecke</string>
     <string name="dashboard_avg_rate">Ø Rate</string>
     <string name="dashboard_order_evaluation">Auftragsbewertung</string>

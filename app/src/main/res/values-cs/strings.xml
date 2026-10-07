@@ -17,6 +17,7 @@
 
     <string name="dashboard_today_summary">Dnešní přehled</string>
     <string name="dashboard_active_time">Aktivní čas</string>
+    <string name="dashboard_order_time">Čas zakázek</string>
     <string name="dashboard_distance">Vzdálenost</string>
     <string name="dashboard_avg_rate">Průměrná sazba</string>
     <string name="dashboard_order_evaluation">Vyhodnocení objednávky</string>

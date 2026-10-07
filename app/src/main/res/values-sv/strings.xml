@@ -17,6 +17,7 @@
 
     <string name="dashboard_today_summary">Dagens sammanfattning</string>
     <string name="dashboard_active_time">Aktiv tid</string>
+    <string name="dashboard_order_time">Ordertid</string>
     <string name="dashboard_distance">Sträcka</string>
     <string name="dashboard_avg_rate">Genomsnittlig taxa</string>
     <string name="dashboard_order_evaluation">Beställningsutvärdering</string>

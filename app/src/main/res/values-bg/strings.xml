@@ -17,6 +17,7 @@
 
     <string name="dashboard_today_summary">Обобщение за днес</string>
     <string name="dashboard_active_time">Активно време</string>
+    <string name="dashboard_order_time">Време за поръчки</string>
     <string name="dashboard_distance">Разстояние</string>
     <string name="dashboard_avg_rate">Средна тарифа</string>
     <string name="dashboard_order_evaluation">Оценка на поръчката</string>

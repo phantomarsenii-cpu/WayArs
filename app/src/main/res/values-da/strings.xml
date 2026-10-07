@@ -17,6 +17,7 @@
 
     <string name="dashboard_today_summary">Dagens oversigt</string>
     <string name="dashboard_active_time">Aktiv tid</string>
+    <string name="dashboard_order_time">Ordretid</string>
     <string name="dashboard_distance">Afstand</string>
     <string name="dashboard_avg_rate">Gennemsnitlig takst</string>
     <string name="dashboard_order_evaluation">Vurdering af ordre</string>

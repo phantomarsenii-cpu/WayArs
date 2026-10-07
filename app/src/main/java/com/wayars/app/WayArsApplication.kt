@@ -11,6 +11,7 @@ import com.revenuecat.purchases.PurchasesConfiguration
 import com.wayars.app.billing.RevenueCatConfig
 import com.wayars.app.data.prefs.LanguagePrefs
 import com.wayars.app.domain.model.SubscriptionState
+import com.wayars.app.service.accessibility.ActiveSessionTracker
 import com.wayars.app.service.accessibility.ScanningState
 import com.wayars.app.util.LocaleManager
 import kotlinx.coroutines.CoroutineScope
@@ -46,6 +47,7 @@ class WayArsApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         container = AppContainer(this)
+        ActiveSessionTracker.init(this)
         configureRevenueCat()
         observeAppForeground()
         persistResolvedLanguageIfMissing()
@@ -175,6 +177,7 @@ class WayArsApplication : Application() {
                 // scanning isn't running — stop until either comes back.
                 if (!isAppForegrounded && !ScanningState.isActive.value) break
 
+                ActiveSessionTracker.heartbeat()
                 delay(SUBSCRIPTION_POLL_INTERVAL_MS)
             }
             pollingJob = null

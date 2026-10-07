@@ -17,6 +17,7 @@
 
     <string name="dashboard_today_summary">Bugünkü nəticələr</string>
     <string name="dashboard_active_time">Fəal vaxt</string>
+    <string name="dashboard_order_time">Sifariş vaxtı</string>
     <string name="dashboard_distance">Məsafə</string>
     <string name="dashboard_avg_rate">Orta tarif</string>
     <string name="dashboard_order_evaluation">Sifarişin qiymətləndirilməsi</string>

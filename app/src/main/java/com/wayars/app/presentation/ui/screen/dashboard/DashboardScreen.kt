@@ -24,6 +24,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -54,10 +58,12 @@ import com.wayars.app.presentation.ui.theme.WaSurface
 import com.wayars.app.presentation.ui.theme.WaSurfaceVariant
 import com.wayars.app.presentation.ui.theme.WaTextSecondary
 import com.wayars.app.service.accessibility.ScanLogFile
+import com.wayars.app.service.accessibility.ActiveSessionTracker
 import com.wayars.app.service.accessibility.ScanningState
 import com.wayars.app.service.overlay.OverlayService
 import com.wayars.app.util.AccessibilityUtils
 import com.wayars.app.util.CurrencyFormatter
+import kotlinx.coroutines.delay
 
 @Composable
 fun DashboardScreen(
@@ -69,6 +75,25 @@ fun DashboardScreen(
 ) {
     val context = LocalContext.current
     val isActive by ScanningState.isActive.collectAsState()
+    // Time the scanner has been switched ON today (not order-based).
+    // Holds WHOLE MINUTES, so the card only recomposes when the shown value
+    // really changes; while scanning runs it sleeps exactly until the next
+    // minute boundary, so the tile ticks up the moment the minute flips.
+    val scanningNow = isActive
+    val lifecycleOwner = LocalLifecycleOwner.current
+    // Whole minutes. Only runs while the screen is visible (STARTED); when scanning
+    // is OFF it reads the value once and stops, when scanning is ON it sleeps
+    // exactly until the next minute boundary. Nothing runs in the background.
+    val activeTodayMinutes by produceState(initialValue = ActiveSessionTracker.todayMillis() / 60_000L, scanningNow) {
+        lifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            while (true) {
+                val ms = ActiveSessionTracker.todayMillis()
+                value = ms / 60_000L
+                if (!scanningNow) break
+                delay(60_000L - (ms % 60_000L) + 50L)
+            }
+        }
+    }
     val requiresSubscriptionToast = stringResource(R.string.active_requires_subscription)
     // Only a FINISHED session's file ever lands here (see ScanLogFile), so
     // this is never offered while a scan is still being written to.
@@ -265,10 +290,18 @@ fun DashboardScreen(
 
             Row(modifier = Modifier.fillMaxWidth()) {
                 SummaryStat(
-                    value = fmtDuration(summary.totalTimeMinutes),
+                    value = fmtDuration(activeTodayMinutes.toDouble()),
                     label = stringResource(R.string.dashboard_active_time),
                     modifier = Modifier.weight(1f)
                 )
+                SummaryStat(
+                    value = fmtDuration(summary.totalTimeMinutes),
+                    label = stringResource(R.string.dashboard_order_time),
+                    modifier = Modifier.weight(1f)
+                )
+            }
+            androidx.compose.foundation.layout.Spacer(Modifier.height(12.dp))
+            Row(modifier = Modifier.fillMaxWidth()) {
                 SummaryStat(
                     value = "${fmt(summary.totalDistanceKm)} km",
                     label = stringResource(R.string.dashboard_distance),

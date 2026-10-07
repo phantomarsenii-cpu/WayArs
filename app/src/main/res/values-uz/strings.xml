@@ -17,6 +17,7 @@
 
     <string name="dashboard_today_summary">Bugungi natijalar</string>
     <string name="dashboard_active_time">Faol vaqt</string>
+    <string name="dashboard_order_time">Buyurtmalar vaqti</string>
     <string name="dashboard_distance">Masofa</string>
     <string name="dashboard_avg_rate">O\'rtacha tarif</string>
     <string name="dashboard_order_evaluation">Buyurtmani baholash</string>
