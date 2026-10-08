@@ -78,6 +78,7 @@ fun MainScreen(
     onClearPackageHint: (String) -> Unit,
     isSubscribed: Boolean,
     onSubscriptionRequired: () -> Unit,
+    onOpenPaywall: () -> Unit,
     tour: TourController,
     tourDone: Boolean?,
     onTourFinished: () -> Unit,
@@ -86,6 +87,8 @@ fun MainScreen(
 ) {
     var tab by remember { mutableStateOf(MainTab.HOME) }
     val settingsListState = rememberLazyListState()
+    var showPermissionsPrompt by remember { mutableStateOf(false) }
+    var permissionsRequestId by remember { mutableStateOf(0) }
     val context = LocalContext.current
 
     // ---------------------------------------------------------------- first-run tour
@@ -98,7 +101,7 @@ fun MainScreen(
     // Starts once, on the Home screen, for a subscribed user who has not seen it yet.
     // tourDone is null until DataStore has loaded, so a returning user never sees a flash.
     LaunchedEffect(tourDone, isSubscribed) {
-        if (tourDone == false && isSubscribed && !tour.running) {
+        if (tourDone == false && !tour.running) {
             delay(900)
             tour.start()
         }
@@ -129,6 +132,15 @@ fun MainScreen(
         tour.settle()
     }
 
+    // "Active" tapped without permissions: the caller switches to the Settings tab; bring the
+    // permissions card into view (it opens itself and shows the consent dialog).
+    LaunchedEffect(permissionsRequestId) {
+        if (permissionsRequestId > 0) {
+            delay(80L)
+            runCatching { settingsListState.animateScrollToItem(5) }
+        }
+    }
+
     // When the tour ends, land on the Home tab again.
     var tourWasRunning by remember { mutableStateOf(false) }
     LaunchedEffect(tour.running) {
@@ -142,7 +154,7 @@ fun MainScreen(
     var updateAvailable by remember { mutableStateOf(false) }
     var updateChecked by remember { mutableStateOf(false) }
     LaunchedEffect(isSubscribed, tourDone, updateSnoozeUntil) {
-        if (updateChecked || !isSubscribed || tourDone != true || updateSnoozeUntil == null) {
+        if (updateChecked || tourDone != true || updateSnoozeUntil == null) {
             return@LaunchedEffect
         }
         if (System.currentTimeMillis() < updateSnoozeUntil) return@LaunchedEffect
@@ -166,7 +178,12 @@ fun MainScreen(
                     summary = summary,
                     latestEvaluation = latestEvaluation,
                     isSubscribed = isSubscribed,
-                    onSubscriptionRequired = onSubscriptionRequired
+                    onSubscriptionRequired = onSubscriptionRequired,
+                    onPermissionsRequired = {
+                        tab = MainTab.SETTINGS
+                        showPermissionsPrompt = true
+                        permissionsRequestId++
+                    }
                 )
                 MainTab.STATS -> StatsScreen(orders = todayOrders)
                 MainTab.PRESETS -> PresetSelectionScreen(
@@ -195,7 +212,11 @@ fun MainScreen(
                     onClearPackageHint = onClearPackageHint,
                     termsAcceptedAt = termsAcceptedAt,
                     listState = settingsListState,
-                    onReplayTour = { tour.start() }
+                    onReplayTour = { tour.start() },
+                    isSubscribed = isSubscribed,
+                    onOpenPaywall = onOpenPaywall,
+                    permissionsPrompt = showPermissionsPrompt,
+                    onPermissionsPromptHandled = { showPermissionsPrompt = false }
                 )
             }
 

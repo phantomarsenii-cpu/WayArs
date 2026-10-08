@@ -1,5 +1,7 @@
 package com.wayars.app.presentation.ui.screen.paywall
 
+import androidx.compose.material3.IconButton
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateDpAsState
@@ -127,7 +129,8 @@ fun PaywallScreen(
     onRestore: () -> Unit,
     onDismissError: () -> Unit,
     gateErrorMessage: String? = null,
-    onRetryGateCheck: () -> Unit = {}
+    onRetryGateCheck: () -> Unit = {},
+    onClose: (() -> Unit)? = null
 ) {
     // RevenueCat hands back its cached offerings first and refreshes them in
     // the background, so a single request can show stale prices (e.g. right
@@ -174,6 +177,13 @@ fun PaywallScreen(
                 .padding(horizontal = 18.dp)
                 .padding(top = 12.dp, bottom = 24.dp)
         ) {
+            onClose?.let { close ->
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                    IconButton(onClick = close) {
+                        Icon(Icons.Filled.Close, contentDescription = null, tint = Color.White)
+                    }
+                }
+            }
             gateErrorMessage?.let { message ->
                 ProGateErrorBanner(message = message, onRetry = onRetryGateCheck)
                 Spacer(Modifier.height(16.dp))

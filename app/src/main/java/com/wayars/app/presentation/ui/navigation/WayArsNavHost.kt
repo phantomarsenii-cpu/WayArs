@@ -1,5 +1,6 @@
 package com.wayars.app.presentation.ui.navigation
 
+import com.wayars.app.service.accessibility.FreeTrial
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -80,16 +81,10 @@ fun WayArsNavHost(
     // based on the server-verified subscription state. Kept in one place
     // so the two screens can't drift into different gating behavior.
     fun navigateFromGate(fromRoute: String) {
-        when (gateState) {
-            is SubscriptionState.Loading -> Unit // keep waiting
-            is SubscriptionState.Subscribed -> navController.navigate(destinationAfterGate()) {
-                popUpTo(fromRoute) { inclusive = true }
-            }
-            is SubscriptionState.NotSubscribed, is SubscriptionState.Error -> {
-                navController.navigate(Routes.PAYWALL) {
-                    popUpTo(fromRoute) { inclusive = true }
-                }
-            }
+        // No paywall at launch (Google Play reviewers must be able to open the app).
+        // Subscription is only required to switch scanning ON (Dashboard "Active").
+        navController.navigate(destinationAfterGate()) {
+            popUpTo(fromRoute) { inclusive = true }
         }
     }
 
@@ -138,7 +133,7 @@ fun WayArsNavHost(
                     SplashScreen(onFinished = { splashAnimationDone = true })
                 }
 
-                LaunchedEffect(splashAnimationDone, termsAcceptedAt, gateState) {
+                LaunchedEffect(splashAnimationDone, termsAcceptedAt) {
                     if (!splashAnimationDone) return@LaunchedEffect
                     if (termsAcceptedAt == null) {
                         navController.navigate(Routes.TERMS) {
@@ -166,7 +161,7 @@ fun WayArsNavHost(
                 // just entered from here: once acceptance has actually
                 // persisted (termsAcceptedAt flips non-null), proceed to
                 // the paywall or the app the same way Splash would have.
-                LaunchedEffect(termsAcceptedAt, gateState) {
+                LaunchedEffect(termsAcceptedAt) {
                     if (termsAcceptedAt == null) return@LaunchedEffect
                     navigateFromGate(Routes.TERMS)
                 }
@@ -191,8 +186,12 @@ fun WayArsNavHost(
                 // own — leave the paywall automatically the moment it does.
                 LaunchedEffect(gateState) {
                     if (gateState is SubscriptionState.Subscribed) {
-                        navController.navigate(destinationAfterGate()) {
-                            popUpTo(Routes.PAYWALL) { inclusive = true }
+                        if (navController.previousBackStackEntry?.destination?.route == Routes.MAIN) {
+                            navController.popBackStack()
+                        } else {
+                            navController.navigate(destinationAfterGate()) {
+                                popUpTo(Routes.PAYWALL) { inclusive = true }
+                            }
                         }
                     }
                 }
@@ -222,6 +221,7 @@ fun WayArsNavHost(
                         }
                     },
                     onRestore = { subscriptionViewModel.restorePurchases() },
+                    onClose = { navController.popBackStack() },
                     onDismissError = { subscriptionViewModel.clearError() },
                     gateErrorMessage = (gateState as? SubscriptionState.Error)?.message,
                     onRetryGateCheck = { subscriptionViewModel.retryGateCheck() }
@@ -263,16 +263,31 @@ fun WayArsNavHost(
                 // both need the exact same "send them to the paywall" action,
                 // so a lapsed user can never end up looking at MAIN with no
                 // way back to the paywall short of restarting the app.
+                fun openPaywall() {
+                    navController.navigate(Routes.PAYWALL) { launchSingleTop = true }
+                }
+
                 fun goToPaywall() {
                     ScanningState.setActive(false, mainContext)
-                    navController.navigate(Routes.PAYWALL) {
-                        popUpTo(Routes.MAIN) { inclusive = true }
+                    openPaywall()
+                }
+
+                // A lapsed subscription only switches scanning off (the user stays in the app).
+                LaunchedEffect(gateState) {
+                    if (gateState is SubscriptionState.NotSubscribed && !FreeTrial.hasTimeLeft()) {
+                        ScanningState.setActive(false, mainContext)
                     }
                 }
 
-                LaunchedEffect(gateState) {
-                    if (gateState is SubscriptionState.NotSubscribed) {
-                        goToPaywall()
+                // Free trial ran out while scanning: scanning is already stopped (WayArsApplication);
+                // tell the user and offer the subscription.
+                val trialExpired by FreeTrial.expired.collectAsState()
+                val trialEndedToast = stringResource(R.string.active_requires_subscription)
+                LaunchedEffect(trialExpired) {
+                    if (trialExpired) {
+                        Toast.makeText(mainContext, trialEndedToast, Toast.LENGTH_LONG).show()
+                        FreeTrial.consumeExpired()
+                        openPaywall()
                     }
                 }
 
@@ -304,6 +319,7 @@ fun WayArsNavHost(
                     onClearPackageHint = { viewModel.clearPackageHint(it) },
                     isSubscribed = gateState is SubscriptionState.Subscribed,
                     onSubscriptionRequired = { goToPaywall() },
+                    onOpenPaywall = { openPaywall() },
                     tour = tour,
                     tourDone = tourDone,
                     onTourFinished = { viewModel.setTourDone(true) },

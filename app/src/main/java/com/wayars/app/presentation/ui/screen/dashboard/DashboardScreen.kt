@@ -1,5 +1,6 @@
 package com.wayars.app.presentation.ui.screen.dashboard
 
+import com.wayars.app.service.accessibility.FreeTrial
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -71,6 +72,7 @@ fun DashboardScreen(
     latestEvaluation: OrderEvaluation?,
     isSubscribed: Boolean,
     onSubscriptionRequired: () -> Unit,
+    onPermissionsRequired: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -95,6 +97,13 @@ fun DashboardScreen(
         }
     }
     val requiresSubscriptionToast = stringResource(R.string.active_requires_subscription)
+    // Minutes of the one-time free trial left (only shown to a user without a subscription).
+    val trialLeftMinutes by produceState(initialValue = FreeTrial.minutesLeft(), isActive, isSubscribed) {
+        while (true) {
+            value = FreeTrial.minutesLeft()
+            delay(15_000L)
+        }
+    }
     // Only a FINISHED session's file ever lands here (see ScanLogFile), so
     // this is never offered while a scan is still being written to.
     val lastLogFile by ScanLogFile.lastCompletedLogFile.collectAsState()
@@ -122,7 +131,7 @@ fun DashboardScreen(
         // back on with nothing to stop them. isSubscribed is derived the
         // same way (from SubscriptionViewModel.gateState, server-verified
         // via RevenueCat) so this can't be spoofed by anything on-device.
-        if (!isSubscribed) {
+        if (!isSubscribed && !FreeTrial.hasTimeLeft()) {
             Toast.makeText(context, requiresSubscriptionToast, Toast.LENGTH_LONG).show()
             onSubscriptionRequired()
             return
@@ -138,6 +147,8 @@ fun DashboardScreen(
                 context.getString(R.string.active_requires_permissions),
                 Toast.LENGTH_LONG
             ).show()
+            // Take the user straight to the permissions (and the screen-reading consent dialog).
+            onPermissionsRequired()
         }
     }
 
@@ -196,7 +207,7 @@ fun DashboardScreen(
                             // re-checks isSubscribed itself either way (it's
                             // the real gate); this just skips the pointless
                             // permission prompt when we already know it'll refuse.
-                            val needsNotificationPermission = isSubscribed &&
+                            val needsNotificationPermission = (isSubscribed || FreeTrial.hasTimeLeft()) &&
                                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
                                 ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) !=
                                 PackageManager.PERMISSION_GRANTED
@@ -216,6 +227,14 @@ fun DashboardScreen(
                     )
                 )
             }
+        }
+
+        if (!isSubscribed && trialLeftMinutes > 0) {
+            Text(
+                stringResource(R.string.dashboard_trial_left, trialLeftMinutes),
+                color = WaNeonGreen,
+                fontSize = 13.sp
+            )
         }
 
         // "Share log" row hidden from the dashboard UI per product decision —

@@ -1,5 +1,8 @@
 package com.wayars.app.presentation.ui.screen.settings
 
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
@@ -126,7 +129,11 @@ fun SettingsScreen(
     termsAcceptedAt: Long?,
     modifier: Modifier = Modifier,
     listState: LazyListState = rememberLazyListState(),
-    onReplayTour: () -> Unit = {}
+    onReplayTour: () -> Unit = {},
+    isSubscribed: Boolean = false,
+    onOpenPaywall: () -> Unit = {},
+    permissionsPrompt: Boolean = false,
+    onPermissionsPromptHandled: () -> Unit = {}
 ) {
     LazyColumn(
         state = listState,
@@ -138,6 +145,10 @@ fun SettingsScreen(
     ) {
         item {
             Text(stringResource(R.string.settings_title), style = MaterialTheme.typography.headlineMedium, color = MaterialTheme.colorScheme.onBackground)
+        }
+
+        item {
+            SubscriptionSection(isSubscribed = isSubscribed, onOpenPaywall = onOpenPaywall)
         }
 
         item {
@@ -175,7 +186,9 @@ fun SettingsScreen(
                 PermissionsSection(
                     onOpenAccessibilitySettings = onOpenAccessibilitySettings,
                     onOpenOverlaySettings = onOpenOverlaySettings,
-                    onOpenNotificationSettings = onOpenNotificationSettings
+                    onOpenNotificationSettings = onOpenNotificationSettings,
+                    openRequest = permissionsPrompt,
+                    onRequestHandled = onPermissionsPromptHandled
                 )
             }
         }
@@ -235,11 +248,23 @@ private fun rememberPermissionStates(): PermissionStates {
 private fun PermissionsSection(
     onOpenAccessibilitySettings: () -> Unit,
     onOpenOverlaySettings: () -> Unit,
-    onOpenNotificationSettings: () -> Unit
+    onOpenNotificationSettings: () -> Unit,
+    openRequest: Boolean = false,
+    onRequestHandled: () -> Unit = {}
 ) {
     var expanded by remember { mutableStateOf(false) }
     var showAccessibilityConsent by remember { mutableStateOf(false) }
     val states = rememberPermissionStates()
+
+    // Opened from the Dashboard ("Active" without permissions): expand the card and, if screen
+    // reading is still off, show the prominent-disclosure dialog straight away.
+    LaunchedEffect(openRequest) {
+        if (openRequest) {
+            expanded = true
+            if (!states.accessibility) showAccessibilityConsent = true
+            onRequestHandled()
+        }
+    }
 
     if (showAccessibilityConsent) {
         AccessibilityConsentDialog(
@@ -1838,5 +1863,42 @@ internal fun parseSimpleMarkdown(raw: String) = buildAnnotatedString {
             append(raw.substring(start + 2, end))
         }
         i = end + 2
+    }
+}
+
+/**
+ * Where a not-yet-subscribed user starts the subscription. The app itself is open to everyone;
+ * only turning order scanning ON (Dashboard "Active") needs an active subscription.
+ */
+@Composable
+private fun SubscriptionSection(isSubscribed: Boolean, onOpenPaywall: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(14.dp))
+            .background(WaSurface)
+    ) {
+        if (isSubscribed) {
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Icon(Icons.Filled.Check, contentDescription = null, tint = com.wayars.app.presentation.ui.theme.WaNeonGreen)
+                Text(
+                    stringResource(R.string.settings_subscription_active),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
+        } else {
+            InfoRow(Icons.Filled.Star, stringResource(R.string.settings_subscription_activate)) { onOpenPaywall() }
+            Text(
+                stringResource(R.string.settings_subscription_hint),
+                color = WaTextSecondary,
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(start = 56.dp, end = 16.dp, bottom = 14.dp)
+            )
+        }
     }
 }

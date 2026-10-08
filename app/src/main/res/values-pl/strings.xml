@@ -50,7 +50,7 @@
     <string name="accessibility_service_description">WayArs odczytuje szczegóły zlecenia (cenę, dystans, czas) wyświetlane na ekranie aplikacji dostawczych/taxi, aby pomóc Ci szybciej podjąć decyzję. Nigdy nie klika ani nie modyfikuje niczego automatycznie.</string>
 
     <string name="accessibility_consent_title">Uprawnienie do odczytu ekranu</string>
-    <string name="accessibility_consent_body">Aby automatycznie wykrywać nowe zlecenia, WayArs musi odczytywać tekst wyświetlany na ekranie przez używane przez Ciebie aplikacje dostawcze i taxi — np. cenę, dystans i szacowany czas.\n\nCo to oznacza:\n• WayArs odczytuje tylko szczegóły zlecenia z wybranych przez Ciebie obsługiwanych aplikacji. Nigdy nie odczytuje haseł, wiadomości ani tego, co wpisujesz.\n• WayArs nigdy nie klika, nie wypełnia ani nie zmienia niczego na ekranie — tylko odczytuje.\n• Wszystko jest przetwarzane na tym urządzeniu. Nic nie jest wysyłane na serwer.\n\nMożesz to wyłączyć w dowolnym momencie w Ustawieniach.</string>
+    <string name="accessibility_consent_body">Aby automatycznie wykrywać nowe zlecenia, WayArs musi odczytywać tekst wyświetlany na ekranie przez używane przez Ciebie aplikacje dostawcze i taxi — np. cenę, dystans i szacowany czas.\n\nCo to oznacza:\n• WayArs odczytuje szczegóły zlecenia tylko z obsługiwanych aplikacji (oraz tych, które sam dodasz). Wszystko, co wyświetlają inne aplikacje, jest natychmiast ignorowane — nic nie jest odczytywane ani zapisywane. Haseł, wiadomości ani tego, co wpisujesz, nie odczytuje nigdy.\n• WayArs nigdy nie klika, nie wypełnia ani nie zmienia niczego na ekranie — tylko odczytuje.\n• Wszystko jest przetwarzane na tym urządzeniu. Nic nie jest wysyłane na serwer.\n• Jeśli dodatkowo włączysz opcjonalny dostęp do powiadomień, WayArs odczytuje tylko powiadomienia obsługiwanych aplikacji o nowych zleceniach.\n\nMożesz to wyłączyć w dowolnym momencie w Ustawieniach.</string>
     <string name="accessibility_consent_allow">Zezwól i kontynuuj</string>
     <string name="accessibility_consent_decline">Nie teraz</string>
 
@@ -63,7 +63,11 @@
     <string name="settings_custom_save">Zapisz</string>
     <string name="settings_custom_clear">Użyj profilu</string>
     <string name="active_requires_permissions">Najpierw włącz odczyt ekranu i pływający widget w Ustawieniach</string>
-    <string name="active_requires_subscription">Subskrypcja wygasła — wykup ją ponownie, aby włączyć skanowanie</string>
+    <string name="active_requires_subscription">Darmowe 30 minut skanowania zostało wykorzystane — wykup subskrypcję, aby kontynuować</string>
+    <string name="settings_subscription_activate">Aktywuj subskrypcję</string>
+    <string name="settings_subscription_hint">Dostajesz 30 darmowych minut skanowania — jednorazowo. Potem skanowanie wymaga subskrypcji.</string>
+    <string name="settings_subscription_active">Subskrypcja aktywna</string>
+    <string name="dashboard_trial_left">Okres próbny: zostało %1$d min skanowania</string>
     <string name="verdict_average">ŚREDNI</string>
     <string name="settings_enable_notifications">Włącz dostęp do powiadomień</string>
     <string name="settings_notifications_hint">Opcjonalny kanał zapasowy — wykrywa zlecenia przesłane jako powiadomienie, gdy aplikacja jest zminimalizowana</string>

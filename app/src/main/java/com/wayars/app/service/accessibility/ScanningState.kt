@@ -17,6 +17,7 @@ object ScanningState {
 
     fun setActive(active: Boolean, context: Context) {
         ActiveSessionTracker.onActiveChanged(active, context)
+        FreeTrial.onActiveChanged(active, context)
         _isActive.value = active
         // Ties the file logger's lifetime exactly to one Active session,
         // regardless of which call site flips this flag.

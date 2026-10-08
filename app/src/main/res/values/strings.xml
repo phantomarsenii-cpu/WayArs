@@ -55,7 +55,7 @@
          Disclosure requirement — this must be its own affirmative-action
          screen, not folded into the privacy policy text. -->
     <string name="accessibility_consent_title">Screen reading permission</string>
-    <string name="accessibility_consent_body">To detect new orders automatically, WayArs needs to read text shown on screen by the delivery and rideshare apps you use — things like price, distance, and estimated time.\n\nWhat this means:\n• WayArs only reads order details from the supported apps you choose. It never reads passwords, messages, or anything you type.\n• WayArs never taps, fills in, or changes anything on screen — it only reads.\n• Everything is processed on this device. Nothing is sent to a server.\n\nYou can turn this off at any time in Settings.</string>
+    <string name="accessibility_consent_body">To detect new orders automatically, WayArs needs to read text shown on screen by the delivery and rideshare apps you use — things like price, distance, and estimated time.\n\nWhat this means:\n• WayArs only reads order details from the supported apps (and any apps you add yourself). Everything shown by other apps is ignored immediately — nothing is read, kept or stored from them. It never reads passwords, messages, or anything you type.\n• WayArs never taps, fills in, or changes anything on screen — it only reads.\n• Everything is processed on this device. Nothing is sent to a server.\n• If you also enable the optional notification access, WayArs reads only notifications of the supported apps about new orders.\n\nYou can turn this off at any time in Settings.</string>
     <string name="accessibility_consent_allow">Allow and continue</string>
     <string name="accessibility_consent_decline">Not now</string>
 
@@ -68,7 +68,11 @@
     <string name="settings_custom_save">Save</string>
     <string name="settings_custom_clear">Use preset instead</string>
     <string name="active_requires_permissions">Enable screen reading and the floating widget in Settings first</string>
-    <string name="active_requires_subscription">Your subscription has ended — subscribe again to turn scanning back on</string>
+    <string name="active_requires_subscription">Your free 30 minutes of scanning are used up — subscribe to keep going</string>
+    <string name="settings_subscription_activate">Activate subscription</string>
+    <string name="settings_subscription_hint">You get 30 free minutes of scanning, once. After that, scanning needs a subscription.</string>
+    <string name="settings_subscription_active">Subscription active</string>
+    <string name="dashboard_trial_left">Free trial: %1$d min of scanning left</string>
     <string name="dashboard_share_log">Send scan log</string>
     <string name="verdict_average">AVERAGE</string>
     <string name="settings_enable_notifications">Enable notification access</string>
