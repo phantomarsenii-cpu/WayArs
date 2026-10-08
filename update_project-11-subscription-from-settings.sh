@@ -19,6 +19,9 @@
 #     events from all apps (supported packages + user-added ones are checked in code, so a
 #     static android:packageNames list is not possible) but ignores every other app
 #     immediately; optional notification access is disclosed too. Stale XML comment fixed.
+#  9) In-app Privacy Policy (en/ru/pl) brought in line with the website policy and the app:
+#     no clicks/typing, other apps ignored, consent shown first, optional notification access,
+#     fuel cost / net profit in history, local free-trial counter, RevenueCat technical data.
 # Idempotent: safe to run twice.  Run BEFORE git add/commit/push.
 set -e
 cd "$(dirname "$0")"
@@ -612,5 +615,62 @@ for d, (old_b, new_b, tail, notif) in CONSENT.items():
         s = s.replace(old_b, new_b, 1)
         return s.replace(tail, notif + tail, 1)
     rw("app/src/main/res/%s/strings.xml" % d, g)
+
+# ---------------------------------------------------------------- In-app privacy policy text
+PRIV = {
+ "values": [
+  ("Last updated: October 5, 2026", "Last updated: October 8, 2026"),
+  ("is not shared with third parties or used for advertising.",
+   "is not shared with third parties or used for advertising. The service never taps, types or changes anything on the screen and is not used to record calls. Events from all other apps are ignored immediately: nothing from them is read or stored. Before the service can be enabled, the app shows a disclosure and asks for your consent, and you can turn it off at any time."),
+  ("notification access is used only to detect new order offers while the app runs in the background.",
+   "notification access is optional and is used only to detect new order offers from the supported apps while the app runs in the background. Other notifications are not read or stored."),
+  ("calculated rates and verdict of each evaluated order",
+   "calculated rates, estimated fuel cost, net profit and verdict of each evaluated order"),
+  ("\\n• Installed apps list:",
+   "\\n• Free trial: to provide the one-time free trial of scanning, the app stores on your device a counter of how long scanning has run. It is not sent anywhere.\\n• Installed apps list:"),
+  ("subscription status verification based on anonymous device and transaction identifiers.",
+   "subscription status verification based on anonymous device and transaction identifiers. RevenueCat may also process technical connection data such as an IP address."),
+ ],
+ "values-ru": [
+  ("Последнее обновление: 5 октября 2026 г.", "Последнее обновление: 8 октября 2026 г."),
+  ("не передаются третьим лицам и не используются для рекламы.",
+   "не передаются третьим лицам и не используются для рекламы. Служба никогда ничего не нажимает, не вводит и не меняет на экране и не используется для записи звонков. События всех остальных приложений сразу игнорируются: ничего из них не читается и не сохраняется. Перед включением службы приложение показывает пояснение и запрашивает ваше согласие; вы можете отключить её в любой момент."),
+  ("Доступ к уведомлениям используется только для обнаружения новых предложений заказов, пока приложение работает в фоновом режиме.",
+   "Доступ к уведомлениям необязателен и используется только для обнаружения новых предложений заказов от поддерживаемых приложений, пока приложение работает в фоновом режиме. Остальные уведомления не читаются и не сохраняются."),
+  ("рассчитанные тарифы и вердикт по каждому оценённому заказу",
+   "рассчитанные тарифы, ориентировочные расходы на топливо, чистую прибыль и вердикт по каждому оценённому заказу"),
+  ("\\n• Список установленных приложений:",
+   "\\n• Пробный период: для разового бесплатного пробного периода сканирования приложение хранит на вашем устройстве счётчик времени работы сканирования. Он никуда не отправляется.\\n• Список установленных приложений:"),
+  ("Проверка подписки на основе анонимных идентификаторов устройства и транзакций.",
+   "Проверка подписки на основе анонимных идентификаторов устройства и транзакций. RevenueCat также может обрабатывать технические данные соединения, например IP-адрес."),
+ ],
+ "values-pl": [
+  ("Data ostatniej aktualizacji: 5 października 2026 r.", "Data ostatniej aktualizacji: 8 października 2026 r."),
+  ("nie są udostępniane osobom trzecim ani wykorzystywane do reklam.",
+   "nie są udostępniane osobom trzecim ani wykorzystywane do reklam. Usługa nigdy niczego nie klika, nie wpisuje ani nie zmienia na ekranie i nie służy do nagrywania rozmów. Zdarzenia z wszystkich pozostałych aplikacji są natychmiast ignorowane: nic z nich nie jest odczytywane ani zapisywane. Przed włączeniem usługi aplikacja wyświetla objaśnienie i prosi o Twoją zgodę; możesz ją wyłączyć w dowolnej chwili."),
+  ("Dostęp do powiadomień służy wyłącznie do wykrywania nowych propozycji zleceń, gdy aplikacja działa w tle.",
+   "Dostęp do powiadomień jest opcjonalny i służy wyłącznie do wykrywania nowych propozycji zleceń z obsługiwanych aplikacji, gdy aplikacja działa w tle. Pozostałe powiadomienia nie są odczytywane ani zapisywane."),
+  ("obliczone stawki i ocenę każdego ocenionego zlecenia",
+   "obliczone stawki, szacowany koszt paliwa, zysk netto i ocenę każdego ocenionego zlecenia"),
+  ("\\n• Lista zainstalowanych aplikacji:",
+   "\\n• Okres próbny: na potrzeby jednorazowego darmowego okresu próbnego skanowania aplikacja zapisuje na Twoim urządzeniu licznik czasu działania skanowania. Nie jest on nigdzie wysyłany.\\n• Lista zainstalowanych aplikacji:"),
+  ("Weryfikacja subskrypcji na podstawie anonimowych identyfikatorów urządzenia i transakcji.",
+   "Weryfikacja subskrypcji na podstawie anonimowych identyfikatorów urządzenia i transakcji. RevenueCat może też przetwarzać techniczne dane połączenia, takie jak adres IP."),
+ ],
+}
+for d, pairs in PRIV.items():
+    def h(s, pairs=pairs):
+        m = re.search(r'(<string name="settings_privacy_content">)(.*?)(</string>)', s, re.S)
+        if not m:
+            raise SystemExit("settings_privacy_content missing in " + d)
+        body = m.group(2)
+        for old, new in pairs:
+            if new in body:
+                continue
+            if body.count(old) != 1:
+                raise SystemExit("privacy text: %d matches in %s for: %s" % (body.count(old), d, old[:50]))
+            body = body.replace(old, new, 1)
+        return s[:m.start(2)] + body + s[m.end(2):]
+    rw("app/src/main/res/%s/strings.xml" % d, h)
 PYEOF
 echo "Done. Review with git diff, then: git add -A && git commit && git push"
