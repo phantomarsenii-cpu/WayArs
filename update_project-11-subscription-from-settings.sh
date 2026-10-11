@@ -22,6 +22,9 @@
 #  9) In-app Privacy Policy (ALL 17 languages) brought in line with the website policy and the app:
 #     no clicks/typing, other apps ignored, consent shown first, optional notification access,
 #     fuel cost / net profit in history, local free-trial counter, RevenueCat technical data.
+# 10) Play Console warning "DEX optimization below threshold: obfuscation 0%": release builds now
+#     run R8 (isMinifyEnabled = true) with readable crash stack traces (mapping goes to Play
+#     inside the AAB automatically). TEST the release APK on a phone before uploading the AAB.
 # Idempotent: safe to run twice.  Run BEFORE git add/commit/push.
 set -e
 cd "$(dirname "$0")"
@@ -689,5 +692,31 @@ for d, pairs in PRIV.items():
             body = body.replace(old, new, 1)
         return s[:m.start(2)] + body + s[m.end(2):]
     rw("app/src/main/res/%s/strings.xml" % d, h)
+
+# ---------------------------------------------------------------- R8 / obfuscation (Play warning)
+def gradle(s):
+    if "isMinifyEnabled = true" in s:
+        return s
+    if s.count("isMinifyEnabled = false") != 1:
+        raise SystemExit("isMinifyEnabled = false found %d times (expected 1)" % s.count("isMinifyEnabled = false"))
+    return s.replace("isMinifyEnabled = false",
+                     "// R8 code shrinking + obfuscation (Play Console: DEX optimization / obfuscation >= 25%).\n"
+                     "            // Manifest components (services, activity) keep their names automatically.\n"
+                     "            isMinifyEnabled = true", 1)
+rw("app/build.gradle.kts", gradle)
+
+def rules(s):
+    if "renamesourcefileattribute" in s:
+        return s
+    return s.rstrip("\n") + """
+
+# Readable crash stack traces in Play Console (mapping.txt is uploaded with the AAB automatically).
+-keepattributes SourceFile,LineNumberTable
+-renamesourcefileattribute SourceFile
+
+# Generic safety attributes (generics, annotations, nested classes).
+-keepattributes Signature,*Annotation*,InnerClasses,EnclosingMethod
+"""
+rw("app/proguard-rules.pro", rules)
 PYEOF
 echo "Done. Review with git diff, then: git add -A && git commit && git push"

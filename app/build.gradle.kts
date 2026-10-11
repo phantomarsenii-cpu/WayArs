@@ -115,7 +115,9 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
         release {
-            isMinifyEnabled = false
+            // R8 code shrinking + obfuscation (Play Console: DEX optimization / obfuscation >= 25%).
+            // Manifest components (services, activity) keep their names automatically.
+            isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             // Only attach the release signing config when the environment
             // actually provided one (see signingConfigs above) — otherwise
