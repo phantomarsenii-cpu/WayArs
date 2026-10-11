@@ -19,7 +19,7 @@
 #     events from all apps (supported packages + user-added ones are checked in code, so a
 #     static android:packageNames list is not possible) but ignores every other app
 #     immediately; optional notification access is disclosed too. Stale XML comment fixed.
-#  9) In-app Privacy Policy (en/ru/pl) brought in line with the website policy and the app:
+#  9) In-app Privacy Policy (en/ru/pl/uk) brought in line with the website policy and the app:
 #     no clicks/typing, other apps ignored, consent shown first, optional notification access,
 #     fuel cost / net profit in history, local free-trial counter, RevenueCat technical data.
 # Idempotent: safe to run twice.  Run BEFORE git add/commit/push.
@@ -656,6 +656,19 @@ PRIV = {
    "\\n• Okres próbny: na potrzeby jednorazowego darmowego okresu próbnego skanowania aplikacja zapisuje na Twoim urządzeniu licznik czasu działania skanowania. Nie jest on nigdzie wysyłany.\\n• Lista zainstalowanych aplikacji:"),
   ("Weryfikacja subskrypcji na podstawie anonimowych identyfikatorów urządzenia i transakcji.",
    "Weryfikacja subskrypcji na podstawie anonimowych identyfikatorów urządzenia i transakcji. RevenueCat może też przetwarzać techniczne dane połączenia, takie jak adres IP."),
+ ],
+ "values-uk": [
+  ("Останнє оновлення: 5 жовтня 2026 р.", "Останнє оновлення: 8 жовтня 2026 р."),
+  ("не передаються третім особам і не використовуються для реклами.",
+   "не передаються третім особам і не використовуються для реклами. Служба ніколи нічого не натискає, не вводить і не змінює на екрані та не використовується для запису дзвінків. Події всіх інших застосунків одразу ігноруються: нічого з них не зчитується й не зберігається. Перед увімкненням служби застосунок показує пояснення й запитує вашу згоду; ви можете вимкнути її будь-коли."),
+  ("Доступ до сповіщень використовується лише для виявлення нових пропозицій замовлень, поки застосунок працює у фоновому режимі.",
+   "Доступ до сповіщень необов’язковий і використовується лише для виявлення нових пропозицій замовлень від підтримуваних застосунків, поки застосунок працює у фоновому режимі. Інші сповіщення не зчитуються й не зберігаються."),
+  ("розраховані тарифи та вердикт щодо кожного оціненого замовлення",
+   "розраховані тарифи, орієнтовні витрати на пальне, чистий прибуток і вердикт щодо кожного оціненого замовлення"),
+  ("\\n• Список встановлених застосунків:",
+   "\\n• Пробний період: для разового безкоштовного пробного періоду сканування застосунок зберігає на вашому пристрої лічильник часу роботи сканування. Він нікуди не надсилається.\\n• Список встановлених застосунків:"),
+  ("Перевірка підписки на основі анонімних ідентифікаторів пристрою та транзакцій.",
+   "Перевірка підписки на основі анонімних ідентифікаторів пристрою та транзакцій. RevenueCat також може обробляти технічні дані з’єднання, наприклад IP-адресу."),
  ],
 }
 for d, pairs in PRIV.items():
