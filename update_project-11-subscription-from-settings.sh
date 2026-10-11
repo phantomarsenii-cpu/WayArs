@@ -19,7 +19,7 @@
 #     events from all apps (supported packages + user-added ones are checked in code, so a
 #     static android:packageNames list is not possible) but ignores every other app
 #     immediately; optional notification access is disclosed too. Stale XML comment fixed.
-#  9) In-app Privacy Policy (en/ru/pl/uk) brought in line with the website policy and the app:
+#  9) In-app Privacy Policy (ALL 17 languages) brought in line with the website policy and the app:
 #     no clicks/typing, other apps ignored, consent shown first, optional notification access,
 #     fuel cost / net profit in history, local free-trial counter, RevenueCat technical data.
 # Idempotent: safe to run twice.  Run BEFORE git add/commit/push.
@@ -671,6 +671,10 @@ PRIV = {
    "Перевірка підписки на основі анонімних ідентифікаторів пристрою та транзакцій. RevenueCat також може обробляти технічні дані з’єднання, наприклад IP-адресу."),
  ],
 }
+# The remaining 13 languages carry the policy in English (untranslated copy), so they get the
+# same English update. Result: every language shows the same, current policy text.
+for _d in ("az", "bg", "cs", "da", "de", "fr", "hu", "hy", "ka", "nb", "ro", "sv", "uz"):
+    PRIV["values-" + _d] = PRIV["values"]
 for d, pairs in PRIV.items():
     def h(s, pairs=pairs):
         m = re.search(r'(<string name="settings_privacy_content">)(.*?)(</string>)', s, re.S)
