@@ -25,6 +25,10 @@
 # 10) Play Console warning "DEX optimization below threshold: obfuscation 0%": release builds now
 #     run R8 (isMinifyEnabled = true) with readable crash stack traces (mapping goes to Play
 #     inside the AAB automatically). TEST the release APK on a phone before uploading the AAB.
+# 11) Overlay widget now also shows net profit after fuel: "Чисто X (топливо Y)" under the rate badge,
+#     ONLY when the user has entered fuel consumption AND fuel price in the vehicle settings
+#     (the built-in default profile does not count) and the order is >= 1 km (under 1 km the badge
+#     already shows the net profit). The same rule applies to the verdict card in the app.
 # Idempotent: safe to run twice.  Run BEFORE git add/commit/push.
 set -e
 cd "$(dirname "$0")"
@@ -718,5 +722,77 @@ def rules(s):
 -keepattributes Signature,*Annotation*,InnerClasses,EnclosingMethod
 """
 rw("app/proguard-rules.pro", rules)
+
+# ---------------------------------------------------------------- Overlay: net profit + fuel (only if the user entered fuel data)
+def vehicle_profile(s):
+    if "userConfigured" in s:
+        return s
+    s = sub(s, "    val fuelPricePerUnit: Double\n) {",
+            "    val fuelPricePerUnit: Double,\n"
+            "    /** False only for [DEFAULT] (the user never saved a vehicle profile). */\n"
+            "    val userConfigured: Boolean = true\n) {", "val userConfigured: Boolean = true")
+    s = sub(s, "    companion object {\n",
+            "    /**\n"
+            "     * True only when the driver has actually entered fuel consumption AND fuel price. The built-in\n"
+            "     * default profile does not count, so UI that shows fuel/net-profit lines stays hidden until then.\n"
+            "     */\n"
+            "    fun hasFuelCostData(): Boolean =\n"
+            "        userConfigured && category != VehicleCategory.BICYCLE && consumptionPer100Km > 0.0 && fuelPricePerUnit > 0.0\n\n"
+            "    companion object {\n", "fun hasFuelCostData()")
+    s = sub(s, "            fuelPricePerUnit = 6.5\n        )",
+            "            fuelPricePerUnit = 6.5,\n            userConfigured = false\n        )", "userConfigured = false")
+    return s
+rw("app/src/main/java/com/wayars/app/domain/model/VehicleProfile.kt", vehicle_profile)
+
+def order_eval(s):
+    return sub(s, "    val verdict: Verdict\n) {",
+               "    val verdict: Verdict,\n"
+               "    /** True when the driver entered fuel consumption and price, so fuel/net-profit lines may be shown. */\n"
+               "    val fuelDataEntered: Boolean = false\n) {", "val fuelDataEntered: Boolean = false")
+rw("app/src/main/java/com/wayars/app/domain/model/OrderEvaluation.kt", order_eval)
+
+def use_case(s):
+    return sub(s, "            ratePerMinute = ratePerMinute,\n            verdict = verdict\n        )",
+               "            ratePerMinute = ratePerMinute,\n            verdict = verdict,\n"
+               "            fuelDataEntered = vehicleProfile.hasFuelCostData()\n        )", "fuelDataEntered = vehicleProfile.hasFuelCostData()")
+rw("app/src/main/java/com/wayars/app/domain/usecase/EvaluateOrderUseCase.kt", use_case)
+
+def overlay_net(s):
+    new_cond = "if (evaluation.fuelDataEntered && evaluation.fuelCost > 0 && evaluation.distanceKm >= OrderEvaluation.SHORT_TRIP_THRESHOLD_KM) {"
+    old_cond = "if (evaluation.fuelCost > 0 && evaluation.distanceKm >= OrderEvaluation.SHORT_TRIP_THRESHOLD_KM) {"
+    if new_cond in s:
+        return s
+    if old_cond in s:  # an earlier version of this script already added the block
+        return s.replace(old_cond, new_cond, 1)
+    anchor = ("            Spacer(Modifier.height(11.dp))\n"
+              "            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {\n"
+              "                Button(\n"
+              "                    onClick = onAccept,")
+    if s.count(anchor) != 1:
+        raise SystemExit("overlay anchor found %d times (expected 1)" % s.count(anchor))
+    block = ("            // Net profit after fuel. Shown only when the driver entered fuel consumption AND price in the\n"
+             "            // vehicle settings, and the trip is long enough: under 1 km the badge above already shows\n"
+             "            // the net profit.\n"
+             "            " + new_cond + "\n"
+             "                Spacer(Modifier.height(5.dp))\n"
+             "                Text(\n"
+             "                    stringResource(\n"
+             "                        R.string.verdict_net_profit,\n"
+             "                        CurrencyFormatter.format(evaluation.netProfit, evaluation.currency),\n"
+             "                        CurrencyFormatter.format(evaluation.fuelCost, evaluation.currency)\n"
+             "                    ),\n"
+             "                    fontSize = 10.sp,\n"
+             "                    color = WaTextSecondary\n"
+             "                )\n"
+             "            }\n\n")
+    return s.replace(anchor, block + anchor, 1)
+rw(BASE + "widget/OverlayContent.kt", overlay_net)
+
+def verdict_card(s):
+    if "evaluation.fuelDataEntered && evaluation.fuelCost > 0" in s:
+        return s
+    return sub(s, "        if (evaluation.fuelCost > 0) {", "        if (evaluation.fuelDataEntered && evaluation.fuelCost > 0) {",
+               "evaluation.fuelDataEntered && evaluation.fuelCost > 0")
+rw(BASE + "ui/component/VerdictCard.kt", verdict_card)
 PYEOF
 echo "Done. Review with git diff, then: git add -A && git commit && git push"

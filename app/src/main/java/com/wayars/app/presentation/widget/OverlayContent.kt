@@ -220,6 +220,22 @@ fun OverlayContent(
                 )
             }
 
+            // Net profit after fuel. Shown only when the driver entered fuel consumption AND price in the
+            // vehicle settings, and the trip is long enough: under 1 km the badge above already shows
+            // the net profit.
+            if (evaluation.fuelDataEntered && evaluation.fuelCost > 0 && evaluation.distanceKm >= OrderEvaluation.SHORT_TRIP_THRESHOLD_KM) {
+                Spacer(Modifier.height(5.dp))
+                Text(
+                    stringResource(
+                        R.string.verdict_net_profit,
+                        CurrencyFormatter.format(evaluation.netProfit, evaluation.currency),
+                        CurrencyFormatter.format(evaluation.fuelCost, evaluation.currency)
+                    ),
+                    fontSize = 10.sp,
+                    color = WaTextSecondary
+                )
+            }
+
             Spacer(Modifier.height(11.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Button(

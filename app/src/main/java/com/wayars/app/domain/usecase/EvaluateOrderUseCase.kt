@@ -95,7 +95,8 @@ class EvaluateOrderUseCase {
             netProfit = netProfit,
             ratePerKm = ratePerKm,
             ratePerMinute = ratePerMinute,
-            verdict = verdict
+            verdict = verdict,
+            fuelDataEntered = vehicleProfile.hasFuelCostData()
         )
     }
 
