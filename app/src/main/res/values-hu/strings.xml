@@ -210,4 +210,8 @@
     <string name="update_available_text">A WayArs új verziója érhető el fejlesztésekkel és javításokkal.</string>
     <string name="update_now">Frissítés</string>
     <string name="update_later">Később</string>
+    <string name="vehicle_prompt_title">Állítsd be a járművet</string>
+    <string name="vehicle_prompt_body">A jármű típusa és az üzemanyag-fogyasztás határozza meg, mennyire kifizetődő valójában egy megrendelés. Add meg őket egyszer, hogy a számítások pontosak legyenek.</string>
+    <string name="vehicle_prompt_configure">Beállítás</string>
+    <string name="vehicle_prompt_skip">Kihagyás</string>
 </resources>

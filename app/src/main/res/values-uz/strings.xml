@@ -210,4 +210,8 @@
     <string name="update_available_text">WayArs’ning yaxshilanishlar va tuzatishlar bilan yangi versiyasi mavjud.</string>
     <string name="update_now">Yangilash</string>
     <string name="update_later">Keyinroq</string>
+    <string name="vehicle_prompt_title">Transport vositasini sozlang</string>
+    <string name="vehicle_prompt_body">Transport turi va yoqilg‘i sarfi buyurtma aslida qanchalik foydali ekanini belgilaydi. Hisob-kitoblar aniq bo‘lishi uchun ularni bir marta kiriting.</string>
+    <string name="vehicle_prompt_configure">Sozlash</string>
+    <string name="vehicle_prompt_skip">O‘tkazib yuborish</string>
 </resources>

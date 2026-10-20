@@ -63,6 +63,7 @@ fun WayArsNavHost(
     val todayOrders by viewModel.todayOrders.collectAsState()
     val customThresholds by viewModel.customThresholds.collectAsState()
     val vehicleProfile by viewModel.vehicleProfile.collectAsState()
+    val vehiclePromptCount by viewModel.vehiclePromptCount.collectAsState()
     val customPackages by viewModel.customPackages.collectAsState()
     val packageHints by viewModel.packageHints.collectAsState()
     val tourDone by viewModel.tourDone.collectAsState()
@@ -308,6 +309,8 @@ fun WayArsNavHost(
                     onOpenNotificationSettings = onOpenNotificationSettings,
                     customThresholds = customThresholds,
                     vehicleProfile = vehicleProfile,
+                    vehiclePromptCount = vehiclePromptCount,
+                    onVehiclePromptShown = { viewModel.noteVehiclePromptShown() },
                     onSaveCustomThresholds = { bad, average, good -> viewModel.setCustomThresholds(bad, average, good) },
                     onClearCustomThresholds = { viewModel.clearCustomThresholds() },
                     onSaveVehicleProfile = { viewModel.setVehicleProfile(it) },

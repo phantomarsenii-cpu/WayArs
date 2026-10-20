@@ -214,4 +214,8 @@
     <string name="update_available_text">Dostępna jest nowa wersja WayArs z ulepszeniami i poprawkami.</string>
     <string name="update_now">Aktualizuj</string>
     <string name="update_later">Później</string>
+    <string name="vehicle_prompt_title">Skonfiguruj pojazd</string>
+    <string name="vehicle_prompt_body">Rodzaj pojazdu i zużycie paliwa decydują o tym, czy zlecenie naprawdę się opłaca. Podaj je raz, aby obliczenia były dokładne.</string>
+    <string name="vehicle_prompt_configure">Skonfiguruj</string>
+    <string name="vehicle_prompt_skip">Pomiń</string>
 </resources>

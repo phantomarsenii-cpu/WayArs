@@ -29,6 +29,11 @@
 #     ONLY when the user has entered fuel consumption AND fuel price in the vehicle settings
 #     (the built-in default profile does not count) and the order is >= 1 km (under 1 km the badge
 #     already shows the net profit). The same rule applies to the verdict card in the app.
+# 12) "Set up your vehicle" prompt: when the user taps Active, all permissions are granted and no vehicle
+#     profile was ever saved, a dialog offers [Set up] (-> Settings, vehicle card opens) or [Skip]
+#     (scanning starts on the default profile). Shown at most 2 times in total. It never overlaps other
+#     UI: not during the first-run tour, and when the Android notification-permission dialog is up it
+#     waits until that one is answered. Texts are translated into all 17 languages.
 # Idempotent: safe to run twice.  Run BEFORE git add/commit/push.
 set -e
 cd "$(dirname "$0")"
@@ -794,5 +799,231 @@ def verdict_card(s):
     return sub(s, "        if (evaluation.fuelCost > 0) {", "        if (evaluation.fuelDataEntered && evaluation.fuelCost > 0) {",
                "evaluation.fuelDataEntered && evaluation.fuelCost > 0")
 rw(BASE + "ui/component/VerdictCard.kt", verdict_card)
+
+# ---------------------------------------------------------------- "Set up your vehicle" prompt (on Active)
+def ds_prompt(s):
+    s = add_import(s, "import androidx.datastore.preferences.core.intPreferencesKey")
+    s = sub(s, '        val VEHICLE_FUEL_PRICE = doublePreferencesKey("vehicle_fuel_price_per_unit")\n',
+            '        val VEHICLE_FUEL_PRICE = doublePreferencesKey("vehicle_fuel_price_per_unit")\n'
+            '        val VEHICLE_PROMPT_COUNT = intPreferencesKey("vehicle_prompt_count")\n', "VEHICLE_PROMPT_COUNT = intPreferencesKey")
+    s = sub(s, "    val vehicleProfile: Flow<VehicleProfile> = context.dataStore.data.map { prefs ->",
+            "    /** How many times the \"set up your vehicle\" prompt has been shown (it is shown at most twice). */\n"
+            "    val vehiclePromptCount: Flow<Int> = context.dataStore.data.map { it[Keys.VEHICLE_PROMPT_COUNT] ?: 0 }\n\n"
+            "    suspend fun incrementVehiclePromptCount() {\n"
+            "        context.dataStore.edit { it[Keys.VEHICLE_PROMPT_COUNT] = (it[Keys.VEHICLE_PROMPT_COUNT] ?: 0) + 1 }\n"
+            "    }\n\n"
+            "    val vehicleProfile: Flow<VehicleProfile> = context.dataStore.data.map { prefs ->", "val vehiclePromptCount: Flow<Int>")
+    return s
+rw("app/src/main/java/com/wayars/app/data/prefs/SettingsDataStore.kt", ds_prompt)
+
+def vm_prompt(s):
+    return sub(s, "        settings.vehicleProfile.stateIn(viewModelScope, SharingStarted.Eagerly, VehicleProfile.DEFAULT)\n",
+               "        settings.vehicleProfile.stateIn(viewModelScope, SharingStarted.Eagerly, VehicleProfile.DEFAULT)\n\n"
+               "    /** Times the vehicle prompt was shown. Starts at 2 (= do not prompt) until the stored value is loaded. */\n"
+               "    val vehiclePromptCount: StateFlow<Int> =\n"
+               "        settings.vehiclePromptCount.stateIn(viewModelScope, SharingStarted.Eagerly, 2)\n\n"
+               "    fun noteVehiclePromptShown() = viewModelScope.launch { settings.incrementVehiclePromptCount() }\n",
+               "val vehiclePromptCount: StateFlow<Int>")
+rw(BASE + "MainViewModel.kt", vm_prompt)
+
+def nav_prompt(s):
+    s = sub(s, "    val vehicleProfile by viewModel.vehicleProfile.collectAsState()\n",
+            "    val vehicleProfile by viewModel.vehicleProfile.collectAsState()\n"
+            "    val vehiclePromptCount by viewModel.vehiclePromptCount.collectAsState()\n", "val vehiclePromptCount by viewModel")
+    s = sub(s, "                    vehicleProfile = vehicleProfile,\n",
+            "                    vehicleProfile = vehicleProfile,\n"
+            "                    vehiclePromptCount = vehiclePromptCount,\n"
+            "                    onVehiclePromptShown = { viewModel.noteVehiclePromptShown() },\n", "vehiclePromptCount = vehiclePromptCount,")
+    return s
+rw(BASE + "ui/navigation/WayArsNavHost.kt", nav_prompt)
+
+def main_vehicle(s):
+    s = sub(s, "    vehicleProfile: VehicleProfile,\n    onLanguageSelected: (String) -> Unit,",
+            "    vehicleProfile: VehicleProfile,\n    vehiclePromptCount: Int,\n    onVehiclePromptShown: () -> Unit,\n    onLanguageSelected: (String) -> Unit,",
+            "vehiclePromptCount: Int,")
+    s = sub(s, "    var permissionsRequestId by remember { mutableStateOf(0) }\n",
+            "    var permissionsRequestId by remember { mutableStateOf(0) }\n"
+            "    var vehicleSetupPrompt by remember { mutableStateOf(false) }\n"
+            "    var vehicleSetupRequestId by remember { mutableStateOf(0) }\n", "var vehicleSetupPrompt")
+    s = sub(s, "    // When the tour ends, land on the Home tab again.\n",
+            "    // \"Set up your vehicle\" from the Active prompt: the tab is switched by the caller; bring the\n"
+            "    // vehicle card (item 4: title, subscription, general, thresholds, vehicle) into view.\n"
+            "    LaunchedEffect(vehicleSetupRequestId) {\n"
+            "        if (vehicleSetupRequestId > 0) {\n"
+            "            delay(80L)\n"
+            "            runCatching { settingsListState.animateScrollToItem(4) }\n"
+            "        }\n"
+            "    }\n\n"
+            "    // When the tour ends, land on the Home tab again.\n", "LaunchedEffect(vehicleSetupRequestId)")
+    s = sub(s, "                        showPermissionsPrompt = true\n                        permissionsRequestId++\n                    }\n                )\n",
+            "                        showPermissionsPrompt = true\n                        permissionsRequestId++\n                    },\n"
+            "                    vehicleConfigured = vehicleProfile.userConfigured,\n"
+            "                    vehiclePromptCount = vehiclePromptCount,\n"
+            "                    promptsEnabled = !tour.running,\n"
+            "                    onVehiclePromptShown = onVehiclePromptShown,\n"
+            "                    onVehicleSetupRequested = {\n"
+            "                        tab = MainTab.SETTINGS\n"
+            "                        vehicleSetupPrompt = true\n"
+            "                        vehicleSetupRequestId++\n"
+            "                    }\n"
+            "                )\n", "onVehicleSetupRequested = {")
+    s = sub(s, "                    onPermissionsPromptHandled = { showPermissionsPrompt = false }\n",
+            "                    onPermissionsPromptHandled = { showPermissionsPrompt = false },\n"
+            "                    vehiclePrompt = vehicleSetupPrompt,\n"
+            "                    onVehiclePromptHandled = { vehicleSetupPrompt = false }\n", "vehiclePrompt = vehicleSetupPrompt")
+    return s
+rw(BASE + "ui/navigation/MainScreen.kt", main_vehicle)
+
+def settings_vehicle(s):
+    s = sub(s, "    permissionsPrompt: Boolean = false,\n    onPermissionsPromptHandled: () -> Unit = {}\n) {",
+            "    permissionsPrompt: Boolean = false,\n    onPermissionsPromptHandled: () -> Unit = {},\n"
+            "    vehiclePrompt: Boolean = false,\n    onVehiclePromptHandled: () -> Unit = {}\n) {", "vehiclePrompt: Boolean = false")
+    s = sub(s, "                    currency = currency,\n                    onSave = onSaveVehicleProfile\n",
+            "                    currency = currency,\n                    onSave = onSaveVehicleProfile,\n"
+            "                    openRequest = vehiclePrompt,\n                    onRequestHandled = onVehiclePromptHandled\n", "openRequest = vehiclePrompt")
+    s = sub(s, "    onSave: (VehicleProfile) -> Unit\n) {\n    val context = LocalContext.current\n    var expanded by remember { mutableStateOf(false) }\n",
+            "    onSave: (VehicleProfile) -> Unit,\n    openRequest: Boolean = false,\n    onRequestHandled: () -> Unit = {}\n) {\n    val context = LocalContext.current\n    var expanded by remember { mutableStateOf(false) }\n"
+            "    // Opened from the Dashboard \"set up your vehicle\" prompt: expand this card.\n"
+            "    LaunchedEffect(openRequest) {\n"
+            "        if (openRequest) {\n"
+            "            expanded = true\n"
+            "            onRequestHandled()\n"
+            "        }\n"
+            "    }\n", "LaunchedEffect(openRequest) {\n        if (openRequest) {\n            expanded = true")
+    return s
+rw(BASE + "ui/screen/settings/SettingsScreen.kt", settings_vehicle)
+
+def dash_vehicle(s):
+    for imp in ("import androidx.compose.runtime.LaunchedEffect", "import androidx.compose.runtime.mutableStateOf",
+                "import androidx.compose.runtime.setValue", "import androidx.compose.material3.Button",
+                "import androidx.compose.material3.TextButton"):
+        s = add_import(s, imp)
+    s = sub(s, "    onPermissionsRequired: () -> Unit = {},\n    modifier: Modifier = Modifier\n) {",
+            "    onPermissionsRequired: () -> Unit = {},\n"
+            "    vehicleConfigured: Boolean = true,\n"
+            "    vehiclePromptCount: Int = 2,\n"
+            "    promptsEnabled: Boolean = true,\n"
+            "    onVehiclePromptShown: () -> Unit = {},\n"
+            "    onVehicleSetupRequested: () -> Unit = {},\n"
+            "    modifier: Modifier = Modifier\n) {", "vehicleConfigured: Boolean = true")
+    # state + launcher callback
+    old_launcher = "    val notificationPermissionLauncher = rememberLauncherForActivityResult("
+    if s.count(old_launcher) != 1:
+        raise SystemExit("notification launcher not found")
+    if "var notificationRequestInFlight" not in s:
+        s = s.replace(old_launcher,
+            "    // \"Set up your vehicle\" prompt state. The prompt must never overlap the Android notification-permission\n"
+            "    // dialog, so while that request is open the prompt is only marked pending and shown once it is answered.\n"
+            "    var showVehiclePrompt by remember { mutableStateOf(false) }\n"
+            "    var vehiclePromptPending by remember { mutableStateOf(false) }\n"
+            "    var notificationRequestInFlight by remember { mutableStateOf(false) }\n\n"
+            + old_launcher, 1)
+    i = s.find("    ) { /* proceed regardless of the result")
+    if i >= 0 and "notificationRequestInFlight = false" not in s:
+        j = s.index("*/ }\n", i) + len("*/ }\n")
+        s = s[:i] + ("    ) {\n"
+                     "        // Proceed regardless of the result (see activateScanning below).\n"
+                     "        notificationRequestInFlight = false\n"
+                     "        if (vehiclePromptPending) {\n"
+                     "            vehiclePromptPending = false\n"
+                     "            if (promptsEnabled) showVehiclePrompt = true\n"
+                     "        }\n"
+                     "    }\n") + s[j:]
+    elif "notificationRequestInFlight = false" not in s:
+        raise SystemExit("launcher callback not found")
+    s = sub(s, "                                notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)\n",
+            "                                notificationRequestInFlight = true\n"
+            "                                notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)\n",
+            "notificationRequestInFlight = true")
+    # start scanning helper + prompt gate
+    s = sub(s, "    fun activateScanning() {\n",
+            "    fun startScanning() {\n"
+            "        ScanningState.setActive(true, context)\n"
+            "        context.startForegroundService(Intent(context, OverlayService::class.java))\n"
+            "    }\n\n"
+            "    fun activateScanning() {\n", "fun startScanning()")
+    s = sub(s, "        if (overlayOk && accessibilityOk) {\n"
+               "            ScanningState.setActive(true, context)\n"
+               "            context.startForegroundService(Intent(context, OverlayService::class.java))\n"
+               "        } else {\n",
+            "        if (overlayOk && accessibilityOk) {\n"
+            "            // Vehicle type and fuel use drive every calculation: if the user never saved a vehicle profile,\n"
+            "            // offer to set it up first (at most twice in total). Not during the first-run tour.\n"
+            "            if (promptsEnabled && !vehicleConfigured && vehiclePromptCount < 2) {\n"
+            "                if (notificationRequestInFlight) vehiclePromptPending = true else showVehiclePrompt = true\n"
+            "                return\n"
+            "            }\n"
+            "            startScanning()\n"
+            "        } else {\n", "if (promptsEnabled && !vehicleConfigured && vehiclePromptCount < 2)")
+    # dialog + tour guard
+    s = sub(s, "    Column(\n        modifier = modifier\n            .fillMaxSize()\n            .verticalScroll(rememberScrollState())",
+            "    // Never show the prompt on top of the first-run tour.\n"
+            "    LaunchedEffect(promptsEnabled) {\n"
+            "        if (!promptsEnabled) {\n"
+            "            showVehiclePrompt = false\n"
+            "            vehiclePromptPending = false\n"
+            "        }\n"
+            "    }\n"
+            "    if (showVehiclePrompt) {\n"
+            "        LaunchedEffect(Unit) { onVehiclePromptShown() }\n"
+            "        androidx.compose.material3.AlertDialog(\n"
+            "            // Back / tap outside = Skip: the user asked for scanning, so it still starts.\n"
+            "            onDismissRequest = {\n"
+            "                showVehiclePrompt = false\n"
+            "                startScanning()\n"
+            "            },\n"
+            "            title = { Text(stringResource(R.string.vehicle_prompt_title)) },\n"
+            "            text = { Text(stringResource(R.string.vehicle_prompt_body)) },\n"
+            "            confirmButton = {\n"
+            "                Button(onClick = {\n"
+            "                    showVehiclePrompt = false\n"
+            "                    onVehicleSetupRequested()\n"
+            "                }) { Text(stringResource(R.string.vehicle_prompt_configure)) }\n"
+            "            },\n"
+            "            dismissButton = {\n"
+            "                TextButton(onClick = {\n"
+            "                    showVehiclePrompt = false\n"
+            "                    startScanning()\n"
+            "                }) { Text(stringResource(R.string.vehicle_prompt_skip)) }\n"
+            "            }\n"
+            "        )\n"
+            "    }\n\n"
+            "    Column(\n        modifier = modifier\n            .fillMaxSize()\n            .verticalScroll(rememberScrollState())",
+            "R.string.vehicle_prompt_title")
+    return s
+rw(BASE + "ui/screen/dashboard/DashboardScreen.kt", dash_vehicle)
+
+# strings for the prompt, all 17 languages
+VP = {
+ "values":    ("Set up your vehicle", "Your vehicle type and fuel use change how profitable an order really is. Set them once for accurate calculations.", "Set up", "Skip"),
+ "values-ru": ("Настройте транспорт", "Вид транспорта и расход топлива влияют на то, насколько заказ действительно выгоден. Укажите их один раз, чтобы расчёты были точными.", "Настроить", "Пропустить"),
+ "values-pl": ("Skonfiguruj pojazd", "Rodzaj pojazdu i zużycie paliwa decydują o tym, czy zlecenie naprawdę się opłaca. Podaj je raz, aby obliczenia były dokładne.", "Skonfiguruj", "Pomiń"),
+ "values-uk": ("Налаштуйте транспорт", "Вид транспорту та витрата пального впливають на те, наскільки замовлення справді вигідне. Вкажіть їх один раз, щоб розрахунки були точними.", "Налаштувати", "Пропустити"),
+ "values-de": ("Fahrzeug einrichten", "Fahrzeugtyp und Kraftstoffverbrauch bestimmen, wie lohnend ein Auftrag wirklich ist. Gib sie einmal an, damit die Berechnungen stimmen.", "Einrichten", "Überspringen"),
+ "values-fr": ("Configurez votre véhicule", "Le type de véhicule et la consommation de carburant déterminent la rentabilité réelle d’une course. Indiquez-les une seule fois pour des calculs précis.", "Configurer", "Passer"),
+ "values-cs": ("Nastavte vozidlo", "Typ vozidla a spotřeba paliva ovlivňují, jak výdělečná zakázka skutečně je. Zadejte je jednou, aby výpočty byly přesné.", "Nastavit", "Přeskočit"),
+ "values-da": ("Opsæt dit køretøj", "Køretøjstype og brændstofforbrug afgør, hvor rentabel en ordre egentlig er. Angiv dem én gang, så beregningerne bliver præcise.", "Opsæt", "Spring over"),
+ "values-nb": ("Sett opp kjøretøyet", "Kjøretøytype og drivstofforbruk avgjør hvor lønnsom en bestilling egentlig er. Angi dem én gang, så blir beregningene nøyaktige.", "Sett opp", "Hopp over"),
+ "values-sv": ("Ställ in ditt fordon", "Fordonstyp och bränsleförbrukning avgör hur lönsam en order egentligen är. Ange dem en gång så blir beräkningarna korrekta.", "Ställ in", "Hoppa över"),
+ "values-ro": ("Configurează vehiculul", "Tipul vehiculului și consumul de combustibil influențează cât de profitabilă este de fapt o comandă. Introdu-le o singură dată pentru calcule corecte.", "Configurează", "Omite"),
+ "values-hu": ("Állítsd be a járművet", "A jármű típusa és az üzemanyag-fogyasztás határozza meg, mennyire kifizetődő valójában egy megrendelés. Add meg őket egyszer, hogy a számítások pontosak legyenek.", "Beállítás", "Kihagyás"),
+ "values-bg": ("Настройте превозното средство", "Видът превозно средство и разходът на гориво определят колко изгодна е всъщност една поръчка. Задайте ги веднъж, за да са изчисленията точни.", "Настрой", "Пропусни"),
+ "values-az": ("Nəqliyyat vasitəsini ayarlayın", "Nəqliyyat vasitəsinin növü və yanacaq sərfi sifarişin həqiqətən nə qədər sərfəli olduğunu müəyyən edir. Hesablamaların dəqiq olması üçün onları bir dəfə daxil edin.", "Ayarla", "Keç"),
+ "values-uz": ("Transport vositasini sozlang", "Transport turi va yoqilg‘i sarfi buyurtma aslida qanchalik foydali ekanini belgilaydi. Hisob-kitoblar aniq bo‘lishi uchun ularni bir marta kiriting.", "Sozlash", "O‘tkazib yuborish"),
+ "values-ka": ("დააყენეთ ტრანსპორტი", "ტრანსპორტის ტიპი და საწვავის ხარჯი განსაზღვრავს, რამდენად მომგებიანია შეკვეთა რეალურად. მიუთითეთ ისინი ერთხელ, რომ გათვლები იყოს ზუსტი.", "დაყენება", "გამოტოვება"),
+ "values-hy": ("Կարգավորեք փոխադրամիջոցը", "Փոխադրամիջոցի տեսակը և վառելիքի ծախսը որոշում են, թե իրականում որքան եկամտաբեր է պատվերը։ Նշեք դրանք մեկ անգամ՝ ճշգրիտ հաշվարկների համար։", "Կարգավորել", "Բաց թողնել"),
+}
+for d, (t, b, c, k) in VP.items():
+    def f(s, t=t, b=b, c=c, k=k):
+        if "vehicle_prompt_title" in s:
+            return s
+        add = ('    <string name="vehicle_prompt_title">%s</string>\n'
+               '    <string name="vehicle_prompt_body">%s</string>\n'
+               '    <string name="vehicle_prompt_configure">%s</string>\n'
+               '    <string name="vehicle_prompt_skip">%s</string>\n') % (t, b, c, k)
+        if "</resources>" not in s:
+            raise SystemExit("no </resources> in " + d)
+        return s.replace("</resources>", add + "</resources>", 1)
+    rw("app/src/main/res/%s/strings.xml" % d, f)
 PYEOF
 echo "Done. Review with git diff, then: git add -A && git commit && git push"

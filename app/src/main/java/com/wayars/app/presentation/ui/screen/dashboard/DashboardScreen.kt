@@ -1,5 +1,10 @@
 package com.wayars.app.presentation.ui.screen.dashboard
 
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.Button
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.LaunchedEffect
 import com.wayars.app.service.accessibility.FreeTrial
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -73,6 +78,11 @@ fun DashboardScreen(
     isSubscribed: Boolean,
     onSubscriptionRequired: () -> Unit,
     onPermissionsRequired: () -> Unit = {},
+    vehicleConfigured: Boolean = true,
+    vehiclePromptCount: Int = 2,
+    promptsEnabled: Boolean = true,
+    onVehiclePromptShown: () -> Unit = {},
+    onVehicleSetupRequested: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -114,9 +124,27 @@ fun DashboardScreen(
     // though the service itself is running fine, which looked like "Active
     // sometimes needs to be toggled twice" but was really just a missing
     // permission prompt that never happened.
+    // "Set up your vehicle" prompt state. The prompt must never overlap the Android notification-permission
+    // dialog, so while that request is open the prompt is only marked pending and shown once it is answered.
+    var showVehiclePrompt by remember { mutableStateOf(false) }
+    var vehiclePromptPending by remember { mutableStateOf(false) }
+    var notificationRequestInFlight by remember { mutableStateOf(false) }
+
     val notificationPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission()
-    ) { /* proceed regardless of the result — see activateScanning below */ }
+    ) {
+        // Proceed regardless of the result (see activateScanning below).
+        notificationRequestInFlight = false
+        if (vehiclePromptPending) {
+            vehiclePromptPending = false
+            if (promptsEnabled) showVehiclePrompt = true
+        }
+    }
+
+    fun startScanning() {
+        ScanningState.setActive(true, context)
+        context.startForegroundService(Intent(context, OverlayService::class.java))
+    }
 
     fun activateScanning() {
         // Gate #1, right here at the source of truth for "Active": this is
@@ -139,8 +167,13 @@ fun DashboardScreen(
         val overlayOk = Settings.canDrawOverlays(context)
         val accessibilityOk = AccessibilityUtils.isServiceEnabled(context)
         if (overlayOk && accessibilityOk) {
-            ScanningState.setActive(true, context)
-            context.startForegroundService(Intent(context, OverlayService::class.java))
+            // Vehicle type and fuel use drive every calculation: if the user never saved a vehicle profile,
+            // offer to set it up first (at most twice in total). Not during the first-run tour.
+            if (promptsEnabled && !vehicleConfigured && vehiclePromptCount < 2) {
+                if (notificationRequestInFlight) vehiclePromptPending = true else showVehiclePrompt = true
+                return
+            }
+            startScanning()
         } else {
             Toast.makeText(
                 context,
@@ -150,6 +183,38 @@ fun DashboardScreen(
             // Take the user straight to the permissions (and the screen-reading consent dialog).
             onPermissionsRequired()
         }
+    }
+
+    // Never show the prompt on top of the first-run tour.
+    LaunchedEffect(promptsEnabled) {
+        if (!promptsEnabled) {
+            showVehiclePrompt = false
+            vehiclePromptPending = false
+        }
+    }
+    if (showVehiclePrompt) {
+        LaunchedEffect(Unit) { onVehiclePromptShown() }
+        androidx.compose.material3.AlertDialog(
+            // Back / tap outside = Skip: the user asked for scanning, so it still starts.
+            onDismissRequest = {
+                showVehiclePrompt = false
+                startScanning()
+            },
+            title = { Text(stringResource(R.string.vehicle_prompt_title)) },
+            text = { Text(stringResource(R.string.vehicle_prompt_body)) },
+            confirmButton = {
+                Button(onClick = {
+                    showVehiclePrompt = false
+                    onVehicleSetupRequested()
+                }) { Text(stringResource(R.string.vehicle_prompt_configure)) }
+            },
+            dismissButton = {
+                TextButton(onClick = {
+                    showVehiclePrompt = false
+                    startScanning()
+                }) { Text(stringResource(R.string.vehicle_prompt_skip)) }
+            }
+        )
     }
 
     Column(
@@ -212,6 +277,7 @@ fun DashboardScreen(
                                 ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) !=
                                 PackageManager.PERMISSION_GRANTED
                             if (needsNotificationPermission) {
+                                notificationRequestInFlight = true
                                 notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                             }
                             activateScanning()

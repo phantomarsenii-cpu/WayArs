@@ -1,5 +1,6 @@
 package com.wayars.app.data.prefs
 
+import androidx.datastore.preferences.core.intPreferencesKey
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.doublePreferencesKey
@@ -46,6 +47,7 @@ class SettingsDataStore(private val context: Context) {
         val VEHICLE_FUEL_TYPE = stringPreferencesKey("vehicle_fuel_type")
         val VEHICLE_CONSUMPTION = doublePreferencesKey("vehicle_consumption_per_100km")
         val VEHICLE_FUEL_PRICE = doublePreferencesKey("vehicle_fuel_price_per_unit")
+        val VEHICLE_PROMPT_COUNT = intPreferencesKey("vehicle_prompt_count")
         // User-added package ids for delivery/taxi apps beyond the built-in
         // list — see the "universal support" comment on customPackages below.
         val CUSTOM_PACKAGES = stringSetPreferencesKey("custom_scanned_packages")
@@ -78,6 +80,13 @@ class SettingsDataStore(private val context: Context) {
         val avg = prefs[Keys.CUSTOM_AVERAGE_RATE]
         val good = prefs[Keys.CUSTOM_GOOD_RATE]
         if (bad != null && avg != null && good != null) CustomThresholds(bad, avg, good) else null
+    }
+
+    /** How many times the "set up your vehicle" prompt has been shown (it is shown at most twice). */
+    val vehiclePromptCount: Flow<Int> = context.dataStore.data.map { it[Keys.VEHICLE_PROMPT_COUNT] ?: 0 }
+
+    suspend fun incrementVehiclePromptCount() {
+        context.dataStore.edit { it[Keys.VEHICLE_PROMPT_COUNT] = (it[Keys.VEHICLE_PROMPT_COUNT] ?: 0) + 1 }
     }
 
     val vehicleProfile: Flow<VehicleProfile> = context.dataStore.data.map { prefs ->

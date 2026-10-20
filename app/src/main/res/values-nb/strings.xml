@@ -210,4 +210,8 @@
     <string name="update_available_text">En ny versjon av WayArs er tilgjengelig med forbedringer og rettelser.</string>
     <string name="update_now">Oppdater</string>
     <string name="update_later">Senere</string>
+    <string name="vehicle_prompt_title">Sett opp kjøretøyet</string>
+    <string name="vehicle_prompt_body">Kjøretøytype og drivstofforbruk avgjør hvor lønnsom en bestilling egentlig er. Angi dem én gang, så blir beregningene nøyaktige.</string>
+    <string name="vehicle_prompt_configure">Sett opp</string>
+    <string name="vehicle_prompt_skip">Hopp over</string>
 </resources>

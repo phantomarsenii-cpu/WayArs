@@ -209,4 +209,8 @@
     <string name="update_available_text">Вийшла нова версія WayArs з покращеннями та виправленнями.</string>
     <string name="update_now">Оновити</string>
     <string name="update_later">Пізніше</string>
+    <string name="vehicle_prompt_title">Налаштуйте транспорт</string>
+    <string name="vehicle_prompt_body">Вид транспорту та витрата пального впливають на те, наскільки замовлення справді вигідне. Вкажіть їх один раз, щоб розрахунки були точними.</string>
+    <string name="vehicle_prompt_configure">Налаштувати</string>
+    <string name="vehicle_prompt_skip">Пропустити</string>
 </resources>

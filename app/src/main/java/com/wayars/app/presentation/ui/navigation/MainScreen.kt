@@ -61,6 +61,8 @@ fun MainScreen(
     termsAcceptedAt: Long?,
     customThresholds: CustomThresholds?,
     vehicleProfile: VehicleProfile,
+    vehiclePromptCount: Int,
+    onVehiclePromptShown: () -> Unit,
     onLanguageSelected: (String) -> Unit,
     onCurrencySelected: (Currency) -> Unit,
     onPresetSelected: (PresetType) -> Unit,
@@ -89,6 +91,8 @@ fun MainScreen(
     val settingsListState = rememberLazyListState()
     var showPermissionsPrompt by remember { mutableStateOf(false) }
     var permissionsRequestId by remember { mutableStateOf(0) }
+    var vehicleSetupPrompt by remember { mutableStateOf(false) }
+    var vehicleSetupRequestId by remember { mutableStateOf(0) }
     val context = LocalContext.current
 
     // ---------------------------------------------------------------- first-run tour
@@ -141,6 +145,15 @@ fun MainScreen(
         }
     }
 
+    // "Set up your vehicle" from the Active prompt: the tab is switched by the caller; bring the
+    // vehicle card (item 4: title, subscription, general, thresholds, vehicle) into view.
+    LaunchedEffect(vehicleSetupRequestId) {
+        if (vehicleSetupRequestId > 0) {
+            delay(80L)
+            runCatching { settingsListState.animateScrollToItem(4) }
+        }
+    }
+
     // When the tour ends, land on the Home tab again.
     var tourWasRunning by remember { mutableStateOf(false) }
     LaunchedEffect(tour.running) {
@@ -183,6 +196,15 @@ fun MainScreen(
                         tab = MainTab.SETTINGS
                         showPermissionsPrompt = true
                         permissionsRequestId++
+                    },
+                    vehicleConfigured = vehicleProfile.userConfigured,
+                    vehiclePromptCount = vehiclePromptCount,
+                    promptsEnabled = !tour.running,
+                    onVehiclePromptShown = onVehiclePromptShown,
+                    onVehicleSetupRequested = {
+                        tab = MainTab.SETTINGS
+                        vehicleSetupPrompt = true
+                        vehicleSetupRequestId++
                     }
                 )
                 MainTab.STATS -> StatsScreen(orders = todayOrders)
@@ -216,7 +238,9 @@ fun MainScreen(
                     isSubscribed = isSubscribed,
                     onOpenPaywall = onOpenPaywall,
                     permissionsPrompt = showPermissionsPrompt,
-                    onPermissionsPromptHandled = { showPermissionsPrompt = false }
+                    onPermissionsPromptHandled = { showPermissionsPrompt = false },
+                    vehiclePrompt = vehicleSetupPrompt,
+                    onVehiclePromptHandled = { vehicleSetupPrompt = false }
                 )
             }
 

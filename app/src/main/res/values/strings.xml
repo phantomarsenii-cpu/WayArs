@@ -221,4 +221,8 @@
     <string name="update_available_text">A new version of WayArs is available with improvements and fixes.</string>
     <string name="update_now">Update</string>
     <string name="update_later">Later</string>
+    <string name="vehicle_prompt_title">Set up your vehicle</string>
+    <string name="vehicle_prompt_body">Your vehicle type and fuel use change how profitable an order really is. Set them once for accurate calculations.</string>
+    <string name="vehicle_prompt_configure">Set up</string>
+    <string name="vehicle_prompt_skip">Skip</string>
 </resources>

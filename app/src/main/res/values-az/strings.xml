@@ -210,4 +210,8 @@
     <string name="update_available_text">WayArs-ın təkmilləşdirmələr və düzəlişlərlə yeni versiyası mövcuddur.</string>
     <string name="update_now">Yenilə</string>
     <string name="update_later">Sonra</string>
+    <string name="vehicle_prompt_title">Nəqliyyat vasitəsini ayarlayın</string>
+    <string name="vehicle_prompt_body">Nəqliyyat vasitəsinin növü və yanacaq sərfi sifarişin həqiqətən nə qədər sərfəli olduğunu müəyyən edir. Hesablamaların dəqiq olması üçün onları bir dəfə daxil edin.</string>
+    <string name="vehicle_prompt_configure">Ayarla</string>
+    <string name="vehicle_prompt_skip">Keç</string>
 </resources>

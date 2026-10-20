@@ -133,7 +133,9 @@ fun SettingsScreen(
     isSubscribed: Boolean = false,
     onOpenPaywall: () -> Unit = {},
     permissionsPrompt: Boolean = false,
-    onPermissionsPromptHandled: () -> Unit = {}
+    onPermissionsPromptHandled: () -> Unit = {},
+    vehiclePrompt: Boolean = false,
+    onVehiclePromptHandled: () -> Unit = {}
 ) {
     LazyColumn(
         state = listState,
@@ -176,7 +178,9 @@ fun SettingsScreen(
                 VehicleSection(
                     profile = vehicleProfile,
                     currency = currency,
-                    onSave = onSaveVehicleProfile
+                    onSave = onSaveVehicleProfile,
+                    openRequest = vehiclePrompt,
+                    onRequestHandled = onVehiclePromptHandled
                 )
             }
         }

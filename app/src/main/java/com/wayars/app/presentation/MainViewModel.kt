@@ -61,6 +61,12 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
     val vehicleProfile: StateFlow<VehicleProfile> =
         settings.vehicleProfile.stateIn(viewModelScope, SharingStarted.Eagerly, VehicleProfile.DEFAULT)
 
+    /** Times the vehicle prompt was shown. Starts at 2 (= do not prompt) until the stored value is loaded. */
+    val vehiclePromptCount: StateFlow<Int> =
+        settings.vehiclePromptCount.stateIn(viewModelScope, SharingStarted.Eagerly, 2)
+
+    fun noteVehiclePromptShown() = viewModelScope.launch { settings.incrementVehiclePromptCount() }
+
     val customPackages: StateFlow<Set<String>> =
         settings.customPackages.stateIn(viewModelScope, SharingStarted.Eagerly, emptySet())
 

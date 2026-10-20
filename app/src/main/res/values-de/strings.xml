@@ -209,4 +209,8 @@
     <string name="update_available_text">Eine neue Version von WayArs mit Verbesserungen und Fehlerbehebungen ist verfügbar.</string>
     <string name="update_now">Aktualisieren</string>
     <string name="update_later">Später</string>
+    <string name="vehicle_prompt_title">Fahrzeug einrichten</string>
+    <string name="vehicle_prompt_body">Fahrzeugtyp und Kraftstoffverbrauch bestimmen, wie lohnend ein Auftrag wirklich ist. Gib sie einmal an, damit die Berechnungen stimmen.</string>
+    <string name="vehicle_prompt_configure">Einrichten</string>
+    <string name="vehicle_prompt_skip">Überspringen</string>
 </resources>

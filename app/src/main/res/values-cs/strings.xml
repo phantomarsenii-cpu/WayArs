@@ -210,4 +210,8 @@
     <string name="update_available_text">Je dostupná nová verze WayArs s vylepšeními a opravami.</string>
     <string name="update_now">Aktualizovat</string>
     <string name="update_later">Později</string>
+    <string name="vehicle_prompt_title">Nastavte vozidlo</string>
+    <string name="vehicle_prompt_body">Typ vozidla a spotřeba paliva ovlivňují, jak výdělečná zakázka skutečně je. Zadejte je jednou, aby výpočty byly přesné.</string>
+    <string name="vehicle_prompt_configure">Nastavit</string>
+    <string name="vehicle_prompt_skip">Přeskočit</string>
 </resources>

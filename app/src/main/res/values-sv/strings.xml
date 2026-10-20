@@ -210,4 +210,8 @@
     <string name="update_available_text">En ny version av WayArs finns tillgänglig med förbättringar och rättelser.</string>
     <string name="update_now">Uppdatera</string>
     <string name="update_later">Senare</string>
+    <string name="vehicle_prompt_title">Ställ in ditt fordon</string>
+    <string name="vehicle_prompt_body">Fordonstyp och bränsleförbrukning avgör hur lönsam en order egentligen är. Ange dem en gång så blir beräkningarna korrekta.</string>
+    <string name="vehicle_prompt_configure">Ställ in</string>
+    <string name="vehicle_prompt_skip">Hoppa över</string>
 </resources>

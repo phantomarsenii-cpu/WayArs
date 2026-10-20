@@ -209,4 +209,8 @@
     <string name="update_available_text">Este disponibilă o nouă versiune WayArs cu îmbunătățiri și remedieri.</string>
     <string name="update_now">Actualizează</string>
     <string name="update_later">Mai târziu</string>
+    <string name="vehicle_prompt_title">Configurează vehiculul</string>
+    <string name="vehicle_prompt_body">Tipul vehiculului și consumul de combustibil influențează cât de profitabilă este de fapt o comandă. Introdu-le o singură dată pentru calcule corecte.</string>
+    <string name="vehicle_prompt_configure">Configurează</string>
+    <string name="vehicle_prompt_skip">Omite</string>
 </resources>

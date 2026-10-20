@@ -209,4 +209,8 @@
     <string name="update_available_text">Une nouvelle version de WayArs est disponible avec des améliorations et des corrections.</string>
     <string name="update_now">Mettre à jour</string>
     <string name="update_later">Plus tard</string>
+    <string name="vehicle_prompt_title">Configurez votre véhicule</string>
+    <string name="vehicle_prompt_body">Le type de véhicule et la consommation de carburant déterminent la rentabilité réelle d’une course. Indiquez-les une seule fois pour des calculs précis.</string>
+    <string name="vehicle_prompt_configure">Configurer</string>
+    <string name="vehicle_prompt_skip">Passer</string>
 </resources>

@@ -210,4 +210,8 @@
     <string name="update_available_text">ხელმისაწვდომია WayArs-ის ახალი ვერსია გაუმჯობესებებით და შესწორებებით.</string>
     <string name="update_now">განახლება</string>
     <string name="update_later">მოგვიანებით</string>
+    <string name="vehicle_prompt_title">დააყენეთ ტრანსპორტი</string>
+    <string name="vehicle_prompt_body">ტრანსპორტის ტიპი და საწვავის ხარჯი განსაზღვრავს, რამდენად მომგებიანია შეკვეთა რეალურად. მიუთითეთ ისინი ერთხელ, რომ გათვლები იყოს ზუსტი.</string>
+    <string name="vehicle_prompt_configure">დაყენება</string>
+    <string name="vehicle_prompt_skip">გამოტოვება</string>
 </resources>

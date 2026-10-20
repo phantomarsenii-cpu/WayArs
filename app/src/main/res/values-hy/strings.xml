@@ -210,4 +210,8 @@
     <string name="update_available_text">Հասանելի է WayArs-ի նոր տարբերակը՝ բարելավումներով և շտկումներով։</string>
     <string name="update_now">Թարմացնել</string>
     <string name="update_later">Ավելի ուշ</string>
+    <string name="vehicle_prompt_title">Կարգավորեք փոխադրամիջոցը</string>
+    <string name="vehicle_prompt_body">Փոխադրամիջոցի տեսակը և վառելիքի ծախսը որոշում են, թե իրականում որքան եկամտաբեր է պատվերը։ Նշեք դրանք մեկ անգամ՝ ճշգրիտ հաշվարկների համար։</string>
+    <string name="vehicle_prompt_configure">Կարգավորել</string>
+    <string name="vehicle_prompt_skip">Բաց թողնել</string>
 </resources>
