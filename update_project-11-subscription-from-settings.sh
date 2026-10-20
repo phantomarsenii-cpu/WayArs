@@ -816,6 +816,24 @@ def ds_prompt(s):
     return s
 rw("app/src/main/java/com/wayars/app/data/prefs/SettingsDataStore.kt", ds_prompt)
 
+def repo_iface(s):
+    s = sub(s, "    val vehicleProfile: Flow<VehicleProfile>\n",
+            "    val vehicleProfile: Flow<VehicleProfile>\n    val vehiclePromptCount: Flow<Int>\n", "val vehiclePromptCount: Flow<Int>")
+    s = sub(s, "    suspend fun setVehicleProfile(profile: VehicleProfile)\n",
+            "    suspend fun setVehicleProfile(profile: VehicleProfile)\n    suspend fun incrementVehiclePromptCount()\n", "suspend fun incrementVehiclePromptCount()")
+    return s
+rw("app/src/main/java/com/wayars/app/domain/repository/SettingsRepository.kt", repo_iface)
+
+def repo_impl(s):
+    s = sub(s, "    override val vehicleProfile: Flow<VehicleProfile> = store.vehicleProfile\n",
+            "    override val vehicleProfile: Flow<VehicleProfile> = store.vehicleProfile\n"
+            "    override val vehiclePromptCount: Flow<Int> = store.vehiclePromptCount\n", "override val vehiclePromptCount")
+    s = sub(s, "    override suspend fun setVehicleProfile(profile: VehicleProfile) = store.setVehicleProfile(profile)\n",
+            "    override suspend fun setVehicleProfile(profile: VehicleProfile) = store.setVehicleProfile(profile)\n"
+            "    override suspend fun incrementVehiclePromptCount() = store.incrementVehiclePromptCount()\n", "override suspend fun incrementVehiclePromptCount()")
+    return s
+rw("app/src/main/java/com/wayars/app/data/repository/SettingsRepositoryImpl.kt", repo_impl)
+
 def vm_prompt(s):
     return sub(s, "        settings.vehicleProfile.stateIn(viewModelScope, SharingStarted.Eagerly, VehicleProfile.DEFAULT)\n",
                "        settings.vehicleProfile.stateIn(viewModelScope, SharingStarted.Eagerly, VehicleProfile.DEFAULT)\n\n"
@@ -889,7 +907,7 @@ def settings_vehicle(s):
             "            expanded = true\n"
             "            onRequestHandled()\n"
             "        }\n"
-            "    }\n", "LaunchedEffect(openRequest) {\n        if (openRequest) {\n            expanded = true")
+            "    }\n", "// Opened from the Dashboard \"set up your vehicle\" prompt: expand this card.")
     return s
 rw(BASE + "ui/screen/settings/SettingsScreen.kt", settings_vehicle)
 

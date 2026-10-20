@@ -1138,10 +1138,19 @@ private fun CustomThresholdsSection(
 private fun VehicleSection(
     profile: VehicleProfile,
     currency: Currency,
-    onSave: (VehicleProfile) -> Unit
+    onSave: (VehicleProfile) -> Unit,
+    openRequest: Boolean = false,
+    onRequestHandled: () -> Unit = {}
 ) {
     val context = LocalContext.current
     var expanded by remember { mutableStateOf(false) }
+    // Opened from the Dashboard "set up your vehicle" prompt: expand this card.
+    LaunchedEffect(openRequest) {
+        if (openRequest) {
+            expanded = true
+            onRequestHandled()
+        }
+    }
     var category by remember(profile) { mutableStateOf(profile.category) }
     var fuelType by remember(profile) { mutableStateOf(profile.fuelType ?: FuelType.PETROL) }
     var consumptionText by remember(profile) {

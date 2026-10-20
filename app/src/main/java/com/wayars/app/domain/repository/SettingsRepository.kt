@@ -17,6 +17,7 @@ interface SettingsRepository {
     val termsAcceptedAt: Flow<Long?>
     val customThresholds: Flow<CustomThresholds?>
     val vehicleProfile: Flow<VehicleProfile>
+    val vehiclePromptCount: Flow<Int>
     val customPackages: Flow<Set<String>>
     val packageHints: Flow<Map<String, PackageHint>>
 
@@ -30,6 +31,7 @@ interface SettingsRepository {
     suspend fun setCustomThresholds(bad: Double, average: Double, good: Double)
     suspend fun clearCustomThresholds()
     suspend fun setVehicleProfile(profile: VehicleProfile)
+    suspend fun incrementVehiclePromptCount()
     suspend fun addCustomPackage(packageName: String)
     suspend fun removeCustomPackage(packageName: String)
     suspend fun savePackageHint(hint: PackageHint)
