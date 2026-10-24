@@ -218,4 +218,9 @@
     <string name="vehicle_prompt_body">Вид транспорта и расход топлива влияют на то, насколько заказ действительно выгоден. Укажите их один раз, чтобы расчёты были точными.</string>
     <string name="vehicle_prompt_configure">Настроить</string>
     <string name="vehicle_prompt_skip">Пропустить</string>
+    <string name="stats_period_today">Сегодня</string>
+    <string name="stats_period_week">7 дней</string>
+    <string name="stats_period_month">Месяц</string>
+    <string name="stats_period_year">Год</string>
+    <string name="stats_earned">Заработано</string>
 </resources>

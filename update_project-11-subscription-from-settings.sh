@@ -34,6 +34,11 @@
 #     (scanning starts on the default profile). Shown at most 2 times in total. It never overlaps other
 #     UI: not during the first-run tour, and when the Android notification-permission dialog is up it
 #     waits until that one is answered. Texts are translated into all 17 languages.
+# 13) Statistics screen: choose Today / 7 days / Month / Year (choice is saved), totals (earned, orders,
+#     distance, average rate per km), a tappable bar chart of earnings and the recent orders of the period.
+#     Uses all accepted orders, not just today's. Texts translated into all 17 languages.
+# 14) Order overlay glows around its contour in the verdict colour (green = good, amber = average,
+#     red = bad); smooth colour change; plain thin border while no order is shown.
 # Idempotent: safe to run twice.  Run BEFORE git add/commit/push.
 set -e
 cd "$(dirname "$0")"
@@ -1043,5 +1048,575 @@ for d, (t, b, c, k) in VP.items():
             raise SystemExit("no </resources> in " + d)
         return s.replace("</resources>", add + "</resources>", 1)
     rw("app/src/main/res/%s/strings.xml" % d, f)
+
+# ---------------------------------------------------------------- Statistics: periods + chart
+STATS_SRC = r'''package com.wayars.app.presentation.ui.screen.dashboard
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.wayars.app.R
+import com.wayars.app.domain.model.Currency
+import com.wayars.app.domain.model.StatsPeriod
+import com.wayars.app.domain.repository.OrderRecord
+import com.wayars.app.presentation.ui.component.StatCard
+import com.wayars.app.presentation.ui.component.bottomNavBarClearance
+import com.wayars.app.presentation.ui.component.verdictColor
+import com.wayars.app.presentation.ui.component.verdictLabel
+import com.wayars.app.presentation.ui.theme.WaNeonGreen
+import com.wayars.app.presentation.ui.theme.WaNeonGreenDark
+import com.wayars.app.presentation.ui.theme.WaSurface
+import com.wayars.app.presentation.ui.theme.WaSurfaceVariant
+import com.wayars.app.presentation.ui.theme.WaTextSecondary
+import com.wayars.app.util.CurrencyFormatter
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+
+/**
+ * Earnings statistics. [orders] are every accepted order ever recorded (newest first); the screen
+ * filters them by [period] (today / 7 days / month / year), shows totals and a bar chart, and lists
+ * the most recent orders of that period. The chosen period is persisted by the caller.
+ */
+@Composable
+fun StatsScreen(
+    orders: List<OrderRecord>,
+    currency: Currency,
+    period: StatsPeriod,
+    onPeriodChange: (StatsPeriod) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val stats = remember(orders, period) { buildPeriodStats(orders, period) }
+    val timeFormat = remember(period) {
+        SimpleDateFormat(if (period == StatsPeriod.TODAY) "HH:mm" else "dd.MM HH:mm", Locale.getDefault())
+    }
+
+    LazyColumn(
+        modifier = modifier.fillMaxSize().padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp),
+        // See bottomNavBarClearance's doc: device-accurate clearance for
+        // the floating nav pill, instead of a fixed guess.
+        contentPadding = PaddingValues(bottom = bottomNavBarClearance())
+    ) {
+        item { PeriodSelector(period, onPeriodChange) }
+
+        if (stats.orders.isEmpty()) {
+            item {
+                Text(
+                    stringResource(R.string.stats_empty),
+                    color = WaTextSecondary,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth().padding(top = 48.dp)
+                )
+            }
+        } else {
+            item { SummaryBlock(stats, currency) }
+            item { EarningsChart(stats, currency) }
+            items(stats.orders.take(50)) { order ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(14.dp))
+                        .background(WaSurface)
+                        .padding(14.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column {
+                        Text(
+                            CurrencyFormatter.format(order.evaluation.earnings, order.evaluation.currency),
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        Text(
+                            "${order.evaluation.distanceKm} km • ${timeFormat.format(Date(order.timestampMillis))}",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = WaTextSecondary
+                        )
+                    }
+                    Text(
+                        verdictLabel(order.evaluation.verdict),
+                        color = verdictColor(order.evaluation.verdict),
+                        style = MaterialTheme.typography.labelSmall
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun periodLabel(period: StatsPeriod): String = stringResource(
+    when (period) {
+        StatsPeriod.TODAY -> R.string.stats_period_today
+        StatsPeriod.WEEK -> R.string.stats_period_week
+        StatsPeriod.MONTH -> R.string.stats_period_month
+        StatsPeriod.YEAR -> R.string.stats_period_year
+    }
+)
+
+@Composable
+private fun PeriodSelector(period: StatsPeriod, onChange: (StatsPeriod) -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(14.dp))
+            .background(WaSurface)
+            .padding(4.dp),
+        horizontalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        StatsPeriod.values().forEach { p ->
+            val selected = p == period
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .clip(RoundedCornerShape(10.dp))
+                    .background(if (selected) WaNeonGreen else WaSurface)
+                    .clickable { onChange(p) }
+                    .padding(vertical = 10.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    periodLabel(p),
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    maxLines = 1,
+                    color = if (selected) Color.Black else WaTextSecondary
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun SummaryBlock(stats: PeriodStats, currency: Currency) {
+    val total = stats.orders.sumOf { it.evaluation.earnings }
+    val km = stats.orders.sumOf { it.evaluation.distanceKm }
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            StatCard(
+                label = stringResource(R.string.stats_earned),
+                value = CurrencyFormatter.format(total, currency),
+                modifier = Modifier.weight(1f)
+            )
+            StatCard(
+                label = stringResource(R.string.dashboard_orders),
+                value = stats.orders.size.toString(),
+                modifier = Modifier.weight(1f)
+            )
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            StatCard(
+                label = stringResource(R.string.dashboard_distance),
+                value = String.format(Locale.US, "%.1f km", km),
+                modifier = Modifier.weight(1f)
+            )
+            StatCard(
+                label = stringResource(R.string.dashboard_avg_rate),
+                value = CurrencyFormatter.formatRatePerKm(if (km > 0) total / km else 0.0, currency),
+                modifier = Modifier.weight(1f)
+            )
+        }
+    }
+}
+
+/** Bar chart of earnings per hour (today) / day (7 days, month) / month (year). Tap a bar to read its value. */
+@Composable
+private fun EarningsChart(stats: PeriodStats, currency: Currency) {
+    var selected by remember(stats.period) { mutableStateOf(-1) }
+    val max = stats.buckets.maxOrNull() ?: 0.0
+    val bestIndex = stats.buckets.indexOf(max).coerceAtLeast(0)
+    val shown = if (selected in stats.buckets.indices) selected else bestIndex
+    val gap = if (stats.buckets.size > 14) 2.dp else 6.dp
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(14.dp))
+            .background(WaSurface)
+            .padding(14.dp)
+    ) {
+        Text(
+            "${stats.captions[shown]}: ${CurrencyFormatter.format(stats.buckets[shown], currency)}",
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.onSurface
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth().height(150.dp).padding(top = 12.dp),
+            horizontalArrangement = Arrangement.spacedBy(gap),
+            verticalAlignment = Alignment.Bottom
+        ) {
+            stats.buckets.forEachIndexed { i, value ->
+                val fraction = if (max > 0) (value / max).toFloat() else 0f
+                val barColor = when {
+                    value <= 0.0 -> WaSurfaceVariant
+                    i == shown -> WaNeonGreen
+                    else -> WaNeonGreenDark.copy(alpha = 0.7f)
+                }
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .clickable { selected = i },
+                    contentAlignment = Alignment.BottomCenter
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .then(
+                                if (value > 0.0) Modifier.fillMaxHeight(fraction.coerceIn(0.04f, 1f))
+                                else Modifier.height(2.dp)
+                            )
+                            .clip(RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp))
+                            .background(barColor)
+                    )
+                }
+            }
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+            horizontalArrangement = Arrangement.spacedBy(gap)
+        ) {
+            stats.labels.forEach { label ->
+                Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
+                    Text(
+                        label,
+                        fontSize = 10.sp,
+                        color = WaTextSecondary,
+                        maxLines = 1,
+                        softWrap = false,
+                        modifier = Modifier.wrapContentWidth(unbounded = true)
+                    )
+                }
+            }
+        }
+    }
+}
+
+private class PeriodStats(
+    val period: StatsPeriod,
+    val orders: List<OrderRecord>,
+    val buckets: List<Double>,
+    val labels: List<String>,
+    val captions: List<String>
+)
+
+private fun buildPeriodStats(all: List<OrderRecord>, period: StatsPeriod): PeriodStats {
+    val start = Calendar.getInstance().apply {
+        set(Calendar.HOUR_OF_DAY, 0); set(Calendar.MINUTE, 0)
+        set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
+        when (period) {
+            StatsPeriod.TODAY -> Unit
+            StatsPeriod.WEEK -> add(Calendar.DAY_OF_YEAR, -6)
+            StatsPeriod.MONTH -> add(Calendar.DAY_OF_YEAR, -29)
+            StatsPeriod.YEAR -> {
+                set(Calendar.DAY_OF_MONTH, 1)
+                add(Calendar.MONTH, -11)
+            }
+        }
+    }
+    val count = when (period) {
+        StatsPeriod.TODAY -> 24
+        StatsPeriod.WEEK -> 7
+        StatsPeriod.MONTH -> 30
+        StatsPeriod.YEAR -> 12
+    }
+    val inPeriod = all.filter { it.timestampMillis >= start.timeInMillis }
+
+    val sums = DoubleArray(count)
+    val cal = Calendar.getInstance()
+    for (order in inPeriod) {
+        cal.timeInMillis = order.timestampMillis
+        val index = when (period) {
+            StatsPeriod.TODAY -> cal.get(Calendar.HOUR_OF_DAY)
+            StatsPeriod.WEEK, StatsPeriod.MONTH -> {
+                val dayStart = Calendar.getInstance().apply {
+                    timeInMillis = order.timestampMillis
+                    set(Calendar.HOUR_OF_DAY, 0); set(Calendar.MINUTE, 0)
+                    set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
+                }.timeInMillis
+                Math.round((dayStart - start.timeInMillis) / 86_400_000.0).toInt()
+            }
+            StatsPeriod.YEAR ->
+                (cal.get(Calendar.YEAR) - start.get(Calendar.YEAR)) * 12 + cal.get(Calendar.MONTH) - start.get(Calendar.MONTH)
+        }
+        sums[index.coerceIn(0, count - 1)] += order.evaluation.earnings
+    }
+
+    val locale = Locale.getDefault()
+    val dowShort = SimpleDateFormat("EEE", locale)
+    val dowCaption = SimpleDateFormat("EEE, d MMM", locale)
+    val dayNumber = SimpleDateFormat("d", locale)
+    val dayCaption = SimpleDateFormat("d MMM", locale)
+    val monthShort = SimpleDateFormat("LLL", locale)
+    val monthCaption = SimpleDateFormat("LLLL yyyy", locale)
+
+    val labels = ArrayList<String>(count)
+    val captions = ArrayList<String>(count)
+    val cursor = start.clone() as Calendar
+    for (i in 0 until count) {
+        val date = cursor.time
+        when (period) {
+            StatsPeriod.TODAY -> {
+                labels.add(if (i % 6 == 0) i.toString() else "")
+                captions.add(String.format(Locale.US, "%02d:00", i))
+                cursor.add(Calendar.HOUR_OF_DAY, 1)
+            }
+            StatsPeriod.WEEK -> {
+                labels.add(dowShort.format(date).take(3).replaceFirstChar { it.uppercase() })
+                captions.add(dowCaption.format(date))
+                cursor.add(Calendar.DAY_OF_YEAR, 1)
+            }
+            StatsPeriod.MONTH -> {
+                labels.add(if (i % 5 == 0 || i == count - 1) dayNumber.format(date) else "")
+                captions.add(dayCaption.format(date))
+                cursor.add(Calendar.DAY_OF_YEAR, 1)
+            }
+            StatsPeriod.YEAR -> {
+                labels.add(monthShort.format(date).take(3).replaceFirstChar { it.uppercase() })
+                captions.add(monthCaption.format(date))
+                cursor.add(Calendar.MONTH, 1)
+            }
+        }
+    }
+    return PeriodStats(period, inPeriod, sums.toList(), labels, captions)
+}
+'''
+
+def new_file(path, content):
+    import os
+    if os.path.exists(path) and io.open(path, encoding="utf-8").read() == content:
+        print("already OK", path); return
+    if os.path.exists(path):
+        print("updated", path)
+    else:
+        print("created", path)
+    io.open(path, "w", encoding="utf-8").write(content)
+
+new_file("app/src/main/java/com/wayars/app/domain/model/StatsPeriod.kt",
+         "package com.wayars.app.domain.model\n\n/** Time window shown on the Statistics screen; the user's choice is persisted. */\nenum class StatsPeriod { TODAY, WEEK, MONTH, YEAR }\n")
+
+def stats_screen_file(s):
+    if "period: StatsPeriod" in s:
+        return s
+    if "fun StatsScreen(orders: List<OrderRecord>, modifier: Modifier = Modifier)" not in s:
+        raise SystemExit("StatsScreen.kt has an unexpected shape")
+    return STATS_SRC
+rw(BASE + "ui/screen/dashboard/StatsScreen.kt", stats_screen_file)
+
+def ds_stats(s):
+    s = add_import(s, "import com.wayars.app.domain.model.StatsPeriod")
+    s = sub(s, '        val PRESET = stringPreferencesKey("preset")\n',
+            '        val PRESET = stringPreferencesKey("preset")\n        val STATS_PERIOD = stringPreferencesKey("stats_period")\n', "STATS_PERIOD = stringPreferencesKey")
+    s = sub(s, "    val onboardingDone: Flow<Boolean> = context.dataStore.data.map { it[Keys.ONBOARDING_DONE] ?: false }\n",
+            "    val onboardingDone: Flow<Boolean> = context.dataStore.data.map { it[Keys.ONBOARDING_DONE] ?: false }\n\n"
+            "    /** Period chosen on the Statistics screen (default: today). */\n"
+            "    val statsPeriod: Flow<StatsPeriod> = context.dataStore.data.map {\n"
+            "        it[Keys.STATS_PERIOD]?.let { name -> runCatching { StatsPeriod.valueOf(name) }.getOrNull() } ?: StatsPeriod.TODAY\n"
+            "    }\n\n"
+            "    suspend fun setStatsPeriod(period: StatsPeriod) {\n"
+            "        context.dataStore.edit { it[Keys.STATS_PERIOD] = period.name }\n"
+            "    }\n", "val statsPeriod: Flow<StatsPeriod>")
+    return s
+rw("app/src/main/java/com/wayars/app/data/prefs/SettingsDataStore.kt", ds_stats)
+
+def repo_stats_iface(s):
+    s = add_import(s, "import com.wayars.app.domain.model.StatsPeriod")
+    s = sub(s, "    val vehiclePromptCount: Flow<Int>\n",
+            "    val vehiclePromptCount: Flow<Int>\n    val statsPeriod: Flow<StatsPeriod>\n", "val statsPeriod: Flow<StatsPeriod>")
+    s = sub(s, "    suspend fun incrementVehiclePromptCount()\n",
+            "    suspend fun incrementVehiclePromptCount()\n    suspend fun setStatsPeriod(period: StatsPeriod)\n", "suspend fun setStatsPeriod(period: StatsPeriod)")
+    return s
+rw("app/src/main/java/com/wayars/app/domain/repository/SettingsRepository.kt", repo_stats_iface)
+
+def repo_stats_impl(s):
+    s = add_import(s, "import com.wayars.app.domain.model.StatsPeriod")
+    s = sub(s, "    override val vehiclePromptCount: Flow<Int> = store.vehiclePromptCount\n",
+            "    override val vehiclePromptCount: Flow<Int> = store.vehiclePromptCount\n"
+            "    override val statsPeriod: Flow<StatsPeriod> = store.statsPeriod\n", "override val statsPeriod")
+    s = sub(s, "    override suspend fun incrementVehiclePromptCount() = store.incrementVehiclePromptCount()\n",
+            "    override suspend fun incrementVehiclePromptCount() = store.incrementVehiclePromptCount()\n"
+            "    override suspend fun setStatsPeriod(period: StatsPeriod) = store.setStatsPeriod(period)\n", "override suspend fun setStatsPeriod")
+    return s
+rw("app/src/main/java/com/wayars/app/data/repository/SettingsRepositoryImpl.kt", repo_stats_impl)
+
+def vm_stats(s):
+    s = add_import(s, "import com.wayars.app.domain.model.StatsPeriod")
+    s = sub(s, "    fun noteVehiclePromptShown() = viewModelScope.launch { settings.incrementVehiclePromptCount() }\n",
+            "    fun noteVehiclePromptShown() = viewModelScope.launch { settings.incrementVehiclePromptCount() }\n\n"
+            "    /** Every accepted order ever recorded (newest first); the Statistics screen filters it by period. */\n"
+            "    val allOrders: StateFlow<List<OrderRecord>> =\n"
+            "        container.orderRepository.observeAll().stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())\n\n"
+            "    val statsPeriod: StateFlow<StatsPeriod> =\n"
+            "        settings.statsPeriod.stateIn(viewModelScope, SharingStarted.Eagerly, StatsPeriod.TODAY)\n\n"
+            "    fun setStatsPeriod(period: StatsPeriod) = viewModelScope.launch { settings.setStatsPeriod(period) }\n",
+            "val allOrders: StateFlow<List<OrderRecord>>")
+    return s
+rw(BASE + "MainViewModel.kt", vm_stats)
+
+def nav_stats(s):
+    s = sub(s, "    val todayOrders by viewModel.todayOrders.collectAsState()\n",
+            "    val todayOrders by viewModel.todayOrders.collectAsState()\n"
+            "    val allOrders by viewModel.allOrders.collectAsState()\n"
+            "    val statsPeriod by viewModel.statsPeriod.collectAsState()\n", "val allOrders by viewModel.allOrders")
+    s = sub(s, "                    todayOrders = todayOrders,\n",
+            "                    todayOrders = todayOrders,\n"
+            "                    allOrders = allOrders,\n"
+            "                    statsPeriod = statsPeriod,\n"
+            "                    onStatsPeriodChange = { viewModel.setStatsPeriod(it) },\n", "onStatsPeriodChange = { viewModel.setStatsPeriod(it) }")
+    return s
+rw(BASE + "ui/navigation/WayArsNavHost.kt", nav_stats)
+
+def main_stats(s):
+    s = add_import(s, "import com.wayars.app.domain.model.StatsPeriod")
+    s = sub(s, "    todayOrders: List<OrderRecord>,\n",
+            "    todayOrders: List<OrderRecord>,\n    allOrders: List<OrderRecord>,\n    statsPeriod: StatsPeriod,\n    onStatsPeriodChange: (StatsPeriod) -> Unit,\n",
+            "onStatsPeriodChange: (StatsPeriod) -> Unit,")
+    s = sub(s, "                MainTab.STATS -> StatsScreen(orders = todayOrders)\n",
+            "                MainTab.STATS -> StatsScreen(\n"
+            "                    orders = allOrders,\n"
+            "                    currency = currency,\n"
+            "                    period = statsPeriod,\n"
+            "                    onPeriodChange = onStatsPeriodChange\n"
+            "                )\n", "onPeriodChange = onStatsPeriodChange")
+    return s
+rw(BASE + "ui/navigation/MainScreen.kt", main_stats)
+
+SP = {
+ "values":    ("Today", "7 days", "Month", "Year", "Earned"),
+ "values-ru": ("Сегодня", "7 дней", "Месяц", "Год", "Заработано"),
+ "values-pl": ("Dziś", "7 dni", "Miesiąc", "Rok", "Zarobiono"),
+ "values-uk": ("Сьогодні", "7 днів", "Місяць", "Рік", "Зароблено"),
+ "values-de": ("Heute", "7 Tage", "Monat", "Jahr", "Verdient"),
+ "values-fr": ("Aujourd’hui", "7 jours", "Mois", "Année", "Gagné"),
+ "values-cs": ("Dnes", "7 dní", "Měsíc", "Rok", "Vyděláno"),
+ "values-da": ("I dag", "7 dage", "Måned", "År", "Tjent"),
+ "values-nb": ("I dag", "7 dager", "Måned", "År", "Tjent"),
+ "values-sv": ("Idag", "7 dagar", "Månad", "År", "Intjänat"),
+ "values-ro": ("Azi", "7 zile", "Lună", "An", "Câștigat"),
+ "values-hu": ("Ma", "7 nap", "Hónap", "Év", "Kereset"),
+ "values-bg": ("Днес", "7 дни", "Месец", "Година", "Спечелено"),
+ "values-az": ("Bu gün", "7 gün", "Ay", "İl", "Qazanc"),
+ "values-uz": ("Bugun", "7 kun", "Oy", "Yil", "Daromad"),
+ "values-ka": ("დღეს", "7 დღე", "თვე", "წელი", "შემოსავალი"),
+ "values-hy": ("Այսօր", "7 օր", "Ամիս", "Տարի", "Եկամուտ"),
+}
+for d, (a, b, c, e, f_) in SP.items():
+    def g(s, a=a, b=b, c=c, e=e, f_=f_):
+        if "stats_period_today" in s:
+            return s
+        if "</resources>" not in s:
+            raise SystemExit("no </resources> in " + d)
+        add = ('    <string name="stats_period_today">%s</string>\n'
+               '    <string name="stats_period_week">%s</string>\n'
+               '    <string name="stats_period_month">%s</string>\n'
+               '    <string name="stats_period_year">%s</string>\n'
+               '    <string name="stats_earned">%s</string>\n') % (a, b, c, e, f_)
+        return s.replace("</resources>", add + "</resources>", 1)
+    rw("app/src/main/res/%s/strings.xml" % d, g)
+
+# ---------------------------------------------------------------- Overlay: verdict-coloured glow around the contour
+def overlay_glow(s):
+    if "fun Modifier.verdictGlow" in s:
+        return s
+    for imp in ("import androidx.compose.animation.animateColorAsState",
+                "import androidx.compose.foundation.border",
+                "import androidx.compose.ui.draw.drawBehind",
+                "import androidx.compose.ui.geometry.CornerRadius",
+                "import androidx.compose.ui.geometry.Offset",
+                "import androidx.compose.ui.geometry.Size",
+                "import androidx.compose.ui.unit.Dp"):
+        s = add_import(s, imp)
+    helper = (
+        "/** Transparent margin around the card that hosts the glow (the overlay window wraps its content). */\n"
+        "private val OVERLAY_GLOW_PADDING = 12.dp\n\n"
+        "/**\n"
+        " * Soft neon glow around the card contour: a stack of growing, translucent rounded rectangles drawn\n"
+        " * BEHIND the card (the card background then covers the inside). Works on every API level, unlike\n"
+        " * blur/shadow layers. [strength] 0..1 fades it in and out.\n"
+        " */\n"
+        "private fun Modifier.verdictGlow(color: Color, cornerRadius: Dp, glow: Dp, strength: Float): Modifier =\n"
+        "    if (strength <= 0.01f) this else drawBehind {\n"
+        "        val radius = cornerRadius.toPx()\n"
+        "        val reach = glow.toPx()\n"
+        "        val layers = 8\n"
+        "        for (i in layers downTo 1) {\n"
+        "            val expand = reach * i / layers\n"
+        "            drawRoundRect(\n"
+        "                color = color.copy(alpha = 0.075f * strength),\n"
+        "                topLeft = Offset(-expand, -expand),\n"
+        "                size = Size(size.width + 2 * expand, size.height + 2 * expand),\n"
+        "                cornerRadius = CornerRadius(radius + expand)\n"
+        "            )\n"
+        "        }\n"
+        "    }\n\n")
+    anchor = "@Composable\nfun OverlayContent("
+    if s.count(anchor) != 1:
+        raise SystemExit("OverlayContent anchor found %d times" % s.count(anchor))
+    s = s.replace(anchor, helper + anchor, 1)
+    old = ("    Column(\n"
+           "        modifier = Modifier\n"
+           "            .width(212.dp)\n"
+           "            .clip(RoundedCornerShape(16.dp))\n"
+           "            .background(WaSurface)\n"
+           "            .padding(12.dp)\n"
+           "    ) {\n")
+    if s.count(old) != 1:
+        raise SystemExit("overlay card modifier found %d times" % s.count(old))
+    new_card = (
+        "    // The card outline glows in the verdict colour: green = good, amber = average, red = bad.\n"
+        "    val verdictTint = evaluation?.let { verdictColor(it.verdict) }\n"
+        "    val glowColor by animateColorAsState(\n"
+        "        targetValue = verdictTint ?: WaSurfaceVariant,\n"
+        "        animationSpec = tween(durationMillis = 250),\n"
+        "        label = \"overlay_glow_color\"\n"
+        "    )\n"
+        "    val glowStrength by animateFloatAsState(\n"
+        "        targetValue = if (verdictTint != null) 1f else 0f,\n"
+        "        animationSpec = tween(durationMillis = 250),\n"
+        "        label = \"overlay_glow_strength\"\n"
+        "    )\n"
+        "    Column(\n"
+        "        modifier = Modifier\n"
+        "            .padding(OVERLAY_GLOW_PADDING)\n"
+        "            .width(212.dp)\n"
+        "            .verdictGlow(glowColor, 16.dp, OVERLAY_GLOW_PADDING, glowStrength)\n"
+        "            .clip(RoundedCornerShape(16.dp))\n"
+        "            .background(WaSurface)\n"
+        "            .border(1.5.dp, glowColor.copy(alpha = 0.35f + 0.65f * glowStrength), RoundedCornerShape(16.dp))\n"
+        "            .padding(12.dp)\n"
+        "    ) {\n")
+    return s.replace(old, new_card, 1)
+rw(BASE + "widget/OverlayContent.kt", overlay_glow)
 PYEOF
 echo "Done. Review with git diff, then: git add -A && git commit && git push"

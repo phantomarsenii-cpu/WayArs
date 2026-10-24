@@ -214,4 +214,9 @@
     <string name="vehicle_prompt_body">A jármű típusa és az üzemanyag-fogyasztás határozza meg, mennyire kifizetődő valójában egy megrendelés. Add meg őket egyszer, hogy a számítások pontosak legyenek.</string>
     <string name="vehicle_prompt_configure">Beállítás</string>
     <string name="vehicle_prompt_skip">Kihagyás</string>
+    <string name="stats_period_today">Ma</string>
+    <string name="stats_period_week">7 nap</string>
+    <string name="stats_period_month">Hónap</string>
+    <string name="stats_period_year">Év</string>
+    <string name="stats_earned">Kereset</string>
 </resources>

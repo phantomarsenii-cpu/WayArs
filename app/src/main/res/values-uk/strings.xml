@@ -213,4 +213,9 @@
     <string name="vehicle_prompt_body">Вид транспорту та витрата пального впливають на те, наскільки замовлення справді вигідне. Вкажіть їх один раз, щоб розрахунки були точними.</string>
     <string name="vehicle_prompt_configure">Налаштувати</string>
     <string name="vehicle_prompt_skip">Пропустити</string>
+    <string name="stats_period_today">Сьогодні</string>
+    <string name="stats_period_week">7 днів</string>
+    <string name="stats_period_month">Місяць</string>
+    <string name="stats_period_year">Рік</string>
+    <string name="stats_earned">Зароблено</string>
 </resources>

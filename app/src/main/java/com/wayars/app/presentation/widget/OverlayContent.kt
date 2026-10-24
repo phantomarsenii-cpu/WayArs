@@ -1,5 +1,12 @@
 package com.wayars.app.presentation.widget
 
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.foundation.border
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -110,6 +117,30 @@ fun AnimatedOverlayCard(
  * to intercept every touch, including button taps, before Compose's click
  * detector ever got a clean look at it).
  */
+/** Transparent margin around the card that hosts the glow (the overlay window wraps its content). */
+private val OVERLAY_GLOW_PADDING = 12.dp
+
+/**
+ * Soft neon glow around the card contour: a stack of growing, translucent rounded rectangles drawn
+ * BEHIND the card (the card background then covers the inside). Works on every API level, unlike
+ * blur/shadow layers. [strength] 0..1 fades it in and out.
+ */
+private fun Modifier.verdictGlow(color: Color, cornerRadius: Dp, glow: Dp, strength: Float): Modifier =
+    if (strength <= 0.01f) this else drawBehind {
+        val radius = cornerRadius.toPx()
+        val reach = glow.toPx()
+        val layers = 8
+        for (i in layers downTo 1) {
+            val expand = reach * i / layers
+            drawRoundRect(
+                color = color.copy(alpha = 0.075f * strength),
+                topLeft = Offset(-expand, -expand),
+                size = Size(size.width + 2 * expand, size.height + 2 * expand),
+                cornerRadius = CornerRadius(radius + expand)
+            )
+        }
+    }
+
 @Composable
 fun OverlayContent(
     evaluation: OrderEvaluation?,
@@ -119,11 +150,26 @@ fun OverlayContent(
     onClose: () -> Unit,
     onDragBy: (dx: Float, dy: Float) -> Unit
 ) {
+    // The card outline glows in the verdict colour: green = good, amber = average, red = bad.
+    val verdictTint = evaluation?.let { verdictColor(it.verdict) }
+    val glowColor by animateColorAsState(
+        targetValue = verdictTint ?: WaSurfaceVariant,
+        animationSpec = tween(durationMillis = 250),
+        label = "overlay_glow_color"
+    )
+    val glowStrength by animateFloatAsState(
+        targetValue = if (verdictTint != null) 1f else 0f,
+        animationSpec = tween(durationMillis = 250),
+        label = "overlay_glow_strength"
+    )
     Column(
         modifier = Modifier
+            .padding(OVERLAY_GLOW_PADDING)
             .width(212.dp)
+            .verdictGlow(glowColor, 16.dp, OVERLAY_GLOW_PADDING, glowStrength)
             .clip(RoundedCornerShape(16.dp))
             .background(WaSurface)
+            .border(1.5.dp, glowColor.copy(alpha = 0.35f + 0.65f * glowStrength), RoundedCornerShape(16.dp))
             .padding(12.dp)
     ) {
         Row(

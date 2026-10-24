@@ -1,5 +1,6 @@
 package com.wayars.app.data.repository
 
+import com.wayars.app.domain.model.StatsPeriod
 import com.wayars.app.data.prefs.SettingsDataStore
 import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.Currency
@@ -20,6 +21,7 @@ class SettingsRepositoryImpl(private val store: SettingsDataStore) : SettingsRep
     override val customThresholds: Flow<CustomThresholds?> = store.customThresholds
     override val vehicleProfile: Flow<VehicleProfile> = store.vehicleProfile
     override val vehiclePromptCount: Flow<Int> = store.vehiclePromptCount
+    override val statsPeriod: Flow<StatsPeriod> = store.statsPeriod
     override val customPackages: Flow<Set<String>> = store.customPackages
     override val packageHints: Flow<Map<String, PackageHint>> = store.packageHints
 
@@ -35,6 +37,7 @@ class SettingsRepositoryImpl(private val store: SettingsDataStore) : SettingsRep
     override suspend fun clearCustomThresholds() = store.clearCustomThresholds()
     override suspend fun setVehicleProfile(profile: VehicleProfile) = store.setVehicleProfile(profile)
     override suspend fun incrementVehiclePromptCount() = store.incrementVehiclePromptCount()
+    override suspend fun setStatsPeriod(period: StatsPeriod) = store.setStatsPeriod(period)
     override suspend fun addCustomPackage(packageName: String) = store.addCustomPackage(packageName)
     override suspend fun removeCustomPackage(packageName: String) = store.removeCustomPackage(packageName)
     override suspend fun savePackageHint(hint: PackageHint) = store.savePackageHint(hint)

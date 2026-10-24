@@ -213,4 +213,9 @@
     <string name="vehicle_prompt_body">Fahrzeugtyp und Kraftstoffverbrauch bestimmen, wie lohnend ein Auftrag wirklich ist. Gib sie einmal an, damit die Berechnungen stimmen.</string>
     <string name="vehicle_prompt_configure">Einrichten</string>
     <string name="vehicle_prompt_skip">Überspringen</string>
+    <string name="stats_period_today">Heute</string>
+    <string name="stats_period_week">7 Tage</string>
+    <string name="stats_period_month">Monat</string>
+    <string name="stats_period_year">Jahr</string>
+    <string name="stats_earned">Verdient</string>
 </resources>

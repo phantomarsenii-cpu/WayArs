@@ -214,4 +214,9 @@
     <string name="vehicle_prompt_body">Видът превозно средство и разходът на гориво определят колко изгодна е всъщност една поръчка. Задайте ги веднъж, за да са изчисленията точни.</string>
     <string name="vehicle_prompt_configure">Настрой</string>
     <string name="vehicle_prompt_skip">Пропусни</string>
+    <string name="stats_period_today">Днес</string>
+    <string name="stats_period_week">7 дни</string>
+    <string name="stats_period_month">Месец</string>
+    <string name="stats_period_year">Година</string>
+    <string name="stats_earned">Спечелено</string>
 </resources>

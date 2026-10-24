@@ -214,4 +214,9 @@
     <string name="vehicle_prompt_body">Typ vozidla a spotřeba paliva ovlivňují, jak výdělečná zakázka skutečně je. Zadejte je jednou, aby výpočty byly přesné.</string>
     <string name="vehicle_prompt_configure">Nastavit</string>
     <string name="vehicle_prompt_skip">Přeskočit</string>
+    <string name="stats_period_today">Dnes</string>
+    <string name="stats_period_week">7 dní</string>
+    <string name="stats_period_month">Měsíc</string>
+    <string name="stats_period_year">Rok</string>
+    <string name="stats_earned">Vyděláno</string>
 </resources>

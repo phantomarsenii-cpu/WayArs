@@ -213,4 +213,9 @@
     <string name="vehicle_prompt_body">Tipul vehiculului și consumul de combustibil influențează cât de profitabilă este de fapt o comandă. Introdu-le o singură dată pentru calcule corecte.</string>
     <string name="vehicle_prompt_configure">Configurează</string>
     <string name="vehicle_prompt_skip">Omite</string>
+    <string name="stats_period_today">Azi</string>
+    <string name="stats_period_week">7 zile</string>
+    <string name="stats_period_month">Lună</string>
+    <string name="stats_period_year">An</string>
+    <string name="stats_earned">Câștigat</string>
 </resources>

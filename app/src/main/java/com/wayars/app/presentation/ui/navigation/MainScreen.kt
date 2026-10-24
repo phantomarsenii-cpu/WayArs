@@ -1,5 +1,6 @@
 package com.wayars.app.presentation.ui.navigation
 
+import com.wayars.app.domain.model.StatsPeriod
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -55,6 +56,9 @@ fun MainScreen(
     summary: TodaySummary,
     latestEvaluation: OrderEvaluation?,
     todayOrders: List<OrderRecord>,
+    allOrders: List<OrderRecord>,
+    statsPeriod: StatsPeriod,
+    onStatsPeriodChange: (StatsPeriod) -> Unit,
     languageCode: String,
     currency: Currency,
     preset: PresetType,
@@ -207,7 +211,12 @@ fun MainScreen(
                         vehicleSetupRequestId++
                     }
                 )
-                MainTab.STATS -> StatsScreen(orders = todayOrders)
+                MainTab.STATS -> StatsScreen(
+                    orders = allOrders,
+                    currency = currency,
+                    period = statsPeriod,
+                    onPeriodChange = onStatsPeriodChange
+                )
                 MainTab.PRESETS -> PresetSelectionScreen(
                     selected = preset,
                     onSelect = onPresetSelected,

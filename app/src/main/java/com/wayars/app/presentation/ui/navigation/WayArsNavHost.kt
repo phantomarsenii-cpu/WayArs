@@ -61,6 +61,8 @@ fun WayArsNavHost(
     val summary by viewModel.todaySummary.collectAsState()
     val latestEvaluation by viewModel.latestEvaluation.collectAsState()
     val todayOrders by viewModel.todayOrders.collectAsState()
+    val allOrders by viewModel.allOrders.collectAsState()
+    val statsPeriod by viewModel.statsPeriod.collectAsState()
     val customThresholds by viewModel.customThresholds.collectAsState()
     val vehicleProfile by viewModel.vehicleProfile.collectAsState()
     val vehiclePromptCount by viewModel.vehiclePromptCount.collectAsState()
@@ -297,6 +299,9 @@ fun WayArsNavHost(
                     summary = summary,
                     latestEvaluation = latestEvaluation,
                     todayOrders = todayOrders,
+                    allOrders = allOrders,
+                    statsPeriod = statsPeriod,
+                    onStatsPeriodChange = { viewModel.setStatsPeriod(it) },
                     languageCode = languageCode ?: "en",
                     currency = currency,
                     preset = preset,

@@ -1,5 +1,6 @@
 package com.wayars.app.presentation
 
+import com.wayars.app.domain.model.StatsPeriod
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -66,6 +67,15 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
         settings.vehiclePromptCount.stateIn(viewModelScope, SharingStarted.Eagerly, 2)
 
     fun noteVehiclePromptShown() = viewModelScope.launch { settings.incrementVehiclePromptCount() }
+
+    /** Every accepted order ever recorded (newest first); the Statistics screen filters it by period. */
+    val allOrders: StateFlow<List<OrderRecord>> =
+        container.orderRepository.observeAll().stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
+    val statsPeriod: StateFlow<StatsPeriod> =
+        settings.statsPeriod.stateIn(viewModelScope, SharingStarted.Eagerly, StatsPeriod.TODAY)
+
+    fun setStatsPeriod(period: StatsPeriod) = viewModelScope.launch { settings.setStatsPeriod(period) }
 
     val customPackages: StateFlow<Set<String>> =
         settings.customPackages.stateIn(viewModelScope, SharingStarted.Eagerly, emptySet())

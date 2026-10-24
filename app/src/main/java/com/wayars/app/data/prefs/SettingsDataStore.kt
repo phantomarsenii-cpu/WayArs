@@ -1,5 +1,6 @@
 package com.wayars.app.data.prefs
 
+import com.wayars.app.domain.model.StatsPeriod
 import androidx.datastore.preferences.core.intPreferencesKey
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -34,6 +35,7 @@ class SettingsDataStore(private val context: Context) {
         val LANGUAGE = stringPreferencesKey("language")
         val CURRENCY = stringPreferencesKey("currency")
         val PRESET = stringPreferencesKey("preset")
+        val STATS_PERIOD = stringPreferencesKey("stats_period")
         val ONBOARDING_DONE = booleanPreferencesKey("onboarding_done")
         // Epoch millis of the moment the user accepted the Terms of Use
         // gate screen. Absent until accepted; once set it is never cleared
@@ -65,6 +67,15 @@ class SettingsDataStore(private val context: Context) {
         it[Keys.PRESET]?.let { name -> runCatching { PresetType.valueOf(name) }.getOrNull() } ?: PresetType.BALANCE
     }
     val onboardingDone: Flow<Boolean> = context.dataStore.data.map { it[Keys.ONBOARDING_DONE] ?: false }
+
+    /** Period chosen on the Statistics screen (default: today). */
+    val statsPeriod: Flow<StatsPeriod> = context.dataStore.data.map {
+        it[Keys.STATS_PERIOD]?.let { name -> runCatching { StatsPeriod.valueOf(name) }.getOrNull() } ?: StatsPeriod.TODAY
+    }
+
+    suspend fun setStatsPeriod(period: StatsPeriod) {
+        context.dataStore.edit { it[Keys.STATS_PERIOD] = period.name }
+    }
 
     val tourDone: Flow<Boolean> = context.dataStore.data.map { it[Keys.TOUR_DONE] ?: false }
 

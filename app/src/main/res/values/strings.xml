@@ -225,4 +225,9 @@
     <string name="vehicle_prompt_body">Your vehicle type and fuel use change how profitable an order really is. Set them once for accurate calculations.</string>
     <string name="vehicle_prompt_configure">Set up</string>
     <string name="vehicle_prompt_skip">Skip</string>
+    <string name="stats_period_today">Today</string>
+    <string name="stats_period_week">7 days</string>
+    <string name="stats_period_month">Month</string>
+    <string name="stats_period_year">Year</string>
+    <string name="stats_earned">Earned</string>
 </resources>

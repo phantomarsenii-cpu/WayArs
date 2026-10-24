@@ -1,5 +1,6 @@
 package com.wayars.app.domain.repository
 
+import com.wayars.app.domain.model.StatsPeriod
 import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.Currency
 import com.wayars.app.domain.model.PackageHint
@@ -18,6 +19,7 @@ interface SettingsRepository {
     val customThresholds: Flow<CustomThresholds?>
     val vehicleProfile: Flow<VehicleProfile>
     val vehiclePromptCount: Flow<Int>
+    val statsPeriod: Flow<StatsPeriod>
     val customPackages: Flow<Set<String>>
     val packageHints: Flow<Map<String, PackageHint>>
 
@@ -32,6 +34,7 @@ interface SettingsRepository {
     suspend fun clearCustomThresholds()
     suspend fun setVehicleProfile(profile: VehicleProfile)
     suspend fun incrementVehiclePromptCount()
+    suspend fun setStatsPeriod(period: StatsPeriod)
     suspend fun addCustomPackage(packageName: String)
     suspend fun removeCustomPackage(packageName: String)
     suspend fun savePackageHint(hint: PackageHint)
