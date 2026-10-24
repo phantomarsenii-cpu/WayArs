@@ -39,6 +39,8 @@
 #     Uses all accepted orders, not just today's. Texts translated into all 17 languages.
 # 14) Order overlay glows around its contour in the verdict colour (green = good, amber = average,
 #     red = bad); smooth colour change; plain thin border while no order is shown.
+#     The glow PULSES (slow breathing of brightness and reach, ~2.6 s per cycle); it stays steady when
+#     the user turned system animations off (reduced motion).
 # Idempotent: safe to run twice.  Run BEFORE git add/commit/push.
 set -e
 cd "$(dirname "$0")"
@@ -66,7 +68,8 @@ def sub(s, old, new, marker=None):
     return s.replace(old, new, 1)
 
 def add_import(s, line):
-    if line in s:
+    # exact whole-line match (a plain substring test would treat ...animateFloat as present because of ...animateFloatAsState)
+    if re.search("^" + re.escape(line) + "$", s, re.M):
         return s
     m = re.search(r"^import .*$", s, re.M)
     return s[:m.start()] + line + "\n" + s[m.start():]
@@ -1618,5 +1621,52 @@ def overlay_glow(s):
         "    ) {\n")
     return s.replace(old, new_card, 1)
 rw(BASE + "widget/OverlayContent.kt", overlay_glow)
+
+# ---------------------------------------------------------------- Overlay glow: smooth pulsing
+def overlay_pulse(s):
+    if "overlay_glow_pulse" in s:
+        return s
+    for imp in ("import androidx.compose.animation.core.FastOutSlowInEasing",
+                "import androidx.compose.animation.core.animateFloat",
+                "import androidx.compose.animation.core.RepeatMode",
+                "import androidx.compose.animation.core.infiniteRepeatable",
+                "import androidx.compose.animation.core.rememberInfiniteTransition"):
+        s = add_import(s, imp)
+    s = sub(s, "private fun Modifier.verdictGlow(color: Color, cornerRadius: Dp, glow: Dp, strength: Float): Modifier =",
+            "private fun Modifier.verdictGlow(color: Color, cornerRadius: Dp, glow: Dp, strength: Float, spread: Float): Modifier =",
+            "strength: Float, spread: Float")
+    s = sub(s, "        val reach = glow.toPx()\n", "        val reach = glow.toPx() * spread\n", "glow.toPx() * spread")
+    s = sub(s, "color.copy(alpha = 0.075f * strength)", "color.copy(alpha = 0.085f * strength)", "0.085f * strength")
+    s = sub(s, "    onDragBy: (dx: Float, dy: Float) -> Unit\n) {\n    // The card outline glows",
+            "    onDragBy: (dx: Float, dy: Float) -> Unit,\n    reducedMotion: Boolean = false\n) {\n    // The card outline glows",
+            "reducedMotion: Boolean = false")
+    s = sub(s, '        label = "overlay_glow_strength"\n    )\n',
+            '        label = "overlay_glow_strength"\n    )\n'
+            "    // Slow \"breathing\" of the glow (brightness and reach). Steady when system animations are off.\n"
+            "    val pulseTransition = rememberInfiniteTransition(label = \"overlay_glow_pulse\")\n"
+            "    val pulseAnimated by pulseTransition.animateFloat(\n"
+            "        initialValue = 0.35f,\n"
+            "        targetValue = 1f,\n"
+            "        animationSpec = infiniteRepeatable(\n"
+            "            animation = tween(durationMillis = 1300, easing = FastOutSlowInEasing),\n"
+            "            repeatMode = RepeatMode.Reverse\n"
+            "        ),\n"
+            "        label = \"overlay_glow_pulse_value\"\n"
+            "    )\n"
+            "    val pulse = if (reducedMotion) 1f else pulseAnimated\n", "overlay_glow_pulse_value")
+    s = sub(s, ".verdictGlow(glowColor, 16.dp, OVERLAY_GLOW_PADDING, glowStrength)",
+            ".verdictGlow(glowColor, 16.dp, OVERLAY_GLOW_PADDING, glowStrength * pulse, 0.7f + 0.3f * pulse)",
+            "glowStrength * pulse, 0.7f + 0.3f * pulse")
+    s = sub(s, "glowColor.copy(alpha = 0.35f + 0.65f * glowStrength)",
+            "glowColor.copy(alpha = (0.35f + 0.65f * glowStrength) * (0.7f + 0.3f * pulse))",
+            "(0.35f + 0.65f * glowStrength) * (0.7f + 0.3f * pulse)")
+    return s
+rw(BASE + "widget/OverlayContent.kt", overlay_pulse)
+
+def service_motion(s):
+    return sub(s, "                            onDragBy = ::moveWindowBy\n                        )",
+               "                            onDragBy = ::moveWindowBy,\n                            reducedMotion = reducedMotion\n                        )",
+               "onDragBy = ::moveWindowBy,\n                            reducedMotion = reducedMotion")
+rw(BASE.replace("presentation/", "") + "service/overlay/OverlayService.kt", service_motion)
 PYEOF
 echo "Done. Review with git diff, then: git add -A && git commit && git push"

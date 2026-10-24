@@ -1,5 +1,10 @@
 package com.wayars.app.presentation.widget
 
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.geometry.Offset
@@ -125,15 +130,15 @@ private val OVERLAY_GLOW_PADDING = 12.dp
  * BEHIND the card (the card background then covers the inside). Works on every API level, unlike
  * blur/shadow layers. [strength] 0..1 fades it in and out.
  */
-private fun Modifier.verdictGlow(color: Color, cornerRadius: Dp, glow: Dp, strength: Float): Modifier =
+private fun Modifier.verdictGlow(color: Color, cornerRadius: Dp, glow: Dp, strength: Float, spread: Float): Modifier =
     if (strength <= 0.01f) this else drawBehind {
         val radius = cornerRadius.toPx()
-        val reach = glow.toPx()
+        val reach = glow.toPx() * spread
         val layers = 8
         for (i in layers downTo 1) {
             val expand = reach * i / layers
             drawRoundRect(
-                color = color.copy(alpha = 0.075f * strength),
+                color = color.copy(alpha = 0.085f * strength),
                 topLeft = Offset(-expand, -expand),
                 size = Size(size.width + 2 * expand, size.height + 2 * expand),
                 cornerRadius = CornerRadius(radius + expand)
@@ -148,7 +153,8 @@ fun OverlayContent(
     onReject: () -> Unit,
     onSettings: () -> Unit,
     onClose: () -> Unit,
-    onDragBy: (dx: Float, dy: Float) -> Unit
+    onDragBy: (dx: Float, dy: Float) -> Unit,
+    reducedMotion: Boolean = false
 ) {
     // The card outline glows in the verdict colour: green = good, amber = average, red = bad.
     val verdictTint = evaluation?.let { verdictColor(it.verdict) }
@@ -162,14 +168,26 @@ fun OverlayContent(
         animationSpec = tween(durationMillis = 250),
         label = "overlay_glow_strength"
     )
+    // Slow "breathing" of the glow (brightness and reach). Steady when system animations are off.
+    val pulseTransition = rememberInfiniteTransition(label = "overlay_glow_pulse")
+    val pulseAnimated by pulseTransition.animateFloat(
+        initialValue = 0.35f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 1300, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "overlay_glow_pulse_value"
+    )
+    val pulse = if (reducedMotion) 1f else pulseAnimated
     Column(
         modifier = Modifier
             .padding(OVERLAY_GLOW_PADDING)
             .width(212.dp)
-            .verdictGlow(glowColor, 16.dp, OVERLAY_GLOW_PADDING, glowStrength)
+            .verdictGlow(glowColor, 16.dp, OVERLAY_GLOW_PADDING, glowStrength * pulse, 0.7f + 0.3f * pulse)
             .clip(RoundedCornerShape(16.dp))
             .background(WaSurface)
-            .border(1.5.dp, glowColor.copy(alpha = 0.35f + 0.65f * glowStrength), RoundedCornerShape(16.dp))
+            .border(1.5.dp, glowColor.copy(alpha = (0.35f + 0.65f * glowStrength) * (0.7f + 0.3f * pulse)), RoundedCornerShape(16.dp))
             .padding(12.dp)
     ) {
         Row(
