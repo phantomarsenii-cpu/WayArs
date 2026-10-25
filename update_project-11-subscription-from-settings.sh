@@ -42,8 +42,8 @@
 #     The glow PULSES (slow breathing of brightness and reach, ~2.6 s per cycle); it stays steady when
 #     the user turned system animations off (reduced motion).
 # 15) Verdict fix: when the source app shows no trip time (Uber Eats / Stuart: only "2.8 km"), minutes arrive
-#     as 0, so EUR/min was 0 and EVERY such order was marked BAD even at 8 zl/km. Now, for trips >= 1 km
-#     with unknown time, the verdict is judged on net money per km only (shorter trips keep the strict rule).
+#     as 0, so EUR/min was 0 and EVERY such order was marked BAD even at 8 zl/km. Now, whenever the trip
+#     time is unknown, the verdict is judged on net money per km only (any distance).
 #     The overlay and the verdict card no longer print a misleading "0 min".
 # Idempotent: safe to run twice.  Run BEFORE git add/commit/push.
 set -e
@@ -1675,15 +1675,21 @@ rw(BASE.replace("presentation/", "") + "service/overlay/OverlayService.kt", serv
 
 # ---------------------------------------------------------------- Verdict fix: unknown trip time
 def verdict_fix(s):
+    # upgrade path: an earlier version of this script kept the strict rule for trips under 1 km
+    old_line = "            val judgeByKmOnly = minutesUnknown && distanceKm >= OrderEvaluation.SHORT_TRIP_THRESHOLD_KM\n"
+    if old_line in s:
+        s = s.replace(old_line, "            val judgeByKmOnly = minutesUnknown\n", 1)
+        s = s.replace("            // per km. For a real trip (>= SHORT_TRIP_THRESHOLD_KM) with unknown time we therefore judge on net\n"
+                      "            // EUR/km only; very short trips with unknown time keep the strict rule (a tiny distance inflates EUR/km).\n",
+                      "            // per km. When the time is unknown we therefore judge on net EUR/km only (any distance).\n", 1)
     if "val perMinuteOk" in s:
         return s
     s = sub(s, "            val clearsPresetBar = ratePerKm >= preset.minRatePerKm(currency) && ratePerMinute >= preset.minRatePerMinute(currency)\n",
-            "            // Some source apps (Uber / Uber Eats, Stuart) show only the distance, so timeMinutes arrives as 0 and\n"
-            "            // EUR/minute is unknown (0.0). Requiring it would mark EVERY such order BAD however well it pays\n"
-            "            // per km. For a real trip (>= SHORT_TRIP_THRESHOLD_KM) with unknown time we therefore judge on net\n"
-            "            // EUR/km only; very short trips with unknown time keep the strict rule (a tiny distance inflates EUR/km).\n"
+            "            // Some source apps / screens (e.g. Stuart, some Uber screens) show only the distance, so timeMinutes\n"
+            "            // arrives as 0 and EUR/minute is unknown (0.0). Requiring it would mark EVERY such order BAD however\n"
+            "            // well it pays per km. When the time is unknown we therefore judge on net EUR/km only (any distance).\n"
             "            val minutesUnknown = timeMinutes <= 0.0\n"
-            "            val judgeByKmOnly = minutesUnknown && distanceKm >= OrderEvaluation.SHORT_TRIP_THRESHOLD_KM\n"
+            "            val judgeByKmOnly = minutesUnknown\n"
             "            val perMinuteOk = judgeByKmOnly || ratePerMinute >= preset.minRatePerMinute(currency)\n"
             "            val clearsPresetBar = ratePerKm >= preset.minRatePerKm(currency) && perMinuteOk\n", "val perMinuteOk")
     s = sub(s, "            if (ratePerKm >= absoluteGoodRate && ratePerMinute >= preset.minRatePerMinute(currency)) {\n",
