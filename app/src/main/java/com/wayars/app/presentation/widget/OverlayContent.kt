@@ -257,7 +257,8 @@ fun OverlayContent(
                 color = MaterialTheme.colorScheme.onSurface
             )
             Text(
-                "${fmt(evaluation.distanceKm)} km • ${fmt(evaluation.timeMinutes)} min",
+                if (evaluation.timeMinutes > 0) "${fmt(evaluation.distanceKm)} km • ${fmt(evaluation.timeMinutes)} min"
+                else "${fmt(evaluation.distanceKm)} km",
                 fontSize = 12.sp,
                 color = WaTextSecondary
             )

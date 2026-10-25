@@ -69,7 +69,14 @@ class EvaluateOrderUseCase {
             }
         } else {
             val absoluteGoodRate = ABSOLUTE_GOOD_RATE_PER_KM_PLN / currency.rateToPln
-            val clearsPresetBar = ratePerKm >= preset.minRatePerKm(currency) && ratePerMinute >= preset.minRatePerMinute(currency)
+            // Some source apps (Uber / Uber Eats, Stuart) show only the distance, so timeMinutes arrives as 0 and
+            // EUR/minute is unknown (0.0). Requiring it would mark EVERY such order BAD however well it pays
+            // per km. For a real trip (>= SHORT_TRIP_THRESHOLD_KM) with unknown time we therefore judge on net
+            // EUR/km only; very short trips with unknown time keep the strict rule (a tiny distance inflates EUR/km).
+            val minutesUnknown = timeMinutes <= 0.0
+            val judgeByKmOnly = minutesUnknown && distanceKm >= OrderEvaluation.SHORT_TRIP_THRESHOLD_KM
+            val perMinuteOk = judgeByKmOnly || ratePerMinute >= preset.minRatePerMinute(currency)
+            val clearsPresetBar = ratePerKm >= preset.minRatePerKm(currency) && perMinuteOk
             // The absolute-rate override used to fire on ratePerKm ALONE.
             // On a short trip (e.g. 0.4 km) €/km can look huge purely because
             // the distance is tiny, even while €/minute is terrible — that
@@ -77,7 +84,7 @@ class EvaluateOrderUseCase {
             // override also requires clearing the preset's own €/minute bar,
             // same as the normal path below, so a big €/km number can no
             // longer paper over a bad €/minute one.
-            if (ratePerKm >= absoluteGoodRate && ratePerMinute >= preset.minRatePerMinute(currency)) {
+            if (ratePerKm >= absoluteGoodRate && perMinuteOk) {
                 Verdict.GOOD
             } else if (clearsPresetBar) {
                 Verdict.GOOD

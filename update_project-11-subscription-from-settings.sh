@@ -41,6 +41,10 @@
 #     red = bad); smooth colour change; plain thin border while no order is shown.
 #     The glow PULSES (slow breathing of brightness and reach, ~2.6 s per cycle); it stays steady when
 #     the user turned system animations off (reduced motion).
+# 15) Verdict fix: when the source app shows no trip time (Uber Eats / Stuart: only "2.8 km"), minutes arrive
+#     as 0, so EUR/min was 0 and EVERY such order was marked BAD even at 8 zl/km. Now, for trips >= 1 km
+#     with unknown time, the verdict is judged on net money per km only (shorter trips keep the strict rule).
+#     The overlay and the verdict card no longer print a misleading "0 min".
 # Idempotent: safe to run twice.  Run BEFORE git add/commit/push.
 set -e
 cd "$(dirname "$0")"
@@ -1668,5 +1672,35 @@ def service_motion(s):
                "                            onDragBy = ::moveWindowBy,\n                            reducedMotion = reducedMotion\n                        )",
                "onDragBy = ::moveWindowBy,\n                            reducedMotion = reducedMotion")
 rw(BASE.replace("presentation/", "") + "service/overlay/OverlayService.kt", service_motion)
+
+# ---------------------------------------------------------------- Verdict fix: unknown trip time
+def verdict_fix(s):
+    if "val perMinuteOk" in s:
+        return s
+    s = sub(s, "            val clearsPresetBar = ratePerKm >= preset.minRatePerKm(currency) && ratePerMinute >= preset.minRatePerMinute(currency)\n",
+            "            // Some source apps (Uber / Uber Eats, Stuart) show only the distance, so timeMinutes arrives as 0 and\n"
+            "            // EUR/minute is unknown (0.0). Requiring it would mark EVERY such order BAD however well it pays\n"
+            "            // per km. For a real trip (>= SHORT_TRIP_THRESHOLD_KM) with unknown time we therefore judge on net\n"
+            "            // EUR/km only; very short trips with unknown time keep the strict rule (a tiny distance inflates EUR/km).\n"
+            "            val minutesUnknown = timeMinutes <= 0.0\n"
+            "            val judgeByKmOnly = minutesUnknown && distanceKm >= OrderEvaluation.SHORT_TRIP_THRESHOLD_KM\n"
+            "            val perMinuteOk = judgeByKmOnly || ratePerMinute >= preset.minRatePerMinute(currency)\n"
+            "            val clearsPresetBar = ratePerKm >= preset.minRatePerKm(currency) && perMinuteOk\n", "val perMinuteOk")
+    s = sub(s, "            if (ratePerKm >= absoluteGoodRate && ratePerMinute >= preset.minRatePerMinute(currency)) {\n",
+            "            if (ratePerKm >= absoluteGoodRate && perMinuteOk) {\n", "absoluteGoodRate && perMinuteOk")
+    return s
+rw("app/src/main/java/com/wayars/app/domain/usecase/EvaluateOrderUseCase.kt", verdict_fix)
+
+def no_zero_minutes(s):
+    old = '"${fmt(evaluation.distanceKm)} km • ${fmt(evaluation.timeMinutes)} min",'
+    new = ('if (evaluation.timeMinutes > 0) "${fmt(evaluation.distanceKm)} km • ${fmt(evaluation.timeMinutes)} min"\n'
+           '                else "${fmt(evaluation.distanceKm)} km",')
+    if "if (evaluation.timeMinutes > 0)" in s:
+        return s
+    if s.count(old) != 1:
+        raise SystemExit("distance/time text found %d times" % s.count(old))
+    return s.replace(old, new, 1)
+rw(BASE + "widget/OverlayContent.kt", no_zero_minutes)
+rw(BASE + "ui/component/VerdictCard.kt", no_zero_minutes)
 PYEOF
 echo "Done. Review with git diff, then: git add -A && git commit && git push"

@@ -87,7 +87,8 @@ fun VerdictCard(evaluation: OrderEvaluation?, emptyLabel: String, modifier: Modi
         }
 
         Text(
-            "${fmt(evaluation.distanceKm)} km • ${fmt(evaluation.timeMinutes)} min",
+            if (evaluation.timeMinutes > 0) "${fmt(evaluation.distanceKm)} km • ${fmt(evaluation.timeMinutes)} min"
+                else "${fmt(evaluation.distanceKm)} km",
             color = WaTextSecondary,
             style = MaterialTheme.typography.bodyMedium
         )
