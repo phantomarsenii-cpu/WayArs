@@ -358,7 +358,8 @@ private fun AccessibilityConsentDialog(onAllow: () -> Unit, onDecline: () -> Uni
     androidx.compose.material3.AlertDialog(
         onDismissRequest = onDecline,
         title = { Text(stringResource(R.string.accessibility_consent_title)) },
-        text = { Text(stringResource(R.string.accessibility_consent_body)) },
+        // Long disclosure: must stay fully readable on small screens, buttons always reachable.
+        text = { Text(stringResource(R.string.accessibility_consent_body), modifier = Modifier.verticalScroll(rememberScrollState())) },
         confirmButton = {
             Button(onClick = onAllow) {
                 Text(stringResource(R.string.accessibility_consent_allow))
