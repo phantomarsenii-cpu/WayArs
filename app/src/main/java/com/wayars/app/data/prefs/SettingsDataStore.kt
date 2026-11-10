@@ -1,7 +1,5 @@
 package com.wayars.app.data.prefs
 
-import com.wayars.app.domain.model.StatsPeriod
-import androidx.datastore.preferences.core.intPreferencesKey
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.doublePreferencesKey
@@ -35,7 +33,6 @@ class SettingsDataStore(private val context: Context) {
         val LANGUAGE = stringPreferencesKey("language")
         val CURRENCY = stringPreferencesKey("currency")
         val PRESET = stringPreferencesKey("preset")
-        val STATS_PERIOD = stringPreferencesKey("stats_period")
         val ONBOARDING_DONE = booleanPreferencesKey("onboarding_done")
         // Epoch millis of the moment the user accepted the Terms of Use
         // gate screen. Absent until accepted; once set it is never cleared
@@ -49,16 +46,12 @@ class SettingsDataStore(private val context: Context) {
         val VEHICLE_FUEL_TYPE = stringPreferencesKey("vehicle_fuel_type")
         val VEHICLE_CONSUMPTION = doublePreferencesKey("vehicle_consumption_per_100km")
         val VEHICLE_FUEL_PRICE = doublePreferencesKey("vehicle_fuel_price_per_unit")
-        val VEHICLE_PROMPT_COUNT = intPreferencesKey("vehicle_prompt_count")
         // User-added package ids for delivery/taxi apps beyond the built-in
         // list — see the "universal support" comment on customPackages below.
         val CUSTOM_PACKAGES = stringSetPreferencesKey("custom_scanned_packages")
         // Calibration hints (see PackageHint) for custom apps whose screen
         // doesn't match the built-in generic money/km/min patterns.
         val PACKAGE_HINTS = stringSetPreferencesKey("package_parsing_hints")
-        // First-run tutorial finished/skipped, and the "update available" card snooze.
-        val TOUR_DONE = booleanPreferencesKey("tour_done")
-        val UPDATE_SNOOZE_UNTIL = longPreferencesKey("update_snooze_until")
     }
 
     val languageCode: Flow<String?> = context.dataStore.data.map { it[Keys.LANGUAGE] }
@@ -67,20 +60,6 @@ class SettingsDataStore(private val context: Context) {
         it[Keys.PRESET]?.let { name -> runCatching { PresetType.valueOf(name) }.getOrNull() } ?: PresetType.BALANCE
     }
     val onboardingDone: Flow<Boolean> = context.dataStore.data.map { it[Keys.ONBOARDING_DONE] ?: false }
-
-    /** Period chosen on the Statistics screen (default: today). */
-    val statsPeriod: Flow<StatsPeriod> = context.dataStore.data.map {
-        it[Keys.STATS_PERIOD]?.let { name -> runCatching { StatsPeriod.valueOf(name) }.getOrNull() } ?: StatsPeriod.TODAY
-    }
-
-    suspend fun setStatsPeriod(period: StatsPeriod) {
-        context.dataStore.edit { it[Keys.STATS_PERIOD] = period.name }
-    }
-
-    val tourDone: Flow<Boolean> = context.dataStore.data.map { it[Keys.TOUR_DONE] ?: false }
-
-    /** Epoch millis until which the "update available" card stays hidden (0 = not snoozed). */
-    val updateSnoozeUntil: Flow<Long> = context.dataStore.data.map { it[Keys.UPDATE_SNOOZE_UNTIL] ?: 0L }
 
     /** Null until the user has accepted the Terms of Use gate; then the epoch-millis timestamp of that moment. */
     val termsAcceptedAt: Flow<Long?> = context.dataStore.data.map { it[Keys.TERMS_ACCEPTED_AT] }
@@ -91,13 +70,6 @@ class SettingsDataStore(private val context: Context) {
         val avg = prefs[Keys.CUSTOM_AVERAGE_RATE]
         val good = prefs[Keys.CUSTOM_GOOD_RATE]
         if (bad != null && avg != null && good != null) CustomThresholds(bad, avg, good) else null
-    }
-
-    /** How many times the "set up your vehicle" prompt has been shown (it is shown at most twice). */
-    val vehiclePromptCount: Flow<Int> = context.dataStore.data.map { it[Keys.VEHICLE_PROMPT_COUNT] ?: 0 }
-
-    suspend fun incrementVehiclePromptCount() {
-        context.dataStore.edit { it[Keys.VEHICLE_PROMPT_COUNT] = (it[Keys.VEHICLE_PROMPT_COUNT] ?: 0) + 1 }
     }
 
     val vehicleProfile: Flow<VehicleProfile> = context.dataStore.data.map { prefs ->
@@ -148,14 +120,6 @@ class SettingsDataStore(private val context: Context) {
 
     suspend fun setOnboardingDone(done: Boolean) {
         context.dataStore.edit { it[Keys.ONBOARDING_DONE] = done }
-    }
-
-    suspend fun setTourDone(done: Boolean) {
-        context.dataStore.edit { it[Keys.TOUR_DONE] = done }
-    }
-
-    suspend fun setUpdateSnoozeUntil(epochMillis: Long) {
-        context.dataStore.edit { it[Keys.UPDATE_SNOOZE_UNTIL] = epochMillis }
     }
 
     /**

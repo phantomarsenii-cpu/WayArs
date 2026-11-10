@@ -1,6 +1,5 @@
 package com.wayars.app
 
-import com.wayars.app.service.accessibility.FreeTrial
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.DefaultLifecycleObserver
@@ -12,7 +11,6 @@ import com.revenuecat.purchases.PurchasesConfiguration
 import com.wayars.app.billing.RevenueCatConfig
 import com.wayars.app.data.prefs.LanguagePrefs
 import com.wayars.app.domain.model.SubscriptionState
-import com.wayars.app.service.accessibility.ActiveSessionTracker
 import com.wayars.app.service.accessibility.ScanningState
 import com.wayars.app.util.LocaleManager
 import kotlinx.coroutines.CoroutineScope
@@ -48,15 +46,8 @@ class WayArsApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         container = AppContainer(this)
-        ActiveSessionTracker.init(this)
-        FreeTrial.init(this)
         configureRevenueCat()
         observeAppForeground()
-        applicationScope.launch {
-            container.subscriptionRepository.subscriptionState.collect { state ->
-                FreeTrial.setSubscribed(state is SubscriptionState.Subscribed)
-            }
-        }
         persistResolvedLanguageIfMissing()
     }
 
@@ -154,12 +145,7 @@ class WayArsApplication : Application() {
         // pick it back up.
         applicationScope.launch {
             ScanningState.isActive.collect { active ->
-                if (active) {
-                    startPollingIfNeeded()
-                    scheduleTrialWatch()
-                } else {
-                    trialJob?.cancel()
-                }
+                if (active) startPollingIfNeeded()
             }
         }
     }
@@ -175,37 +161,7 @@ class WayArsApplication : Application() {
         val stillSubscribed =
             container.subscriptionRepository.subscriptionState.value is SubscriptionState.Subscribed
         if (!stillSubscribed && ScanningState.isActive.value) {
-            // Not subscribed: scanning may only continue while the one-time free trial has time left.
-            FreeTrial.ensureCounting(this@WayArsApplication)
-            if (!FreeTrial.hasTimeLeft()) expireTrial()
-        }
-    }
-
-    private var trialJob: Job? = null
-
-    private fun expireTrial() {
-        ScanningState.setActive(false, this@WayArsApplication)
-        FreeTrial.signalExpired()
-    }
-
-    /** While scanning runs without a subscription, stops it the moment the free trial is used up. */
-    private fun scheduleTrialWatch() {
-        trialJob?.cancel()
-        trialJob = applicationScope.launch {
-            while (isActive && ScanningState.isActive.value) {
-                val state = container.subscriptionRepository.subscriptionState.value
-                if (state is SubscriptionState.Subscribed) {
-                    delay(5_000L)
-                    continue
-                }
-                FreeTrial.ensureCounting(this@WayArsApplication)
-                val left = FreeTrial.remainingMillis()
-                if (left <= 0L) {
-                    expireTrial()
-                    break
-                }
-                delay(minOf(left + 100L, 5_000L))
-            }
+            ScanningState.setActive(false, this@WayArsApplication)
         }
     }
 
@@ -219,8 +175,6 @@ class WayArsApplication : Application() {
                 // scanning isn't running — stop until either comes back.
                 if (!isAppForegrounded && !ScanningState.isActive.value) break
 
-                ActiveSessionTracker.heartbeat()
-                FreeTrial.heartbeat()
                 delay(SUBSCRIPTION_POLL_INTERVAL_MS)
             }
             pollingJob = null

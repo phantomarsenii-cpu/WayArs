@@ -24,4 +24,3 @@ local.properties
 !/app/debug.keystore
 keystore_base64.txt
 
-.update*_backup_*/

@@ -1,0 +1,218 @@
+package com.wayars.app.data.prefs
+
+import android.content.Context
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.doublePreferencesKey
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.longPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.stringSetPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
+import com.wayars.app.domain.model.CustomThresholds
+import com.wayars.app.domain.model.Currency
+import com.wayars.app.domain.model.FuelType
+import com.wayars.app.domain.model.PackageHint
+import com.wayars.app.domain.model.PresetType
+import com.wayars.app.domain.model.VehicleCategory
+import com.wayars.app.domain.model.VehicleProfile
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+
+private val Context.dataStore by preferencesDataStore(name = "wayars_settings")
+
+/**
+ * Persists user-level settings: UI language, working currency, active preset,
+ * optional custom €/km thresholds, the driver's vehicle/fuel profile, and
+ * whether onboarding has been completed. Language is additionally cached
+ * synchronously in SharedPreferences (see [LanguagePrefs]) so it can be
+ * applied in Activity.attachBaseContext before the first Compose frame.
+ */
+class SettingsDataStore(private val context: Context) {
+
+    private object Keys {
+        val LANGUAGE = stringPreferencesKey("language")
+        val CURRENCY = stringPreferencesKey("currency")
+        val PRESET = stringPreferencesKey("preset")
+        val ONBOARDING_DONE = booleanPreferencesKey("onboarding_done")
+        // Epoch millis of the moment the user accepted the Terms of Use
+        // gate screen. Absent until accepted; once set it is never cleared
+        // or overwritten (see setTermsAccepted below) — acceptance is a
+        // one-way, permanent record, not a togglable setting.
+        val TERMS_ACCEPTED_AT = longPreferencesKey("terms_accepted_at")
+        val CUSTOM_BAD_RATE = doublePreferencesKey("custom_bad_rate")
+        val CUSTOM_AVERAGE_RATE = doublePreferencesKey("custom_average_rate")
+        val CUSTOM_GOOD_RATE = doublePreferencesKey("custom_good_rate")
+        val VEHICLE_CATEGORY = stringPreferencesKey("vehicle_category")
+        val VEHICLE_FUEL_TYPE = stringPreferencesKey("vehicle_fuel_type")
+        val VEHICLE_CONSUMPTION = doublePreferencesKey("vehicle_consumption_per_100km")
+        val VEHICLE_FUEL_PRICE = doublePreferencesKey("vehicle_fuel_price_per_unit")
+        // User-added package ids for delivery/taxi apps beyond the built-in
+        // list — see the "universal support" comment on customPackages below.
+        val CUSTOM_PACKAGES = stringSetPreferencesKey("custom_scanned_packages")
+        // Calibration hints (see PackageHint) for custom apps whose screen
+        // doesn't match the built-in generic money/km/min patterns.
+        val PACKAGE_HINTS = stringSetPreferencesKey("package_parsing_hints")
+    }
+
+    val languageCode: Flow<String?> = context.dataStore.data.map { it[Keys.LANGUAGE] }
+    val currency: Flow<Currency> = context.dataStore.data.map { Currency.fromCode(it[Keys.CURRENCY]) }
+    val preset: Flow<PresetType> = context.dataStore.data.map {
+        it[Keys.PRESET]?.let { name -> runCatching { PresetType.valueOf(name) }.getOrNull() } ?: PresetType.BALANCE
+    }
+    val onboardingDone: Flow<Boolean> = context.dataStore.data.map { it[Keys.ONBOARDING_DONE] ?: false }
+
+    /** Null until the user has accepted the Terms of Use gate; then the epoch-millis timestamp of that moment. */
+    val termsAcceptedAt: Flow<Long?> = context.dataStore.data.map { it[Keys.TERMS_ACCEPTED_AT] }
+
+    /** Null unless the user has entered all three of their own rate boundaries. */
+    val customThresholds: Flow<CustomThresholds?> = context.dataStore.data.map { prefs ->
+        val bad = prefs[Keys.CUSTOM_BAD_RATE]
+        val avg = prefs[Keys.CUSTOM_AVERAGE_RATE]
+        val good = prefs[Keys.CUSTOM_GOOD_RATE]
+        if (bad != null && avg != null && good != null) CustomThresholds(bad, avg, good) else null
+    }
+
+    val vehicleProfile: Flow<VehicleProfile> = context.dataStore.data.map { prefs ->
+        val category = prefs[Keys.VEHICLE_CATEGORY]?.let { name ->
+            runCatching { VehicleCategory.valueOf(name) }.getOrNull()
+        } ?: return@map VehicleProfile.DEFAULT
+        val fuelType = prefs[Keys.VEHICLE_FUEL_TYPE]?.let { name ->
+            runCatching { FuelType.valueOf(name) }.getOrNull()
+        }
+        VehicleProfile(
+            category = category,
+            fuelType = fuelType,
+            consumptionPer100Km = prefs[Keys.VEHICLE_CONSUMPTION] ?: 0.0,
+            fuelPricePerUnit = prefs[Keys.VEHICLE_FUEL_PRICE] ?: 0.0
+        )
+    }
+
+    /**
+     * Package ids the USER has added on top of the built-in courier/taxi
+     * app list, so WayArs can be pointed at any delivery/taxi app worldwide
+     * without a code change or app update — the scanner and ScreenTextParser
+     * are already generic (plain money/km/min regex, no per-app branches),
+     * they just need the package name added to the allow-list they check.
+     * Empty set by default (nothing added yet).
+     */
+    val customPackages: Flow<Set<String>> =
+        context.dataStore.data.map { it[Keys.CUSTOM_PACKAGES] ?: emptySet() }
+
+    /** Keyed by packageName. Packages with no saved hint just aren't in the map. */
+    val packageHints: Flow<Map<String, PackageHint>> = context.dataStore.data.map { prefs ->
+        (prefs[Keys.PACKAGE_HINTS] ?: emptySet())
+            .mapNotNull { PackageHintCodec.decode(it) }
+            .associateBy { it.packageName }
+    }
+
+    suspend fun setLanguage(code: String) {
+        context.dataStore.edit { it[Keys.LANGUAGE] = code }
+        LanguagePrefs.save(context, code)
+    }
+
+    suspend fun setCurrency(currency: Currency) {
+        context.dataStore.edit { it[Keys.CURRENCY] = currency.code }
+    }
+
+    suspend fun setPreset(preset: PresetType) {
+        context.dataStore.edit { it[Keys.PRESET] = preset.name }
+    }
+
+    suspend fun setOnboardingDone(done: Boolean) {
+        context.dataStore.edit { it[Keys.ONBOARDING_DONE] = done }
+    }
+
+    /**
+     * Records terms acceptance, once. Per spec this is permanent and
+     * cannot be changed or revoked — a second call (e.g. a stray retry)
+     * must never overwrite the original timestamp, so this only ever
+     * writes when no value is present yet.
+     */
+    suspend fun setTermsAccepted(atEpochMillis: Long) {
+        context.dataStore.edit {
+            if (it[Keys.TERMS_ACCEPTED_AT] == null) {
+                it[Keys.TERMS_ACCEPTED_AT] = atEpochMillis
+            }
+        }
+    }
+
+    suspend fun setCustomThresholds(bad: Double, average: Double, good: Double) {
+        context.dataStore.edit {
+            it[Keys.CUSTOM_BAD_RATE] = bad
+            it[Keys.CUSTOM_AVERAGE_RATE] = average
+            it[Keys.CUSTOM_GOOD_RATE] = good
+        }
+    }
+
+    suspend fun clearCustomThresholds() {
+        context.dataStore.edit {
+            it.remove(Keys.CUSTOM_BAD_RATE)
+            it.remove(Keys.CUSTOM_AVERAGE_RATE)
+            it.remove(Keys.CUSTOM_GOOD_RATE)
+        }
+    }
+
+    suspend fun setVehicleProfile(profile: VehicleProfile) {
+        context.dataStore.edit { prefs ->
+            prefs[Keys.VEHICLE_CATEGORY] = profile.category.name
+            if (profile.fuelType != null) {
+                prefs[Keys.VEHICLE_FUEL_TYPE] = profile.fuelType.name
+            } else {
+                prefs.remove(Keys.VEHICLE_FUEL_TYPE)
+            }
+            prefs[Keys.VEHICLE_CONSUMPTION] = profile.consumptionPer100Km
+            prefs[Keys.VEHICLE_FUEL_PRICE] = profile.fuelPricePerUnit
+        }
+    }
+
+    suspend fun addCustomPackage(packageName: String) {
+        val trimmed = packageName.trim()
+        if (trimmed.isEmpty()) return
+        context.dataStore.edit { prefs ->
+            val current = prefs[Keys.CUSTOM_PACKAGES] ?: emptySet()
+            prefs[Keys.CUSTOM_PACKAGES] = current + trimmed
+        }
+    }
+
+    suspend fun removeCustomPackage(packageName: String) {
+        context.dataStore.edit { prefs ->
+            val current = prefs[Keys.CUSTOM_PACKAGES] ?: emptySet()
+            prefs[Keys.CUSTOM_PACKAGES] = current - packageName
+        }
+    }
+
+    suspend fun savePackageHint(hint: PackageHint) {
+        context.dataStore.edit { prefs ->
+            val current = (prefs[Keys.PACKAGE_HINTS] ?: emptySet())
+                .mapNotNull { PackageHintCodec.decode(it) }
+                .filterNot { it.packageName == hint.packageName }
+            prefs[Keys.PACKAGE_HINTS] = (current + hint).map { PackageHintCodec.encode(it) }.toSet()
+        }
+    }
+
+    suspend fun clearPackageHint(packageName: String) {
+        context.dataStore.edit { prefs ->
+            val current = (prefs[Keys.PACKAGE_HINTS] ?: emptySet())
+                .mapNotNull { PackageHintCodec.decode(it) }
+                .filterNot { it.packageName == packageName }
+            prefs[Keys.PACKAGE_HINTS] = current.map { PackageHintCodec.encode(it) }.toSet()
+        }
+    }
+}
+
+/**
+ * Tiny synchronous cache for the selected language, used only inside
+ * attachBaseContext (where suspending DataStore reads are not viable).
+ * The DataStore Flow above remains the source of truth for the rest of the app.
+ */
+object LanguagePrefs {
+    private const val PREFS = "wayars_lang_cache"
+    private const val KEY = "language"
+
+    fun save(context: Context, code: String) {
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().putString(KEY, code).apply()
+    }
+
+    fun read(context: Context): String? =
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getString(KEY, null)
+}

@@ -87,8 +87,7 @@ fun VerdictCard(evaluation: OrderEvaluation?, emptyLabel: String, modifier: Modi
         }
 
         Text(
-            if (evaluation.timeMinutes > 0) "${fmt(evaluation.distanceKm)} km • ${fmt(evaluation.timeMinutes)} min"
-                else "${fmt(evaluation.distanceKm)} km",
+            "${fmt(evaluation.distanceKm)} km • ${fmt(evaluation.timeMinutes)} min",
             color = WaTextSecondary,
             style = MaterialTheme.typography.bodyMedium
         )
@@ -115,7 +114,7 @@ fun VerdictCard(evaluation: OrderEvaluation?, emptyLabel: String, modifier: Modi
         // Only shown when fuel actually costs something (Car profile) — for
         // scooters/bicycles net profit always equals gross earnings, so this
         // line would be pure noise.
-        if (evaluation.fuelDataEntered && evaluation.fuelCost > 0) {
+        if (evaluation.fuelCost > 0) {
             Text(
                 stringResource(
                     R.string.verdict_net_profit,

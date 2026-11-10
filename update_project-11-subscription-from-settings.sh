@@ -45,6 +45,10 @@
 #     AccessibilityService API, the feature it serves (order scanning + overlay verdict), exactly what is read, what is
 #     NOT done (no taps/typing, no call recording), where data goes (stays on device), and how to turn it off.
 #     Rewritten in all 17 languages; the dialog text is scrollable so the buttons are always reachable.
+# 17) FIRST-LAUNCH DISCLOSURE: the same AccessibilityService disclosure/consent dialog is now shown ONCE right after the
+#     first start (before the tour), so a Google Play reviewer sees it without having to find it. "I agree" opens the
+#     system Accessibility settings, "Not now" just closes it; either way it is not shown again. Skipped when the
+#     service is already enabled. Settings / Active flows are unchanged.
 # 15) Verdict fix: when the source app shows no trip time (Uber Eats / Stuart: only "2.8 km"), minutes arrive
 #     as 0, so EUR/min was 0 and EVERY such order was marked BAD even at 8 zl/km. Now, whenever the trip
 #     time is unknown, the verdict is judged on net money per km only (any distance).
@@ -1825,5 +1829,104 @@ def consent_scroll(s):
                "        text = { Text(stringResource(R.string.accessibility_consent_body), modifier = Modifier.verticalScroll(rememberScrollState())) },",
                "accessibility_consent_body), modifier = Modifier.verticalScroll")
 rw(BASE + "ui/screen/settings/SettingsScreen.kt", consent_scroll)
+
+# ---------------------------------------------------------------- First-launch AccessibilityService disclosure
+def ds_a11y(s):
+    s = sub(s, '        val VEHICLE_PROMPT_COUNT = intPreferencesKey("vehicle_prompt_count")\n',
+            '        val VEHICLE_PROMPT_COUNT = intPreferencesKey("vehicle_prompt_count")\n'
+            '        val A11Y_DISCLOSURE_SHOWN = booleanPreferencesKey("a11y_disclosure_shown")\n', "A11Y_DISCLOSURE_SHOWN = booleanPreferencesKey")
+    s = sub(s, "    /** How many times the \"set up your vehicle\" prompt has been shown (it is shown at most twice). */\n",
+            "    /** True once the first-launch AccessibilityService disclosure was answered (agree or not now). */\n"
+            "    val a11yDisclosureShown: Flow<Boolean> = context.dataStore.data.map { it[Keys.A11Y_DISCLOSURE_SHOWN] ?: false }\n\n"
+            "    suspend fun markA11yDisclosureShown() {\n"
+            "        context.dataStore.edit { it[Keys.A11Y_DISCLOSURE_SHOWN] = true }\n"
+            "    }\n\n"
+            "    /** How many times the \"set up your vehicle\" prompt has been shown (it is shown at most twice). */\n",
+            "val a11yDisclosureShown: Flow<Boolean>")
+    return s
+rw("app/src/main/java/com/wayars/app/data/prefs/SettingsDataStore.kt", ds_a11y)
+
+def repo_a11y_iface(s):
+    s = sub(s, "    val statsPeriod: Flow<StatsPeriod>\n", "    val statsPeriod: Flow<StatsPeriod>\n    val a11yDisclosureShown: Flow<Boolean>\n", "val a11yDisclosureShown: Flow<Boolean>")
+    s = sub(s, "    suspend fun setStatsPeriod(period: StatsPeriod)\n", "    suspend fun setStatsPeriod(period: StatsPeriod)\n    suspend fun markA11yDisclosureShown()\n", "suspend fun markA11yDisclosureShown()")
+    return s
+rw("app/src/main/java/com/wayars/app/domain/repository/SettingsRepository.kt", repo_a11y_iface)
+
+def repo_a11y_impl(s):
+    s = sub(s, "    override val statsPeriod: Flow<StatsPeriod> = store.statsPeriod\n",
+            "    override val statsPeriod: Flow<StatsPeriod> = store.statsPeriod\n    override val a11yDisclosureShown: Flow<Boolean> = store.a11yDisclosureShown\n", "override val a11yDisclosureShown")
+    s = sub(s, "    override suspend fun setStatsPeriod(period: StatsPeriod) = store.setStatsPeriod(period)\n",
+            "    override suspend fun setStatsPeriod(period: StatsPeriod) = store.setStatsPeriod(period)\n    override suspend fun markA11yDisclosureShown() = store.markA11yDisclosureShown()\n", "override suspend fun markA11yDisclosureShown")
+    return s
+rw("app/src/main/java/com/wayars/app/data/repository/SettingsRepositoryImpl.kt", repo_a11y_impl)
+
+def vm_a11y(s):
+    return sub(s, "    fun setStatsPeriod(period: StatsPeriod) = viewModelScope.launch { settings.setStatsPeriod(period) }\n",
+               "    fun setStatsPeriod(period: StatsPeriod) = viewModelScope.launch { settings.setStatsPeriod(period) }\n\n"
+               "    /** null until the stored value is loaded; true = the first-launch disclosure was already answered. */\n"
+               "    val a11yDisclosureShown: StateFlow<Boolean?> =\n"
+               "        settings.a11yDisclosureShown.stateIn(viewModelScope, SharingStarted.Eagerly, null)\n\n"
+               "    fun markA11yDisclosureShown() = viewModelScope.launch { settings.markA11yDisclosureShown() }\n",
+               "val a11yDisclosureShown: StateFlow<Boolean?>")
+rw(BASE + "MainViewModel.kt", vm_a11y)
+
+def nav_a11y(s):
+    s = sub(s, "    val vehiclePromptCount by viewModel.vehiclePromptCount.collectAsState()\n",
+            "    val vehiclePromptCount by viewModel.vehiclePromptCount.collectAsState()\n"
+            "    val a11yDisclosureShown by viewModel.a11yDisclosureShown.collectAsState()\n", "val a11yDisclosureShown by viewModel")
+    s = sub(s, "                    onVehiclePromptShown = { viewModel.noteVehiclePromptShown() },\n",
+            "                    onVehiclePromptShown = { viewModel.noteVehiclePromptShown() },\n"
+            "                    a11yDisclosureShown = a11yDisclosureShown,\n"
+            "                    onA11yDisclosureShown = { viewModel.markA11yDisclosureShown() },\n", "onA11yDisclosureShown = { viewModel.markA11yDisclosureShown() }")
+    return s
+rw(BASE + "ui/navigation/WayArsNavHost.kt", nav_a11y)
+
+def main_a11y(s):
+    for imp in ("import androidx.compose.ui.platform.LocalContext",
+                "import com.wayars.app.util.AccessibilityUtils",
+                "import com.wayars.app.presentation.ui.screen.settings.AccessibilityConsentDialog"):
+        s = add_import(s, imp)
+    s = sub(s, "    onVehiclePromptShown: () -> Unit,\n",
+            "    onVehiclePromptShown: () -> Unit,\n    a11yDisclosureShown: Boolean?,\n    onA11yDisclosureShown: () -> Unit,\n", "a11yDisclosureShown: Boolean?,")
+    anchor = "    // Starts once, on the Home screen, for a subscribed user who has not seen it yet.\n"
+    if s.count(anchor) != 1:
+        raise SystemExit("tour anchor found %d times" % s.count(anchor))
+    if "showA11yDisclosure" not in s:
+        s = s.replace(anchor,
+            "    // First-launch prominent disclosure for the AccessibilityService API (Google Play User Data policy):\n"
+            "    // shown once, before the tour, unless the service is already enabled. Either answer counts as answered.\n"
+            "    val a11yContext = LocalContext.current\n"
+            "    var showA11yDisclosure by remember { mutableStateOf(false) }\n"
+            "    LaunchedEffect(a11yDisclosureShown) {\n"
+            "        if (a11yDisclosureShown == false) {\n"
+            "            if (AccessibilityUtils.isServiceEnabled(a11yContext)) onA11yDisclosureShown() else showA11yDisclosure = true\n"
+            "        }\n"
+            "    }\n"
+            "    if (showA11yDisclosure) {\n"
+            "        AccessibilityConsentDialog(\n"
+            "            onAllow = {\n"
+            "                showA11yDisclosure = false\n"
+            "                onA11yDisclosureShown()\n"
+            "                onOpenAccessibilitySettings()\n"
+            "            },\n"
+            "            onDecline = {\n"
+            "                showA11yDisclosure = false\n"
+            "                onA11yDisclosureShown()\n"
+            "            }\n"
+            "        )\n"
+            "    }\n\n" + anchor, 1)
+    old_tour = "    LaunchedEffect(tourDone, isSubscribed) {\n        if (tourDone == false && !tour.running) {"
+    new_tour = ("    LaunchedEffect(tourDone, isSubscribed, a11yDisclosureShown, showA11yDisclosure) {\n"
+                "        if (tourDone == false && a11yDisclosureShown == true && !showA11yDisclosure && !tour.running) {")
+    if new_tour in s:
+        return s
+    if s.count(old_tour) != 1:
+        raise SystemExit("tour effect found %d times" % s.count(old_tour))
+    return s.replace(old_tour, new_tour, 1)
+rw(BASE + "ui/navigation/MainScreen.kt", main_a11y)
+
+def dialog_public(s):
+    return sub(s, "private fun AccessibilityConsentDialog(", "fun AccessibilityConsentDialog(", "\nfun AccessibilityConsentDialog(")
+rw(BASE + "ui/screen/settings/SettingsScreen.kt", dialog_public)
 PYEOF
 echo "Done. Review with git diff, then: git add -A && git commit && git push"

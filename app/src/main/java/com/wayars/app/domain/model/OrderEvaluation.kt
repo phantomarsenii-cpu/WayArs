@@ -17,9 +17,7 @@ data class OrderEvaluation(
     val netProfit: Double,
     val ratePerKm: Double,
     val ratePerMinute: Double,
-    val verdict: Verdict,
-    /** True when the driver entered fuel consumption and price, so fuel/net-profit lines may be shown. */
-    val fuelDataEntered: Boolean = false
+    val verdict: Verdict
 ) {
     companion object {
         /**

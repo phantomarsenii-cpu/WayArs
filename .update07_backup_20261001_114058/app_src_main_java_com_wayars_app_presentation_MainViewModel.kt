@@ -1,0 +1,118 @@
+package com.wayars.app.presentation
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.wayars.app.AppContainer
+import com.wayars.app.domain.model.CustomThresholds
+import com.wayars.app.domain.model.Currency
+import com.wayars.app.domain.model.OrderEvaluation
+import com.wayars.app.domain.model.PackageHint
+import com.wayars.app.domain.model.PresetType
+import com.wayars.app.domain.model.VehicleProfile
+import com.wayars.app.domain.repository.OrderRecord
+import com.wayars.app.presentation.widget.OverlayState
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+
+data class TodaySummary(
+    val ordersCount: Int = 0,
+    val totalEarnings: Double = 0.0,
+    val totalDistanceKm: Double = 0.0,
+    val totalTimeMinutes: Double = 0.0,
+    val avgRatePerKm: Double = 0.0,
+    val currency: Currency = Currency.default
+)
+
+class MainViewModel(private val container: AppContainer) : ViewModel() {
+
+    private val settings = container.settingsRepository
+
+    val languageCode: StateFlow<String?> =
+        settings.languageCode.stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
+    val currency: StateFlow<Currency> =
+        settings.currency.stateIn(viewModelScope, SharingStarted.Eagerly, Currency.default)
+
+    val preset: StateFlow<PresetType> =
+        settings.preset.stateIn(viewModelScope, SharingStarted.Eagerly, PresetType.BALANCE)
+
+    val onboardingDone: StateFlow<Boolean> =
+        settings.onboardingDone.stateIn(viewModelScope, SharingStarted.Eagerly, false)
+
+    /** Null until the Terms of Use gate has been accepted; then the epoch-millis moment it was. */
+    val termsAcceptedAt: StateFlow<Long?> =
+        settings.termsAcceptedAt.stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
+    val customThresholds: StateFlow<CustomThresholds?> =
+        settings.customThresholds.stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
+    val vehicleProfile: StateFlow<VehicleProfile> =
+        settings.vehicleProfile.stateIn(viewModelScope, SharingStarted.Eagerly, VehicleProfile.DEFAULT)
+
+    val customPackages: StateFlow<Set<String>> =
+        settings.customPackages.stateIn(viewModelScope, SharingStarted.Eagerly, emptySet())
+
+    val packageHints: StateFlow<Map<String, PackageHint>> =
+        settings.packageHints.stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
+
+    val todayOrders: StateFlow<List<OrderRecord>> =
+        container.orderRepository.observeToday().stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
+    // Was `todayOrders.map { buildSummary(it) }` — with zero orders, that Flow
+    // never re-emits when the user only changes the currency setting (nothing
+    // about "today's orders" changed), so the Dashboard kept showing the old
+    // currency ("zł" stuck even after picking EUR). combine() re-evaluates on
+    // either input changing.
+    val todaySummary: StateFlow<TodaySummary> = combine(todayOrders, currency) { orders, cur ->
+        buildSummary(orders, cur)
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, TodaySummary())
+
+    val latestEvaluation: StateFlow<OrderEvaluation?> = OverlayState.latestEvaluation
+
+    private fun buildSummary(orders: List<OrderRecord>, currentCurrency: Currency): TodaySummary {
+        // Always display the currently selected currency label, even for
+        // historical orders recorded under a different one — this app shows
+        // one working currency at a time, not a multi-currency ledger.
+        if (orders.isEmpty()) return TodaySummary(currency = currentCurrency)
+        val totalEarnings = orders.sumOf { it.evaluation.earnings }
+        val totalDistance = orders.sumOf { it.evaluation.distanceKm }
+        val totalTime = orders.sumOf { it.evaluation.timeMinutes }
+        return TodaySummary(
+            ordersCount = orders.size,
+            totalEarnings = totalEarnings,
+            totalDistanceKm = totalDistance,
+            totalTimeMinutes = totalTime,
+            avgRatePerKm = if (totalDistance > 0) totalEarnings / totalDistance else 0.0,
+            currency = currentCurrency
+        )
+    }
+
+    fun setLanguage(code: String) = viewModelScope.launch { settings.setLanguage(code) }
+    fun setCurrency(currency: Currency) = viewModelScope.launch { settings.setCurrency(currency) }
+    fun setPreset(preset: PresetType) = viewModelScope.launch { settings.setPreset(preset) }
+    fun completeOnboarding() = viewModelScope.launch { settings.setOnboardingDone(true) }
+
+    /**
+     * Called exactly once, the moment the user taps Accept on the Terms
+     * gate screen. setTermsAccepted() itself is idempotent (first write
+     * wins), so this is safe even if the gate screen were ever re-entered.
+     */
+    fun acceptTerms() = viewModelScope.launch { settings.setTermsAccepted(System.currentTimeMillis()) }
+    fun setCustomThresholds(bad: Double, average: Double, good: Double) =
+        viewModelScope.launch { settings.setCustomThresholds(bad, average, good) }
+    fun clearCustomThresholds() = viewModelScope.launch { settings.clearCustomThresholds() }
+    fun setVehicleProfile(profile: VehicleProfile) = viewModelScope.launch { settings.setVehicleProfile(profile) }
+    fun addCustomPackage(packageName: String) = viewModelScope.launch { settings.addCustomPackage(packageName) }
+    fun removeCustomPackage(packageName: String) = viewModelScope.launch { settings.removeCustomPackage(packageName) }
+    fun savePackageHint(hint: PackageHint) = viewModelScope.launch { settings.savePackageHint(hint) }
+    fun clearPackageHint(packageName: String) = viewModelScope.launch { settings.clearPackageHint(packageName) }
+
+    class Factory(private val container: AppContainer) : ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel> create(modelClass: Class<T>): T = MainViewModel(container) as T
+    }
+}

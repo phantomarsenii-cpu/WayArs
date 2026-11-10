@@ -115,9 +115,7 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
         release {
-            // R8 code shrinking + obfuscation (Play Console: DEX optimization / obfuscation >= 25%).
-            // Manifest components (services, activity) keep their names automatically.
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             // Only attach the release signing config when the environment
             // actually provided one (see signingConfigs above) — otherwise
@@ -265,6 +263,4 @@ dependencies {
     // RevenueCat — subscription management (Play Billing wrapper +
     // server-verified entitlements). See com.wayars.app.billing.RevenueCatConfig.
     implementation("com.revenuecat.purchases:purchases:10.21.1")
-    // Update 07: "update available" prompt (Google Play in-app updates API, availability check only)
-    implementation("com.google.android.play:app-update:2.1.0")
 }
