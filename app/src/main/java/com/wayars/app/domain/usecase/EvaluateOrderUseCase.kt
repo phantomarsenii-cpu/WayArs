@@ -40,7 +40,8 @@ class EvaluateOrderUseCase {
         currency: Currency,
         preset: Preset,
         vehicleProfile: VehicleProfile = VehicleProfile.DEFAULT,
-        customThresholds: CustomThresholds? = null
+        customThresholds: CustomThresholds? = null,
+        taxPercent: Double = 0.0
     ): OrderEvaluation {
         require(distanceKm > 0) { "distanceKm must be > 0" }
         // >= 0, not > 0: apps like Stuart don't always expose a parseable
@@ -50,6 +51,11 @@ class EvaluateOrderUseCase {
 
         val fuelCost = vehicleProfile.fuelCostForDistance(distanceKm)
         val netProfit = earnings - fuelCost
+        // Tax is a percentage of the order amount. It only affects the "take-home" figure shown to the
+        // driver; the verdict and the per-km / per-minute rates stay based on fuel-only net profit, so the
+        // driver's own thresholds keep their meaning.
+        val taxAmount = if (taxPercent > 0.0) earnings * taxPercent / 100.0 else 0.0
+        val takeHome = earnings - (if (vehicleProfile.hasFuelCostData()) fuelCost else 0.0) - taxAmount
 
         // No hidden padding here anymore — this used to add a flat, fake
         // "parking/red lights/waiting" constant on top of the order's own
@@ -69,7 +75,13 @@ class EvaluateOrderUseCase {
             }
         } else {
             val absoluteGoodRate = ABSOLUTE_GOOD_RATE_PER_KM_PLN / currency.rateToPln
-            val clearsPresetBar = ratePerKm >= preset.minRatePerKm(currency) && ratePerMinute >= preset.minRatePerMinute(currency)
+            // Some source apps / screens (e.g. Stuart, some Uber screens) show only the distance, so timeMinutes
+            // arrives as 0 and EUR/minute is unknown (0.0). Requiring it would mark EVERY such order BAD however
+            // well it pays per km. When the time is unknown we therefore judge on net EUR/km only (any distance).
+            val minutesUnknown = timeMinutes <= 0.0
+            val judgeByKmOnly = minutesUnknown
+            val perMinuteOk = judgeByKmOnly || ratePerMinute >= preset.minRatePerMinute(currency)
+            val clearsPresetBar = ratePerKm >= preset.minRatePerKm(currency) && perMinuteOk
             // The absolute-rate override used to fire on ratePerKm ALONE.
             // On a short trip (e.g. 0.4 km) €/km can look huge purely because
             // the distance is tiny, even while €/minute is terrible — that
@@ -77,7 +89,7 @@ class EvaluateOrderUseCase {
             // override also requires clearing the preset's own €/minute bar,
             // same as the normal path below, so a big €/km number can no
             // longer paper over a bad €/minute one.
-            if (ratePerKm >= absoluteGoodRate && ratePerMinute >= preset.minRatePerMinute(currency)) {
+            if (ratePerKm >= absoluteGoodRate && perMinuteOk) {
                 Verdict.GOOD
             } else if (clearsPresetBar) {
                 Verdict.GOOD
@@ -95,7 +107,11 @@ class EvaluateOrderUseCase {
             netProfit = netProfit,
             ratePerKm = ratePerKm,
             ratePerMinute = ratePerMinute,
-            verdict = verdict
+            verdict = verdict,
+            fuelDataEntered = vehicleProfile.hasFuelCostData(),
+            taxPercent = taxPercent,
+            taxAmount = taxAmount,
+            takeHome = takeHome
         )
     }
 

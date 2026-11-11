@@ -17,6 +17,7 @@
 
     <string name="dashboard_today_summary">Today\'s Summary</string>
     <string name="dashboard_active_time">Active Time</string>
+    <string name="dashboard_order_time">Order Time</string>
     <string name="dashboard_distance">Distance</string>
     <string name="dashboard_avg_rate">Avg Rate</string>
     <string name="dashboard_order_evaluation">Order Evaluation</string>
@@ -53,9 +54,9 @@
          separate from the Privacy Policy screen per Google Play's Prominent
          Disclosure requirement — this must be its own affirmative-action
          screen, not folded into the privacy policy text. -->
-    <string name="accessibility_consent_title">Screen reading permission</string>
-    <string name="accessibility_consent_body">To detect new orders automatically, WayArs needs to read text shown on screen by the delivery and rideshare apps you use — things like price, distance, and estimated time.\n\nWhat this means:\n• WayArs only reads order details from the supported apps you choose. It never reads passwords, messages, or anything you type.\n• WayArs never taps, fills in, or changes anything on screen — it only reads.\n• Everything is processed on this device. Nothing is sent to a server.\n\nYou can turn this off at any time in Settings.</string>
-    <string name="accessibility_consent_allow">Allow and continue</string>
+    <string name="accessibility_consent_title">Accessibility Service permission</string>
+    <string name="accessibility_consent_body">WayArs uses Android’s AccessibilityService API. It is needed for the app’s core feature: automatically reading order offers on the screen of the delivery and ride apps you use, so WayArs can calculate your net profit and show a verdict (good / average / bad) in a floating overlay while scanning is on.\n\nHow it is used:\n• It reads the text shown by the supported apps (and any apps you add yourself) when an order offer appears: price, distance and estimated time.\n• Passwords, messages and anything you type are never read. Everything shown by other apps is ignored immediately.\n• It never taps, types, scrolls or changes anything on screen, and it is not used to record calls.\n\nWhat happens with the data:\n• It is processed only on this device to calculate profit. Nothing is sent to a server, shared, sold or used for advertising.\n• For orders you accept, only summary figures (price, distance, time, profit) are saved on this device for your statistics.\n\nYou stay in control: the service works only after you turn it on in Android settings, and you can turn it off at any time. If you also enable the optional notification access, WayArs reads only the notifications of supported apps about new orders.</string>
+    <string name="accessibility_consent_allow">I agree and continue</string>
     <string name="accessibility_consent_decline">Not now</string>
 
     <string name="stats_empty">No orders yet</string>
@@ -67,7 +68,11 @@
     <string name="settings_custom_save">Save</string>
     <string name="settings_custom_clear">Use preset instead</string>
     <string name="active_requires_permissions">Enable screen reading and the floating widget in Settings first</string>
-    <string name="active_requires_subscription">Your subscription has ended — subscribe again to turn scanning back on</string>
+    <string name="active_requires_subscription">Your free 30 minutes of scanning are used up — subscribe to keep going</string>
+    <string name="settings_subscription_activate">Activate subscription</string>
+    <string name="settings_subscription_hint">You get 30 free minutes of scanning, once. After that, scanning needs a subscription.</string>
+    <string name="settings_subscription_active">Subscription active</string>
+    <string name="dashboard_trial_left">Free trial: %1$d min of scanning left</string>
     <string name="dashboard_share_log">Send scan log</string>
     <string name="verdict_average">AVERAGE</string>
     <string name="settings_enable_notifications">Enable notification access</string>
@@ -132,7 +137,7 @@
     <string name="settings_visit_website">Visit developer website</string>
     <string name="settings_close">Close</string>
     <string name="settings_about_content">"**WayArs**\nYour personal delivery and rideshare assistant\n\nVersion: %1$s\n\nWayArs is a subscription-based tool built for drivers and couriers working with ride-hailing and delivery apps.\n\nThe app automatically analyzes on-screen data and notifications, helping you quickly judge whether an order is worth taking and track your earnings in real time.\n\n**Design and development:** AP STUDIO\n**Contact and support:** apstudiomobile@gmail.com\n\nAll third-party trademarks, logos, and app names (including but not limited to Bolt, Uber, Wolt, FreeNow, Stuart, and any others added by the user) belong to their respective owners and are used solely for informational and identification purposes."</string>
-    <string name="settings_privacy_content">"**WayArs Privacy Policy**\nLast updated: September 12, 2026\n\n**Protecting your privacy**\nWe respect your privacy. WayArs is designed around the principle of Privacy by Design — the core screen-analysis and rate-calculation operations run locally on your device.\n\n**Data collection and use**\n• Accessibility Service: the app uses this access solely to read order details (e.g. price, distance) displayed on screen by the supported delivery and rideshare apps (both built in and added by you). The app never records passwords, personal data, or keystrokes.\n• Notifications (Notification Listener): notification access is used only to detect new job offers while the app runs in the background.\n• Vehicle and rate data: data you enter in Settings (fuel consumption, fuel price, rating thresholds) is stored only in local device storage.\n\n**Subscriptions and third-party providers (payments)**\nThe app offers features on a subscription basis. The app does not collect or store detailed payment data (such as credit card numbers). To process transactions and verify subscription status, we rely on trusted third-party providers:\n• Google Play Billing (Google LLC): payments and transactions are handled directly by the Google Play Store.\n• RevenueCat, Inc.: subscription status verification based on anonymous device and transaction identifiers.\n\n**Children's privacy**\nWayArs is intended solely for adults who are legally permitted to work as a driver or courier. The app is not directed at children under 16 and does not knowingly collect or process any personal data from children. If you become aware that a child has provided us with any data, please contact us at apstudiomobile@gmail.com so we can take appropriate action promptly.\n\n**Managing permissions and your subscription**\nYou can revoke granted permissions at any time in Android system Settings, or manage and cancel your subscription directly in your Google Play account settings."</string>
+    <string name="settings_privacy_content">"**WayArs Privacy Policy**\nLast updated: October 8, 2026\n\n**Protecting your privacy**\nWe respect your privacy. WayArs is developed and operated by Arsenii Panicev (AP STUDIO), an independent developer. WayArs is designed around Privacy by Design — the core screen-analysis and rate-calculation operations run locally on your device.\n\n**Data collection and use**\n• Accessibility Service: the app uses this access exclusively to read order details (e.g. price, distance) shown on screen by the supported delivery and taxi apps (built in and added by you) in order to calculate order profitability. The app does not record passwords, personal data or keystrokes. Data read through the service is processed locally on your device, is not sent to external servers, and is not shared with third parties or used for advertising. The service never taps, types or changes anything on the screen and is not used to record calls. Events from all other apps are ignored immediately: nothing from them is read or stored. Before the service can be enabled, the app shows a disclosure and asks for your consent, and you can turn it off at any time.\n• Notifications (Notification Listener): notification access is optional and is used only to detect new order offers from the supported apps while the app runs in the background. Other notifications are not read or stored.\n• Order history: for the statistics screen the app saves, on your device only, the amount, currency, distance, time, calculated rates, estimated fuel cost, net profit and verdict of each evaluated order and whether you accepted it. It contains no addresses, names or other personal details and is never sent anywhere.\n• Vehicle and rate data: data you enter in Settings (fuel consumption, fuel price, evaluation thresholds) is stored only in local device storage.\n• Free trial: to provide the one-time free trial of scanning, the app stores on your device a counter of how long scanning has run. It is not sent anywhere.\n• Installed apps list: when you add an app to scan, the app shows the launchable apps installed on your device. The list is not stored or sent anywhere; only the apps you choose are saved locally.\n• Floating overlay: the “display over other apps” permission is used only to show the order verdict card above the delivery or taxi app. No data is collected through it.\n• App updates: the app asks Google Play whether a newer version is available (Google Play in-app updates API).\n\n**Subscriptions and third-party providers**\nThe app offers features on a subscription basis. The app does not collect or store detailed payment data (such as credit card numbers). To process transactions and verify subscription status, we rely on trusted third-party providers:\n• Google Play Billing (Google LLC): payments and transactions are handled directly by the Google Play Store. Policy: policies.google.com/privacy\n• RevenueCat, Inc.: subscription status verification based on anonymous device and transaction identifiers. RevenueCat may also process technical connection data such as an IP address. Policy: revenuecat.com/privacy\n\n**Children’s privacy**\nWayArs is intended solely for adults who are legally permitted to work as a driver or courier. The app is not directed at children under 16 and does not knowingly collect or process any personal data from children. If you become aware that a child has provided us with any data, please contact us at apstudiomobile@gmail.com so we can take appropriate action promptly.\n\n**Managing permissions and your subscription**\nYou can revoke granted permissions at any time in Android system settings, or manage and cancel your subscription directly in your Google Play account settings.\n\n**Data deletion and retention**\nWayArs has no user accounts, and we do not operate our own servers that store your personal data. Data entered in the app is stored locally on your device and can be deleted at any time by clearing the app data (Android Settings → Apps → WayArs → Storage → Clear data) or by uninstalling the app. The app does not use Android automatic cloud backup, so your local data is not copied to your Google account. To request deletion of technical subscription identifiers processed by RevenueCat, contact us at apstudiomobile@gmail.com.\n\n**Contact**\nDeveloper: AP STUDIO (Arsenii Panicev)\napstudiomobile@gmail.com"</string>
     <string name="settings_terms_content">"**WayArs Terms of Use**\nLast updated: September 12, 2026\n\n**General provisions**\nBy using the WayArs app, you accept the terms below. The app is an independent helper tool built by AP STUDIO and is not officially affiliated with, sponsored by, or endorsed by any third-party app providers (such as Bolt, Uber, Wolt, FreeNow, Stuart, or any others added to the list by the user).\n\n**Auxiliary nature and third-party apps**\n• The app is for informational and analytical purposes only. Profitability indicators (currency/km, estimated profit) are calculated from data entered by the user and readings taken from the screen.\n• Users may add supported third-party apps themselves. AP STUDIO does not guarantee correct data reading for apps added manually by the user.\n\n**User age**\nOnly people who are at least 18 years old (or have reached the age required to provide rideshare/courier services in their country) may use the app. The app is not intended for children.\n\n**Subscriptions and payments**\n• Subscription payments are collected by the Google Play Store according to the selected plan.\n• Users may cancel subscription renewal at any time in their Google Play account settings.\n• Refunds are handled according to Google Play Store policies and rules.\n\n**Disclaimer**\n• AP STUDIO is not responsible for discrepancies in calculations resulting from incorrect screen reading, or updates or changes to third-party apps' interfaces.\n• AP STUDIO is not responsible for financial, business, or driving decisions made by the user based on the app's indicators.\n• Users are required to use their phone safely and strictly follow traffic laws while driving.\n• AP STUDIO is not responsible for any blocks, temporary or permanent suspensions of the user\u2019s accounts on third-party services (Uber, Bolt, Wolt, etc.).\n• The user uses the app entirely at their own risk and independently decides whether to use it.\n• The app is an independent helper tool and has no official connection to any rideshare or delivery platform.\n\n**Contact**\nAny questions, comments, or bug reports should be sent to: apstudiomobile@gmail.com."</string>
 
     <!-- Paywall -->
@@ -182,4 +187,57 @@
     <string name="paywall_per_month_hint">Just %1$s / month</string>
     <string name="paywall_data_safe">Your data is safe</string>
     <string name="paywall_no_charge_notice">No charge for the first 7 days. Cancel anytime in Google Play.</string>
+
+    <!-- ===== Update 07: first-run tour + update prompt ===== -->
+    <string name="tour_counter" translatable="false">%1$d / %2$d</string>
+    <string name="tour_skip">Skip</string>
+    <string name="tour_back">Back</string>
+    <string name="tour_next">Next</string>
+    <string name="tour_done">Got it</string>
+    <string name="tour_welcome_title">Welcome to WayArs</string>
+    <string name="tour_welcome_text">A quick tour shows how WayArs rates your orders in real time. It takes about a minute, and you can replay it any time in Settings.</string>
+    <string name="tour_active_title">Active switch</string>
+    <string name="tour_active_text">Turn it on when you start working. WayArs then reads incoming orders in your delivery and taxi apps and rates each one for you.</string>
+    <string name="tour_summary_title">Today’s summary</string>
+    <string name="tour_summary_text">Orders, earnings, active time, distance and average rate per km for today. It updates after every order.</string>
+    <string name="tour_verdict_title">Order evaluation</string>
+    <string name="tour_verdict_text">Every order gets a verdict: good, average or bad. The same verdict also appears in a small floating widget over your delivery app.</string>
+    <string name="tour_stats_title">Stats</string>
+    <string name="tour_stats_text">The list of today’s rated orders with pay, distance, time and verdict.</string>
+    <string name="tour_presets_title">Presets</string>
+    <string name="tour_presets_text">Choose how strict the rating is: Economy, Balance or Profitable only.</string>
+    <string name="tour_thresholds_title">Your own thresholds</string>
+    <string name="tour_thresholds_text">Optional. Set your own rate-per-km limits for bad, average and good orders instead of using a preset.</string>
+    <string name="tour_vehicle_title">Vehicle and fuel</string>
+    <string name="tour_vehicle_text">Enter your vehicle, fuel type, consumption and fuel price, so the net profit of each order is calculated after fuel costs.</string>
+    <string name="tour_permissions_title">Permissions</string>
+    <string name="tour_permissions_text">Enable screen reading (read-only, no automatic taps) and the floating widget before turning Active on. Notification access is optional.</string>
+    <string name="tour_apps_title">Supported apps</string>
+    <string name="tour_apps_text">Popular delivery and taxi apps are built in. If yours is missing, add it here by hand.</string>
+    <string name="tour_final_title">You’re all set!</string>
+    <string name="tour_final_text">Enable the permissions in Settings, then switch Active on the Home screen. You can replay this tutorial any time in Settings.</string>
+    <string name="settings_tutorial_title">Tutorial</string>
+    <string name="update_available_title">Update available</string>
+    <string name="update_available_text">A new version of WayArs is available with improvements and fixes.</string>
+    <string name="update_now">Update</string>
+    <string name="update_later">Later</string>
+    <string name="vehicle_prompt_title">Set up your vehicle</string>
+    <string name="vehicle_prompt_body">Your vehicle type and fuel use change how profitable an order really is. Set them once for accurate calculations.</string>
+    <string name="vehicle_prompt_configure">Set up</string>
+    <string name="vehicle_prompt_skip">Skip</string>
+    <string name="stats_period_today">Today</string>
+    <string name="stats_period_week">7 days</string>
+    <string name="stats_period_month">Month</string>
+    <string name="stats_period_year">Year</string>
+    <string name="stats_earned">Earned</string>
+    <string name="settings_tax_title">Tax</string>
+    <string name="settings_tax_summary_none">Not set</string>
+    <string name="settings_tax_summary">%1$s%% of the order amount</string>
+    <string name="settings_tax_desc">Enter the percent of each order that you pay as tax. After saving, new orders show the net amount after fuel and tax.</string>
+    <string name="settings_tax_label">Tax rate, %</string>
+    <string name="overlay_net_caption">Net</string>
+    <string name="overlay_gross">Order amount %1$s</string>
+    <string name="overlay_deduction_fuel">fuel −%1$s</string>
+    <string name="overlay_deduction_tax">tax −%1$s</string>
+    <string name="verdict_take_home">Net %1$s (%2$s)</string>
 </resources>

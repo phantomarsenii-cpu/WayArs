@@ -1,5 +1,11 @@
 package com.wayars.app.presentation.ui.screen.dashboard
 
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.Button
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.LaunchedEffect
+import com.wayars.app.service.accessibility.FreeTrial
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -24,6 +30,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,6 +54,8 @@ import android.provider.Settings
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.wayars.app.R
+import com.wayars.app.presentation.ui.tour.TourTarget
+import com.wayars.app.presentation.ui.tour.tourTarget
 import com.wayars.app.domain.model.OrderEvaluation
 import com.wayars.app.presentation.TodaySummary
 import com.wayars.app.presentation.ui.component.VerdictCard
@@ -52,10 +64,12 @@ import com.wayars.app.presentation.ui.theme.WaSurface
 import com.wayars.app.presentation.ui.theme.WaSurfaceVariant
 import com.wayars.app.presentation.ui.theme.WaTextSecondary
 import com.wayars.app.service.accessibility.ScanLogFile
+import com.wayars.app.service.accessibility.ActiveSessionTracker
 import com.wayars.app.service.accessibility.ScanningState
 import com.wayars.app.service.overlay.OverlayService
 import com.wayars.app.util.AccessibilityUtils
 import com.wayars.app.util.CurrencyFormatter
+import kotlinx.coroutines.delay
 
 @Composable
 fun DashboardScreen(
@@ -63,11 +77,43 @@ fun DashboardScreen(
     latestEvaluation: OrderEvaluation?,
     isSubscribed: Boolean,
     onSubscriptionRequired: () -> Unit,
+    onPermissionsRequired: () -> Unit = {},
+    vehicleConfigured: Boolean = true,
+    vehiclePromptCount: Int = 2,
+    promptsEnabled: Boolean = true,
+    onVehiclePromptShown: () -> Unit = {},
+    onVehicleSetupRequested: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
     val isActive by ScanningState.isActive.collectAsState()
+    // Time the scanner has been switched ON today (not order-based).
+    // Holds WHOLE MINUTES, so the card only recomposes when the shown value
+    // really changes; while scanning runs it sleeps exactly until the next
+    // minute boundary, so the tile ticks up the moment the minute flips.
+    val scanningNow = isActive
+    val lifecycleOwner = LocalLifecycleOwner.current
+    // Whole minutes. Only runs while the screen is visible (STARTED); when scanning
+    // is OFF it reads the value once and stops, when scanning is ON it sleeps
+    // exactly until the next minute boundary. Nothing runs in the background.
+    val activeTodayMinutes by produceState(initialValue = ActiveSessionTracker.todayMillis() / 60_000L, scanningNow) {
+        lifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            while (true) {
+                val ms = ActiveSessionTracker.todayMillis()
+                value = ms / 60_000L
+                if (!scanningNow) break
+                delay(60_000L - (ms % 60_000L) + 50L)
+            }
+        }
+    }
     val requiresSubscriptionToast = stringResource(R.string.active_requires_subscription)
+    // Minutes of the one-time free trial left (only shown to a user without a subscription).
+    val trialLeftMinutes by produceState(initialValue = FreeTrial.minutesLeft(), isActive, isSubscribed) {
+        while (true) {
+            value = FreeTrial.minutesLeft()
+            delay(15_000L)
+        }
+    }
     // Only a FINISHED session's file ever lands here (see ScanLogFile), so
     // this is never offered while a scan is still being written to.
     val lastLogFile by ScanLogFile.lastCompletedLogFile.collectAsState()
@@ -78,9 +124,27 @@ fun DashboardScreen(
     // though the service itself is running fine, which looked like "Active
     // sometimes needs to be toggled twice" but was really just a missing
     // permission prompt that never happened.
+    // "Set up your vehicle" prompt state. The prompt must never overlap the Android notification-permission
+    // dialog, so while that request is open the prompt is only marked pending and shown once it is answered.
+    var showVehiclePrompt by remember { mutableStateOf(false) }
+    var vehiclePromptPending by remember { mutableStateOf(false) }
+    var notificationRequestInFlight by remember { mutableStateOf(false) }
+
     val notificationPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission()
-    ) { /* proceed regardless of the result — see activateScanning below */ }
+    ) {
+        // Proceed regardless of the result (see activateScanning below).
+        notificationRequestInFlight = false
+        if (vehiclePromptPending) {
+            vehiclePromptPending = false
+            if (promptsEnabled) showVehiclePrompt = true
+        }
+    }
+
+    fun startScanning() {
+        ScanningState.setActive(true, context)
+        context.startForegroundService(Intent(context, OverlayService::class.java))
+    }
 
     fun activateScanning() {
         // Gate #1, right here at the source of truth for "Active": this is
@@ -95,7 +159,7 @@ fun DashboardScreen(
         // back on with nothing to stop them. isSubscribed is derived the
         // same way (from SubscriptionViewModel.gateState, server-verified
         // via RevenueCat) so this can't be spoofed by anything on-device.
-        if (!isSubscribed) {
+        if (!isSubscribed && !FreeTrial.hasTimeLeft()) {
             Toast.makeText(context, requiresSubscriptionToast, Toast.LENGTH_LONG).show()
             onSubscriptionRequired()
             return
@@ -103,15 +167,54 @@ fun DashboardScreen(
         val overlayOk = Settings.canDrawOverlays(context)
         val accessibilityOk = AccessibilityUtils.isServiceEnabled(context)
         if (overlayOk && accessibilityOk) {
-            ScanningState.setActive(true, context)
-            context.startForegroundService(Intent(context, OverlayService::class.java))
+            // Vehicle type and fuel use drive every calculation: if the user never saved a vehicle profile,
+            // offer to set it up first (at most twice in total). Not during the first-run tour.
+            if (promptsEnabled && !vehicleConfigured && vehiclePromptCount < 2) {
+                if (notificationRequestInFlight) vehiclePromptPending = true else showVehiclePrompt = true
+                return
+            }
+            startScanning()
         } else {
             Toast.makeText(
                 context,
                 context.getString(R.string.active_requires_permissions),
                 Toast.LENGTH_LONG
             ).show()
+            // Take the user straight to the permissions (and the screen-reading consent dialog).
+            onPermissionsRequired()
         }
+    }
+
+    // Never show the prompt on top of the first-run tour.
+    LaunchedEffect(promptsEnabled) {
+        if (!promptsEnabled) {
+            showVehiclePrompt = false
+            vehiclePromptPending = false
+        }
+    }
+    if (showVehiclePrompt) {
+        LaunchedEffect(Unit) { onVehiclePromptShown() }
+        androidx.compose.material3.AlertDialog(
+            // Back / tap outside = Skip: the user asked for scanning, so it still starts.
+            onDismissRequest = {
+                showVehiclePrompt = false
+                startScanning()
+            },
+            title = { Text(stringResource(R.string.vehicle_prompt_title)) },
+            text = { Text(stringResource(R.string.vehicle_prompt_body)) },
+            confirmButton = {
+                Button(onClick = {
+                    showVehiclePrompt = false
+                    onVehicleSetupRequested()
+                }) { Text(stringResource(R.string.vehicle_prompt_configure)) }
+            },
+            dismissButton = {
+                TextButton(onClick = {
+                    showVehiclePrompt = false
+                    startScanning()
+                }) { Text(stringResource(R.string.vehicle_prompt_skip)) }
+            }
+        )
     }
 
     Column(
@@ -146,7 +249,10 @@ fun DashboardScreen(
                     modifier = Modifier.padding(start = 8.dp)
                 )
             }
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                modifier = Modifier.tourTarget(TourTarget.ACTIVE_SWITCH),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Text(
                     "Active",
                     color = WaTextSecondary,
@@ -166,11 +272,12 @@ fun DashboardScreen(
                             // re-checks isSubscribed itself either way (it's
                             // the real gate); this just skips the pointless
                             // permission prompt when we already know it'll refuse.
-                            val needsNotificationPermission = isSubscribed &&
+                            val needsNotificationPermission = (isSubscribed || FreeTrial.hasTimeLeft()) &&
                                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
                                 ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) !=
                                 PackageManager.PERMISSION_GRANTED
                             if (needsNotificationPermission) {
+                                notificationRequestInFlight = true
                                 notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                             }
                             activateScanning()
@@ -186,6 +293,14 @@ fun DashboardScreen(
                     )
                 )
             }
+        }
+
+        if (!isSubscribed && trialLeftMinutes > 0) {
+            Text(
+                stringResource(R.string.dashboard_trial_left, trialLeftMinutes),
+                color = WaNeonGreen,
+                fontSize = 13.sp
+            )
         }
 
         // "Share log" row hidden from the dashboard UI per product decision —
@@ -224,6 +339,7 @@ fun DashboardScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .tourTarget(TourTarget.SUMMARY_CARD)
                 .clip(RoundedCornerShape(20.dp))
                 .background(WaSurface)
                 .padding(18.dp),
@@ -259,10 +375,18 @@ fun DashboardScreen(
 
             Row(modifier = Modifier.fillMaxWidth()) {
                 SummaryStat(
-                    value = fmtDuration(summary.totalTimeMinutes),
+                    value = fmtDuration(activeTodayMinutes.toDouble()),
                     label = stringResource(R.string.dashboard_active_time),
                     modifier = Modifier.weight(1f)
                 )
+                SummaryStat(
+                    value = fmtDuration(summary.totalTimeMinutes),
+                    label = stringResource(R.string.dashboard_order_time),
+                    modifier = Modifier.weight(1f)
+                )
+            }
+            androidx.compose.foundation.layout.Spacer(Modifier.height(12.dp))
+            Row(modifier = Modifier.fillMaxWidth()) {
                 SummaryStat(
                     value = "${fmt(summary.totalDistanceKm)} km",
                     label = stringResource(R.string.dashboard_distance),
@@ -283,7 +407,8 @@ fun DashboardScreen(
         )
         VerdictCard(
             evaluation = latestEvaluation,
-            emptyLabel = stringResource(R.string.dashboard_no_order)
+            emptyLabel = stringResource(R.string.dashboard_no_order),
+            modifier = Modifier.tourTarget(TourTarget.VERDICT_CARD)
         )
 
         // Bottom inset so content scrolls fully BEHIND the floating nav pill

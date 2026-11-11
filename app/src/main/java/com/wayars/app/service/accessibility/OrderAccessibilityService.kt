@@ -73,6 +73,7 @@ class OrderAccessibilityService : AccessibilityService() {
     private var currentPreset: Preset = Preset.BALANCE
     private var currentCustomThresholds: CustomThresholds? = null
     private var currentVehicleProfile: VehicleProfile = VehicleProfile.DEFAULT
+    private var currentTaxPercent: Double = 0.0
     // Per-package, not global — see the debounce comment in
     // onAccessibilityEvent for why a single shared timer let noise from
     // unrelated apps starve out real order-popup events (Uber especially).
@@ -125,6 +126,9 @@ class OrderAccessibilityService : AccessibilityService() {
         }
         scope.launch {
             container.settingsRepository.vehicleProfile.collect { currentVehicleProfile = it }
+        }
+        scope.launch {
+            container.settingsRepository.taxPercent.collect { currentTaxPercent = it }
         }
         scope.launch {
             container.settingsRepository.customPackages.collect { CustomPackagesState.update(it) }
@@ -432,7 +436,8 @@ class OrderAccessibilityService : AccessibilityService() {
             currency = currency,
             preset = currentPreset,
             vehicleProfile = currentVehicleProfile,
-            customThresholds = currentCustomThresholds
+            customThresholds = currentCustomThresholds,
+            taxPercent = currentTaxPercent
         )
 
         Log.d(TAG, "Parsed order: $evaluation")

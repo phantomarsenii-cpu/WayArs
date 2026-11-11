@@ -1,5 +1,7 @@
 package com.wayars.app.presentation.ui.screen.paywall
 
+import androidx.compose.material3.IconButton
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateDpAsState
@@ -43,6 +45,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -52,6 +55,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import kotlinx.coroutines.delay
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
@@ -122,9 +129,26 @@ fun PaywallScreen(
     onRestore: () -> Unit,
     onDismissError: () -> Unit,
     gateErrorMessage: String? = null,
-    onRetryGateCheck: () -> Unit = {}
+    onRetryGateCheck: () -> Unit = {},
+    onClose: (() -> Unit)? = null
 ) {
-    LaunchedEffect(Unit) { onLoadOfferings() }
+    // RevenueCat hands back its cached offerings first and refreshes them in
+    // the background, so a single request can show stale prices (e.g. right
+    // after a price change in Play Console). Ask again a few seconds later
+    // and every time the user returns to the paywall.
+    LaunchedEffect(Unit) {
+        onLoadOfferings()
+        delay(4_000L)
+        onLoadOfferings()
+    }
+    val lifecycleOwner = LocalLifecycleOwner.current
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) onLoadOfferings()
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
+    }
 
     var selectedPlan by rememberSaveable { mutableStateOf(PlanType.YEARLY) }
 
@@ -153,6 +177,13 @@ fun PaywallScreen(
                 .padding(horizontal = 18.dp)
                 .padding(top = 12.dp, bottom = 24.dp)
         ) {
+            onClose?.let { close ->
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                    IconButton(onClick = close) {
+                        Icon(Icons.Filled.Close, contentDescription = null, tint = Color.White)
+                    }
+                }
+            }
             gateErrorMessage?.let { message ->
                 ProGateErrorBanner(message = message, onRetry = onRetryGateCheck)
                 Spacer(Modifier.height(16.dp))

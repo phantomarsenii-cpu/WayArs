@@ -87,7 +87,8 @@ fun VerdictCard(evaluation: OrderEvaluation?, emptyLabel: String, modifier: Modi
         }
 
         Text(
-            "${fmt(evaluation.distanceKm)} km • ${fmt(evaluation.timeMinutes)} min",
+            if (evaluation.timeMinutes > 0) "${fmt(evaluation.distanceKm)} km • ${fmt(evaluation.timeMinutes)} min"
+                else "${fmt(evaluation.distanceKm)} km",
             color = WaTextSecondary,
             style = MaterialTheme.typography.bodyMedium
         )
@@ -100,7 +101,7 @@ fun VerdictCard(evaluation: OrderEvaluation?, emptyLabel: String, modifier: Modi
             // Same "under 1 km -> show net profit, not €/km" rule as the
             // overlay card — see OrderEvaluation.SHORT_TRIP_THRESHOLD_KM.
             val badgeText = if (evaluation.distanceKm < com.wayars.app.domain.model.OrderEvaluation.SHORT_TRIP_THRESHOLD_KM) {
-                stringResource(R.string.verdict_short_trip_net, CurrencyFormatter.format(evaluation.netProfit, evaluation.currency))
+                stringResource(R.string.verdict_short_trip_net, CurrencyFormatter.format(evaluation.takeHome, evaluation.currency))
             } else {
                 CurrencyFormatter.formatRatePerKm(evaluation.ratePerKm, evaluation.currency)
             }
@@ -114,12 +115,13 @@ fun VerdictCard(evaluation: OrderEvaluation?, emptyLabel: String, modifier: Modi
         // Only shown when fuel actually costs something (Car profile) — for
         // scooters/bicycles net profit always equals gross earnings, so this
         // line would be pure noise.
-        if (evaluation.fuelCost > 0) {
+        val deductions = deductionsLine(evaluation)
+        if (deductions != null) {
             Text(
                 stringResource(
-                    R.string.verdict_net_profit,
-                    CurrencyFormatter.format(evaluation.netProfit, evaluation.currency),
-                    CurrencyFormatter.format(evaluation.fuelCost, evaluation.currency)
+                    R.string.verdict_take_home,
+                    CurrencyFormatter.format(evaluation.takeHome, evaluation.currency),
+                    deductions
                 ),
                 color = WaTextSecondary,
                 style = MaterialTheme.typography.labelSmall

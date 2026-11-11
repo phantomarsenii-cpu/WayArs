@@ -1,5 +1,17 @@
 package com.wayars.app.presentation.widget
 
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.foundation.border
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -43,6 +55,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.wayars.app.R
 import com.wayars.app.domain.model.OrderEvaluation
+import com.wayars.app.presentation.ui.component.deductionsLine
 import com.wayars.app.presentation.ui.component.verdictColor
 import com.wayars.app.presentation.ui.component.verdictLabel
 import com.wayars.app.presentation.ui.theme.WaNeonGreen
@@ -110,6 +123,30 @@ fun AnimatedOverlayCard(
  * to intercept every touch, including button taps, before Compose's click
  * detector ever got a clean look at it).
  */
+/** Transparent margin around the card that hosts the glow (the overlay window wraps its content). */
+private val OVERLAY_GLOW_PADDING = 12.dp
+
+/**
+ * Soft neon glow around the card contour: a stack of growing, translucent rounded rectangles drawn
+ * BEHIND the card (the card background then covers the inside). Works on every API level, unlike
+ * blur/shadow layers. [strength] 0..1 fades it in and out.
+ */
+private fun Modifier.verdictGlow(color: Color, cornerRadius: Dp, glow: Dp, strength: Float, spread: Float): Modifier =
+    if (strength <= 0.01f) this else drawBehind {
+        val radius = cornerRadius.toPx()
+        val reach = glow.toPx() * spread
+        val layers = 8
+        for (i in layers downTo 1) {
+            val expand = reach * i / layers
+            drawRoundRect(
+                color = color.copy(alpha = 0.085f * strength),
+                topLeft = Offset(-expand, -expand),
+                size = Size(size.width + 2 * expand, size.height + 2 * expand),
+                cornerRadius = CornerRadius(radius + expand)
+            )
+        }
+    }
+
 @Composable
 fun OverlayContent(
     evaluation: OrderEvaluation?,
@@ -117,13 +154,41 @@ fun OverlayContent(
     onReject: () -> Unit,
     onSettings: () -> Unit,
     onClose: () -> Unit,
-    onDragBy: (dx: Float, dy: Float) -> Unit
+    onDragBy: (dx: Float, dy: Float) -> Unit,
+    reducedMotion: Boolean = false
 ) {
+    // The card outline glows in the verdict colour: green = good, amber = average, red = bad.
+    val verdictTint = evaluation?.let { verdictColor(it.verdict) }
+    val glowColor by animateColorAsState(
+        targetValue = verdictTint ?: WaSurfaceVariant,
+        animationSpec = tween(durationMillis = 250),
+        label = "overlay_glow_color"
+    )
+    val glowStrength by animateFloatAsState(
+        targetValue = if (verdictTint != null) 1f else 0f,
+        animationSpec = tween(durationMillis = 250),
+        label = "overlay_glow_strength"
+    )
+    // Slow "breathing" of the glow (brightness and reach). Steady when system animations are off.
+    val pulseTransition = rememberInfiniteTransition(label = "overlay_glow_pulse")
+    val pulseAnimated by pulseTransition.animateFloat(
+        initialValue = 0.35f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 1300, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "overlay_glow_pulse_value"
+    )
+    val pulse = if (reducedMotion) 1f else pulseAnimated
     Column(
         modifier = Modifier
+            .padding(OVERLAY_GLOW_PADDING)
             .width(212.dp)
+            .verdictGlow(glowColor, 16.dp, OVERLAY_GLOW_PADDING, glowStrength * pulse, 0.7f + 0.3f * pulse)
             .clip(RoundedCornerShape(16.dp))
             .background(WaSurface)
+            .border(1.5.dp, glowColor.copy(alpha = (0.35f + 0.65f * glowStrength) * (0.7f + 0.3f * pulse)), RoundedCornerShape(16.dp))
             .padding(12.dp)
     ) {
         Row(
@@ -186,14 +251,27 @@ fun OverlayContent(
             }
 
             Spacer(Modifier.height(5.dp))
+            // The big number is what the driver really keeps (after fuel and tax); the order amount
+            // as shown by the source app (gross) is repeated smaller underneath.
             Text(
-                CurrencyFormatter.format(evaluation.earnings, evaluation.currency),
-                fontSize = 21.sp,
+                stringResource(R.string.overlay_net_caption),
+                fontSize = 10.sp,
+                color = WaTextSecondary
+            )
+            Text(
+                CurrencyFormatter.format(evaluation.takeHome, evaluation.currency),
+                fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onSurface
             )
             Text(
-                "${fmt(evaluation.distanceKm)} km • ${fmt(evaluation.timeMinutes)} min",
+                stringResource(R.string.overlay_gross, CurrencyFormatter.format(evaluation.earnings, evaluation.currency)),
+                fontSize = 12.sp,
+                color = WaTextSecondary
+            )
+            Text(
+                if (evaluation.timeMinutes > 0) "${fmt(evaluation.distanceKm)} km • ${fmt(evaluation.timeMinutes)} min"
+                else "${fmt(evaluation.distanceKm)} km",
                 fontSize = 12.sp,
                 color = WaTextSecondary
             )
@@ -209,7 +287,7 @@ fun OverlayContent(
                 // as nonsense (it can exceed the order's own total) — show
                 // net profit instead so short orders don't look broken.
                 val badgeText = if (evaluation.distanceKm < OrderEvaluation.SHORT_TRIP_THRESHOLD_KM) {
-                    stringResource(R.string.verdict_short_trip_net, CurrencyFormatter.format(evaluation.netProfit, evaluation.currency))
+                    stringResource(R.string.verdict_short_trip_net, CurrencyFormatter.format(evaluation.takeHome, evaluation.currency))
                 } else {
                     CurrencyFormatter.formatRatePerKm(evaluation.ratePerKm, evaluation.currency)
                 }
@@ -217,6 +295,17 @@ fun OverlayContent(
                     badgeText,
                     fontSize = 10.sp,
                     color = WaNeonGreen
+                )
+            }
+
+            // What was subtracted from the order amount: fuel (only if the driver entered fuel data) and tax.
+            val deductions = deductionsLine(evaluation)
+            if (deductions != null) {
+                Spacer(Modifier.height(5.dp))
+                Text(
+                    deductions,
+                    fontSize = 10.sp,
+                    color = WaTextSecondary
                 )
             }
 

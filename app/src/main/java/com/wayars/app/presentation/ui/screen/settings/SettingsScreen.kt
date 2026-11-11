@@ -1,5 +1,8 @@
 package com.wayars.app.presentation.ui.screen.settings
 
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
@@ -18,6 +21,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
@@ -32,6 +36,7 @@ import androidx.compose.material.icons.filled.DirectionsCar
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Gavel
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.School
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Language
@@ -82,6 +87,8 @@ import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import com.wayars.app.R
+import com.wayars.app.presentation.ui.tour.TourTarget
+import com.wayars.app.presentation.ui.tour.tourTarget
 import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.Currency
 import com.wayars.app.domain.model.FuelType
@@ -113,6 +120,8 @@ fun SettingsScreen(
     onSaveCustomThresholds: (bad: Double, average: Double, good: Double) -> Unit,
     onClearCustomThresholds: () -> Unit,
     onSaveVehicleProfile: (VehicleProfile) -> Unit,
+    taxPercent: Double = 0.0,
+    onSaveTaxPercent: (Double) -> Unit = {},
     customPackages: Set<String>,
     onAddCustomPackage: (String) -> Unit,
     onRemoveCustomPackage: (String) -> Unit,
@@ -120,9 +129,18 @@ fun SettingsScreen(
     onSavePackageHint: (PackageHint) -> Unit,
     onClearPackageHint: (String) -> Unit,
     termsAcceptedAt: Long?,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    listState: LazyListState = rememberLazyListState(),
+    onReplayTour: () -> Unit = {},
+    isSubscribed: Boolean = false,
+    onOpenPaywall: () -> Unit = {},
+    permissionsPrompt: Boolean = false,
+    onPermissionsPromptHandled: () -> Unit = {},
+    vehiclePrompt: Boolean = false,
+    onVehiclePromptHandled: () -> Unit = {}
 ) {
     LazyColumn(
+        state = listState,
         modifier = modifier.fillMaxSize().padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
         // See bottomNavBarClearance's doc: device-accurate clearance for
@@ -131,6 +149,10 @@ fun SettingsScreen(
     ) {
         item {
             Text(stringResource(R.string.settings_title), style = MaterialTheme.typography.headlineMedium, color = MaterialTheme.colorScheme.onBackground)
+        }
+
+        item {
+            SubscriptionSection(isSubscribed = isSubscribed, onOpenPaywall = onOpenPaywall)
         }
 
         item {
@@ -143,43 +165,59 @@ fun SettingsScreen(
         }
 
         item {
-            CustomThresholdsSection(
-                existing = customThresholds,
-                currency = currency,
-                onSave = onSaveCustomThresholds,
-                onClear = onClearCustomThresholds
-            )
+            Box(modifier = Modifier.tourTarget(TourTarget.SETTINGS_THRESHOLDS)) {
+                CustomThresholdsSection(
+                    existing = customThresholds,
+                    currency = currency,
+                    onSave = onSaveCustomThresholds,
+                    onClear = onClearCustomThresholds
+                )
+            }
         }
 
         item {
-            VehicleSection(
-                profile = vehicleProfile,
-                currency = currency,
-                onSave = onSaveVehicleProfile
-            )
+            Box(modifier = Modifier.tourTarget(TourTarget.SETTINGS_VEHICLE)) {
+                VehicleSection(
+                    profile = vehicleProfile,
+                    currency = currency,
+                    onSave = onSaveVehicleProfile,
+                    openRequest = vehiclePrompt,
+                    onRequestHandled = onVehiclePromptHandled
+                )
+            }
         }
 
         item {
-            PermissionsSection(
-                onOpenAccessibilitySettings = onOpenAccessibilitySettings,
-                onOpenOverlaySettings = onOpenOverlaySettings,
-                onOpenNotificationSettings = onOpenNotificationSettings
-            )
+            TaxSection(taxPercent = taxPercent, onSave = onSaveTaxPercent)
         }
 
         item {
-            SupportedAppsSection(
-                customPackages = customPackages,
-                onAddCustomPackage = onAddCustomPackage,
-                onRemoveCustomPackage = onRemoveCustomPackage,
-                packageHints = packageHints,
-                onSavePackageHint = onSavePackageHint,
-                onClearPackageHint = onClearPackageHint
-            )
+            Box(modifier = Modifier.tourTarget(TourTarget.SETTINGS_PERMISSIONS)) {
+                PermissionsSection(
+                    onOpenAccessibilitySettings = onOpenAccessibilitySettings,
+                    onOpenOverlaySettings = onOpenOverlaySettings,
+                    onOpenNotificationSettings = onOpenNotificationSettings,
+                    openRequest = permissionsPrompt,
+                    onRequestHandled = onPermissionsPromptHandled
+                )
+            }
         }
 
         item {
-            InfoSection(termsAcceptedAt = termsAcceptedAt)
+            Box(modifier = Modifier.tourTarget(TourTarget.SETTINGS_APPS)) {
+                SupportedAppsSection(
+                    customPackages = customPackages,
+                    onAddCustomPackage = onAddCustomPackage,
+                    onRemoveCustomPackage = onRemoveCustomPackage,
+                    packageHints = packageHints,
+                    onSavePackageHint = onSavePackageHint,
+                    onClearPackageHint = onClearPackageHint
+                )
+            }
+        }
+
+        item {
+            InfoSection(termsAcceptedAt = termsAcceptedAt, onReplayTour = onReplayTour)
         }
     }
 }
@@ -220,11 +258,23 @@ private fun rememberPermissionStates(): PermissionStates {
 private fun PermissionsSection(
     onOpenAccessibilitySettings: () -> Unit,
     onOpenOverlaySettings: () -> Unit,
-    onOpenNotificationSettings: () -> Unit
+    onOpenNotificationSettings: () -> Unit,
+    openRequest: Boolean = false,
+    onRequestHandled: () -> Unit = {}
 ) {
     var expanded by remember { mutableStateOf(false) }
     var showAccessibilityConsent by remember { mutableStateOf(false) }
     val states = rememberPermissionStates()
+
+    // Opened from the Dashboard ("Active" without permissions): expand the card and, if screen
+    // reading is still off, show the prominent-disclosure dialog straight away.
+    LaunchedEffect(openRequest) {
+        if (openRequest) {
+            expanded = true
+            if (!states.accessibility) showAccessibilityConsent = true
+            onRequestHandled()
+        }
+    }
 
     if (showAccessibilityConsent) {
         AccessibilityConsentDialog(
@@ -310,11 +360,12 @@ private fun PermissionsSection(
  * system Settings if the user explicitly taps Allow.
  */
 @Composable
-private fun AccessibilityConsentDialog(onAllow: () -> Unit, onDecline: () -> Unit) {
+fun AccessibilityConsentDialog(onAllow: () -> Unit, onDecline: () -> Unit) {
     androidx.compose.material3.AlertDialog(
         onDismissRequest = onDecline,
         title = { Text(stringResource(R.string.accessibility_consent_title)) },
-        text = { Text(stringResource(R.string.accessibility_consent_body)) },
+        // Long disclosure: must stay fully readable on small screens, buttons always reachable.
+        text = { Text(stringResource(R.string.accessibility_consent_body), modifier = Modifier.verticalScroll(rememberScrollState())) },
         confirmButton = {
             Button(onClick = onAllow) {
                 Text(stringResource(R.string.accessibility_consent_allow))
@@ -1094,10 +1145,19 @@ private fun CustomThresholdsSection(
 private fun VehicleSection(
     profile: VehicleProfile,
     currency: Currency,
-    onSave: (VehicleProfile) -> Unit
+    onSave: (VehicleProfile) -> Unit,
+    openRequest: Boolean = false,
+    onRequestHandled: () -> Unit = {}
 ) {
     val context = LocalContext.current
     var expanded by remember { mutableStateOf(false) }
+    // Opened from the Dashboard "set up your vehicle" prompt: expand this card.
+    LaunchedEffect(openRequest) {
+        if (openRequest) {
+            expanded = true
+            onRequestHandled()
+        }
+    }
     var category by remember(profile) { mutableStateOf(profile.category) }
     var fuelType by remember(profile) { mutableStateOf(profile.fuelType ?: FuelType.PETROL) }
     var consumptionText by remember(profile) {
@@ -1292,6 +1352,91 @@ private fun VehicleSection(
                             VehicleProfile(category = category, fuelType = null, consumptionPer100Km = 0.0, fuelPricePerUnit = 0.0)
                         }
                         onSave(newProfile)
+                        expanded = false
+                        Toast.makeText(context, context.getString(R.string.settings_saved), Toast.LENGTH_SHORT).show()
+                    }
+                ) {
+                    Text(stringResource(R.string.settings_vehicle_save), color = WaNeonGreen)
+                }
+            }
+        }
+    }
+}
+
+private fun formatTaxPercent(value: Double): String =
+    if (value == value.toLong().toDouble()) value.toLong().toString() else value.toString()
+
+/** Driver's tax rate (percent of each order amount). New orders show the take-home amount after fuel and tax. */
+@Composable
+private fun TaxSection(
+    taxPercent: Double,
+    onSave: (Double) -> Unit
+) {
+    val context = LocalContext.current
+    var expanded by remember { mutableStateOf(false) }
+    var text by remember(taxPercent) {
+        mutableStateOf(if (taxPercent > 0.0) formatTaxPercent(taxPercent) else "")
+    }
+    val summary = if (taxPercent > 0.0) {
+        stringResource(R.string.settings_tax_summary, formatTaxPercent(taxPercent))
+    } else {
+        stringResource(R.string.settings_tax_summary_none)
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(14.dp))
+            .background(WaSurface)
+            .clickable { expanded = !expanded }
+            .padding(16.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(Icons.Filled.AccountBalance, contentDescription = null, tint = WaTextSecondary)
+            Column(Modifier.weight(1f).padding(start = 12.dp)) {
+                Text(
+                    stringResource(R.string.settings_tax_title),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    summary,
+                    color = WaTextSecondary,
+                    style = MaterialTheme.typography.bodyMedium,
+                    maxLines = 1,
+                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                )
+            }
+            Icon(
+                imageVector = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
+                contentDescription = null,
+                tint = WaTextSecondary
+            )
+        }
+
+        AnimatedVisibility(visible = expanded, enter = expandVertically(), exit = shrinkVertically()) {
+            Column(modifier = Modifier.padding(top = 14.dp)) {
+                Text(
+                    stringResource(R.string.settings_tax_desc),
+                    color = WaTextSecondary,
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Spacer(Modifier.padding(top = 12.dp))
+                ThresholdField(
+                    label = stringResource(R.string.settings_tax_label),
+                    value = text,
+                    accent = WaNeonGreen,
+                    onValueChange = { text = it }
+                )
+                Spacer(Modifier.padding(top = 14.dp))
+                TextButton(
+                    onClick = {
+                        val percent = (text.replace(',', '.').toDoubleOrNull() ?: 0.0).coerceIn(0.0, 99.0)
+                        onSave(percent)
                         expanded = false
                         Toast.makeText(context, context.getString(R.string.settings_saved), Toast.LENGTH_SHORT).show()
                     }
@@ -1644,7 +1789,7 @@ private fun CurrencyPicker(current: Currency, onSelect: (Currency) -> Unit) {
 private enum class InfoDoc { ABOUT, PRIVACY, TERMS }
 
 @Composable
-private fun InfoSection(termsAcceptedAt: Long?) {
+private fun InfoSection(termsAcceptedAt: Long?, onReplayTour: () -> Unit) {
     var activeDoc by remember { mutableStateOf<InfoDoc?>(null) }
 
     Column(
@@ -1653,6 +1798,8 @@ private fun InfoSection(termsAcceptedAt: Long?) {
             .clip(RoundedCornerShape(14.dp))
             .background(WaSurface)
     ) {
+        InfoRow(Icons.Filled.School, stringResource(R.string.settings_tutorial_title)) { onReplayTour() }
+        HorizontalDivider(color = WaSurfaceVariant)
         InfoRow(Icons.Filled.Info, stringResource(R.string.settings_about_title)) { activeDoc = InfoDoc.ABOUT }
         HorizontalDivider(color = WaSurfaceVariant)
         InfoRow(Icons.Filled.PrivacyTip, stringResource(R.string.settings_privacy_title)) { activeDoc = InfoDoc.PRIVACY }
@@ -1821,5 +1968,42 @@ internal fun parseSimpleMarkdown(raw: String) = buildAnnotatedString {
             append(raw.substring(start + 2, end))
         }
         i = end + 2
+    }
+}
+
+/**
+ * Where a not-yet-subscribed user starts the subscription. The app itself is open to everyone;
+ * only turning order scanning ON (Dashboard "Active") needs an active subscription.
+ */
+@Composable
+private fun SubscriptionSection(isSubscribed: Boolean, onOpenPaywall: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(14.dp))
+            .background(WaSurface)
+    ) {
+        if (isSubscribed) {
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Icon(Icons.Filled.Check, contentDescription = null, tint = com.wayars.app.presentation.ui.theme.WaNeonGreen)
+                Text(
+                    stringResource(R.string.settings_subscription_active),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
+        } else {
+            InfoRow(Icons.Filled.Star, stringResource(R.string.settings_subscription_activate)) { onOpenPaywall() }
+            Text(
+                stringResource(R.string.settings_subscription_hint),
+                color = WaTextSecondary,
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(start = 56.dp, end = 16.dp, bottom = 14.dp)
+            )
+        }
     }
 }

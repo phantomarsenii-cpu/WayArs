@@ -43,6 +43,7 @@ class OrderNotificationListenerService : NotificationListenerService() {
     private var currentPreset: Preset = Preset.BALANCE
     private var currentCustomThresholds: CustomThresholds? = null
     private var currentVehicleProfile: VehicleProfile = VehicleProfile.DEFAULT
+    private var currentTaxPercent: Double = 0.0
 
     override fun onListenerConnected() {
         super.onListenerConnected()
@@ -51,6 +52,7 @@ class OrderNotificationListenerService : NotificationListenerService() {
         scope.launch { container.settingsRepository.preset.collect { currentPreset = Preset.fromType(it) } }
         scope.launch { container.settingsRepository.customThresholds.collect { currentCustomThresholds = it } }
         scope.launch { container.settingsRepository.vehicleProfile.collect { currentVehicleProfile = it } }
+        scope.launch { container.settingsRepository.taxPercent.collect { currentTaxPercent = it } }
         scope.launch {
             container.settingsRepository.customPackages.collect { CustomPackagesState.update(it) }
         }
@@ -99,7 +101,8 @@ class OrderNotificationListenerService : NotificationListenerService() {
             currency = currency,
             preset = currentPreset,
             vehicleProfile = currentVehicleProfile,
-            customThresholds = currentCustomThresholds
+            customThresholds = currentCustomThresholds,
+            taxPercent = currentTaxPercent
         )
         Log.d(TAG, "Parsed order from notification: $evaluation")
         OverlayState.publish(evaluation, recordId = null, sourcePackage = sbn.packageName)

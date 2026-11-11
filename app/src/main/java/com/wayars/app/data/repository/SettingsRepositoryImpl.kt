@@ -1,5 +1,6 @@
 package com.wayars.app.data.repository
 
+import com.wayars.app.domain.model.StatsPeriod
 import com.wayars.app.data.prefs.SettingsDataStore
 import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.Currency
@@ -14,9 +15,15 @@ class SettingsRepositoryImpl(private val store: SettingsDataStore) : SettingsRep
     override val currency: Flow<Currency> = store.currency
     override val preset: Flow<PresetType> = store.preset
     override val onboardingDone: Flow<Boolean> = store.onboardingDone
+    override val tourDone: Flow<Boolean> = store.tourDone
+    override val updateSnoozeUntil: Flow<Long> = store.updateSnoozeUntil
     override val termsAcceptedAt: Flow<Long?> = store.termsAcceptedAt
     override val customThresholds: Flow<CustomThresholds?> = store.customThresholds
     override val vehicleProfile: Flow<VehicleProfile> = store.vehicleProfile
+    override val vehiclePromptCount: Flow<Int> = store.vehiclePromptCount
+    override val taxPercent: Flow<Double> = store.taxPercent
+    override val statsPeriod: Flow<StatsPeriod> = store.statsPeriod
+    override val a11yDisclosureShown: Flow<Boolean> = store.a11yDisclosureShown
     override val customPackages: Flow<Set<String>> = store.customPackages
     override val packageHints: Flow<Map<String, PackageHint>> = store.packageHints
 
@@ -24,11 +31,17 @@ class SettingsRepositoryImpl(private val store: SettingsDataStore) : SettingsRep
     override suspend fun setCurrency(currency: Currency) = store.setCurrency(currency)
     override suspend fun setPreset(preset: PresetType) = store.setPreset(preset)
     override suspend fun setOnboardingDone(done: Boolean) = store.setOnboardingDone(done)
+    override suspend fun setTourDone(done: Boolean) = store.setTourDone(done)
+    override suspend fun setUpdateSnoozeUntil(epochMillis: Long) = store.setUpdateSnoozeUntil(epochMillis)
     override suspend fun setTermsAccepted(atEpochMillis: Long) = store.setTermsAccepted(atEpochMillis)
     override suspend fun setCustomThresholds(bad: Double, average: Double, good: Double) =
         store.setCustomThresholds(bad, average, good)
     override suspend fun clearCustomThresholds() = store.clearCustomThresholds()
     override suspend fun setVehicleProfile(profile: VehicleProfile) = store.setVehicleProfile(profile)
+    override suspend fun setTaxPercent(percent: Double) = store.setTaxPercent(percent)
+    override suspend fun incrementVehiclePromptCount() = store.incrementVehiclePromptCount()
+    override suspend fun setStatsPeriod(period: StatsPeriod) = store.setStatsPeriod(period)
+    override suspend fun markA11yDisclosureShown() = store.markA11yDisclosureShown()
     override suspend fun addCustomPackage(packageName: String) = store.addCustomPackage(packageName)
     override suspend fun removeCustomPackage(packageName: String) = store.removeCustomPackage(packageName)
     override suspend fun savePackageHint(hint: PackageHint) = store.savePackageHint(hint)

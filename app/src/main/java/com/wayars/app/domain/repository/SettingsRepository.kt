@@ -1,5 +1,6 @@
 package com.wayars.app.domain.repository
 
+import com.wayars.app.domain.model.StatsPeriod
 import com.wayars.app.domain.model.CustomThresholds
 import com.wayars.app.domain.model.Currency
 import com.wayars.app.domain.model.PackageHint
@@ -12,9 +13,15 @@ interface SettingsRepository {
     val currency: Flow<Currency>
     val preset: Flow<PresetType>
     val onboardingDone: Flow<Boolean>
+    val tourDone: Flow<Boolean>
+    val updateSnoozeUntil: Flow<Long>
     val termsAcceptedAt: Flow<Long?>
     val customThresholds: Flow<CustomThresholds?>
     val vehicleProfile: Flow<VehicleProfile>
+    val vehiclePromptCount: Flow<Int>
+    val taxPercent: Flow<Double>
+    val statsPeriod: Flow<StatsPeriod>
+    val a11yDisclosureShown: Flow<Boolean>
     val customPackages: Flow<Set<String>>
     val packageHints: Flow<Map<String, PackageHint>>
 
@@ -22,10 +29,16 @@ interface SettingsRepository {
     suspend fun setCurrency(currency: Currency)
     suspend fun setPreset(preset: PresetType)
     suspend fun setOnboardingDone(done: Boolean)
+    suspend fun setTourDone(done: Boolean)
+    suspend fun setUpdateSnoozeUntil(epochMillis: Long)
     suspend fun setTermsAccepted(atEpochMillis: Long)
     suspend fun setCustomThresholds(bad: Double, average: Double, good: Double)
     suspend fun clearCustomThresholds()
     suspend fun setVehicleProfile(profile: VehicleProfile)
+    suspend fun setTaxPercent(percent: Double)
+    suspend fun incrementVehiclePromptCount()
+    suspend fun setStatsPeriod(period: StatsPeriod)
+    suspend fun markA11yDisclosureShown()
     suspend fun addCustomPackage(packageName: String)
     suspend fun removeCustomPackage(packageName: String)
     suspend fun savePackageHint(hint: PackageHint)

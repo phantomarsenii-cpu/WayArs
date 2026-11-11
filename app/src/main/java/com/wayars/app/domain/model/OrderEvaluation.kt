@@ -17,7 +17,15 @@ data class OrderEvaluation(
     val netProfit: Double,
     val ratePerKm: Double,
     val ratePerMinute: Double,
-    val verdict: Verdict
+    val verdict: Verdict,
+    /** True when the driver entered fuel consumption and price, so fuel/net-profit lines may be shown. */
+    val fuelDataEntered: Boolean = false,
+    /** Tax rate (percent of the order amount) the driver entered in Settings; 0 = not set. */
+    val taxPercent: Double = 0.0,
+    /** Tax in the driver's currency: earnings * taxPercent / 100. */
+    val taxAmount: Double = 0.0,
+    /** What the driver really keeps: earnings minus fuel (only if fuel data was entered) minus tax. */
+    val takeHome: Double = earnings
 ) {
     companion object {
         /**

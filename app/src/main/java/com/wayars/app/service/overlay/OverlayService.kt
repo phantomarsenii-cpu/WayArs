@@ -174,7 +174,8 @@ class OverlayService : LifecycleService() {
                             onReject = { onDecision(accepted = false, evaluation = shownEvaluation, sourcePackage = shownSourcePackage) },
                             onSettings = { openApp() },
                             onClose = { onDecision(accepted = false, evaluation = shownEvaluation, sourcePackage = shownSourcePackage) },
-                            onDragBy = ::moveWindowBy
+                            onDragBy = ::moveWindowBy,
+                            reducedMotion = reducedMotion
                         )
                     }
                 }

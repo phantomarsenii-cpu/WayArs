@@ -17,6 +17,7 @@
 
     <string name="dashboard_today_summary">Dnešní přehled</string>
     <string name="dashboard_active_time">Aktivní čas</string>
+    <string name="dashboard_order_time">Čas zakázek</string>
     <string name="dashboard_distance">Vzdálenost</string>
     <string name="dashboard_avg_rate">Průměrná sazba</string>
     <string name="dashboard_order_evaluation">Vyhodnocení objednávky</string>
@@ -48,9 +49,9 @@
 
     <string name="accessibility_service_description">WayArs čte údaje o objednávce (cena, vzdálenost, čas) zobrazené na obrazovce aplikacemi pro doručování/taxi, aby vám pomohl rychleji se rozhodnout. Nikdy nic automaticky neklepe ani neupravuje.</string>
 
-    <string name="accessibility_consent_title">Oprávnění ke čtení obrazovky</string>
-    <string name="accessibility_consent_body">Aby WayArs mohl automaticky rozpoznávat nové objednávky, potřebuje číst text zobrazovaný na obrazovce aplikacemi pro doručování a přepravu, které používáte — jako je cena, vzdálenost a odhadovaný čas.\n\nCo to znamená:\n• WayArs čte údaje o objednávkách pouze z vámi vybraných podporovaných aplikací. Nikdy nečte hesla, zprávy ani nic jiného, co píšete.\n• WayArs nikdy na obrazovce nic neklepe, nevyplňuje ani neupravuje — pouze čte.\n• Vše se zpracovává přímo v tomto zařízení. Nic se neodesílá na server.\n\nKdykoli to můžete vypnout v Nastavení.</string>
-    <string name="accessibility_consent_allow">Povolit a pokračovat</string>
+    <string name="accessibility_consent_title">Oprávnění služby usnadnění</string>
+    <string name="accessibility_consent_body">WayArs používá rozhraní Android AccessibilityService API. Je potřeba pro hlavní funkci aplikace: automaticky číst nabídky zakázek na obrazovce aplikací pro rozvoz a přepravu, které používáte, aby WayArs vypočítal váš čistý zisk a zobrazil hodnocení (dobré / přijatelné / špatné) v plovoucím okně, dokud je skenování zapnuté.\n\nJak se používá:\n• Čte text zobrazený podporovanými aplikacemi (a aplikacemi, které sami přidáte), když se objeví nabídka zakázky: cena, vzdálenost a odhadovaný čas.\n• Hesla, zprávy ani to, co píšete, se nikdy nečtou. Vše, co zobrazují jiné aplikace, se okamžitě ignoruje.\n• WayArs nikdy nic neklepne, nepíše, neposouvá ani nemění na obrazovce a nepoužívá se k nahrávání hovorů.\n\nCo se děje s daty:\n• Zpracovávají se pouze v tomto zařízení za účelem výpočtu zisku. Nic se neodesílá na server, nesdílí, neprodává ani nepoužívá k reklamě.\n• U přijatých zakázek se v zařízení ukládají jen souhrnné údaje (cena, vzdálenost, čas, zisk) pro vaše statistiky.\n\nMáte to pod kontrolou: služba funguje až po zapnutí v nastavení Androidu a můžete ji kdykoli vypnout. Pokud navíc zapnete volitelný přístup k oznámením, WayArs čte jen oznámení podporovaných aplikací o nových zakázkách.</string>
+    <string name="accessibility_consent_allow">Souhlasím a pokračuji</string>
     <string name="accessibility_consent_decline">Teď ne</string>
 
     <string name="stats_empty">Zatím žádné objednávky</string>
@@ -126,7 +127,7 @@
     <string name="settings_visit_website">Navštívit web vývojáře</string>
     <string name="settings_close">Zavřít</string>
     <string name="settings_about_content">"**WayArs**\nVáš osobní asistent pro doručování a přepravu\n\nVerze: %1$s\n\nWayArs je nástroj na bázi předplatného vytvořený pro řidiče a kurýry pracující s aplikacemi pro přepravu a doručování.\n\nAplikace automaticky analyzuje data na obrazovce a oznámení, pomáhá vám rychle posoudit, zda se objednávka vyplatí, a sledovat vaše výdělky v reálném čase.\n\n**Design a vývoj:** AP STUDIO\n**Kontakt a podpora:** apstudiomobile@gmail.com\n\nVšechny ochranné známky, loga a názvy aplikací třetích stran (mimo jiné Bolt, Uber, Wolt, FreeNow, Stuart a další přidané uživatelem) patří jejich příslušným vlastníkům a jsou použity výhradně pro informační a identifikační účely."</string>
-    <string name="settings_privacy_content">"**Zásady ochrany osobních údajů WayArs**\nPoslední aktualizace: 12. září 2026\n\n**Ochrana vašeho soukromí**\nRespektujeme vaše soukromí. WayArs je navržen podle principu Privacy by Design — hlavní operace analýzy obrazovky a výpočtu sazby probíhají lokálně ve vašem zařízení.\n\n**Sběr a použití dat**\n• Accessibility Service: aplikace používá tento přístup výhradně ke čtení údajů o objednávkách (např. cena, vzdálenost) zobrazených na obrazovce podporovanými aplikacemi pro doručování a přepravu (vestavěnými i přidanými vámi). Aplikace nikdy nezaznamenává hesla, osobní údaje ani stisky kláves.\n• Oznámení (Notification Listener): přístup k oznámením se používá pouze k rozpoznání nových nabídek práce, zatímco aplikace běží na pozadí.\n• Údaje o vozidle a sazbě: údaje, které zadáte v Nastavení (spotřeba paliva, cena paliva, prahy hodnocení), jsou uloženy pouze v lokální paměti zařízení.\n\n**Předplatné a poskytovatelé třetích stran (platby)**\nAplikace nabízí funkce na základě předplatného. Aplikace neshromažďuje ani neukládá podrobné platební údaje (jako čísla platebních karet). Ke zpracování transakcí a ověření stavu předplatného spoléháme na důvěryhodné poskytovatele třetích stran:\n• Google Play Billing (Google LLC): platby a transakce zpracovává přímo Google Play Store.\n• RevenueCat, Inc.: ověření stavu předplatného na základě anonymních identifikátorů zařízení a transakcí.\n\n**Soukromí dětí**\nWayArs je určen výhradně pro dospělé, kteří mají zákonné oprávnění pracovat jako řidič nebo kurýr. Aplikace není určena dětem mladším 16 let a vědomě neshromažďuje ani nezpracovává žádné osobní údaje dětí. Pokud zjistíte, že nám dítě poskytlo jakékoli údaje, kontaktujte nás prosím na apstudiomobile@gmail.com, abychom mohli neprodleně podniknout příslušné kroky.\n\n**Správa oprávnění a předplatného**\nUdělená oprávnění můžete kdykoli odvolat v systémovém Nastavení Androidu nebo spravovat a zrušit své předplatné přímo v nastavení účtu Google Play."</string>
+    <string name="settings_privacy_content">"**WayArs Privacy Policy**\nLast updated: October 8, 2026\n\n**Protecting your privacy**\nWe respect your privacy. WayArs is developed and operated by Arsenii Panicev (AP STUDIO), an independent developer. WayArs is designed around Privacy by Design — the core screen-analysis and rate-calculation operations run locally on your device.\n\n**Data collection and use**\n• Accessibility Service: the app uses this access exclusively to read order details (e.g. price, distance) shown on screen by the supported delivery and taxi apps (built in and added by you) in order to calculate order profitability. The app does not record passwords, personal data or keystrokes. Data read through the service is processed locally on your device, is not sent to external servers, and is not shared with third parties or used for advertising. The service never taps, types or changes anything on the screen and is not used to record calls. Events from all other apps are ignored immediately: nothing from them is read or stored. Before the service can be enabled, the app shows a disclosure and asks for your consent, and you can turn it off at any time.\n• Notifications (Notification Listener): notification access is optional and is used only to detect new order offers from the supported apps while the app runs in the background. Other notifications are not read or stored.\n• Order history: for the statistics screen the app saves, on your device only, the amount, currency, distance, time, calculated rates, estimated fuel cost, net profit and verdict of each evaluated order and whether you accepted it. It contains no addresses, names or other personal details and is never sent anywhere.\n• Vehicle and rate data: data you enter in Settings (fuel consumption, fuel price, evaluation thresholds) is stored only in local device storage.\n• Free trial: to provide the one-time free trial of scanning, the app stores on your device a counter of how long scanning has run. It is not sent anywhere.\n• Installed apps list: when you add an app to scan, the app shows the launchable apps installed on your device. The list is not stored or sent anywhere; only the apps you choose are saved locally.\n• Floating overlay: the “display over other apps” permission is used only to show the order verdict card above the delivery or taxi app. No data is collected through it.\n• App updates: the app asks Google Play whether a newer version is available (Google Play in-app updates API).\n\n**Subscriptions and third-party providers**\nThe app offers features on a subscription basis. The app does not collect or store detailed payment data (such as credit card numbers). To process transactions and verify subscription status, we rely on trusted third-party providers:\n• Google Play Billing (Google LLC): payments and transactions are handled directly by the Google Play Store. Policy: policies.google.com/privacy\n• RevenueCat, Inc.: subscription status verification based on anonymous device and transaction identifiers. RevenueCat may also process technical connection data such as an IP address. Policy: revenuecat.com/privacy\n\n**Children’s privacy**\nWayArs is intended solely for adults who are legally permitted to work as a driver or courier. The app is not directed at children under 16 and does not knowingly collect or process any personal data from children. If you become aware that a child has provided us with any data, please contact us at apstudiomobile@gmail.com so we can take appropriate action promptly.\n\n**Managing permissions and your subscription**\nYou can revoke granted permissions at any time in Android system settings, or manage and cancel your subscription directly in your Google Play account settings.\n\n**Data deletion and retention**\nWayArs has no user accounts, and we do not operate our own servers that store your personal data. Data entered in the app is stored locally on your device and can be deleted at any time by clearing the app data (Android Settings → Apps → WayArs → Storage → Clear data) or by uninstalling the app. The app does not use Android automatic cloud backup, so your local data is not copied to your Google account. To request deletion of technical subscription identifiers processed by RevenueCat, contact us at apstudiomobile@gmail.com.\n\n**Contact**\nDeveloper: AP STUDIO (Arsenii Panicev)\napstudiomobile@gmail.com"</string>
     <string name="settings_terms_content">"**Podmínky použití WayArs**\nPoslední aktualizace: 12. září 2026\n\n**Obecná ustanovení**\nPoužíváním aplikace WayArs přijímáte níže uvedené podmínky. Aplikace je nezávislý pomocný nástroj vytvořený společností AP STUDIO a není oficiálně spojena, sponzorována ani schválena žádným poskytovatelem aplikací třetích stran (jako je Bolt, Uber, Wolt, FreeNow, Stuart nebo jakýkoli jiný přidaný uživatelem do seznamu).\n\n**Pomocný charakter a aplikace třetích stran**\n• Aplikace slouží pouze pro informační a analytické účely. Ukazatele výnosnosti (měna/km, odhadovaný zisk) se počítají z údajů zadaných uživatelem a údajů přečtených z obrazovky.\n• Uživatelé si mohou sami přidat podporované aplikace třetích stran. AP STUDIO nezaručuje správné čtení dat u aplikací přidaných uživatelem ručně.\n\n**Věk uživatele**\nAplikaci mohou používat pouze osoby starší 18 let (nebo osoby, které dosáhly věku vyžadovaného pro poskytování přepravních/kurýrních služeb ve své zemi). Aplikace není určena dětem.\n\n**Předplatné a platby**\n• Platby za předplatné vybírá Google Play Store podle zvoleného plánu.\n• Uživatelé mohou kdykoli zrušit obnovení předplatného v nastavení svého účtu Google Play.\n• Vrácení peněz se řídí zásadami a pravidly obchodu Google Play.\n\n**Vyloučení odpovědnosti**\n• AP STUDIO neodpovídá za nesrovnalosti ve výpočtech vzniklé nesprávným čtením obrazovky nebo aktualizacemi či změnami v rozhraní aplikací třetích stran.\n• AP STUDIO neodpovídá za finanční, obchodní nebo řidičská rozhodnutí učiněná uživatelem na základě ukazatelů aplikace.\n• Uživatelé jsou povinni bezpečně používat telefon a při jízdě důsledně dodržovat pravidla silničního provozu.\n• AP STUDIO neodpovídá za jakékoli dočasné či trvalé zablokování účtů uživatele u služeb třetích stran (Uber, Bolt, Wolt atd.).\n• Uživatel používá aplikaci zcela na vlastní riziko a sám rozhoduje, zda ji bude používat.\n• Aplikace je nezávislý pomocný nástroj a nemá žádné oficiální spojení s žádnou přepravní nebo doručovací platformou.\n\n**Kontakt**\nJakékoli dotazy, připomínky nebo hlášení chyb zasílejte na: apstudiomobile@gmail.com."</string>
 
     <!-- Paywall -->
@@ -176,4 +177,56 @@
     <string name="paywall_per_month_hint">Jen %1$s / měsíc</string>
     <string name="paywall_data_safe">Vaše data jsou v bezpečí</string>
     <string name="paywall_no_charge_notice">Za prvních 7 dní se neúčtuje žádný poplatek. Kdykoli zrušte v Google Play.</string>
+
+    <!-- ===== Update 07: first-run tour + update prompt ===== -->
+    <string name="tour_skip">Přeskočit</string>
+    <string name="tour_back">Zpět</string>
+    <string name="tour_next">Další</string>
+    <string name="tour_done">Rozumím</string>
+    <string name="tour_welcome_title">Vítejte ve WayArs</string>
+    <string name="tour_welcome_text">Krátká prohlídka ukáže, jak WayArs hodnotí vaše objednávky v reálném čase. Zabere asi minutu a v Nastavení ji můžete kdykoli zopakovat.</string>
+    <string name="tour_active_title">Přepínač Active</string>
+    <string name="tour_active_text">Zapněte ho, když začínáte pracovat. WayArs pak čte příchozí objednávky ve vašich aplikacích pro rozvoz a taxi a každou z nich ohodnotí.</string>
+    <string name="tour_summary_title">Dnešní přehled</string>
+    <string name="tour_summary_text">Objednávky, výdělek, aktivní čas, vzdálenost a průměrná sazba za km za dnešek. Aktualizuje se po každé objednávce.</string>
+    <string name="tour_verdict_title">Hodnocení objednávky</string>
+    <string name="tour_verdict_text">Každá objednávka dostane verdikt: dobrá, průměrná nebo špatná. Stejný verdikt se zobrazí i v malém plovoucím widgetu nad vaší aplikací pro rozvoz.</string>
+    <string name="tour_stats_title">Statistiky</string>
+    <string name="tour_stats_text">Seznam dnešních ohodnocených objednávek s odměnou, vzdáleností, časem a verdiktem.</string>
+    <string name="tour_presets_title">Předvolby</string>
+    <string name="tour_presets_text">Vyberte, jak přísné má hodnocení být: úsporné, vyvážené, nebo jen výdělečné objednávky.</string>
+    <string name="tour_thresholds_title">Vlastní hranice</string>
+    <string name="tour_thresholds_text">Volitelné. Nastavte si vlastní hranice sazby za km pro špatné, průměrné a dobré objednávky místo hotové předvolby.</string>
+    <string name="tour_vehicle_title">Vozidlo a palivo</string>
+    <string name="tour_vehicle_text">Zadejte vozidlo, druh paliva, spotřebu a cenu paliva, aby se čistý zisk každé objednávky počítal po odečtení nákladů na palivo.</string>
+    <string name="tour_permissions_title">Oprávnění</string>
+    <string name="tour_permissions_text">Před zapnutím Active povolte čtení obrazovky (pouze čtení, žádná automatická klepnutí) a plovoucí widget. Přístup k oznámením je volitelný.</string>
+    <string name="tour_apps_title">Podporované aplikace</string>
+    <string name="tour_apps_text">Oblíbené aplikace pro rozvoz a taxi jsou již zabudované. Pokud vaše chybí, přidejte ji tady ručně.</string>
+    <string name="tour_final_title">Hotovo!</string>
+    <string name="tour_final_text">Povolte oprávnění v Nastavení a poté zapněte Active na domovské obrazovce. Tuto nápovědu můžete kdykoli zopakovat v Nastavení.</string>
+    <string name="settings_tutorial_title">Nápověda</string>
+    <string name="update_available_title">Je dostupná aktualizace</string>
+    <string name="update_available_text">Je dostupná nová verze WayArs s vylepšeními a opravami.</string>
+    <string name="update_now">Aktualizovat</string>
+    <string name="update_later">Později</string>
+    <string name="vehicle_prompt_title">Nastavte vozidlo</string>
+    <string name="vehicle_prompt_body">Typ vozidla a spotřeba paliva ovlivňují, jak výdělečná zakázka skutečně je. Zadejte je jednou, aby výpočty byly přesné.</string>
+    <string name="vehicle_prompt_configure">Nastavit</string>
+    <string name="vehicle_prompt_skip">Přeskočit</string>
+    <string name="stats_period_today">Dnes</string>
+    <string name="stats_period_week">7 dní</string>
+    <string name="stats_period_month">Měsíc</string>
+    <string name="stats_period_year">Rok</string>
+    <string name="stats_earned">Vyděláno</string>
+    <string name="settings_tax_title">Daň</string>
+    <string name="settings_tax_summary_none">Nenastaveno</string>
+    <string name="settings_tax_summary">%1$s%% z částky objednávky</string>
+    <string name="settings_tax_desc">Zadejte, kolik procent z každé objednávky platíte na daních. Po uložení budou nové objednávky zobrazovat čistou částku po odečtení paliva a daně.</string>
+    <string name="settings_tax_label">Sazba daně, %</string>
+    <string name="overlay_net_caption">Čistě</string>
+    <string name="overlay_gross">Částka objednávky %1$s</string>
+    <string name="overlay_deduction_fuel">palivo −%1$s</string>
+    <string name="overlay_deduction_tax">daň −%1$s</string>
+    <string name="verdict_take_home">Čistě %1$s (%2$s)</string>
 </resources>

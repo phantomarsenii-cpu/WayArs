@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-TEMPORARY: android:packageNames removed again, on purpose, for exactly one
-reason — finding out Bolt's and Wolt's REAL package names via the in-app
-diagnostics panel (Settings -> Диагностика). They've never worked at all,
-which strongly points to the guessed package names simply being wrong; with
-this filter in place we'd never even see their events to find out. The
-service-side code now bails out immediately (before any window scanning) for
-every non-supported package, so the earlier "flooded with every app's
-events" performance/stability concern is minimized: unsupported apps only
-ever cost one cheap package-name check + a debounce, never a tree walk.
-Once the real names are confirmed from that screen, put this filter back
-with the corrected list.
+Package filtering happens in code (OrderAccessibilityService.isSupportedPackage): the built-in
+supported apps plus the apps the user adds in Settings, which cannot be listed statically here.
+The service therefore receives events from all apps but returns immediately for every app that is
+not supported/added, before reading any window content. The user-facing consent text says so.
 -->
 <accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
     android:accessibilityEventTypes="typeWindowStateChanged|typeWindowContentChanged|typeWindowsChanged"

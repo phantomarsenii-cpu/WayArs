@@ -1,5 +1,6 @@
 package com.wayars.app.presentation
 
+import com.wayars.app.domain.model.StatsPeriod
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -43,6 +44,14 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
     val onboardingDone: StateFlow<Boolean> =
         settings.onboardingDone.stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
+    /** Null until DataStore has loaded, so a returning user never gets a flash of the tutorial. */
+    val tourDone: StateFlow<Boolean?> =
+        settings.tourDone.stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
+    /** Null until loaded; epoch millis until which the "update available" card is snoozed. */
+    val updateSnoozeUntil: StateFlow<Long?> =
+        settings.updateSnoozeUntil.stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
     /** Null until the Terms of Use gate has been accepted; then the epoch-millis moment it was. */
     val termsAcceptedAt: StateFlow<Long?> =
         settings.termsAcceptedAt.stateIn(viewModelScope, SharingStarted.Eagerly, null)
@@ -52,6 +61,31 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
 
     val vehicleProfile: StateFlow<VehicleProfile> =
         settings.vehicleProfile.stateIn(viewModelScope, SharingStarted.Eagerly, VehicleProfile.DEFAULT)
+
+    /** Tax rate in percent of each order amount (0 = not set). */
+    val taxPercent: StateFlow<Double> =
+        settings.taxPercent.stateIn(viewModelScope, SharingStarted.Eagerly, 0.0)
+
+    /** Times the vehicle prompt was shown. Starts at 2 (= do not prompt) until the stored value is loaded. */
+    val vehiclePromptCount: StateFlow<Int> =
+        settings.vehiclePromptCount.stateIn(viewModelScope, SharingStarted.Eagerly, 2)
+
+    fun noteVehiclePromptShown() = viewModelScope.launch { settings.incrementVehiclePromptCount() }
+
+    /** Every accepted order ever recorded (newest first); the Statistics screen filters it by period. */
+    val allOrders: StateFlow<List<OrderRecord>> =
+        container.orderRepository.observeAll().stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
+    val statsPeriod: StateFlow<StatsPeriod> =
+        settings.statsPeriod.stateIn(viewModelScope, SharingStarted.Eagerly, StatsPeriod.TODAY)
+
+    fun setStatsPeriod(period: StatsPeriod) = viewModelScope.launch { settings.setStatsPeriod(period) }
+
+    /** null until the stored value is loaded; true = the first-launch disclosure was already answered. */
+    val a11yDisclosureShown: StateFlow<Boolean?> =
+        settings.a11yDisclosureShown.stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
+    fun markA11yDisclosureShown() = viewModelScope.launch { settings.markA11yDisclosureShown() }
 
     val customPackages: StateFlow<Set<String>> =
         settings.customPackages.stateIn(viewModelScope, SharingStarted.Eagerly, emptySet())
@@ -95,6 +129,10 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
     fun setCurrency(currency: Currency) = viewModelScope.launch { settings.setCurrency(currency) }
     fun setPreset(preset: PresetType) = viewModelScope.launch { settings.setPreset(preset) }
     fun completeOnboarding() = viewModelScope.launch { settings.setOnboardingDone(true) }
+    fun setTourDone(done: Boolean) = viewModelScope.launch { settings.setTourDone(done) }
+    fun snoozeUpdatePrompt() = viewModelScope.launch {
+        settings.setUpdateSnoozeUntil(System.currentTimeMillis() + 3L * 24 * 60 * 60 * 1000)
+    }
 
     /**
      * Called exactly once, the moment the user taps Accept on the Terms
@@ -106,6 +144,7 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
         viewModelScope.launch { settings.setCustomThresholds(bad, average, good) }
     fun clearCustomThresholds() = viewModelScope.launch { settings.clearCustomThresholds() }
     fun setVehicleProfile(profile: VehicleProfile) = viewModelScope.launch { settings.setVehicleProfile(profile) }
+    fun setTaxPercent(percent: Double) = viewModelScope.launch { settings.setTaxPercent(percent) }
     fun addCustomPackage(packageName: String) = viewModelScope.launch { settings.addCustomPackage(packageName) }
     fun removeCustomPackage(packageName: String) = viewModelScope.launch { settings.removeCustomPackage(packageName) }
     fun savePackageHint(hint: PackageHint) = viewModelScope.launch { settings.savePackageHint(hint) }
