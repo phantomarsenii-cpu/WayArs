@@ -226,7 +226,7 @@ edit(SETTINGS, [
      "TaxSection(taxPercent = taxPercent"),
     ("import androidx.compose.material.icons.filled.Check\n",
      "import androidx.compose.material.icons.filled.AccountBalance\nimport androidx.compose.material.icons.filled.Check\n",
-     "filled.AccountBalance"),
+     "import androidx.compose.material.icons.filled.AccountBalance\n"),
     ("@Composable\nprivate fun ChoiceChip(",
      '''private fun formatTaxPercent(value: Double): String =
     if (value == value.toLong().toDouble()) value.toLong().toString() else value.toString()

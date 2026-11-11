@@ -2,6 +2,7 @@ package com.wayars.app.presentation.ui.screen.settings
 
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.AccountBalance
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
