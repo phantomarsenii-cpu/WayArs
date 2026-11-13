@@ -114,6 +114,9 @@
     <string name="settings_calibrate_action">Edytuj kalibrację</string>
     <string name="settings_calibrated">Skalibrowano ✓</string>
     <string name="settings_calibration_clear">Wyczyść kalibrację</string>
+    <string name="settings_contacts_title">Kontakt</string>
+    <string name="settings_contacts_subtitle">Pytania, pomysły albo problem ze zleceniami? Napisz do nas w każdej chwili.</string>
+    <string name="settings_contacts_open_failed">Nie udało się otworzyć linku</string>
     <string name="settings_calibration_status_title">Co WayArs teraz odczytuje z tej aplikacji</string>
     <string name="settings_calibration_not_found">nie znaleziono ✗</string>
     <string name="settings_calibration_auto_ok">Zlecenia z tej aplikacji są odczytywane automatycznie. Kalibracja nie jest potrzebna.</string>
@@ -129,7 +132,6 @@
     <string name="settings_calibration_check_ok">Działa! Dotknij „Zapisz”.</string>
     <string name="settings_calibration_check_fail">WayArs odczytuje to zlecenie inaczej, niż wybrałeś. Dotknij „Zacznij od nowa” i wybierz inne liczby albo zapisz mimo to.</string>
     <string name="settings_calibration_restart">Zacznij od nowa</string>
-    <string name="settings_calibration_currency">Waluta:</string>
     <string name="settings_calibration_advanced">Zaawansowane: jednostki</string>
     <string name="settings_calibration_close">Zamknij</string>
     <string name="settings_calibration_no_numbers">Ostatni skan nie zawiera liczb. Otwórz prawdziwe zlecenie w tej aplikacji, poczekaj kilka sekund i wróć tutaj.</string>
@@ -226,6 +228,10 @@
     <string name="tour_permissions_text">Przed włączeniem Active włącz odczyt ekranu (tylko odczyt, bez automatycznych kliknięć) i pływający widżet. Dostęp do powiadomień jest opcjonalny.</string>
     <string name="tour_apps_title">Obsługiwane aplikacje</string>
     <string name="tour_apps_text">Popularne aplikacje dowozu i taksówek są już wbudowane. Jeśli Twojej brakuje, dodaj ją tutaj ręcznie.</string>
+    <string name="tour_currency_title">Twoja waluta</string>
+    <string name="tour_currency_text">Wybierz walutę swojego kraju albo tę, w której ceny pokazuje Twoja aplikacja dostaw lub taxi. WayArs odczytuje zlecenia w każdym kraju, a wszystkie stawki i progi liczy w tej walucie.</string>
+    <string name="tour_tax_title">Podatek</string>
+    <string name="tour_tax_text">Wpisz stawkę podatku w %. WayArs odejmie ją razem z paliwem, a nakładka pokaże, ile naprawdę zostaje Ci z każdego zlecenia.</string>
     <string name="tour_final_title">Wszystko gotowe!</string>
     <string name="tour_final_text">Włącz uprawnienia w Ustawieniach, a potem włącz Active na ekranie głównym. Ten samouczek możesz powtórzyć w Ustawieniach w dowolnej chwili.</string>
     <string name="settings_tutorial_title">Samouczek</string>

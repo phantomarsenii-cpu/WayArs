@@ -114,6 +114,9 @@
     <string name="settings_calibration_distance_token_label">Afstandsenhed (rediger om nødvendigt)</string>
     <string name="settings_calibration_time_token_label">Tidsenhed (rediger om nødvendigt)</string>
     <string name="settings_calibration_clear">Ryd kalibrering</string>
+    <string name="settings_contacts_title">Kontakt</string>
+    <string name="settings_contacts_subtitle">Spørgsmål, idéer eller problemer med ordrer? Skriv til os når som helst.</string>
+    <string name="settings_contacts_open_failed">Linket kunne ikke åbnes</string>
     <string name="settings_calibration_status_title">Hvad WayArs læser fra denne app nu</string>
     <string name="settings_calibration_not_found">ikke fundet ✗</string>
     <string name="settings_calibration_auto_ok">Ordrer fra denne app læses automatisk. Ingen kalibrering nødvendig.</string>
@@ -129,7 +132,6 @@
     <string name="settings_calibration_check_ok">Det virker! Tryk på Gem.</string>
     <string name="settings_calibration_check_fail">WayArs læser ordren anderledes end dit valg. Tryk på Start forfra og vælg andre tal, eller gem alligevel.</string>
     <string name="settings_calibration_restart">Start forfra</string>
-    <string name="settings_calibration_currency">Valuta:</string>
     <string name="settings_calibration_advanced">Avanceret: enheder</string>
     <string name="settings_calibration_close">Luk</string>
     <string name="settings_calibration_no_numbers">Den seneste scanning har ingen tal. Åbn en rigtig ordre i denne app, vent et par sekunder og kom tilbage her.</string>
@@ -222,6 +224,10 @@
     <string name="tour_permissions_text">Før du slår Active til, skal du aktivere skærmlæsning (kun læsning, ingen automatiske tryk) og den svævende widget. Adgang til notifikationer er valgfri.</string>
     <string name="tour_apps_title">Understøttede apps</string>
     <string name="tour_apps_text">Populære leverings- og taxa-apps er indbygget. Mangler din, kan du tilføje den her manuelt.</string>
+    <string name="tour_currency_title">Din valuta</string>
+    <string name="tour_currency_text">Vælg dit lands valuta eller den, din leverings- eller taxa-app viser priser i. WayArs læser ordrer i alle lande; alle satser og grænser bruger denne valuta.</string>
+    <string name="tour_tax_title">Skat</string>
+    <string name="tour_tax_text">Indtast din skattesats i %. WayArs trækker den fra sammen med brændstof, så overlayet viser, hvad du reelt beholder af hver ordre.</string>
     <string name="tour_final_title">Alt er klar!</string>
     <string name="tour_final_text">Aktivér tilladelserne i Indstillinger, og slå derefter Active til på startskærmen. Du kan gentage denne vejledning når som helst i Indstillinger.</string>
     <string name="settings_tutorial_title">Vejledning</string>

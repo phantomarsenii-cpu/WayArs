@@ -114,6 +114,9 @@
     <string name="settings_calibration_distance_token_label">Masofa birligi (kerak bo\'lsa tahrirlang)</string>
     <string name="settings_calibration_time_token_label">Vaqt birligi (kerak bo\'lsa tahrirlang)</string>
     <string name="settings_calibration_clear">Kalibrlashni tozalash</string>
+    <string name="settings_contacts_title">Aloqa</string>
+    <string name="settings_contacts_subtitle">Savollar, g‘oyalar yoki buyurtmalar bilan muammo? Istalgan vaqtda yozing.</string>
+    <string name="settings_contacts_open_failed">Havolani ochib bo‘lmadi</string>
     <string name="settings_calibration_status_title">WayArs hozir bu ilovadan nimani o‘qiyapti</string>
     <string name="settings_calibration_not_found">topilmadi ✗</string>
     <string name="settings_calibration_auto_ok">Bu ilova buyurtmalari avtomatik o‘qiladi. Kalibrlash shart emas.</string>
@@ -129,7 +132,6 @@
     <string name="settings_calibration_check_ok">Ishlayapti! Saqlash tugmasini bosing.</string>
     <string name="settings_calibration_check_fail">WayArs bu buyurtmani siz tanlagandan boshqacha o‘qiyapti. Qaytadan boshlash tugmasini bosib, boshqa raqamlarni tanlang yoki baribir saqlang.</string>
     <string name="settings_calibration_restart">Qaytadan boshlash</string>
-    <string name="settings_calibration_currency">Valyuta:</string>
     <string name="settings_calibration_advanced">Qo‘shimcha: o‘lchov birliklari</string>
     <string name="settings_calibration_close">Yopish</string>
     <string name="settings_calibration_no_numbers">Oxirgi skanerda raqamlar yo‘q. Bu ilovada haqiqiy buyurtmani oching, bir necha soniya kuting va bu yerga qayting.</string>
@@ -222,6 +224,10 @@
     <string name="tour_permissions_text">Active’ni yoqishdan oldin ekranni o‘qishga (faqat o‘qish, avtomatik bosishlarsiz) va suzuvchi vidjetga ruxsat bering. Bildirishnomalarga kirish ixtiyoriy.</string>
     <string name="tour_apps_title">Qo‘llab-quvvatlanadigan ilovalar</string>
     <string name="tour_apps_text">Mashhur yetkazib berish va taksi ilovalari allaqachon qo‘shilgan. Sizniki yo‘q bo‘lsa, uni shu yerda qo‘lda qo‘shing.</string>
+    <string name="tour_currency_title">Valyutangiz</string>
+    <string name="tour_currency_text">O‘z mamlakatingiz valyutasini yoki yetkazib berish yoxud taksi ilovangiz narxlarni ko‘rsatadigan valyutani tanlang. WayArs istalgan mamlakatda buyurtmalarni o‘qiydi; barcha stavkalar va chegaralar shu valyutada hisoblanadi.</string>
+    <string name="tour_tax_title">Soliq</string>
+    <string name="tour_tax_text">Soliq stavkasini %da kiriting. WayArs uni yoqilg‘i bilan birga ayiradi va overlay har bir buyurtmadan sizga haqiqatan qancha qolishini ko‘rsatadi.</string>
     <string name="tour_final_title">Hammasi tayyor!</string>
     <string name="tour_final_text">Ruxsatlarni Sozlamalarda yoqing, so‘ng bosh ekranda Active’ni yoqing. Bu qo‘llanmani istalgan vaqtda Sozlamalarda qayta ko‘rishingiz mumkin.</string>
     <string name="settings_tutorial_title">Qo‘llanma</string>

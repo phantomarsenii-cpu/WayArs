@@ -109,6 +109,9 @@
     <string name="settings_calibrate_action">Editează calibrarea</string>
     <string name="settings_calibrated">Calibrat ✓</string>
     <string name="settings_calibration_clear">Șterge calibrarea</string>
+    <string name="settings_contacts_title">Contact</string>
+    <string name="settings_contacts_subtitle">Întrebări, idei sau o problemă cu comenzile? Scrie-ne oricând.</string>
+    <string name="settings_contacts_open_failed">Linkul nu a putut fi deschis</string>
     <string name="settings_calibration_status_title">Ce citește WayArs acum din această aplicație</string>
     <string name="settings_calibration_not_found">negăsit ✗</string>
     <string name="settings_calibration_auto_ok">Comenzile din această aplicație sunt citite automat. Nu e nevoie de calibrare.</string>
@@ -124,7 +127,6 @@
     <string name="settings_calibration_check_ok">Funcționează! Atinge Salvează.</string>
     <string name="settings_calibration_check_fail">WayArs citește comanda altfel decât ai ales. Atinge Ia-o de la capăt și alege alte numere sau salvează oricum.</string>
     <string name="settings_calibration_restart">Ia-o de la capăt</string>
-    <string name="settings_calibration_currency">Monedă:</string>
     <string name="settings_calibration_advanced">Avansat: unități</string>
     <string name="settings_calibration_close">Închide</string>
     <string name="settings_calibration_no_numbers">Ultima scanare nu conține numere. Deschide o comandă reală în această aplicație, așteaptă câteva secunde și revino aici.</string>
@@ -221,6 +223,10 @@
     <string name="tour_permissions_text">Înainte să pornești Active, activează citirea ecranului (doar citire, fără atingeri automate) și widgetul plutitor. Accesul la notificări este opțional.</string>
     <string name="tour_apps_title">Aplicații acceptate</string>
     <string name="tour_apps_text">Aplicațiile populare de livrare și taxi sunt deja incluse. Dacă a ta lipsește, adaug-o aici manual.</string>
+    <string name="tour_currency_title">Moneda ta</string>
+    <string name="tour_currency_text">Alege moneda țării tale sau pe cea în care aplicația ta de livrări sau taxi afișează prețurile. WayArs citește comenzi în orice țară; toate tarifele și pragurile folosesc această monedă.</string>
+    <string name="tour_tax_title">Impozit</string>
+    <string name="tour_tax_text">Introdu cota de impozit în %. WayArs o scade împreună cu combustibilul, iar overlay-ul arată cât îți rămâne cu adevărat din fiecare comandă.</string>
     <string name="tour_final_title">Totul este gata!</string>
     <string name="tour_final_text">Activează permisiunile în Setări, apoi pornește Active pe ecranul principal. Poți relua acest tutorial oricând în Setări.</string>
     <string name="settings_tutorial_title">Tutorial</string>

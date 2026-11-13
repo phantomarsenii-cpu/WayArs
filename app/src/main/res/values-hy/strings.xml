@@ -114,6 +114,9 @@
     <string name="settings_calibration_distance_token_label">Հեռավորության միավոր (խմբագրեք անհրաժեշտության դեպքում)</string>
     <string name="settings_calibration_time_token_label">Ժամանակի միավոր (խմբագրեք անհրաժեշտության դեպքում)</string>
     <string name="settings_calibration_clear">Մաքրել կարգաբերումը</string>
+    <string name="settings_contacts_title">Կապ</string>
+    <string name="settings_contacts_subtitle">Հարցեր, գաղափարներ կամ խնդիր պատվերների հետ։ Գրեք մեզ ցանկացած ժամանակ։</string>
+    <string name="settings_contacts_open_failed">Չհաջողվեց բացել հղումը</string>
     <string name="settings_calibration_status_title">Ինչ է WayArs-ը հիմա կարդում այս հավելվածից</string>
     <string name="settings_calibration_not_found">չի գտնվել ✗</string>
     <string name="settings_calibration_auto_ok">Այս հավելվածի պատվերները կարդացվում են ավտոմատ։ Կալիբրացիա պետք չէ։</string>
@@ -129,7 +132,6 @@
     <string name="settings_calibration_check_ok">Աշխատում է։ Սեղմեք Պահպանել։</string>
     <string name="settings_calibration_check_fail">WayArs-ը այս պատվերը կարդում է ոչ այնպես, ինչպես ընտրել եք։ Սեղմեք Սկսել նորից և ընտրեք այլ թվեր կամ պահպանեք այնուամենայնիվ։</string>
     <string name="settings_calibration_restart">Սկսել նորից</string>
-    <string name="settings_calibration_currency">Արժույթ՝</string>
     <string name="settings_calibration_advanced">Լրացուցիչ՝ չափման միավորներ</string>
     <string name="settings_calibration_close">Փակել</string>
     <string name="settings_calibration_no_numbers">Վերջին սկանավորման մեջ թվեր չկան։ Բացեք իրական պատվեր այս հավելվածում, սպասեք մի քանի վայրկյան և վերադարձեք այստեղ։</string>
@@ -222,6 +224,10 @@
     <string name="tour_permissions_text">Active-ը միացնելուց առաջ թույլատրեք էկրանի ընթերցումը (միայն ընթերցում, առանց ավտոմատ հպումների) և լողացող վիջեթը։ Ծանուցումներին հասանելիությունը պարտադիր չէ։</string>
     <string name="tour_apps_title">Աջակցվող հավելվածներ</string>
     <string name="tour_apps_text">Առաքման և տաքսիի հանրաճանաչ հավելվածներն արդեն ներառված են։ Եթե ձերը չկա, ավելացրեք այն այստեղ ձեռքով։</string>
+    <string name="tour_currency_title">Ձեր արժույթը</string>
+    <string name="tour_currency_text">Ընտրեք ձեր երկրի արժույթը կամ այն, որով ձեր առաքման կամ տաքսու հավելվածը ցույց է տալիս գները։ WayArs-ը կարդում է պատվերներ ցանկացած երկրում, և բոլոր դրույքներն ու շեմերը հաշվվում են այս արժույթով։</string>
+    <string name="tour_tax_title">Հարկ</string>
+    <string name="tour_tax_text">Մուտքագրեք հարկի դրույքը %-ով։ WayArs-ը այն կհանի վառելիքի հետ միասին, և overlay-ը ցույց կտա, թե իրականում որքան է մնում յուրաքանչյուր պատվերից։</string>
     <string name="tour_final_title">Ամեն ինչ պատրաստ է։</string>
     <string name="tour_final_text">Թույլատրեք հասանելիությունը Կարգավորումներում, ապա միացրեք Active-ը գլխավոր էկրանին։ Այս ուղեցույցը կարող եք ցանկացած ժամանակ կրկնել Կարգավորումներում։</string>
     <string name="settings_tutorial_title">Ուղեցույց</string>

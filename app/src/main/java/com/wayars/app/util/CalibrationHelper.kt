@@ -1,7 +1,5 @@
 package com.wayars.app.util
 
-import com.wayars.app.domain.model.Currency
-
 /**
  * Pure helpers behind the step-by-step calibration dialog (Settings ->
  * Supported apps -> calibrate). Kept out of the Compose code so they can be
@@ -54,14 +52,6 @@ object CalibrationHelper {
         wordAfterRegex.find(after)?.groupValues?.get(1)?.trim()?.takeIf { it.isNotEmpty() }?.let { return it }
         val before = line.substring(0, pick.range.first.coerceAtLeast(0))
         return wordBeforeRegex.find(before)?.groupValues?.get(1)?.trim().orEmpty()
-    }
-
-    /** Currency whose code or symbol is exactly [token] ("PLN", "zł", "€"), or null. */
-    fun currencyForToken(token: String): Currency? {
-        val t = token.trim()
-        if (t.isEmpty()) return null
-        return Currency.entries.firstOrNull { it.code.equals(t, ignoreCase = true) || it.symbol.equals(t, ignoreCase = true) }
-            ?: if (t.equals("zl", ignoreCase = true)) Currency.PLN else null
     }
 
     /** "10.33" / "10,33" -> 10.33 for comparing a pick with what the parser read. */

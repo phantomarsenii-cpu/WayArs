@@ -119,6 +119,9 @@
     <string name="settings_calibration_distance_token_label">Единица расстояния (при необходимости отредактируйте)</string>
     <string name="settings_calibration_time_token_label">Единица времени (при необходимости отредактируйте)</string>
     <string name="settings_calibration_clear">Сбросить калибровку</string>
+    <string name="settings_contacts_title">Контакты</string>
+    <string name="settings_contacts_subtitle">Вопросы, идеи или проблема с заказами? Пишите в любое время.</string>
+    <string name="settings_contacts_open_failed">Не удалось открыть ссылку</string>
     <string name="settings_calibration_status_title">Что WayArs сейчас считывает из этого приложения</string>
     <string name="settings_calibration_not_found">не найдено ✗</string>
     <string name="settings_calibration_auto_ok">Заказы из этого приложения распознаются автоматически. Калибровка не нужна.</string>
@@ -134,7 +137,6 @@
     <string name="settings_calibration_check_ok">Работает! Нажмите «Сохранить».</string>
     <string name="settings_calibration_check_fail">WayArs читает этот заказ не так, как вы выбрали. Нажмите «Начать заново» и выберите другие числа или сохраните как есть.</string>
     <string name="settings_calibration_restart">Начать заново</string>
-    <string name="settings_calibration_currency">Валюта:</string>
     <string name="settings_calibration_advanced">Дополнительно: единицы измерения</string>
     <string name="settings_calibration_close">Закрыть</string>
     <string name="settings_calibration_no_numbers">В последнем сканировании нет чисел. Откройте реальный заказ в этом приложении, подождите пару секунд и вернитесь сюда.</string>
@@ -226,6 +228,10 @@
     <string name="tour_permissions_text">Перед включением Active включите чтение экрана (только чтение, без автоматических нажатий) и плавающий виджет. Доступ к уведомлениям — по желанию.</string>
     <string name="tour_apps_title">Поддерживаемые приложения</string>
     <string name="tour_apps_text">Популярные приложения доставки и такси уже добавлены. Если вашего нет в списке, добавьте его вручную.</string>
+    <string name="tour_currency_title">Ваша валюта</string>
+    <string name="tour_currency_text">Выберите валюту своей страны или ту, в которой показывает цены ваше приложение доставки или такси. WayArs читает заказы в любой стране, а все ставки и пороги считаются в этой валюте.</string>
+    <string name="tour_tax_title">Налог</string>
+    <string name="tour_tax_text">Укажите ставку налога в %. WayArs вычтет её вместе с топливом, и в оверлее будет видно, сколько вы реально получите с каждого заказа.</string>
     <string name="tour_final_title">Всё готово!</string>
     <string name="tour_final_text">Включите разрешения в Настройках, затем включите Active на главном экране. Пройти обучение снова можно в любой момент в Настройках.</string>
     <string name="settings_tutorial_title">Обучение</string>

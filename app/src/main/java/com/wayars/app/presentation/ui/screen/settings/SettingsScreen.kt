@@ -31,6 +31,12 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.MusicNote
+import androidx.compose.material.icons.filled.PhotoCamera
+import androidx.compose.material.icons.filled.Send
+import androidx.compose.material.icons.filled.Forum
 import androidx.compose.material.icons.filled.AccountBalanceWallet
 import androidx.compose.material.icons.filled.Apps
 import androidx.compose.material.icons.filled.ChevronRight
@@ -161,12 +167,14 @@ fun SettingsScreen(
         }
 
         item {
-            GeneralSettingsCard(
-                languageCode = languageCode,
-                currency = currency,
-                onLanguageSelected = onLanguageSelected,
-                onCurrencySelected = onCurrencySelected
-            )
+            Box(modifier = Modifier.tourTarget(TourTarget.SETTINGS_CURRENCY)) {
+                GeneralSettingsCard(
+                    languageCode = languageCode,
+                    currency = currency,
+                    onLanguageSelected = onLanguageSelected,
+                    onCurrencySelected = onCurrencySelected
+                )
+            }
         }
 
         item {
@@ -193,7 +201,9 @@ fun SettingsScreen(
         }
 
         item {
-            TaxSection(taxPercent = taxPercent, onSave = onSaveTaxPercent)
+            Box(modifier = Modifier.tourTarget(TourTarget.SETTINGS_TAX)) {
+                TaxSection(taxPercent = taxPercent, onSave = onSaveTaxPercent)
+            }
         }
 
         item {
@@ -211,6 +221,7 @@ fun SettingsScreen(
         item {
             Box(modifier = Modifier.tourTarget(TourTarget.SETTINGS_APPS)) {
                 SupportedAppsSection(
+                    currency = currency,
                     customPackages = customPackages,
                     onAddCustomPackage = onAddCustomPackage,
                     onRemoveCustomPackage = onRemoveCustomPackage,
@@ -439,6 +450,7 @@ private fun PermissionRow(title: String, hint: String, granted: Boolean, onClick
  */
 @Composable
 private fun SupportedAppsSection(
+    currency: Currency,
     customPackages: Set<String>,
     onAddCustomPackage: (String) -> Unit,
     onRemoveCustomPackage: (String) -> Unit,
@@ -634,6 +646,7 @@ private fun SupportedAppsSection(
     calibratingPackage?.let { pkg ->
         CalibrationDialog(
             packageName = pkg,
+            userCurrency = currency,
             existingHint = packageHints[pkg],
             onDismiss = { calibratingPackage = null },
             onSave = { hint ->
@@ -804,6 +817,7 @@ private enum class CalStep { MONEY, DISTANCE, TIME, DONE }
 @Composable
 private fun CalibrationDialog(
     packageName: String,
+    userCurrency: Currency,
     existingHint: PackageHint?,
     onDismiss: () -> Unit,
     onSave: (PackageHint) -> Unit,
@@ -825,17 +839,16 @@ private fun CalibrationDialog(
     var distancePick by remember(packageName) { mutableStateOf<CalibrationHelper.NumberPick?>(null) }
     var timePick by remember(packageName) { mutableStateOf<CalibrationHelper.NumberPick?>(null) }
     var moneyToken by remember(packageName) { mutableStateOf(existingHint?.moneyToken.orEmpty()) }
-    var moneyCurrency by remember(packageName) { mutableStateOf(existingHint?.moneyCurrency ?: Currency.PLN) }
     var distanceToken by remember(packageName) { mutableStateOf(existingHint?.distanceUnitToken.orEmpty()) }
     var timeToken by remember(packageName) { mutableStateOf(existingHint?.timeUnitToken.orEmpty()) }
-    var currencyMenuExpanded by remember { mutableStateOf(false) }
     var advancedOpen by remember { mutableStateOf(false) }
 
     val showWizard = lines.isNotEmpty() && (wizardOpen || !autoOk)
     val newHint = PackageHint(
         packageName = packageName,
         moneyToken = moneyToken.trim().ifBlank { null },
-        moneyCurrency = if (moneyToken.isNotBlank()) moneyCurrency else null,
+        // The currency is the one the user picked in Settings (any country), never chosen here.
+        moneyCurrency = if (moneyToken.isNotBlank()) userCurrency else null,
         distanceUnitToken = distanceToken.trim().ifBlank { null },
         timeUnitToken = timeToken.trim().ifBlank { null }
     )
@@ -860,7 +873,6 @@ private fun CalibrationDialog(
             CalStep.MONEY -> {
                 moneyPick = pick
                 moneyToken = token
-                CalibrationHelper.currencyForToken(token)?.let { moneyCurrency = it }
                 step = CalStep.DISTANCE
             }
             CalStep.DISTANCE -> {
@@ -907,7 +919,7 @@ private fun CalibrationDialog(
                 CalibrationResultCard(
                     title = stringResource(R.string.settings_calibration_status_title),
                     result = autoResult,
-                    fallbackCurrency = moneyCurrency
+                    currency = userCurrency
                 )
                 if (autoOk) {
                     Text(
@@ -1011,30 +1023,10 @@ private fun CalibrationDialog(
                 // ---- 3. Check before saving ----
                 if (showWizard && step == CalStep.DONE) {
                     HorizontalDivider(color = WaSurfaceVariant)
-                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text(
-                            stringResource(R.string.settings_calibration_currency),
-                            color = WaTextSecondary,
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                        Box {
-                            TextButton(onClick = { currencyMenuExpanded = true }) {
-                                Text("${moneyCurrency.code} ▾", color = WaNeonGreen)
-                            }
-                            DropdownMenu(expanded = currencyMenuExpanded, onDismissRequest = { currencyMenuExpanded = false }) {
-                                Currency.entries.forEach { c ->
-                                    DropdownMenuItem(
-                                        text = { Text("${c.code} (${c.symbol})") },
-                                        onClick = { moneyCurrency = c; currencyMenuExpanded = false }
-                                    )
-                                }
-                            }
-                        }
-                    }
                     CalibrationResultCard(
                         title = stringResource(R.string.settings_calibration_check_title),
                         result = checkResult,
-                        fallbackCurrency = moneyCurrency
+                        currency = userCurrency
                     )
                     Text(
                         stringResource(if (checkOk) R.string.settings_calibration_check_ok else R.string.settings_calibration_check_fail),
@@ -1096,12 +1088,11 @@ private fun CalibrationDialog(
 private fun CalibrationResultCard(
     title: String,
     result: com.wayars.app.domain.model.RawOrderCandidate?,
-    fallbackCurrency: Currency
+    currency: Currency
 ) {
     val notFound = stringResource(R.string.settings_calibration_not_found)
-    val currency = result?.currency ?: fallbackCurrency
     val rows = listOf(
-        stringResource(R.string.settings_calibration_role_money) to result?.earnings?.let { String.format(java.util.Locale.US, "%.2f %s", it, currency.code) },
+        stringResource(R.string.settings_calibration_role_money) to result?.earnings?.let { String.format(java.util.Locale.US, "%.2f %s", it, currency.symbol) },
         stringResource(R.string.settings_calibration_role_distance) to result?.distanceKm?.let { String.format(java.util.Locale.US, "%.1f km", it) },
         stringResource(R.string.settings_calibration_role_time) to result?.timeMinutes?.takeIf { it > 0 }?.let { String.format(java.util.Locale.US, "%.0f min", it) }
     )
@@ -1913,6 +1904,7 @@ private enum class InfoDoc { ABOUT, PRIVACY, TERMS }
 @Composable
 private fun InfoSection(termsAcceptedAt: Long?, onReplayTour: () -> Unit) {
     var activeDoc by remember { mutableStateOf<InfoDoc?>(null) }
+    var showContacts by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -1920,6 +1912,8 @@ private fun InfoSection(termsAcceptedAt: Long?, onReplayTour: () -> Unit) {
             .clip(RoundedCornerShape(14.dp))
             .background(WaSurface)
     ) {
+        InfoRow(Icons.Filled.Forum, stringResource(R.string.settings_contacts_title)) { showContacts = true }
+        HorizontalDivider(color = WaSurfaceVariant)
         InfoRow(Icons.Filled.School, stringResource(R.string.settings_tutorial_title)) { onReplayTour() }
         HorizontalDivider(color = WaSurfaceVariant)
         InfoRow(Icons.Filled.Info, stringResource(R.string.settings_about_title)) { activeDoc = InfoDoc.ABOUT }
@@ -1931,6 +1925,94 @@ private fun InfoSection(termsAcceptedAt: Long?, onReplayTour: () -> Unit) {
 
     activeDoc?.let { doc ->
         InfoDialog(doc = doc, termsAcceptedAt = termsAcceptedAt, onDismiss = { activeDoc = null })
+    }
+    if (showContacts) {
+        ContactsDialog(onDismiss = { showContacts = false })
+    }
+}
+
+/** One way to reach the developer. [uri] is opened with ACTION_VIEW, or ACTION_SENDTO for mailto:. */
+private data class ContactLink(
+    val name: String,
+    val handle: String,
+    val uri: String,
+    val icon: androidx.compose.ui.graphics.vector.ImageVector,
+    val color: Color
+)
+
+private val CONTACT_LINKS = listOf(
+    ContactLink("Telegram", "@wayars_app", "https://t.me/wayars_app", Icons.Filled.Send, Color(0xFF229ED9)),
+    ContactLink("Instagram", "@apstudiomobile", "https://www.instagram.com/apstudiomobile/", Icons.Filled.PhotoCamera, Color(0xFFE1306C)),
+    ContactLink("TikTok", "@apstudiomobile.pl", "https://www.tiktok.com/@apstudiomobile.pl", Icons.Filled.MusicNote, Color(0xFF25F4EE)),
+    ContactLink("E-mail", "apstudiomobile@gmail.com", "mailto:apstudiomobile@gmail.com", Icons.Filled.Email, WaNeonGreen)
+)
+
+@Composable
+private fun ContactsDialog(onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    val failedText = stringResource(R.string.settings_contacts_open_failed)
+
+    fun open(link: ContactLink) {
+        val uri = Uri.parse(link.uri)
+        val intent = if (link.uri.startsWith("mailto:")) {
+            Intent(Intent.ACTION_SENDTO, uri).putExtra(Intent.EXTRA_SUBJECT, "WayArs")
+        } else {
+            Intent(Intent.ACTION_VIEW, uri)
+        }.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        runCatching { context.startActivity(intent) }
+            .onFailure { Toast.makeText(context, failedText, Toast.LENGTH_SHORT).show() }
+    }
+
+    Dialog(onDismissRequest = onDismiss) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(16.dp))
+                .background(WaSurface)
+                .padding(20.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            Text(
+                stringResource(R.string.settings_contacts_title),
+                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.titleLarge
+            )
+            Text(
+                stringResource(R.string.settings_contacts_subtitle),
+                color = WaTextSecondary,
+                style = MaterialTheme.typography.bodyMedium
+            )
+            CONTACT_LINKS.forEach { link ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(14.dp))
+                        .background(WaSurfaceVariant)
+                        .clickable { open(link) }
+                        .padding(horizontal = 14.dp, vertical = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(14.dp)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(42.dp)
+                            .clip(RoundedCornerShape(12.dp))
+                            .background(link.color.copy(alpha = 0.18f)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(link.icon, contentDescription = null, tint = link.color)
+                    }
+                    Column(Modifier.weight(1f)) {
+                        Text(link.name, color = Color.White, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Bold)
+                        Text(link.handle, color = WaTextSecondary, style = MaterialTheme.typography.bodySmall)
+                    }
+                    Icon(Icons.Filled.ChevronRight, contentDescription = null, tint = WaTextSecondary)
+                }
+            }
+            TextButton(onClick = onDismiss, modifier = Modifier.align(Alignment.End)) {
+                Text(stringResource(R.string.settings_calibration_close), color = WaNeonGreen)
+            }
+        }
     }
 }
 

@@ -114,6 +114,9 @@
     <string name="settings_calibration_distance_token_label">Unité de distance (modifiez si nécessaire)</string>
     <string name="settings_calibration_time_token_label">Unité de temps (modifiez si nécessaire)</string>
     <string name="settings_calibration_clear">Réinitialiser la calibration</string>
+    <string name="settings_contacts_title">Contact</string>
+    <string name="settings_contacts_subtitle">Une question, une idée ou un problème avec les courses ? Écrivez-nous à tout moment.</string>
+    <string name="settings_contacts_open_failed">Impossible d’ouvrir le lien</string>
     <string name="settings_calibration_status_title">Ce que WayArs lit actuellement dans cette appli</string>
     <string name="settings_calibration_not_found">introuvable ✗</string>
     <string name="settings_calibration_auto_ok">Les courses de cette appli sont lues automatiquement. Aucun étalonnage nécessaire.</string>
@@ -129,7 +132,6 @@
     <string name="settings_calibration_check_ok">Ça marche ! Touchez Enregistrer.</string>
     <string name="settings_calibration_check_fail">WayArs lit cette course autrement que votre choix. Touchez Recommencer et choisissez d’autres nombres, ou enregistrez quand même.</string>
     <string name="settings_calibration_restart">Recommencer</string>
-    <string name="settings_calibration_currency">Devise :</string>
     <string name="settings_calibration_advanced">Avancé : unités</string>
     <string name="settings_calibration_close">Fermer</string>
     <string name="settings_calibration_no_numbers">Le dernier scan ne contient aucun nombre. Ouvrez une vraie course dans cette appli, attendez quelques secondes et revenez ici.</string>
@@ -221,6 +223,10 @@
     <string name="tour_permissions_text">Avant d’activer Active, autorisez la lecture de l’écran (lecture seule, sans appuis automatiques) et le widget flottant. L’accès aux notifications est facultatif.</string>
     <string name="tour_apps_title">Applications prises en charge</string>
     <string name="tour_apps_text">Les applications de livraison et de taxi populaires sont déjà intégrées. Si la vôtre manque, ajoutez-la ici manuellement.</string>
+    <string name="tour_currency_title">Votre devise</string>
+    <string name="tour_currency_text">Choisissez la devise de votre pays, ou celle dans laquelle votre appli de livraison ou de taxi affiche les prix. WayArs lit les courses dans tous les pays ; tous les tarifs et seuils utilisent cette devise.</string>
+    <string name="tour_tax_title">Impôt</string>
+    <string name="tour_tax_text">Saisissez votre taux d’impôt en %. WayArs le déduit avec le carburant, pour que l’overlay montre ce qu’il vous reste vraiment de chaque course.</string>
     <string name="tour_final_title">Tout est prêt !</string>
     <string name="tour_final_text">Activez les autorisations dans les Réglages, puis activez Active sur l’écran d’accueil. Vous pouvez revoir ce tutoriel à tout moment dans les Réglages.</string>
     <string name="settings_tutorial_title">Tutoriel</string>

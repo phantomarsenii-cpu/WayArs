@@ -124,6 +124,9 @@
     <string name="settings_calibration_distance_token_label">Distance unit (edit if needed)</string>
     <string name="settings_calibration_time_token_label">Time unit (edit if needed)</string>
     <string name="settings_calibration_clear">Clear calibration</string>
+    <string name="settings_contacts_title">Contact us</string>
+    <string name="settings_contacts_subtitle">Questions, ideas or a problem with orders? Write to us any time.</string>
+    <string name="settings_contacts_open_failed">Couldn\'t open the link</string>
     <string name="settings_calibration_status_title">What WayArs reads from this app now</string>
     <string name="settings_calibration_not_found">not found ✗</string>
     <string name="settings_calibration_auto_ok">Orders from this app are read automatically. No calibration needed.</string>
@@ -139,7 +142,6 @@
     <string name="settings_calibration_check_ok">Works! Tap Save.</string>
     <string name="settings_calibration_check_fail">WayArs reads this order differently from what you picked. Tap Start over and pick other numbers, or save anyway.</string>
     <string name="settings_calibration_restart">Start over</string>
-    <string name="settings_calibration_currency">Currency:</string>
     <string name="settings_calibration_advanced">Advanced: unit words</string>
     <string name="settings_calibration_close">Close</string>
     <string name="settings_calibration_no_numbers">The last scan has no numbers. Open a real order in this app, wait a few seconds and come back here.</string>
@@ -233,6 +235,10 @@
     <string name="tour_permissions_text">Enable screen reading (read-only, no automatic taps) and the floating widget before turning Active on. Notification access is optional.</string>
     <string name="tour_apps_title">Supported apps</string>
     <string name="tour_apps_text">Popular delivery and taxi apps are built in. If yours is missing, add it here by hand.</string>
+    <string name="tour_currency_title">Your currency</string>
+    <string name="tour_currency_text">Choose the currency of your country, or the one your delivery or taxi app shows prices in. WayArs reads orders in any country; all rates and limits use this currency.</string>
+    <string name="tour_tax_title">Tax</string>
+    <string name="tour_tax_text">Enter your tax rate in %. WayArs subtracts it together with fuel, so the overlay shows how much you really keep from each order.</string>
     <string name="tour_final_title">You’re all set!</string>
     <string name="tour_final_text">Enable the permissions in Settings, then switch Active on the Home screen. You can replay this tutorial any time in Settings.</string>
     <string name="settings_tutorial_title">Tutorial</string>

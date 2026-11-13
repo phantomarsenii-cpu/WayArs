@@ -114,6 +114,9 @@
     <string name="settings_calibration_distance_token_label">Avstandsenhet (rediger ved behov)</string>
     <string name="settings_calibration_time_token_label">Tidsenhet (rediger ved behov)</string>
     <string name="settings_calibration_clear">Fjern kalibrering</string>
+    <string name="settings_contacts_title">Kontakt</string>
+    <string name="settings_contacts_subtitle">Spørsmål, ideer eller problemer med oppdrag? Skriv til oss når som helst.</string>
+    <string name="settings_contacts_open_failed">Kunne ikke åpne lenken</string>
     <string name="settings_calibration_status_title">Hva WayArs leser fra denne appen nå</string>
     <string name="settings_calibration_not_found">ikke funnet ✗</string>
     <string name="settings_calibration_auto_ok">Oppdrag fra denne appen leses automatisk. Ingen kalibrering trengs.</string>
@@ -129,7 +132,6 @@
     <string name="settings_calibration_check_ok">Det fungerer! Trykk Lagre.</string>
     <string name="settings_calibration_check_fail">WayArs leser oppdraget annerledes enn valget ditt. Trykk Start på nytt og velg andre tall, eller lagre likevel.</string>
     <string name="settings_calibration_restart">Start på nytt</string>
-    <string name="settings_calibration_currency">Valuta:</string>
     <string name="settings_calibration_advanced">Avansert: enheter</string>
     <string name="settings_calibration_close">Lukk</string>
     <string name="settings_calibration_no_numbers">Siste skanning har ingen tall. Åpne et ekte oppdrag i denne appen, vent noen sekunder og kom tilbake hit.</string>
@@ -222,6 +224,10 @@
     <string name="tour_permissions_text">Før du slår på Active, må du aktivere skjermlesing (bare lesing, ingen automatiske trykk) og den flytende widgeten. Tilgang til varsler er valgfritt.</string>
     <string name="tour_apps_title">Støttede apper</string>
     <string name="tour_apps_text">Populære leverings- og drosjeapper er innebygd. Mangler din, kan du legge den til her manuelt.</string>
+    <string name="tour_currency_title">Din valuta</string>
+    <string name="tour_currency_text">Velg valutaen i landet ditt, eller den leverings- eller taxiappen din viser priser i. WayArs leser oppdrag i alle land; alle satser og grenser bruker denne valutaen.</string>
+    <string name="tour_tax_title">Skatt</string>
+    <string name="tour_tax_text">Skriv inn skattesatsen i %. WayArs trekker den fra sammen med drivstoff, slik at overlegget viser hva du faktisk sitter igjen med per oppdrag.</string>
     <string name="tour_final_title">Alt er klart!</string>
     <string name="tour_final_text">Aktiver tillatelsene i Innstillinger, og slå deretter på Active på startskjermen. Du kan gjenta denne veiledningen når som helst i Innstillinger.</string>
     <string name="settings_tutorial_title">Veiledning</string>

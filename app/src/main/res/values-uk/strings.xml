@@ -109,6 +109,9 @@
     <string name="settings_calibrate_action">Редагувати калібрування</string>
     <string name="settings_calibrated">Відкалібровано ✓</string>
     <string name="settings_calibration_clear">Скинути калібрування</string>
+    <string name="settings_contacts_title">Контакти</string>
+    <string name="settings_contacts_subtitle">Питання, ідеї чи проблема із замовленнями? Пишіть будь-коли.</string>
+    <string name="settings_contacts_open_failed">Не вдалося відкрити посилання</string>
     <string name="settings_calibration_status_title">Що WayArs зараз зчитує з цього застосунку</string>
     <string name="settings_calibration_not_found">не знайдено ✗</string>
     <string name="settings_calibration_auto_ok">Замовлення з цього застосунку розпізнаються автоматично. Калібрування не потрібне.</string>
@@ -124,7 +127,6 @@
     <string name="settings_calibration_check_ok">Працює! Натисніть «Зберегти».</string>
     <string name="settings_calibration_check_fail">WayArs читає це замовлення не так, як ви обрали. Натисніть «Почати знову» й оберіть інші числа або збережіть як є.</string>
     <string name="settings_calibration_restart">Почати знову</string>
-    <string name="settings_calibration_currency">Валюта:</string>
     <string name="settings_calibration_advanced">Додатково: одиниці виміру</string>
     <string name="settings_calibration_close">Закрити</string>
     <string name="settings_calibration_no_numbers">В останньому скануванні немає чисел. Відкрийте реальне замовлення в цьому застосунку, зачекайте кілька секунд і поверніться сюди.</string>
@@ -221,6 +223,10 @@
     <string name="tour_permissions_text">Перед вмиканням Active увімкніть читання екрана (лише читання, без автоматичних натискань) і плаваючий віджет. Доступ до сповіщень — за бажанням.</string>
     <string name="tour_apps_title">Підтримувані застосунки</string>
     <string name="tour_apps_text">Популярні застосунки доставки й таксі вже додано. Якщо вашого немає в списку, додайте його вручну.</string>
+    <string name="tour_currency_title">Ваша валюта</string>
+    <string name="tour_currency_text">Оберіть валюту своєї країни або ту, в якій показує ціни ваш застосунок доставки чи таксі. WayArs читає замовлення в будь-якій країні, а всі ставки й пороги рахуються в цій валюті.</string>
+    <string name="tour_tax_title">Податок</string>
+    <string name="tour_tax_text">Вкажіть ставку податку у %. WayArs відніме її разом із пальним, і в оверлеї буде видно, скільки ви реально отримаєте з кожного замовлення.</string>
     <string name="tour_final_title">Усе готово!</string>
     <string name="tour_final_text">Увімкніть дозволи в Налаштуваннях, а потім увімкніть Active на головному екрані. Пройти навчання знову можна будь-коли в Налаштуваннях.</string>
     <string name="settings_tutorial_title">Навчання</string>

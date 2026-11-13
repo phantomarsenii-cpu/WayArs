@@ -114,6 +114,9 @@
     <string name="settings_calibration_distance_token_label">Məsafə vahidi (lazım olarsa redaktə edin)</string>
     <string name="settings_calibration_time_token_label">Vaxt vahidi (lazım olarsa redaktə edin)</string>
     <string name="settings_calibration_clear">Kalibrləməni təmizlə</string>
+    <string name="settings_contacts_title">Əlaqə</string>
+    <string name="settings_contacts_subtitle">Suallar, ideyalar və ya sifarişlərlə problem? İstənilən vaxt yazın.</string>
+    <string name="settings_contacts_open_failed">Linki açmaq mümkün olmadı</string>
     <string name="settings_calibration_status_title">WayArs indi bu tətbiqdən nəyi oxuyur</string>
     <string name="settings_calibration_not_found">tapılmadı ✗</string>
     <string name="settings_calibration_auto_ok">Bu tətbiqin sifarişləri avtomatik oxunur. Kalibrləmə lazım deyil.</string>
@@ -129,7 +132,6 @@
     <string name="settings_calibration_check_ok">İşləyir! Yadda saxla düyməsinə toxunun.</string>
     <string name="settings_calibration_check_fail">WayArs bu sifarişi seçdiyinizdən fərqli oxuyur. Yenidən başla düyməsinə toxunub başqa rəqəmlər seçin və ya yenə də yadda saxlayın.</string>
     <string name="settings_calibration_restart">Yenidən başla</string>
-    <string name="settings_calibration_currency">Valyuta:</string>
     <string name="settings_calibration_advanced">Əlavə: ölçü vahidləri</string>
     <string name="settings_calibration_close">Bağla</string>
     <string name="settings_calibration_no_numbers">Son skanda rəqəm yoxdur. Bu tətbiqdə real sifariş açın, bir neçə saniyə gözləyin və bura qayıdın.</string>
@@ -222,6 +224,10 @@
     <string name="tour_permissions_text">Active-i yandırmazdan əvvəl ekranın oxunmasına (yalnız oxuma, avtomatik toxunuşlar yoxdur) və üzən vidcetə icazə verin. Bildirişlərə giriş istəyə bağlıdır.</string>
     <string name="tour_apps_title">Dəstəklənən tətbiqlər</string>
     <string name="tour_apps_text">Məşhur çatdırılma və taksi tətbiqləri artıq daxildir. Sizinki yoxdursa, onu burada əl ilə əlavə edin.</string>
+    <string name="tour_currency_title">Valyutanız</string>
+    <string name="tour_currency_text">Ölkənizin valyutasını və ya çatdırılma, yaxud taksi tətbiqinizin qiymətləri göstərdiyi valyutanı seçin. WayArs istənilən ölkədə sifarişləri oxuyur; bütün dərəcələr və hədlər bu valyutada hesablanır.</string>
+    <string name="tour_tax_title">Vergi</string>
+    <string name="tour_tax_text">Vergi dərəcəsini %-lə daxil edin. WayArs onu yanacaqla birlikdə çıxır və overlay hər sifarişdən həqiqətən nə qədər qaldığını göstərir.</string>
     <string name="tour_final_title">Hər şey hazırdır!</string>
     <string name="tour_final_text">İcazələri Ayarlarda aktiv edin, sonra əsas ekranda Active-i yandırın. Bu təlimatı istənilən vaxt Ayarlarda təkrar keçə bilərsiniz.</string>
     <string name="settings_tutorial_title">Təlimat</string>

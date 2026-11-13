@@ -114,6 +114,9 @@
     <string name="settings_calibration_distance_token_label">Jednotka vzdálenosti (v případě potřeby upravte)</string>
     <string name="settings_calibration_time_token_label">Jednotka času (v případě potřeby upravte)</string>
     <string name="settings_calibration_clear">Vymazat kalibraci</string>
+    <string name="settings_contacts_title">Kontakt</string>
+    <string name="settings_contacts_subtitle">Dotazy, nápady nebo problém se zakázkami? Napište nám kdykoli.</string>
+    <string name="settings_contacts_open_failed">Odkaz se nepodařilo otevřít</string>
     <string name="settings_calibration_status_title">Co WayArs teď čte z této aplikace</string>
     <string name="settings_calibration_not_found">nenalezeno ✗</string>
     <string name="settings_calibration_auto_ok">Zakázky z této aplikace se čtou automaticky. Kalibrace není potřeba.</string>
@@ -129,7 +132,6 @@
     <string name="settings_calibration_check_ok">Funguje! Klepněte na Uložit.</string>
     <string name="settings_calibration_check_fail">WayArs čte tuto zakázku jinak, než jste vybrali. Klepněte na Začít znovu a vyberte jiná čísla, nebo přesto uložte.</string>
     <string name="settings_calibration_restart">Začít znovu</string>
-    <string name="settings_calibration_currency">Měna:</string>
     <string name="settings_calibration_advanced">Pokročilé: jednotky</string>
     <string name="settings_calibration_close">Zavřít</string>
     <string name="settings_calibration_no_numbers">Poslední sken neobsahuje žádná čísla. Otevřete skutečnou zakázku v této aplikaci, počkejte pár sekund a vraťte se sem.</string>
@@ -222,6 +224,10 @@
     <string name="tour_permissions_text">Před zapnutím Active povolte čtení obrazovky (pouze čtení, žádná automatická klepnutí) a plovoucí widget. Přístup k oznámením je volitelný.</string>
     <string name="tour_apps_title">Podporované aplikace</string>
     <string name="tour_apps_text">Oblíbené aplikace pro rozvoz a taxi jsou již zabudované. Pokud vaše chybí, přidejte ji tady ručně.</string>
+    <string name="tour_currency_title">Vaše měna</string>
+    <string name="tour_currency_text">Vyberte měnu své země nebo tu, ve které ceny ukazuje vaše doručovací či taxi aplikace. WayArs čte zakázky v jakékoli zemi; všechny sazby a limity počítá v této měně.</string>
+    <string name="tour_tax_title">Daň</string>
+    <string name="tour_tax_text">Zadejte sazbu daně v %. WayArs ji odečte spolu s palivem a overlay ukáže, kolik vám z každé zakázky opravdu zůstane.</string>
     <string name="tour_final_title">Hotovo!</string>
     <string name="tour_final_text">Povolte oprávnění v Nastavení a poté zapněte Active na domovské obrazovce. Tuto nápovědu můžete kdykoli zopakovat v Nastavení.</string>
     <string name="settings_tutorial_title">Nápověda</string>

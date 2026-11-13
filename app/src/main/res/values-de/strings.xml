@@ -114,6 +114,9 @@
     <string name="settings_calibration_distance_token_label">Distanzeinheit (bei Bedarf bearbeiten)</string>
     <string name="settings_calibration_time_token_label">Zeiteinheit (bei Bedarf bearbeiten)</string>
     <string name="settings_calibration_clear">Kalibrierung zurücksetzen</string>
+    <string name="settings_contacts_title">Kontakt</string>
+    <string name="settings_contacts_subtitle">Fragen, Ideen oder ein Problem mit Aufträgen? Schreib uns jederzeit.</string>
+    <string name="settings_contacts_open_failed">Link konnte nicht geöffnet werden</string>
     <string name="settings_calibration_status_title">Was WayArs jetzt aus dieser App liest</string>
     <string name="settings_calibration_not_found">nicht gefunden ✗</string>
     <string name="settings_calibration_auto_ok">Aufträge aus dieser App werden automatisch erkannt. Keine Kalibrierung nötig.</string>
@@ -129,7 +132,6 @@
     <string name="settings_calibration_check_ok">Funktioniert! Tippe auf Speichern.</string>
     <string name="settings_calibration_check_fail">WayArs liest diesen Auftrag anders als deine Auswahl. Tippe auf Neu beginnen und wähle andere Zahlen oder speichere trotzdem.</string>
     <string name="settings_calibration_restart">Neu beginnen</string>
-    <string name="settings_calibration_currency">Währung:</string>
     <string name="settings_calibration_advanced">Erweitert: Einheiten</string>
     <string name="settings_calibration_close">Schließen</string>
     <string name="settings_calibration_no_numbers">Der letzte Scan enthält keine Zahlen. Öffne einen echten Auftrag in dieser App, warte ein paar Sekunden und komm hierher zurück.</string>
@@ -221,6 +223,10 @@
     <string name="tour_permissions_text">Aktiviere vor dem Einschalten von Active das Lesen des Bildschirms (nur Lesen, keine automatischen Tipps) und das schwebende Widget. Der Zugriff auf Benachrichtigungen ist optional.</string>
     <string name="tour_apps_title">Unterstützte Apps</string>
     <string name="tour_apps_text">Beliebte Liefer- und Taxi-Apps sind bereits integriert. Fehlt deine App, füge sie hier von Hand hinzu.</string>
+    <string name="tour_currency_title">Deine Währung</string>
+    <string name="tour_currency_text">Wähle die Währung deines Landes oder die, in der deine Liefer- oder Taxi-App Preise anzeigt. WayArs liest Aufträge in jedem Land; alle Raten und Grenzen nutzen diese Währung.</string>
+    <string name="tour_tax_title">Steuer</string>
+    <string name="tour_tax_text">Gib deinen Steuersatz in % ein. WayArs zieht ihn zusammen mit dem Kraftstoff ab, damit das Overlay zeigt, was dir von jedem Auftrag wirklich bleibt.</string>
     <string name="tour_final_title">Alles bereit!</string>
     <string name="tour_final_text">Aktiviere die Berechtigungen in den Einstellungen und schalte dann Active auf dem Startbildschirm ein. Diese Anleitung kannst du jederzeit in den Einstellungen wiederholen.</string>
     <string name="settings_tutorial_title">Anleitung</string>

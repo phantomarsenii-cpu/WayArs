@@ -114,6 +114,9 @@
     <string name="settings_calibration_distance_token_label">მანძილის ერთეული (საჭიროების შემთხვევაში შეასწორეთ)</string>
     <string name="settings_calibration_time_token_label">დროის ერთეული (საჭიროების შემთხვევაში შეასწორეთ)</string>
     <string name="settings_calibration_clear">კალიბრაციის გასუფთავება</string>
+    <string name="settings_contacts_title">კონტაქტი</string>
+    <string name="settings_contacts_subtitle">კითხვები, იდეები ან პრობლემა შეკვეთებთან? მოგვწერეთ ნებისმიერ დროს.</string>
+    <string name="settings_contacts_open_failed">ბმულის გახსნა ვერ მოხერხდა</string>
     <string name="settings_calibration_status_title">რას კითხულობს WayArs ახლა ამ აპიდან</string>
     <string name="settings_calibration_not_found">ვერ მოიძებნა ✗</string>
     <string name="settings_calibration_auto_ok">ამ აპის შეკვეთები ავტომატურად იკითხება. კალიბრაცია საჭირო არ არის.</string>
@@ -129,7 +132,6 @@
     <string name="settings_calibration_check_ok">მუშაობს! შეეხეთ შენახვას.</string>
     <string name="settings_calibration_check_fail">WayArs ამ შეკვეთას თქვენი არჩევანისგან განსხვავებულად კითხულობს. შეეხეთ თავიდან დაწყებას და აირჩიეთ სხვა რიცხვები, ან მაინც შეინახეთ.</string>
     <string name="settings_calibration_restart">თავიდან დაწყება</string>
-    <string name="settings_calibration_currency">ვალუტა:</string>
     <string name="settings_calibration_advanced">დამატებით: ერთეულები</string>
     <string name="settings_calibration_close">დახურვა</string>
     <string name="settings_calibration_no_numbers">ბოლო სკანირებაში რიცხვები არ არის. გახსენით რეალური შეკვეთა ამ აპში, დაელოდეთ რამდენიმე წამს და დაბრუნდით აქ.</string>
@@ -222,6 +224,10 @@
     <string name="tour_permissions_text">Active-ის ჩართვამდე ჩართეთ ეკრანის წაკითხვა (მხოლოდ წაკითხვა, ავტომატური შეხებების გარეშე) და მოტივტივე ვიჯეტი. შეტყობინებებზე წვდომა არასავალდებულოა.</string>
     <string name="tour_apps_title">მხარდაჭერილი აპები</string>
     <string name="tour_apps_text">პოპულარული მიწოდებისა და ტაქსის აპები უკვე ჩაშენებულია. თუ თქვენი აკლია, დაამატეთ აქ ხელით.</string>
+    <string name="tour_currency_title">თქვენი ვალუტა</string>
+    <string name="tour_currency_text">აირჩიეთ თქვენი ქვეყნის ვალუტა ან ის, რომლითაც თქვენი მიწოდების ან ტაქსის აპი ფასებს აჩვენებს. WayArs ნებისმიერ ქვეყანაში კითხულობს შეკვეთებს; ყველა ტარიფი და ზღვარი ამ ვალუტაში ითვლება.</string>
+    <string name="tour_tax_title">გადასახადი</string>
+    <string name="tour_tax_text">შეიყვანეთ გადასახადის განაკვეთი %-ში. WayArs მას საწვავთან ერთად გამოაკლებს და overlay აჩვენებს, რეალურად რამდენი გრჩებათ თითოეული შეკვეთიდან.</string>
     <string name="tour_final_title">ყველაფერი მზადაა!</string>
     <string name="tour_final_text">ჩართეთ ნებართვები პარამეტრებში, შემდეგ ჩართეთ Active მთავარ ეკრანზე. ამ სახელმძღვანელოს ნებისმიერ დროს გაიმეორებთ პარამეტრებში.</string>
     <string name="settings_tutorial_title">სახელმძღვანელო</string>

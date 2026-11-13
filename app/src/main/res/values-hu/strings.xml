@@ -114,6 +114,9 @@
     <string name="settings_calibration_distance_token_label">Távolság mértékegysége (szükség esetén szerkeszd)</string>
     <string name="settings_calibration_time_token_label">Idő mértékegysége (szükség esetén szerkeszd)</string>
     <string name="settings_calibration_clear">Kalibráció törlése</string>
+    <string name="settings_contacts_title">Kapcsolat</string>
+    <string name="settings_contacts_subtitle">Kérdés, ötlet vagy gond a rendelésekkel? Írj nekünk bármikor.</string>
+    <string name="settings_contacts_open_failed">Nem sikerült megnyitni a linket</string>
     <string name="settings_calibration_status_title">Amit a WayArs most kiolvas ebből az appból</string>
     <string name="settings_calibration_not_found">nem található ✗</string>
     <string name="settings_calibration_auto_ok">Az app rendeléseit a WayArs automatikusan felismeri. Nincs szükség kalibrálásra.</string>
@@ -129,7 +132,6 @@
     <string name="settings_calibration_check_ok">Működik! Koppints a Mentésre.</string>
     <string name="settings_calibration_check_fail">A WayArs másképp olvassa a rendelést, mint amit választottál. Koppints az Újrakezdésre és válassz más számokat, vagy mentsd így.</string>
     <string name="settings_calibration_restart">Újrakezdés</string>
-    <string name="settings_calibration_currency">Pénznem:</string>
     <string name="settings_calibration_advanced">Haladó: mértékegységek</string>
     <string name="settings_calibration_close">Bezárás</string>
     <string name="settings_calibration_no_numbers">Az utolsó beolvasásban nincsenek számok. Nyiss meg egy valódi rendelést ebben az appban, várj pár másodpercet, majd térj vissza ide.</string>
@@ -222,6 +224,10 @@
     <string name="tour_permissions_text">Az Active bekapcsolása előtt engedélyezd a képernyő olvasását (csak olvasás, automatikus koppintások nélkül) és a lebegő widgetet. Az értesítésekhez való hozzáférés nem kötelező.</string>
     <string name="tour_apps_title">Támogatott alkalmazások</string>
     <string name="tour_apps_text">A népszerű futár- és taxialkalmazások már be vannak építve. Ha a tiéd hiányzik, add hozzá itt kézzel.</string>
+    <string name="tour_currency_title">A pénznemed</string>
+    <string name="tour_currency_text">Válaszd az országod pénznemét, vagy azt, amelyben a futár- vagy taxi appod az árakat mutatja. A WayArs bármely országban olvassa a rendeléseket; minden díj és határ ebben a pénznemben számol.</string>
+    <string name="tour_tax_title">Adó</string>
+    <string name="tour_tax_text">Add meg az adókulcsot %-ban. A WayArs az üzemanyaggal együtt levonja, így az overlay megmutatja, mennyi marad valójában minden rendelésből.</string>
     <string name="tour_final_title">Minden kész!</string>
     <string name="tour_final_text">Engedélyezd a jogosultságokat a Beállításokban, majd kapcsold be az Active-ot a főképernyőn. Ezt a bemutatót bármikor megismételheted a Beállításokban.</string>
     <string name="settings_tutorial_title">Bemutató</string>
