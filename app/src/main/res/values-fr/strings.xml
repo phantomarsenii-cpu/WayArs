@@ -114,6 +114,25 @@
     <string name="settings_calibration_distance_token_label">Unité de distance (modifiez si nécessaire)</string>
     <string name="settings_calibration_time_token_label">Unité de temps (modifiez si nécessaire)</string>
     <string name="settings_calibration_clear">Réinitialiser la calibration</string>
+    <string name="settings_calibration_status_title">Ce que WayArs lit actuellement dans cette appli</string>
+    <string name="settings_calibration_not_found">introuvable ✗</string>
+    <string name="settings_calibration_auto_ok">Les courses de cette appli sont lues automatiquement. Aucun étalonnage nécessaire.</string>
+    <string name="settings_calibration_auto_missing">WayArs ne lit pas tout ici. Montrez-lui où sont les chiffres — 3 étapes rapides ci-dessous.</string>
+    <string name="settings_calibration_manual">Étalonner quand même</string>
+    <string name="settings_calibration_step">Étape %1$d sur 3 · %2$s</string>
+    <string name="settings_calibration_pick_money">Touchez le nombre qui est le PRIX de la course.</string>
+    <string name="settings_calibration_pick_distance">Touchez le nombre qui est la DISTANCE (km).</string>
+    <string name="settings_calibration_pick_time">Touchez le nombre qui est la DURÉE (minutes).</string>
+    <string name="settings_calibration_skip_time">Pas de durée à l’écran — passer</string>
+    <string name="settings_calibration_back">Retour</string>
+    <string name="settings_calibration_check_title">Vérification : WayArs lira</string>
+    <string name="settings_calibration_check_ok">Ça marche ! Touchez Enregistrer.</string>
+    <string name="settings_calibration_check_fail">WayArs lit cette course autrement que votre choix. Touchez Recommencer et choisissez d’autres nombres, ou enregistrez quand même.</string>
+    <string name="settings_calibration_restart">Recommencer</string>
+    <string name="settings_calibration_currency">Devise :</string>
+    <string name="settings_calibration_advanced">Avancé : unités</string>
+    <string name="settings_calibration_close">Fermer</string>
+    <string name="settings_calibration_no_numbers">Le dernier scan ne contient aucun nombre. Ouvrez une vraie course dans cette appli, attendez quelques secondes et revenez ici.</string>
 
     <string name="settings_about_title">À propos de l\'application</string>
     <string name="settings_privacy_title">Politique de confidentialité</string>

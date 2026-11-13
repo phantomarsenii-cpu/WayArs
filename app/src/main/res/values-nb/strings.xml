@@ -114,6 +114,25 @@
     <string name="settings_calibration_distance_token_label">Avstandsenhet (rediger ved behov)</string>
     <string name="settings_calibration_time_token_label">Tidsenhet (rediger ved behov)</string>
     <string name="settings_calibration_clear">Fjern kalibrering</string>
+    <string name="settings_calibration_status_title">Hva WayArs leser fra denne appen nå</string>
+    <string name="settings_calibration_not_found">ikke funnet ✗</string>
+    <string name="settings_calibration_auto_ok">Oppdrag fra denne appen leses automatisk. Ingen kalibrering trengs.</string>
+    <string name="settings_calibration_auto_missing">WayArs leser ikke alt her. Vis hvor tallene er — 3 raske trinn nedenfor.</string>
+    <string name="settings_calibration_manual">Kalibrer likevel</string>
+    <string name="settings_calibration_step">Trinn %1$d av 3 · %2$s</string>
+    <string name="settings_calibration_pick_money">Trykk på tallet som er PRISEN for oppdraget.</string>
+    <string name="settings_calibration_pick_distance">Trykk på tallet som er AVSTANDEN (km).</string>
+    <string name="settings_calibration_pick_time">Trykk på tallet som er TIDEN (minutter).</string>
+    <string name="settings_calibration_skip_time">Ingen tid på skjermen — hopp over</string>
+    <string name="settings_calibration_back">Tilbake</string>
+    <string name="settings_calibration_check_title">Kontroll: WayArs vil lese</string>
+    <string name="settings_calibration_check_ok">Det fungerer! Trykk Lagre.</string>
+    <string name="settings_calibration_check_fail">WayArs leser oppdraget annerledes enn valget ditt. Trykk Start på nytt og velg andre tall, eller lagre likevel.</string>
+    <string name="settings_calibration_restart">Start på nytt</string>
+    <string name="settings_calibration_currency">Valuta:</string>
+    <string name="settings_calibration_advanced">Avansert: enheter</string>
+    <string name="settings_calibration_close">Lukk</string>
+    <string name="settings_calibration_no_numbers">Siste skanning har ingen tall. Åpne et ekte oppdrag i denne appen, vent noen sekunder og kom tilbake hit.</string>
 
     <string name="settings_developer_website_url" translatable="false">https://phantomarsenii-cpu.github.io/AP-STUDIO/</string>
     <string name="settings_about_title">Om appen</string>

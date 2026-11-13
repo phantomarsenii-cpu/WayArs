@@ -114,6 +114,25 @@
     <string name="settings_calibration_distance_token_label">Masofa birligi (kerak bo\'lsa tahrirlang)</string>
     <string name="settings_calibration_time_token_label">Vaqt birligi (kerak bo\'lsa tahrirlang)</string>
     <string name="settings_calibration_clear">Kalibrlashni tozalash</string>
+    <string name="settings_calibration_status_title">WayArs hozir bu ilovadan nimani o‘qiyapti</string>
+    <string name="settings_calibration_not_found">topilmadi ✗</string>
+    <string name="settings_calibration_auto_ok">Bu ilova buyurtmalari avtomatik o‘qiladi. Kalibrlash shart emas.</string>
+    <string name="settings_calibration_auto_missing">WayArs bu yerda hammasini o‘qimayapti. Raqamlar qayerdaligini ko‘rsating — pastda 3 ta qisqa qadam.</string>
+    <string name="settings_calibration_manual">Baribir kalibrlash</string>
+    <string name="settings_calibration_step">%1$d-qadam / 3 · %2$s</string>
+    <string name="settings_calibration_pick_money">Buyurtma NARXI bo‘lgan raqamga bosing.</string>
+    <string name="settings_calibration_pick_distance">MASOFA (km) bo‘lgan raqamga bosing.</string>
+    <string name="settings_calibration_pick_time">VAQT (daqiqa) bo‘lgan raqamga bosing.</string>
+    <string name="settings_calibration_skip_time">Ekranda vaqt yo‘q — o‘tkazib yuborish</string>
+    <string name="settings_calibration_back">Orqaga</string>
+    <string name="settings_calibration_check_title">Tekshiruv: WayArs shunday o‘qiydi</string>
+    <string name="settings_calibration_check_ok">Ishlayapti! Saqlash tugmasini bosing.</string>
+    <string name="settings_calibration_check_fail">WayArs bu buyurtmani siz tanlagandan boshqacha o‘qiyapti. Qaytadan boshlash tugmasini bosib, boshqa raqamlarni tanlang yoki baribir saqlang.</string>
+    <string name="settings_calibration_restart">Qaytadan boshlash</string>
+    <string name="settings_calibration_currency">Valyuta:</string>
+    <string name="settings_calibration_advanced">Qo‘shimcha: o‘lchov birliklari</string>
+    <string name="settings_calibration_close">Yopish</string>
+    <string name="settings_calibration_no_numbers">Oxirgi skanerda raqamlar yo‘q. Bu ilovada haqiqiy buyurtmani oching, bir necha soniya kuting va bu yerga qayting.</string>
 
     <string name="settings_developer_website_url" translatable="false">https://phantomarsenii-cpu.github.io/AP-STUDIO/</string>
     <string name="settings_about_title">Ilova haqida</string>

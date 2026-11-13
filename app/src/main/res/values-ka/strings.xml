@@ -114,6 +114,25 @@
     <string name="settings_calibration_distance_token_label">მანძილის ერთეული (საჭიროების შემთხვევაში შეასწორეთ)</string>
     <string name="settings_calibration_time_token_label">დროის ერთეული (საჭიროების შემთხვევაში შეასწორეთ)</string>
     <string name="settings_calibration_clear">კალიბრაციის გასუფთავება</string>
+    <string name="settings_calibration_status_title">რას კითხულობს WayArs ახლა ამ აპიდან</string>
+    <string name="settings_calibration_not_found">ვერ მოიძებნა ✗</string>
+    <string name="settings_calibration_auto_ok">ამ აპის შეკვეთები ავტომატურად იკითხება. კალიბრაცია საჭირო არ არის.</string>
+    <string name="settings_calibration_auto_missing">WayArs აქ ყველაფერს ვერ კითხულობს. აჩვენეთ, სად არის რიცხვები — ქვემოთ 3 მოკლე ნაბიჯი.</string>
+    <string name="settings_calibration_manual">მაინც დაკალიბრება</string>
+    <string name="settings_calibration_step">ნაბიჯი %1$d / 3 · %2$s</string>
+    <string name="settings_calibration_pick_money">შეეხეთ რიცხვს, რომელიც შეკვეთის ფასია.</string>
+    <string name="settings_calibration_pick_distance">შეეხეთ რიცხვს, რომელიც მანძილია (კმ).</string>
+    <string name="settings_calibration_pick_time">შეეხეთ რიცხვს, რომელიც დროა (წუთი).</string>
+    <string name="settings_calibration_skip_time">ეკრანზე დრო არ არის — გამოტოვება</string>
+    <string name="settings_calibration_back">უკან</string>
+    <string name="settings_calibration_check_title">შემოწმება: WayArs წაიკითხავს</string>
+    <string name="settings_calibration_check_ok">მუშაობს! შეეხეთ შენახვას.</string>
+    <string name="settings_calibration_check_fail">WayArs ამ შეკვეთას თქვენი არჩევანისგან განსხვავებულად კითხულობს. შეეხეთ თავიდან დაწყებას და აირჩიეთ სხვა რიცხვები, ან მაინც შეინახეთ.</string>
+    <string name="settings_calibration_restart">თავიდან დაწყება</string>
+    <string name="settings_calibration_currency">ვალუტა:</string>
+    <string name="settings_calibration_advanced">დამატებით: ერთეულები</string>
+    <string name="settings_calibration_close">დახურვა</string>
+    <string name="settings_calibration_no_numbers">ბოლო სკანირებაში რიცხვები არ არის. გახსენით რეალური შეკვეთა ამ აპში, დაელოდეთ რამდენიმე წამს და დაბრუნდით აქ.</string>
 
     <string name="settings_developer_website_url" translatable="false">https://phantomarsenii-cpu.github.io/AP-STUDIO/</string>
     <string name="settings_about_title">აპის შესახებ</string>

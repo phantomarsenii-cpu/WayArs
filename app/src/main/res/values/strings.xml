@@ -124,6 +124,25 @@
     <string name="settings_calibration_distance_token_label">Distance unit (edit if needed)</string>
     <string name="settings_calibration_time_token_label">Time unit (edit if needed)</string>
     <string name="settings_calibration_clear">Clear calibration</string>
+    <string name="settings_calibration_status_title">What WayArs reads from this app now</string>
+    <string name="settings_calibration_not_found">not found ✗</string>
+    <string name="settings_calibration_auto_ok">Orders from this app are read automatically. No calibration needed.</string>
+    <string name="settings_calibration_auto_missing">WayArs doesn\'t read everything here. Show it where the numbers are — 3 quick steps below.</string>
+    <string name="settings_calibration_manual">Calibrate anyway</string>
+    <string name="settings_calibration_step">Step %1$d of 3 · %2$s</string>
+    <string name="settings_calibration_pick_money">Tap the number that is the order PRICE.</string>
+    <string name="settings_calibration_pick_distance">Tap the number that is the DISTANCE (km).</string>
+    <string name="settings_calibration_pick_time">Tap the number that is the TIME (minutes).</string>
+    <string name="settings_calibration_skip_time">No time on screen — skip</string>
+    <string name="settings_calibration_back">Back</string>
+    <string name="settings_calibration_check_title">Check: WayArs will read</string>
+    <string name="settings_calibration_check_ok">Works! Tap Save.</string>
+    <string name="settings_calibration_check_fail">WayArs reads this order differently from what you picked. Tap Start over and pick other numbers, or save anyway.</string>
+    <string name="settings_calibration_restart">Start over</string>
+    <string name="settings_calibration_currency">Currency:</string>
+    <string name="settings_calibration_advanced">Advanced: unit words</string>
+    <string name="settings_calibration_close">Close</string>
+    <string name="settings_calibration_no_numbers">The last scan has no numbers. Open a real order in this app, wait a few seconds and come back here.</string>
 
     <string name="settings_developer_website_url" translatable="false">https://phantomarsenii-cpu.github.io/AP-STUDIO/</string>
     <string name="settings_about_title">About the app</string>

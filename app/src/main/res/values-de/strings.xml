@@ -114,6 +114,25 @@
     <string name="settings_calibration_distance_token_label">Distanzeinheit (bei Bedarf bearbeiten)</string>
     <string name="settings_calibration_time_token_label">Zeiteinheit (bei Bedarf bearbeiten)</string>
     <string name="settings_calibration_clear">Kalibrierung zurücksetzen</string>
+    <string name="settings_calibration_status_title">Was WayArs jetzt aus dieser App liest</string>
+    <string name="settings_calibration_not_found">nicht gefunden ✗</string>
+    <string name="settings_calibration_auto_ok">Aufträge aus dieser App werden automatisch erkannt. Keine Kalibrierung nötig.</string>
+    <string name="settings_calibration_auto_missing">WayArs erkennt hier nicht alles. Zeig, wo die Zahlen stehen — 3 kurze Schritte unten.</string>
+    <string name="settings_calibration_manual">Trotzdem kalibrieren</string>
+    <string name="settings_calibration_step">Schritt %1$d von 3 · %2$s</string>
+    <string name="settings_calibration_pick_money">Tippe auf die Zahl, die der PREIS des Auftrags ist.</string>
+    <string name="settings_calibration_pick_distance">Tippe auf die Zahl, die die STRECKE (km) ist.</string>
+    <string name="settings_calibration_pick_time">Tippe auf die Zahl, die die ZEIT (Minuten) ist.</string>
+    <string name="settings_calibration_skip_time">Keine Zeit auf dem Bildschirm — überspringen</string>
+    <string name="settings_calibration_back">Zurück</string>
+    <string name="settings_calibration_check_title">Prüfung: WayArs liest</string>
+    <string name="settings_calibration_check_ok">Funktioniert! Tippe auf Speichern.</string>
+    <string name="settings_calibration_check_fail">WayArs liest diesen Auftrag anders als deine Auswahl. Tippe auf Neu beginnen und wähle andere Zahlen oder speichere trotzdem.</string>
+    <string name="settings_calibration_restart">Neu beginnen</string>
+    <string name="settings_calibration_currency">Währung:</string>
+    <string name="settings_calibration_advanced">Erweitert: Einheiten</string>
+    <string name="settings_calibration_close">Schließen</string>
+    <string name="settings_calibration_no_numbers">Der letzte Scan enthält keine Zahlen. Öffne einen echten Auftrag in dieser App, warte ein paar Sekunden und komm hierher zurück.</string>
 
     <string name="settings_about_title">Über die App</string>
     <string name="settings_privacy_title">Datenschutzerklärung</string>

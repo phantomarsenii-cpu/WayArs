@@ -114,6 +114,25 @@
     <string name="settings_calibration_distance_token_label">Afstandsenhed (rediger om nødvendigt)</string>
     <string name="settings_calibration_time_token_label">Tidsenhed (rediger om nødvendigt)</string>
     <string name="settings_calibration_clear">Ryd kalibrering</string>
+    <string name="settings_calibration_status_title">Hvad WayArs læser fra denne app nu</string>
+    <string name="settings_calibration_not_found">ikke fundet ✗</string>
+    <string name="settings_calibration_auto_ok">Ordrer fra denne app læses automatisk. Ingen kalibrering nødvendig.</string>
+    <string name="settings_calibration_auto_missing">WayArs læser ikke alt her. Vis den, hvor tallene er — 3 hurtige trin nedenfor.</string>
+    <string name="settings_calibration_manual">Kalibrer alligevel</string>
+    <string name="settings_calibration_step">Trin %1$d af 3 · %2$s</string>
+    <string name="settings_calibration_pick_money">Tryk på tallet, der er ordrens PRIS.</string>
+    <string name="settings_calibration_pick_distance">Tryk på tallet, der er AFSTANDEN (km).</string>
+    <string name="settings_calibration_pick_time">Tryk på tallet, der er TIDEN (minutter).</string>
+    <string name="settings_calibration_skip_time">Ingen tid på skærmen — spring over</string>
+    <string name="settings_calibration_back">Tilbage</string>
+    <string name="settings_calibration_check_title">Kontrol: WayArs vil læse</string>
+    <string name="settings_calibration_check_ok">Det virker! Tryk på Gem.</string>
+    <string name="settings_calibration_check_fail">WayArs læser ordren anderledes end dit valg. Tryk på Start forfra og vælg andre tal, eller gem alligevel.</string>
+    <string name="settings_calibration_restart">Start forfra</string>
+    <string name="settings_calibration_currency">Valuta:</string>
+    <string name="settings_calibration_advanced">Avanceret: enheder</string>
+    <string name="settings_calibration_close">Luk</string>
+    <string name="settings_calibration_no_numbers">Den seneste scanning har ingen tal. Åbn en rigtig ordre i denne app, vent et par sekunder og kom tilbage her.</string>
 
     <string name="settings_developer_website_url" translatable="false">https://phantomarsenii-cpu.github.io/AP-STUDIO/</string>
     <string name="settings_about_title">Om appen</string>

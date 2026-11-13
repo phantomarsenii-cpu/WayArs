@@ -114,6 +114,25 @@
     <string name="settings_calibration_distance_token_label">Avståndsenhet (redigera vid behov)</string>
     <string name="settings_calibration_time_token_label">Tidsenhet (redigera vid behov)</string>
     <string name="settings_calibration_clear">Rensa kalibrering</string>
+    <string name="settings_calibration_status_title">Vad WayArs läser från den här appen nu</string>
+    <string name="settings_calibration_not_found">hittades inte ✗</string>
+    <string name="settings_calibration_auto_ok">Uppdrag från den här appen läses automatiskt. Ingen kalibrering behövs.</string>
+    <string name="settings_calibration_auto_missing">WayArs läser inte allt här. Visa var siffrorna finns — 3 snabba steg nedan.</string>
+    <string name="settings_calibration_manual">Kalibrera ändå</string>
+    <string name="settings_calibration_step">Steg %1$d av 3 · %2$s</string>
+    <string name="settings_calibration_pick_money">Tryck på talet som är uppdragets PRIS.</string>
+    <string name="settings_calibration_pick_distance">Tryck på talet som är AVSTÅNDET (km).</string>
+    <string name="settings_calibration_pick_time">Tryck på talet som är TIDEN (minuter).</string>
+    <string name="settings_calibration_skip_time">Ingen tid på skärmen — hoppa över</string>
+    <string name="settings_calibration_back">Tillbaka</string>
+    <string name="settings_calibration_check_title">Kontroll: WayArs kommer att läsa</string>
+    <string name="settings_calibration_check_ok">Det fungerar! Tryck på Spara.</string>
+    <string name="settings_calibration_check_fail">WayArs läser uppdraget annorlunda än ditt val. Tryck på Börja om och välj andra tal, eller spara ändå.</string>
+    <string name="settings_calibration_restart">Börja om</string>
+    <string name="settings_calibration_currency">Valuta:</string>
+    <string name="settings_calibration_advanced">Avancerat: enheter</string>
+    <string name="settings_calibration_close">Stäng</string>
+    <string name="settings_calibration_no_numbers">Senaste skanningen har inga siffror. Öppna ett riktigt uppdrag i appen, vänta några sekunder och kom tillbaka hit.</string>
 
     <string name="settings_developer_website_url" translatable="false">https://phantomarsenii-cpu.github.io/AP-STUDIO/</string>
     <string name="settings_about_title">Om appen</string>

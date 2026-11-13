@@ -119,6 +119,25 @@
     <string name="settings_calibration_distance_token_label">Единица расстояния (при необходимости отредактируйте)</string>
     <string name="settings_calibration_time_token_label">Единица времени (при необходимости отредактируйте)</string>
     <string name="settings_calibration_clear">Сбросить калибровку</string>
+    <string name="settings_calibration_status_title">Что WayArs сейчас считывает из этого приложения</string>
+    <string name="settings_calibration_not_found">не найдено ✗</string>
+    <string name="settings_calibration_auto_ok">Заказы из этого приложения распознаются автоматически. Калибровка не нужна.</string>
+    <string name="settings_calibration_auto_missing">WayArs распознаёт здесь не всё. Покажите, где какие числа — 3 коротких шага ниже.</string>
+    <string name="settings_calibration_manual">Всё равно откалибровать</string>
+    <string name="settings_calibration_step">Шаг %1$d из 3 · %2$s</string>
+    <string name="settings_calibration_pick_money">Нажмите на число, которое является ЦЕНОЙ заказа.</string>
+    <string name="settings_calibration_pick_distance">Нажмите на число, которое является РАССТОЯНИЕМ (км).</string>
+    <string name="settings_calibration_pick_time">Нажмите на число, которое является ВРЕМЕНЕМ (минуты).</string>
+    <string name="settings_calibration_skip_time">Времени на экране нет — пропустить</string>
+    <string name="settings_calibration_back">Назад</string>
+    <string name="settings_calibration_check_title">Проверка: WayArs будет считывать</string>
+    <string name="settings_calibration_check_ok">Работает! Нажмите «Сохранить».</string>
+    <string name="settings_calibration_check_fail">WayArs читает этот заказ не так, как вы выбрали. Нажмите «Начать заново» и выберите другие числа или сохраните как есть.</string>
+    <string name="settings_calibration_restart">Начать заново</string>
+    <string name="settings_calibration_currency">Валюта:</string>
+    <string name="settings_calibration_advanced">Дополнительно: единицы измерения</string>
+    <string name="settings_calibration_close">Закрыть</string>
+    <string name="settings_calibration_no_numbers">В последнем сканировании нет чисел. Откройте реальный заказ в этом приложении, подождите пару секунд и вернитесь сюда.</string>
 
     <string name="settings_about_title">О приложении</string>
     <string name="settings_privacy_title">Политика конфиденциальности</string>

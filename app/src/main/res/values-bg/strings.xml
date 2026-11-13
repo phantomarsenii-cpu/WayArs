@@ -114,6 +114,25 @@
     <string name="settings_calibration_distance_token_label">Единица за разстояние (редактирайте при нужда)</string>
     <string name="settings_calibration_time_token_label">Единица за време (редактирайте при нужда)</string>
     <string name="settings_calibration_clear">Изчисти калибрирането</string>
+    <string name="settings_calibration_status_title">Какво чете WayArs сега от това приложение</string>
+    <string name="settings_calibration_not_found">не е намерено ✗</string>
+    <string name="settings_calibration_auto_ok">Поръчките от това приложение се разпознават автоматично. Не е нужна калибровка.</string>
+    <string name="settings_calibration_auto_missing">WayArs не разпознава всичко тук. Покажете къде са числата — 3 кратки стъпки по-долу.</string>
+    <string name="settings_calibration_manual">Калибрирай въпреки това</string>
+    <string name="settings_calibration_step">Стъпка %1$d от 3 · %2$s</string>
+    <string name="settings_calibration_pick_money">Докоснете числото, което е ЦЕНАТА на поръчката.</string>
+    <string name="settings_calibration_pick_distance">Докоснете числото, което е РАЗСТОЯНИЕТО (км).</string>
+    <string name="settings_calibration_pick_time">Докоснете числото, което е ВРЕМЕТО (минути).</string>
+    <string name="settings_calibration_skip_time">Няма време на екрана — пропусни</string>
+    <string name="settings_calibration_back">Назад</string>
+    <string name="settings_calibration_check_title">Проверка: WayArs ще прочете</string>
+    <string name="settings_calibration_check_ok">Работи! Натиснете Запази.</string>
+    <string name="settings_calibration_check_fail">WayArs чете поръчката различно от избора ви. Натиснете Започни отначало и изберете други числа или запазете въпреки това.</string>
+    <string name="settings_calibration_restart">Започни отначало</string>
+    <string name="settings_calibration_currency">Валута:</string>
+    <string name="settings_calibration_advanced">Разширени: мерни единици</string>
+    <string name="settings_calibration_close">Затвори</string>
+    <string name="settings_calibration_no_numbers">Последното сканиране няма числа. Отворете истинска поръчка в това приложение, изчакайте няколко секунди и се върнете тук.</string>
 
     <string name="settings_developer_website_url" translatable="false">https://phantomarsenii-cpu.github.io/AP-STUDIO/</string>
     <string name="settings_about_title">За приложението</string>

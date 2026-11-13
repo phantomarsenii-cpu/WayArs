@@ -29,6 +29,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBalanceWallet
 import androidx.compose.material.icons.filled.Apps
@@ -97,6 +98,7 @@ import com.wayars.app.domain.model.PackageHint
 import com.wayars.app.domain.model.VehicleCategory
 import com.wayars.app.domain.model.VehicleProfile
 import com.wayars.app.presentation.ui.theme.WaAmber
+import com.wayars.app.presentation.ui.theme.WaBlue
 import com.wayars.app.presentation.ui.theme.WaNeonGreen
 import com.wayars.app.presentation.ui.theme.WaRed
 import com.wayars.app.presentation.ui.theme.WaSurface
@@ -104,6 +106,8 @@ import com.wayars.app.presentation.ui.theme.WaSurfaceVariant
 import com.wayars.app.presentation.ui.theme.WaTextPrimary
 import com.wayars.app.presentation.ui.theme.WaTextSecondary
 import com.wayars.app.util.AccessibilityUtils
+import com.wayars.app.util.CalibrationHelper
+import com.wayars.app.util.OrderTextParser
 import com.wayars.app.util.CurrencyFormatter
 import com.wayars.app.util.LocaleManager
 
@@ -775,26 +779,28 @@ private fun InstalledAppsPickerDialog(
 }
 
 /**
- * Lets the user teach WayArs how a specific custom app's screen is laid
- * out, without needing a code change — reads from
- * [com.wayars.app.service.accessibility.ScanDiagnostics.latestByPackage],
- * the freshest scan WayArs has for THIS package specifically, immune to
- * being pushed out by other apps' traffic (see that map's own doc for why
- * the plain rolling diagnostics log isn't safe to use here). No new capture
- * mechanism is needed: whatever this app's screen most recently produced
- * (while the user had a real order open, per the on-screen instructions)
- * is right here, tap the line that's the price/distance/
- * time, and WayArs derives an extra pattern for JUST that package from the
- * literal unit word/symbol next to the number in that line (see
- * ScreenTextParser.buildHintMoneyPatterns and friends) — not the number
- * itself, since that changes every order.
+ * Step-by-step calibration for one app (Settings -> Supported apps -> ✎).
  *
- * A static screenshot upload was considered and rejected: WayArs reads the
- * live AccessibilityNodeInfo tree, not pixels, so a photo can't be mapped
- * to anything a future live scan of that app will produce. The live scan
- * already sitting in ScanDiagnostics is the actual equivalent of "show it
- * one example" that works with how this app actually reads screens.
+ * Reads the freshest scan WayArs has for THIS package
+ * ([com.wayars.app.service.accessibility.ScanDiagnostics.latestByPackage]).
+ *
+ *  1. First shows what WayArs ALREADY reads from that screen (price /
+ *     distance / time). For the built-in apps this is normally all green, and
+ *     the dialog says so plainly — no calibration needed.
+ *  2. Otherwise (or on "Calibrate anyway") it walks through three steps:
+ *     tap the PRICE number, then the DISTANCE number, then the TIME number.
+ *     Only lines that contain numbers are shown, and the user taps the exact
+ *     number, not a whole line — the unit word next to that number ("PLN",
+ *     "км", "мин") becomes the hint token (see [CalibrationHelper]).
+ *  3. Finally it re-parses the same scan WITH the new hint and shows whether
+ *     WayArs now reads the numbers the user picked, before saving.
+ *
+ * The old version showed every scanned line (icon glyphs included) with three
+ * buttons each, and copied the whole line minus digits into the token
+ * fields ("км мин PLN"), which matched nothing.
  */
+private enum class CalStep { MONEY, DISTANCE, TIME, DONE }
+
 @Composable
 private fun CalibrationDialog(
     packageName: String,
@@ -804,25 +810,72 @@ private fun CalibrationDialog(
     onClearHint: () -> Unit
 ) {
     val latestByPackage by com.wayars.app.service.accessibility.ScanDiagnostics.latestByPackage.collectAsState()
-    val latestEntry = remember(latestByPackage, packageName) {
-        latestByPackage[packageName]
-    }
+    val rawTexts = latestByPackage[packageName]?.rawTexts.orEmpty()
+    val lines = remember(rawTexts) { CalibrationHelper.candidateLines(rawTexts) }
+    val displayName = BUILTIN_SUPPORTED_APPS.firstOrNull { it.packageId == packageName }?.displayName ?: packageName
 
-    var moneyRowText by remember(packageName) { mutableStateOf<String?>(null) }
-    var distanceRowText by remember(packageName) { mutableStateOf<String?>(null) }
-    var timeRowText by remember(packageName) { mutableStateOf<String?>(null) }
+    val autoResult = remember(rawTexts, existingHint) {
+        if (rawTexts.isEmpty()) null else OrderTextParser.parse(packageName, rawTexts, existingHint).candidate
+    }
+    val autoOk = autoResult?.isComplete == true
+
+    var wizardOpen by remember(packageName) { mutableStateOf(false) }
+    var step by remember(packageName) { mutableStateOf(CalStep.MONEY) }
+    var moneyPick by remember(packageName) { mutableStateOf<CalibrationHelper.NumberPick?>(null) }
+    var distancePick by remember(packageName) { mutableStateOf<CalibrationHelper.NumberPick?>(null) }
+    var timePick by remember(packageName) { mutableStateOf<CalibrationHelper.NumberPick?>(null) }
     var moneyToken by remember(packageName) { mutableStateOf(existingHint?.moneyToken.orEmpty()) }
     var moneyCurrency by remember(packageName) { mutableStateOf(existingHint?.moneyCurrency ?: Currency.PLN) }
     var distanceToken by remember(packageName) { mutableStateOf(existingHint?.distanceUnitToken.orEmpty()) }
     var timeToken by remember(packageName) { mutableStateOf(existingHint?.timeUnitToken.orEmpty()) }
     var currencyMenuExpanded by remember { mutableStateOf(false) }
+    var advancedOpen by remember { mutableStateOf(false) }
 
-    // A tapped line like "12.50 CHF" or "CHF 12.50" -> "CHF": strip every
-    // digit/decimal separator, keep whatever's left. Deliberately simple —
-    // shown in an editable field right after, so the person can trim any
-    // stray leftover text (an emoji, a second word) by hand rather than the
-    // app guessing wrong silently.
-    fun extractToken(text: String): String = text.replace(Regex("""[\d.,]"""), "").trim()
+    val showWizard = lines.isNotEmpty() && (wizardOpen || !autoOk)
+    val newHint = PackageHint(
+        packageName = packageName,
+        moneyToken = moneyToken.trim().ifBlank { null },
+        moneyCurrency = if (moneyToken.isNotBlank()) moneyCurrency else null,
+        distanceUnitToken = distanceToken.trim().ifBlank { null },
+        timeUnitToken = timeToken.trim().ifBlank { null }
+    )
+    val checkResult = remember(rawTexts, newHint) { OrderTextParser.parse(packageName, rawTexts, newHint).candidate }
+    val checkOk = checkResult.isComplete &&
+        CalibrationHelper.sameNumber(checkResult.earnings, moneyPick?.value) &&
+        CalibrationHelper.sameNumber(checkResult.distanceKm, distancePick?.value) &&
+        (timePick == null || CalibrationHelper.sameNumber(checkResult.timeMinutes, timePick?.value))
+
+    val moneyColor = WaNeonGreen
+    val distanceColor = WaBlue
+    val timeColor = WaAmber
+
+    fun restart() {
+        moneyPick = null; distancePick = null; timePick = null
+        step = CalStep.MONEY
+    }
+
+    fun onNumberPicked(pick: CalibrationHelper.NumberPick) {
+        val token = CalibrationHelper.unitTokenFor(lines[pick.lineIndex], pick)
+        when (step) {
+            CalStep.MONEY -> {
+                moneyPick = pick
+                moneyToken = token
+                CalibrationHelper.currencyForToken(token)?.let { moneyCurrency = it }
+                step = CalStep.DISTANCE
+            }
+            CalStep.DISTANCE -> {
+                distancePick = pick
+                distanceToken = token
+                step = CalStep.TIME
+            }
+            CalStep.TIME -> {
+                timePick = pick
+                timeToken = token
+                step = CalStep.DONE
+            }
+            CalStep.DONE -> Unit
+        }
+    }
 
     Dialog(onDismissRequest = onDismiss) {
         Column(
@@ -830,151 +883,185 @@ private fun CalibrationDialog(
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(16.dp))
                 .background(WaSurface)
-                .padding(16.dp)
+                .verticalScroll(rememberScrollState())
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            Text(
-                stringResource(R.string.settings_calibration_title),
-                color = MaterialTheme.colorScheme.onSurface,
-                style = MaterialTheme.typography.titleMedium
-            )
-            Text(
-                packageName,
-                color = WaTextSecondary,
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
+            Column {
+                Text(
+                    stringResource(R.string.settings_calibration_title),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(displayName, color = WaTextSecondary, style = MaterialTheme.typography.bodySmall)
+            }
 
-            if (latestEntry == null) {
+            if (rawTexts.isEmpty()) {
                 Text(
                     stringResource(R.string.settings_calibration_no_data),
                     color = WaTextSecondary,
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(vertical = 12.dp)
+                    style = MaterialTheme.typography.bodyMedium
                 )
             } else {
-                Text(
-                    stringResource(R.string.settings_calibration_instructions),
-                    color = WaTextSecondary,
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(bottom = 8.dp)
+                // ---- 1. What WayArs reads right now ----
+                CalibrationResultCard(
+                    title = stringResource(R.string.settings_calibration_status_title),
+                    result = autoResult,
+                    fallbackCurrency = moneyCurrency
                 )
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .heightIn(max = 280.dp)
-                ) {
-                    items(latestEntry.rawTexts) { line ->
-                        val isMoney = line == moneyRowText
-                        val isDistance = line == distanceRowText
-                        val isTime = line == timeRowText
-                        Column(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
-                            Text(
-                                line,
-                                color = if (isMoney || isDistance || isTime) WaNeonGreen else Color.White,
-                                style = MaterialTheme.typography.bodySmall
-                            )
-                            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                                CalibrationRoleChip(
-                                    label = stringResource(R.string.settings_calibration_role_money),
-                                    selected = isMoney,
-                                    onClick = { moneyRowText = line; moneyToken = extractToken(line) }
-                                )
-                                CalibrationRoleChip(
-                                    label = stringResource(R.string.settings_calibration_role_distance),
-                                    selected = isDistance,
-                                    onClick = { distanceRowText = line; distanceToken = extractToken(line) }
-                                )
-                                CalibrationRoleChip(
-                                    label = stringResource(R.string.settings_calibration_role_time),
-                                    selected = isTime,
-                                    onClick = { timeRowText = line; timeToken = extractToken(line) }
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (moneyRowText != null) {
-                Text(
-                    stringResource(R.string.settings_calibration_money_token_label),
-                    color = WaTextSecondary,
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(top = 8.dp)
-                )
-                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    OutlinedTextField(
-                        value = moneyToken,
-                        onValueChange = { moneyToken = it },
-                        singleLine = true,
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = WaNeonGreen,
-                            unfocusedBorderColor = WaTextSecondary,
-                            focusedTextColor = Color.White,
-                            unfocusedTextColor = Color.White
-                        ),
-                        modifier = Modifier.weight(1f)
+                if (autoOk) {
+                    Text(
+                        stringResource(R.string.settings_calibration_auto_ok),
+                        color = WaNeonGreen,
+                        style = MaterialTheme.typography.bodyMedium
                     )
-                    Box {
-                        TextButton(onClick = { currencyMenuExpanded = true }) {
-                            Text(moneyCurrency.code, color = WaNeonGreen)
+                    if (!wizardOpen) {
+                        TextButton(onClick = { wizardOpen = true; restart() }) {
+                            Text(stringResource(R.string.settings_calibration_manual), color = WaTextSecondary)
                         }
-                        DropdownMenu(expanded = currencyMenuExpanded, onDismissRequest = { currencyMenuExpanded = false }) {
-                            Currency.entries.forEach { c ->
-                                DropdownMenuItem(
-                                    text = { Text("${c.code} (${c.symbol})") },
-                                    onClick = { moneyCurrency = c; currencyMenuExpanded = false }
-                                )
+                    }
+                } else {
+                    Text(
+                        stringResource(R.string.settings_calibration_auto_missing),
+                        color = WaAmber,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
+
+                if (lines.isEmpty()) {
+                    Text(
+                        stringResource(R.string.settings_calibration_no_numbers),
+                        color = WaTextSecondary,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
+
+                // ---- 2. Wizard ----
+                if (showWizard && step != CalStep.DONE) {
+                    val (roleLabel, roleColor, instruction) = when (step) {
+                        CalStep.MONEY -> Triple(stringResource(R.string.settings_calibration_role_money), moneyColor, stringResource(R.string.settings_calibration_pick_money))
+                        CalStep.DISTANCE -> Triple(stringResource(R.string.settings_calibration_role_distance), distanceColor, stringResource(R.string.settings_calibration_pick_distance))
+                        else -> Triple(stringResource(R.string.settings_calibration_role_time), timeColor, stringResource(R.string.settings_calibration_pick_time))
+                    }
+                    HorizontalDivider(color = WaSurfaceVariant)
+                    Text(
+                        stringResource(R.string.settings_calibration_step, step.ordinal + 1, roleLabel),
+                        color = roleColor,
+                        style = MaterialTheme.typography.titleSmall
+                    )
+                    Text(instruction, color = Color.White, style = MaterialTheme.typography.bodyMedium)
+
+                    lines.forEachIndexed { index, line ->
+                        val numbers = remember(line, index) { CalibrationHelper.numbersIn(index, line) }
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(12.dp))
+                                .background(WaSurfaceVariant)
+                                .padding(horizontal = 12.dp, vertical = 8.dp)
+                        ) {
+                            Text(line, color = WaTextSecondary, style = MaterialTheme.typography.bodySmall)
+                            Row(
+                                modifier = Modifier.horizontalScroll(rememberScrollState()).padding(top = 6.dp),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                numbers.forEach { pick ->
+                                    val pickedColor = when (pick) {
+                                        moneyPick -> moneyColor
+                                        distancePick -> distanceColor
+                                        timePick -> timeColor
+                                        else -> null
+                                    }
+                                    Text(
+                                        pick.text,
+                                        color = if (pickedColor != null) Color.Black else Color.White,
+                                        fontWeight = FontWeight.Bold,
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        modifier = Modifier
+                                            .clip(RoundedCornerShape(10.dp))
+                                            .background(pickedColor ?: WaSurface)
+                                            .border(1.dp, roleColor.copy(alpha = 0.6f), RoundedCornerShape(10.dp))
+                                            .clickable { onNumberPicked(pick) }
+                                            .padding(horizontal = 14.dp, vertical = 6.dp)
+                                    )
+                                }
                             }
                         }
+                    }
+
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        if (step != CalStep.MONEY) {
+                            TextButton(onClick = {
+                                step = when (step) {
+                                    CalStep.TIME -> CalStep.DISTANCE
+                                    else -> CalStep.MONEY
+                                }
+                            }) { Text(stringResource(R.string.settings_calibration_back), color = WaTextSecondary) }
+                        }
+                        if (step == CalStep.TIME) {
+                            TextButton(onClick = {
+                                timePick = null
+                                timeToken = ""
+                                step = CalStep.DONE
+                            }) { Text(stringResource(R.string.settings_calibration_skip_time), color = timeColor) }
+                        }
+                    }
+                }
+
+                // ---- 3. Check before saving ----
+                if (showWizard && step == CalStep.DONE) {
+                    HorizontalDivider(color = WaSurfaceVariant)
+                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(
+                            stringResource(R.string.settings_calibration_currency),
+                            color = WaTextSecondary,
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                        Box {
+                            TextButton(onClick = { currencyMenuExpanded = true }) {
+                                Text("${moneyCurrency.code} ▾", color = WaNeonGreen)
+                            }
+                            DropdownMenu(expanded = currencyMenuExpanded, onDismissRequest = { currencyMenuExpanded = false }) {
+                                Currency.entries.forEach { c ->
+                                    DropdownMenuItem(
+                                        text = { Text("${c.code} (${c.symbol})") },
+                                        onClick = { moneyCurrency = c; currencyMenuExpanded = false }
+                                    )
+                                }
+                            }
+                        }
+                    }
+                    CalibrationResultCard(
+                        title = stringResource(R.string.settings_calibration_check_title),
+                        result = checkResult,
+                        fallbackCurrency = moneyCurrency
+                    )
+                    Text(
+                        stringResource(if (checkOk) R.string.settings_calibration_check_ok else R.string.settings_calibration_check_fail),
+                        color = if (checkOk) WaNeonGreen else WaAmber,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                    TextButton(onClick = { restart() }) {
+                        Text(stringResource(R.string.settings_calibration_restart), color = WaTextSecondary)
+                    }
+
+                    Text(
+                        stringResource(R.string.settings_calibration_advanced) + if (advancedOpen) " ▴" else " ▾",
+                        color = WaTextSecondary,
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.clickable { advancedOpen = !advancedOpen }.padding(vertical = 4.dp)
+                    )
+                    if (advancedOpen) {
+                        CalibrationTokenField(stringResource(R.string.settings_calibration_money_token_label), moneyToken) { moneyToken = it }
+                        CalibrationTokenField(stringResource(R.string.settings_calibration_distance_token_label), distanceToken) { distanceToken = it }
+                        CalibrationTokenField(stringResource(R.string.settings_calibration_time_token_label), timeToken) { timeToken = it }
                     }
                 }
             }
 
-            if (distanceRowText != null) {
-                Text(
-                    stringResource(R.string.settings_calibration_distance_token_label),
-                    color = WaTextSecondary,
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(top = 8.dp)
-                )
-                OutlinedTextField(
-                    value = distanceToken,
-                    onValueChange = { distanceToken = it },
-                    singleLine = true,
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = WaNeonGreen,
-                        unfocusedBorderColor = WaTextSecondary,
-                        focusedTextColor = Color.White,
-                        unfocusedTextColor = Color.White
-                    ),
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
-
-            if (timeRowText != null) {
-                Text(
-                    stringResource(R.string.settings_calibration_time_token_label),
-                    color = WaTextSecondary,
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(top = 8.dp)
-                )
-                OutlinedTextField(
-                    value = timeToken,
-                    onValueChange = { timeToken = it },
-                    singleLine = true,
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = WaNeonGreen,
-                        unfocusedBorderColor = WaTextSecondary,
-                        focusedTextColor = Color.White,
-                        unfocusedTextColor = Color.White
-                    ),
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
-
+            // ---- Buttons ----
             Row(
-                modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+                modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -986,25 +1073,17 @@ private fun CalibrationDialog(
                     Spacer(Modifier.weight(1f))
                 }
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    val canSave = showWizard && step == CalStep.DONE && !newHint.isEmpty
                     TextButton(onClick = onDismiss) {
-                        Text(stringResource(R.string.settings_cancel))
+                        Text(stringResource(if (canSave) R.string.settings_cancel else R.string.settings_calibration_close))
                     }
-                    Button(
-                        onClick = {
-                            onSave(
-                                PackageHint(
-                                    packageName = packageName,
-                                    moneyToken = moneyToken.trim().ifBlank { null },
-                                    moneyCurrency = if (moneyToken.isNotBlank()) moneyCurrency else null,
-                                    distanceUnitToken = distanceToken.trim().ifBlank { null },
-                                    timeUnitToken = timeToken.trim().ifBlank { null }
-                                )
-                            )
-                        },
-                        enabled = moneyToken.isNotBlank() || distanceToken.isNotBlank() || timeToken.isNotBlank(),
-                        colors = ButtonDefaults.buttonColors(containerColor = WaNeonGreen, contentColor = Color.Black)
-                    ) {
-                        Text(stringResource(R.string.settings_custom_save))
+                    if (canSave) {
+                        Button(
+                            onClick = { onSave(newHint) },
+                            colors = ButtonDefaults.buttonColors(containerColor = WaNeonGreen, contentColor = Color.Black)
+                        ) {
+                            Text(stringResource(R.string.settings_custom_save))
+                        }
                     }
                 }
             }
@@ -1012,18 +1091,60 @@ private fun CalibrationDialog(
     }
 }
 
+/** Price / distance / time as read by the parser, each green when found, "not found" otherwise. */
 @Composable
-private fun CalibrationRoleChip(label: String, selected: Boolean, onClick: () -> Unit) {
-    Text(
-        label,
-        color = if (selected) Color.Black else Color.White,
-        style = MaterialTheme.typography.bodySmall,
-        modifier = Modifier
-            .clip(RoundedCornerShape(8.dp))
-            .background(if (selected) WaNeonGreen else WaSurfaceVariant)
-            .clickable(onClick = onClick)
-            .padding(horizontal = 10.dp, vertical = 4.dp)
+private fun CalibrationResultCard(
+    title: String,
+    result: com.wayars.app.domain.model.RawOrderCandidate?,
+    fallbackCurrency: Currency
+) {
+    val notFound = stringResource(R.string.settings_calibration_not_found)
+    val currency = result?.currency ?: fallbackCurrency
+    val rows = listOf(
+        stringResource(R.string.settings_calibration_role_money) to result?.earnings?.let { String.format(java.util.Locale.US, "%.2f %s", it, currency.code) },
+        stringResource(R.string.settings_calibration_role_distance) to result?.distanceKm?.let { String.format(java.util.Locale.US, "%.1f km", it) },
+        stringResource(R.string.settings_calibration_role_time) to result?.timeMinutes?.takeIf { it > 0 }?.let { String.format(java.util.Locale.US, "%.0f min", it) }
     )
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .background(WaSurfaceVariant)
+            .padding(12.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        Text(title, color = WaTextSecondary, style = MaterialTheme.typography.bodySmall)
+        rows.forEach { (label, value) ->
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Text(label, color = Color.White, style = MaterialTheme.typography.bodyMedium)
+                Text(
+                    if (value != null) "$value ✓" else notFound,
+                    color = if (value != null) WaNeonGreen else WaRed,
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun CalibrationTokenField(label: String, value: String, onChange: (String) -> Unit) {
+    Column {
+        Text(label, color = WaTextSecondary, style = MaterialTheme.typography.bodySmall)
+        OutlinedTextField(
+            value = value,
+            onValueChange = onChange,
+            singleLine = true,
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = WaNeonGreen,
+                unfocusedBorderColor = WaTextSecondary,
+                focusedTextColor = Color.White,
+                unfocusedTextColor = Color.White
+            ),
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
 }
 
 /**

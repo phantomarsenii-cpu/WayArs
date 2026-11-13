@@ -114,6 +114,25 @@
     <string name="settings_calibration_distance_token_label">Հեռավորության միավոր (խմբագրեք անհրաժեշտության դեպքում)</string>
     <string name="settings_calibration_time_token_label">Ժամանակի միավոր (խմբագրեք անհրաժեշտության դեպքում)</string>
     <string name="settings_calibration_clear">Մաքրել կարգաբերումը</string>
+    <string name="settings_calibration_status_title">Ինչ է WayArs-ը հիմա կարդում այս հավելվածից</string>
+    <string name="settings_calibration_not_found">չի գտնվել ✗</string>
+    <string name="settings_calibration_auto_ok">Այս հավելվածի պատվերները կարդացվում են ավտոմատ։ Կալիբրացիա պետք չէ։</string>
+    <string name="settings_calibration_auto_missing">WayArs-ն այստեղ ամեն ինչ չի կարդում։ Ցույց տվեք, թե որտեղ են թվերը — 3 կարճ քայլ ներքևում։</string>
+    <string name="settings_calibration_manual">Միևնույնն է կալիբրացնել</string>
+    <string name="settings_calibration_step">Քայլ %1$d / 3 · %2$s</string>
+    <string name="settings_calibration_pick_money">Սեղմեք այն թվի վրա, որը պատվերի ԳԻՆՆ է։</string>
+    <string name="settings_calibration_pick_distance">Սեղմեք այն թվի վրա, որը ՀԵՌԱՎՈՐՈՒԹՅՈՒՆՆ է (կմ)։</string>
+    <string name="settings_calibration_pick_time">Սեղմեք այն թվի վրա, որը ԺԱՄԱՆԱԿՆ է (րոպե)։</string>
+    <string name="settings_calibration_skip_time">Էկրանին ժամանակ չկա — բաց թողնել</string>
+    <string name="settings_calibration_back">Հետ</string>
+    <string name="settings_calibration_check_title">Ստուգում՝ WayArs-ը կկարդա</string>
+    <string name="settings_calibration_check_ok">Աշխատում է։ Սեղմեք Պահպանել։</string>
+    <string name="settings_calibration_check_fail">WayArs-ը այս պատվերը կարդում է ոչ այնպես, ինչպես ընտրել եք։ Սեղմեք Սկսել նորից և ընտրեք այլ թվեր կամ պահպանեք այնուամենայնիվ։</string>
+    <string name="settings_calibration_restart">Սկսել նորից</string>
+    <string name="settings_calibration_currency">Արժույթ՝</string>
+    <string name="settings_calibration_advanced">Լրացուցիչ՝ չափման միավորներ</string>
+    <string name="settings_calibration_close">Փակել</string>
+    <string name="settings_calibration_no_numbers">Վերջին սկանավորման մեջ թվեր չկան։ Բացեք իրական պատվեր այս հավելվածում, սպասեք մի քանի վայրկյան և վերադարձեք այստեղ։</string>
 
     <string name="settings_developer_website_url" translatable="false">https://phantomarsenii-cpu.github.io/AP-STUDIO/</string>
     <string name="settings_about_title">Հավելվածի մասին</string>

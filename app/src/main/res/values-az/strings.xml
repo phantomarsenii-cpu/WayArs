@@ -114,6 +114,25 @@
     <string name="settings_calibration_distance_token_label">Məsafə vahidi (lazım olarsa redaktə edin)</string>
     <string name="settings_calibration_time_token_label">Vaxt vahidi (lazım olarsa redaktə edin)</string>
     <string name="settings_calibration_clear">Kalibrləməni təmizlə</string>
+    <string name="settings_calibration_status_title">WayArs indi bu tətbiqdən nəyi oxuyur</string>
+    <string name="settings_calibration_not_found">tapılmadı ✗</string>
+    <string name="settings_calibration_auto_ok">Bu tətbiqin sifarişləri avtomatik oxunur. Kalibrləmə lazım deyil.</string>
+    <string name="settings_calibration_auto_missing">WayArs burada hər şeyi oxumur. Rəqəmlərin harada olduğunu göstərin — aşağıda 3 qısa addım.</string>
+    <string name="settings_calibration_manual">Yenə də kalibrlə</string>
+    <string name="settings_calibration_step">Addım %1$d / 3 · %2$s</string>
+    <string name="settings_calibration_pick_money">Sifarişin QİYMƏTİ olan rəqəmə toxunun.</string>
+    <string name="settings_calibration_pick_distance">MƏSAFƏ (km) olan rəqəmə toxunun.</string>
+    <string name="settings_calibration_pick_time">VAXT (dəqiqə) olan rəqəmə toxunun.</string>
+    <string name="settings_calibration_skip_time">Ekranda vaxt yoxdur — keç</string>
+    <string name="settings_calibration_back">Geri</string>
+    <string name="settings_calibration_check_title">Yoxlama: WayArs belə oxuyacaq</string>
+    <string name="settings_calibration_check_ok">İşləyir! Yadda saxla düyməsinə toxunun.</string>
+    <string name="settings_calibration_check_fail">WayArs bu sifarişi seçdiyinizdən fərqli oxuyur. Yenidən başla düyməsinə toxunub başqa rəqəmlər seçin və ya yenə də yadda saxlayın.</string>
+    <string name="settings_calibration_restart">Yenidən başla</string>
+    <string name="settings_calibration_currency">Valyuta:</string>
+    <string name="settings_calibration_advanced">Əlavə: ölçü vahidləri</string>
+    <string name="settings_calibration_close">Bağla</string>
+    <string name="settings_calibration_no_numbers">Son skanda rəqəm yoxdur. Bu tətbiqdə real sifariş açın, bir neçə saniyə gözləyin və bura qayıdın.</string>
 
     <string name="settings_developer_website_url" translatable="false">https://phantomarsenii-cpu.github.io/AP-STUDIO/</string>
     <string name="settings_about_title">Tətbiq haqqında</string>

@@ -114,6 +114,25 @@
     <string name="settings_calibration_distance_token_label">Távolság mértékegysége (szükség esetén szerkeszd)</string>
     <string name="settings_calibration_time_token_label">Idő mértékegysége (szükség esetén szerkeszd)</string>
     <string name="settings_calibration_clear">Kalibráció törlése</string>
+    <string name="settings_calibration_status_title">Amit a WayArs most kiolvas ebből az appból</string>
+    <string name="settings_calibration_not_found">nem található ✗</string>
+    <string name="settings_calibration_auto_ok">Az app rendeléseit a WayArs automatikusan felismeri. Nincs szükség kalibrálásra.</string>
+    <string name="settings_calibration_auto_missing">A WayArs nem ismer fel itt mindent. Mutasd meg, hol vannak a számok — 3 gyors lépés lent.</string>
+    <string name="settings_calibration_manual">Kalibrálás mégis</string>
+    <string name="settings_calibration_step">%1$d. lépés a 3-ból · %2$s</string>
+    <string name="settings_calibration_pick_money">Koppints arra a számra, amely a rendelés ÁRA.</string>
+    <string name="settings_calibration_pick_distance">Koppints arra a számra, amely a TÁVOLSÁG (km).</string>
+    <string name="settings_calibration_pick_time">Koppints arra a számra, amely az IDŐ (perc).</string>
+    <string name="settings_calibration_skip_time">Nincs idő a képernyőn — kihagyás</string>
+    <string name="settings_calibration_back">Vissza</string>
+    <string name="settings_calibration_check_title">Ellenőrzés: a WayArs ezt olvassa</string>
+    <string name="settings_calibration_check_ok">Működik! Koppints a Mentésre.</string>
+    <string name="settings_calibration_check_fail">A WayArs másképp olvassa a rendelést, mint amit választottál. Koppints az Újrakezdésre és válassz más számokat, vagy mentsd így.</string>
+    <string name="settings_calibration_restart">Újrakezdés</string>
+    <string name="settings_calibration_currency">Pénznem:</string>
+    <string name="settings_calibration_advanced">Haladó: mértékegységek</string>
+    <string name="settings_calibration_close">Bezárás</string>
+    <string name="settings_calibration_no_numbers">Az utolsó beolvasásban nincsenek számok. Nyiss meg egy valódi rendelést ebben az appban, várj pár másodpercet, majd térj vissza ide.</string>
 
     <string name="settings_developer_website_url" translatable="false">https://phantomarsenii-cpu.github.io/AP-STUDIO/</string>
     <string name="settings_about_title">Az alkalmazásról</string>
