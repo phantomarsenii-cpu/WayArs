@@ -15,7 +15,8 @@ import com.wayars.app.domain.model.RawOrderCandidate
 import com.wayars.app.domain.model.VehicleProfile
 import com.wayars.app.presentation.widget.OverlayState
 import com.wayars.app.service.overlay.OverlayService
-import com.wayars.app.util.ScreenTextParser
+import com.wayars.app.util.OrderTextParser
+import com.wayars.app.util.TaxiOrderParser
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -395,8 +396,12 @@ class OrderAccessibilityService : AccessibilityService() {
      * complete and new — publishes it to the overlay.
      */
     private fun handleCollectedTexts(eventPackage: String, texts: List<String>) {
-        val candidate = ScreenTextParser.parse(texts, hint = PackageHintsState.hints[eventPackage])
-        val candidateSummary = "earnings=${candidate.earnings} km=${candidate.distanceKm} min=${candidate.timeMinutes} cur=${candidate.currency}"
+        // Taxi apps (Bolt Driver, FreeNow, Uber ride offers) get their own
+        // parser; every courier layout still goes to ScreenTextParser exactly
+        // as before — see OrderTextParser for the routing rules.
+        val parsed = OrderTextParser.parse(eventPackage, texts, PackageHintsState.hints[eventPackage])
+        val candidate = parsed.candidate
+        val candidateSummary = "parser=${parsed.parserName} earnings=${candidate.earnings} km=${candidate.distanceKm} min=${candidate.timeMinutes} cur=${candidate.currency}"
 
         if (!candidate.isComplete) {
             ScanDiagnostics.record(
@@ -581,11 +586,15 @@ class OrderAccessibilityService : AccessibilityService() {
         }
         if (preferredPackage == null) return texts
 
+        // Taxi-only apps (Bolt Driver, FreeNow) get a deeper walk: their ride
+        // offer sits on top of a map screen with a much deeper view tree than
+        // a courier card. Courier apps and Uber keep the original depth.
+        val maxDepth = if (TaxiOrderParser.isTaxiOnlyPackage(preferredPackage)) TAXI_MAX_TREE_DEPTH else 40
         for (window in visibleWindows) {
             val root = window.root ?: continue
             val pkg = root.packageName?.toString() ?: continue
             if (pkg != preferredPackage) continue
-            collectText(root, texts, maxDepth = 40)
+            collectText(root, texts, maxDepth = maxDepth)
         }
         return texts
     }
@@ -626,6 +635,9 @@ class OrderAccessibilityService : AccessibilityService() {
         /** How often an unsupported package's diagnostic line is allowed to
          *  repeat — see the throttle at its call site above. */
         private const val UNSUPPORTED_LOG_THROTTLE_MS = 10_000L
+
+        /** Tree-walk depth for taxi-only packages — see collectTextsFromAllSupportedWindows. */
+        private const val TAXI_MAX_TREE_DEPTH = 100
 
         /**
          * Runtime backstop allow-list — keep in sync with

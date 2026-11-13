@@ -14,7 +14,7 @@ import com.wayars.app.service.accessibility.DecidedOrdersState
 import com.wayars.app.service.accessibility.OrderAccessibilityService
 import com.wayars.app.service.accessibility.PackageHintsState
 import com.wayars.app.service.accessibility.ScanningState
-import com.wayars.app.util.ScreenTextParser
+import com.wayars.app.util.OrderTextParser
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -75,7 +75,7 @@ class OrderNotificationListenerService : NotificationListenerService() {
         )
         if (texts.isEmpty()) return
 
-        val candidate = ScreenTextParser.parse(texts, hint = PackageHintsState.hints[sbn.packageName])
+        val candidate = OrderTextParser.parse(sbn.packageName, texts, PackageHintsState.hints[sbn.packageName]).candidate
         if (!candidate.isComplete) return
 
         val earnings = candidate.earnings ?: return

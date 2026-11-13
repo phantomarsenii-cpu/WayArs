@@ -281,6 +281,13 @@ object ScreenTextParser {
     }
 
     /**
+     * The exact money patterns [parse] uses (hint first, then built-ins), for
+     * [TaxiOrderParser]. Read-only: nothing in [parse] changes because of it.
+     */
+    internal fun moneyPatternsFor(hint: PackageHint?): List<Pair<Regex, Currency>> =
+        buildHintMoneyPatterns(hint) + moneyPatterns
+
+    /**
      * A calibration hint's money token becomes an extra prefix AND suffix
      * pattern (we don't know which side of the number this app puts its
      * marker on from the token alone), with the same anti-cross-line
