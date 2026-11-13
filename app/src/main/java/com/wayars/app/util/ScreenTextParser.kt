@@ -52,7 +52,7 @@ object ScreenTextParser {
     // So every suffix pattern's separator is tightened to `[ \t\u00A0]?` too —
     // same-line only, matching how a real currency suffix is always laid
     // out in practice.
-    private val moneyPatterns: List<Pair<Regex, Currency>> = listOf(
+    private val rawMoneyPatterns: List<Pair<Regex, Currency>> = listOf(
         Regex("""€[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""") to Currency.EUR,
         Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?€""") to Currency.EUR,
         // (?<!R) guards against matching the "$" inside Brazil's "R$" as a
@@ -156,6 +156,22 @@ object ScreenTextParser {
         Regex("""(?<!\d)DKK[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.DKK,
         Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?DKK""", RegexOption.IGNORE_CASE) to Currency.DKK
     )
+
+    /**
+     * Every pattern above, with a LETTER boundary on the currency side: a
+     * currency code/word must not be glued to other letters. Without it,
+     * the 3-letter codes added later (SEK, NOK, DKK, RON, CHF, HUF, …) and
+     * IGNORE_CASE matched inside ordinary words — "30 sekund" read as
+     * 30 SEK, "2 rondo" as 2 RON — and such a line, if it sat above the
+     * real price on screen, became the order's "earnings". Real price
+     * notations ("16,21 PLN", "PLN 17.28", "10,33 zł (netto)", "€12") are
+     * never glued to letters, so they match exactly as before.
+     */
+    private val moneyPatterns: List<Pair<Regex, Currency>> = rawMoneyPatterns.map { (regex, currency) ->
+        val p = regex.pattern
+        val bounded = if (p.startsWith("(\\d+")) "$p(?![\\p{L}])" else "(?<![\\p{L}])$p"
+        Regex(bounded, regex.options) to currency
+    }
 
     /**
      * A counter/rating badge glued to the Accept button ("4, Accept", "63,
