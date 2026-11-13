@@ -249,8 +249,21 @@ object ScreenTextParser {
     // წთ/წუთი (KA).
     private const val TIME_UNITS =
         """min\.?|mins?|minutes?|minut[aey]?|mín|хв(?:илин[аи]?)?|мин(?:ут[аы]?)?\.?|perc|dəq(?:iqə)?|daq(?:iqa)?|dk|dakika|րոպե|წთ|წუთი"""
+    // Optional hours in front of the minutes: "1 h 5 min", "1 godz. 14 min",
+    // "1 ч 10 мин", "1 óra 5 perc" -> group 1 = hours, group 2 = minutes.
+    // Before this, "1 godz. 14 min" was read as 14 minutes.
+    private const val HOUR_UNITS =
+        """godz\.?|godzin[ay]?|h|hr|hrs|hours?|ч\.?|час(?:а|ов)?|год\.?|std\.?|óra|saat|soat|ժամ|სთ"""
     private val timeRegex = Regex(
-        """(\d+)\s?(?:$TIME_UNITS)(?![\p{L}])""",
+        """(?:(\d+)\s?(?:$HOUR_UNITS)\s*)?(\d+)\s?(?:$TIME_UNITS)(?![\p{L}])""",
+        RegexOption.IGNORE_CASE
+    )
+
+    // Short trips are often shown in metres ("800 m", "450 м", "300 metrów")
+    // instead of "0,8 km". Without this the distance stayed empty and the
+    // order never showed. Only used when no km/mile figure is on screen.
+    private val metersRegex = Regex(
+        """(\d{2,4})\s?(?:m|м|metr(?:y|ów|a|e|i)?|meters?|metres?|метр(?:а|ов)?)(?![\p{L}\d])""",
         RegexOption.IGNORE_CASE
     )
 
@@ -264,7 +277,14 @@ object ScreenTextParser {
      */
     private val perUnitSuffixRegex = Regex("""^\s*/\s?km|^\s*per\s?km""", RegexOption.IGNORE_CASE)
 
-    fun parse(texts: List<String>, hint: PackageHint? = null): RawOrderCandidate {
+    private val exoticSpaces = Regex("[\\u2007\\u2009\\u200A\\u202F\\u205F]")
+
+    fun parse(rawTexts: List<String>, hint: PackageHint? = null): RawOrderCandidate {
+        // Narrow / thin no-break spaces (U+202F, U+2009 …) are what Android's
+        // own number formatting puts between number and currency in several
+        // locales (e.g. "16,21\u202F€" in French). The patterns accept plain
+        // and no-break spaces, so the exotic ones are turned into plain ones.
+        val texts = rawTexts.map { it.replace(exoticSpaces, " ") }
         // A calibration hint's patterns are tried FIRST (prepended), the
         // built-ins still apply after — a hint exists specifically because
         // the built-ins didn't match THIS app's notation, but if that app's
@@ -338,7 +358,10 @@ object ScreenTextParser {
         // already has distance/time at or after the money node, so this is
         // a no-op for them.
         val distanceKm = findValue(texts, effectiveDistanceRegex, moneyIndex, ::distanceToKm)
-        val timeMinutes = findValue(texts, effectiveTimeRegex, moneyIndex)
+            ?: findValue(texts, metersRegex, moneyIndex) { m ->
+                m.groupValues[1].toDoubleOrNull()?.takeIf { it >= 10 }?.let { Math.round(it) / 1000.0 }
+            }
+        val timeMinutes = findValue(texts, effectiveTimeRegex, moneyIndex, ::durationToMinutes)
 
         return RawOrderCandidate(
             earnings = earnings,
@@ -385,7 +408,7 @@ object ScreenTextParser {
         val token = hint?.timeUnitToken?.takeIf { it.isNotBlank() } ?: return null
         val escaped = Regex.escape(token)
         return Regex(
-            """(\d+)\s?(?:$escaped|$TIME_UNITS)(?![\p{L}])""",
+            """(?:(\d+)\s?(?:$HOUR_UNITS)\s*)?(\d+)\s?(?:$escaped|$TIME_UNITS)(?![\p{L}])""",
             RegexOption.IGNORE_CASE
         )
     }
@@ -397,6 +420,13 @@ object ScreenTextParser {
      * on. A negative [preferredFromIndex] (earnings never matched) simply
      * searches the whole list once, same as the old single-pass behavior.
      */
+    /** Group 1 = optional hours, group 2 = minutes. */
+    private fun durationToMinutes(match: MatchResult): Double? {
+        val hours = match.groupValues.getOrNull(1)?.toIntOrNull() ?: 0
+        val minutes = match.groupValues.getOrNull(2)?.toIntOrNull() ?: return null
+        return (hours * 60 + minutes).toDouble()
+    }
+
     /** Group 2 of a distance match is its unit: miles are converted, everything else is km. */
     internal fun distanceToKm(match: MatchResult): Double? {
         val value = match.groupValues[1].replace(',', '.').toDoubleOrNull() ?: return null

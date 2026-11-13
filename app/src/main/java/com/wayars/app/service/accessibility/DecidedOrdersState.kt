@@ -31,9 +31,11 @@ import kotlin.math.abs
  */
 object DecidedOrdersState {
 
-    // 40 minutes: a delivery normally wraps up well within 30, this leaves
-    // margin without risking masking a genuinely new matching order.
-    private const val TTL_MILLIS = 40 * 60 * 1000L
+    // 15 minutes (was 40): long enough for re-opening the same order's
+    // details right after deciding, short enough that a NEW order that just
+    // happens to have the same fare and distance (common for fixed-fee short
+    // deliveries) isn't silently skipped for most of an hour.
+    private const val TTL_MILLIS = 15 * 60 * 1000L
 
     private const val DISTANCE_TOLERANCE_KM = 0.3
     private const val EARNINGS_TOLERANCE = 0.005

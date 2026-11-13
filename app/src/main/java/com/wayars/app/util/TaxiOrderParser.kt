@@ -126,7 +126,7 @@ object TaxiOrderParser {
     private const val MIN = """(?:min(?:ut[aeyę]?|utes?|s)?|мин(?:ут[аы]?)?|хв(?:илин[аи]?)?|mín|perc|dəq(?:iqə)?|daq(?:iqa)?|dk|dakika|րոպե|წთ|წუთი)(?!\p{L})\.?"""
     private const val DUR = """(?:\d+\s*$HOUR(?:\s*\d+\s*$MIN)?|\d+\s*$MIN)"""
     // Group 1 = number, group 2 = unit (miles are converted to km).
-    private const val DIST = """(\d+(?:[.,]\d+)?)\s*(km|км|კმ|կմ|mi(?:les?)?)(?!\p{L})"""
+    private const val DIST = """(\d+(?:[.,]\d+)?)\s*(km|км|კმ|կմ|mi(?:les?)?|m|м)(?![\p{L}\d])"""
     private const val SEP = """(?:[•·∙・|,–—\-]\s*|\(\s*)"""
 
     /** "4 min (1.8 km)", "1 godz. 14 min (71.7 km)", "2 min · 1.6 km" */
@@ -152,7 +152,11 @@ object TaxiOrderParser {
 
     private fun toKm(number: String, unit: String): Double? {
         val v = toNumber(number) ?: return null
-        return if (unit.startsWith("mi", ignoreCase = true)) v * 1.609344 else v
+        return when {
+            unit.startsWith("mi", ignoreCase = true) -> v * 1.609344
+            unit.equals("m", ignoreCase = true) || unit == "м" -> v / 1000.0   // "1 min (400 m)"
+            else -> v
+        }
     }
 
     internal fun findLegs(full: String): List<Leg> {

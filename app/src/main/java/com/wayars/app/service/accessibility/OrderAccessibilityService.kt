@@ -98,6 +98,8 @@ class OrderAccessibilityService : AccessibilityService() {
     // a fresh event for the same app cancels and restarts its own poll
     // instead of racing a stale one; unrelated packages are untouched.
     private val pollJobsByPackage = HashMap<String, kotlinx.coroutines.Job>()
+    // A pending "hide the overlay" per package, see scheduleClearIfSourceIsGone.
+    private val pendingClearJobs = HashMap<String, kotlinx.coroutines.Job>()
 
     override fun onServiceConnected() {
         super.onServiceConnected()
@@ -271,7 +273,7 @@ class OrderAccessibilityService : AccessibilityService() {
         // triggering AccessibilityEvent even when its node tree doesn't.
         if (texts.isEmpty()) {
             event.text?.forEach { if (it.isNotBlank()) texts.add(it.toString()) }
-            event.source?.let { collectText(it, texts, maxDepth = 40) }
+            event.source?.let { collectText(it, texts, maxDepth = MAX_TREE_DEPTH) }
         }
 
         // Content-based debounce, not time-based. A plain "<500ms since last
@@ -383,7 +385,17 @@ class OrderAccessibilityService : AccessibilityService() {
      * package-specific scan result for [eventPackage] itself, not from a
      * generic "some window disappeared somewhere" signal.
      */
+    private fun scheduleClearIfSourceIsGone(eventPackage: String) {
+        if (OverlayState.sourcePackage.value != eventPackage) return
+        if (pendingClearJobs[eventPackage]?.isActive == true) return
+        pendingClearJobs[eventPackage] = scope.launch {
+            kotlinx.coroutines.delay(INCOMPLETE_GRACE_MS)
+            clearOverlayIfSourceIsGone(eventPackage)
+        }
+    }
+
     private fun clearOverlayIfSourceIsGone(eventPackage: String) {
+        pendingClearJobs.remove(eventPackage)?.cancel()
         if (OverlayState.sourcePackage.value != eventPackage) return
         lastCandidate = null
         OverlayState.clear()
@@ -412,9 +424,17 @@ class OrderAccessibilityService : AccessibilityService() {
             // complete order (order taken by someone else, expired, or the
             // driver navigated to a list/other screen within the SAME app).
             // Same source-package scoping as above — see that comment.
-            clearOverlayIfSourceIsGone(eventPackage)
+            //
+            // Not immediately, though: order cards briefly render without
+            // their price while animating or refreshing (Wolt's skeleton /
+            // collapsed state, a ticking countdown re-layout), and hiding
+            // the card on that one empty frame made the overlay blink away
+            // for an order that was still on screen. Only hide it if the
+            // screen STAYS without a complete order for a few seconds.
+            scheduleClearIfSourceIsGone(eventPackage)
             return
         }
+        pendingClearJobs.remove(eventPackage)?.cancel()
         if (candidate == lastCandidate) return // identical to what's already on screen — nothing changed
         lastCandidate = candidate
 
@@ -580,7 +600,7 @@ class OrderAccessibilityService : AccessibilityService() {
             if (fallbackPackage != null && isSupportedPackage(fallbackPackage) &&
                 (preferredPackage == null || fallbackPackage == preferredPackage)
             ) {
-                collectText(fallbackRoot, texts, maxDepth = 40)
+                collectText(fallbackRoot, texts, maxDepth = MAX_TREE_DEPTH)
             }
             return texts
         }
@@ -589,7 +609,7 @@ class OrderAccessibilityService : AccessibilityService() {
         // Taxi-only apps (Bolt Driver, FreeNow) get a deeper walk: their ride
         // offer sits on top of a map screen with a much deeper view tree than
         // a courier card. Courier apps and Uber keep the original depth.
-        val maxDepth = if (TaxiOrderParser.isTaxiOnlyPackage(preferredPackage)) TAXI_MAX_TREE_DEPTH else 40
+        val maxDepth = if (TaxiOrderParser.isTaxiOnlyPackage(preferredPackage)) TAXI_MAX_TREE_DEPTH else MAX_TREE_DEPTH
         for (window in visibleWindows) {
             val root = window.root ?: continue
             val pkg = root.packageName?.toString() ?: continue
@@ -638,6 +658,16 @@ class OrderAccessibilityService : AccessibilityService() {
 
         /** Tree-walk depth for taxi-only packages — see collectTextsFromAllSupportedWindows. */
         private const val TAXI_MAX_TREE_DEPTH = 100
+
+        /**
+         * Tree-walk depth for every other app. Was 40: apps built with
+         * Jetpack Compose / React Native can nest the order card deeper than
+         * that, so their price/distance was never reached at all.
+         */
+        private const val MAX_TREE_DEPTH = 80
+
+        /** How long the screen may show no complete order before the overlay hides. */
+        private const val INCOMPLETE_GRACE_MS = 6_000L
 
         /**
          * Runtime backstop allow-list — keep in sync with
