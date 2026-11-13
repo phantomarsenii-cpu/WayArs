@@ -15,6 +15,10 @@ import com.wayars.app.domain.model.SubscriptionState
 import com.wayars.app.service.accessibility.ActiveSessionTracker
 import com.wayars.app.service.accessibility.ScanningState
 import com.wayars.app.util.LocaleManager
+import com.wayars.app.util.AccessibilityUtils
+import com.wayars.app.service.overlay.OverlayService
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.withTimeoutOrNull
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -58,6 +62,41 @@ class WayArsApplication : Application() {
             }
         }
         persistResolvedLanguageIfMissing()
+        restoreScanningIfInterrupted()
+    }
+
+    /**
+     * Android may kill WayArs in the background (memory pressure, battery
+     * savers, swiping it away) while the driver has "Active" on. The system
+     * then restarts the process for the accessibility service, but scanning
+     * used to come back OFF — the overlay silently stopped working. Turn it
+     * back on here, with the same gates as the Dashboard switch: a verified
+     * subscription or free-trial time left, accessibility service enabled,
+     * overlay permission granted.
+     */
+    private fun restoreScanningIfInterrupted() {
+        if (!ScanningState.wasInterruptedWhileActive(this)) return
+        applicationScope.launch {
+            container.subscriptionRepository.refreshCustomerInfo()
+            val state = withTimeoutOrNull(15_000L) {
+                container.subscriptionRepository.subscriptionState.first {
+                    it is SubscriptionState.Subscribed || it is SubscriptionState.NotSubscribed || it is SubscriptionState.Error
+                }
+            }
+            val entitled = state is SubscriptionState.Subscribed || FreeTrial.hasTimeLeft()
+            val permitted = AccessibilityUtils.isServiceEnabled(this@WayArsApplication) &&
+                android.provider.Settings.canDrawOverlays(this@WayArsApplication)
+            if (ScanningState.isActive.value) return@launch
+            if (entitled && permitted) {
+                ScanningState.setActive(true, this@WayArsApplication)
+                runCatching {
+                    startForegroundService(android.content.Intent(this@WayArsApplication, OverlayService::class.java))
+                }
+            } else {
+                // Can't resume: record it as off so it isn't retried on every start.
+                ScanningState.setActive(false, this@WayArsApplication)
+            }
+        }
     }
 
     /**

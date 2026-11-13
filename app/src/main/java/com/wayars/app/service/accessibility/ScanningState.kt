@@ -8,14 +8,32 @@ import kotlinx.coroutines.flow.StateFlow
  * Process-wide "Active" switch. The OS AccessibilityService can be enabled
  * in system Settings yet still do NOTHING unless this is true — enabling
  * Accessibility in Settings only grants the *permission*; this flag is the
- * app's own runtime on/off control (the Dashboard "Active" toggle), and it
- * always starts false on a cold app launch, per spec.
+ * app's own runtime on/off control (the Dashboard "Active" toggle).
+ *
+ * It starts false in a new process, but the last value the user (or the
+ * subscription gate) set is persisted: if Android kills WayArs in the
+ * background while scanning was on, [wasInterruptedWhileActive] lets
+ * WayArsApplication switch it back on (subscription/trial permitting)
+ * instead of leaving the driver with a silently dead scanner.
  */
 object ScanningState {
     private val _isActive = MutableStateFlow(false)
     val isActive: StateFlow<Boolean> = _isActive
 
+    private const val PREFS = "scanning_state"
+    private const val KEY_ACTIVE = "active"
+    private const val KEY_SINCE = "active_since"
+
+    /** Scanning is restored after a process death only within this long after it was switched on. */
+    private const val RESTORE_WINDOW_MS = 16L * 60 * 60 * 1000
+
     fun setActive(active: Boolean, context: Context) {
+        runCatching {
+            context.applicationContext.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit()
+                .putBoolean(KEY_ACTIVE, active)
+                .putLong(KEY_SINCE, if (active) System.currentTimeMillis() else 0L)
+                .apply()
+        }
         ActiveSessionTracker.onActiveChanged(active, context)
         FreeTrial.onActiveChanged(active, context)
         _isActive.value = active
@@ -26,6 +44,20 @@ object ScanningState {
         } else {
             ScanLogFile.stop()
         }
+    }
+
+    /**
+     * True when the previous process was killed while scanning was ON (the
+     * user never switched it off and the subscription gate never did), and
+     * that was switched on less than [RESTORE_WINDOW_MS] ago.
+     */
+    fun wasInterruptedWhileActive(context: Context): Boolean {
+        val p = runCatching {
+            context.applicationContext.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+        }.getOrNull() ?: return false
+        if (!p.getBoolean(KEY_ACTIVE, false)) return false
+        val since = p.getLong(KEY_SINCE, 0L)
+        return since > 0L && System.currentTimeMillis() - since in 0..RESTORE_WINDOW_MS
     }
 
     // Cooldown after Accept/Reject: the same still-visible order screen often
