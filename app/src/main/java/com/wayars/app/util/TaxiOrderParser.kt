@@ -79,7 +79,7 @@ object TaxiOrderParser {
 
     private val bareAmountRegex = Regex("""^\d+(?:[.,]\d{1,2})?$""")
     private val currencyOnlyRegex = Regex(
-        """^(?:zł|zl|pln|€|eur|\$|usd|£|gbp|₴|грн\.?|uah|lei|ron|mdl|kč|czk|ft|huf|₽|руб\.?|rub|₸|тг|kzt)$""",
+        """^(?:zł|zl|pln|€|eur|\$|usd|£|gbp|₴|грн\.?|uah|lei|ron|mdl|kč|czk|ft|huf|₽|руб\.?|rub|₸|тг|kzt|kr\.?|sek|nok|dkk|₾|gel|֏|amd|₼|azn|so'?m|сум|uzs|лв\.?|bgn|chf|₺|tl|try)$""",
         RegexOption.IGNORE_CASE
     )
 
@@ -119,10 +119,14 @@ object TaxiOrderParser {
 
     // Unit words. (?!\p{L}) instead of \b so Cyrillic and "godz." behave the
     // same everywhere and "min" never matches inside "minimum".
-    private const val HOUR = """(?:godz(?:in[ayę]?)?|h|hr|hrs|hours?|ч|час(?:а|ов)?|год(?:ин[аи]?)?|std)(?!\p{L})\.?"""
-    private const val MIN = """(?:min(?:ut[ayę]?|s)?|мин(?:ут[аы]?)?|хв(?:илин[аи]?)?|mín)(?!\p{L})\.?"""
+    // Hour / minute words for every app language (PL, EN, RU, UK, DE, CS,
+    // RO, FR, DA/NB/SV, HU "óra"/"perc", AZ "saat"/"dəq", UZ "soat"/"daq",
+    // TR "saat"/"dk", HY "ժամ"/"րոպե", KA "სთ"/"წთ").
+    private const val HOUR = """(?:godz(?:in[ayę]?)?|h|hr|hrs|hours?|ч|час(?:а|ов)?|год(?:ин[аи]?)?|std|óra|saat|soat|ժամ|სთ|tim(?:me|mar)?)(?!\p{L})\.?"""
+    private const val MIN = """(?:min(?:ut[aeyę]?|utes?|s)?|мин(?:ут[аы]?)?|хв(?:илин[аи]?)?|mín|perc|dəq(?:iqə)?|daq(?:iqa)?|dk|dakika|րոպե|წთ|წუთი)(?!\p{L})\.?"""
     private const val DUR = """(?:\d+\s*$HOUR(?:\s*\d+\s*$MIN)?|\d+\s*$MIN)"""
-    private const val DIST = """(\d+(?:[.,]\d+)?)\s*(?:km|км)(?!\p{L})"""
+    // Group 1 = number, group 2 = unit (miles are converted to km).
+    private const val DIST = """(\d+(?:[.,]\d+)?)\s*(km|км|კმ|կմ|mi(?:les?)?)(?!\p{L})"""
     private const val SEP = """(?:[•·∙・|,–—\-]\s*|\(\s*)"""
 
     /** "4 min (1.8 km)", "1 godz. 14 min (71.7 km)", "2 min · 1.6 km" */
@@ -146,16 +150,21 @@ object TaxiOrderParser {
 
     private fun toNumber(raw: String): Double? = raw.replace(',', '.').toDoubleOrNull()
 
+    private fun toKm(number: String, unit: String): Double? {
+        val v = toNumber(number) ?: return null
+        return if (unit.startsWith("mi", ignoreCase = true)) v * 1.609344 else v
+    }
+
     internal fun findLegs(full: String): List<Leg> {
         val found = ArrayList<Leg>()
         legTimeThenDistRegex.findAll(full).forEach { m ->
             val minutes = parseDurationMinutes(m.groupValues[1]) ?: return@forEach
-            val km = toNumber(m.groupValues[2]) ?: return@forEach
+            val km = toKm(m.groupValues[2], m.groupValues[3]) ?: return@forEach
             found.add(Leg(m.range, minutes, km))
         }
         legDistThenTimeRegex.findAll(full).forEach { m ->
-            val km = toNumber(m.groupValues[1]) ?: return@forEach
-            val minutes = parseDurationMinutes(m.groupValues[2]) ?: return@forEach
+            val km = toKm(m.groupValues[1], m.groupValues[2]) ?: return@forEach
+            val minutes = parseDurationMinutes(m.groupValues[3]) ?: return@forEach
             found.add(Leg(m.range, minutes, km))
         }
         // Earliest first, overlapping matches dropped (keep the earlier one).
@@ -171,7 +180,7 @@ object TaxiOrderParser {
 
     // -------------------------------------------------------------------- money
 
-    private data class MoneyHit(val position: Int, val amount: Double, val currency: Currency, val priceLike: Boolean)
+    private data class MoneyHit(val position: Int, val amount: Double, val currency: Currency?, val priceLike: Boolean)
 
     private val parenthesizedRegex = Regex("""\([^)]*\)""")
     private val perKmAfterRegex = Regex("""^\s*/\s?km|^\s*per\s?km""", RegexOption.IGNORE_CASE)
@@ -182,19 +191,19 @@ object TaxiOrderParser {
         lines.forEachIndexed { index, line ->
             // "+5,00 zł" style bonus/boost chips are never the fare itself.
             if (line.startsWith("+")) return@forEachIndexed
-            var best: Pair<MatchResult, Currency>? = null
+            var best: Pair<MatchResult, Currency?>? = null
             for ((regex, currency) in patterns) {
                 for (match in regex.findAll(line)) {
                     if (line.substring(0, match.range.first).trimEnd().endsWith("★")) continue
                     if (perKmAfterRegex.containsMatchIn(line.substring(match.range.last + 1))) continue
-                    val amount = toNumber(match.groupValues[1]) ?: continue
+                    val amount = ScreenTextParser.parseAmount(match.groupValues[1]) ?: continue
                     if (amount <= 0) continue
                     if (best == null || match.range.first < best.first.range.first) best = match to currency
                     break
                 }
             }
             val (match, currency) = best ?: return@forEachIndexed
-            val amount = toNumber(match.groupValues[1]) ?: return@forEachIndexed
+            val amount = ScreenTextParser.parseAmount(match.groupValues[1]) ?: return@forEachIndexed
             // "Price-like": the line is basically just the amount, maybe with
             // a parenthesized note ("(netto)") or an icon glyph after it — as
             // opposed to a sentence that merely mentions an amount.
@@ -271,7 +280,7 @@ object TaxiOrderParser {
             // the pickup minutes as if they were the whole job.
             val tripKm = distOnlyRegex.findAll(full)
                 .filter { it.range.first > leg.range.last }
-                .firstNotNullOfOrNull { toNumber(it.groupValues[1])?.takeIf { km -> km > 0 } }
+                .firstNotNullOfOrNull { toKm(it.groupValues[1], it.groupValues[2])?.takeIf { km -> km > 0 } }
             if (tripKm != null) {
                 distanceKm = leg.km + tripKm
                 timeMinutes = null

@@ -81,8 +81,8 @@ object ScreenTextParser {
         Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:zł|PLN|zl)""", RegexOption.IGNORE_CASE) to Currency.PLN,
         Regex("""(?<!\d)(?:₴|UAH|грн)[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.UAH,
         Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:₴|UAH|грн)""", RegexOption.IGNORE_CASE) to Currency.UAH,
-        Regex("""(?<!\d)(?:MDL|lei)[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.MDL,
-        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:MDL|lei|L\b)""", RegexOption.IGNORE_CASE) to Currency.MDL,
+        Regex("""(?<!\d)MDL[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.MDL,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?(?:MDL|L\b)""", RegexOption.IGNORE_CASE) to Currency.MDL,
         // "R$" is always a prefix in practice (Brazilian apps never write
         // "25,00 R$") so only one direction is needed here.
         Regex("""(?<!\d)R\$[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.BRL,
@@ -123,15 +123,10 @@ object ScreenTextParser {
         Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?KGS""", RegexOption.IGNORE_CASE) to Currency.KGS,
 
         // --- Europe ---
-        // NOTE: "lei" (no diacritics, plural of "leu") is the everyday name
-        // for BOTH Moldova's leu (MDL, pattern above) and Romania's leu
-        // (RON) — genuinely the same word in both countries, not a parsing
-        // bug. Text alone can't disambiguate them, so bare "lei" keeps
-        // resolving to MDL (pre-existing behavior, unchanged) and RON is
-        // only auto-detected via its distinct "RON" ISO code. A driver who
-        // needs Romanian "lei" text specifically recognized as RON (not
-        // MDL) should set that package's currency explicitly via the
-        // per-app hint in Settings, which always overrides this table.
+        // NOTE: bare "lei" is the everyday word in BOTH Romania (RON) and
+        // Moldova (MDL), so it is matched in ambiguousKronePatterns below
+        // with no currency and resolves to the currency chosen in Settings.
+        // Only the explicit "RON" / "MDL" codes pick a currency here.
         Regex("""(?<!\d)RON[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.RON,
         Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?RON""", RegexOption.IGNORE_CASE) to Currency.RON,
         Regex("""(?<!\d)(?:Kč|CZK)[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to Currency.CZK,
@@ -158,6 +153,20 @@ object ScreenTextParser {
     )
 
     /**
+     * Denmark, Norway and Sweden usually print a bare "kr" (no SEK/NOK/DKK),
+     * and Romania and Moldova both write "lei" — the word alone can't say
+     * which currency it is. Matched with currency = null, so the caller falls
+     * back to the currency the user chose in Settings. Listed AFTER every
+     * specific code, so "SEK 120", "150 NOK", "RON 25", "MDL 40" still win.
+     */
+    private val ambiguousKronePatterns: List<Pair<Regex, Currency?>> = listOf(
+        Regex("""(?<!\d)kr\.?[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to null,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?kr(?:oner|onor|ona|one)?\.?""", RegexOption.IGNORE_CASE) to null,
+        Regex("""(?<!\d)lei[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to null,
+        Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?lei""", RegexOption.IGNORE_CASE) to null
+    )
+
+    /**
      * Every pattern above, with a LETTER boundary on the currency side: a
      * currency code/word must not be glued to other letters. Without it,
      * the 3-letter codes added later (SEK, NOK, DKK, RON, CHF, HUF, …) and
@@ -167,10 +176,42 @@ object ScreenTextParser {
      * notations ("16,21 PLN", "PLN 17.28", "10,33 zł (netto)", "€12") are
      * never glued to letters, so they match exactly as before.
      */
-    private val moneyPatterns: List<Pair<Regex, Currency>> = rawMoneyPatterns.map { (regex, currency) ->
-        val p = regex.pattern
-        val bounded = if (p.startsWith("(\\d+")) "$p(?![\\p{L}])" else "(?<![\\p{L}])$p"
-        Regex(bounded, regex.options) to currency
+    private val moneyPatterns: List<Pair<Regex, Currency?>> =
+        (rawMoneyPatterns + ambiguousKronePatterns).map { (regex, currency) ->
+            val p = regex.pattern
+            val isSuffix = p.startsWith("(\\d+")
+            // Amounts may also carry thousands separators ("3 450 Ft",
+            // "25 000 so'm", "1.234,50 zł") — see AMOUNT / parseAmount.
+            val withAmount = p.replace(SIMPLE_AMOUNT, AMOUNT)
+            val bounded = if (isSuffix) "$withAmount(?![\\p{L}])" else "(?<![\\p{L}])$withAmount"
+            Regex(bounded, regex.options) to currency
+        }
+
+    private const val SIMPLE_AMOUNT = """(\d+(?:[.,]\d{1,2})?)"""
+
+    /** A plain amount, or one with thousands groups: 3 450 · 25 000 · 1.234,50 · 1,234.50. */
+    private const val AMOUNT =
+        """(\d{1,3}(?:[ \u00A0\u202F\u2009.,]\d{3})+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?)"""
+
+    private val groupSeparators = Regex("""[ \u00A0\u202F\u2009.,]""")
+
+    /**
+     * Turns a matched amount into a number. A '.' or ',' followed by 1–2
+     * final digits is the decimal point; every other separator (space,
+     * '.', ',' before a group of exactly three digits) is a thousands
+     * separator: "16,21" → 16.21, "3 450" → 3450, "1.234,50" → 1234.5.
+     */
+    internal fun parseAmount(raw: String): Double? {
+        val s = raw.trim()
+        val last = s.indexOfLast { it == '.' || it == ',' || it == ' ' || it == '\u00A0' || it == '\u202F' || it == '\u2009' }
+        if (last < 0) return s.toDoubleOrNull()
+        val tail = s.substring(last + 1)
+        val sep = s[last]
+        return if ((sep == '.' || sep == ',') && tail.length in 1..2) {
+            (s.substring(0, last).replace(groupSeparators, "") + "." + tail).toDoubleOrNull()
+        } else {
+            s.replace(groupSeparators, "").toDoubleOrNull()
+        }
     }
 
     /**
@@ -189,7 +230,12 @@ object ScreenTextParser {
     // overlay never showed for a real, fully-visible Bolt order (confirmed
     // on-device, 2026-09-10 logs: earnings=17.28 min=17.0 km=null on every
     // single scan of an order that was on-screen for 45+ seconds).
-    private val distanceRegex = Regex("""(\d+[.,]\d+|\d+)\s?(?:km|км)\b""", RegexOption.IGNORE_CASE)
+    // Distance units for every app language: km / км / კმ (Georgian) / կմ
+    // (Armenian), plus miles ("mi", "mile(s)") which are converted to km.
+    // (?![\p{L}]) instead of \b so non-Latin units end the same way on
+    // every regex engine.
+    private const val DIST_UNITS = """km|км|კმ|կմ|mi(?:les?)?"""
+    private val distanceRegex = Regex("""(\d+[.,]\d+|\d+)\s?($DIST_UNITS)(?![\p{L}])""", RegexOption.IGNORE_CASE)
 
     // Widened beyond the original "min|mín|хв|мин" to also accept the
     // Polish full-word forms ("minut", "minuty", "minuta") and "min." with a
@@ -197,8 +243,14 @@ object ScreenTextParser {
     // (Stuart included, per on-device raw-text diagnostics) were silently
     // falling through to timeMinutes=null with the old word-boundary-only
     // "min" pattern.
+    // Minutes in every app language: min/mins/minutes/minut(a,e,y) (PL, CS,
+    // RO, DE "Min.", FR, DA/NB/SV), мин(ута) (RU, BG), хв(илин) (UK), mín,
+    // perc (HU), dəq(iqə) (AZ), daq(iqa) (UZ), dk/dakika (TR), րոպե (HY),
+    // წთ/წუთი (KA).
+    private const val TIME_UNITS =
+        """min\.?|mins?|minutes?|minut[aey]?|mín|хв(?:илин[аи]?)?|мин(?:ут[аы]?)?\.?|perc|dəq(?:iqə)?|daq(?:iqa)?|dk|dakika|րոպե|წთ|წუთი"""
     private val timeRegex = Regex(
-        """(\d+)\s?(?:min\.?|mins?|mín|хв|мин|minut[ay]?)\b""",
+        """(\d+)\s?(?:$TIME_UNITS)(?![\p{L}])""",
         RegexOption.IGNORE_CASE
     )
 
@@ -256,7 +308,7 @@ object ScreenTextParser {
                     perUnitSuffixRegex.containsMatchIn(nextNodeText)
                 ) continue
 
-                val amount = match.groupValues[1].replace(',', '.').toDoubleOrNull()
+                val amount = parseAmount(match.groupValues[1])
                 if (amount != null && amount > 0) {
                     earnings = amount
                     currency = cur
@@ -285,7 +337,7 @@ object ScreenTextParser {
         // zł | Łącznie 34 min (14.7 km)"); every currently-working layout
         // already has distance/time at or after the money node, so this is
         // a no-op for them.
-        val distanceKm = findValue(texts, effectiveDistanceRegex, moneyIndex)
+        val distanceKm = findValue(texts, effectiveDistanceRegex, moneyIndex, ::distanceToKm)
         val timeMinutes = findValue(texts, effectiveTimeRegex, moneyIndex)
 
         return RawOrderCandidate(
@@ -300,7 +352,7 @@ object ScreenTextParser {
      * The exact money patterns [parse] uses (hint first, then built-ins), for
      * [TaxiOrderParser]. Read-only: nothing in [parse] changes because of it.
      */
-    internal fun moneyPatternsFor(hint: PackageHint?): List<Pair<Regex, Currency>> =
+    internal fun moneyPatternsFor(hint: PackageHint?): List<Pair<Regex, Currency?>> =
         buildHintMoneyPatterns(hint) + moneyPatterns
 
     /**
@@ -311,13 +363,13 @@ object ScreenTextParser {
      * built-in currency pattern above. Empty list when there's no hint or
      * it has no money token — the built-ins run unchanged either way.
      */
-    private fun buildHintMoneyPatterns(hint: PackageHint?): List<Pair<Regex, Currency>> {
+    private fun buildHintMoneyPatterns(hint: PackageHint?): List<Pair<Regex, Currency?>> {
         val token = hint?.moneyToken?.takeIf { it.isNotBlank() } ?: return emptyList()
         val currency = hint.moneyCurrency ?: return emptyList()
         val escaped = Regex.escape(token)
         return listOf(
-            Regex("""(?<!\d)$escaped[ \t\u00A0]?(\d+(?:[.,]\d{1,2})?)""", RegexOption.IGNORE_CASE) to currency,
-            Regex("""(\d+(?:[.,]\d{1,2})?)[ \t\u00A0]?$escaped""", RegexOption.IGNORE_CASE) to currency
+            Regex("""(?<!\d)$escaped[ \t\u00A0]?$AMOUNT""", RegexOption.IGNORE_CASE) to currency,
+            Regex("""$AMOUNT[ \t\u00A0]?$escaped""", RegexOption.IGNORE_CASE) to currency
         )
     }
 
@@ -325,7 +377,7 @@ object ScreenTextParser {
     private fun buildHintDistanceRegex(hint: PackageHint?): Regex? {
         val token = hint?.distanceUnitToken?.takeIf { it.isNotBlank() } ?: return null
         val escaped = Regex.escape(token)
-        return Regex("""(\d+[.,]\d+|\d+)\s?(?:$escaped|km|км)\b""", RegexOption.IGNORE_CASE)
+        return Regex("""(\d+[.,]\d+|\d+)\s?($escaped|$DIST_UNITS)(?![\p{L}])""", RegexOption.IGNORE_CASE)
     }
 
     /** Hint's time unit word (e.g. "hrs") tried alongside the built-in list, not instead of it. */
@@ -333,7 +385,7 @@ object ScreenTextParser {
         val token = hint?.timeUnitToken?.takeIf { it.isNotBlank() } ?: return null
         val escaped = Regex.escape(token)
         return Regex(
-            """(\d+)\s?(?:$escaped|min\.?|mins?|mín|хв|мин|minut[ay]?)\b""",
+            """(\d+)\s?(?:$escaped|$TIME_UNITS)(?![\p{L}])""",
             RegexOption.IGNORE_CASE
         )
     }
@@ -345,13 +397,25 @@ object ScreenTextParser {
      * on. A negative [preferredFromIndex] (earnings never matched) simply
      * searches the whole list once, same as the old single-pass behavior.
      */
-    private fun findValue(texts: List<String>, regex: Regex, preferredFromIndex: Int): Double? {
+    /** Group 2 of a distance match is its unit: miles are converted, everything else is km. */
+    internal fun distanceToKm(match: MatchResult): Double? {
+        val value = match.groupValues[1].replace(',', '.').toDoubleOrNull() ?: return null
+        val unit = match.groupValues.getOrNull(2).orEmpty()
+        return if (unit.startsWith("mi", ignoreCase = true)) Math.round(value * 1.609344 * 100.0) / 100.0 else value
+    }
+
+    private fun findValue(
+        texts: List<String>,
+        regex: Regex,
+        preferredFromIndex: Int,
+        convert: (MatchResult) -> Double? = { it.groupValues[1].replace(',', '.').toDoubleOrNull() }
+    ): Double? {
         fun search(range: IntRange): Double? {
             for (index in range) {
                 val text = texts.getOrNull(index)?.trim().orEmpty()
                 if (text.isEmpty() || acceptCounterLineRegex.matches(text)) continue
                 val match = regex.find(text) ?: continue
-                val value = match.groupValues[1].replace(',', '.').toDoubleOrNull()
+                val value = convert(match)
                 if (value != null && value > 0) return value
             }
             return null
