@@ -492,4 +492,14 @@
     <string name="chat_my_subscribed">Din prenumeration är aktiv ✅</string>
     <string name="chat_my_trial">Provperiod: %1$d min kvar.</string>
     <string name="chat_my_trial_over">Provperioden är slut — en prenumeration krävs för att skanna uppdrag.</string>
+    <string-array name="pet_greet_morning"><item>God morgon! ☀️ Redo för bra uppdrag?</item><item>Morgon! Kaffe, sedan smarta uppdrag ☕</item><item>Upp och hoppa! I dag tar vi bara de bra 💚</item></string-array>
+    <string-array name="pet_greet_day"><item>Hej! Kul att se dig 💚</item><item>Hej, du är tillbaka! Hur går passet?</item><item>Hej! Jag är här — vi fångar bra uppdrag 👀</item></string-array>
+    <string-array name="pet_greet_evening"><item>God kväll! 🌆 På kvällen betalar uppdrag ofta bättre</item><item>Hej! Hur var din dag?</item><item>Kväll, kompis! Vi avslutar starkt 💪</item></string-array>
+    <string-array name="pet_greet_night"><item>Nattpass? Jag är med dig 🌙</item><item>Fortfarande vaken? Kör försiktigt 🌙</item><item>Nattläge på — jag håller koll på uppdragen 🦉</item></string-array>
+    <string-array name="pet_greet_back"><item>Jag har saknat dig! 🥺 Kul att du är tillbaka</item><item>Äntligen! Jag hade tråkigt utan dig 💚</item></string-array>
+    <string-array name="pet_praise_good"><item>Bra val! +%1$d ⚡</item><item>Det där är ett uppdrag! +%1$d ⚡</item><item>Snyggt! 💪 +%1$d ⚡</item><item>Du har blick för det! +%1$d ⚡</item></string-array>
+    <string-array name="pet_praise_smart"><item>Smart att hoppa över! +%1$d ⚡</item><item>Rätt — det var inte värt det! +%1$d ⚡</item><item>Bra, slösa inte tid 😎 +%1$d ⚡</item><item>Som ett proffs! +%1$d ⚡</item></string-array>
+    <string name="pet_praise_today">I dag redan %1$d uppdrag och %2$s netto — bra jobbat! 💪</string>
+    <string name="pet_praise_record">Rekordtempo i dag: %1$s! 🔥</string>
+    <string name="pet_praise_streak">%1$d smarta dagar i rad — fortsätt så! 🔥</string>
 </resources>

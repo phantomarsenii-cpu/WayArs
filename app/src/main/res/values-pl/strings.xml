@@ -496,4 +496,14 @@
     <string name="chat_my_subscribed">Subskrypcja aktywna ✅</string>
     <string name="chat_my_trial">Okres próbny: zostało %1$d min.</string>
     <string name="chat_my_trial_over">Okres próbny się skończył — do skanowania zleceń potrzebna jest subskrypcja.</string>
+    <string-array name="pet_greet_morning"><item>Dzień dobry! ☀️ Gotowy na dobre zlecenia?</item><item>Ranek! Kawa i do mądrych zleceń ☕</item><item>Pobudka! Dziś bierzemy tylko opłacalne 💚</item></string-array>
+    <string-array name="pet_greet_day"><item>Cześć! Miło cię widzieć 💚</item><item>O, wróciłeś! Jak zmiana?</item><item>Cześć! Jestem — łapiemy dobre zlecenia 👀</item></string-array>
+    <string-array name="pet_greet_evening"><item>Dobry wieczór! 🌆 Wieczorem zlecenia często płacą lepiej</item><item>Hej! Jak minął dzień?</item><item>Wieczór, partnerze! Kończymy dzień z klasą 💪</item></string-array>
+    <string-array name="pet_greet_night"><item>Nocna zmiana? Jestem z tobą 🌙</item><item>Nie śpisz? Uważaj na drodze 🌙</item><item>Tryb nocny włączony — pilnuję zleceń 🦉</item></string-array>
+    <string-array name="pet_greet_back"><item>Tęskniłem! 🥺 Dobrze, że jesteś</item><item>Nareszcie! Nudziłem się bez ciebie 💚</item></string-array>
+    <string-array name="pet_praise_good"><item>Świetny wybór! +%1$d ⚡</item><item>To jest zlecenie! +%1$d ⚡</item><item>Brawo! 💪 +%1$d ⚡</item><item>Masz oko! +%1$d ⚡</item></string-array>
+    <string-array name="pet_praise_smart"><item>Słusznie pominięte! +%1$d ⚡</item><item>Dobrze — nie było warto! +%1$d ⚡</item><item>Brawo, szkoda czasu 😎 +%1$d ⚡</item><item>Jak zawodowiec! +%1$d ⚡</item></string-array>
+    <string name="pet_praise_today">Dziś już %1$d zleceń i %2$s na rękę — dobra robota! 💪</string>
+    <string name="pet_praise_record">Dziś rekordowe tempo: %1$s! 🔥</string>
+    <string name="pet_praise_streak">%1$d mądrych dni z rzędu — tak trzymaj! 🔥</string>
 </resources>

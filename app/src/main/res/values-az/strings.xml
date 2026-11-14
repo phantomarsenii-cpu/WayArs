@@ -492,4 +492,14 @@
     <string name="chat_my_subscribed">Abunəliyin aktivdir ✅</string>
     <string name="chat_my_trial">Pulsuz sınaq: %1$d dəq qalıb.</string>
     <string name="chat_my_trial_over">Pulsuz sınaq bitib — sifarişləri skan etmək üçün abunəlik lazımdır.</string>
+    <string-array name="pet_greet_morning"><item>Sabahın xeyir! ☀️ Yaxşı sifarişlərə hazırsan?</item><item>Səhərdir! Qəhvə, sonra ağıllı sifarişlər ☕</item><item>Qalx! Bu gün yalnız sərfəliləri götürürük 💚</item></string-array>
+    <string-array name="pet_greet_day"><item>Salam! Səni görməyə şadam 💚</item><item>Hey, qayıtdın! Növbə necə keçir?</item><item>Salam! Buradayam — yaxşı sifarişləri tuturuq 👀</item></string-array>
+    <string-array name="pet_greet_evening"><item>Axşamın xeyir! 🌆 Axşam sifarişlər çox vaxt daha sərfəli olur</item><item>Salam! Günün necə keçdi?</item><item>Axşamdır, dostum! Günü gözəl bitirək 💪</item></string-array>
+    <string-array name="pet_greet_night"><item>Gecə növbəsi? Səninləyəm 🌙</item><item>Hələ yatmamısan? Yolda ehtiyatlı ol 🌙</item><item>Gecə rejimi açıqdır — sifarişləri izləyirəm 🦉</item></string-array>
+    <string-array name="pet_greet_back"><item>Səni darıxmışdım! 🥺 Qayıtdığına şadam</item><item>Nəhayət! Sənsiz darıxırdım 💚</item></string-array>
+    <string-array name="pet_praise_good"><item>Əla seçim! +%1$d ⚡</item><item>Budur sifariş! +%1$d ⚡</item><item>Afərin! 💪 +%1$d ⚡</item><item>Gözün itidir! +%1$d ⚡</item></string-array>
+    <string-array name="pet_praise_smart"><item>Düz buraxdın! +%1$d ⚡</item><item>Doğrudur — dəyməzdi! +%1$d ⚡</item><item>Afərin, vaxtını itirmə 😎 +%1$d ⚡</item><item>Peşəkar kimi! +%1$d ⚡</item></string-array>
+    <string name="pet_praise_today">Bu gün artıq %1$d sifariş və %2$s əlində — afərin! 💪</string>
+    <string name="pet_praise_record">Bu gün rekord temp: %1$s! 🔥</string>
+    <string name="pet_praise_streak">Ardıcıl %1$d ağıllı gün — belə davam et! 🔥</string>
 </resources>

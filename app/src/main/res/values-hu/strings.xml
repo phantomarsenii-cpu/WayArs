@@ -492,4 +492,14 @@
     <string name="chat_my_subscribed">Az előfizetésed aktív ✅</string>
     <string name="chat_my_trial">Próbaidő: még %1$d perc.</string>
     <string name="chat_my_trial_over">A próbaidő lejárt — a rendelések szkenneléséhez előfizetés kell.</string>
+    <string-array name="pet_greet_morning"><item>Jó reggelt! ☀️ Készen állsz a jó rendelésekre?</item><item>Reggel! Egy kávé, aztán okos rendelések ☕</item><item>Ébresztő! Ma csak a jókat vállaljuk 💚</item></string-array>
+    <string-array name="pet_greet_day"><item>Szia! Örülök, hogy látlak 💚</item><item>Hé, visszajöttél! Hogy megy a műszak?</item><item>Szia! Itt vagyok — jó rendeléseket fogunk 👀</item></string-array>
+    <string-array name="pet_greet_evening"><item>Jó estét! 🌆 Este a rendelések gyakran jobban fizetnek</item><item>Szia! Milyen volt a napod?</item><item>Este van, társam! Zárjuk erősen 💪</item></string-array>
+    <string-array name="pet_greet_night"><item>Éjszakai műszak? Veled vagyok 🌙</item><item>Még fent vagy? Vigyázz az úton 🌙</item><item>Éjszakai mód bekapcsolva — figyelem a rendeléseket 🦉</item></string-array>
+    <string-array name="pet_greet_back"><item>Hiányoztál! 🥺 Örülök, hogy itt vagy</item><item>Végre! Unatkoztam nélküled 💚</item></string-array>
+    <string-array name="pet_praise_good"><item>Remek választás! +%1$d ⚡</item><item>Ez aztán a rendelés! +%1$d ⚡</item><item>Szép! 💪 +%1$d ⚡</item><item>Jó szemed van! +%1$d ⚡</item></string-array>
+    <string-array name="pet_praise_smart"><item>Okosan kihagyva! +%1$d ⚡</item><item>Helyes — nem érte meg! +%1$d ⚡</item><item>Jól tetted, ne pazarold az időd 😎 +%1$d ⚡</item><item>Mint egy profi! +%1$d ⚡</item></string-array>
+    <string name="pet_praise_today">Ma már %1$d rendelés és %2$s nettó — szép munka! 💪</string>
+    <string name="pet_praise_record">Ma rekordtempó: %1$s! 🔥</string>
+    <string name="pet_praise_streak">%1$d okos nap egymás után — csak így tovább! 🔥</string>
 </resources>

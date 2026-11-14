@@ -492,4 +492,14 @@
     <string name="chat_my_subscribed">Předplatné je aktivní ✅</string>
     <string name="chat_my_trial">Zkušební doba: zbývá %1$d min.</string>
     <string name="chat_my_trial_over">Zkušební doba skončila — ke skenování zakázek je potřeba předplatné.</string>
+    <string-array name="pet_greet_morning"><item>Dobré ráno! ☀️ Připraven na dobré zakázky?</item><item>Ráno! Káva a pak chytré zakázky ☕</item><item>Vstávat! Dnes bereme jen výhodné 💚</item></string-array>
+    <string-array name="pet_greet_day"><item>Ahoj! Rád tě vidím 💚</item><item>Hej, jsi zpátky! Jak jde směna?</item><item>Ahoj! Jsem tu — chytáme dobré zakázky 👀</item></string-array>
+    <string-array name="pet_greet_evening"><item>Dobrý večer! 🌆 Večer zakázky často platí líp</item><item>Ahoj! Jaký byl den?</item><item>Večer, parťáku! Dotáhneme to pěkně 💪</item></string-array>
+    <string-array name="pet_greet_night"><item>Noční směna? Jsem s tebou 🌙</item><item>Ještě nespíš? Opatrně na silnici 🌙</item><item>Noční režim zapnut — hlídám zakázky 🦉</item></string-array>
+    <string-array name="pet_greet_back"><item>Stýskalo se mi! 🥺 Rád, že jsi zpátky</item><item>Konečně! Bez tebe jsem se nudil 💚</item></string-array>
+    <string-array name="pet_praise_good"><item>Skvělá volba! +%1$d ⚡</item><item>To je zakázka! +%1$d ⚡</item><item>Paráda! 💪 +%1$d ⚡</item><item>Máš na to oko! +%1$d ⚡</item></string-array>
+    <string-array name="pet_praise_smart"><item>Chytře vynecháno! +%1$d ⚡</item><item>Správně — nestála za to! +%1$d ⚡</item><item>Dobře, neplýtvej časem 😎 +%1$d ⚡</item><item>Jako profík! +%1$d ⚡</item></string-array>
+    <string name="pet_praise_today">Dnes už %1$d zakázek a %2$s čistého — jen tak dál! 💪</string>
+    <string name="pet_praise_record">Dnes rekordní tempo: %1$s! 🔥</string>
+    <string name="pet_praise_streak">%1$d chytrých dní v řadě — jen tak dál! 🔥</string>
 </resources>

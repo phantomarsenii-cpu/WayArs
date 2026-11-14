@@ -491,4 +491,14 @@
     <string name="chat_my_subscribed">Dein Abo ist aktiv ✅</string>
     <string name="chat_my_trial">Testphase: noch %1$d Min.</string>
     <string name="chat_my_trial_over">Die Testphase ist vorbei — zum Scannen von Aufträgen braucht es ein Abo.</string>
+    <string-array name="pet_greet_morning"><item>Guten Morgen! ☀️ Bereit für gute Aufträge?</item><item>Morgen! Kaffee, dann kluge Aufträge ☕</item><item>Aufstehen! Heute nehmen wir nur die guten 💚</item></string-array>
+    <string-array name="pet_greet_day"><item>Hallo! Schön, dich zu sehen 💚</item><item>Hey, du bist zurück! Wie läuft die Schicht?</item><item>Hallo! Ich bin da — wir fangen gute Aufträge 👀</item></string-array>
+    <string-array name="pet_greet_evening"><item>Guten Abend! 🌆 Abends zahlen Aufträge oft besser</item><item>Hey! Wie war dein Tag?</item><item>Abend, Partner! Lass uns stark abschließen 💪</item></string-array>
+    <string-array name="pet_greet_night"><item>Nachtschicht? Ich bin bei dir 🌙</item><item>Noch wach? Fahr vorsichtig 🌙</item><item>Nachtmodus an — ich behalte die Aufträge im Blick 🦉</item></string-array>
+    <string-array name="pet_greet_back"><item>Ich hab dich vermisst! 🥺 Schön, dass du da bist</item><item>Endlich! Ohne dich war mir langweilig 💚</item></string-array>
+    <string-array name="pet_praise_good"><item>Super Wahl! +%1$d ⚡</item><item>Das ist ein Auftrag! +%1$d ⚡</item><item>Stark! 💪 +%1$d ⚡</item><item>Du hast ein Auge dafür! +%1$d ⚡</item></string-array>
+    <string-array name="pet_praise_smart"><item>Klug ausgelassen! +%1$d ⚡</item><item>Richtig — der lohnte sich nicht! +%1$d ⚡</item><item>Gut, keine Zeit verschwenden 😎 +%1$d ⚡</item><item>Wie ein Profi! +%1$d ⚡</item></string-array>
+    <string name="pet_praise_today">Heute schon %1$d Aufträge und %2$s netto — stark! 💪</string>
+    <string name="pet_praise_record">Heute Rekordtempo: %1$s! 🔥</string>
+    <string name="pet_praise_streak">%1$d kluge Tage in Folge — weiter so! 🔥</string>
 </resources>

@@ -492,4 +492,14 @@
     <string name="chat_my_subscribed">Abonnementet ditt er aktivt ✅</string>
     <string name="chat_my_trial">Prøveperiode: %1$d min igjen.</string>
     <string name="chat_my_trial_over">Prøveperioden er over — det trengs et abonnement for å skanne oppdrag.</string>
+    <string-array name="pet_greet_morning"><item>God morgen! ☀️ Klar for gode oppdrag?</item><item>Morgen! Kaffe, så smarte oppdrag ☕</item><item>Opp og stå! I dag tar vi bare de gode 💚</item></string-array>
+    <string-array name="pet_greet_day"><item>Hei! Hyggelig å se deg 💚</item><item>Hei, du er tilbake! Hvordan går skiftet?</item><item>Hei! Jeg er her — vi fanger gode oppdrag 👀</item></string-array>
+    <string-array name="pet_greet_evening"><item>God kveld! 🌆 Om kvelden betaler oppdrag ofte bedre</item><item>Hei! Hvordan var dagen?</item><item>Kveld, makker! La oss avslutte sterkt 💪</item></string-array>
+    <string-array name="pet_greet_night"><item>Nattskift? Jeg er med deg 🌙</item><item>Fortsatt våken? Kjør forsiktig 🌙</item><item>Nattmodus på — jeg følger med på oppdragene 🦉</item></string-array>
+    <string-array name="pet_greet_back"><item>Jeg har savnet deg! 🥺 Godt at du er tilbake</item><item>Endelig! Jeg kjedet meg uten deg 💚</item></string-array>
+    <string-array name="pet_praise_good"><item>Godt valg! +%1$d ⚡</item><item>Det er et oppdrag! +%1$d ⚡</item><item>Bra! 💪 +%1$d ⚡</item><item>Du har blikk for det! +%1$d ⚡</item></string-array>
+    <string-array name="pet_praise_smart"><item>Smart hoppet over! +%1$d ⚡</item><item>Riktig — det var ikke verdt det! +%1$d ⚡</item><item>Bra, ikke kast bort tiden 😎 +%1$d ⚡</item><item>Som en proff! +%1$d ⚡</item></string-array>
+    <string name="pet_praise_today">I dag allerede %1$d oppdrag og %2$s netto — bra jobba! 💪</string>
+    <string name="pet_praise_record">Rekordtempo i dag: %1$s! 🔥</string>
+    <string name="pet_praise_streak">%1$d smarte dager på rad — fortsett sånn! 🔥</string>
 </resources>

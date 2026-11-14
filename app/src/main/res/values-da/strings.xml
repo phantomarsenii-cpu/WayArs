@@ -492,4 +492,14 @@
     <string name="chat_my_subscribed">Dit abonnement er aktivt ✅</string>
     <string name="chat_my_trial">Prøveperiode: %1$d min tilbage.</string>
     <string name="chat_my_trial_over">Prøveperioden er slut — der kræves et abonnement for at scanne ordrer.</string>
+    <string-array name="pet_greet_morning"><item>Godmorgen! ☀️ Klar til gode ordrer?</item><item>Morgen! Kaffe, så kloge ordrer ☕</item><item>Op og stå! I dag tager vi kun de gode 💚</item></string-array>
+    <string-array name="pet_greet_day"><item>Hej! Godt at se dig 💚</item><item>Hej, du er tilbage! Hvordan går vagten?</item><item>Hej! Jeg er her — vi fanger gode ordrer 👀</item></string-array>
+    <string-array name="pet_greet_evening"><item>Godaften! 🌆 Om aftenen betaler ordrer ofte bedre</item><item>Hej! Hvordan var din dag?</item><item>Aften, makker! Lad os slutte stærkt 💪</item></string-array>
+    <string-array name="pet_greet_night"><item>Nattevagt? Jeg er med dig 🌙</item><item>Stadig vågen? Kør forsigtigt 🌙</item><item>Nattilstand til — jeg holder øje med ordrerne 🦉</item></string-array>
+    <string-array name="pet_greet_back"><item>Jeg har savnet dig! 🥺 Godt du er tilbage</item><item>Endelig! Jeg kedede mig uden dig 💚</item></string-array>
+    <string-array name="pet_praise_good"><item>Godt valg! +%1$d ⚡</item><item>Det er en ordre! +%1$d ⚡</item><item>Flot! 💪 +%1$d ⚡</item><item>Du har øje for det! +%1$d ⚡</item></string-array>
+    <string-array name="pet_praise_smart"><item>Klogt sprunget over! +%1$d ⚡</item><item>Rigtigt — den var ikke det værd! +%1$d ⚡</item><item>Godt, spild ikke tiden 😎 +%1$d ⚡</item><item>Som en pro! +%1$d ⚡</item></string-array>
+    <string name="pet_praise_today">I dag allerede %1$d ordrer og %2$s netto — flot! 💪</string>
+    <string name="pet_praise_record">Rekordtempo i dag: %1$s! 🔥</string>
+    <string name="pet_praise_streak">%1$d kloge dage i træk — bliv ved! 🔥</string>
 </resources>

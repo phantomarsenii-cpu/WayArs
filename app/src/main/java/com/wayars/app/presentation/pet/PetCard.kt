@@ -182,11 +182,32 @@ fun PetCard(
         }
     }
 
+    // Greeting / praise each time the app is opened (at most every 20 min): time of day,
+    // "I missed you" after a long break, or praise from today's real numbers.
+    var greeting by remember { mutableStateOf<String?>(null) }
+    var resumeTick by remember { mutableStateOf(0) }
+    val lifecycle = androidx.compose.ui.platform.LocalLifecycleOwner.current
+    androidx.compose.runtime.DisposableEffect(lifecycle) {
+        val obs = androidx.lifecycle.LifecycleEventObserver { _, e ->
+            if (e == androidx.lifecycle.Lifecycle.Event.ON_RESUME) resumeTick++
+        }
+        lifecycle.lifecycle.addObserver(obs)
+        onDispose { lifecycle.lifecycle.removeObserver(obs) }
+    }
+    LaunchedEffect(resumeTick) {
+        if (resumeTick == 0) return@LaunchedEffect
+        val text = PetGreeter.next(context, pet.lastActivityAt) ?: return@LaunchedEffect
+        greeting = text
+        delay(9_000)
+        greeting = null
+    }
+
     val reactionFresh = pet.reaction != PetState.Reaction.NONE && now - pet.reactionAt < REACTION_MS
     val mood = when {
         helpOpen -> PetMood.HELPER
         petting -> PetMood.NEUTRAL
         afterglow -> PetMood.HAPPY
+        greeting != null && !reactionFresh && permissionsOk -> PetMood.HELLO
         reactionFresh -> when (pet.reaction) {
             PetState.Reaction.GOOD_ACCEPTED -> PetMood.HAPPY
             PetState.Reaction.SMART_REJECT -> PetMood.COOL
@@ -205,12 +226,17 @@ fun PetCard(
     val pettedPhrases = listOf(
         R.string.pet_say_petted_1, R.string.pet_say_petted_2, R.string.pet_say_petted_3, R.string.pet_say_petted_4
     )
-    val says = if (petting || afterglow) stringResource(pettedPhrases[phrase % pettedPhrases.size]) else when (mood) {
+    val praiseGood = androidx.compose.ui.res.stringArrayResource(R.array.pet_praise_good)
+    val praiseSmart = androidx.compose.ui.res.stringArrayResource(R.array.pet_praise_smart)
+    val pick = (pet.reactionAt / 1000L).toInt().let { if (it < 0) -it else it }
+    val says = if (petting || afterglow) stringResource(pettedPhrases[phrase % pettedPhrases.size])
+    else if (mood == PetMood.HELLO && greeting != null) greeting!!
+    else when (mood) {
         PetMood.HELLO -> stringResource(R.string.pet_say_hello, name)
         PetMood.WORKING -> stringResource(R.string.pet_say_working)
         PetMood.HAPPY -> if (pet.reaction == PetState.Reaction.FULL) stringResource(R.string.pet_say_full)
-            else stringResource(R.string.pet_say_happy, pet.lastGain)
-        PetMood.COOL -> stringResource(R.string.pet_say_cool, pet.lastGain)
+            else String.format(praiseGood[pick % praiseGood.size], pet.lastGain)
+        PetMood.COOL -> String.format(praiseSmart[pick % praiseSmart.size], pet.lastGain)
         PetMood.EATING -> stringResource(R.string.pet_say_eating, pet.lastGain)
         PetMood.LEVEL_UP -> stringResource(R.string.pet_say_level_up, pet.level)
         PetMood.SLEEPING -> stringResource(R.string.pet_say_sleeping)

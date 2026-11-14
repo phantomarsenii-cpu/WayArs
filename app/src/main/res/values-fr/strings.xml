@@ -491,4 +491,14 @@
     <string name="chat_my_subscribed">Ton abonnement est actif ✅</string>
     <string name="chat_my_trial">Essai gratuit : encore %1$d min.</string>
     <string name="chat_my_trial_over">L’essai gratuit est terminé — un abonnement est nécessaire pour scanner les courses.</string>
+    <string-array name="pet_greet_morning"><item>Bonjour ! ☀️ Prêt pour de bonnes courses ?</item><item>Le matin ! Un café, puis des courses malines ☕</item><item>Debout ! Aujourd’hui, que des bonnes 💚</item></string-array>
+    <string-array name="pet_greet_day"><item>Salut ! Content de te voir 💚</item><item>Hé, te revoilà ! Ça se passe comment ?</item><item>Salut ! Je suis là — on attrape les bonnes courses 👀</item></string-array>
+    <string-array name="pet_greet_evening"><item>Bonsoir ! 🌆 Le soir, les courses paient souvent mieux</item><item>Salut ! Ta journée s’est bien passée ?</item><item>Bonsoir, partenaire ! On finit en beauté 💪</item></string-array>
+    <string-array name="pet_greet_night"><item>Service de nuit ? Je suis avec toi 🌙</item><item>Encore debout ? Prudence sur la route 🌙</item><item>Mode nuit activé — je surveille les courses 🦉</item></string-array>
+    <string-array name="pet_greet_back"><item>Tu m’as manqué ! 🥺 Content que tu sois là</item><item>Enfin ! Je m’ennuyais sans toi 💚</item></string-array>
+    <string-array name="pet_praise_good"><item>Excellent choix ! +%1$d ⚡</item><item>Ça, c’est une course ! +%1$d ⚡</item><item>Bravo ! 💪 +%1$d ⚡</item><item>Tu as l’œil ! +%1$d ⚡</item></string-array>
+    <string-array name="pet_praise_smart"><item>Bien passé ! +%1$d ⚡</item><item>Bonne décision — elle ne valait pas le coup ! +%1$d ⚡</item><item>Bien, ne perds pas ton temps 😎 +%1$d ⚡</item><item>Comme un pro ! +%1$d ⚡</item></string-array>
+    <string name="pet_praise_today">Déjà %1$d courses et %2$s net aujourd’hui — bravo ! 💪</string>
+    <string name="pet_praise_record">Rythme record aujourd’hui : %1$s ! 🔥</string>
+    <string name="pet_praise_streak">%1$d jours malins d’affilée — continue ! 🔥</string>
 </resources>

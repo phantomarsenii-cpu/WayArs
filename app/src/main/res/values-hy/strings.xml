@@ -492,4 +492,14 @@
     <string name="chat_my_subscribed">Բաժանորդագրությունդ ակտիվ է ✅</string>
     <string name="chat_my_trial">Անվճար փորձաշրջան՝ մնացել է %1$d րոպե։</string>
     <string name="chat_my_trial_over">Փորձաշրջանն ավարտվել է՝ պատվերներ սկանավորելու համար բաժանորդագրություն է պետք։</string>
+    <string-array name="pet_greet_morning"><item>Բարի լույս։ ☀️ Պատրա՞ստ ես լավ պատվերների</item><item>Առավոտ է։ Սուրճ, հետո խելացի պատվերներ ☕</item><item>Վեր կաց։ Այսօր վերցնում ենք միայն ձեռնտուները 💚</item></string-array>
+    <string-array name="pet_greet_day"><item>Բարև։ Ուրախ եմ քեզ տեսնել 💚</item><item>Հեյ, վերադարձար։ Ինչպե՞ս է հերթափոխը</item><item>Բարև։ Այստեղ եմ՝ լավ պատվերներ ենք որսում 👀</item></string-array>
+    <string-array name="pet_greet_evening"><item>Բարի երեկո։ 🌆 Երեկոյան պատվերները հաճախ ավելի ձեռնտու են</item><item>Բարև։ Ինչպե՞ս անցավ օրդ</item><item>Երեկո է, ընկեր։ Օրը գեղեցիկ ավարտենք 💪</item></string-array>
+    <string-array name="pet_greet_night"><item>Գիշերային հերթափո՞խ։ Քեզ հետ եմ 🌙</item><item>Դեռ չե՞ս քնել։ Զգույշ ճանապարհին 🌙</item><item>Գիշերային ռեժիմը միացված է՝ հետևում եմ պատվերներին 🦉</item></string-array>
+    <string-array name="pet_greet_back"><item>Կարոտել էի քեզ։ 🥺 Ուրախ եմ, որ վերադարձար</item><item>Վերջապես։ Առանց քեզ ձանձրանում էի 💚</item></string-array>
+    <string-array name="pet_praise_good"><item>Հիանալի ընտրություն։ +%1$d ⚡</item><item>Ահա թե պատվեր։ +%1$d ⚡</item><item>Ապրես։ 💪 +%1$d ⚡</item><item>Աչքդ սուր է։ +%1$d ⚡</item></string-array>
+    <string-array name="pet_praise_smart"><item>Ճիշտ բաց թողեցիր։ +%1$d ⚡</item><item>Ճիշտ է՝ չարժեր։ +%1$d ⚡</item><item>Ապրես, ժամանակդ մի կորցրու 😎 +%1$d ⚡</item><item>Պրոֆեսիոնալի պես։ +%1$d ⚡</item></string-array>
+    <string name="pet_praise_today">Այսօր արդեն %1$d պատվեր և %2$s ձեռքին՝ ապրես։ 💪</string>
+    <string name="pet_praise_record">Այսօր ռեկորդային տեմպ՝ %1$s։ 🔥</string>
+    <string name="pet_praise_streak">%1$d խելացի օր անընդմեջ՝ այդպես շարունակիր։ 🔥</string>
 </resources>

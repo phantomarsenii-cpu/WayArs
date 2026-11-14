@@ -491,4 +491,14 @@
     <string name="chat_my_subscribed">Abonamentul tău e activ ✅</string>
     <string name="chat_my_trial">Perioada de probă: mai sunt %1$d min.</string>
     <string name="chat_my_trial_over">Perioada de probă s-a terminat — e nevoie de abonament pentru scanarea comenzilor.</string>
+    <string-array name="pet_greet_morning"><item>Bună dimineața! ☀️ Gata de comenzi bune?</item><item>Dimineață! O cafea, apoi comenzi istețe ☕</item><item>Trezirea! Azi luăm doar comenzi bune 💚</item></string-array>
+    <string-array name="pet_greet_day"><item>Salut! Mă bucur să te văd 💚</item><item>Hei, te-ai întors! Cum merge tura?</item><item>Salut! Sunt aici — prindem comenzi bune 👀</item></string-array>
+    <string-array name="pet_greet_evening"><item>Bună seara! 🌆 Seara comenzile plătesc adesea mai bine</item><item>Salut! Cum a fost ziua?</item><item>Seara bună, partenere! Încheiem frumos 💪</item></string-array>
+    <string-array name="pet_greet_night"><item>Tură de noapte? Sunt cu tine 🌙</item><item>Încă treaz? Atenție la drum 🌙</item><item>Mod noapte pornit — urmăresc comenzile 🦉</item></string-array>
+    <string-array name="pet_greet_back"><item>Mi-a fost dor de tine! 🥺 Mă bucur că te-ai întors</item><item>În sfârșit! M-am plictisit fără tine 💚</item></string-array>
+    <string-array name="pet_praise_good"><item>Alegere excelentă! +%1$d ⚡</item><item>Asta da comandă! +%1$d ⚡</item><item>Bravo! 💪 +%1$d ⚡</item><item>Ai ochi buni! +%1$d ⚡</item></string-array>
+    <string-array name="pet_praise_smart"><item>Bine ai sărit-o! +%1$d ⚡</item><item>Corect — nu merita! +%1$d ⚡</item><item>Bravo, nu-ți pierde timpul 😎 +%1$d ⚡</item><item>Ca un profesionist! +%1$d ⚡</item></string-array>
+    <string name="pet_praise_today">Azi deja %1$d comenzi și %2$s net — bravo! 💪</string>
+    <string name="pet_praise_record">Ritm record azi: %1$s! 🔥</string>
+    <string name="pet_praise_streak">%1$d zile istețe la rând — ține-o tot așa! 🔥</string>
 </resources>

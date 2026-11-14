@@ -504,4 +504,14 @@
     <string name="chat_my_subscribed">Your subscription is active ✅</string>
     <string name="chat_my_trial">Your free trial: %1$d min left.</string>
     <string name="chat_my_trial_over">Your free trial is over — a subscription is needed to scan orders.</string>
+    <string-array name="pet_greet_morning"><item>Good morning! ☀️ Ready for good orders?</item><item>Morning! Coffee, then smart orders ☕</item><item>Rise and shine! Let’s pick only the good ones today 💚</item></string-array>
+    <string-array name="pet_greet_day"><item>Hi! Nice to see you 💚</item><item>Hey, welcome back! How’s the shift?</item><item>Hi! I’m here — let’s catch good orders 👀</item></string-array>
+    <string-array name="pet_greet_evening"><item>Good evening! 🌆 Evening orders often pay well</item><item>Hey! How was your day?</item><item>Evening, partner! Let’s finish strong 💪</item></string-array>
+    <string-array name="pet_greet_night"><item>Night shift? I’m with you 🌙</item><item>Still up? Careful on the road 🌙</item><item>Night mode on — I’m watching the orders 🦉</item></string-array>
+    <string-array name="pet_greet_back"><item>I missed you! 🥺 Glad you’re back</item><item>Finally! I was getting bored without you 💚</item></string-array>
+    <string-array name="pet_praise_good"><item>Great pick! +%1$d ⚡</item><item>That’s a good one! +%1$d ⚡</item><item>Nice catch! 💪 +%1$d ⚡</item><item>You’ve got an eye for it! +%1$d ⚡</item></string-array>
+    <string-array name="pet_praise_smart"><item>Smart skip! +%1$d ⚡</item><item>Right call — not worth it! +%1$d ⚡</item><item>Good, don’t waste your time 😎 +%1$d ⚡</item><item>Pro move! +%1$d ⚡</item></string-array>
+    <string name="pet_praise_today">Today: %1$d orders and %2$s take-home — you’re doing great! 💪</string>
+    <string name="pet_praise_record">Record pace today: %1$s! 🔥</string>
+    <string name="pet_praise_streak">%1$d smart days in a row — keep it up! 🔥</string>
 </resources>

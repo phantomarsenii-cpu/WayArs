@@ -492,4 +492,14 @@
     <string name="chat_my_subscribed">Obunangiz faol ✅</string>
     <string name="chat_my_trial">Bepul sinov: %1$d daqiqa qoldi.</string>
     <string name="chat_my_trial_over">Bepul sinov tugadi — buyurtmalarni skanerlash uchun obuna kerak.</string>
+    <string-array name="pet_greet_morning"><item>Xayrli tong! ☀️ Yaxshi buyurtmalarga tayyormisan?</item><item>Tong! Qahva, keyin aqlli buyurtmalar ☕</item><item>Tur! Bugun faqat foydalilarini olamiz 💚</item></string-array>
+    <string-array name="pet_greet_day"><item>Salom! Seni ko‘rganimdan xursandman 💚</item><item>Hey, qaytding! Smena qanday?</item><item>Salom! Shu yerdaman — yaxshi buyurtmalarni ushlaymiz 👀</item></string-array>
+    <string-array name="pet_greet_evening"><item>Xayrli kech! 🌆 Kechqurun buyurtmalar ko‘pincha foydaliroq</item><item>Salom! Kuning qanday o‘tdi?</item><item>Kech bo‘ldi, do‘stim! Kunni chiroyli yakunlaymiz 💪</item></string-array>
+    <string-array name="pet_greet_night"><item>Tungi smenami? Sen bilanman 🌙</item><item>Hali uxlamadingmi? Yo‘lda ehtiyot bo‘l 🌙</item><item>Tungi rejim yoqilgan — buyurtmalarni kuzatyapman 🦉</item></string-array>
+    <string-array name="pet_greet_back"><item>Seni sog‘indim! 🥺 Qaytganingdan xursandman</item><item>Nihoyat! Sensiz zerikdim 💚</item></string-array>
+    <string-array name="pet_praise_good"><item>Zo‘r tanlov! +%1$d ⚡</item><item>Mana bu buyurtma! +%1$d ⚡</item><item>Barakalla! 💪 +%1$d ⚡</item><item>Ko‘zing o‘tkir! +%1$d ⚡</item></string-array>
+    <string-array name="pet_praise_smart"><item>To‘g‘ri o‘tkazib yubording! +%1$d ⚡</item><item>To‘g‘ri — arzimasdi! +%1$d ⚡</item><item>Barakalla, vaqtingni yo‘qotma 😎 +%1$d ⚡</item><item>Professional kabi! +%1$d ⚡</item></string-array>
+    <string name="pet_praise_today">Bugun allaqachon %1$d buyurtma va %2$s qo‘lga — barakalla! 💪</string>
+    <string name="pet_praise_record">Bugun rekord sur’at: %1$s! 🔥</string>
+    <string name="pet_praise_streak">Ketma-ket %1$d aqlli kun — shunday davom et! 🔥</string>
 </resources>

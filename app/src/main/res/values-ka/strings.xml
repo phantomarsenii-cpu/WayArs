@@ -492,4 +492,14 @@
     <string name="chat_my_subscribed">გამოწერა აქტიურია ✅</string>
     <string name="chat_my_trial">უფასო საცდელი: დარჩა %1$d წთ.</string>
     <string name="chat_my_trial_over">საცდელი პერიოდი დასრულდა — შეკვეთების სკანირებისთვის გამოწერაა საჭირო.</string>
+    <string-array name="pet_greet_morning"><item>დილა მშვიდობისა! ☀️ მზად ხარ კარგი შეკვეთებისთვის?</item><item>დილაა! ყავა და მერე ჭკვიანი შეკვეთები ☕</item><item>ადექი! დღეს მხოლოდ მომგებიანებს ვიღებთ 💚</item></string-array>
+    <string-array name="pet_greet_day"><item>გამარჯობა! მიხარია შენი ნახვა 💚</item><item>ჰეი, დაბრუნდი! როგორ მიდის ცვლა?</item><item>გამარჯობა! აქ ვარ — კარგ შეკვეთებს ვიჭერთ 👀</item></string-array>
+    <string-array name="pet_greet_evening"><item>საღამო მშვიდობისა! 🌆 საღამოს შეკვეთები ხშირად უკეთ იხდის</item><item>გამარჯობა! როგორ ჩაიარა დღემ?</item><item>საღამოა, მეგობარო! ლამაზად დავასრულოთ 💪</item></string-array>
+    <string-array name="pet_greet_night"><item>ღამის ცვლა? შენთან ვარ 🌙</item><item>ჯერ არ გძინავს? ფრთხილად გზაზე 🌙</item><item>ღამის რეჟიმი ჩართულია — შეკვეთებს ვადევნებ თვალს 🦉</item></string-array>
+    <string-array name="pet_greet_back"><item>მომენატრე! 🥺 მიხარია, რომ დაბრუნდი</item><item>როგორც იქნა! შენ გარეშე მომწყინდა 💚</item></string-array>
+    <string-array name="pet_praise_good"><item>შესანიშნავი არჩევანი! +%1$d ⚡</item><item>აი, ეს არის შეკვეთა! +%1$d ⚡</item><item>ყოჩაღ! 💪 +%1$d ⚡</item><item>კარგი თვალი გაქვს! +%1$d ⚡</item></string-array>
+    <string-array name="pet_praise_smart"><item>სწორად გამოტოვე! +%1$d ⚡</item><item>სწორია — არ ღირდა! +%1$d ⚡</item><item>ყოჩაღ, დრო ნუ დაკარგე 😎 +%1$d ⚡</item><item>პროფესიონალივით! +%1$d ⚡</item></string-array>
+    <string name="pet_praise_today">დღეს უკვე %1$d შეკვეთა და %2$s ხელზე — ყოჩაღ! 💪</string>
+    <string name="pet_praise_record">დღეს რეკორდული ტემპი: %1$s! 🔥</string>
+    <string name="pet_praise_streak">%1$d ჭკვიანი დღე ზედიზედ — ასე გააგრძელე! 🔥</string>
 </resources>

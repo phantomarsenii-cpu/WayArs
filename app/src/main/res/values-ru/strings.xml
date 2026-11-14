@@ -496,4 +496,14 @@
     <string name="chat_my_subscribed">Подписка активна ✅</string>
     <string name="chat_my_trial">Пробный период: осталось %1$d мин.</string>
     <string name="chat_my_trial_over">Пробный период закончился — для сканирования заказов нужна подписка.</string>
+    <string-array name="pet_greet_morning"><item>Доброе утро! ☀️ Готов к хорошим заказам?</item><item>Утро! Кофе — и за умные заказы ☕</item><item>Подъём! Сегодня берём только выгодные 💚</item></string-array>
+    <string-array name="pet_greet_day"><item>Привет! Рад тебя видеть 💚</item><item>О, ты вернулся! Как смена?</item><item>Привет! Я на месте — ловим хорошие заказы 👀</item></string-array>
+    <string-array name="pet_greet_evening"><item>Добрый вечер! 🌆 Вечером заказы часто выгоднее</item><item>Привет! Как прошёл день?</item><item>Вечер, напарник! Добьём день красиво 💪</item></string-array>
+    <string-array name="pet_greet_night"><item>Ночная смена? Я с тобой 🌙</item><item>Не спишь? Аккуратнее на дороге 🌙</item><item>Ночной режим включён — слежу за заказами 🦉</item></string-array>
+    <string-array name="pet_greet_back"><item>Я скучал! 🥺 Рад, что ты вернулся</item><item>Наконец-то! Мне было скучно без тебя 💚</item></string-array>
+    <string-array name="pet_praise_good"><item>Отличный выбор! +%1$d ⚡</item><item>Вот это заказ! +%1$d ⚡</item><item>Красавчик! 💪 +%1$d ⚡</item><item>Глаз-алмаз! +%1$d ⚡</item></string-array>
+    <string-array name="pet_praise_smart"><item>Правильно пропустил! +%1$d ⚡</item><item>Верно — он того не стоил! +%1$d ⚡</item><item>Молодец, не трать время 😎 +%1$d ⚡</item><item>Как профи! +%1$d ⚡</item></string-array>
+    <string name="pet_praise_today">Сегодня уже %1$d заказов и %2$s на руки — ты молодец! 💪</string>
+    <string name="pet_praise_record">Сегодня рекордный темп: %1$s! 🔥</string>
+    <string name="pet_praise_streak">%1$d умных дней подряд — так держать! 🔥</string>
 </resources>

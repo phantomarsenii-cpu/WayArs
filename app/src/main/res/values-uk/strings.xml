@@ -491,4 +491,14 @@
     <string name="chat_my_subscribed">Підписка активна ✅</string>
     <string name="chat_my_trial">Пробний період: лишилося %1$d хв.</string>
     <string name="chat_my_trial_over">Пробний період закінчився — для сканування замовлень потрібна підписка.</string>
+    <string-array name="pet_greet_morning"><item>Доброго ранку! ☀️ Готовий до гарних замовлень?</item><item>Ранок! Кава — і за розумні замовлення ☕</item><item>Підйом! Сьогодні беремо лише вигідні 💚</item></string-array>
+    <string-array name="pet_greet_day"><item>Привіт! Радий тебе бачити 💚</item><item>О, ти повернувся! Як зміна?</item><item>Привіт! Я на місці — ловимо гарні замовлення 👀</item></string-array>
+    <string-array name="pet_greet_evening"><item>Добрий вечір! 🌆 Увечері замовлення часто вигідніші</item><item>Привіт! Як минув день?</item><item>Вечір, напарнику! Завершимо день красиво 💪</item></string-array>
+    <string-array name="pet_greet_night"><item>Нічна зміна? Я з тобою 🌙</item><item>Не спиш? Обережно на дорозі 🌙</item><item>Нічний режим увімкнено — стежу за замовленнями 🦉</item></string-array>
+    <string-array name="pet_greet_back"><item>Я сумував! 🥺 Радий, що ти повернувся</item><item>Нарешті! Мені було нудно без тебе 💚</item></string-array>
+    <string-array name="pet_praise_good"><item>Чудовий вибір! +%1$d ⚡</item><item>Оце замовлення! +%1$d ⚡</item><item>Красень! 💪 +%1$d ⚡</item><item>Око-алмаз! +%1$d ⚡</item></string-array>
+    <string-array name="pet_praise_smart"><item>Правильно пропустив! +%1$d ⚡</item><item>Так — воно того не варте! +%1$d ⚡</item><item>Молодець, не марнуй час 😎 +%1$d ⚡</item><item>Як профі! +%1$d ⚡</item></string-array>
+    <string name="pet_praise_today">Сьогодні вже %1$d замовлень і %2$s на руки — ти молодець! 💪</string>
+    <string name="pet_praise_record">Сьогодні рекордний темп: %1$s! 🔥</string>
+    <string name="pet_praise_streak">%1$d розумних днів поспіль — так тримати! 🔥</string>
 </resources>
