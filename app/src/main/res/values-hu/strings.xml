@@ -457,4 +457,5 @@
     <string name="tour_extras_text">Napi és heti összesítő értesítésben, értékelés Wear OS-es órán rezgéssel, kezdőképernyő-widget Active kapcsolóval és sofőr meghívása egy ingyenes hónapért.</string>
     <string name="tour_new_title">Újdonságok a WayArs-ban</string>
     <string name="tour_new_text">Röviden az újdonságok: Wayo, a segítő, valós óránkénti kereset és alkalmazás-összehasonlítás, partnerjutalék, napi összesítő, widget, óra és meghívók.</string>
+    <string name="settings_extras_summary">Összesítők, óra, widget, meghívók</string>
 </resources>

@@ -3,6 +3,7 @@ package com.wayars.app.presentation.ui.screen.settings
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.AccountBalance
+import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
@@ -2353,6 +2354,7 @@ private fun ExtrasSection() {
         }
     }
 
+    var expanded by remember { mutableStateOf(false) }
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -2360,12 +2362,35 @@ private fun ExtrasSection() {
             .background(WaSurface)
             .padding(16.dp)
     ) {
-        Text(
-            stringResource(R.string.settings_extras_title),
-            color = MaterialTheme.colorScheme.onSurface,
-            style = MaterialTheme.typography.titleMedium
-        )
-        Spacer(Modifier.padding(top = 6.dp))
+        // Only the header toggles the card, so taps on the switches/buttons inside never collapse it.
+        Row(
+            modifier = Modifier.fillMaxWidth().clickable { expanded = !expanded },
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(Icons.Filled.AutoAwesome, contentDescription = null, tint = WaTextSecondary)
+            Column(Modifier.weight(1f).padding(start = 12.dp)) {
+                Text(
+                    stringResource(R.string.settings_extras_title),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    stringResource(R.string.settings_extras_summary),
+                    color = WaTextSecondary,
+                    style = MaterialTheme.typography.bodyMedium,
+                    maxLines = 1,
+                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                )
+            }
+            Icon(
+                imageVector = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
+                contentDescription = null,
+                tint = WaTextSecondary
+            )
+        }
+        AnimatedVisibility(visible = expanded, enter = expandVertically(), exit = shrinkVertically()) {
+        Column(modifier = Modifier.padding(top = 10.dp)) {
         ExtrasToggle(
             title = stringResource(R.string.settings_summaries_title),
             desc = stringResource(R.string.settings_summaries_desc),
@@ -2435,5 +2460,7 @@ private fun ExtrasSection() {
                 )
             }
         }) { Text(stringResource(R.string.settings_invite_button), color = WaNeonGreen) }
+        }
+        }
     }
 }

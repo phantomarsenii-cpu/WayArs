@@ -469,4 +469,5 @@
     <string name="tour_extras_text">Day and week summaries in notifications, the verdict on a Wear OS watch with vibration, a home-screen widget with the Active switch, and inviting a driver for a free month.</string>
     <string name="tour_new_title">What\'s new in WayArs</string>
     <string name="tour_new_text">A quick look at what\'s new: Wayo the helper, real earnings per hour and app comparison, partner commission, day summaries, the widget, the watch and invites.</string>
+    <string name="settings_extras_summary">Summaries, watch, widget, invites</string>
 </resources>

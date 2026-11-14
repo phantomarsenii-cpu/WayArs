@@ -461,4 +461,5 @@
     <string name="tour_extras_text">Podsumowanie dnia i tygodnia w powiadomieniach, ocena na zegarku z Wear OS z wibracją, widżet na ekran główny z przyciskiem Active i zaproszenie kierowcy za miesiąc za darmo.</string>
     <string name="tour_new_title">Co nowego w WayArs</string>
     <string name="tour_new_text">Krótko o nowościach: pomocnik Wayo, realny zarobek na godzinę i porównanie aplikacji, prowizja partnera, podsumowania dnia, widżet, zegarek i zaproszenia.</string>
+    <string name="settings_extras_summary">Podsumowania, zegarek, widżet, zaproszenia</string>
 </resources>

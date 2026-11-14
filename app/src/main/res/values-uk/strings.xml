@@ -456,4 +456,5 @@
     <string name="tour_extras_text">Підсумки дня і тижня в сповіщеннях, оцінка на годиннику Wear OS з вібрацією, віджет на головний екран із кнопкою Active і запрошення водія за місяць безкоштовно.</string>
     <string name="tour_new_title">Що нового у WayArs</string>
     <string name="tour_new_text">Коротко про нове: помічник Wayo, реальний заробіток за годину й порівняння застосунків, комісія партнера, підсумки дня, віджет, годинник і запрошення.</string>
+    <string name="settings_extras_summary">Підсумки, годинник, віджет, запрошення</string>
 </resources>

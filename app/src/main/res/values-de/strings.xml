@@ -456,4 +456,5 @@
     <string name="tour_extras_text">Tages- und Wochenbilanz als Benachrichtigung, Bewertung auf einer Wear-OS-Uhr mit Vibration, ein Widget mit Active-Schalter für den Startbildschirm und Fahrer einladen für einen Gratismonat.</string>
     <string name="tour_new_title">Neu in WayArs</string>
     <string name="tour_new_text">Kurz das Neue: Helfer Wayo, echter Stundenverdienst und App-Vergleich, Partnerprovision, Tagesbilanz, Widget, Uhr und Einladungen.</string>
+    <string name="settings_extras_summary">Bilanzen, Uhr, Widget, Einladungen</string>
 </resources>

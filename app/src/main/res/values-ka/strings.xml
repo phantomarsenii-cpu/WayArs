@@ -457,4 +457,5 @@
     <string name="tour_extras_text">დღისა და კვირის შედეგი შეტყობინებებში, შეფასება Wear OS საათზე ვიბრაციით, მთავარი ეკრანის ვიჯეტი Active ღილაკით და მძღოლის მოწვევა ერთი თვით უფასოდ.</string>
     <string name="tour_new_title">რა არის ახალი WayArs-ში</string>
     <string name="tour_new_text">მოკლედ სიახლეებზე: დამხმარე Wayo, რეალური საათობრივი შემოსავალი და აპების შედარება, პარტნიორის საკომისიო, დღის შედეგი, ვიჯეტი, საათი და მოწვევები.</string>
+    <string name="settings_extras_summary">შედეგები, საათი, ვიჯეტი, მოწვევები</string>
 </resources>

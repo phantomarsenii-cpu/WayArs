@@ -457,4 +457,5 @@
     <string name="tour_extras_text">Bildirishnomalarda kun va hafta yakuni, Wear OS soatida tebranishli baho, Active tugmali bosh ekran vidjeti va bir oy bepul uchun haydovchini taklif qilish.</string>
     <string name="tour_new_title">WayArs’dagi yangiliklar</string>
     <string name="tour_new_text">Qisqacha yangiliklar: yordamchi Wayo, haqiqiy soatlik daromad va ilovalarni solishtirish, hamkor komissiyasi, kun yakuni, vidjet, soat va takliflar.</string>
+    <string name="settings_extras_summary">Yakunlar, soat, vidjet, takliflar</string>
 </resources>

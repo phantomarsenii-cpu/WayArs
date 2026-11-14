@@ -457,4 +457,5 @@
     <string name="tour_extras_text">Обобщение за деня и седмицата в известия, оценка на часовник с Wear OS с вибрация, уиджет за началния екран с бутона Active и покана на шофьор за месец безплатно.</string>
     <string name="tour_new_title">Какво ново в WayArs</string>
     <string name="tour_new_text">Накратко за новото: помощникът Wayo, реален доход на час и сравнение на приложенията, комисиона на партньора, обобщение за деня, уиджет, часовник и покани.</string>
+    <string name="settings_extras_summary">Обобщения, часовник, уиджет, покани</string>
 </resources>

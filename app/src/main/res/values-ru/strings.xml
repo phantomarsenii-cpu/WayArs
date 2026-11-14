@@ -461,4 +461,5 @@
     <string name="tour_extras_text">Итоги дня и недели в уведомлениях, оценка на часах Wear OS с вибрацией, виджет на главный экран с кнопкой Active и приглашение водителя за месяц бесплатно.</string>
     <string name="tour_new_title">Что нового в WayArs</string>
     <string name="tour_new_text">Коротко о новом: помощник Wayo, реальный заработок в час и сравнение приложений, комиссия партнёра, итоги дня, виджет, часы и приглашения.</string>
+    <string name="settings_extras_summary">Итоги, часы, виджет, приглашения</string>
 </resources>

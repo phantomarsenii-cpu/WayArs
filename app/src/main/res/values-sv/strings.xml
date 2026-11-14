@@ -457,4 +457,5 @@
     <string name="tour_extras_text">Dagens och veckans resultat som avisering, bedömning på en Wear OS-klocka med vibration, en widget på hemskärmen med Active-knappen och inbjudan av en förare för en gratis månad.</string>
     <string name="tour_new_title">Nytt i WayArs</string>
     <string name="tour_new_text">Kort om nyheterna: hjälparen Wayo, verklig timlön och jämförelse av appar, partnerprovision, dagens resultat, widget, klocka och inbjudningar.</string>
+    <string name="settings_extras_summary">Resultat, klocka, widget, inbjudningar</string>
 </resources>

@@ -456,4 +456,5 @@
     <string name="tour_extras_text">Bilan du jour et de la semaine en notification, verdict sur une montre Wear OS avec vibration, widget d’écran d’accueil avec le bouton Active et invitation d’un chauffeur pour un mois gratuit.</string>
     <string name="tour_new_title">Nouveautés de WayArs</string>
     <string name="tour_new_text">En bref : l’assistant Wayo, le gain réel par heure et la comparaison des applis, la commission du partenaire, le bilan du jour, le widget, la montre et les invitations.</string>
+    <string name="settings_extras_summary">Bilans, montre, widget, invitations</string>
 </resources>
