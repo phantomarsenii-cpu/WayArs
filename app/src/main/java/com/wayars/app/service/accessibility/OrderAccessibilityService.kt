@@ -103,6 +103,7 @@ class OrderAccessibilityService : AccessibilityService() {
 
     override fun onServiceConnected() {
         super.onServiceConnected()
+        isConnected = true
         // The log file must exist the moment this service is alive, not only
         // when the in-app "Active" switch happens to flip it on — the UI
         // path that used to guarantee this (ScanningState.setActive ->
@@ -644,13 +645,24 @@ class OrderAccessibilityService : AccessibilityService() {
         // Read-only service — nothing to tear down mid-scan.
     }
 
+    override fun onUnbind(intent: Intent?): Boolean {
+        isConnected = false
+        return super.onUnbind(intent)
+    }
+
     override fun onDestroy() {
+        isConnected = false
         super.onDestroy()
         scope.cancel()
     }
 
     companion object {
         private const val TAG = "WayArsAccessibility"
+
+        /** True while the system has this service bound and running. */
+        @Volatile
+        var isConnected: Boolean = false
+            private set
 
         /** How often an unsupported package's diagnostic line is allowed to
          *  repeat — see the throttle at its call site above. */
