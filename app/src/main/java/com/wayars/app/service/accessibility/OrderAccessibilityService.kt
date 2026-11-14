@@ -718,5 +718,8 @@ class OrderAccessibilityService : AccessibilityService() {
 
         fun isSupportedPackage(packageName: String): Boolean =
             packageName in SUPPORTED_PACKAGES || packageName in CustomPackagesState.packages
+
+        /** The apps WayArs reads out of the box (for the order-reading report). */
+        val builtInPackages: Set<String> get() = SUPPORTED_PACKAGES
     }
 }

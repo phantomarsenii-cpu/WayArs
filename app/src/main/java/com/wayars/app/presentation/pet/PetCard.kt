@@ -597,6 +597,7 @@ private fun PetHelpDialog(
                         color = if (diag.all { it.ok }) WaNeonGreen else WaTextSecondary,
                         fontSize = 13.sp, lineHeight = 18.sp
                     )
+                    if (diag.all { it.ok }) com.wayars.app.features.report.ReportBlock(isSubscribed)
                 }
             }
             if (shown.isEmpty()) {

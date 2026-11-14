@@ -536,7 +536,7 @@ fun WayoChatDialog(
                                 .background(if (m.fromUser) WaNeonGreen else WaSurfaceVariant)
                                 .padding(horizontal = 12.dp, vertical = 9.dp)
                         )
-                        if (m.phoneCheck) PhoneCheckBlock(checks)
+                        if (m.phoneCheck) PhoneCheckBlock(checks, isSubscribed)
                         val step = m.step
                         if (step != null) ChatButton(stringResource(R.string.pet_help_show)) { onShow(step) }
                         if (m.telegram) ChatButton("Telegram · @wayars_app") {
@@ -623,7 +623,7 @@ private fun ChatButton(label: String, onClick: () -> Unit) {
 }
 
 @Composable
-private fun PhoneCheckBlock(checks: List<DiagItem>) {
+private fun PhoneCheckBlock(checks: List<DiagItem>, isSubscribed: Boolean) {
     Column(
         Modifier
             .padding(top = 6.dp)
@@ -650,6 +650,7 @@ private fun PhoneCheckBlock(checks: List<DiagItem>) {
             stringResource(if (checks.all { it.ok }) R.string.pet_diag_all_ok else R.string.pet_diag_problems),
             color = if (checks.all { it.ok }) WaNeonGreen else WaTextSecondary, fontSize = 12.sp, lineHeight = 16.sp
         )
+        if (checks.all { it.ok }) com.wayars.app.features.report.ReportBlock(isSubscribed)
     }
 }
 

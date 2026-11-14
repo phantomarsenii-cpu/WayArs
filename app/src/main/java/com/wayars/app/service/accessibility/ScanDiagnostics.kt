@@ -117,11 +117,56 @@ object ScanDiagnostics {
             _latestByPackage.value = _latestByPackage.value + (packageName to entry)
         }
 
+        if (matchedSupportedApp) remember(entry)
+
         if (_paused.value) return
         _recentPackages.value = (listOf(entry) + _recentPackages.value).take(MAX_ENTRIES)
     }
 
+    /**
+     * The last scans of each SUPPORTED app (up to [HISTORY_PER_PACKAGE], at most
+     * [HISTORY_MAX_AGE_MS] old), kept in memory only — they never leave the phone
+     * unless the driver sends an order-reading report from Wayo's phone check
+     * themselves (see features/report). Unlike [recentPackages] they aren't
+     * evicted by other apps' traffic, so the report shows what the app in
+     * question looked like even when two or three apps run side by side.
+     * Repeats of the same screen are collapsed into one entry (its time is
+     * refreshed), so a ticking countdown can't push the order itself out.
+     */
+    private const val HISTORY_PER_PACKAGE = 40
+    private const val HISTORY_MAX_AGE_MS = 2L * 60 * 60 * 1000
+    private val history = HashMap<String, ArrayDeque<DiagnosticEntry>>()
+
+    private fun remember(entry: DiagnosticEntry) = synchronized(history) {
+        val q = history.getOrPut(entry.packageName) { ArrayDeque() }
+        val last = q.lastOrNull()
+        if (last != null && last.windowFound == entry.windowFound && last.textsCollected == entry.textsCollected &&
+            last.parsedSummary == entry.parsedSummary && last.rawTexts == entry.rawTexts
+        ) {
+            q[q.size - 1] = entry
+        } else {
+            q.addLast(entry)
+        }
+        while (q.size > HISTORY_PER_PACKAGE) q.removeFirst()
+        val cutoff = entry.timestampMillis - HISTORY_MAX_AGE_MS
+        while (q.isNotEmpty() && q.first().timestampMillis < cutoff) q.removeFirst()
+    }
+
+    /** Scans of [packageName], oldest first (see [history]). */
+    fun historyFor(packageName: String): List<DiagnosticEntry> = synchronized(history) {
+        val cutoff = System.currentTimeMillis() - HISTORY_MAX_AGE_MS
+        history[packageName].orEmpty().filter { it.timestampMillis >= cutoff }
+    }
+
+    /** Supported apps seen within [withinMs], most recent first, with when each was last seen. */
+    fun recentSupportedApps(withinMs: Long): List<Pair<String, Long>> = synchronized(history) {
+        val cutoff = System.currentTimeMillis() - withinMs
+        history.mapNotNull { (pkg, q) -> q.lastOrNull()?.timestampMillis?.takeIf { it >= cutoff }?.let { pkg to it } }
+            .sortedByDescending { it.second }
+    }
+
     fun clear() {
+        synchronized(history) { history.clear() }
         _recentPackages.value = emptyList()
         _latestByPackage.value = emptyMap()
     }
