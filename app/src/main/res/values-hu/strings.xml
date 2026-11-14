@@ -461,4 +461,19 @@
     <string name="dashboard_per_hour">óránként, nettó</string>
     <string name="stats_partner_commission_line">Partner jutaléka (%1$s%%): −%2$s</string>
     <string name="stats_after_partner">Partner után marad: %1$s</string>
+    <string name="chat_welcome">Szia! Wayo vagyok 🦎 Írd meg a kérdésed a saját szavaiddal — rendelésekről, a kártyáról, beállításokról, statisztikáról vagy az előfizetésről. Mindent tudok a WayArs-ról.</string>
+    <string name="chat_placeholder">Írj üzenetet…</string>
+    <string name="chat_clarify">Nem vagyok biztos benne, mire gondolsz. Ezek közül valamelyik?</string>
+    <string name="chat_unknown">Hmm, ezt nem tudom — csak a WayArs-hoz értek. Kérdezz másképp, vagy válassz témát. Más ügyben írj nekünk Telegramon.</string>
+    <string name="chat_hello">Szia! 👋 Miben segíthetek?</string>
+    <string name="chat_thanks">Örülök, hogy segíthettem! 💚 Még valami?</string>
+    <string name="chat_who">%1$s vagyok, a WayArs kaméleonja 🦎 Mindent tudok az alkalmazásról: hogyan működik, hol van minden beállítás, és mit kell ellenőrizni, ha valami nem megy. Internet nélkül működöm.</string>
+    <string name="chat_bye">Szia! Jó rendeléseket 🚗💚</string>
+    <string name="chat_how">Remekül — tele energiával! ⚡ Miben segíthetek?</string>
+    <string name="chat_not_helped">Nézzük meg alaposabban. Ezt látom a telefonodon:</string>
+    <string name="chat_not_helped_ok">A telefonon minden be van állítva. Írj nekünk Telegramon a rendelés képernyőképével — megoldjuk.</string>
+    <string name="chat_no_place">Ehhez nincs egyetlen hely, amit megmutathatnék — a fenti válasz leírja, mit tegyél.</string>
+    <string name="chat_typing">ír…</string>
+    <string name="chat_offline">ismeri az alkalmazást · internet nélkül</string>
+    <string name="chat_check_title">Telefon ellenőrzése</string>
 </resources>

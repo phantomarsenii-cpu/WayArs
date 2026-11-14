@@ -460,4 +460,19 @@
     <string name="dashboard_per_hour">pe oră, net</string>
     <string name="stats_partner_commission_line">Comisionul partenerului (%1$s%%): −%2$s</string>
     <string name="stats_after_partner">Rămâne după partener: %1$s</string>
+    <string name="chat_welcome">Salut! Sunt Wayo 🦎 Scrie întrebarea cu cuvintele tale — despre comenzi, card, setări, statistici sau abonament. Știu totul despre WayArs.</string>
+    <string name="chat_placeholder">Scrie un mesaj…</string>
+    <string name="chat_clarify">Nu sunt sigur ce vrei să spui. E una dintre acestea?</string>
+    <string name="chat_unknown">Hmm, asta nu știu — mă pricep doar la WayArs. Încearcă altfel sau alege un subiect. Pentru altceva, scrie-ne pe Telegram.</string>
+    <string name="chat_hello">Salut! 👋 Cu ce te ajut?</string>
+    <string name="chat_thanks">Mă bucur că am ajutat! 💚 Altceva?</string>
+    <string name="chat_who">Sunt %1$s, cameleonul WayArs 🦎 Știu totul despre aplicație: cum funcționează, unde e fiecare setare și ce să verifici când ceva nu merge. Funcționez fără internet.</string>
+    <string name="chat_bye">Pa! Comenzi bune 🚗💚</string>
+    <string name="chat_how">Super — plin de energie! ⚡ Cu ce te ajut?</string>
+    <string name="chat_not_helped">Hai să vedem mai atent. Iată ce văd pe telefonul tău:</string>
+    <string name="chat_not_helped_ok">Pe telefon totul e setat. Scrie-ne pe Telegram cu o captură a comenzii — rezolvăm.</string>
+    <string name="chat_no_place">Nu există un singur loc de arătat — răspunsul de mai sus spune ce să faci.</string>
+    <string name="chat_typing">scrie…</string>
+    <string name="chat_offline">știe aplicația · fără internet</string>
+    <string name="chat_check_title">Verificarea telefonului</string>
 </resources>

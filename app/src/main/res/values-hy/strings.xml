@@ -461,4 +461,19 @@
     <string name="dashboard_per_hour">ժամում, ձեռքին</string>
     <string name="stats_partner_commission_line">Գործընկերոջ միջնորդավճար (%1$s%%)՝ −%2$s</string>
     <string name="stats_after_partner">Գործընկերոջից հետո մնում է՝ %1$s</string>
+    <string name="chat_welcome">Բարև։ Ես Wayo-ն եմ 🦎 Գրիր հարցդ քո բառերով՝ պատվերների, քարտի, կարգավորումների, վիճակագրության կամ բաժանորդագրության մասին։ WayArs-ի մասին ամեն ինչ գիտեմ։</string>
+    <string name="chat_placeholder">Գրիր հաղորդագրություն…</string>
+    <string name="chat_clarify">Լավ չհասկացա։ Սրանցից մեկի մասի՞ն է։</string>
+    <string name="chat_unknown">Հմ, դա չգիտեմ՝ ես միայն WayArs-ից եմ հասկանում։ Փորձիր այլ կերպ հարցնել կամ ընտրիր թեմա։ Այլ հարցերով գրիր մեզ Telegram-ում։</string>
+    <string name="chat_hello">Բարև։ 👋 Ինչո՞վ օգնեմ։</string>
+    <string name="chat_thanks">Ուրախ եմ, որ օգնեցի։ 💚 Էլ ինչ-որ բան։</string>
+    <string name="chat_who">Ես %1$s-ն եմ՝ WayArs-ի քամելեոնը 🦎 Հավելվածի մասին ամեն ինչ գիտեմ՝ ինչպես է աշխատում, որտեղ է ամեն կարգավորում և ինչ ստուգել, երբ ինչ-որ բան այն չէ։ Աշխատում եմ առանց ինտերնետի։</string>
+    <string name="chat_bye">Հաջող։ Լավ պատվերներ 🚗💚</string>
+    <string name="chat_how">Հիանալի՝ էներգիայով լի։ ⚡ Ինչո՞վ օգնեմ։</string>
+    <string name="chat_not_helped">Եկ ավելի խորը նայենք։ Ահա թե ինչ եմ տեսնում քո հեռախոսում․</string>
+    <string name="chat_not_helped_ok">Հեռախոսում ամեն ինչ կարգավորված է։ Գրիր մեզ Telegram-ում պատվերի սքրինշոթով՝ կլուծենք։</string>
+    <string name="chat_no_place">Ցույց տալու մեկ տեղ չկա՝ ինչ անել, գրված է վերևի պատասխանում։</string>
+    <string name="chat_typing">գրում է…</string>
+    <string name="chat_offline">գիտի հավելվածը · առանց ինտերնետի</string>
+    <string name="chat_check_title">Հեռախոսի ստուգում</string>
 </resources>

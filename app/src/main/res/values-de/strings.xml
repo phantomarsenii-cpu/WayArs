@@ -460,4 +460,19 @@
     <string name="dashboard_per_hour">pro Stunde, netto</string>
     <string name="stats_partner_commission_line">Partnerprovision (%1$s%%): −%2$s</string>
     <string name="stats_after_partner">Nach dem Partner übrig: %1$s</string>
+    <string name="chat_welcome">Hallo! Ich bin Wayo 🦎 Schreib deine Frage mit eigenen Worten — zu Aufträgen, der Karte, Einstellungen, Statistik oder dem Abo. Ich weiß alles über WayArs.</string>
+    <string name="chat_placeholder">Nachricht schreiben…</string>
+    <string name="chat_clarify">Ich bin nicht ganz sicher, was du meinst. Ist es eines davon?</string>
+    <string name="chat_unknown">Hmm, das weiß ich nicht — ich kenne mich nur mit WayArs aus. Frag anders oder wähle ein Thema. Für alles andere schreib uns auf Telegram.</string>
+    <string name="chat_hello">Hallo! 👋 Wie kann ich helfen?</string>
+    <string name="chat_thanks">Freut mich, dass ich helfen konnte! 💚 Noch etwas?</string>
+    <string name="chat_who">Ich bin %1$s, das WayArs-Chamäleon 🦎 Ich weiß alles über die App: wie sie funktioniert, wo jede Einstellung ist und was zu prüfen ist, wenn etwas nicht klappt. Ich arbeite ohne Internet.</string>
+    <string name="chat_bye">Tschüss! Gute Aufträge 🚗💚</string>
+    <string name="chat_how">Super — voller Energie! ⚡ Wie kann ich helfen?</string>
+    <string name="chat_not_helped">Schauen wir genauer hin. Das sehe ich auf deinem Handy:</string>
+    <string name="chat_not_helped_ok">Auf dem Handy ist alles eingerichtet. Schreib uns auf Telegram mit einem Screenshot des Auftrags — wir klären das.</string>
+    <string name="chat_no_place">Dafür gibt es keine einzelne Stelle zum Zeigen — die Antwort oben sagt, was zu tun ist.</string>
+    <string name="chat_typing">schreibt…</string>
+    <string name="chat_offline">kennt die App · ohne Internet</string>
+    <string name="chat_check_title">Handy-Check</string>
 </resources>

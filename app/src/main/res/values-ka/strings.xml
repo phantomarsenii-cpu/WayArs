@@ -461,4 +461,19 @@
     <string name="dashboard_per_hour">საათში, ხელზე</string>
     <string name="stats_partner_commission_line">პარტნიორის საკომისიო (%1$s%%): −%2$s</string>
     <string name="stats_after_partner">პარტნიორის შემდეგ რჩება: %1$s</string>
+    <string name="chat_welcome">გამარჯობა! მე Wayo ვარ 🦎 დაწერე კითხვა შენი სიტყვებით — შეკვეთებზე, ბარათზე, პარამეტრებზე, სტატისტიკაზე ან გამოწერაზე. WayArs-ზე ყველაფერი ვიცი.</string>
+    <string name="chat_placeholder">დაწერე შეტყობინება…</string>
+    <string name="chat_clarify">ბოლომდე ვერ გავიგე. რომელიმე ამათგანზეა?</string>
+    <string name="chat_unknown">ჰმ, ეს არ ვიცი — მხოლოდ WayArs-ში ვერკვევი. სცადე სხვაგვარად კითხვა ან აირჩიე თემა. სხვა საკითხებზე მოგვწერე Telegram-ში.</string>
+    <string name="chat_hello">გამარჯობა! 👋 რით დაგეხმარო?</string>
+    <string name="chat_thanks">მიხარია, რომ დაგეხმარე! 💚 კიდევ რამე?</string>
+    <string name="chat_who">მე %1$s ვარ, WayArs-ის ქამელეონი 🦎 აპზე ყველაფერი ვიცი: როგორ მუშაობს, სად არის თითოეული პარამეტრი და რა შეამოწმო, თუ რამე ვერ ხდება. ინტერნეტის გარეშე ვმუშაობ.</string>
+    <string name="chat_bye">ნახვამდის! კარგ შეკვეთებს გისურვებ 🚗💚</string>
+    <string name="chat_how">მშვენივრად — ენერგიით სავსე ვარ! ⚡ რით დაგეხმარო?</string>
+    <string name="chat_not_helped">უფრო ღრმად ვნახოთ. აი, რას ვხედავ შენს ტელეფონზე:</string>
+    <string name="chat_not_helped_ok">ტელეფონზე ყველაფერი მოწყობილია. მოგვწერე Telegram-ში შეკვეთის სქრინშოტით — მოვაგვარებთ.</string>
+    <string name="chat_no_place">საჩვენებლად ერთი ადგილი არ არის — რა უნდა გააკეთო, ზემოთ პასუხშია.</string>
+    <string name="chat_typing">წერს…</string>
+    <string name="chat_offline">იცის აპი · ინტერნეტის გარეშე</string>
+    <string name="chat_check_title">ტელეფონის შემოწმება</string>
 </resources>

@@ -126,7 +126,7 @@ val PET_HELP_TOPICS: List<PetHelpTopic> = listOf(
 )
 
 /** One live check of the phone/app state for "Check my phone". */
-private class DiagItem(@StringRes val label: Int, val ok: Boolean, val fix: (() -> Unit)?)
+internal class DiagItem(@StringRes val label: Int, val ok: Boolean, val fix: (() -> Unit)?)
 
 private const val REACTION_MS = 6_000L
 private const val SLEEP_AFTER_MS = 24L * 60 * 60 * 1000
@@ -146,6 +146,7 @@ fun PetCard(
     val context = LocalContext.current
     val pet by PetState.state.collectAsState()
     var helpOpen by remember { mutableStateOf(false) }
+    var listMode by remember { mutableStateOf(false) }
     var hopKey by remember { mutableStateOf(0) }
     // Stroking: while the finger moves over Wayo, and a short happy afterglow when it stops.
     var petting by remember { mutableStateOf(false) }
@@ -334,16 +335,30 @@ fun PetCard(
     }
 
     if (helpOpen) {
-        PetHelpDialog(
+        val show: (TourStep) -> Unit = { step ->
+            helpOpen = false
+            listMode = false
+            onShowTopic(step)
+        }
+        // The chat stays open underneath, so closing the list returns to the same conversation.
+        WayoChatDialog(
             name = name,
             isActive = isActive,
             isSubscribed = isSubscribed,
             onDismiss = { helpOpen = false },
-            onShow = { step ->
-                helpOpen = false
-                onShowTopic(step)
-            }
+            onShow = show,
+            onOpenList = { listMode = true }
         )
+        if (listMode) {
+            // Full list of questions (the "📋" button in the chat).
+            PetHelpDialog(
+                name = name,
+                isActive = isActive,
+                isSubscribed = isSubscribed,
+                onDismiss = { listMode = false },
+                onShow = show
+            )
+        }
     }
 }
 

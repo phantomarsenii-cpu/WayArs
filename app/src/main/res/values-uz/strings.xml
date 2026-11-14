@@ -461,4 +461,19 @@
     <string name="dashboard_per_hour">soatiga, qo‘lga</string>
     <string name="stats_partner_commission_line">Hamkor komissiyasi (%1$s%%): −%2$s</string>
     <string name="stats_after_partner">Hamkordan keyin qoladi: %1$s</string>
+    <string name="chat_welcome">Salom! Men Wayo’man 🦎 Savolingni o‘z so‘zlaring bilan yoz — buyurtmalar, karta, sozlamalar, statistika yoki obuna haqida. WayArs haqida hamma narsani bilaman.</string>
+    <string name="chat_placeholder">Xabar yoz…</string>
+    <string name="chat_clarify">To‘liq tushunmadim. Shulardan biri haqidami?</string>
+    <string name="chat_unknown">Hmm, buni bilmayman — faqat WayArs’ni tushunaman. Boshqacha so‘rab ko‘r yoki mavzu tanla. Boshqa masalalar bo‘yicha bizga Telegram’da yoz.</string>
+    <string name="chat_hello">Salom! 👋 Qanday yordam beray?</string>
+    <string name="chat_thanks">Yordam bera olganimdan xursandman! 💚 Yana nimadir?</string>
+    <string name="chat_who">Men %1$s, WayArs xameleoniman 🦎 Ilova haqida hamma narsani bilaman: qanday ishlaydi, qaysi sozlama qayerda va nimadir noto‘g‘ri bo‘lsa nimani tekshirish kerak. Internetsiz ishlayman.</string>
+    <string name="chat_bye">Xayr! Yaxshi buyurtmalar 🚗💚</string>
+    <string name="chat_how">Zo‘r — energiyaga to‘laman! ⚡ Qanday yordam beray?</string>
+    <string name="chat_not_helped">Chuqurroq ko‘raylik. Telefoningda mana nimani ko‘ryapman:</string>
+    <string name="chat_not_helped_ok">Telefonda hammasi sozlangan. Buyurtma skrinshoti bilan bizga Telegram’da yoz — hal qilamiz.</string>
+    <string name="chat_no_place">Ko‘rsatish uchun bitta joy yo‘q — nima qilish kerakligi yuqoridagi javobda yozilgan.</string>
+    <string name="chat_typing">yozmoqda…</string>
+    <string name="chat_offline">ilovani biladi · internetsiz</string>
+    <string name="chat_check_title">Telefonni tekshirish</string>
 </resources>

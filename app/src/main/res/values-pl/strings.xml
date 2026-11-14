@@ -465,4 +465,19 @@
     <string name="dashboard_per_hour">na godzinę, na rękę</string>
     <string name="stats_partner_commission_line">Prowizja partnera (%1$s%%): −%2$s</string>
     <string name="stats_after_partner">Zostaje po partnerze: %1$s</string>
+    <string name="chat_welcome">Cześć! Jestem Wayo 🦎 Napisz pytanie własnymi słowami — o zlecenia, kartę, ustawienia, statystyki lub subskrypcję. Wiem wszystko o WayArs.</string>
+    <string name="chat_placeholder">Napisz wiadomość…</string>
+    <string name="chat_clarify">Nie do końca rozumiem. Chodzi o coś z tego?</string>
+    <string name="chat_unknown">Hmm, tego nie wiem — znam się tylko na WayArs. Spróbuj zapytać inaczej albo wybierz temat. W innych sprawach napisz do nas na Telegramie.</string>
+    <string name="chat_hello">Cześć! 👋 W czym pomóc?</string>
+    <string name="chat_thanks">Cieszę się, że pomogłem! 💚 Coś jeszcze?</string>
+    <string name="chat_who">Jestem %1$s, kameleon WayArs 🦎 Wiem wszystko o aplikacji: jak działa, gdzie jest każde ustawienie i co sprawdzić, gdy coś nie gra. Działam bez internetu.</string>
+    <string name="chat_bye">Na razie! Dobrych zleceń 🚗💚</string>
+    <string name="chat_how">Świetnie — pełen energii! ⚡ W czym pomóc?</string>
+    <string name="chat_not_helped">Sprawdźmy dokładniej. Oto co widzę na twoim telefonie:</string>
+    <string name="chat_not_helped_ok">Na telefonie wszystko jest ustawione. Napisz do nas na Telegramie i wyślij zrzut ekranu zlecenia — rozwiążemy to.</string>
+    <string name="chat_no_place">Tu nie ma jednego miejsca do pokazania — co zrobić, jest w odpowiedzi wyżej.</string>
+    <string name="chat_typing">pisze…</string>
+    <string name="chat_offline">zna aplikację · bez internetu</string>
+    <string name="chat_check_title">Sprawdzenie telefonu</string>
 </resources>

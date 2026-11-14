@@ -465,4 +465,19 @@
     <string name="dashboard_per_hour">в час, на руки</string>
     <string name="stats_partner_commission_line">Комиссия партнёра (%1$s%%): −%2$s</string>
     <string name="stats_after_partner">Осталось после партнёра: %1$s</string>
+    <string name="chat_welcome">Привет! Я Wayo 🦎 Напиши вопрос своими словами — про заказы, карточку, настройки, статистику или подписку. Я знаю всё о WayArs.</string>
+    <string name="chat_placeholder">Напиши сообщение…</string>
+    <string name="chat_clarify">Не совсем понял. Ты про что-то из этого?</string>
+    <string name="chat_unknown">Хм, такого я не знаю — я разбираюсь только в WayArs. Попробуй спросить иначе или выбери тему. По другим вопросам напиши нам в Telegram.</string>
+    <string name="chat_hello">Привет! 👋 Чем помочь?</string>
+    <string name="chat_thanks">Рад помочь! 💚 Что-то ещё?</string>
+    <string name="chat_who">Я %1$s, хамелеон WayArs 🦎 Знаю всё о приложении: как оно работает, где какая настройка и что проверить, если что-то не так. Работаю без интернета.</string>
+    <string name="chat_bye">Пока! Хороших заказов 🚗💚</string>
+    <string name="chat_how">Отлично — полон энергии! ⚡ Чем помочь?</string>
+    <string name="chat_not_helped">Давай разберёмся глубже. Вот что я вижу на твоём телефоне:</string>
+    <string name="chat_not_helped_ok">На телефоне всё настроено. Напиши нам в Telegram и пришли скриншот заказа — разберёмся.</string>
+    <string name="chat_no_place">Тут нечего показать в одном месте — что делать, написано в ответе выше.</string>
+    <string name="chat_typing">печатает…</string>
+    <string name="chat_offline">знает приложение · без интернета</string>
+    <string name="chat_check_title">Проверка телефона</string>
 </resources>

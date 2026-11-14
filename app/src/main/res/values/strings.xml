@@ -473,4 +473,19 @@
     <string name="dashboard_per_hour">per hour, take-home</string>
     <string name="stats_partner_commission_line">Partner commission (%1$s%%): −%2$s</string>
     <string name="stats_after_partner">Left after the partner: %1$s</string>
+    <string name="chat_welcome">Hi! I’m Wayo 🦎 Write your question in your own words — about orders, the card, settings, statistics or the subscription. I know everything about WayArs.</string>
+    <string name="chat_placeholder">Write a message…</string>
+    <string name="chat_clarify">I’m not quite sure what you mean. Is it one of these?</string>
+    <string name="chat_unknown">Hmm, I don’t know that one — I only know about WayArs. Try asking differently or pick a topic. For anything else, write to us on Telegram.</string>
+    <string name="chat_hello">Hi! 👋 How can I help?</string>
+    <string name="chat_thanks">Glad I could help! 💚 Anything else?</string>
+    <string name="chat_who">I’m %1$s, the WayArs chameleon 🦎 I know everything about the app: how it works, where each setting is and what to check when something goes wrong. I work without the internet.</string>
+    <string name="chat_bye">Bye! Good orders to you 🚗💚</string>
+    <string name="chat_how">Great — full of energy! ⚡ How can I help?</string>
+    <string name="chat_not_helped">Let’s dig deeper. Here’s what I see on your phone:</string>
+    <string name="chat_not_helped_ok">Everything on the phone is set up. Write to us on Telegram with a screenshot of the order — we’ll sort it out.</string>
+    <string name="chat_no_place">There’s no single place to show for that — the answer above says what to do.</string>
+    <string name="chat_typing">typing…</string>
+    <string name="chat_offline">knows the app · works offline</string>
+    <string name="chat_check_title">Phone check</string>
 </resources>

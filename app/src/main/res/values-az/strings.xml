@@ -461,4 +461,19 @@
     <string name="dashboard_per_hour">saatda, əlinizdə</string>
     <string name="stats_partner_commission_line">Partnyor komissiyası (%1$s%%): −%2$s</string>
     <string name="stats_after_partner">Partnyordan sonra qalan: %1$s</string>
+    <string name="chat_welcome">Salam! Mən Wayo-yam 🦎 Sualını öz sözlərinlə yaz — sifarişlər, kart, parametrlər, statistika və ya abunəlik haqqında. WayArs haqqında hər şeyi bilirəm.</string>
+    <string name="chat_placeholder">Mesaj yaz…</string>
+    <string name="chat_clarify">Tam başa düşmədim. Bunlardan biri haqqındadır?</string>
+    <string name="chat_unknown">Hmm, bunu bilmirəm — yalnız WayArs-dan başım çıxır. Başqa cür soruş və ya mövzu seç. Digər məsələlər üçün bizə Telegram-da yaz.</string>
+    <string name="chat_hello">Salam! 👋 Necə kömək edim?</string>
+    <string name="chat_thanks">Kömək edə bildiyimə şadam! 💚 Başqa nəsə?</string>
+    <string name="chat_who">Mən %1$s, WayArs buqələmunuyam 🦎 Tətbiq haqqında hər şeyi bilirəm: necə işləyir, hansı parametr haradadır və nəsə qaydasında olmayanda nəyi yoxlamaq lazımdır. İnternetsiz işləyirəm.</string>
+    <string name="chat_bye">Sağ ol! Uğurlu sifarişlər 🚗💚</string>
+    <string name="chat_how">Əla — enerji ilə doluyam! ⚡ Necə kömək edim?</string>
+    <string name="chat_not_helped">Gəl daha dərindən baxaq. Telefonunda bunu görürəm:</string>
+    <string name="chat_not_helped_ok">Telefonda hər şey qaydasındadır. Sifarişin ekran şəkli ilə bizə Telegram-da yaz — həll edərik.</string>
+    <string name="chat_no_place">Göstərmək üçün tək bir yer yoxdur — nə etmək lazım olduğu yuxarıdakı cavabda yazılıb.</string>
+    <string name="chat_typing">yazır…</string>
+    <string name="chat_offline">tətbiqi bilir · internetsiz</string>
+    <string name="chat_check_title">Telefonun yoxlanması</string>
 </resources>

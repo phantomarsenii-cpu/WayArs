@@ -460,4 +460,19 @@
     <string name="dashboard_per_hour">par heure, net</string>
     <string name="stats_partner_commission_line">Commission du partenaire (%1$s %%) : −%2$s</string>
     <string name="stats_after_partner">Reste après le partenaire : %1$s</string>
+    <string name="chat_welcome">Salut ! Je suis Wayo 🦎 Écris ta question avec tes mots — sur les courses, la carte, les réglages, les statistiques ou l’abonnement. Je sais tout sur WayArs.</string>
+    <string name="chat_placeholder">Écris un message…</string>
+    <string name="chat_clarify">Je ne suis pas sûr de comprendre. C’est l’un de ceux-ci ?</string>
+    <string name="chat_unknown">Hmm, ça je ne sais pas — je ne connais que WayArs. Essaie autrement ou choisis un sujet. Pour le reste, écris-nous sur Telegram.</string>
+    <string name="chat_hello">Salut ! 👋 Comment puis-je aider ?</string>
+    <string name="chat_thanks">Content d’avoir aidé ! 💚 Autre chose ?</string>
+    <string name="chat_who">Je suis %1$s, le caméléon de WayArs 🦎 Je sais tout sur l’appli : comment elle marche, où est chaque réglage et quoi vérifier si quelque chose cloche. Je fonctionne sans internet.</string>
+    <string name="chat_bye">Salut ! Bonnes courses 🚗💚</string>
+    <string name="chat_how">Super — plein d’énergie ! ⚡ Comment puis-je aider ?</string>
+    <string name="chat_not_helped">Regardons de plus près. Voici ce que je vois sur ton téléphone :</string>
+    <string name="chat_not_helped_ok">Tout est réglé sur le téléphone. Écris-nous sur Telegram avec une capture de la course — on va régler ça.</string>
+    <string name="chat_no_place">Il n’y a pas d’endroit unique à montrer — la réponse ci-dessus dit quoi faire.</string>
+    <string name="chat_typing">écrit…</string>
+    <string name="chat_offline">connaît l’appli · sans internet</string>
+    <string name="chat_check_title">Vérification du téléphone</string>
 </resources>

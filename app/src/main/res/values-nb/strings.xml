@@ -461,4 +461,19 @@
     <string name="dashboard_per_hour">per time, netto</string>
     <string name="stats_partner_commission_line">Partnerens provisjon (%1$s %%): −%2$s</string>
     <string name="stats_after_partner">Igjen etter partneren: %1$s</string>
+    <string name="chat_welcome">Hei! Jeg er Wayo 🦎 Skriv spørsmålet med egne ord — om oppdrag, kortet, innstillinger, statistikk eller abonnementet. Jeg vet alt om WayArs.</string>
+    <string name="chat_placeholder">Skriv en melding…</string>
+    <string name="chat_clarify">Jeg er ikke helt sikker på hva du mener. Er det ett av disse?</string>
+    <string name="chat_unknown">Hmm, det vet jeg ikke — jeg kan bare WayArs. Prøv å spørre annerledes eller velg et tema. For annet, skriv til oss på Telegram.</string>
+    <string name="chat_hello">Hei! 👋 Hva kan jeg hjelpe med?</string>
+    <string name="chat_thanks">Fint at jeg kunne hjelpe! 💚 Noe mer?</string>
+    <string name="chat_who">Jeg er %1$s, WayArs-kameleonen 🦎 Jeg vet alt om appen: hvordan den virker, hvor hver innstilling er og hva du bør sjekke når noe ikke stemmer. Jeg virker uten internett.</string>
+    <string name="chat_bye">Ha det! Gode oppdrag 🚗💚</string>
+    <string name="chat_how">Kjempebra — full av energi! ⚡ Hva kan jeg hjelpe med?</string>
+    <string name="chat_not_helped">La oss se nærmere. Dette ser jeg på telefonen din:</string>
+    <string name="chat_not_helped_ok">Alt på telefonen er satt opp. Skriv til oss på Telegram med et skjermbilde av oppdraget — så ordner vi det.</string>
+    <string name="chat_no_place">Det finnes ikke ett sted å vise — svaret over sier hva du skal gjøre.</string>
+    <string name="chat_typing">skriver…</string>
+    <string name="chat_offline">kan appen · uten internett</string>
+    <string name="chat_check_title">Telefonsjekk</string>
 </resources>

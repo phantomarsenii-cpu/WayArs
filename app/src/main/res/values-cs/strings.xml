@@ -461,4 +461,19 @@
     <string name="dashboard_per_hour">za hodinu, čistého</string>
     <string name="stats_partner_commission_line">Provize partnera (%1$s %%): −%2$s</string>
     <string name="stats_after_partner">Zbývá po partnerovi: %1$s</string>
+    <string name="chat_welcome">Ahoj! Jsem Wayo 🦎 Napiš otázku vlastními slovy — o zakázkách, kartě, nastavení, statistikách nebo předplatném. Vím o WayArs všechno.</string>
+    <string name="chat_placeholder">Napiš zprávu…</string>
+    <string name="chat_clarify">Nejsem si jistý, co myslíš. Je to něco z tohohle?</string>
+    <string name="chat_unknown">Hmm, tohle nevím — vyznám se jen ve WayArs. Zkus se zeptat jinak nebo vyber téma. S ostatním nám napiš na Telegram.</string>
+    <string name="chat_hello">Ahoj! 👋 S čím pomoct?</string>
+    <string name="chat_thanks">Rád jsem pomohl! 💚 Ještě něco?</string>
+    <string name="chat_who">Jsem %1$s, chameleon WayArs 🦎 Vím o aplikaci všechno: jak funguje, kde je které nastavení a co zkontrolovat, když něco nejde. Funguju bez internetu.</string>
+    <string name="chat_bye">Ahoj! Dobré zakázky 🚗💚</string>
+    <string name="chat_how">Skvěle — plný energie! ⚡ S čím pomoct?</string>
+    <string name="chat_not_helped">Podíváme se podrobněji. Tohle vidím v tvém telefonu:</string>
+    <string name="chat_not_helped_ok">V telefonu je vše nastaveno. Napiš nám na Telegram se snímkem zakázky — vyřešíme to.</string>
+    <string name="chat_no_place">Tady není jedno místo k ukázání — co dělat, je v odpovědi výše.</string>
+    <string name="chat_typing">píše…</string>
+    <string name="chat_offline">zná aplikaci · bez internetu</string>
+    <string name="chat_check_title">Kontrola telefonu</string>
 </resources>
