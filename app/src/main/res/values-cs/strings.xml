@@ -613,4 +613,132 @@
         <item>Našel jsem v dokumentech 📖</item>
         <item>Cituji:</item>
     </string-array>
+    <string name="pet_q_p_screen">Co přesně aplikace čte z obrazovky?</string>
+    <string name="pet_a_p_screen" formatted="false">Jen údaje zakázky: cenu, vzdálenost a čas 👀 — a jen v aplikacích taxi a rozvozu z tvého seznamu. Hesla, zprávy ani to, co píšeš, nečtu a nepamatuji si. Zbytek obrazovky hned přeskakuji, nic neklikám a nikam nic neposílám.</string>
+    <string name="pet_q_p_history">Co se ukládá o mých zakázkách?</string>
+    <string name="pet_a_p_history" formatted="false">Jen to, co potřebují statistiky, a jen v tvém telefonu 📱: částka, měna, kilometry, čas, sazby, palivo, kolik ti zůstane, verdikt a z jaké aplikace zakázka byla. Žádné adresy ani jména zákazníků. A nic z toho se nikam neposílá.</string>
+    <string name="pet_q_p_apps_list">Ukládá se seznam mých aplikací?</string>
+    <string name="pet_a_p_apps_list" formatted="false">Ne 🙂 Když přidáváš aplikaci, ukážu seznam nainstalovaných, ale nepamatuji si ho a nikam ho neposílám. Uloží se jen aplikace, které sám vybereš.</string>
+    <string name="pet_q_p_worktime">Proč si aplikace pamatuje, kdy jsem pracoval?</string>
+    <string name="pet_a_p_worktime" formatted="false">Abych poctivě spočítal výdělek za hodinu ⏱ Pamatuji si, kdy jsi zapínal a vypínal „Active“ — jen v telefonu a zhruba za posledních 400 dní. Nikam to neodchází.</string>
+    <string name="pet_q_p_wayo_private">Kam jdou otázky, které píšu Wayovi?</string>
+    <string name="pet_a_p_wayo_private" formatted="false">Nikam 🤐 Odpovídám přímo v telefonu, bez internetu, a tvé otázky neukládám. Moje úroveň a energie žijí taky jen u tebe.</string>
+    <string name="pet_q_p_watch">Co vidí hodinky a neunikají přes ně data?</string>
+    <string name="pet_a_p_watch" formatted="false">Na hodinky přijde krátké oznámení: verdikt, částka, vzdálenost a aplikace ⌚ Předává ho Android a aplikace hodinek (Wear OS, Galaxy Wearable) podle svých pravidel. Nám ani nikomu jinému to neposíláme.</string>
+    <string name="pet_q_p_widget">Vidí ostatní můj výdělek na widgetu?</string>
+    <string name="pet_a_p_widget" formatted="false">Widget ukazuje dnešní výdělek, počet zakázek a hodinovou sazbu — takže ho vidí každý, kdo se dívá na tvou hlavní obrazovku 👀 Nechceš? Prostě widget odeber.</string>
+    <string name="pet_q_p_payments">Vidí aplikace mou kartu a platby?</string>
+    <string name="pet_a_p_payments" formatted="false">Ne 💳 Platbu celou zajišťuje Google Play — číslo karty nevidím ani neukládám. Zda je předplatné aktivní, ověřuje RevenueCat pomocí anonymních identifikátorů.</string>
+    <string name="pet_q_p_revenuecat">Co je RevenueCat a co dostává?</string>
+    <string name="pet_a_p_revenuecat" formatted="false">Je to služba, která ověřuje, zda je tvé předplatné aktivní 🔎 Dostává anonymní identifikátory zařízení a nákupu a může vidět technické údaje o připojení, třeba IP adresu. Zakázky ani statistiky nedostává.</string>
+    <string name="pet_q_p_invite_data">Co se děje s mými daty, když píšu kvůli pozvánce?</string>
+    <string name="pet_a_p_invite_data" formatted="false">Když nám napíšeš kvůli odměně, vidíme tvé jméno v messengeru, kód, snímek účtenky Google Play a číslo objednávky 📩 Slouží to jen k ověření nákupu kamaráda a udělení odměny; mažeme to nejpozději do 90 dní. Můžeš požádat o nahlédnutí, opravu nebo smazání a stížnost podat u UODO (polský úřad pro ochranu údajů).</string>
+    <string name="pet_q_p_age">Od kolika let se dá aplikace používat?</string>
+    <string name="pet_a_p_age" formatted="false">Od 16 let 🔞 A jen pokud ti zákony tvé země už dovolují pracovat jako kurýr nebo řidič — u taxi obvykle 18+. Aplikace není pro děti.</string>
+    <string name="pet_q_p_permissions">Jak aplikaci odebrat oprávnění?</string>
+    <string name="pet_a_p_permissions" formatted="false">Kdykoli 🔧 v nastavení Androidu: Přístupnost → WayArs nebo Aplikace → WayArs → Oprávnění. Jen bez čtení obrazovky nebudu moct hodnotit zakázky.</string>
+    <string name="pet_q_p_who">Kdo zpracovává moje data?</string>
+    <string name="pet_a_p_who" formatted="false">Skoro všechno žije jen v tvém telefonu 📱 Nemáme servery s tvými daty. Vývojář je AP STUDIO (Arsenii Panicev), předplatné ověřují Google Play a RevenueCat. Dotazy k datům: apstudiomobile@gmail.com.</string>
+    <string name="pet_q_t_official">Je aplikace spojená s Uberem nebo Boltem?</string>
+    <string name="pet_a_t_official" formatted="false">Ne, jsme nezávislí 🦎 WayArs není spojen s Uberem, Boltem, Woltem, FreeNow ani Stuartem a nesponzorují ho. Jejich jména jsou tu jen proto, aby bylo jasné, s čím pracuji.</string>
+    <string name="pet_q_t_estimates">Jak přesná jsou čísla? Hodí se pro finanční úřad?</string>
+    <string name="pet_a_t_estimates" formatted="false">Moje čísla jsou odhady 📊 Počítám z toho, co přečtu z obrazovky, a z tvých údajů: paliva, daně, provize. Nejsou to oficiální výpisy platforem ani daňové doklady. U aplikací přidaných tebou nezaručuji dokonalé čtení — pomůže kalibrace.</string>
+    <string name="pet_q_t_invite_rules">Jaká jsou pravidla odměny za pozvání?</string>
+    <string name="pet_a_t_invite_rules" formatted="false">Jednoduchá 🎁 Za každého kamaráda, který si koupí placené předplatné (zkušební období se nepočítá), dostaneš měsíc zdarma: promo kód Google Play nebo vrácení jedné měsíční platby. Jedna odměna za kamaráda, nikdy v penězích. Pozvat sám sebe, víc účtů nebo vrácený nákup se nepočítá.</string>
+    <string name="pet_q_t_liability">Odpovídá aplikace za chyby ve výpočtech a moje rozhodnutí?</string>
+    <string name="pet_a_t_liability" formatted="false">Snažím se počítat přesně, ale jsem rádce, ne šéf 😅 Když Uber nebo Bolt něco změní na obrazovce, můžu číst špatně. Jestli zakázku vezmeš, rozhoduješ ty, a za blokace účtů na platformách aplikace neodpovídá.</string>
+    <string name="pet_q_t_driving">Můžu se při jízdě dívat do aplikace?</string>
+    <string name="pet_a_t_driving" formatted="false">Raději ne 🚦 Za volantem se dívej na cestu a dodržuj předpisy. Proto je tu vibrace hodinek: jedna krátká — vyplatí se, dvě — ne, a oči zůstanou na silnici.</string>
+    <string name="pet_q_t_refund">Můžu dostat peníze za předplatné zpět?</string>
+    <string name="pet_a_t_refund" formatted="false">Vrácení peněz řeší Google Play podle svých pravidel 💸 Obvykle: Google Play → Platby a předplatná → Rozpočet a historie → nákup → „Nahlásit problém“. Obnovení můžeš zrušit kdykoli.</string>
+    <string-array name="chat_v_joke">
+        <item>Proč chameleon nebere špatné zakázky? Neumí se červenat studem — rovnou zezelená ziskem 😎</item>
+        <item>Potkají se dva kurýři. Jeden: „Dneska jsem najel 300 km!“ Druhý: „A kolik jsi vydělal?“ První: „…Zeptám se Waya“ 🦎</item>
+        <item>Můj oblíbený sport je hon na výhodné zakázky. No, ty běháš, já počítám 😄</item>
+    </string-array>
+    <string-array name="chat_v_tired">
+        <item>Jsi borec, že vydržíš 💚 Dej si pauzu a vodu — dobré zakázky neutečou.</item>
+        <item>Unavený znamená, že jsi dobře pracoval 🫡 Co takhle pro dnešek skončit? Mrkni na denní souhrn.</item>
+        <item>Hej, odpočinek je taky součást práce 😴 Pohlídám zatím zakázky.</item>
+    </string-array>
+    <string-array name="chat_v_bad_day">
+        <item>Takové dny bývají 🫂 Ale opravdu špatné zakázky jsi nebral — to je už výhra.</item>
+        <item>Nebuď smutný! Podívej se ve Statistikách, v kolik hodin vyděláváš nejlíp — zítra je zkusíme chytit 💪</item>
+        <item>Špatný den je jen den. Zítra je nový a já budu u tebe 🦎</item>
+    </string-array>
+    <string-array name="chat_v_good_day">
+        <item>Tak tomu říkám výkon! 🎉 Jsem na tebe pyšný!</item>
+        <item>Borec! 💚 Až jsem víc zezelenal.</item>
+        <item>Hurá! 🥳 Mrkni do Úspěchů — možná je tam nový rekord.</item>
+    </string-array>
+    <string-array name="chat_v_compliment">
+        <item>Červenal bych se, ale jsem chameleon — tak zezelenám 💚</item>
+        <item>Díky! Ty taky nejsi k zahození 😎</item>
+        <item>Jsi nejlepší řidič, kterému pomáhám! (Neříkej to ostatním 🤫)</item>
+    </string-array>
+    <string-array name="chat_v_rude">
+        <item>No jo, a já se tak snažil 🥲 Řekni, co je špatně — zkusím pomoct.</item>
+        <item>Neurážím se, jsem chameleon — jen změním barvu 😅 Radši zjistíme, co se stalo.</item>
+        <item>Chápu, člověk je někdy naštvaný. Napiš, co nefunguje — pomůžu, a když ne, zavolám vývojáře.</item>
+    </string-array>
+    <string-array name="chat_v_bored">
+        <item>Nudíš se? Chceš vtip? Napiš „vtip“ 😄</item>
+        <item>Můžeš mrknout do statistik — co když je dnes rekord? 📊</item>
+        <item>Pohlaď mě — přejeď prstem po mém obrázku 💚 Mně je to příjemné, tobě veseleji.</item>
+    </string-array>
+    <string-array name="chat_v_doing">
+        <item>Sedím, počítám kilometry a čekám na výhodné zakázky 🦎</item>
+        <item>Chráním tě před nevýhodnými zakázkami 🛡️</item>
+        <item>Jím energii z tvých chytrých rozhodnutí a rostu 🌱</item>
+    </string-array>
+    <string-array name="chat_v_bot">
+        <item>Jsem Wayo — chameleon pomocník, který bydlí v aplikaci 🦎 Nejsem online AI: pracuji bez internetu a vím všechno o WayArs.</item>
+        <item>Napůl chameleon, napůl kalkulačka 😄 Odpovídám přímo v telefonu, bez internetu.</item>
+        <item>Nejsem člověk ani AI z internetu — jsem tvůj osobní pomocník se zakázkami 💚</item>
+    </string-array>
+    <string-array name="chat_v_name">
+        <item>Jmenuju se Wayo 🦎 Těší mě!</item>
+        <item>Wayo! Chameleon pomocník ve WayArs 💚</item>
+        <item>Jsem Wayo — zapamatuj si to, bude se hodit 😉</item>
+    </string-array>
+    <string-array name="chat_v_age">
+        <item>Je mi tolik, kolik se mnou pracuješ 🥚→🦎 Moje úroveň je na kartě.</item>
+        <item>Věk není důležitý, úroveň ano 😎 Rostu z tvých chytrých rozhodnutí.</item>
+        <item>Vylíhl jsem se, když jsi mě nainstaloval 🐣</item>
+    </string-array>
+    <string-array name="chat_v_food">
+        <item>Moje oblíbené jídlo je energie z chytrých rozhodnutí ⚡ Hlavně když odmítneš špatnou zakázku — mňam!</item>
+        <item>Výhodné zakázky k snídani, obědu i večeři 😋</item>
+        <item>Chameleoni mají rádi mouchy, já dobré sazby za km 🦎</item>
+    </string-array>
+    <string-array name="chat_v_weather">
+        <item>Počasí nevidím — bydlím v telefonu 🙈 Ale v dešti bývá víc zakázek a vyšší ceny — sleduj kartu!</item>
+        <item>Meteorolog ze mě nebude ☔ ale zakázky hodnotím skvěle.</item>
+        <item>Ven nevidím, ale v jakémkoli počasí ti pomůžu vybrat dobrou zakázku 🌦️</item>
+    </string-array>
+    <string-array name="chat_v_motivate">
+        <item>Každá vynechaná špatná zakázka je čas na dobrou 💪 Zvládneš to!</item>
+        <item>Pracuješ chytřeji, ne déle — to je cesta k dobrému výdělku 🚀</item>
+        <item>Do toho! Jsem tu a počítám každý kilometr 🦎💚</item>
+    </string-array>
+    <string-array name="chat_v_ok">
+        <item>Super 👍</item>
+        <item>Platí! 😉</item>
+        <item>Kdyby něco, jsem tu 🦎</item>
+    </string-array>
+    <string-array name="chat_v_laugh">
+        <item>Hehe 😄</item>
+        <item>Jsem rád, že tě to baví! 😁</item>
+        <item>Ha! Snažil jsem se 😎</item>
+    </string-array>
+    <string-array name="chat_v_night">
+        <item>Dobrou noc! 🌙 Odpočiň si, zítra budou nové dobré zakázky.</item>
+        <item>Sladké sny 😴 Já si taky zdřímnu na kartě.</item>
+        <item>Zítra ahoj! Nezapomeň vypnout „Active“, pokud končíš 💤</item>
+    </string-array>
+    <string-array name="chat_v_love">
+        <item>Já tebe taky 💚 Jsi můj oblíbený řidič!</item>
+        <item>Jé, to je milé! Taky jsem si tě oblíbil 🦎</item>
+        <item>Je to vzájemné! Pojďme spolu vydělávat víc 💪</item>
+    </string-array>
 </resources>

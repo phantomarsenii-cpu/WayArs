@@ -28,6 +28,8 @@ class WayoBrain(
         data class Answer(val key: String) : Reply()
         data class Clarify(val keys: List<String>) : Reply()
         data class Small(val kind: SmallTalk) : Reply()
+        /** Chit-chat in character; [kind] is a key of [WayoKeywords.chit]. */
+        data class Chit(val kind: String) : Reply()
         data class ShowLast(val key: String) : Reply()
         data class NotHelped(val lastKey: String?) : Reply()
         data class Unknown(val suggestions: List<String>) : Reply()
@@ -132,6 +134,8 @@ class WayoBrain(
         val small = if (notHelped) null else smallTalk(norm)
         // Short chit-chat ("who are you?", "how are you?") stays chit-chat unless a topic matches very strongly.
         if (small != null && (!strong || (msg.size <= 3 && top!!.second < VERY_HIGH))) return Reply.Small(small)
+        val chit = if (notHelped) null else chitTalk(norm, msg.size)
+        if (chit != null && (!strong || (msg.size <= 4 && top!!.second < VERY_HIGH))) return Reply.Chit(chit)
         if (top == null || top.second < LOW) {
             return Reply.Unknown(ranked.filter { it.second > 0.6 }.take(3).map { it.first })
         }
@@ -140,6 +144,15 @@ class WayoBrain(
         if (top.second >= VERY_HIGH && top.second >= second * 1.08) return Reply.Answer(top.first)
         val close = ranked.filter { it.second >= top.second * 0.6 }.take(3).map { it.first }
         return if (close.size == 1) Reply.Answer(close[0]) else Reply.Clarify(close)
+    }
+
+    private fun chitTalk(norm: String, size: Int): String? {
+        for ((kind, phrases) in WayoKeywords.chit) {
+            // "ok" / "haha" only when that's (almost) the whole message, not "ok, and how do I…".
+            if ((kind == "ok" || kind == "laugh") && size > 2) continue
+            if (phrases.any { containsPhrase(norm, it) }) return kind
+        }
+        return null
     }
 
     private fun smallTalk(norm: String): SmallTalk? {

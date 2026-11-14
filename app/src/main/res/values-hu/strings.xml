@@ -613,4 +613,132 @@
         <item>Megtaláltam a dokumentumokban 📖</item>
         <item>Idézem:</item>
     </string-array>
+    <string name="pet_q_p_screen">Pontosan mit olvas le az app a képernyőről?</string>
+    <string name="pet_a_p_screen" formatted="false">Csak a rendelés adatait: árat, távolságot és időt 👀 — és csak a listádon lévő taxis és futár appokban. Jelszavakat, csevegéseket és amit gépelsz, nem olvasom és nem jegyzem meg. A képernyő többi részét azonnal kihagyom, semmit nem nyomok meg és sehová nem küldök semmit.</string>
+    <string name="pet_q_p_history">Mit ment el az app a rendeléseimről?</string>
+    <string name="pet_a_p_history" formatted="false">Csak amit a statisztika igényel, és csak a telefonodon 📱: összeg, pénznem, kilométer, idő, díjak, üzemanyag, mennyi marad, értékelés és melyik appból jött a rendelés. Se cím, se ügyfélnév. És semmi nem megy el sehová.</string>
+    <string name="pet_q_p_apps_list">Elmenti az app a telepített appjaim listáját?</string>
+    <string name="pet_a_p_apps_list" formatted="false">Nem 🙂 Amikor appot adsz hozzá, megmutatom a telepítetteket, de a listát nem jegyzem meg és nem küldöm el. Csak az általad választott appok mentődnek.</string>
+    <string name="pet_q_p_worktime">Miért jegyzi meg az app, mikor dolgoztam?</string>
+    <string name="pet_a_p_worktime" formatted="false">Hogy becsületesen számoljam az órabéredet ⏱ Megjegyzem, mikor kapcsoltad be és ki az „Active”-ot — csak a telefonon és nagyjából az utolsó 400 napra. Sehová nem megy.</string>
+    <string name="pet_q_p_wayo_private">Hová kerülnek a kérdések, amiket Wayónak írok?</string>
+    <string name="pet_a_p_wayo_private" formatted="false">Sehová 🤐 Közvetlenül a telefonon válaszolok, internet nélkül, és nem mentem a kérdéseidet. A szintem és az energiám is csak nálad él.</string>
+    <string name="pet_q_p_watch">Mit lát az óra — szivároghatnak rajta keresztül adatok?</string>
+    <string name="pet_a_p_watch" formatted="false">Az órára egy rövid értesítés megy: értékelés, összeg, távolság és app ⌚ Az Android és az órád appja (Wear OS, Galaxy Wearable) a saját szabályaik szerint továbbítja. Mi se magunknak, se másnak nem küldjük el.</string>
+    <string name="pet_q_p_widget">Látják mások a keresetemet a widgeten?</string>
+    <string name="pet_a_p_widget" formatted="false">A widget a mai keresetet, a rendelések számát és az órabért mutatja — tehát bárki látja, aki a főképernyődre néz 👀 Nem szeretnéd? Egyszerűen vedd le a widgetet.</string>
+    <string name="pet_q_p_payments">Látja az app a kártyámat és a fizetéseimet?</string>
+    <string name="pet_a_p_payments" formatted="false">Nem 💳 A fizetést teljes egészében a Google Play intézi — a kártyaszámodat nem látom és nem tárolom. Hogy aktív-e az előfizetés, azt a RevenueCat ellenőrzi névtelen azonosítókkal.</string>
+    <string name="pet_q_p_revenuecat">Mi az a RevenueCat, és mit kap meg?</string>
+    <string name="pet_a_p_revenuecat" formatted="false">Ez a szolgáltatás ellenőrzi, hogy aktív-e az előfizetésed 🔎 Névtelen eszköz- és vásárlásazonosítókat kap, és technikai kapcsolati adatokat, pl. IP-címet láthat. Rendeléseket és statisztikát nem kap.</string>
+    <string name="pet_q_p_invite_data">Mi lesz az adataimmal, ha meghívás miatt írok?</string>
+    <string name="pet_a_p_invite_data" formatted="false">Ha a jutalom miatt írsz nekünk, látjuk a nevedet az üzenetküldőben, a kódot, a Google Play-nyugta képét és a rendelésszámot 📩 Ezt csak a barátod vásárlásának ellenőrzésére és a jutalom kiadására használjuk; legkésőbb 90 nap után töröljük. Kérheted a megtekintést, javítást vagy törlést, és panaszt tehetsz az UODO-nál (lengyel adatvédelmi hatóság).</string>
+    <string name="pet_q_p_age">Hány éves kortól lehet használni az appot?</string>
+    <string name="pet_a_p_age" formatted="false">16 éves kortól 🔞 És csak ha országod törvényei már engedik, hogy futárként vagy sofőrként dolgozz — taxihoz általában 18+. Az app nem gyerekeknek szól.</string>
+    <string name="pet_q_p_permissions">Hogyan vonhatom vissza az app engedélyeit?</string>
+    <string name="pet_a_p_permissions" formatted="false">Bármikor 🔧 az Android beállításaiban: Kisegítő lehetőségek → WayArs, vagy Alkalmazások → WayArs → Engedélyek. Csak képernyőolvasás nélkül nem tudom értékelni a rendeléseket.</string>
+    <string name="pet_q_p_who">Ki kezeli az adataimat?</string>
+    <string name="pet_a_p_who" formatted="false">Szinte minden csak a telefonodon él 📱 Nincsenek szervereink az adataiddal. A fejlesztő az AP STUDIO (Arsenii Panicev), az előfizetéseket a Google Play és a RevenueCat ellenőrzi. Adatkérdések: apstudiomobile@gmail.com.</string>
+    <string name="pet_q_t_official">Kapcsolatban áll az app az Uberrel vagy a Bolttal?</string>
+    <string name="pet_a_t_official" formatted="false">Nem, függetlenek vagyunk 🦎 A WayArs nem kapcsolódik az Uberhez, Bolthoz, Wolthoz, FreeNow-hoz vagy Stuarthoz, és nem is szponzorálják. A nevük csak azért szerepel, hogy érthető legyen, mivel dolgozom.</string>
+    <string name="pet_q_t_estimates">Mennyire pontosak a számok? Jók az adóhivatalnak?</string>
+    <string name="pet_a_t_estimates" formatted="false">A számaim becslések 📊 Abból számolok, amit a képernyőről olvasok, és a te adataidból: üzemanyag, adó, jutalék. Ezek nem a platformok hivatalos kimutatásai és nem adózási dokumentumok. Az általad hozzáadott appoknál nem garantálok tökéletes olvasást — a kalibrálás segít.</string>
+    <string name="pet_q_t_invite_rules">Mik a meghívási jutalom szabályai?</string>
+    <string name="pet_a_t_invite_rules" formatted="false">Egyszerűek 🎁 Minden barátért, aki fizetős előfizetést vesz (a próbaidő nem számít), kapsz egy ingyenes hónapot: Google Play-promókódot vagy egy havi díj visszatérítését. Barátonként egy jutalom, készpénzben soha. Önmeghívás, több fiók vagy visszatérített vásárlás nem számít.</string>
+    <string name="pet_q_t_liability">Felel az app a számítási hibákért és a döntéseimért?</string>
+    <string name="pet_a_t_liability" formatted="false">Igyekszem pontosan számolni, de tanácsadó vagyok, nem főnök 😅 Ha az Uber vagy a Bolt módosít a képernyőn, rosszul olvashatok. Hogy elvállalod-e a rendelést, te döntöd el, és a platformokon történő fióktiltásokért az app nem felel.</string>
+    <string name="pet_q_t_driving">Nézhetem vezetés közben az appot?</string>
+    <string name="pet_a_t_driving" formatted="false">Inkább ne 🚦 Vezetés közben az utat nézd és tartsd be a szabályokat. Erre való az óra rezgése: egy rövid — megéri, kettő — nem, és a szemed az úton marad.</string>
+    <string name="pet_q_t_refund">Visszakaphatom az előfizetés árát?</string>
+    <string name="pet_a_t_refund" formatted="false">A visszatérítéseket a Google Play intézi a saját szabályai szerint 💸 Általában: Google Play → Fizetések és előfizetések → Költségkeret és előzmények → a vásárlás → „Probléma bejelentése”. A megújítást bármikor lemondhatod.</string>
+    <string-array name="chat_v_joke">
+        <item>Miért nem vállal a kaméleon rossz rendelést? Nem tud elpirulni szégyenében — rögtön bezöldül a nyereségtől 😎</item>
+        <item>Találkozik két futár. Az egyik: „Ma 300 km-t mentem!” A másik: „És mennyit kerestél?” Az első: „…Megkérdezem Wayót” 🦎</item>
+        <item>A kedvenc sportom a jó rendelések vadászata. Na jó, te futsz, én számolok 😄</item>
+    </string-array>
+    <string-array name="chat_v_tired">
+        <item>Ügyes vagy, hogy bírod 💚 Tarts szünetet, igyál vizet — a jó rendelések nem szaladnak el.</item>
+        <item>A fáradtság azt jelenti, hogy jól dolgoztál 🫡 Mára elég? Nézd meg a napi összesítőt.</item>
+        <item>Hé, a pihenés is a munka része 😴 Addig vigyázok a rendelésekre.</item>
+    </string-array>
+    <string-array name="chat_v_bad_day">
+        <item>Vannak ilyen napok 🫂 De a tényleg rossz rendeléseket nem vállaltad — ez már győzelem.</item>
+        <item>Ne búsulj! Nézd meg a Statisztikában, mely órák fizetnek a legjobban — holnap elkapjuk őket 💪</item>
+        <item>Egy rossz nap csak egy nap. Holnap új nap, és én itt leszek 🦎</item>
+    </string-array>
+    <string-array name="chat_v_good_day">
+        <item>Ez az! 🎉 Büszke vagyok rád!</item>
+        <item>Bajnok! 💚 Még zöldebb lettem.</item>
+        <item>Hurrá! 🥳 Nézz be az Eredményekhez — talán új rekord van.</item>
+    </string-array>
+    <string-array name="chat_v_compliment">
+        <item>Elpirulnék, de kaméleon vagyok — úgyhogy bezöldültem 💚</item>
+        <item>Köszi! Te sem vagy semmi 😎</item>
+        <item>Te vagy a legjobb sofőr, akinek segítek! (Ne mondd el a többieknek 🤫)</item>
+    </string-array>
+    <string-array name="chat_v_rude">
+        <item>Na tessék, pedig úgy igyekeztem 🥲 Mondd el, mi a baj — megpróbálok segíteni.</item>
+        <item>Nem sértődöm meg, kaméleon vagyok — csak színt váltok 😅 Inkább nézzük meg, mi történt.</item>
+        <item>Értem, néha az ember mérges. Írd meg, mi nem működik — segítek, és ha nem megy, szólok a fejlesztőknek.</item>
+    </string-array>
+    <string-array name="chat_v_bored">
+        <item>Unatkozol? Kérsz egy viccet? Írd be: „vicc” 😄</item>
+        <item>Nézz bele a statisztikába — hátha ma rekord van? 📊</item>
+        <item>Simogass meg — húzd végig az ujjad a képemen 💚 Nekem jólesik, neked vidámabb.</item>
+    </string-array>
+    <string-array name="chat_v_doing">
+        <item>Itt ülök, számolom a kilométereket és várom a jó rendeléseket 🦎</item>
+        <item>Védelek a nem megérő rendelésektől 🛡️</item>
+        <item>Eszem az okos döntéseid energiáját és növök 🌱</item>
+    </string-array>
+    <string-array name="chat_v_bot">
+        <item>Wayo vagyok — a kaméleon segítő, aki az appban lakik 🦎 Nem vagyok online MI: internet nélkül működöm és mindent tudok a WayArs-ról.</item>
+        <item>Félig kaméleon, félig számológép 😄 A telefonon válaszolok, internet nélkül.</item>
+        <item>Se ember, se online MI — a személyes rendelés-segítőd vagyok 💚</item>
+    </string-array>
+    <string-array name="chat_v_name">
+        <item>Wayo a nevem 🦎 Örvendek!</item>
+        <item>Wayo! A WayArs kaméleon segítője 💚</item>
+        <item>Wayo vagyok — jegyezd meg, jól jön még 😉</item>
+    </string-array>
+    <string-array name="chat_v_age">
+        <item>Annyi idős vagyok, amennyi ideje velem dolgozol 🥚→🦎 A szintem a kártyán látszik.</item>
+        <item>A kor nem számít, a szint igen 😎 Az okos döntéseidtől növök.</item>
+        <item>Akkor keltem ki, amikor telepítettél 🐣</item>
+    </string-array>
+    <string-array name="chat_v_food">
+        <item>A kedvenc kajám az okos döntések energiája ⚡ Főleg ha elutasítasz egy rossz rendelést — finom!</item>
+        <item>Megérő rendelések reggelire, ebédre és vacsorára 😋</item>
+        <item>A kaméleonok a legyeket szeretik, én a jó km-díjakat 🦎</item>
+    </string-array>
+    <string-array name="chat_v_weather">
+        <item>Az időjárást nem látom — telefonban lakom 🙈 De esőben általában több a rendelés és magasabbak az árak — figyeld a kártyát!</item>
+        <item>Meteorológusnak gyenge vagyok ☔ de rendeléseket remekül értékelek.</item>
+        <item>Nem látok ki, de bármilyen időben segítek jó rendelést választani 🌦️</item>
+    </string-array>
+    <string-array name="chat_v_motivate">
+        <item>Minden kihagyott rossz rendelés idő egy jóra 💪 Menni fog!</item>
+        <item>Okosabban dolgozol, nem tovább — ez az út a jó keresethez 🚀</item>
+        <item>Hajrá! Itt vagyok és számolok minden kilométert 🦎💚</item>
+    </string-array>
+    <string-array name="chat_v_ok">
+        <item>Szuper 👍</item>
+        <item>Áll az alku! 😉</item>
+        <item>Ha kellek, itt vagyok 🦎</item>
+    </string-array>
+    <string-array name="chat_v_laugh">
+        <item>Hehe 😄</item>
+        <item>Örülök, hogy jól szórakozol! 😁</item>
+        <item>Ha! Igyekeztem 😎</item>
+    </string-array>
+    <string-array name="chat_v_night">
+        <item>Jó éjt! 🌙 Pihenj, holnap új jó rendelések lesznek.</item>
+        <item>Szép álmokat 😴 Én is szundítok egyet a kártyán.</item>
+        <item>Holnap találkozunk! Ne felejtsd kikapcsolni az „Active”-ot, ha végeztél 💤</item>
+    </string-array>
+    <string-array name="chat_v_love">
+        <item>Én is szeretlek 💚 Te vagy a kedvenc sofőröm!</item>
+        <item>Jaj, de aranyos! Én is megkedveltelek 🦎</item>
+        <item>Kölcsönös! Keressünk többet együtt 💪</item>
+    </string-array>
 </resources>

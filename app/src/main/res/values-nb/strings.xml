@@ -613,4 +613,132 @@
         <item>Fant det i dokumentene 📖</item>
         <item>Jeg siterer:</item>
     </string-array>
+    <string name="pet_q_p_screen">Hva leser appen egentlig fra skjermen?</string>
+    <string name="pet_a_p_screen" formatted="false">Bare ordredetaljene: pris, avstand og tid 👀 — og bare i taxi- og leveringsappene på listen din. Passord, chatter og det du skriver, leser og husker jeg ikke. Resten av skjermen hopper jeg over med en gang; jeg trykker ikke på noe og sender ingenting noe sted.</string>
+    <string name="pet_q_p_history">Hva lagres om ordrene mine?</string>
+    <string name="pet_a_p_history" formatted="false">Bare det statistikken trenger, og bare på telefonen din 📱: beløp, valuta, kilometer, tid, satser, drivstoff, hva du sitter igjen med, vurdering og hvilken app ordren kom fra. Ingen adresser eller kundenavn. Og ingenting sendes noe sted.</string>
+    <string name="pet_q_p_apps_list">Lagres listen over appene mine?</string>
+    <string name="pet_a_p_apps_list" formatted="false">Nei 🙂 Når du legger til en app, viser jeg de installerte, men jeg husker ikke listen og sender den ikke noe sted. Bare appene du velger, lagres.</string>
+    <string name="pet_q_p_worktime">Hvorfor husker appen når jeg har jobbet?</string>
+    <string name="pet_a_p_worktime" formatted="false">For å regne ut timelønnen din ærlig ⏱ Jeg husker når du slo «Active» av og på — bare på telefonen og for omtrent de siste 400 dagene. Det forlater aldri telefonen.</string>
+    <string name="pet_q_p_wayo_private">Hvor havner spørsmålene jeg skriver til Wayo?</string>
+    <string name="pet_a_p_wayo_private" formatted="false">Ingen steder 🤐 Jeg svarer rett på telefonen, uten nett, og lagrer ikke spørsmålene dine. Nivået og energien min bor også bare hos deg.</string>
+    <string name="pet_q_p_watch">Hva ser klokka — kan data lekke via den?</string>
+    <string name="pet_a_p_watch" formatted="false">Klokka får et kort varsel: vurdering, beløp, avstand og app ⌚ Android og klokke-appen din (Wear OS, Galaxy Wearable) sender det videre etter egne regler. Vi sender det verken til oss selv eller andre.</string>
+    <string name="pet_q_p_widget">Kan andre se inntekten min på widgeten?</string>
+    <string name="pet_a_p_widget" formatted="false">Widgeten viser dagens inntekt, antall ordrer og timesats — så alle som ser på startskjermen din, kan se den 👀 Vil du ikke det? Bare fjern widgeten.</string>
+    <string name="pet_q_p_payments">Ser appen kortet og betalingene mine?</string>
+    <string name="pet_a_p_payments" formatted="false">Nei 💳 Betalingen håndteres helt av Google Play — kortnummeret ditt ser og lagrer jeg aldri. RevenueCat sjekker med anonyme ID-er om abonnementet er aktivt.</string>
+    <string name="pet_q_p_revenuecat">Hva er RevenueCat, og hva får den?</string>
+    <string name="pet_a_p_revenuecat" formatted="false">Det er tjenesten som sjekker om abonnementet ditt er aktivt 🔎 Den får anonyme enhets- og kjøps-ID-er og kan se tekniske tilkoblingsdata som IP-adressen. Ordrer og statistikk får den ikke.</string>
+    <string name="pet_q_p_invite_data">Hva skjer med dataene mine når jeg skriver om en invitasjon?</string>
+    <string name="pet_a_p_invite_data" formatted="false">Når du skriver til oss om belønningen, ser vi navnet ditt i meldingsappen, koden, skjermbildet av Google Play-kvitteringen og ordrenummeret 📩 Det brukes bare til å sjekke vennens kjøp og gi belønningen, og slettes senest etter 90 dager. Du kan be om innsyn, retting eller sletting og klage til UODO (Polens datatilsyn).</string>
+    <string name="pet_q_p_age">Fra hvilken alder kan man bruke appen?</string>
+    <string name="pet_a_p_age" formatted="false">Fra 16 år 🔞 Og bare hvis lovene i landet ditt allerede lar deg jobbe som bud eller sjåfør — taxi krever vanligvis 18+. Appen er ikke for barn.</string>
+    <string name="pet_q_p_permissions">Hvordan tar jeg fra appen tillatelsene?</string>
+    <string name="pet_a_p_permissions" formatted="false">Når som helst 🔧 i Android-innstillinger: Tilgjengelighet → WayArs eller Apper → WayArs → Tillatelser. Uten skjermlesing kan jeg bare ikke vurdere ordrer.</string>
+    <string name="pet_q_p_who">Hvem behandler dataene mine?</string>
+    <string name="pet_a_p_who" formatted="false">Nesten alt bor bare på telefonen din 📱 Vi har ingen servere med dataene dine. Utvikleren er AP STUDIO (Arsenii Panicev); Google Play og RevenueCat sjekker abonnementer. Spørsmål om data: apstudiomobile@gmail.com.</string>
+    <string name="pet_q_t_official">Er appen knyttet til Uber eller Bolt?</string>
+    <string name="pet_a_t_official" formatted="false">Nei, vi er uavhengige 🦎 WayArs er verken tilknyttet eller sponset av Uber, Bolt, Wolt, FreeNow eller Stuart. Navnene deres står der bare så det er klart hva jeg jobber med.</string>
+    <string name="pet_q_t_estimates">Hvor nøyaktige er tallene? Kan de brukes til skatt?</string>
+    <string name="pet_a_t_estimates" formatted="false">Tallene mine er anslag 📊 Jeg regner ut fra det jeg leser på skjermen og dine egne tall: drivstoff, skatt, provisjon. Det er ikke offisielle oppgjør fra plattformene eller skattedokumenter. For apper du har lagt til selv, kan jeg ikke love perfekt lesing — kalibrering hjelper.</string>
+    <string name="pet_q_t_invite_rules">Hva er reglene for invitasjonsbelønningen?</string>
+    <string name="pet_a_t_invite_rules" formatted="false">Enkle 🎁 For hver venn som kjøper et betalt abonnement (prøveperioden teller ikke), får du en gratis måned: en Google Play-kampanjekode eller refusjon av én månedlig betaling. Én belønning per venn, aldri i kontanter. Å invitere deg selv, flere kontoer eller et refundert kjøp teller ikke.</string>
+    <string name="pet_q_t_liability">Er appen ansvarlig for regnefeil og valgene mine?</string>
+    <string name="pet_a_t_liability" formatted="false">Jeg prøver å regne nøyaktig, men jeg er rådgiver, ikke sjefen din 😅 Endrer Uber eller Bolt skjermen sin, kan jeg lese feil. Om du tar en ordre, bestemmer du, og appen er ikke ansvarlig for blokkerte kontoer på plattformene.</string>
+    <string name="pet_q_t_driving">Kan jeg se på appen mens jeg kjører?</string>
+    <string name="pet_a_t_driving" formatted="false">Helst ikke 🚦 Mens du kjører, skal blikket være på veien og trafikkreglene følges. Derfor vibrerer klokka: én kort — lønnsomt, to — ikke, og øynene blir på veien.</string>
+    <string name="pet_q_t_refund">Kan jeg få pengene tilbake for abonnementet?</string>
+    <string name="pet_a_t_refund" formatted="false">Refusjoner håndteres av Google Play etter deres regler 💸 Vanligvis: Google Play → Betalinger og abonnementer → Budsjett og logg → kjøpet → «Rapporter et problem». Fornyelsen kan du si opp når som helst.</string>
+    <string-array name="chat_v_joke">
+        <item>Hvorfor tar ikke en kameleon dårlige ordrer? Den kan ikke rødme av skam — den blir grønn av profitt med en gang 😎</item>
+        <item>To bud møtes. Den ene: «Jeg kjørte 300 km i dag!» Den andre: «Og hvor mye tjente du?» Den første: «…Jeg spør Wayo» 🦎</item>
+        <item>Favorittsporten min er jakten på lønnsomme ordrer. Ok, du løper, jeg teller 😄</item>
+    </string-array>
+    <string-array name="chat_v_tired">
+        <item>Sterkt at du holder ut 💚 Ta en pause og drikk vann — de gode ordrene forsvinner ikke.</item>
+        <item>Sliten betyr at du har jobbet bra 🫡 Kanskje nok for i dag? Se på dagens oppsummering.</item>
+        <item>Hei, hvile er også en del av jobben 😴 Jeg passer på ordrene så lenge.</item>
+    </string-array>
+    <string-array name="chat_v_bad_day">
+        <item>Sånne dager finnes 🫂 Men du tok ikke de virkelig dårlige ordrene — det er allerede en seier.</item>
+        <item>Ikke heng med hodet! Se i Statistikk hvilke timer som betaler best — i morgen fanger vi dem 💪</item>
+        <item>En dårlig dag er bare en dag. I morgen er en ny, og jeg er her 🦎</item>
+    </string-array>
+    <string-array name="chat_v_good_day">
+        <item>Sånn skal det være! 🎉 Jeg er stolt av deg!</item>
+        <item>Rå! 💚 Jeg ble enda grønnere.</item>
+        <item>Hurra! 🥳 Sjekk Prestasjoner — kanskje det er ny rekord.</item>
+    </string-array>
+    <string-array name="chat_v_compliment">
+        <item>Jeg ville rødmet, men jeg er en kameleon — så jeg ble grønnere 💚</item>
+        <item>Takk! Du er ikke så verst selv 😎</item>
+        <item>Du er den beste sjåføren jeg hjelper! (Ikke si det til de andre 🤫)</item>
+    </string-array>
+    <string-array name="chat_v_rude">
+        <item>Å, og jeg som prøvde så hardt 🥲 Fortell hva som er galt — jeg prøver å hjelpe.</item>
+        <item>Jeg blir ikke fornærmet, jeg er en kameleon — jeg bytter bare farge 😅 La oss heller finne ut hva som skjedde.</item>
+        <item>Skjønner, man kan bli sint. Skriv hva som ikke virker — jeg hjelper, og klarer jeg det ikke, henter jeg utviklerne.</item>
+    </string-array>
+    <string-array name="chat_v_bored">
+        <item>Kjeder du deg? Vil du ha en vits? Skriv «vits» 😄</item>
+        <item>Du kan se i statistikken — kanskje det er rekord i dag? 📊</item>
+        <item>Klapp meg — dra fingeren over bildet mitt 💚 Jeg liker det, og du får det morsommere.</item>
+    </string-array>
+    <string-array name="chat_v_doing">
+        <item>Sitter og teller kilometer og venter på gode ordrer 🦎</item>
+        <item>Passer på deg mot ulønnsomme ordrer 🛡️</item>
+        <item>Spiser energi fra de smarte valgene dine og vokser 🌱</item>
+    </string-array>
+    <string-array name="chat_v_bot">
+        <item>Jeg er Wayo — kameleonhjelperen som bor i appen 🦎 Ikke en nett-KI: jeg virker uten nett og vet alt om WayArs.</item>
+        <item>Halvt kameleon, halvt kalkulator 😄 Jeg svarer rett på telefonen uten internett.</item>
+        <item>Verken menneske eller nett-KI — jeg er din personlige ordrehjelper 💚</item>
+    </string-array>
+    <string-array name="chat_v_name">
+        <item>Jeg heter Wayo 🦎 Hyggelig å hilse på!</item>
+        <item>Wayo! Kameleonhjelperen i WayArs 💚</item>
+        <item>Jeg er Wayo — husk det, det blir nyttig 😉</item>
+    </string-array>
+    <string-array name="chat_v_age">
+        <item>Like gammel som tiden du har jobbet med meg 🥚→🦎 Nivået mitt står på kortet.</item>
+        <item>Alder betyr ingenting, nivå teller 😎 Jeg vokser av de smarte valgene dine.</item>
+        <item>Jeg klekket da du installerte meg 🐣</item>
+    </string-array>
+    <string-array name="chat_v_food">
+        <item>Favorittmaten min er energi fra smarte valg ⚡ Særlig når du hopper over en dårlig ordre — nydelig!</item>
+        <item>Lønnsomme ordrer til frokost, lunsj og middag 😋</item>
+        <item>Kameleoner elsker fluer, jeg elsker gode kilometersatser 🦎</item>
+    </string-array>
+    <string-array name="chat_v_weather">
+        <item>Været ser jeg ikke — jeg bor i en telefon 🙈 Men i regn blir det ofte flere ordrer og høyere priser — følg med på kortet!</item>
+        <item>Som værmelder er jeg elendig ☔ men som ordrevurderer er jeg god.</item>
+        <item>Jeg ser ikke ut, men i all slags vær hjelper jeg deg å velge en god ordre 🌦️</item>
+    </string-array>
+    <string-array name="chat_v_motivate">
+        <item>Hver dårlige ordre du hopper over, gir tid til en god 💪 Du klarer det!</item>
+        <item>Du jobber smartere, ikke lenger — det er veien til god inntekt 🚀</item>
+        <item>Kjør på! Jeg er her og teller hver kilometer 🦎💚</item>
+    </string-array>
+    <string-array name="chat_v_ok">
+        <item>Supert 👍</item>
+        <item>Avtale! 😉</item>
+        <item>Jeg er her om du trenger meg 🦎</item>
+    </string-array>
+    <string-array name="chat_v_laugh">
+        <item>Hehe 😄</item>
+        <item>Gøy at du koser deg! 😁</item>
+        <item>Ha! Jeg prøvde 😎</item>
+    </string-array>
+    <string-array name="chat_v_night">
+        <item>God natt! 🌙 Hvil deg — i morgen kommer nye gode ordrer.</item>
+        <item>Sov godt 😴 Jeg tar også en lur på kortet.</item>
+        <item>Vi ses i morgen! Husk å slå av «Active» om du er ferdig 💤</item>
+    </string-array>
+    <string-array name="chat_v_love">
+        <item>Jeg er glad i deg også 💚 Du er favorittsjåføren min!</item>
+        <item>Å, så søtt! Jeg har også blitt glad i deg 🦎</item>
+        <item>Det er gjensidig! La oss tjene mer sammen 💪</item>
+    </string-array>
 </resources>

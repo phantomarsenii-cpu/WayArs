@@ -612,4 +612,132 @@
         <item>Trouvé dans les documents 📖</item>
         <item>Je cite :</item>
     </string-array>
+    <string name="pet_q_p_screen">Que lit exactement l’appli à l’écran ?</string>
+    <string name="pet_a_p_screen" formatted="false">Seulement les infos de la course : prix, distance et durée 👀 — et seulement dans les applis de taxi et de livraison de ta liste. Mots de passe, conversations, ce que tu tapes : je ne lis rien et ne retiens rien. Le reste de l’écran, je l’ignore tout de suite ; je ne touche à rien et n’envoie rien.</string>
+    <string name="pet_q_p_history">Qu’est-ce qui est enregistré sur mes courses ?</string>
+    <string name="pet_a_p_history" formatted="false">Seulement ce qu’il faut pour les statistiques, et seulement sur ton téléphone 📱 : montant, devise, kilomètres, durée, tarifs, carburant, ce qui te reste, verdict et appli d’origine. Aucune adresse ni nom de client. Et rien n’est envoyé nulle part.</string>
+    <string name="pet_q_p_apps_list">La liste de mes applis est-elle enregistrée ?</string>
+    <string name="pet_a_p_apps_list" formatted="false">Non 🙂 Quand tu ajoutes une appli, je montre celles qui sont installées, mais je ne retiens pas la liste et je ne l’envoie nulle part. Seules les applis que tu choisis sont enregistrées.</string>
+    <string name="pet_q_p_worktime">Pourquoi l’appli retient-elle quand j’ai travaillé ?</string>
+    <string name="pet_a_p_worktime" formatted="false">Pour calculer honnêtement ton gain par heure ⏱ Je retiens quand tu as activé et désactivé « Active » — seulement sur le téléphone et sur environ 400 jours. Ça ne quitte jamais le téléphone.</string>
+    <string name="pet_q_p_wayo_private">Où vont les questions que j’écris à Wayo ?</string>
+    <string name="pet_a_p_wayo_private" formatted="false">Nulle part 🤐 Je réponds directement sur le téléphone, hors ligne, et je n’enregistre pas tes questions. Mon niveau et mon énergie restent aussi chez toi.</string>
+    <string name="pet_q_p_watch">Que voit la montre — des données peuvent-elles fuiter ?</string>
+    <string name="pet_a_p_watch" formatted="false">La montre reçoit une courte notification : verdict, montant, distance et appli ⌚ Android et l’appli de ta montre (Wear OS, Galaxy Wearable) la transmettent selon leurs propres règles. Nous ne l’envoyons ni à nous ni à personne.</string>
+    <string name="pet_q_p_widget">Les autres voient-ils mes gains sur le widget ?</string>
+    <string name="pet_a_p_widget" formatted="false">Le widget affiche les gains du jour, le nombre de courses et le tarif horaire — donc toute personne qui regarde ton écran d’accueil le voit 👀 Tu ne veux pas ? Retire simplement le widget.</string>
+    <string name="pet_q_p_payments">L’appli voit-elle ma carte et mes paiements ?</string>
+    <string name="pet_a_p_payments" formatted="false">Non 💳 Le paiement passe entièrement par Google Play — je ne vois ni ne garde ton numéro de carte. RevenueCat vérifie si l’abonnement est actif grâce à des identifiants anonymes.</string>
+    <string name="pet_q_p_revenuecat">Qu’est-ce que RevenueCat et que reçoit-il ?</string>
+    <string name="pet_a_p_revenuecat" formatted="false">C’est le service qui vérifie si ton abonnement est actif 🔎 Il reçoit des identifiants anonymes d’appareil et d’achat et peut voir des données techniques de connexion, comme l’adresse IP. Il ne reçoit ni tes courses ni tes statistiques.</string>
+    <string name="pet_q_p_invite_data">Que devient mes données quand j’écris au sujet d’une invitation ?</string>
+    <string name="pet_a_p_invite_data" formatted="false">Quand tu nous écris pour la récompense, on voit ton nom dans la messagerie, le code, la capture du reçu Google Play et le numéro de commande 📩 Ça sert seulement à vérifier l’achat de ton ami et à donner la récompense ; c’est supprimé sous 90 jours. Tu peux demander à voir, corriger ou supprimer ces données, et te plaindre à l’UODO (autorité polonaise de protection des données).</string>
+    <string name="pet_q_p_age">À partir de quel âge peut-on utiliser l’appli ?</string>
+    <string name="pet_a_p_age" formatted="false">À partir de 16 ans 🔞 Et seulement si la loi de ton pays te permet déjà de travailler comme livreur ou chauffeur — pour le taxi, c’est souvent 18+. L’appli n’est pas faite pour les enfants.</string>
+    <string name="pet_q_p_permissions">Comment retirer les autorisations à l’appli ?</string>
+    <string name="pet_a_p_permissions" formatted="false">Quand tu veux 🔧 dans les paramètres Android : Accessibilité → WayArs, ou Applis → WayArs → Autorisations. Mais sans lecture d’écran, je ne peux plus évaluer les courses.</string>
+    <string name="pet_q_p_who">Qui traite mes données ?</string>
+    <string name="pet_a_p_who" formatted="false">Presque tout reste uniquement sur ton téléphone 📱 Nous n’avons pas de serveurs avec tes données. Le développeur est AP STUDIO (Arsenii Panicev) ; Google Play et RevenueCat vérifient les abonnements. Questions sur les données : apstudiomobile@gmail.com.</string>
+    <string name="pet_q_t_official">L’appli est-elle liée à Uber ou Bolt ?</string>
+    <string name="pet_a_t_official" formatted="false">Non, nous sommes indépendants 🦎 WayArs n’est ni affilié à Uber, Bolt, Wolt, FreeNow ou Stuart, ni sponsorisé par eux. Leurs noms apparaissent seulement pour qu’on sache avec quoi je travaille.</string>
+    <string name="pet_q_t_estimates">Les chiffres sont-ils précis ? Valent-ils pour les impôts ?</string>
+    <string name="pet_a_t_estimates" formatted="false">Mes chiffres sont des estimations 📊 Je calcule à partir de ce que je lis à l’écran et de tes données : carburant, impôt, commission. Ce ne sont ni des relevés officiels des plateformes ni des documents fiscaux. Pour les applis ajoutées par toi, je ne garantis pas une lecture parfaite — l’étalonnage aide.</string>
+    <string name="pet_q_t_invite_rules">Quelles sont les règles de la récompense de parrainage ?</string>
+    <string name="pet_a_t_invite_rules" formatted="false">C’est simple 🎁 Pour chaque ami qui achète un abonnement payant (l’essai gratuit ne compte pas), tu gagnes un mois gratuit : code promo Google Play ou remboursement d’une mensualité. Une récompense par ami, jamais en espèces. S’inviter soi-même, plusieurs comptes ou un achat remboursé ne comptent pas.</string>
+    <string name="pet_q_t_liability">L’appli est-elle responsable des erreurs de calcul et de mes décisions ?</string>
+    <string name="pet_a_t_liability" formatted="false">Je calcule au plus juste, mais je suis un conseiller, pas ton patron 😅 Si Uber ou Bolt changent leur écran, je peux mal lire. Prendre une course, c’est toujours ton choix, et l’appli n’est pas responsable des blocages de compte sur les plateformes.</string>
+    <string name="pet_q_t_driving">Puis-je regarder l’appli en conduisant ?</string>
+    <string name="pet_a_t_driving" formatted="false">Mieux vaut pas 🚦 En conduisant, regarde la route et respecte le code. C’est à ça que sert la vibration de la montre : une courte — rentable, deux — non, et tes yeux restent sur la route.</string>
+    <string name="pet_q_t_refund">Puis-je me faire rembourser l’abonnement ?</string>
+    <string name="pet_a_t_refund" formatted="false">Les remboursements sont gérés par Google Play selon ses règles 💸 En général : Google Play → Paiements et abonnements → Budget et historique → l’achat → « Signaler un problème ». Tu peux annuler le renouvellement à tout moment.</string>
+    <string-array name="chat_v_joke">
+        <item>Pourquoi un caméléon ne prend pas de mauvaises courses ? Il ne sait pas rougir de honte — il verdit direct de profit 😎</item>
+        <item>Deux livreurs se croisent. L’un : « J’ai fait 300 km aujourd’hui ! » L’autre : « Et t’as gagné combien ? » Le premier : « …Je demande à Wayo » 🦎</item>
+        <item>Mon sport préféré : la chasse aux courses rentables. Bon, toi tu cours, moi je compte 😄</item>
+    </string-array>
+    <string-array name="chat_v_tired">
+        <item>Bravo de tenir le coup 💚 Fais une pause, bois de l’eau — les bonnes courses ne vont pas s’envoler.</item>
+        <item>Fatigué, c’est que tu as bien bossé 🫡 On s’arrête là ? Regarde le bilan du jour.</item>
+        <item>Hé, le repos fait aussi partie du boulot 😴 Je surveille les courses.</item>
+    </string-array>
+    <string-array name="chat_v_bad_day">
+        <item>Il y a des jours comme ça 🫂 Mais tu n’as pas pris les vraiment mauvaises courses — c’est déjà gagné.</item>
+        <item>Ne t’en fais pas ! Regarde dans les Statistiques quelles heures paient le mieux — demain on essaie de les attraper 💪</item>
+        <item>Un mauvais jour, ce n’est qu’un jour. Demain est un autre jour, et je serai là 🦎</item>
+    </string-array>
+    <string-array name="chat_v_good_day">
+        <item>Ça, c’est du travail ! 🎉 Je suis fier de toi !</item>
+        <item>Champion ! 💚 Je suis devenu encore plus vert.</item>
+        <item>Youpi ! 🥳 Regarde les Succès — il y a peut-être un nouveau record.</item>
+    </string-array>
+    <string-array name="chat_v_compliment">
+        <item>Je rougirais bien, mais je suis un caméléon — alors je verdis 💚</item>
+        <item>Merci ! Toi aussi tu es pas mal 😎</item>
+        <item>Tu es le meilleur chauffeur que j’aide ! (Ne le dis pas aux autres 🤫)</item>
+    </string-array>
+    <string-array name="chat_v_rude">
+        <item>Oh, et moi qui faisais de mon mieux 🥲 Dis-moi ce qui ne va pas — je vais essayer d’aider.</item>
+        <item>Je ne me vexe pas, je suis un caméléon — je change juste de couleur 😅 Voyons plutôt ce qui s’est passé.</item>
+        <item>Je comprends, ça arrive d’être énervé. Écris ce qui ne marche pas — j’aide, et si je ne peux pas, j’appelle les développeurs.</item>
+    </string-array>
+    <string-array name="chat_v_bored">
+        <item>Tu t’ennuies ? Une blague ? Écris « blague » 😄</item>
+        <item>Tu peux regarder tes stats — peut-être un record aujourd’hui ? 📊</item>
+        <item>Caresse-moi — glisse ton doigt sur mon image 💚 Ça me fait plaisir, et toi tu t’amuses.</item>
+    </string-array>
+    <string-array name="chat_v_doing">
+        <item>Je suis là à compter les kilomètres en attendant de bonnes courses 🦎</item>
+        <item>Je te protège des courses pas rentables 🛡️</item>
+        <item>Je mange l’énergie de tes bonnes décisions et je grandis 🌱</item>
+    </string-array>
+    <string-array name="chat_v_bot">
+        <item>Je suis Wayo — le caméléon assistant qui vit dans l’appli 🦎 Pas une IA en ligne : je fonctionne hors ligne et je sais tout sur WayArs.</item>
+        <item>Moitié caméléon, moitié calculatrice 😄 Je réponds sur le téléphone, sans Internet.</item>
+        <item>Ni humain ni IA en ligne — je suis ton assistant perso pour les courses 💚</item>
+    </string-array>
+    <string-array name="chat_v_name">
+        <item>Je m’appelle Wayo 🦎 Enchanté !</item>
+        <item>Wayo ! Le caméléon assistant de WayArs 💚</item>
+        <item>Je suis Wayo — retiens-le, ça servira 😉</item>
+    </string-array>
+    <string-array name="chat_v_age">
+        <item>J’ai l’âge du temps que tu passes avec moi 🥚→🦎 Mon niveau est sur la carte.</item>
+        <item>L’âge ne compte pas, le niveau oui 😎 Je grandis grâce à tes bonnes décisions.</item>
+        <item>Je suis sorti de l’œuf quand tu m’as installé 🐣</item>
+    </string-array>
+    <string-array name="chat_v_food">
+        <item>Mon plat préféré : l’énergie des bonnes décisions ⚡ Surtout quand tu refuses une mauvaise course — délicieux !</item>
+        <item>Des courses rentables au petit-déj, au déj et au dîner 😋</item>
+        <item>Les caméléons aiment les mouches, moi j’aime les bons tarifs au km 🦎</item>
+    </string-array>
+    <string-array name="chat_v_weather">
+        <item>Je ne vois pas la météo — je vis dans un téléphone 🙈 Mais sous la pluie, il y a souvent plus de courses et des prix plus hauts — surveille la carte !</item>
+        <item>Je suis un piètre météorologue ☔ mais un super évaluateur de courses.</item>
+        <item>Je ne vois pas dehors, mais par tous les temps je t’aide à choisir une bonne course 🌦️</item>
+    </string-array>
+    <string-array name="chat_v_motivate">
+        <item>Chaque mauvaise course évitée, c’est du temps pour une bonne 💪 Tu vas y arriver !</item>
+        <item>Tu bosses plus malin, pas plus longtemps — c’est la voie vers de bons gains 🚀</item>
+        <item>Vas-y ! Je suis là et je compte chaque kilomètre 🦎💚</item>
+    </string-array>
+    <string-array name="chat_v_ok">
+        <item>Super 👍</item>
+        <item>Ça marche ! 😉</item>
+        <item>Je suis là si besoin 🦎</item>
+    </string-array>
+    <string-array name="chat_v_laugh">
+        <item>Héhé 😄</item>
+        <item>Content que ça t’amuse ! 😁</item>
+        <item>Ha ! J’ai fait de mon mieux 😎</item>
+    </string-array>
+    <string-array name="chat_v_night">
+        <item>Bonne nuit ! 🌙 Repose-toi, demain il y aura de nouvelles bonnes courses.</item>
+        <item>Fais de beaux rêves 😴 Je fais aussi une sieste sur la carte.</item>
+        <item>À demain ! N’oublie pas de désactiver « Active » si tu as fini 💤</item>
+    </string-array>
+    <string-array name="chat_v_love">
+        <item>Moi aussi je t’aime 💚 Tu es mon chauffeur préféré !</item>
+        <item>Oh, c’est gentil ! Je me suis attaché à toi aussi 🦎</item>
+        <item>C’est réciproque ! Gagnons plus ensemble 💪</item>
+    </string-array>
 </resources>

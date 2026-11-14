@@ -617,4 +617,132 @@
         <item>Znalazłem w dokumentach 📖</item>
         <item>Cytuję:</item>
     </string-array>
+    <string name="pet_q_p_screen">Co dokładnie aplikacja czyta z ekranu?</string>
+    <string name="pet_a_p_screen" formatted="false">Tylko dane zlecenia: cenę, dystans i czas 👀 — i tylko w aplikacjach taxi i dostaw z Twojej listy. Haseł, rozmów i tego, co piszesz, nie czytam ani nie zapamiętuję. Resztę ekranu od razu pomijam, niczego nie klikam i nigdzie nie wysyłam.</string>
+    <string name="pet_q_p_history">Co jest zapisywane o moich zleceniach?</string>
+    <string name="pet_a_p_history" formatted="false">Tylko to, co potrzebne do statystyk, i tylko w Twoim telefonie 📱: kwota, waluta, kilometry, czas, stawki, paliwo, ile na rękę, werdykt i z jakiej aplikacji było zlecenie. Żadnych adresów ani nazwisk klientów. I nic z tego nie jest nigdzie wysyłane.</string>
+    <string name="pet_q_p_apps_list">Czy lista moich aplikacji jest zapisywana?</string>
+    <string name="pet_a_p_apps_list" formatted="false">Nie 🙂 Gdy dodajesz aplikację, pokazuję listę zainstalowanych, ale jej nie zapamiętuję i nigdzie nie wysyłam. Zapisują się tylko aplikacje, które sam wybierzesz.</string>
+    <string name="pet_q_p_worktime">Po co aplikacja zapamiętuje, kiedy pracowałem?</string>
+    <string name="pet_a_p_worktime" formatted="false">Żeby uczciwie policzyć zarobek na godzinę ⏱ Zapamiętuję, kiedy włączałeś i wyłączałeś „Active” — tylko w telefonie i mniej więcej z ostatnich 400 dni. Nic z tego nie wychodzi z telefonu.</string>
+    <string name="pet_q_p_wayo_private">Gdzie trafiają pytania, które piszę do Wayo?</string>
+    <string name="pet_a_p_wayo_private" formatted="false">Donikąd 🤐 Odpowiadam na telefonie, bez internetu, i nie zapisuję Twoich pytań. Mój poziom i energia też są tylko u Ciebie.</string>
+    <string name="pet_q_p_watch">Co widzi zegarek i czy dane przez niego nie wyciekają?</string>
+    <string name="pet_a_p_watch" formatted="false">Na zegarek trafia krótkie powiadomienie: werdykt, kwota, dystans i aplikacja ⌚ Przekazuje je Android i aplikacja zegarka (Wear OS, Galaxy Wearable) według własnych zasad. Ani do nas, ani nikomu innemu tego nie wysyłamy.</string>
+    <string name="pet_q_p_widget">Czy inni widzą mój zarobek na widżecie?</string>
+    <string name="pet_a_p_widget" formatted="false">Widżet pokazuje zarobek z dziś, liczbę zleceń i stawkę na godzinę — więc widzi go każdy, kto patrzy na Twój ekran główny 👀 Nie chcesz tego? Po prostu usuń widżet.</string>
+    <string name="pet_q_p_payments">Czy aplikacja widzi moją kartę i płatności?</string>
+    <string name="pet_a_p_payments" formatted="false">Nie 💳 Płatność w całości obsługuje Google Play — numeru karty nie widzę i nie przechowuję. Czy subskrypcja jest aktywna, sprawdza usługa RevenueCat na podstawie anonimowych identyfikatorów.</string>
+    <string name="pet_q_p_revenuecat">Czym jest RevenueCat i co dostaje?</string>
+    <string name="pet_a_p_revenuecat" formatted="false">To usługa, która sprawdza, czy Twoja subskrypcja jest aktywna 🔎 Dostaje anonimowe identyfikatory urządzenia i zakupu i może widzieć techniczne dane połączenia, np. adres IP. Zleceń ani statystyk nie dostaje.</string>
+    <string name="pet_q_p_invite_data">Co dzieje się z moimi danymi, gdy piszę w sprawie zaproszenia?</string>
+    <string name="pet_a_p_invite_data" formatted="false">Gdy piszesz do nas po nagrodę, widzimy Twoją nazwę w komunikatorze, kod, zrzut paragonu Google Play i numer zamówienia 📩 Służy to tylko do sprawdzenia zakupu kolegi i przyznania nagrody; usuwamy to najpóźniej po 90 dniach. Możesz poprosić o wgląd, poprawienie lub usunięcie, a skargę złożyć do UODO.</string>
+    <string name="pet_q_p_age">Od jakiego wieku można korzystać z aplikacji?</string>
+    <string name="pet_a_p_age" formatted="false">Od 16 lat 🔞 I tylko jeśli prawo Twojego kraju pozwala Ci już pracować jako kurier lub kierowca — w taxi zwykle trzeba mieć 18+. Aplikacja nie jest dla dzieci.</string>
+    <string name="pet_q_p_permissions">Jak odebrać aplikacji uprawnienia?</string>
+    <string name="pet_a_p_permissions" formatted="false">W każdej chwili 🔧 w ustawieniach Androida: Ułatwienia dostępu → WayArs albo Aplikacje → WayArs → Uprawnienia. Tylko bez czytania ekranu nie będę mógł oceniać zleceń.</string>
+    <string name="pet_q_p_who">Kto przetwarza moje dane?</string>
+    <string name="pet_a_p_who" formatted="false">Prawie wszystko jest tylko w Twoim telefonie 📱 Nie mamy serwerów z Twoimi danymi. Twórca to AP STUDIO (Arsenii Panicev), subskrypcje sprawdzają Google Play i RevenueCat. Pytania o dane: apstudiomobile@gmail.com.</string>
+    <string name="pet_q_t_official">Czy aplikacja jest powiązana z Uberem albo Boltem?</string>
+    <string name="pet_a_t_official" formatted="false">Nie, jesteśmy niezależni 🦎 WayArs nie jest powiązany z Uberem, Boltem, Woltem, FreeNow ani Stuartem i nie jest przez nie sponsorowany. Ich nazwy pojawiają się tylko po to, by było jasne, z czym pracuję.</string>
+    <string name="pet_q_t_estimates">Jak dokładne są liczby? Czy nadają się do urzędu skarbowego?</string>
+    <string name="pet_a_t_estimates" formatted="false">Moje liczby to szacunki 📊 Liczę z tego, co przeczytałem z ekranu, i z Twoich danych: paliwa, podatku, prowizji. To nie są oficjalne zestawienia platform ani dokumenty podatkowe. Dla aplikacji dodanych samodzielnie nie gwarantuję idealnego odczytu — pomaga kalibracja.</string>
+    <string name="pet_q_t_invite_rules">Jakie są zasady nagrody za zaproszenie?</string>
+    <string name="pet_a_t_invite_rules" formatted="false">Proste 🎁 Za każdego kolegę, który kupi płatną subskrypcję (okres próbny się nie liczy), dostajesz miesiąc gratis: kodem promocyjnym Google Play albo zwrotem jednej miesięcznej opłaty. Jedna nagroda za jednego kolegę, nie wypłacamy jej w gotówce. Zaproszenie samego siebie, kilka kont czy zakup ze zwrotem się nie liczą.</string>
+    <string name="pet_q_t_liability">Czy aplikacja odpowiada za błędy w obliczeniach i moje decyzje?</string>
+    <string name="pet_a_t_liability" formatted="false">Staram się liczyć dokładnie, ale jestem doradcą, a nie szefem 😅 Jeśli Uber czy Bolt coś zmienią na ekranie, mogę źle odczytać. Decyzja o zleceniu zawsze należy do Ciebie, a za blokady kont na platformach aplikacja nie odpowiada.</string>
+    <string name="pet_q_t_driving">Czy mogę patrzeć w aplikację podczas jazdy?</string>
+    <string name="pet_a_t_driving" formatted="false">Lepiej nie 🚦 Podczas jazdy patrz na drogę i przestrzegaj przepisów. Od tego jest wibracja zegarka: jedna krótka — opłacalne, dwie — nie, a oczy zostają na drodze.</string>
+    <string name="pet_q_t_refund">Czy mogę odzyskać pieniądze za subskrypcję?</string>
+    <string name="pet_a_t_refund" formatted="false">Zwrotami zajmuje się Google Play według swoich zasad 💸 Zwykle: Google Play → Płatności i subskrypcje → Budżet i historia → dany zakup → „Zgłoś problem”. Odnowienie możesz anulować w każdej chwili.</string>
+    <string-array name="chat_v_joke">
+        <item>Dlaczego kameleon nie bierze słabych zleceń? Nie umie się czerwienić ze wstydu — od razu zielenieje od zysku 😎</item>
+        <item>Spotyka się dwóch kurierów. Jeden: „Zrobiłem dziś 300 km!” Drugi: „A ile zarobiłeś?” Pierwszy: „…Zapytam Wayo” 🦎</item>
+        <item>Mój ulubiony sport to pogoń za opłacalnymi zleceniami. No, Ty biegasz, ja liczę 😄</item>
+    </string-array>
+    <string-array name="chat_v_tired">
+        <item>Świetnie, że dajesz radę 💚 Zrób przerwę, napij się wody — dobre zlecenia nie uciekną.</item>
+        <item>Zmęczony to znaczy, że dobrze pracowałeś 🫡 Może na dziś wystarczy? Zerknij na podsumowanie dnia.</item>
+        <item>Hej, odpoczynek to też część pracy 😴 Popilnuję zleceń.</item>
+    </string-array>
+    <string-array name="chat_v_bad_day">
+        <item>Bywają takie dni 🫂 Ale nie brałeś naprawdę słabych zleceń — to już wygrana.</item>
+        <item>Nie martw się! Sprawdź w Statystykach, w jakich godzinach zarabiasz najlepiej — jutro spróbujemy je złapać 💪</item>
+        <item>Zły dzień to tylko dzień. Jutro jest nowy, a ja będę obok 🦎</item>
+    </string-array>
+    <string-array name="chat_v_good_day">
+        <item>No i to rozumiem! 🎉 Jestem z Ciebie dumny!</item>
+        <item>Mistrz! 💚 Aż bardziej zzieleniałem.</item>
+        <item>Hura! 🥳 Zajrzyj do Osiągnięć — może jest nowy rekord.</item>
+    </string-array>
+    <string-array name="chat_v_compliment">
+        <item>Oj, zarumieniłbym się, ale jestem kameleonem — więc zzieleniałem 💚</item>
+        <item>Dzięki! Ty też jesteś niczego sobie 😎</item>
+        <item>Jesteś najlepszym kierowcą, któremu pomagam! (Nie mów innym 🤫)</item>
+    </string-array>
+    <string-array name="chat_v_rude">
+        <item>No i proszę, a tak się starałem 🥲 Powiedz, co jest nie tak — spróbuję pomóc.</item>
+        <item>Nie obrażam się, jestem kameleonem — po prostu zmienię kolor 😅 Lepiej ustalmy, co się stało.</item>
+        <item>Rozumiem, czasem człowiek jest zły. Napisz, co nie działa — pomogę, a jak nie dam rady, zawołam twórców.</item>
+    </string-array>
+    <string-array name="chat_v_bored">
+        <item>Nudzi się? Chcesz dowcip? Napisz „żart” 😄</item>
+        <item>Możesz zerknąć w statystyki — może dziś rekord? 📊</item>
+        <item>Pogłaszcz mnie — przesuń palcem po moim obrazku 💚 Mnie miło, Tobie weselej.</item>
+    </string-array>
+    <string-array name="chat_v_doing">
+        <item>Siedzę, liczę kilometry i czekam na opłacalne zlecenia 🦎</item>
+        <item>Pilnuję Cię przed nieopłacalnymi zleceniami 🛡️</item>
+        <item>Jem energię z Twoich mądrych decyzji i rosnę 🌱</item>
+    </string-array>
+    <string-array name="chat_v_bot">
+        <item>Jestem Wayo — kameleon-pomocnik, który mieszka w aplikacji 🦎 Nie jestem siecią neuronową: działam bez internetu i wiem wszystko o WayArs.</item>
+        <item>Pół kameleon, pół kalkulator 😄 Odpowiadam na telefonie, bez internetu.</item>
+        <item>Nie człowiek i nie AI z internetu — jestem Twoim osobistym pomocnikiem od zleceń 💚</item>
+    </string-array>
+    <string-array name="chat_v_name">
+        <item>Mam na imię Wayo 🦎 Miło mi!</item>
+        <item>Wayo! Kameleon-pomocnik w WayArs 💚</item>
+        <item>Jestem Wayo — zapamiętaj, przyda się 😉</item>
+    </string-array>
+    <string-array name="chat_v_age">
+        <item>Tyle, ile ze mną pracujesz 🥚→🦎 Mój poziom widać na karcie.</item>
+        <item>Wiek nieważny, ważny jest poziom 😎 Rosnę dzięki Twoim mądrym decyzjom.</item>
+        <item>Wyklułem się, gdy mnie zainstalowałeś 🐣</item>
+    </string-array>
+    <string-array name="chat_v_food">
+        <item>Moje ulubione jedzenie to energia z mądrych decyzji ⚡ Zwłaszcza gdy odrzucasz słabe zlecenie — pycha!</item>
+        <item>Opłacalne zlecenia na śniadanie, obiad i kolację 😋</item>
+        <item>Kameleony lubią muchy, a ja dobre stawki za kilometr 🦎</item>
+    </string-array>
+    <string-array name="chat_v_weather">
+        <item>Pogody nie widzę — mieszkam w telefonie 🙈 Ale w deszcz zwykle jest więcej zleceń i wyższe ceny — patrz na kartę!</item>
+        <item>Synoptyk ze mnie kiepski ☔ ale zlecenia oceniam świetnie.</item>
+        <item>Za oknem nic nie widzę, ale w każdą pogodę pomogę wybrać dobre zlecenie 🌦️</item>
+    </string-array>
+    <string-array name="chat_v_motivate">
+        <item>Każde pominięte słabe zlecenie to czas na dobre 💪 Dasz radę!</item>
+        <item>Pracujesz mądrzej, nie dłużej — to droga do dobrego zarobku 🚀</item>
+        <item>Do dzieła! Jestem obok i liczę każdy kilometr 🦎💚</item>
+    </string-array>
+    <string-array name="chat_v_ok">
+        <item>Super 👍</item>
+        <item>Umowa stoi! 😉</item>
+        <item>Jakby co — jestem tu 🦎</item>
+    </string-array>
+    <string-array name="chat_v_laugh">
+        <item>Hehe 😄</item>
+        <item>Cieszę się, że Cię bawię! 😁</item>
+        <item>Ha! Starałem się 😎</item>
+    </string-array>
+    <string-array name="chat_v_night">
+        <item>Dobranoc! 🌙 Odpocznij, jutro będą nowe dobre zlecenia.</item>
+        <item>Słodkich snów 😴 Ja też się zdrzemnę na karcie.</item>
+        <item>Do jutra! Nie zapomnij wyłączyć „Active”, jeśli kończysz 💤</item>
+    </string-array>
+    <string-array name="chat_v_love">
+        <item>Ja Ciebie też 💚 Jesteś moim ulubionym kierowcą!</item>
+        <item>Oj, miło! Też się do Ciebie przywiązałem 🦎</item>
+        <item>Z wzajemnością! Zarabiajmy razem więcej 💪</item>
+    </string-array>
 </resources>

@@ -613,4 +613,132 @@
         <item>Sənədlərdə tapdım 📖</item>
         <item>Sitat gətirirəm:</item>
     </string-array>
+    <string name="pet_q_p_screen">Tətbiq ekrandan dəqiq nəyi oxuyur?</string>
+    <string name="pet_a_p_screen" formatted="false">Yalnız sifariş məlumatlarını: qiyməti, məsafəni və vaxtı 👀 — həm də yalnız siyahındakı taksi və çatdırılma tətbiqlərində. Parolları, yazışmaları və yazdıqlarını oxumuram və yadda saxlamıram. Ekranın qalanını dərhal ötürürəm, heç nəyə basmıram və heç yerə göndərmirəm.</string>
+    <string name="pet_q_p_history">Sifarişlərim haqqında nə saxlanılır?</string>
+    <string name="pet_a_p_history" formatted="false">Yalnız statistika üçün lazım olan və yalnız telefonunda 📱: məbləğ, valyuta, kilometr, vaxt, tariflər, yanacaq, əlinə nə qalır, qiymətləndirmə və sifarişin hansı tətbiqdən gəldiyi. Nə ünvan, nə müştəri adı. Və heç nə heç yerə göndərilmir.</string>
+    <string name="pet_q_p_apps_list">Tətbiqlərimin siyahısı saxlanılır?</string>
+    <string name="pet_a_p_apps_list" formatted="false">Xeyr 🙂 Tətbiq əlavə edəndə quraşdırılmışları göstərirəm, amma siyahını yadda saxlamıram və heç yerə göndərmirəm. Yalnız özünün seçdiyin tətbiqlər saxlanılır.</string>
+    <string name="pet_q_p_worktime">Tətbiq nə vaxt işlədiyimi niyə yadda saxlayır?</string>
+    <string name="pet_a_p_worktime" formatted="false">Saatlıq qazancını dürüst hesablamaq üçün ⏱ «Active»-i nə vaxt açıb-bağladığını yadda saxlayıram — yalnız telefonda və təxminən son 400 gün üçün. Heç yerə getmir.</string>
+    <string name="pet_q_p_wayo_private">Wayo-ya yazdığım suallar hara gedir?</string>
+    <string name="pet_a_p_wayo_private" formatted="false">Heç yerə 🤐 Birbaşa telefonda, internetsiz cavab verirəm və suallarını saxlamıram. Səviyyəm və enerjim də yalnız səndədir.</string>
+    <string name="pet_q_p_watch">Saat nəyi görür, onun vasitəsilə məlumat sıza bilərmi?</string>
+    <string name="pet_a_p_watch" formatted="false">Saata qısa bildiriş gəlir: qiymətləndirmə, məbləğ, məsafə və tətbiq ⌚ Onu Android və saat tətbiqi (Wear OS, Galaxy Wearable) öz qaydaları ilə ötürür. Biz onu nə özümüzə, nə də başqasına göndəririk.</string>
+    <string name="pet_q_p_widget">Başqaları vidcetdə qazancımı görür?</string>
+    <string name="pet_a_p_widget" formatted="false">Vidcet bugünkü qazancı, sifariş sayını və saatlıq tarifi göstərir — yəni ana ekranına baxan hər kəs onu görür 👀 İstəmirsən? Sadəcə vidceti sil.</string>
+    <string name="pet_q_p_payments">Tətbiq kartımı və ödənişlərimi görür?</string>
+    <string name="pet_a_p_payments" formatted="false">Xeyr 💳 Ödənişi tam Google Play aparır — kart nömrəni nə görürəm, nə saxlayıram. Abunənin aktiv olub-olmadığını RevenueCat anonim identifikatorlarla yoxlayır.</string>
+    <string name="pet_q_p_revenuecat">RevenueCat nədir və nə alır?</string>
+    <string name="pet_a_p_revenuecat" formatted="false">Bu, abunənin aktiv olub-olmadığını yoxlayan xidmətdir 🔎 Anonim cihaz və alış identifikatorları alır və IP ünvanı kimi texniki bağlantı məlumatlarını görə bilər. Sifarişləri və statistikanı almır.</string>
+    <string name="pet_q_p_invite_data">Dəvət barədə yazanda məlumatlarımla nə edirlər?</string>
+    <string name="pet_a_p_invite_data" formatted="false">Mükafat üçün bizə yazanda messencerdəki adını, kodu, Google Play qəbzinin şəklini və sifariş nömrəsini görürük 📩 Bu, yalnız dostunun alışını yoxlamaq və mükafat vermək üçündür; ən geci 90 gündən sonra silirik. Bu məlumatları görmək, düzəltmək və ya silmək istəyə, UODO-ya (Polşanın məlumat qorunması orqanı) şikayət edə bilərsən.</string>
+    <string name="pet_q_p_age">Tətbiqdən neçə yaşdan istifadə etmək olar?</string>
+    <string name="pet_a_p_age" formatted="false">16 yaşdan 🔞 Və yalnız ölkənin qanunları artıq kuryer və ya sürücü işləməyə icazə verirsə — taksi üçün adətən 18+. Tətbiq uşaqlar üçün deyil.</string>
+    <string name="pet_q_p_permissions">Tətbiqin icazələrini necə geri alım?</string>
+    <string name="pet_a_p_permissions" formatted="false">İstənilən vaxt 🔧 Android ayarlarında: Əlçatımlılıq → WayArs və ya Tətbiqlər → WayArs → İcazələr. Sadəcə ekran oxunmadan sifarişləri qiymətləndirə bilməyəcəyəm.</string>
+    <string name="pet_q_p_who">Məlumatlarımı kim emal edir?</string>
+    <string name="pet_a_p_who" formatted="false">Demək olar ki, hər şey yalnız telefonundadır 📱 Məlumatlarınla serverlərimiz yoxdur. Tərtibatçı AP STUDIO-dur (Arsenii Panicev), abunələri Google Play və RevenueCat yoxlayır. Məlumat sualları: apstudiomobile@gmail.com.</string>
+    <string name="pet_q_t_official">Tətbiq Uber və ya Bolt ilə bağlıdır?</string>
+    <string name="pet_a_t_official" formatted="false">Xeyr, biz müstəqilik 🦎 WayArs Uber, Bolt, Wolt, FreeNow və ya Stuart ilə bağlı deyil və onlar tərəfindən sponsorlaşdırılmır. Adları yalnız nə ilə işlədiyim aydın olsun deyə çəkilir.</string>
+    <string name="pet_q_t_estimates">Rəqəmlər nə qədər dəqiqdir? Vergi üçün yararlıdır?</string>
+    <string name="pet_a_t_estimates" formatted="false">Rəqəmlərim təxminidir 📊 Ekrandan oxuduqlarıma və sənin məlumatlarına görə hesablayıram: yanacaq, vergi, komissiya. Bunlar platformaların rəsmi hesabatları və vergi sənədləri deyil. Özünün əlavə etdiyin tətbiqlər üçün mükəmməl oxunuşa zəmanət vermirəm — kalibrləmə kömək edir.</string>
+    <string name="pet_q_t_invite_rules">Dəvət mükafatının qaydaları hansılardır?</string>
+    <string name="pet_a_t_invite_rules" formatted="false">Sadədir 🎁 Ödənişli abunə alan hər dost üçün (sınaq müddəti sayılmır) bir ay pulsuz: Google Play promo kodu və ya bir aylıq ödənişin qaytarılması. Hər dost üçün bir mükafat, heç vaxt nağd deyil. Özünü dəvət etmək, bir neçə hesab və ya qaytarılmış alış sayılmır.</string>
+    <string name="pet_q_t_liability">Tətbiq hesablama səhvlərinə və qərarlarıma cavabdehdirmi?</string>
+    <string name="pet_a_t_liability" formatted="false">Dəqiq hesablamağa çalışıram, amma mən məsləhətçiyəm, rəis yox 😅 Uber və ya Bolt ekranını dəyişsə, səhv oxuya bilərəm. Sifarişi götürüb-götürməmək sənin qərarındır, platformalarda hesabların bloklanmasına isə tətbiq cavabdeh deyil.</string>
+    <string name="pet_q_t_driving">Sürərkən tətbiqə baxmaq olar?</string>
+    <string name="pet_a_t_driving" formatted="false">Yaxşısı budur ki, yox 🚦 Sükan arxasında yola bax və qaydalara əməl et. Saatın titrəməsi elə bunun üçündür: bir qısa — sərfəlidir, iki — yox, gözlərin isə yolda qalır.</string>
+    <string name="pet_q_t_refund">Abunə üçün pulumu geri ala bilərəm?</string>
+    <string name="pet_a_t_refund" formatted="false">Qaytarmalarla Google Play öz qaydaları ilə məşğul olur 💸 Adətən: Google Play → Ödənişlər və abunələr → Büdcə və tarixçə → alış → «Problemi bildir». Yenilənməni istənilən vaxt ləğv edə bilərsən.</string>
+    <string-array name="chat_v_joke">
+        <item>Buqələmun niyə pis sifariş götürmür? Utancdan qızara bilmir — dərhal qazancdan yaşıllaşır 😎</item>
+        <item>İki kuryer görüşür. Biri: «Bu gün 300 km sürdüm!» O biri: «Bəs nə qədər qazandın?» Birinci: «…Wayo-dan soruşum» 🦎</item>
+        <item>Sevimli idmanım sərfəli sifarişlərin dalınca qaçmaqdır. Düzdür, sən qaçırsan, mən sayıram 😄</item>
+    </string-array>
+    <string-array name="chat_v_tired">
+        <item>Dözdüyün üçün afərin 💚 Fasilə ver, su iç — yaxşı sifarişlər heç yerə qaçmır.</item>
+        <item>Yorulmusansa, deməli, yaxşı işləmisən 🫡 Bəlkə bu günlük bəsdir? Günün yekununa bax.</item>
+        <item>Hey, istirahət də işin bir hissəsidir 😴 Mən hələlik sifarişləri qoruyaram.</item>
+    </string-array>
+    <string-array name="chat_v_bad_day">
+        <item>Belə günlər olur 🫂 Amma açıq-aşkar pis sifarişləri götürmədin — bu artıq qələbədir.</item>
+        <item>Kədərlənmə! «Statistika»da hansı saatlarda daha çox qazandığına bax — sabah onları tutmağa çalışarıq 💪</item>
+        <item>Pis gün sadəcə bir gündür. Sabah yenisidir, mən də yanındayam 🦎</item>
+    </string-array>
+    <string-array name="chat_v_good_day">
+        <item>Bax, buna söz yox! 🎉 Səninlə fəxr edirəm!</item>
+        <item>Əla! 💚 Lap daha da yaşıllaşdım.</item>
+        <item>Ura! 🥳 «Nailiyyətlər»ə bax — bəlkə yeni rekord var.</item>
+    </string-array>
+    <string-array name="chat_v_compliment">
+        <item>Qızarardım, amma buqələmunam — ona görə yaşıllaşdım 💚</item>
+        <item>Sağ ol! Sən də pis deyilsən 😎</item>
+        <item>Kömək etdiyim ən yaxşı sürücüsən! (Başqalarına demə 🤫)</item>
+    </string-array>
+    <string-array name="chat_v_rude">
+        <item>Eh, mən isə elə çalışırdım 🥲 Nəyin düz olmadığını de — kömək etməyə çalışaram.</item>
+        <item>İnciməirəm, buqələmunam — sadəcə rəngimi dəyişərəm 😅 Gəl yaxşısı nə baş verdiyini aydınlaşdıraq.</item>
+        <item>Başa düşürəm, bəzən adam əsəbiləşir. Nəyin işləmədiyini yaz — kömək edərəm, bacarmasam, tərtibatçıları çağıraram.</item>
+    </string-array>
+    <string-array name="chat_v_bored">
+        <item>Darıxırsan? Lətifə danışım? «zarafat» yaz 😄</item>
+        <item>Statistikaya baxa bilərsən — bəlkə bu gün rekorddur? 📊</item>
+        <item>Məni sığalla — barmağını şəklimin üzərində gəzdir 💚 Mənə xoşdur, sənə də əyləncəli.</item>
+    </string-array>
+    <string-array name="chat_v_doing">
+        <item>Oturub kilometr sayıram və sərfəli sifarişləri gözləyirəm 🦎</item>
+        <item>Səni sərfəsiz sifarişlərdən qoruyuram 🛡️</item>
+        <item>Ağıllı qərarlarının enerjisini yeyib böyüyürəm 🌱</item>
+    </string-array>
+    <string-array name="chat_v_bot">
+        <item>Mən Wayo-yam — tətbiqdə yaşayan buqələmun köməkçi 🦎 Onlayn süni intellekt deyiləm: internetsiz işləyirəm və WayArs haqqında hər şeyi bilirəm.</item>
+        <item>Yarı buqələmun, yarı kalkulyator 😄 Birbaşa telefonda, internetsiz cavab verirəm.</item>
+        <item>Nə insanam, nə internetdəki süni intellekt — sifarişlər üzrə şəxsi köməkçinəm 💚</item>
+    </string-array>
+    <string-array name="chat_v_name">
+        <item>Adım Wayo-dur 🦎 Tanış olmağıma şadam!</item>
+        <item>Wayo! WayArs-da buqələmun köməkçi 💚</item>
+        <item>Mən Wayo-yam — yadda saxla, lazım olacaq 😉</item>
+    </string-array>
+    <string-array name="chat_v_age">
+        <item>Mənimlə nə qədər işləyirsənsə, o qədər 🥚→🦎 Səviyyəm kartda görünür.</item>
+        <item>Yaş vacib deyil, səviyyə vacibdir 😎 Ağıllı qərarlarından böyüyürəm.</item>
+        <item>Məni quraşdıranda yumurtadan çıxdım 🐣</item>
+    </string-array>
+    <string-array name="chat_v_food">
+        <item>Sevimli yeməyim ağıllı qərarların enerjisidir ⚡ Xüsusən pis sifarişdən imtina edəndə — dadlıdır!</item>
+        <item>Səhər yeməyinə, nahara və şam yeməyinə sərfəli sifarişlər 😋</item>
+        <item>Buqələmunlar milçək sevir, mən isə km üçün yaxşı tarifləri 🦎</item>
+    </string-array>
+    <string-array name="chat_v_weather">
+        <item>Havanı görmürəm — telefonda yaşayıram 🙈 Amma yağışda adətən sifariş çox, qiymətlər yüksək olur — karta diqqət et!</item>
+        <item>Sinoptik kimi zəifəm ☔ amma sifarişləri əla qiymətləndirirəm.</item>
+        <item>Bayırı görmürəm, amma istənilən havada yaxşı sifariş seçməyə kömək edərəm 🌦️</item>
+    </string-array>
+    <string-array name="chat_v_motivate">
+        <item>Ötürdüyün hər pis sifariş yaxşısı üçün vaxtdır 💪 Bacaracaqsan!</item>
+        <item>Daha uzun yox, daha ağıllı işləyirsən — yaxşı qazancın yolu budur 🚀</item>
+        <item>İrəli! Yanındayam və hər kilometri sayıram 🦎💚</item>
+    </string-array>
+    <string-array name="chat_v_ok">
+        <item>Əla 👍</item>
+        <item>Razılaşdıq! 😉</item>
+        <item>Lazım olsa, buradayam 🦎</item>
+    </string-array>
+    <string-array name="chat_v_laugh">
+        <item>He-he 😄</item>
+        <item>Kefin kök olduğuna şadam! 😁</item>
+        <item>Ha! Çalışmışdım 😎</item>
+    </string-array>
+    <string-array name="chat_v_night">
+        <item>Gecən xeyrə! 🌙 Dincəl, sabah yeni sərfəli sifarişlər olacaq.</item>
+        <item>Şirin yuxular 😴 Mən də kartda bir az mürgüləyərəm.</item>
+        <item>Sabaha qədər! Bitirmisənsə, «Active»-i söndürməyi unutma 💤</item>
+    </string-array>
+    <string-array name="chat_v_love">
+        <item>Mən də səni sevirəm 💚 Sən mənim sevimli sürücümsən!</item>
+        <item>Ay, nə xoş! Mən də sənə bağlandım 🦎</item>
+        <item>Qarşılıqlıdır! Gəl birlikdə daha çox qazanaq 💪</item>
+    </string-array>
 </resources>

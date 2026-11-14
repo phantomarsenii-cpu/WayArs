@@ -288,6 +288,7 @@ private suspend fun personalLine(context: Context, key: String, isSubscribed: Bo
  * app (offline), can point at the right setting, checks the phone right in the chat and asks
  * back when it isn't sure. "📋" switches to the full list of questions.
  */
+@android.annotation.SuppressLint("DiscouragedApi")
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun WayoChatDialog(
@@ -421,6 +422,10 @@ fun WayoChatDialog(
                         }
                     )
                 )
+                is WayoBrain.Reply.Chit -> {
+                    val arr = context.resources.getIdentifier("chat_v_" + r.kind, "array", context.packageName)
+                    messages.add(ChatMsg(false, if (arr != 0) pick(arr) else pick(R.array.chat_v_hello)))
+                }
                 is WayoBrain.Reply.Unknown -> messages.add(
                     ChatMsg(false, pick(R.array.chat_v_unknown), chips = topics(POPULAR_KEYS.take(4)), telegram = true)
                 )

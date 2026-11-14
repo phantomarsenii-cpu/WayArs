@@ -67,10 +67,20 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /** One question the pet can answer; [step] (if any) is what "Show me" spotlights. */
-class PetHelpTopic(@StringRes val question: Int, @StringRes val answer: Int, val step: TourStep?)
+class PetHelpTopic(
+    @StringRes val question: Int,
+    @StringRes val answer: Int,
+    val step: TourStep?,
+    /** False for the policy/terms details Wayo retells: answered in chat and found by search, not listed. */
+    val inList: Boolean = true
+)
 
-private fun topic(q: Int, a: Int, target: TourTarget?, tab: MainTab = MainTab.SETTINGS, item: Int? = null) =
-    PetHelpTopic(q, a, target?.let { TourStep(it, tab, item, q, a) })
+private fun topic(q: Int, a: Int, target: TourTarget?, tab: MainTab = MainTab.SETTINGS, item: Int? = null, inList: Boolean = true) =
+    PetHelpTopic(q, a, target?.let { TourStep(it, tab, item, q, a) }, inList)
+
+/** A detail from the privacy policy / terms, retold in Wayo's own words. */
+private fun detail(q: Int, a: Int, target: TourTarget = TourTarget.SETTINGS_INFO, item: Int = SettingsItems.INFO) =
+    topic(q, a, target, item = item, inList = false)
 
 // Settings list item positions: see SettingsItems (TourController.kt).
 val PET_HELP_TOPICS: List<PetHelpTopic> = listOf(
@@ -134,7 +144,26 @@ val PET_HELP_TOPICS: List<PetHelpTopic> = listOf(
     topic(R.string.pet_q_theme, R.string.pet_a_theme, TourTarget.SETTINGS_PET, item = SettingsItems.PET),
     topic(R.string.pet_q_accessories, R.string.pet_a_accessories, TourTarget.SETTINGS_PET, item = SettingsItems.PET),
     topic(R.string.pet_q_ban, R.string.pet_a_ban, null),
-    topic(R.string.pet_q_about, R.string.pet_a_about, TourTarget.SETTINGS_INFO, item = SettingsItems.INFO)
+    topic(R.string.pet_q_about, R.string.pet_a_about, TourTarget.SETTINGS_INFO, item = SettingsItems.INFO),
+    detail(R.string.pet_q_p_screen, R.string.pet_a_p_screen),
+    detail(R.string.pet_q_p_history, R.string.pet_a_p_history),
+    detail(R.string.pet_q_p_apps_list, R.string.pet_a_p_apps_list),
+    detail(R.string.pet_q_p_worktime, R.string.pet_a_p_worktime),
+    detail(R.string.pet_q_p_wayo_private, R.string.pet_a_p_wayo_private),
+    detail(R.string.pet_q_p_watch, R.string.pet_a_p_watch, TourTarget.SETTINGS_EXTRAS, SettingsItems.EXTRAS),
+    detail(R.string.pet_q_p_widget, R.string.pet_a_p_widget, TourTarget.SETTINGS_EXTRAS, SettingsItems.EXTRAS),
+    detail(R.string.pet_q_p_payments, R.string.pet_a_p_payments, TourTarget.SETTINGS_SUBSCRIPTION, SettingsItems.SUBSCRIPTION),
+    detail(R.string.pet_q_p_revenuecat, R.string.pet_a_p_revenuecat),
+    detail(R.string.pet_q_p_invite_data, R.string.pet_a_p_invite_data),
+    detail(R.string.pet_q_p_age, R.string.pet_a_p_age),
+    detail(R.string.pet_q_p_permissions, R.string.pet_a_p_permissions, TourTarget.SETTINGS_PERMISSIONS, SettingsItems.PERMISSIONS),
+    detail(R.string.pet_q_p_who, R.string.pet_a_p_who),
+    detail(R.string.pet_q_t_official, R.string.pet_a_t_official),
+    detail(R.string.pet_q_t_estimates, R.string.pet_a_t_estimates),
+    detail(R.string.pet_q_t_invite_rules, R.string.pet_a_t_invite_rules, TourTarget.SETTINGS_EXTRAS, SettingsItems.EXTRAS),
+    detail(R.string.pet_q_t_liability, R.string.pet_a_t_liability),
+    detail(R.string.pet_q_t_driving, R.string.pet_a_t_driving),
+    detail(R.string.pet_q_t_refund, R.string.pet_a_t_refund, TourTarget.SETTINGS_SUBSCRIPTION, SettingsItems.SUBSCRIPTION)
 )
 
 /** One live check of the phone/app state for "Check my phone". */
@@ -441,7 +470,7 @@ private fun PetHelpDialog(
     // Ranked search: every word of the question (4+ letters, compared by its first 5 letters so
     // word endings and small typos at the end don't matter) scores 3 in the question, 1 in the answer.
     val words = query.lowercase().split(Regex("[^\\p{L}\\p{N}]+")).filter { it.length >= 3 }.map { it.take(5) }
-    val shown = if (words.isEmpty()) resolved else resolved
+    val shown = if (words.isEmpty()) resolved.filter { it.first.inList } else resolved
         .map { tr -> tr to words.sumOf { w -> (if (tr.second.lowercase().contains(w)) 3 else 0) + (if (tr.third.lowercase().contains(w)) 1 else 0) } }
         .filter { it.second > 0 }
         .sortedByDescending { it.second }

@@ -612,4 +612,132 @@
         <item>In den Dokumenten gefunden 📖</item>
         <item>Ich zitiere:</item>
     </string-array>
+    <string name="pet_q_p_screen">Was genau liest die App vom Bildschirm?</string>
+    <string name="pet_a_p_screen" formatted="false">Nur die Auftragsdaten: Preis, Strecke und Zeit 👀 — und nur in den Taxi- und Liefer-Apps auf deiner Liste. Passwörter, Chats und was du tippst, lese und speichere ich nicht. Alles andere überspringe ich sofort, tippe nichts an und schicke nichts weg.</string>
+    <string name="pet_q_p_history">Was wird über meine Aufträge gespeichert?</string>
+    <string name="pet_a_p_history" formatted="false">Nur was die Statistik braucht, und nur auf deinem Handy 📱: Betrag, Währung, Kilometer, Zeit, Sätze, Sprit, was dir bleibt, Bewertung und aus welcher App der Auftrag kam. Keine Adressen, keine Kundennamen. Und nichts davon wird verschickt.</string>
+    <string name="pet_q_p_apps_list">Wird die Liste meiner Apps gespeichert?</string>
+    <string name="pet_a_p_apps_list" formatted="false">Nein 🙂 Wenn du eine App hinzufügst, zeige ich die installierten, merke mir die Liste aber nicht und schicke sie nirgendwohin. Gespeichert werden nur die Apps, die du auswählst.</string>
+    <string name="pet_q_p_worktime">Warum merkt sich die App, wann ich gearbeitet habe?</string>
+    <string name="pet_a_p_worktime" formatted="false">Damit ich deinen Stundenverdienst ehrlich berechne ⏱ Ich merke mir, wann du „Active“ an- und ausgeschaltet hast — nur auf dem Handy und für etwa die letzten 400 Tage. Es verlässt das Handy nie.</string>
+    <string name="pet_q_p_wayo_private">Wohin gehen die Fragen, die ich Wayo schreibe?</string>
+    <string name="pet_a_p_wayo_private" formatted="false">Nirgendwohin 🤐 Ich antworte direkt auf dem Handy, offline, und speichere deine Fragen nicht. Mein Level und meine Energie leben auch nur bei dir.</string>
+    <string name="pet_q_p_watch">Was sieht die Uhr — können darüber Daten abfließen?</string>
+    <string name="pet_a_p_watch" formatted="false">Die Uhr bekommt eine kurze Benachrichtigung: Bewertung, Betrag, Strecke und App ⌚ Android und deine Uhren-App (Wear OS, Galaxy Wearable) leiten sie nach eigenen Regeln weiter. Wir schicken sie weder an uns noch an andere.</string>
+    <string name="pet_q_p_widget">Sehen andere meinen Verdienst im Widget?</string>
+    <string name="pet_a_p_widget" formatted="false">Das Widget zeigt den heutigen Verdienst, die Auftragszahl und den Stundensatz — also sieht es jeder, der auf deinen Startbildschirm schaut 👀 Willst du das nicht, entferne einfach das Widget.</string>
+    <string name="pet_q_p_payments">Sieht die App meine Karte und Zahlungen?</string>
+    <string name="pet_a_p_payments" formatted="false">Nein 💳 Die Zahlung läuft komplett über Google Play — deine Kartennummer sehe und speichere ich nie. Ob das Abo aktiv ist, prüft RevenueCat mit anonymen Kennungen.</string>
+    <string name="pet_q_p_revenuecat">Was ist RevenueCat und was bekommt es?</string>
+    <string name="pet_a_p_revenuecat" formatted="false">Der Dienst prüft, ob dein Abo aktiv ist 🔎 Er bekommt anonyme Geräte- und Kaufkennungen und kann technische Verbindungsdaten wie die IP-Adresse sehen. Aufträge und Statistik bekommt er nicht.</string>
+    <string name="pet_q_p_invite_data">Was passiert mit meinen Daten, wenn ich wegen einer Einladung schreibe?</string>
+    <string name="pet_a_p_invite_data" formatted="false">Schreibst du uns wegen der Belohnung, sehen wir deinen Messenger-Namen, den Code, den Screenshot der Google-Play-Quittung und die Bestellnummer 📩 Das dient nur dazu, den Kauf deines Freundes zu prüfen und die Belohnung zu geben; gelöscht wird spätestens nach 90 Tagen. Du kannst Auskunft, Korrektur oder Löschung verlangen und dich bei der UODO (polnische Datenschutzbehörde) beschweren.</string>
+    <string name="pet_q_p_age">Ab welchem Alter darf man die App nutzen?</string>
+    <string name="pet_a_p_age" formatted="false">Ab 16 🔞 Und nur, wenn dich die Gesetze deines Landes schon als Kurier oder Fahrer arbeiten lassen — für Taxi meist 18+. Für Kinder ist die App nicht gedacht.</string>
+    <string name="pet_q_p_permissions">Wie entziehe ich der App Berechtigungen?</string>
+    <string name="pet_a_p_permissions" formatted="false">Jederzeit 🔧 in den Android-Einstellungen: Bedienungshilfen → WayArs oder Apps → WayArs → Berechtigungen. Nur kann ich ohne Bildschirmlesen keine Aufträge bewerten.</string>
+    <string name="pet_q_p_who">Wer verarbeitet meine Daten?</string>
+    <string name="pet_a_p_who" formatted="false">Fast alles lebt nur auf deinem Handy 📱 Wir haben keine Server mit deinen Daten. Entwickler ist AP STUDIO (Arsenii Panicev), Abos prüfen Google Play und RevenueCat. Fragen zu Daten: apstudiomobile@gmail.com.</string>
+    <string name="pet_q_t_official">Gehört die App zu Uber oder Bolt?</string>
+    <string name="pet_a_t_official" formatted="false">Nein, wir sind unabhängig 🦎 WayArs ist weder mit Uber, Bolt, Wolt, FreeNow oder Stuart verbunden noch von ihnen gesponsert. Ihre Namen stehen nur da, damit klar ist, womit ich arbeite.</string>
+    <string name="pet_q_t_estimates">Wie genau sind die Zahlen? Taugen sie fürs Finanzamt?</string>
+    <string name="pet_a_t_estimates" formatted="false">Meine Zahlen sind Schätzungen 📊 Ich rechne mit dem, was ich vom Bildschirm lese, und mit deinen Angaben: Sprit, Steuer, Provision. Das sind keine offiziellen Abrechnungen der Plattformen und keine Steuerunterlagen. Bei selbst hinzugefügten Apps kann ich kein perfektes Lesen versprechen — da hilft die Kalibrierung.</string>
+    <string name="pet_q_t_invite_rules">Welche Regeln gelten für die Einladungsbelohnung?</string>
+    <string name="pet_a_t_invite_rules" formatted="false">Ganz einfach 🎁 Für jeden Freund, der ein bezahltes Abo kauft (Probezeit zählt nicht), bekommst du einen Gratismonat: als Google-Play-Promocode oder Erstattung einer Monatszahlung. Eine Belohnung pro Freund, nie in bar. Selbsteinladung, mehrere Konten oder erstattete Käufe zählen nicht.</string>
+    <string name="pet_q_t_liability">Haftet die App für Rechenfehler und meine Entscheidungen?</string>
+    <string name="pet_a_t_liability" formatted="false">Ich rechne so genau wie möglich, aber ich bin Berater, nicht dein Chef 😅 Ändern Uber oder Bolt ihren Bildschirm, kann ich falsch lesen. Ob du einen Auftrag nimmst, entscheidest du, und für Kontosperren auf den Plattformen haftet die App nicht.</string>
+    <string name="pet_q_t_driving">Darf ich während der Fahrt in die App schauen?</string>
+    <string name="pet_a_t_driving" formatted="false">Lieber nicht 🚦 Beim Fahren gehört der Blick auf die Straße und du hältst dich an die Verkehrsregeln. Dafür gibt’s die Uhren-Vibration: einmal kurz — lohnt sich, zweimal — nicht, und die Augen bleiben auf der Straße.</string>
+    <string name="pet_q_t_refund">Bekomme ich mein Geld fürs Abo zurück?</string>
+    <string name="pet_a_t_refund" formatted="false">Erstattungen regelt Google Play nach eigenen Regeln 💸 Meist so: Google Play → Zahlungen &amp; Abos → Budget &amp; Verlauf → der Kauf → „Problem melden“. Die Verlängerung kannst du jederzeit kündigen.</string>
+    <string-array name="chat_v_joke">
+        <item>Warum nimmt ein Chamäleon keine schlechten Aufträge? Es kann nicht vor Scham rot werden — es wird gleich grün vor Gewinn 😎</item>
+        <item>Treffen sich zwei Kuriere. Einer: „Ich bin heute 300 km gefahren!“ Der andere: „Und wie viel verdient?“ Der Erste: „…Ich frag mal Wayo“ 🦎</item>
+        <item>Mein Lieblingssport: Jagd auf lohnende Aufträge. Na ja, du rennst, ich rechne 😄</item>
+    </string-array>
+    <string-array name="chat_v_tired">
+        <item>Stark, dass du durchhältst 💚 Mach eine Pause, trink Wasser — gute Aufträge laufen nicht weg.</item>
+        <item>Müde heißt: gut gearbeitet 🫡 Vielleicht Feierabend? Schau dir die Tagesbilanz an.</item>
+        <item>Hey, Pause gehört auch zur Arbeit 😴 Ich pass solange auf die Aufträge auf.</item>
+    </string-array>
+    <string-array name="chat_v_bad_day">
+        <item>Solche Tage gibt’s 🫂 Aber du hast die richtig schlechten Aufträge nicht genommen — das ist schon ein Sieg.</item>
+        <item>Kopf hoch! Schau in der Statistik, wann du am besten verdienst — morgen erwischen wir diese Zeiten 💪</item>
+        <item>Ein schlechter Tag ist nur ein Tag. Morgen ist ein neuer, und ich bin da 🦎</item>
+    </string-array>
+    <string-array name="chat_v_good_day">
+        <item>So muss das! 🎉 Ich bin stolz auf dich!</item>
+        <item>Spitze! 💚 Ich bin noch grüner geworden.</item>
+        <item>Juhu! 🥳 Schau in die Erfolge — vielleicht gibt’s einen neuen Rekord.</item>
+    </string-array>
+    <string-array name="chat_v_compliment">
+        <item>Ich würde rot werden, aber ich bin ein Chamäleon — also werde ich grüner 💚</item>
+        <item>Danke! Du bist auch nicht schlecht 😎</item>
+        <item>Du bist der beste Fahrer, dem ich helfe! (Nicht den anderen sagen 🤫)</item>
+    </string-array>
+    <string-array name="chat_v_rude">
+        <item>Na toll, und ich hab mir so Mühe gegeben 🥲 Sag mir, was nicht passt — ich versuche zu helfen.</item>
+        <item>Ich bin nicht beleidigt, ich bin ein Chamäleon — ich wechsle nur die Farbe 😅 Klären wir lieber, was los ist.</item>
+        <item>Verstehe, manchmal ist man sauer. Schreib, was nicht klappt — ich helfe, und wenn nicht, hole ich die Entwickler.</item>
+    </string-array>
+    <string-array name="chat_v_bored">
+        <item>Langweilig? Willst du einen Witz? Schreib „Witz“ 😄</item>
+        <item>Schau mal in die Statistik — vielleicht ist heute ein Rekord? 📊</item>
+        <item>Streichel mich — fahr mit dem Finger über mein Bild 💚 Mir gefällt’s, dir macht’s Spaß.</item>
+    </string-array>
+    <string-array name="chat_v_doing">
+        <item>Ich sitze hier, zähle Kilometer und warte auf gute Aufträge 🦎</item>
+        <item>Ich beschütze dich vor schlechten Aufträgen 🛡️</item>
+        <item>Ich esse Energie aus deinen klugen Entscheidungen und wachse 🌱</item>
+    </string-array>
+    <string-array name="chat_v_bot">
+        <item>Ich bin Wayo — der Chamäleon-Helfer in der App 🦎 Keine KI aus dem Netz: Ich arbeite offline und weiß alles über WayArs.</item>
+        <item>Halb Chamäleon, halb Taschenrechner 😄 Ich antworte direkt auf dem Handy, ohne Internet.</item>
+        <item>Kein Mensch und keine Online-KI — ich bin dein persönlicher Auftrags-Helfer 💚</item>
+    </string-array>
+    <string-array name="chat_v_name">
+        <item>Ich heiße Wayo 🦎 Freut mich!</item>
+        <item>Wayo! Der Chamäleon-Helfer von WayArs 💚</item>
+        <item>Ich bin Wayo — merk dir das, wird nützlich 😉</item>
+    </string-array>
+    <string-array name="chat_v_age">
+        <item>So alt wie die Zeit, die du mit mir arbeitest 🥚→🦎 Mein Level steht auf der Karte.</item>
+        <item>Alter ist egal, das Level zählt 😎 Ich wachse durch deine klugen Entscheidungen.</item>
+        <item>Ich bin geschlüpft, als du mich installiert hast 🐣</item>
+    </string-array>
+    <string-array name="chat_v_food">
+        <item>Mein Lieblingsessen: Energie aus klugen Entscheidungen ⚡ Besonders lecker, wenn du einen schlechten Auftrag ablehnst!</item>
+        <item>Lohnende Aufträge zum Frühstück, Mittag und Abendessen 😋</item>
+        <item>Chamäleons mögen Fliegen, ich mag gute Sätze pro km 🦎</item>
+    </string-array>
+    <string-array name="chat_v_weather">
+        <item>Wetter sehe ich nicht — ich wohne im Handy 🙈 Aber bei Regen gibt’s meist mehr Aufträge und höhere Preise — achte auf die Karte!</item>
+        <item>Als Wetterfrosch tauge ich nichts ☔ aber Aufträge bewerte ich super.</item>
+        <item>Ich sehe nicht nach draußen, helfe dir aber bei jedem Wetter, einen guten Auftrag zu wählen 🌦️</item>
+    </string-array>
+    <string-array name="chat_v_motivate">
+        <item>Jeder ausgelassene schlechte Auftrag ist Zeit für einen guten 💪 Du schaffst das!</item>
+        <item>Du arbeitest klüger, nicht länger — so verdient man gut 🚀</item>
+        <item>Los geht’s! Ich bin da und zähle jeden Kilometer 🦎💚</item>
+    </string-array>
+    <string-array name="chat_v_ok">
+        <item>Super 👍</item>
+        <item>Abgemacht! 😉</item>
+        <item>Ich bin da, falls was ist 🦎</item>
+    </string-array>
+    <string-array name="chat_v_laugh">
+        <item>Hehe 😄</item>
+        <item>Schön, dass du Spaß hast! 😁</item>
+        <item>Ha! Ich hab mir Mühe gegeben 😎</item>
+    </string-array>
+    <string-array name="chat_v_night">
+        <item>Gute Nacht! 🌙 Ruh dich aus, morgen gibt’s neue gute Aufträge.</item>
+        <item>Süße Träume 😴 Ich mach auch ein Nickerchen auf der Karte.</item>
+        <item>Bis morgen! Vergiss nicht, „Active“ auszuschalten, wenn du fertig bist 💤</item>
+    </string-array>
+    <string-array name="chat_v_love">
+        <item>Ich dich auch 💚 Du bist mein Lieblingsfahrer!</item>
+        <item>Ach, wie lieb! Ich hab dich auch ins Herz geschlossen 🦎</item>
+        <item>Beruht auf Gegenseitigkeit! Verdienen wir zusammen mehr 💪</item>
+    </string-array>
 </resources>

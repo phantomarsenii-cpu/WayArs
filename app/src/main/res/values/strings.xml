@@ -625,4 +625,132 @@
         <item>Found it in the documents 📖</item>
         <item>Quoting the app:</item>
     </string-array>
+    <string name="pet_q_p_screen">What exactly does the app read from the screen?</string>
+    <string name="pet_a_p_screen" formatted="false">Only the order details: price, distance and time 👀 — and only in the taxi and delivery apps on your list. Passwords, chats and what you type I don’t read or remember. Everything else on the screen I skip right away; I never tap anything or send anything anywhere.</string>
+    <string name="pet_q_p_history">What is saved about my orders?</string>
+    <string name="pet_a_p_history" formatted="false">Only what statistics need, and only on your phone 📱: amount, currency, kilometres, time, rates, fuel, take-home, the verdict and which app the order came from. No addresses or customer names. And none of it is sent anywhere.</string>
+    <string name="pet_q_p_apps_list">Is the list of my apps saved?</string>
+    <string name="pet_a_p_apps_list" formatted="false">No 🙂 When you add an app I show the installed ones, but I don’t remember the list or send it anywhere. Only the apps you pick are saved.</string>
+    <string name="pet_q_p_worktime">Why does the app remember when I worked?</string>
+    <string name="pet_a_p_worktime" formatted="false">To count your earnings per hour honestly ⏱ I remember when you switched “Active” on and off — only on the phone and for about the last 400 days. It never leaves the phone.</string>
+    <string name="pet_q_p_wayo_private">Where do the questions I write to Wayo go?</string>
+    <string name="pet_a_p_wayo_private" formatted="false">Nowhere 🤐 I answer right on the phone, offline, and I don’t save your questions. My level and energy live only on your phone too.</string>
+    <string name="pet_q_p_watch">What does the watch see — can data leak through it?</string>
+    <string name="pet_a_p_watch" formatted="false">The watch gets a short notification: verdict, amount, distance and app ⌚ Android and your watch app (Wear OS, Galaxy Wearable) pass it on under their own rules. We don’t send it to ourselves or anyone else.</string>
+    <string name="pet_q_p_widget">Can others see my earnings on the widget?</string>
+    <string name="pet_a_p_widget" formatted="false">The widget shows today’s earnings, order count and per-hour rate — so anyone looking at your home screen can see it 👀 Don’t want that? Just remove the widget.</string>
+    <string name="pet_q_p_payments">Does the app see my card and payments?</string>
+    <string name="pet_a_p_payments" formatted="false">No 💳 Google Play handles the payment completely — I never see or store your card number. RevenueCat checks whether the subscription is active, using anonymous identifiers.</string>
+    <string name="pet_q_p_revenuecat">What is RevenueCat and what does it get?</string>
+    <string name="pet_a_p_revenuecat" formatted="false">It’s the service that checks whether your subscription is active 🔎 It gets anonymous device and purchase identifiers and may see technical connection data like your IP address. It doesn’t get your orders or statistics.</string>
+    <string name="pet_q_p_invite_data">What happens to my data when I write about an invite?</string>
+    <string name="pet_a_p_invite_data" formatted="false">When you write to us for a reward, we see your messenger name, the code, the Google Play receipt screenshot and the order number 📩 It’s only used to check your friend’s purchase and give the reward, and deleted within 90 days. You can ask to see, fix or delete it, and complain to UODO (Poland’s data protection office).</string>
+    <string name="pet_q_p_age">From what age can I use the app?</string>
+    <string name="pet_a_p_age" formatted="false">From 16 🔞 And only if your country’s laws already let you work as a courier or driver — taxi usually needs 18+. The app isn’t meant for children.</string>
+    <string name="pet_q_p_permissions">How do I take permissions away from the app?</string>
+    <string name="pet_a_p_permissions" formatted="false">Any time 🔧 in Android settings: Accessibility → WayArs, or Apps → WayArs → Permissions. Just know that without screen reading I can’t rate orders.</string>
+    <string name="pet_q_p_who">Who processes my data?</string>
+    <string name="pet_a_p_who" formatted="false">Almost everything lives only on your phone 📱 We have no servers holding your data. The developer is AP STUDIO (Arsenii Panicev); Google Play and RevenueCat check subscriptions. Data questions: apstudiomobile@gmail.com.</string>
+    <string name="pet_q_t_official">Is the app connected to Uber or Bolt?</string>
+    <string name="pet_a_t_official" formatted="false">No, we’re independent 🦎 WayArs isn’t affiliated with or sponsored by Uber, Bolt, Wolt, FreeNow or Stuart. Their names appear only so it’s clear what I work with.</string>
+    <string name="pet_q_t_estimates">How accurate are the numbers? Can I use them for taxes?</string>
+    <string name="pet_a_t_estimates" formatted="false">My numbers are estimates 📊 I count from what I read on the screen and your own data: fuel, tax, commission. They’re not official platform statements or tax documents. For apps you added yourself I can’t promise perfect reading — calibration helps there.</string>
+    <string name="pet_q_t_invite_rules">What are the rules of the invite reward?</string>
+    <string name="pet_a_t_invite_rules" formatted="false">Simple 🎁 For each friend who buys a paid subscription (a free trial doesn’t count) you get a free month: a Google Play promo code or a refund of one monthly payment. One reward per friend, never paid in cash. Inviting yourself, multiple accounts or a purchase that gets refunded don’t count.</string>
+    <string name="pet_q_t_liability">Is the app responsible for calculation mistakes and my decisions?</string>
+    <string name="pet_a_t_liability" formatted="false">I try to count precisely, but I’m an adviser, not your boss 😅 If Uber or Bolt change their screen, I may read it wrong. Taking an order is always your call, and the app isn’t responsible for account blocks on the platforms.</string>
+    <string name="pet_q_t_driving">Can I look at the app while driving?</string>
+    <string name="pet_a_t_driving" formatted="false">Better not 🚦 While driving, watch the road and follow traffic rules. That’s what the watch vibration is for: one short — profitable, two — not, and your eyes stay on the road.</string>
+    <string name="pet_q_t_refund">Can I get my money back for the subscription?</string>
+    <string name="pet_a_t_refund" formatted="false">Refunds are handled by Google Play under its own rules 💸 Usually: Google Play → Payments &amp; subscriptions → Budget &amp; history → the purchase → “Report a problem”. You can cancel renewal any time.</string>
+    <string-array name="chat_v_joke">
+        <item>Why doesn’t a chameleon take bad orders? It can’t blush with shame — it just turns green with profit 😎</item>
+        <item>Two couriers meet. One: “I drove 300 km today!” The other: “And how much did you make?” The first: “…Let me ask Wayo” 🦎</item>
+        <item>My favourite sport is chasing profitable orders. Well, you do the running, I do the counting 😄</item>
+    </string-array>
+    <string-array name="chat_v_tired">
+        <item>You’re doing great hanging in there 💚 Take a break, drink some water — the good orders aren’t going anywhere.</item>
+        <item>Tired means you worked well 🫡 Maybe call it a day? Check today’s summary and see how much you’ve done.</item>
+        <item>Hey, rest is part of the job too 😴 I’ll guard the orders meanwhile.</item>
+    </string-array>
+    <string-array name="chat_v_bad_day">
+        <item>Days like that happen 🫂 But you didn’t take the really bad orders — that’s already a win.</item>
+        <item>Don’t be upset! Check in Stats which hours pay you best — tomorrow we’ll try to catch them 💪</item>
+        <item>A bad day is just a day. Tomorrow is new, and I’ll be right here 🦎</item>
+    </string-array>
+    <string-array name="chat_v_good_day">
+        <item>Now that’s what I’m talking about! 🎉 Proud of you!</item>
+        <item>Legend! 💚 I turned even greener.</item>
+        <item>Yay! 🥳 Check Achievements — maybe there’s a new record.</item>
+    </string-array>
+    <string-array name="chat_v_compliment">
+        <item>Aw, I’d blush, but I’m a chameleon — so I turned greener 💚</item>
+        <item>Thanks! You’re pretty cool yourself 😎</item>
+        <item>You’re the best driver I help! (Don’t tell the others 🤫)</item>
+    </string-array>
+    <string-array name="chat_v_rude">
+        <item>Oh, and I tried so hard 🥲 Tell me what’s wrong — I’ll try to help.</item>
+        <item>I don’t take offence, I’m a chameleon — I just change colour 😅 Let’s sort out what happened instead.</item>
+        <item>I get it, sometimes you’re angry. Tell me what doesn’t work — I’ll help, and if I can’t, I’ll call the developers.</item>
+    </string-array>
+    <string-array name="chat_v_bored">
+        <item>Bored? Want a joke? Type “joke” 😄</item>
+        <item>You could check your stats — maybe today’s a record? 📊</item>
+        <item>Pet me — stroke my picture with your finger 💚 I like it, you’ll have fun.</item>
+    </string-array>
+    <string-array name="chat_v_doing">
+        <item>Sitting here counting kilometres and waiting for good orders 🦎</item>
+        <item>Guarding you from unprofitable orders 🛡️</item>
+        <item>Eating energy from your smart decisions and growing 🌱</item>
+    </string-array>
+    <string-array name="chat_v_bot">
+        <item>I’m Wayo — the chameleon helper who lives in the app 🦎 I’m not an AI model: I work offline and know everything about WayArs.</item>
+        <item>Half chameleon, half calculator 😄 I answer right on the phone, no internet needed.</item>
+        <item>Not a human and not an online AI — I’m your personal order helper 💚</item>
+    </string-array>
+    <string-array name="chat_v_name">
+        <item>My name is Wayo 🦎 Nice to meet you!</item>
+        <item>Wayo! The chameleon helper of WayArs 💚</item>
+        <item>I’m Wayo — remember it, it’ll come in handy 😉</item>
+    </string-array>
+    <string-array name="chat_v_age">
+        <item>As old as the time you’ve worked with me 🥚→🦎 My level is on the card.</item>
+        <item>Age doesn’t matter, level does 😎 I grow from your smart decisions.</item>
+        <item>I hatched when you installed me 🐣</item>
+    </string-array>
+    <string-array name="chat_v_food">
+        <item>My favourite food is energy from smart decisions ⚡ Especially when you skip a bad order — delicious!</item>
+        <item>Profitable orders for breakfast, lunch and dinner 😋</item>
+        <item>Chameleons love flies; I love good rates per km 🦎</item>
+    </string-array>
+    <string-array name="chat_v_weather">
+        <item>I can’t see the weather — I live in a phone 🙈 But rain usually means more orders and higher prices — watch the card!</item>
+        <item>I’m a lousy forecaster ☔ but a great order rater.</item>
+        <item>Can’t see outside, but in any weather I’ll help you pick a good order 🌦️</item>
+    </string-array>
+    <string-array name="chat_v_motivate">
+        <item>Every bad order you skip is time for a good one 💪 You’ve got this!</item>
+        <item>You work smarter, not longer — that’s the way to good earnings 🚀</item>
+        <item>Go for it! I’m right here counting every kilometre 🦎💚</item>
+    </string-array>
+    <string-array name="chat_v_ok">
+        <item>Great 👍</item>
+        <item>Deal! 😉</item>
+        <item>I’m here if you need me 🦎</item>
+    </string-array>
+    <string-array name="chat_v_laugh">
+        <item>Hehe 😄</item>
+        <item>Glad you’re having fun! 😁</item>
+        <item>Ha! I tried 😎</item>
+    </string-array>
+    <string-array name="chat_v_night">
+        <item>Good night! 🌙 Rest up — there’ll be new good orders tomorrow.</item>
+        <item>Sweet dreams 😴 I’ll nap on the card too.</item>
+        <item>See you tomorrow! Don’t forget to switch “Active” off if you’re done 💤</item>
+    </string-array>
+    <string-array name="chat_v_love">
+        <item>Love you too 💚 You’re my favourite driver!</item>
+        <item>Aw, that’s sweet! I’ve grown attached to you too 🦎</item>
+        <item>It’s mutual! Let’s earn more together 💪</item>
+    </string-array>
 </resources>

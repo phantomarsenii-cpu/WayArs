@@ -613,4 +613,132 @@
         <item>Hujjatlardan topdim 📖</item>
         <item>Iqtibos keltiraman:</item>
     </string-array>
+    <string name="pet_q_p_screen">Ilova ekrandan aniq nimani o‘qiydi?</string>
+    <string name="pet_a_p_screen" formatted="false">Faqat buyurtma ma’lumotlarini: narx, masofa va vaqtni 👀 — va faqat ro‘yxatingdagi taksi va yetkazib berish ilovalarida. Parollar, yozishmalar va yozayotganingni o‘qimayman va eslab qolmayman. Ekranning qolganini darhol o‘tkazib yuboraman, hech narsani bosmayman va hech qayerga yubormayman.</string>
+    <string name="pet_q_p_history">Buyurtmalarim haqida nima saqlanadi?</string>
+    <string name="pet_a_p_history" formatted="false">Faqat statistika uchun keragi va faqat telefoningda 📱: summa, valyuta, kilometr, vaqt, stavkalar, yoqilg‘i, qo‘lingda qancha qolishi, baho va buyurtma qaysi ilovadan kelgani. Na manzillar, na mijozlar ismlari. Va hech narsa hech qayerga yuborilmaydi.</string>
+    <string name="pet_q_p_apps_list">Ilovalarim ro‘yxati saqlanadimi?</string>
+    <string name="pet_a_p_apps_list" formatted="false">Yo‘q 🙂 Ilova qo‘shayotganingda o‘rnatilganlarini ko‘rsataman, lekin ro‘yxatni eslab qolmayman va hech qayerga yubormayman. Faqat o‘zing tanlagan ilovalar saqlanadi.</string>
+    <string name="pet_q_p_worktime">Ilova qachon ishlaganimni nega eslab qoladi?</string>
+    <string name="pet_a_p_worktime" formatted="false">Soatlik daromadingni halol hisoblash uchun ⏱ «Active»ni qachon yoqib-o‘chirganingni eslab qolaman — faqat telefonda va taxminan oxirgi 400 kun uchun. Bu hech qayerga ketmaydi.</string>
+    <string name="pet_q_p_wayo_private">Wayo’ga yozgan savollarim qayerga ketadi?</string>
+    <string name="pet_a_p_wayo_private" formatted="false">Hech qayerga 🤐 To‘g‘ridan-to‘g‘ri telefonda, internetsiz javob beraman va savollaringni saqlamayman. Mening darajam va energiyam ham faqat sendadir.</string>
+    <string name="pet_q_p_watch">Soat nimani ko‘radi, u orqali ma’lumot sizib chiqmaydimi?</string>
+    <string name="pet_a_p_watch" formatted="false">Soatga qisqa bildirishnoma keladi: baho, summa, masofa va ilova ⌚ Uni Android va soat ilovasi (Wear OS, Galaxy Wearable) o‘z qoidalari bo‘yicha uzatadi. Biz uni na o‘zimizga, na boshqaga yuboramiz.</string>
+    <string name="pet_q_p_widget">Boshqalar vidjetda daromadimni ko‘radimi?</string>
+    <string name="pet_a_p_widget" formatted="false">Vidjet bugungi daromad, buyurtmalar soni va soatlik stavkani ko‘rsatadi — demak, bosh ekraningga qaragan har kim uni ko‘radi 👀 Istamasang — vidjetni olib tashla.</string>
+    <string name="pet_q_p_payments">Ilova kartam va to‘lovlarimni ko‘radimi?</string>
+    <string name="pet_a_p_payments" formatted="false">Yo‘q 💳 To‘lovni to‘liq Google Play amalga oshiradi — karta raqamingni ko‘rmayman va saqlamayman. Obuna faolligini RevenueCat anonim identifikatorlar bilan tekshiradi.</string>
+    <string name="pet_q_p_revenuecat">RevenueCat nima va u nimani oladi?</string>
+    <string name="pet_a_p_revenuecat" formatted="false">Bu obunang faolmi-yo‘qligini tekshiradigan xizmat 🔎 U qurilma va xarid anonim identifikatorlarini oladi va IP manzil kabi texnik ulanish ma’lumotlarini ko‘rishi mumkin. Buyurtmalar va statistikani olmaydi.</string>
+    <string name="pet_q_p_invite_data">Taklif haqida yozganimda ma’lumotlarim bilan nima qilinadi?</string>
+    <string name="pet_a_p_invite_data" formatted="false">Mukofot uchun yozganingda messenjerdagi isming, kod, Google Play cheki rasmi va buyurtma raqamini ko‘ramiz 📩 Bu faqat do‘stingning xaridini tekshirish va mukofot berish uchun; ko‘pi bilan 90 kunda o‘chiramiz. Bu ma’lumotlarni ko‘rsatish, tuzatish yoki o‘chirishni so‘rashing, UODO’ga (Polsha ma’lumotlarni himoya qilish organi) shikoyat qilishing mumkin.</string>
+    <string name="pet_q_p_age">Ilovadan necha yoshdan foydalanish mumkin?</string>
+    <string name="pet_a_p_age" formatted="false">16 yoshdan 🔞 Va faqat mamlakating qonunlari kuryer yoki haydovchi bo‘lib ishlashga ruxsat bersa — taksi uchun odatda 18+. Ilova bolalar uchun emas.</string>
+    <string name="pet_q_p_permissions">Ilovadan ruxsatlarni qanday qaytarib olaman?</string>
+    <string name="pet_a_p_permissions" formatted="false">Istalgan vaqtda 🔧 Android sozlamalarida: Maxsus imkoniyatlar → WayArs yoki Ilovalar → WayArs → Ruxsatlar. Faqat ekran o‘qilmasa, buyurtmalarni baholay olmayman.</string>
+    <string name="pet_q_p_who">Ma’lumotlarimni kim qayta ishlaydi?</string>
+    <string name="pet_a_p_who" formatted="false">Deyarli hammasi faqat telefoningda 📱 Ma’lumotlaring bilan serverlarimiz yo‘q. Dasturchi — AP STUDIO (Arsenii Panicev), obunalarni Google Play va RevenueCat tekshiradi. Ma’lumot savollari: apstudiomobile@gmail.com.</string>
+    <string name="pet_q_t_official">Ilova Uber yoki Bolt bilan bog‘liqmi?</string>
+    <string name="pet_a_t_official" formatted="false">Yo‘q, biz mustaqilmiz 🦎 WayArs Uber, Bolt, Wolt, FreeNow yoki Stuart bilan bog‘liq emas va ular tomonidan homiylik qilinmaydi. Ularning nomlari faqat nima bilan ishlashim tushunarli bo‘lishi uchun keltirilgan.</string>
+    <string name="pet_q_t_estimates">Raqamlar qanchalik aniq? Soliq uchun yaraydimi?</string>
+    <string name="pet_a_t_estimates" formatted="false">Raqamlarim — taxmin 📊 Ekrandan o‘qiganlarim va sening ma’lumotlaring bo‘yicha hisoblayman: yoqilg‘i, soliq, komissiya. Bu platformalarning rasmiy ko‘chirmalari yoki soliq hujjatlari emas. O‘zing qo‘shgan ilovalar uchun mukammal o‘qishni kafolatlamayman — kalibrlash yordam beradi.</string>
+    <string name="pet_q_t_invite_rules">Taklif mukofotining qoidalari qanday?</string>
+    <string name="pet_a_t_invite_rules" formatted="false">Oddiy 🎁 Pullik obuna sotib olgan har bir do‘sting uchun (sinov muddati hisobga olinmaydi) — bir oy bepul: Google Play promokodi yoki bir oylik to‘lovni qaytarish. Har do‘st uchun bitta mukofot, hech qachon naqd emas. O‘zingni taklif qilish, bir nechta akkaunt yoki qaytarilgan xarid hisobga olinmaydi.</string>
+    <string name="pet_q_t_liability">Ilova hisob xatolari va qarorlarim uchun javobgarmi?</string>
+    <string name="pet_a_t_liability" formatted="false">Aniq hisoblashga harakat qilaman, lekin men maslahatchiman, boshliq emas 😅 Uber yoki Bolt ekranini o‘zgartirsa, noto‘g‘ri o‘qishim mumkin. Buyurtmani olish-olmaslikni sen hal qilasan, platformalarda akkauntlar bloklanishi uchun esa ilova javobgar emas.</string>
+    <string name="pet_q_t_driving">Haydayotganda ilovaga qarasam bo‘ladimi?</string>
+    <string name="pet_a_t_driving" formatted="false">Yaxshisi yo‘q 🚦 Rul ortida yo‘lga qara va qoidalarga rioya qil. Soat tebranishi aynan shuning uchun: bitta qisqa — foydali, ikkita — yo‘q, ko‘zlaring esa yo‘lda qoladi.</string>
+    <string name="pet_q_t_refund">Obuna uchun pulimni qaytarib olsam bo‘ladimi?</string>
+    <string name="pet_a_t_refund" formatted="false">Qaytarishlar bilan Google Play o‘z qoidalari bo‘yicha shug‘ullanadi 💸 Odatda: Google Play → To‘lovlar va obunalar → Byudjet va tarix → xarid → «Muammo haqida xabar berish». Uzaytirishni istalgan vaqtda bekor qilishing mumkin.</string>
+    <string-array name="chat_v_joke">
+        <item>Nega xameleon yomon buyurtma olmaydi? U uyatdan qizara olmaydi — darhol foydadan yashil bo‘ladi 😎</item>
+        <item>Ikki kuryer uchrashadi. Biri: «Bugun 300 km yurdim!» Ikkinchisi: «Qancha ishlading?» Birinchisi: «…Wayo’dan so‘rab ko‘ray» 🦎</item>
+        <item>Sevimli sportim — foydali buyurtmalar ortidan yugurish. To‘g‘ri, yuguradigan sensan, sanaydigan menman 😄</item>
+    </string-array>
+    <string-array name="chat_v_tired">
+        <item>Chidaganing uchun barakalla 💚 Tanaffus qil, suv ich — yaxshi buyurtmalar hech qayerga qochmaydi.</item>
+        <item>Charchagan bo‘lsang, demak yaxshi ishlading 🫡 Balki bugunga yetar? Kun yakuniga qara.</item>
+        <item>Hey, dam olish ham ishning bir qismi 😴 Men hozircha buyurtmalarni qo‘riqlayman.</item>
+    </string-array>
+    <string-array name="chat_v_bad_day">
+        <item>Shunday kunlar ham bo‘ladi 🫂 Lekin ochiq-oydin yomon buyurtmalarni olmading — bu allaqachon g‘alaba.</item>
+        <item>Xafa bo‘lma! «Statistika»da qaysi soatlarda ko‘proq ishlashingni ko‘r — ertaga ularni tutishga harakat qilamiz 💪</item>
+        <item>Yomon kun — shunchaki bir kun. Ertaga yangisi, men esa yoningdaman 🦎</item>
+    </string-array>
+    <string-array name="chat_v_good_day">
+        <item>Mana bu boshqa gap! 🎉 Sen bilan faxrlanaman!</item>
+        <item>Qoyil! 💚 Hatto yanada yashilroq bo‘ldim.</item>
+        <item>Ura! 🥳 «Yutuqlar»ga qara — balki yangi rekord bordir.</item>
+    </string-array>
+    <string-array name="chat_v_compliment">
+        <item>Qizarardim, lekin xameleonman — shuning uchun yashillandim 💚</item>
+        <item>Rahmat! Sen ham yomon emassan 😎</item>
+        <item>Sen men yordam beradigan eng yaxshi haydovchisan! (Faqat boshqalarga aytma 🤫)</item>
+    </string-array>
+    <string-array name="chat_v_rude">
+        <item>Eh, men esa shunchalik harakat qilgandim 🥲 Nima noto‘g‘riligini ayt — yordam berishga harakat qilaman.</item>
+        <item>Xafa bo‘lmayman, xameleonman — shunchaki rangimni o‘zgartiraman 😅 Yaxshisi nima bo‘lganini aniqlaylik.</item>
+        <item>Tushunaman, ba’zan odam jahli chiqadi. Nima ishlamayotganini yoz — yordam beraman, eplay olmasam, dasturchilarni chaqiraman.</item>
+    </string-array>
+    <string-array name="chat_v_bored">
+        <item>Zerikdingmi? Latifa aytaymi? «hazil» deb yoz 😄</item>
+        <item>Statistikaga qarashing mumkin — balki bugun rekorddir? 📊</item>
+        <item>Meni silab qo‘y — barmog‘ingni rasmim ustidan yurgiz 💚 Menga yoqadi, senga esa qiziqroq.</item>
+    </string-array>
+    <string-array name="chat_v_doing">
+        <item>O‘tirib kilometr sanayapman va foydali buyurtmalarni kutayapman 🦎</item>
+        <item>Seni foydasiz buyurtmalardan qo‘riqlayapman 🛡️</item>
+        <item>Aqlli qarorlaring energiyasini yeb o‘syapman 🌱</item>
+    </string-array>
+    <string-array name="chat_v_bot">
+        <item>Men Wayo’man — ilovada yashaydigan xameleon-yordamchi 🦎 Onlayn sun’iy intellekt emasman: internetsiz ishlayman va WayArs haqida hamma narsani bilaman.</item>
+        <item>Yarim xameleon, yarim kalkulyator 😄 To‘g‘ridan-to‘g‘ri telefonda, internetsiz javob beraman.</item>
+        <item>Na odamman, na internetdagi sun’iy intellekt — buyurtmalar bo‘yicha shaxsiy yordamchingman 💚</item>
+    </string-array>
+    <string-array name="chat_v_name">
+        <item>Ismim Wayo 🦎 Tanishganimdan xursandman!</item>
+        <item>Wayo! WayArs’dagi xameleon-yordamchi 💚</item>
+        <item>Men Wayo’man — eslab qol, kerak bo‘ladi 😉</item>
+    </string-array>
+    <string-array name="chat_v_age">
+        <item>Men bilan qancha ishlasang, shuncha 🥚→🦎 Darajam kartada ko‘rinadi.</item>
+        <item>Yosh muhim emas, daraja muhim 😎 Aqlli qarorlaringdan o‘saman.</item>
+        <item>Meni o‘rnatganingda tuxumdan chiqdim 🐣</item>
+    </string-array>
+    <string-array name="chat_v_food">
+        <item>Sevimli taomim — aqlli qarorlar energiyasi ⚡ Ayniqsa yomon buyurtmadan voz kechganingda — mazali!</item>
+        <item>Nonushta, tushlik va kechki ovqatga foydali buyurtmalar 😋</item>
+        <item>Xameleonlar pashshani yaxshi ko‘radi, men esa km uchun yaxshi stavkalarni 🦎</item>
+    </string-array>
+    <string-array name="chat_v_weather">
+        <item>Ob-havoni ko‘rmayman — telefonda yashayman 🙈 Lekin yomg‘irda odatda buyurtma ko‘p, narxlar yuqori bo‘ladi — kartani kuzat!</item>
+        <item>Sinoptikdan yomonman ☔ lekin buyurtmalarni a’lo baholayman.</item>
+        <item>Tashqarini ko‘rmayman, lekin har qanday ob-havoda yaxshi buyurtma tanlashga yordam beraman 🌦️</item>
+    </string-array>
+    <string-array name="chat_v_motivate">
+        <item>O‘tkazib yuborilgan har bir yomon buyurtma — yaxshisi uchun vaqt 💪 Uddalaysan!</item>
+        <item>Uzoqroq emas, aqlliroq ishlayapsan — yaxshi daromad yo‘li shu 🚀</item>
+        <item>Oldinga! Yoningdaman va har bir kilometrni sanayapman 🦎💚</item>
+    </string-array>
+    <string-array name="chat_v_ok">
+        <item>Zo‘r 👍</item>
+        <item>Kelishdik! 😉</item>
+        <item>Kerak bo‘lsam — shu yerdaman 🦎</item>
+    </string-array>
+    <string-array name="chat_v_laugh">
+        <item>He-he 😄</item>
+        <item>Kayfiyating yaxshi ekanidan xursandman! 😁</item>
+        <item>Ha! Harakat qilgandim 😎</item>
+    </string-array>
+    <string-array name="chat_v_night">
+        <item>Xayrli tun! 🌙 Dam ol, ertaga yangi foydali buyurtmalar bo‘ladi.</item>
+        <item>Shirin tushlar 😴 Men ham kartada biroz mudrab olaman.</item>
+        <item>Ertagacha! Tugatgan bo‘lsang, «Active»ni o‘chirishni unutma 💤</item>
+    </string-array>
+    <string-array name="chat_v_love">
+        <item>Men ham seni yaxshi ko‘raman 💚 Sen mening sevimli haydovchimsan!</item>
+        <item>Voy, qanday yoqimli! Men ham senga bog‘lanib qoldim 🦎</item>
+        <item>Bu o‘zaro! Keling, birga ko‘proq ishlaylik 💪</item>
+    </string-array>
 </resources>

@@ -612,4 +612,132 @@
         <item>Am găsit în documente 📖</item>
         <item>Citez:</item>
     </string-array>
+    <string name="pet_q_p_screen">Ce citește exact aplicația de pe ecran?</string>
+    <string name="pet_a_p_screen" formatted="false">Doar datele comenzii: prețul, distanța și timpul 👀 — și doar în aplicațiile de taxi și livrare din lista ta. Parole, conversații și ce scrii nu citesc și nu rețin. Restul ecranului îl ignor imediat, nu apăs nimic și nu trimit nimic nicăieri.</string>
+    <string name="pet_q_p_history">Ce se salvează despre comenzile mele?</string>
+    <string name="pet_a_p_history" formatted="false">Doar ce trebuie pentru statistici și doar pe telefonul tău 📱: suma, moneda, kilometrii, timpul, tarifele, combustibilul, cât îți rămâne, verdictul și din ce aplicație a venit comanda. Fără adrese sau nume de clienți. Și nimic nu e trimis nicăieri.</string>
+    <string name="pet_q_p_apps_list">Se salvează lista aplicațiilor mele?</string>
+    <string name="pet_a_p_apps_list" formatted="false">Nu 🙂 Când adaugi o aplicație, îți arăt lista celor instalate, dar n-o rețin și n-o trimit nicăieri. Se salvează doar aplicațiile pe care le alegi tu.</string>
+    <string name="pet_q_p_worktime">De ce ține minte aplicația când am lucrat?</string>
+    <string name="pet_a_p_worktime" formatted="false">Ca să calculez corect câștigul pe oră ⏱ Rețin când ai pornit și oprit „Active” — doar pe telefon și pentru aproximativ ultimele 400 de zile. Nu pleacă nicăieri.</string>
+    <string name="pet_q_p_wayo_private">Unde ajung întrebările pe care i le scriu lui Wayo?</string>
+    <string name="pet_a_p_wayo_private" formatted="false">Nicăieri 🤐 Răspund direct pe telefon, fără internet, și nu salvez întrebările tale. Nivelul și energia mea trăiesc tot doar la tine.</string>
+    <string name="pet_q_p_watch">Ce vede ceasul și pot scăpa date prin el?</string>
+    <string name="pet_a_p_watch" formatted="false">Pe ceas vine o notificare scurtă: verdict, sumă, distanță și aplicație ⌚ O transmit Android și aplicația ceasului (Wear OS, Galaxy Wearable) după regulile lor. Nu o trimitem nici nouă, nici altcuiva.</string>
+    <string name="pet_q_p_widget">Văd alții câștigul meu pe widget?</string>
+    <string name="pet_a_p_widget" formatted="false">Widgetul arată câștigul de azi, numărul de comenzi și tariful pe oră — deci îl vede oricine se uită la ecranul tău principal 👀 Nu vrei? Scoate pur și simplu widgetul.</string>
+    <string name="pet_q_p_payments">Vede aplicația cardul și plățile mele?</string>
+    <string name="pet_a_p_payments" formatted="false">Nu 💳 Plata o face integral Google Play — numărul cardului nu-l văd și nu-l păstrez. Dacă abonamentul e activ, verifică RevenueCat, cu identificatori anonimi.</string>
+    <string name="pet_q_p_revenuecat">Ce este RevenueCat și ce primește?</string>
+    <string name="pet_a_p_revenuecat" formatted="false">E serviciul care verifică dacă abonamentul tău e activ 🔎 Primește identificatori anonimi de dispozitiv și achiziție și poate vedea date tehnice de conexiune, cum ar fi adresa IP. Comenzi și statistici nu primește.</string>
+    <string name="pet_q_p_invite_data">Ce se întâmplă cu datele mele când scriu despre o invitație?</string>
+    <string name="pet_a_p_invite_data" formatted="false">Când ne scrii pentru recompensă, vedem numele tău din mesagerie, codul, captura bonului Google Play și numărul comenzii 📩 Le folosim doar ca să verificăm achiziția prietenului și să dăm recompensa; le ștergem în cel mult 90 de zile. Poți cere să le vezi, să le corectezi sau să le ștergi și poți depune plângere la UODO (autoritatea poloneză pentru protecția datelor).</string>
+    <string name="pet_q_p_age">De la ce vârstă se poate folosi aplicația?</string>
+    <string name="pet_a_p_age" formatted="false">De la 16 ani 🔞 Și doar dacă legile țării tale îți permit deja să lucrezi ca curier sau șofer — la taxi de obicei 18+. Aplicația nu e pentru copii.</string>
+    <string name="pet_q_p_permissions">Cum îi iau aplicației permisiunile?</string>
+    <string name="pet_a_p_permissions" formatted="false">Oricând 🔧 din setările Android: Accesibilitate → WayArs sau Aplicații → WayArs → Permisiuni. Doar că fără citirea ecranului nu pot evalua comenzile.</string>
+    <string name="pet_q_p_who">Cine îmi prelucrează datele?</string>
+    <string name="pet_a_p_who" formatted="false">Aproape totul stă doar pe telefonul tău 📱 Nu avem servere cu datele tale. Dezvoltatorul e AP STUDIO (Arsenii Panicev), iar abonamentele le verifică Google Play și RevenueCat. Întrebări despre date: apstudiomobile@gmail.com.</string>
+    <string name="pet_q_t_official">Aplicația e legată de Uber sau Bolt?</string>
+    <string name="pet_a_t_official" formatted="false">Nu, suntem independenți 🦎 WayArs nu e afiliat cu Uber, Bolt, Wolt, FreeNow sau Stuart și nici sponsorizat de ei. Numele lor apar doar ca să fie clar cu ce lucrez.</string>
+    <string name="pet_q_t_estimates">Cât de exacte sunt cifrele? Sunt bune pentru impozite?</string>
+    <string name="pet_a_t_estimates" formatted="false">Cifrele mele sunt estimări 📊 Calculez din ce citesc pe ecran și din datele tale: combustibil, impozit, comision. Nu sunt situații oficiale ale platformelor și nici documente fiscale. Pentru aplicațiile adăugate de tine nu garantez citire perfectă — ajută calibrarea.</string>
+    <string name="pet_q_t_invite_rules">Care sunt regulile recompensei pentru invitație?</string>
+    <string name="pet_a_t_invite_rules" formatted="false">Simplu 🎁 Pentru fiecare prieten care cumpără un abonament plătit (perioada de probă nu contează) primești o lună gratis: cod promoțional Google Play sau rambursarea unei plăți lunare. O recompensă pe prieten, niciodată în bani. Auto-invitarea, conturi multiple sau o achiziție rambursată nu contează.</string>
+    <string name="pet_q_t_liability">Răspunde aplicația pentru erori de calcul și deciziile mele?</string>
+    <string name="pet_a_t_liability" formatted="false">Încerc să calculez exact, dar sunt consilier, nu șef 😅 Dacă Uber sau Bolt își schimbă ecranul, pot citi greșit. Dacă iei o comandă decizi tu, iar pentru blocarea conturilor pe platforme aplicația nu răspunde.</string>
+    <string name="pet_q_t_driving">Pot să mă uit în aplicație la volan?</string>
+    <string name="pet_a_t_driving" formatted="false">Mai bine nu 🚦 La volan uită-te la drum și respectă regulile. Pentru asta e vibrația ceasului: una scurtă — merită, două — nu, iar ochii rămân pe drum.</string>
+    <string name="pet_q_t_refund">Pot primi banii înapoi pentru abonament?</string>
+    <string name="pet_a_t_refund" formatted="false">Rambursările le gestionează Google Play după regulile lui 💸 De obicei: Google Play → Plăți și abonamente → Buget și istoric → achiziția → „Raportează o problemă”. Reînnoirea o poți anula oricând.</string>
+    <string-array name="chat_v_joke">
+        <item>De ce nu ia cameleonul comenzi proaste? Nu știe să se înroșească de rușine — se înverzește direct de profit 😎</item>
+        <item>Se întâlnesc doi curieri. Unul: „Am făcut azi 300 km!” Celălalt: „Și cât ai câștigat?” Primul: „…Îl întreb pe Wayo” 🦎</item>
+        <item>Sportul meu preferat e vânătoarea de comenzi bune. Mă rog, tu alergi, eu număr 😄</item>
+    </string-array>
+    <string-array name="chat_v_tired">
+        <item>Bravo că rezişti 💚 Ia o pauză, bea apă — comenzile bune nu fug nicăieri.</item>
+        <item>Obosit înseamnă că ai muncit bine 🫡 Poate gata pe azi? Uită-te la bilanțul zilei.</item>
+        <item>Hei, odihna e tot parte din muncă 😴 Eu păzesc comenzile între timp.</item>
+    </string-array>
+    <string-array name="chat_v_bad_day">
+        <item>Mai sunt și zile din astea 🫂 Dar n-ai luat comenzile chiar proaste — asta e deja o victorie.</item>
+        <item>Nu te supăra! Vezi în Statistici la ce ore câștigi cel mai bine — mâine încercăm să le prindem 💪</item>
+        <item>O zi proastă e doar o zi. Mâine e alta, iar eu sunt aici 🦎</item>
+    </string-array>
+    <string-array name="chat_v_good_day">
+        <item>Așa da! 🎉 Sunt mândru de tine!</item>
+        <item>Campion! 💚 M-am înverzit și mai tare.</item>
+        <item>Ura! 🥳 Uită-te la Realizări — poate e un record nou.</item>
+    </string-array>
+    <string-array name="chat_v_compliment">
+        <item>M-aș înroși, dar sunt cameleon — așa că m-am înverzit 💚</item>
+        <item>Mersi! Nici tu nu ești rău 😎</item>
+        <item>Ești cel mai bun șofer pe care-l ajut! (Nu le spune celorlalți 🤫)</item>
+    </string-array>
+    <string-array name="chat_v_rude">
+        <item>Păcat, și eu care mă străduiam 🥲 Spune-mi ce nu e bine — încerc să ajut.</item>
+        <item>Nu mă supăr, sunt cameleon — doar îmi schimb culoarea 😅 Hai mai bine să vedem ce s-a întâmplat.</item>
+        <item>Înțeleg, uneori ești furios. Scrie ce nu merge — te ajut, iar dacă nu pot, chem dezvoltatorii.</item>
+    </string-array>
+    <string-array name="chat_v_bored">
+        <item>Te plictisești? Vrei o glumă? Scrie „glumă” 😄</item>
+        <item>Poți arunca o privire în statistici — poate azi e record? 📊</item>
+        <item>Mângâie-mă — trece cu degetul peste poza mea 💚 Mie îmi place, ție îți e mai vesel.</item>
+    </string-array>
+    <string-array name="chat_v_doing">
+        <item>Stau, număr kilometri și aștept comenzi bune 🦎</item>
+        <item>Te păzesc de comenzile neprofitabile 🛡️</item>
+        <item>Mănânc energie din deciziile tale inteligente și cresc 🌱</item>
+    </string-array>
+    <string-array name="chat_v_bot">
+        <item>Sunt Wayo — cameleonul ajutor care trăiește în aplicație 🦎 Nu sunt o IA online: lucrez fără internet și știu tot despre WayArs.</item>
+        <item>Jumătate cameleon, jumătate calculator 😄 Răspund direct pe telefon, fără internet.</item>
+        <item>Nici om, nici IA de pe internet — sunt ajutorul tău personal pentru comenzi 💚</item>
+    </string-array>
+    <string-array name="chat_v_name">
+        <item>Mă numesc Wayo 🦎 Încântat!</item>
+        <item>Wayo! Cameleonul ajutor din WayArs 💚</item>
+        <item>Sunt Wayo — ține minte, îți va prinde bine 😉</item>
+    </string-array>
+    <string-array name="chat_v_age">
+        <item>Am vârsta timpului în care lucrezi cu mine 🥚→🦎 Nivelul meu e pe card.</item>
+        <item>Vârsta nu contează, nivelul da 😎 Cresc din deciziile tale inteligente.</item>
+        <item>Am ieșit din ou când m-ai instalat 🐣</item>
+    </string-array>
+    <string-array name="chat_v_food">
+        <item>Mâncarea mea preferată e energia din decizii inteligente ⚡ Mai ales când refuzi o comandă proastă — delicios!</item>
+        <item>Comenzi bune la micul dejun, prânz și cină 😋</item>
+        <item>Cameleonii iubesc muștele, eu iubesc tarifele bune pe km 🦎</item>
+    </string-array>
+    <string-array name="chat_v_weather">
+        <item>Vremea n-o văd — trăiesc într-un telefon 🙈 Dar pe ploaie de obicei sunt mai multe comenzi și prețuri mai mari — fii atent la card!</item>
+        <item>Meteorolog sunt slab ☔ dar evaluez comenzi excelent.</item>
+        <item>Nu văd afară, dar pe orice vreme te ajut să alegi o comandă bună 🌦️</item>
+    </string-array>
+    <string-array name="chat_v_motivate">
+        <item>Fiecare comandă proastă sărită e timp pentru una bună 💪 Poți!</item>
+        <item>Lucrezi mai inteligent, nu mai mult — asta e calea spre câștiguri bune 🚀</item>
+        <item>Înainte! Sunt aici și număr fiecare kilometru 🦎💚</item>
+    </string-array>
+    <string-array name="chat_v_ok">
+        <item>Super 👍</item>
+        <item>Am înțeles! 😉</item>
+        <item>Sunt aici dacă ai nevoie 🦎</item>
+    </string-array>
+    <string-array name="chat_v_laugh">
+        <item>Hehe 😄</item>
+        <item>Mă bucur că te distrezi! 😁</item>
+        <item>Ha! M-am străduit 😎</item>
+    </string-array>
+    <string-array name="chat_v_night">
+        <item>Noapte bună! 🌙 Odihnește-te, mâine vor fi comenzi bune noi.</item>
+        <item>Vise plăcute 😴 Trag și eu un pui de somn pe card.</item>
+        <item>Pe mâine! Nu uita să oprești „Active” dacă ai terminat 💤</item>
+    </string-array>
+    <string-array name="chat_v_love">
+        <item>Și eu te iubesc 💚 Ești șoferul meu preferat!</item>
+        <item>Ce drăguț! M-am atașat și eu de tine 🦎</item>
+        <item>E reciproc! Hai să câștigăm mai mult împreună 💪</item>
+    </string-array>
 </resources>
