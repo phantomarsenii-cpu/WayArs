@@ -382,9 +382,9 @@
     <string name="settings_widget_desc">Dagens inntjening og «Active»-knappen uten å åpne appen. Eller legg den til selv: hold på et tomt sted på startskjermen → Moduler → WayArs.</string>
     <string name="settings_widget_add">Legg til widget</string>
     <string name="settings_invite_title">Inviter en sjåfør</string>
-    <string name="settings_invite_desc">Send WayArs til kolleger — i en chat eller melding.</string>
+    <string name="settings_invite_desc">Inviter en sjåfør — få en måned gratis. Når vennen din tegner abonnement, skriver dere begge til oss på Telegram @wayars_app: vennen sender koden din og et skjermbilde av kvitteringen fra Google Play.</string>
     <string name="settings_invite_button">Inviter</string>
-    <string name="invite_share_text">Jeg bruker WayArs — den viser om et Bolt-, Uber- eller Wolt-oppdrag lønner seg før jeg tar det. Prøv: %1$s</string>
+    <string name="invite_share_text">Jeg bruker WayArs — den viser om et Bolt-, Uber- eller Wolt-oppdrag lønner seg før jeg tar det. Prøv: %1$s\nInvitasjonskoden min: %2$s. Når du har tegnet abonnement, send den med et skjermbilde av kvitteringen fra Google Play til t.me/wayars_app.</string>
     <string name="stats_real_hour_title">Reelt per time, netto</string>
     <string name="stats_real_hour_detail">%1$s netto · aktiv %2$s</string>
     <string name="stats_partner_fee_line">Partnerens ukebetaling (andel for perioden): −%1$s</string>
@@ -437,8 +437,10 @@
     <string name="pet_a_widget">Innstillinger → «Ekstra» → «Legg til widget», eller hold på et tomt sted på startskjermen → Moduler → WayArs. Den viser dagens inntjening og slår «Active» av og på.</string>
     <string name="pet_q_achievements">Hva er prestasjoner og serier?</string>
     <string name="pet_a_achievements">Statistikk → «Prestasjoner»: dager på rad uten å ta et ulønnsomt oppdrag (fridager bryter ikke serien), rekord per time, beste dag og oppdrag, merker for 3, 7 og 30 smarte dager, 100 og 1000 oppdrag, 100 timer.</string>
-    <string name="pet_q_invite">Hvordan inviterer jeg en kollega?</string>
-    <string name="pet_a_invite">Innstillinger → «Ekstra» → «Inviter»: velg en chat eller melding — en lenke til WayArs på Google Play sendes med.</string>
+    <string name="pet_q_invite">Hvordan inviterer jeg en kollega og får en måned gratis?</string>
+    <string name="pet_a_invite">Innstillinger → «Ekstra» → «Inviter»: send lenken til en kollega — koden din står allerede i meldingen. Når vennen tegner abonnement, skriver dere begge til oss på Telegram t.me/wayars_app: du — at du inviterte vedkommende, vennen — koden din og et skjermbilde av kvitteringen fra Google Play med ordrenummeret (GPA.…). Etter kontroll får du en måned gratis.</string>
     <string name="pet_q_watch">Hvordan får jeg vurderingen på klokken?</string>
     <string name="pet_a_watch">Innstillinger → «Ekstra» → «Vurdering på klokken». En Wear OS-klokke vibrerer: 1 kort — lønnsomt, 2 korte — ikke, 1 lang — middels. Tillat WayArs-varsler i appen Galaxy Wearable eller Pixel Watch; på en Galaxy Watch må du også tillate varsler mens telefonen brukes, ellers er klokken stille når telefonskjermen er på.</string>
+    <string name="settings_invite_code">Koden din: %1$s (trykk for å kopiere)</string>
+    <string name="invite_code_copied">Koden er kopiert</string>
 </resources>

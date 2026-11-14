@@ -382,9 +382,9 @@
     <string name="settings_widget_desc">Bu günkü qazanc və “Active” düyməsi tətbiqi açmadan. Ya da özünüz əlavə edin: ana ekranda boş yeri basıb saxlayın → Vidcetlər → WayArs.</string>
     <string name="settings_widget_add">Vidcet əlavə et</string>
     <string name="settings_invite_title">Sürücünü dəvət et</string>
-    <string name="settings_invite_desc">WayArs-ı həmkarlara göndərin — çatda və ya mesajla.</string>
+    <string name="settings_invite_desc">Sürücünü dəvət edin — bir ay pulsuz alın. Dostunuz abunə olduqda, ikiniz də bizə Telegram-da @wayars_app yazın: dostunuz kodunuzu və Google Play qəbzinin ekran şəklini göndərir.</string>
     <string name="settings_invite_button">Dəvət et</string>
-    <string name="invite_share_text">WayArs-dan istifadə edirəm — Bolt, Uber və ya Wolt sifarişinin sərfəli olub-olmadığını qəbul etməzdən əvvəl göstərir. Sına: %1$s</string>
+    <string name="invite_share_text">WayArs-dan istifadə edirəm — Bolt, Uber və ya Wolt sifarişinin sərfəli olub-olmadığını qəbul etməzdən əvvəl göstərir. Sına: %1$s\nDəvət kodum: %2$s. Abunə olduqdan sonra onu Google Play qəbzinin ekran şəkli ilə t.me/wayars_app ünvanına göndər.</string>
     <string name="stats_real_hour_title">Real saatlıq, əlinizdə</string>
     <string name="stats_real_hour_detail">%1$s əlinizdə · aktiv %2$s</string>
     <string name="stats_partner_fee_line">Partnyorun həftəlik ödənişi (dövrün payı): −%1$s</string>
@@ -437,8 +437,10 @@
     <string name="pet_a_widget">Parametrlər → “Əlavələr” → “Vidcet əlavə et” və ya ana ekranda boş yeri basıb saxlayın → Vidcetlər → WayArs. Bu günkü qazancı göstərir və “Active”-i yandırıb-söndürür.</string>
     <string name="pet_q_achievements">Nailiyyətlər və seriyalar nədir?</string>
     <string name="pet_a_achievements">Statistika → “Nailiyyətlər”: sərfəsiz sifariş qəbul etmədən ardıcıl günlər (istirahət günləri seriyanı pozmur), saatlıq rekord, ən yaxşı gün və sifariş, 3, 7 və 30 ağıllı gün, 100 və 1000 sifariş, 100 saat üçün nişanlar.</string>
-    <string name="pet_q_invite">Həmkarımı necə dəvət edim?</string>
-    <string name="pet_a_invite">Parametrlər → “Əlavələr” → “Dəvət et”: çat və ya mesaj seçin — Google Play-də WayArs linki göndəriləcək.</string>
+    <string name="pet_q_invite">Həmkarımı necə dəvət edib bir ay pulsuz alım?</string>
+    <string name="pet_a_invite">Parametrlər → “Əlavələr” → “Dəvət et”: linki həmkarınıza göndərin — kodunuz artıq mesajdadır. Dostunuz abunə olduqda, ikiniz də bizə Telegram-da t.me/wayars_app yazın: siz — onu dəvət etdiyinizi, dostunuz — kodunuzu və sifariş nömrəsi (GPA.…) olan Google Play qəbzinin ekran şəklini. Yoxlamadan sonra bir ay pulsuz alırsınız.</string>
     <string name="pet_q_watch">Qiyməti saatda necə alım?</string>
     <string name="pet_a_watch">Parametrlər → “Əlavələr” → “Saatda qiymət”. Wear OS saatı titrəyir: 1 qısa — sərfəli, 2 qısa — yox, 1 uzun — orta. Galaxy Wearable və ya Pixel Watch tətbiqində WayArs bildirişlərinə icazə verin; Galaxy Watch-da telefondan istifadə edərkən bildirişləri də açın, əks halda telefon ekranı açıq olanda saat susur.</string>
+    <string name="settings_invite_code">Kodunuz: %1$s (kopyalamaq üçün toxunun)</string>
+    <string name="invite_code_copied">Kod kopyalandı</string>
 </resources>

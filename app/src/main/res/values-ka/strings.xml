@@ -382,9 +382,9 @@
     <string name="settings_widget_desc">დღევანდელი შემოსავალი და „Active“ ღილაკი აპის გახსნის გარეშე. ან დაამატეთ თავად: დააჭირეთ და გეჭიროთ მთავარ ეკრანზე ცარიელი ადგილი → ვიჯეტები → WayArs.</string>
     <string name="settings_widget_add">ვიჯეტის დამატება</string>
     <string name="settings_invite_title">მძღოლის მოწვევა</string>
-    <string name="settings_invite_desc">გაუგზავნეთ WayArs კოლეგებს — ჩატში ან შეტყობინებით.</string>
+    <string name="settings_invite_desc">მოიწვიეთ მძღოლი — მიიღეთ ერთი თვე უფასოდ. როცა მეგობარი გამოიწერს, ორივემ მოგვწერეთ Telegram-ში @wayars_app: მეგობარი აგზავნის თქვენს კოდს და Google Play-ის ქვითრის სქრინშოტს.</string>
     <string name="settings_invite_button">მოწვევა</string>
-    <string name="invite_share_text">ვიყენებ WayArs-ს — მიღებამდე მაჩვენებს, ღირს თუ არა Bolt-ის, Uber-ის ან Wolt-ის შეკვეთა. სცადე: %1$s</string>
+    <string name="invite_share_text">ვიყენებ WayArs-ს — მიღებამდე მაჩვენებს, ღირს თუ არა Bolt-ის, Uber-ის ან Wolt-ის შეკვეთა. სცადე: %1$s\nჩემი მოწვევის კოდი: %2$s. გამოწერის შემდეგ გაგზავნე ის Google Play-ის ქვითრის სქრინშოტთან ერთად t.me/wayars_app-ზე.</string>
     <string name="stats_real_hour_title">რეალურად საათში, ხელზე</string>
     <string name="stats_real_hour_detail">%1$s ხელზე · აქტიური %2$s</string>
     <string name="stats_partner_fee_line">პარტნიორის კვირის გადასახადი (პერიოდის წილი): −%1$s</string>
@@ -437,8 +437,10 @@
     <string name="pet_a_widget">პარამეტრები → „დამატებითი“ → „ვიჯეტის დამატება“ ან დააჭირეთ და გეჭიროთ მთავარ ეკრანზე ცარიელი ადგილი → ვიჯეტები → WayArs. აჩვენებს დღევანდელ შემოსავალს და რთავს/თიშავს „Active“-ს.</string>
     <string name="pet_q_achievements">რა არის მიღწევები და სერიები?</string>
     <string name="pet_a_achievements">სტატისტიკა → „მიღწევები“: ზედიზედ დღეები წამგებიანი შეკვეთის მიღების გარეშე (დასვენების დღეები სერიას არ წყვეტს), საათის რეკორდი, საუკეთესო დღე და შეკვეთა, ნიშნები 3, 7 და 30 ჭკვიანი დღისთვის, 100 და 1000 შეკვეთისთვის, 100 საათისთვის.</string>
-    <string name="pet_q_invite">როგორ მოვიწვიო კოლეგა?</string>
-    <string name="pet_a_invite">პარამეტრები → „დამატებითი“ → „მოწვევა“: აირჩიეთ ჩატი ან შეტყობინება — გაიგზავნება WayArs-ის ბმული Google Play-ში.</string>
+    <string name="pet_q_invite">როგორ მოვიწვიო კოლეგა და მივიღო ერთი თვე უფასოდ?</string>
+    <string name="pet_a_invite">პარამეტრები → „დამატებითი“ → „მოწვევა“: გაუგზავნეთ ბმული კოლეგას — თქვენი კოდი უკვე შეტყობინებაშია. როცა მეგობარი გამოიწერს, ორივემ მოგვწერეთ Telegram-ში t.me/wayars_app: თქვენ — რომ მოიწვიეთ, მეგობარმა — თქვენი კოდი და Google Play-ის ქვითრის სქრინშოტი შეკვეთის ნომრით (GPA.…). შემოწმების შემდეგ მიიღებთ ერთ თვეს უფასოდ.</string>
     <string name="pet_q_watch">როგორ მივიღო შეფასება საათზე?</string>
     <string name="pet_a_watch">პარამეტრები → „დამატებითი“ → „შეფასება საათზე“. Wear OS საათი ვიბრირებს: 1 მოკლე — მომგებიანი, 2 მოკლე — არა, 1 გრძელი — საშუალო. Galaxy Wearable ან Pixel Watch აპში დაუშვით WayArs-ის შეტყობინებები; Galaxy Watch-ზე ჩართეთ შეტყობინებები ტელეფონის გამოყენებისასაც, თორემ ტელეფონის ჩართული ეკრანისას საათი დუმს.</string>
+    <string name="settings_invite_code">თქვენი კოდი: %1$s (შეეხეთ დასაკოპირებლად)</string>
+    <string name="invite_code_copied">კოდი დაკოპირდა</string>
 </resources>

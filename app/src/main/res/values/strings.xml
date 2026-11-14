@@ -394,9 +394,9 @@
     <string name="settings_widget_desc">Today\'s earnings and the “Active” switch without opening the app. Or add it yourself: hold an empty spot on the home screen → Widgets → WayArs.</string>
     <string name="settings_widget_add">Add widget</string>
     <string name="settings_invite_title">Invite a driver</string>
-    <string name="settings_invite_desc">Send WayArs to colleagues in a chat or a message.</string>
+    <string name="settings_invite_desc">Invite a driver — get a month free. When your friend subscribes, both of you write to us on Telegram @wayars_app: the friend sends your code and a screenshot of the Google Play receipt.</string>
     <string name="settings_invite_button">Invite</string>
-    <string name="invite_share_text">I use WayArs — it shows whether a Bolt, Uber or Wolt order is worth it before I accept it. Try it: %1$s</string>
+    <string name="invite_share_text">I use WayArs — it shows whether a Bolt, Uber or Wolt order is worth it before I accept it. Try it: %1$s\nMy invite code: %2$s. After you subscribe, send it with a screenshot of the Google Play receipt to t.me/wayars_app.</string>
     <string name="stats_real_hour_title">Real per hour, take-home</string>
     <string name="stats_real_hour_detail">%1$s take-home · active %2$s</string>
     <string name="stats_partner_fee_line">Partner\'s weekly payment (share for this period): −%1$s</string>
@@ -449,8 +449,10 @@
     <string name="pet_a_widget">Settings → “Extras” → “Add widget”, or hold an empty spot on the home screen → Widgets → WayArs. It shows today\'s earnings and switches “Active” on and off.</string>
     <string name="pet_q_achievements">What are achievements and streaks?</string>
     <string name="pet_a_achievements">Stats → “Achievements”: days in a row without accepting an unprofitable order (days off don\'t break the streak), record per hour, best day and best order, badges for 3, 7 and 30 smart days, 100 and 1000 orders, 100 hours.</string>
-    <string name="pet_q_invite">How do I invite a colleague?</string>
-    <string name="pet_a_invite">Settings → “Extras” → “Invite”: pick a chat or a message — a link to WayArs on Google Play is sent along.</string>
+    <string name="pet_q_invite">How do I invite a colleague and get a free month?</string>
+    <string name="pet_a_invite">Settings → “Extras” → “Invite”: send the link to a colleague — your code is already in the message. When the friend subscribes, both of you write to us on Telegram t.me/wayars_app: you — that you invited them, the friend — your code and a screenshot of the Google Play receipt with the order number (GPA.…). After we check it, you get a free month.</string>
     <string name="pet_q_watch">How do I get the verdict on my watch?</string>
     <string name="pet_a_watch">Settings → “Extras” → “Verdict on the watch”. A Wear OS watch vibrates: 1 short — profitable, 2 short — not, 1 long — average. In the Galaxy Wearable or Pixel Watch app allow WayArs notifications; on a Galaxy Watch also allow notifications while using the phone, otherwise the watch stays quiet while the phone screen is on.</string>
+    <string name="settings_invite_code">Your code: %1$s (tap to copy)</string>
+    <string name="invite_code_copied">Code copied</string>
 </resources>

@@ -386,9 +386,9 @@
     <string name="settings_widget_desc">Dzisiejszy zarobek i przycisk „Active” bez otwierania aplikacji. Albo dodaj sam: przytrzymaj puste miejsce na ekranie głównym → Widżety → WayArs.</string>
     <string name="settings_widget_add">Dodaj widżet</string>
     <string name="settings_invite_title">Zaproś kierowcę</string>
-    <string name="settings_invite_desc">Wyślij WayArs znajomym kierowcom — na czacie lub w wiadomości.</string>
+    <string name="settings_invite_desc">Zaproś kierowcę — dostaniesz miesiąc za darmo. Gdy znajomy wykupi subskrypcję, napiszcie do nas obaj na Telegramie @wayars_app: znajomy wysyła twój kod i zrzut ekranu potwierdzenia z Google Play.</string>
     <string name="settings_invite_button">Zaproś</string>
-    <string name="invite_share_text">Używam WayArs — pokazuje, czy zlecenie w Bolt, Uber albo Wolt się opłaca, zanim je przyjmę. Spróbuj: %1$s</string>
+    <string name="invite_share_text">Używam WayArs — pokazuje, czy zlecenie w Bolt, Uber albo Wolt się opłaca, zanim je przyjmę. Spróbuj: %1$s\nMój kod zaproszenia: %2$s. Po wykupieniu subskrypcji wyślij go razem ze zrzutem ekranu potwierdzenia z Google Play na t.me/wayars_app.</string>
     <string name="stats_real_hour_title">Realnie na godzinę, na rękę</string>
     <string name="stats_real_hour_detail">%1$s na rękę · w pracy %2$s</string>
     <string name="stats_partner_fee_line">Tygodniowa opłata partnera (część za okres): −%1$s</string>
@@ -441,8 +441,10 @@
     <string name="pet_a_widget">Ustawienia → „Dodatki” → „Dodaj widżet” albo przytrzymaj puste miejsce na ekranie głównym → Widżety → WayArs. Pokazuje dzisiejszy zarobek i włącza/wyłącza „Active”.</string>
     <string name="pet_q_achievements">Czym są osiągnięcia i serie?</string>
     <string name="pet_a_achievements">Statystyki → „Osiągnięcia”: dni z rzędu bez przyjętych nieopłacalnych zleceń (dni wolne nie przerywają serii), rekord na godzinę, najlepszy dzień i zlecenie, odznaki za 3, 7 i 30 mądrych dni, 100 i 1000 zleceń, 100 godzin.</string>
-    <string name="pet_q_invite">Jak zaprosić znajomego kierowcę?</string>
-    <string name="pet_a_invite">Ustawienia → „Dodatki” → „Zaproś”: wybierz czat lub wiadomość — wyślesz link do WayArs w Google Play.</string>
+    <string name="pet_q_invite">Jak zaprosić znajomego kierowcę i dostać miesiąc za darmo?</string>
+    <string name="pet_a_invite">Ustawienia → „Dodatki” → „Zaproś”: wyślij link znajomemu — twój kod jest już w wiadomości. Gdy znajomy wykupi subskrypcję, napiszcie do nas obaj na Telegramie t.me/wayars_app: ty — że go zaprosiłeś, znajomy — twój kod i zrzut ekranu potwierdzenia z Google Play z numerem zamówienia (GPA.…). Po sprawdzeniu dostaniesz miesiąc za darmo.</string>
     <string name="pet_q_watch">Jak dostawać ocenę na zegarek?</string>
     <string name="pet_a_watch">Ustawienia → „Dodatki” → „Ocena na zegarku”. Zegarek z Wear OS wibruje: jedna krótka — opłacalne, dwie — nie, jedna długa — średnie. W aplikacji Galaxy Wearable lub Pixel Watch zezwól na powiadomienia WayArs; na Galaxy Watch włącz też powiadomienia podczas używania telefonu, inaczej przy włączonym ekranie telefonu zegarek milczy.</string>
+    <string name="settings_invite_code">Twój kod: %1$s (dotknij, aby skopiować)</string>
+    <string name="invite_code_copied">Kod skopiowany</string>
 </resources>

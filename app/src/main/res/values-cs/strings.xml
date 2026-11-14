@@ -382,9 +382,9 @@
     <string name="settings_widget_desc">Dnešní výdělek a tlačítko „Active“ bez otevírání aplikace. Nebo ho přidejte sami: podržte prázdné místo na ploše → Widgety → WayArs.</string>
     <string name="settings_widget_add">Přidat widget</string>
     <string name="settings_invite_title">Pozvat řidiče</string>
-    <string name="settings_invite_desc">Pošlete WayArs kolegům — do chatu nebo zprávou.</string>
+    <string name="settings_invite_desc">Pozvěte řidiče — získejte měsíc zdarma. Až si kamarád předplatné koupí, napište nám oba na Telegram @wayars_app: kamarád pošle váš kód a snímek účtenky z Google Play.</string>
     <string name="settings_invite_button">Pozvat</string>
-    <string name="invite_share_text">Používám WayArs — ukáže, jestli se zakázka v Boltu, Uberu nebo Woltu vyplatí, ještě než ji přijmu. Zkus to: %1$s</string>
+    <string name="invite_share_text">Používám WayArs — ukáže, jestli se zakázka v Boltu, Uberu nebo Woltu vyplatí, ještě než ji přijmu. Zkus to: %1$s\nMůj zvací kód: %2$s. Po koupi předplatného ho pošli se snímkem účtenky z Google Play na t.me/wayars_app.</string>
     <string name="stats_real_hour_title">Reálně za hodinu, čistého</string>
     <string name="stats_real_hour_detail">%1$s čistého · aktivní %2$s</string>
     <string name="stats_partner_fee_line">Týdenní poplatek partnerovi (podíl za období): −%1$s</string>
@@ -437,8 +437,10 @@
     <string name="pet_a_widget">Nastavení → „Doplňky“ → „Přidat widget“, nebo podržte prázdné místo na ploše → Widgety → WayArs. Ukazuje dnešní výdělek a zapíná/vypíná „Active“.</string>
     <string name="pet_q_achievements">Co jsou úspěchy a série?</string>
     <string name="pet_a_achievements">Statistika → „Úspěchy“: dny v řadě bez přijaté nevýhodné zakázky (volné dny sérii nepřeruší), rekord za hodinu, nejlepší den a zakázka, odznaky za 3, 7 a 30 chytrých dní, 100 a 1000 zakázek, 100 hodin.</string>
-    <string name="pet_q_invite">Jak pozvat kolegu?</string>
-    <string name="pet_a_invite">Nastavení → „Doplňky“ → „Pozvat“: vyberte chat nebo zprávu — odešle se odkaz na WayArs v Google Play.</string>
+    <string name="pet_q_invite">Jak pozvat kolegu a získat měsíc zdarma?</string>
+    <string name="pet_a_invite">Nastavení → „Doplňky“ → „Pozvat“: pošlete odkaz kolegovi — váš kód už je ve zprávě. Až si kamarád koupí předplatné, napište nám oba na Telegram t.me/wayars_app: vy — že jste ho pozvali, kamarád — váš kód a snímek účtenky z Google Play s číslem objednávky (GPA.…). Po kontrole dostanete měsíc zdarma.</string>
     <string name="pet_q_watch">Jak dostávat hodnocení na hodinky?</string>
     <string name="pet_a_watch">Nastavení → „Doplňky“ → „Hodnocení na hodinkách“. Hodinky s Wear OS zavibrují: 1× krátce — výhodné, 2× krátce — ne, 1× dlouze — průměrné. V aplikaci Galaxy Wearable nebo Pixel Watch povolte oznámení WayArs; na Galaxy Watch povolte i oznámení při používání telefonu, jinak hodinky při zapnuté obrazovce telefonu mlčí.</string>
+    <string name="settings_invite_code">Váš kód: %1$s (klepnutím zkopírujete)</string>
+    <string name="invite_code_copied">Kód zkopírován</string>
 </resources>

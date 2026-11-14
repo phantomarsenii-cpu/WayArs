@@ -381,9 +381,9 @@
     <string name="settings_widget_desc">Заробіток за сьогодні й кнопка «Active» без входу в застосунок. Або додайте самі: утримуйте порожнє місце на головному екрані → Віджети → WayArs.</string>
     <string name="settings_widget_add">Додати віджет</string>
     <string name="settings_invite_title">Запросити водія</string>
-    <string name="settings_invite_desc">Надішліть WayArs колегам — у чат або повідомленням.</string>
+    <string name="settings_invite_desc">Запросіть водія — отримайте місяць безкоштовно. Коли друг оформить підписку, напишіть нам обидва в Telegram @wayars_app: друг надсилає ваш код і скриншот чека Google Play.</string>
     <string name="settings_invite_button">Запросити</string>
-    <string name="invite_share_text">Користуюся WayArs — він показує, чи вигідне замовлення в Bolt, Uber або Wolt, ще до того, як я його прийму. Спробуй: %1$s</string>
+    <string name="invite_share_text">Користуюся WayArs — він показує, чи вигідне замовлення в Bolt, Uber або Wolt, ще до того, як я його прийму. Спробуй: %1$s\nМій код запрошення: %2$s. Коли оформиш підписку, надішли його разом зі скриншотом чека Google Play у t.me/wayars_app.</string>
     <string name="stats_real_hour_title">Реально за годину, на руки</string>
     <string name="stats_real_hour_detail">%1$s на руки · у роботі %2$s</string>
     <string name="stats_partner_fee_line">Тижневий платіж партнеру (частка за період): −%1$s</string>
@@ -436,8 +436,10 @@
     <string name="pet_a_widget">Налаштування → «Додатково» → «Додати віджет» або утримуйте порожнє місце на головному екрані → Віджети → WayArs. Він показує заробіток за сьогодні й вмикає/вимикає «Active».</string>
     <string name="pet_q_achievements">Що таке досягнення і серії?</string>
     <string name="pet_a_achievements">Статистика → «Досягнення»: дні поспіль без прийнятих невигідних замовлень (вихідні серію не переривають), рекорд за годину, найкращий день і замовлення, значки за 3, 7 і 30 розумних днів, 100 і 1000 замовлень, 100 годин.</string>
-    <string name="pet_q_invite">Як запросити колегу?</string>
-    <string name="pet_a_invite">Налаштування → «Додатково» → «Запросити»: оберіть чат або повідомлення — надішлеться посилання на WayArs у Google Play.</string>
+    <string name="pet_q_invite">Як запросити колегу й отримати місяць безкоштовно?</string>
+    <string name="pet_a_invite">Налаштування → «Додатково» → «Запросити»: надішліть посилання колезі — ваш код уже є в повідомленні. Коли друг оформить підписку, напишіть нам обидва в Telegram t.me/wayars_app: ви — що запросили його, друг — ваш код і скриншот чека Google Play з номером замовлення (GPA.…). Після перевірки ви отримаєте місяць безкоштовно.</string>
     <string name="pet_q_watch">Як отримувати оцінку на годинник?</string>
     <string name="pet_a_watch">Налаштування → «Додатково» → «Оцінка на годиннику». Годинник на Wear OS вібрує: одна коротка — вигідно, дві — ні, одна довга — середньо. У застосунку Galaxy Wearable або Pixel Watch дозвольте сповіщення WayArs; на Galaxy Watch увімкніть показ сповіщень під час користування телефоном, інакше при увімкненому екрані телефона годинник мовчить.</string>
+    <string name="settings_invite_code">Ваш код: %1$s (натисніть, щоб скопіювати)</string>
+    <string name="invite_code_copied">Код скопійовано</string>
 </resources>

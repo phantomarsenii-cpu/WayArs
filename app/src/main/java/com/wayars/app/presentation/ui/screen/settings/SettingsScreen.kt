@@ -2404,13 +2404,30 @@ private fun ExtrasSection() {
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.padding(top = 2.dp)
         )
+        val inviteCode = remember { com.wayars.app.data.prefs.DriverPrefs.inviteCode(context) }
+        Text(
+            stringResource(R.string.settings_invite_code, inviteCode),
+            color = WaNeonGreen,
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .padding(top = 8.dp)
+                .clip(RoundedCornerShape(10.dp))
+                .background(WaSurfaceVariant)
+                .clickable {
+                    val cm = context.getSystemService(android.content.Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+                    cm.setPrimaryClip(android.content.ClipData.newPlainText("WayArs", inviteCode))
+                    Toast.makeText(context, context.getString(R.string.invite_code_copied), Toast.LENGTH_SHORT).show()
+                }
+                .padding(horizontal = 12.dp, vertical = 8.dp)
+        )
         TextButton(onClick = {
-            val code = com.wayars.app.data.prefs.DriverPrefs.inviteCode(context)
+            val code = inviteCode
             val link = "https://play.google.com/store/apps/details?id=" + context.packageName +
                 "&referrer=utm_source%3Dinvite%26utm_medium%3Ddriver%26utm_campaign%3D" + code
             val send = Intent(Intent.ACTION_SEND)
                 .setType("text/plain")
-                .putExtra(Intent.EXTRA_TEXT, context.getString(R.string.invite_share_text, link))
+                .putExtra(Intent.EXTRA_TEXT, context.getString(R.string.invite_share_text, link, code))
             runCatching {
                 context.startActivity(
                     Intent.createChooser(send, context.getString(R.string.settings_invite_button))

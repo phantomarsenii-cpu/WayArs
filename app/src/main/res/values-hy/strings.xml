@@ -382,9 +382,9 @@
     <string name="settings_widget_desc">Այսօրվա վաստակը և «Active» կոճակը՝ առանց հավելվածը բացելու։ Կամ ավելացրեք ինքներդ՝ պահեք գլխավոր էկրանի դատարկ տեղը → Վիջեթներ → WayArs։</string>
     <string name="settings_widget_add">Ավելացնել վիջեթ</string>
     <string name="settings_invite_title">Հրավիրել վարորդի</string>
-    <string name="settings_invite_desc">Ուղարկեք WayArs-ը գործընկերներին՝ չաթում կամ հաղորդագրությամբ։</string>
+    <string name="settings_invite_desc">Հրավիրեք վարորդի՝ ստացեք մեկ ամիս անվճար։ Երբ ընկերը բաժանորդագրվի, երկուսով գրեք մեզ Telegram-ում՝ @wayars_app․ ընկերն ուղարկում է ձեր կոդը և Google Play-ի անդորրագրի սքրինշոթը։</string>
     <string name="settings_invite_button">Հրավիրել</string>
-    <string name="invite_share_text">Օգտագործում եմ WayArs — այն ցույց է տալիս՝ արժե՞ Bolt, Uber կամ Wolt պատվերը, նախքան ընդունելը։ Փորձիր՝ %1$s</string>
+    <string name="invite_share_text">Օգտագործում եմ WayArs — այն ցույց է տալիս՝ արժե՞ Bolt, Uber կամ Wolt պատվերը, նախքան ընդունելը։ Փորձիր՝ %1$s\nԻմ հրավերի կոդը՝ %2$s։ Բաժանորդագրվելուց հետո ուղարկիր այն Google Play-ի անդորրագրի սքրինշոթի հետ t.me/wayars_app հասցեով։</string>
     <string name="stats_real_hour_title">Իրական ժամում, ձեռքին</string>
     <string name="stats_real_hour_detail">%1$s ձեռքին · ակտիվ %2$s</string>
     <string name="stats_partner_fee_line">Գործընկերոջ շաբաթական վճարը (ժամանակահատվածի մասը)՝ −%1$s</string>
@@ -437,8 +437,10 @@
     <string name="pet_a_widget">Կարգավորումներ → «Լրացուցիչ» → «Ավելացնել վիջեթ» կամ պահեք գլխավոր էկրանի դատարկ տեղը → Վիջեթներ → WayArs։ Այն ցույց է տալիս այսօրվա վաստակը և միացնում/անջատում է «Active»-ը։</string>
     <string name="pet_q_achievements">Ի՞նչ են ձեռքբերումներն ու շարքերը։</string>
     <string name="pet_a_achievements">Վիճակագրություն → «Ձեռքբերումներ»․ անընդմեջ օրեր առանց անշահավետ պատվեր ընդունելու (հանգստյան օրերը շարքը չեն ընդհատում), ժամային ռեկորդ, լավագույն օր և պատվեր, կրծքանշաններ 3, 7 և 30 խելացի օրերի, 100 և 1000 պատվերի, 100 ժամի համար։</string>
-    <string name="pet_q_invite">Ինչպե՞ս հրավիրել գործընկերոջը։</string>
-    <string name="pet_a_invite">Կարգավորումներ → «Լրացուցիչ» → «Հրավիրել»․ ընտրեք չաթ կամ հաղորդագրություն՝ կուղարկվի WayArs-ի հղումը Google Play-ում։</string>
+    <string name="pet_q_invite">Ինչպե՞ս հրավիրել գործընկերոջը և ստանալ մեկ ամիս անվճար։</string>
+    <string name="pet_a_invite">Կարգավորումներ → «Լրացուցիչ» → «Հրավիրել»․ ուղարկեք հղումը գործընկերոջը՝ ձեր կոդն արդեն հաղորդագրության մեջ է։ Երբ ընկերը բաժանորդագրվի, երկուսով գրեք մեզ Telegram-ում՝ t.me/wayars_app․ դուք՝ որ հրավիրել եք նրան, ընկերը՝ ձեր կոդը և Google Play-ի անդորրագրի սքրինշոթը պատվերի համարով (GPA.…)։ Ստուգումից հետո կստանաք մեկ ամիս անվճար։</string>
     <string name="pet_q_watch">Ինչպե՞ս ստանալ գնահատականը ժամացույցին։</string>
     <string name="pet_a_watch">Կարգավորումներ → «Լրացուցիչ» → «Գնահատական ժամացույցին»։ Wear OS ժամացույցը թրթռում է․ 1 կարճ՝ ձեռնտու, 2 կարճ՝ ոչ, 1 երկար՝ միջին։ Galaxy Wearable կամ Pixel Watch հավելվածում թույլատրեք WayArs-ի ծանուցումները, իսկ Galaxy Watch-ում միացրեք նաև ծանուցումները հեռախոսն օգտագործելիս, այլապես հեռախոսի էկրանը միացված լինելիս ժամացույցը լռում է։</string>
+    <string name="settings_invite_code">Ձեր կոդը՝ %1$s (սեղմեք՝ պատճենելու համար)</string>
+    <string name="invite_code_copied">Կոդը պատճենված է</string>
 </resources>

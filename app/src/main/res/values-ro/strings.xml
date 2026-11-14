@@ -381,9 +381,9 @@
     <string name="settings_widget_desc">Câștigul de azi și butonul „Active” fără să deschizi aplicația. Sau adaugă-l singur: ține apăsat pe un loc gol al ecranului principal → Widgeturi → WayArs.</string>
     <string name="settings_widget_add">Adaugă widgetul</string>
     <string name="settings_invite_title">Invită un șofer</string>
-    <string name="settings_invite_desc">Trimite WayArs colegilor — pe chat sau într-un mesaj.</string>
+    <string name="settings_invite_desc">Invită un șofer — primești o lună gratis. Când prietenul tău se abonează, scrieți-ne amândoi pe Telegram @wayars_app: prietenul trimite codul tău și o captură a chitanței Google Play.</string>
     <string name="settings_invite_button">Invită</string>
-    <string name="invite_share_text">Folosesc WayArs — arată dacă o comandă Bolt, Uber sau Wolt merită înainte s-o accept. Încearcă: %1$s</string>
+    <string name="invite_share_text">Folosesc WayArs — arată dacă o comandă Bolt, Uber sau Wolt merită înainte s-o accept. Încearcă: %1$s\nCodul meu de invitație: %2$s. După ce te abonezi, trimite-l cu o captură a chitanței Google Play la t.me/wayars_app.</string>
     <string name="stats_real_hour_title">Real pe oră, net</string>
     <string name="stats_real_hour_detail">%1$s net · activ %2$s</string>
     <string name="stats_partner_fee_line">Plata săptămânală a partenerului (partea perioadei): −%1$s</string>
@@ -436,8 +436,10 @@
     <string name="pet_a_widget">Setări → „Extra” → „Adaugă widgetul” sau ține apăsat pe un loc gol al ecranului principal → Widgeturi → WayArs. Arată câștigul de azi și pornește/oprește „Active”.</string>
     <string name="pet_q_achievements">Ce sunt realizările și seriile?</string>
     <string name="pet_a_achievements">Statistici → „Realizări”: zile la rând fără comenzi nerentabile acceptate (zilele libere nu întrerup seria), record pe oră, cea mai bună zi și comandă, insigne pentru 3, 7 și 30 de zile istețe, 100 și 1000 de comenzi, 100 de ore.</string>
-    <string name="pet_q_invite">Cum invit un coleg?</string>
-    <string name="pet_a_invite">Setări → „Extra” → „Invită”: alege un chat sau un mesaj — se trimite un link către WayArs pe Google Play.</string>
+    <string name="pet_q_invite">Cum invit un coleg și primesc o lună gratis?</string>
+    <string name="pet_a_invite">Setări → „Extra” → „Invită”: trimite linkul unui coleg — codul tău e deja în mesaj. Când prietenul se abonează, scrieți-ne amândoi pe Telegram t.me/wayars_app: tu — că l-ai invitat, prietenul — codul tău și o captură a chitanței Google Play cu numărul comenzii (GPA.…). După verificare primești o lună gratis.</string>
     <string name="pet_q_watch">Cum primesc verdictul pe ceas?</string>
     <string name="pet_a_watch">Setări → „Extra” → „Verdict pe ceas”. Un ceas Wear OS vibrează: 1 scurtă — rentabil, 2 scurte — nu, 1 lungă — mediu. În aplicația Galaxy Wearable sau Pixel Watch permite notificările WayArs; pe Galaxy Watch permite și notificările cât folosești telefonul, altfel ceasul tace când ecranul telefonului e pornit.</string>
+    <string name="settings_invite_code">Codul tău: %1$s (atinge ca să copiezi)</string>
+    <string name="invite_code_copied">Cod copiat</string>
 </resources>

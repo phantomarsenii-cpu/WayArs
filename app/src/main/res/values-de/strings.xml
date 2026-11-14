@@ -381,9 +381,9 @@
     <string name="settings_widget_desc">Heutiger Verdienst und der „Active“-Schalter, ohne die App zu öffnen. Oder selbst hinzufügen: freie Stelle auf dem Startbildschirm gedrückt halten → Widgets → WayArs.</string>
     <string name="settings_widget_add">Widget hinzufügen</string>
     <string name="settings_invite_title">Fahrer einladen</string>
-    <string name="settings_invite_desc">Schick WayArs an Kollegen — im Chat oder als Nachricht.</string>
+    <string name="settings_invite_desc">Lade einen Fahrer ein — bekomme einen Monat gratis. Wenn dein Freund ein Abo abschließt, schreibt uns beide auf Telegram @wayars_app: der Freund schickt deinen Code und einen Screenshot der Google-Play-Quittung.</string>
     <string name="settings_invite_button">Einladen</string>
-    <string name="invite_share_text">Ich nutze WayArs — es zeigt, ob sich ein Auftrag bei Bolt, Uber oder Wolt lohnt, bevor ich ihn annehme. Probier es: %1$s</string>
+    <string name="invite_share_text">Ich nutze WayArs — es zeigt, ob sich ein Auftrag bei Bolt, Uber oder Wolt lohnt, bevor ich ihn annehme. Probier es: %1$s\nMein Einladungscode: %2$s. Schick ihn nach dem Abo-Abschluss mit einem Screenshot der Google-Play-Quittung an t.me/wayars_app.</string>
     <string name="stats_real_hour_title">Real pro Stunde, netto</string>
     <string name="stats_real_hour_detail">%1$s netto · aktiv %2$s</string>
     <string name="stats_partner_fee_line">Wochengebühr des Partners (Anteil für den Zeitraum): −%1$s</string>
@@ -436,8 +436,10 @@
     <string name="pet_a_widget">Einstellungen → „Extras“ → „Widget hinzufügen“, oder freie Stelle auf dem Startbildschirm gedrückt halten → Widgets → WayArs. Es zeigt den heutigen Verdienst und schaltet „Active“ ein und aus.</string>
     <string name="pet_q_achievements">Was sind Erfolge und Serien?</string>
     <string name="pet_a_achievements">Statistik → „Erfolge“: Tage in Folge ohne angenommenen unrentablen Auftrag (freie Tage unterbrechen die Serie nicht), Rekord pro Stunde, bester Tag und Auftrag, Abzeichen für 3, 7 und 30 kluge Tage, 100 und 1000 Aufträge, 100 Stunden.</string>
-    <string name="pet_q_invite">Wie lade ich einen Kollegen ein?</string>
-    <string name="pet_a_invite">Einstellungen → „Extras“ → „Einladen“: Chat oder Nachricht wählen — ein Link zu WayArs bei Google Play wird mitgeschickt.</string>
+    <string name="pet_q_invite">Wie lade ich einen Kollegen ein und bekomme einen Monat gratis?</string>
+    <string name="pet_a_invite">Einstellungen → „Extras“ → „Einladen“: Schick den Link an einen Kollegen — dein Code steht schon in der Nachricht. Schließt der Freund ein Abo ab, schreibt uns beide auf Telegram t.me/wayars_app: du — dass du ihn eingeladen hast, der Freund — deinen Code und einen Screenshot der Google-Play-Quittung mit der Bestellnummer (GPA.…). Nach der Prüfung bekommst du einen Monat gratis.</string>
     <string name="pet_q_watch">Wie bekomme ich die Bewertung auf die Uhr?</string>
     <string name="pet_a_watch">Einstellungen → „Extras“ → „Bewertung auf der Uhr“. Eine Wear-OS-Uhr vibriert: 1× kurz — lohnend, 2× kurz — nicht, 1× lang — mittel. In der App Galaxy Wearable oder Pixel Watch WayArs-Benachrichtigungen erlauben; auf der Galaxy Watch auch Benachrichtigungen während der Handynutzung zulassen, sonst bleibt die Uhr bei eingeschaltetem Handybildschirm still.</string>
+    <string name="settings_invite_code">Dein Code: %1$s (zum Kopieren tippen)</string>
+    <string name="invite_code_copied">Code kopiert</string>
 </resources>

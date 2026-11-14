@@ -382,9 +382,9 @@
     <string name="settings_widget_desc">A mai kereset és az „Active” kapcsoló az alkalmazás megnyitása nélkül. Vagy add hozzá magad: tarts lenyomva egy üres helyet a kezdőképernyőn → Widgetek → WayArs.</string>
     <string name="settings_widget_add">Widget hozzáadása</string>
     <string name="settings_invite_title">Sofőr meghívása</string>
-    <string name="settings_invite_desc">Küldd el a WayArs-t a kollégáknak — chatben vagy üzenetben.</string>
+    <string name="settings_invite_desc">Hívj meg egy sofőrt — kapsz egy ingyenes hónapot. Ha a barátod előfizet, írjatok nekünk mindketten Telegramon (@wayars_app): a barátod elküldi a kódodat és a Google Play-nyugta képernyőképét.</string>
     <string name="settings_invite_button">Meghívás</string>
-    <string name="invite_share_text">WayArs-t használok — megmutatja, megéri-e egy Bolt, Uber vagy Wolt rendelés, mielőtt elfogadom. Próbáld ki: %1$s</string>
+    <string name="invite_share_text">WayArs-t használok — megmutatja, megéri-e egy Bolt, Uber vagy Wolt rendelés, mielőtt elfogadom. Próbáld ki: %1$s\nA meghívókódom: %2$s. Előfizetés után küldd el a Google Play-nyugta képernyőképével a t.me/wayars_app címre.</string>
     <string name="stats_real_hour_title">Valójában óránként, nettó</string>
     <string name="stats_real_hour_detail">%1$s nettó · aktív %2$s</string>
     <string name="stats_partner_fee_line">A partner heti díja (az időszakra eső rész): −%1$s</string>
@@ -437,8 +437,10 @@
     <string name="pet_a_widget">Beállítások → „Extrák” → „Widget hozzáadása”, vagy tarts lenyomva egy üres helyet a kezdőképernyőn → Widgetek → WayArs. Mutatja a mai keresetet, és be-/kikapcsolja az „Active”-ot.</string>
     <string name="pet_q_achievements">Mik az eredmények és a sorozatok?</string>
     <string name="pet_a_achievements">Statisztika → „Eredmények”: egymás utáni napok elfogadott veszteséges rendelés nélkül (a szabadnapok nem szakítják meg), óránkénti rekord, legjobb nap és rendelés, jelvények 3, 7 és 30 okos napért, 100 és 1000 rendelésért, 100 óráért.</string>
-    <string name="pet_q_invite">Hogyan hívhatok meg egy kollégát?</string>
-    <string name="pet_a_invite">Beállítások → „Extrák” → „Meghívás”: válassz chatet vagy üzenetet — elküldjük a WayArs Google Play linkjét.</string>
+    <string name="pet_q_invite">Hogyan hívhatok meg egy kollégát, és kaphatok ingyenes hónapot?</string>
+    <string name="pet_a_invite">Beállítások → „Extrák” → „Meghívás”: küldd el a linket egy kollégának — a kódod már benne van az üzenetben. Ha a barátod előfizet, írjatok nekünk mindketten Telegramon (t.me/wayars_app): te — hogy meghívtad, a barátod — a kódodat és a Google Play-nyugta képernyőképét a rendelésszámmal (GPA.…). Ellenőrzés után kapsz egy ingyenes hónapot.</string>
     <string name="pet_q_watch">Hogyan kapom meg az értékelést az órámon?</string>
     <string name="pet_a_watch">Beállítások → „Extrák” → „Értékelés az órán”. A Wear OS-es óra rezeg: 1 rövid — megéri, 2 rövid — nem, 1 hosszú — közepes. A Galaxy Wearable vagy Pixel Watch alkalmazásban engedélyezd a WayArs értesítéseit; Galaxy Watchon engedélyezd az értesítéseket a telefon használata közben is, különben bekapcsolt telefonképernyőnél az óra néma marad.</string>
+    <string name="settings_invite_code">A kódod: %1$s (koppints a másoláshoz)</string>
+    <string name="invite_code_copied">Kód másolva</string>
 </resources>
