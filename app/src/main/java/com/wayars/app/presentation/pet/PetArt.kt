@@ -36,6 +36,8 @@ import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -226,7 +228,7 @@ fun PetArt(
                 val anchor = remember(resId) { PetAnchors.of(context, resId) }
                 if (anchor != null && accessories.isNotEmpty()) {
                     val worn = accessories.filter { it.slot in anchor.slots }.sortedBy { it.slot.ordinal }
-                    val bitmaps = worn.map { androidx.compose.ui.res.ImageBitmap.imageResource(it.image) }
+                    val bitmaps = worn.map { ImageBitmap.imageResource(it.image) }
                     Canvas(Modifier.fillMaxSize()) {
                         val k = size.minDimension / 512f
                         val ox = (size.width - 512f * k) / 2f
