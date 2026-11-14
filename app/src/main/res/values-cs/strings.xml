@@ -582,6 +582,9 @@
         <item>Klidně se ptej dál 😉</item>
         <item>Další otázky? Jsem tu!</item>
         <item>Kdykoli 💚</item>
+        <item>Jen neříkej, žes to věděl 😏</item>
+        <item>Zapamatuj si to, bude test 📚</item>
+        <item>Vidíš? Se mnou se neztratíš 🦎</item>
     </string-array>
     <string-array name="chat_v_again">
         <item>Zopakuju 🙂</item>
@@ -592,16 +595,22 @@
         <item>Ahoj! 👋 S čím pomoct?</item>
         <item>Čau! Jsem tu 🦎 Co potřebuješ?</item>
         <item>Ahoj, ahoj! Ptej se na cokoli o aplikaci.</item>
+        <item>Ó, ahoj! Zrovna jsem na tebe myslel 🦎</item>
+        <item>Čau čau! Připravený na výhodné zakázky? 😎</item>
     </string-array>
     <string-array name="chat_v_thanks">
         <item>Rádo se stalo! 💚</item>
         <item>Rád jsem pomohl! Hodně dobrých zakázek 🚕</item>
         <item>Kdykoli! Je mi potěšením 🦎</item>
+        <item>Není zač! Platbu v mouchách beru 🪰</item>
+        <item>Díky přijato! Dávám ho do kasičky dobrých skutků 💚</item>
     </string-array>
     <string-array name="chat_v_how">
         <item>Skvěle! Hlavně když bereš výhodné zakázky 😄</item>
         <item>Super, pomalu rostu 🌱 A jak tvoje směna?</item>
         <item>Dobře! Sedím a počítám kilometry 🦎</item>
+        <item>Nejlíp! No, po tobě samozřejmě 😉</item>
+        <item>Jako chameleon: měním barvy, ale nálada je vždycky zelená 💚</item>
     </string-array>
     <string-array name="chat_v_unknown">
         <item>Hmm, to ještě nevím 🤔 Zkus to říct jinak nebo vyber otázku níž.</item>
@@ -656,6 +665,11 @@
         <item>Proč chameleon nebere špatné zakázky? Neumí se červenat studem — rovnou zezelená ziskem 😎</item>
         <item>Potkají se dva kurýři. Jeden: „Dneska jsem najel 300 km!“ Druhý: „A kolik jsi vydělal?“ První: „…Zeptám se Waya“ 🦎</item>
         <item>Můj oblíbený sport je hon na výhodné zakázky. No, ty běháš, já počítám 😄</item>
+        <item>Chameleon nastoupil k taxíkům. Po týdnu odešel: cestující si ho nikdy nevšimli 🦎</item>
+        <item>Proč taxikáři nehrají na schovávanou? Stejně je najde další zakázka 📱</item>
+        <item>— Wayo, kolik jsem vydělal? — Na kafe. — A na druhé? — Jen když odmítneš červenou zakázku 😏</item>
+        <item>Kurýr volá zákazníkovi: „Jsem u dveří.“ — „U kterých?“ — „U těch, co se neotvírají“ 🚪</item>
+        <item>Můj styl jízdy je jako moje barvy: vždycky se přizpůsobím situaci 😎</item>
     </string-array>
     <string-array name="chat_v_tired">
         <item>Jsi borec, že vydržíš 💚 Dej si pauzu a vodu — dobré zakázky neutečou.</item>
@@ -761,6 +775,8 @@
     <string-array name="pet_tease_night">
         <item>Je hluboká noc a ty jsi tady. Jezdí sovy taky taxi? 🦉</item>
         <item>Zase nespíš? Já jsem chameleon, já můžu — ty potřebuješ odpočinek 😴</item>
+        <item>V tuhle hodinu spí i hvězdy. No, kromě taxikářů 🌟</item>
+        <item>Noční směna? Budu tě hlídat před ospalými zakázkami 😴</item>
     </string-array>
     <string-array name="pet_tease_early">
         <item>Tak brzy? Ani já ještě nejsem vzhůru… dobře, už jsem 😅</item>
@@ -769,10 +785,14 @@
     <string-array name="pet_tease_visitor">
         <item>Jsi tu na návštěvě, nebo dnes pracujeme? 😄</item>
         <item>Zase nakukuješ? Lichotí mi to, ale zakázky se samy nevezmou 😏</item>
+        <item>Chováš se k aplikaci jako k lednici: otevřít, kouknout, zavřít 😄</item>
+        <item>Už potřetí dnes… Přiznej se, je to kvůli mně? 😏</item>
     </string-array>
     <string-array name="pet_tease_away">
         <item>Hele, kdo se vrátil! Myslel jsem, že jsi přesedlal na kolo 🚲</item>
         <item>Pár dní jsi zmizel — skoro jsem se zase proměnil ve vejce 🥚</item>
+        <item>Kde ses toulal? Skoro jsem vyschl nudou 🌵</item>
+        <item>Jsi zpátky! Já už začal mluvit s kalkulačkou 🧮</item>
     </string-array>
     <string-array name="pet_tease_rich">
         <item>S takovým výdělkem mi dlužíš pár much 🪰😏</item>
@@ -782,11 +802,77 @@
         <item>Zase ty? Dělám si legraci, jsem rád, že tě vidím 😄</item>
         <item>Vidím, že ses mi stýskal 😏</item>
         <item>Ó, přišel můj oblíbený řidič. No dobře, jediný 😅</item>
+        <item>Tak mě napadlo… není čas pohladit svého chameleona? 🦎</item>
+        <item>Víš, kdo je nejlepší řidič? Nápověda: právě kouká na tuhle obrazovku 😉</item>
+        <item>Kdybych uměl řídit, přišel bys o práci. Ještě že to neumím 😄</item>
+        <item>Mám dnes skvělou náladu. Asi proto, že jsi přišel 💚</item>
     </string-array>
     <string-array name="pet_tease_bad_now">
         <item>Vždyť byla červená! Dobře, dobře, ty jsi tu šéf 🙈</item>
         <item>Ach… odvážné rozhodnutí. Udělám, že jsem nic neviděl 🫣</item>
+        <item>Ty jsi ale riskér! Zapisuju to do „nezkoušejte doma“ 🙈</item>
+        <item>Dobře, zapsáno. Přidáno na seznam „já to říkal“ 📝</item>
     </string-array>
     <string name="pet_say_petted_5">Hej, nejsem kočka! I když… pokračuj 😌</string>
     <string name="pet_say_petted_6">Ještě chvilku a začnu příst. Umí to chameleoni? Teď už ano 😄</string>
+    <string-array name="pet_tease_long_shift">
+        <item>Jsi za volantem už přes 8 hodin. Jsem chameleon, ale i moje oči už koukají každé jinam 👀</item>
+        <item>Osm hodin směny! Co takhle pauzu? Kola jsou taky lidi… skoro 🛞</item>
+        <item>Pracuješ déle, než já rostu. Dej si pauzu, hrdino 💪</item>
+    </string-array>
+    <string-array name="pet_tease_shift_start">
+        <item>Jedeme! Pravidlo číslo jedna: žádné červené zakázky 😎</item>
+        <item>Směna začala! Už jsem rozehřál kalkulačku 🧮</item>
+        <item>Vyrážíme! Já hlídám zakázky, ty silnici. Dokonalý tým 🤝</item>
+    </string-array>
+    <string-array name="pet_tease_many_orders">
+        <item>Zakázek dnes: %1$d! Určitě nejsi robot? Zkontroluju ti baterky 🔋</item>
+        <item>Zakázek dnes: %1$d. Ještě pár a poprosím o autogram ✍️</item>
+        <item>Zakázek dnes: %1$d. Město tě už zná jménem 🏙️</item>
+    </string-array>
+    <string-array name="pet_tease_no_orders">
+        <item>„Active“ je zapnuté, ale zakázky nula. Možná Uber ještě pije kafe? ☕</item>
+        <item>Ticho v éteru… I já se nudím. Vydrž, za chvíli se to rozjede 📱</item>
+        <item>Zatím ani jedna zakázka. Ale jaký klidný den, co? 😅</item>
+    </string-array>
+    <string-array name="pet_tease_lunch">
+        <item>Oběd! I kurýři jedí. Hlavně kurýři 🍔</item>
+        <item>Čas na svačinu. Já bych snědl mouchu, ty si dej něco pořádnějšího 🥪</item>
+        <item>Hladový řidič je smutný řidič. Najez se, počkám 😋</item>
+    </string-array>
+    <string-array name="pet_tease_late_evening">
+        <item>Ještě pracuješ? Měsíc už nastoupil na směnu 🌙</item>
+        <item>Večerní zakázky jsou nejlepší. Ale odpočinek taky existuje 😉</item>
+        <item>Už je pozdě! Poslední zakázka a domů? Nikomu neřeknu, jestli bude ještě jedna 🤫</item>
+    </string-array>
+    <string-array name="pet_tease_monday">
+        <item>Pondělí… Taky nejsem nadšený, ale zvládneme to 💪</item>
+        <item>Šťastné pondělí! Nový týden, nové rekordy. Nebo aspoň kafe ☕</item>
+        <item>Pondělí je těžké, zakázky lehké. Snad 😅</item>
+    </string-array>
+    <string-array name="pet_tease_friday">
+        <item>Pátek! Město jde slavit, my vydělávat 💸</item>
+        <item>Páteční večer — čas tučných zakázek. Nepropásni je 🍕</item>
+        <item>Pátek! Dnes všichni někam jedou, a skoro všichni s tebou 🚕</item>
+    </string-array>
+    <string-array name="pet_tease_weekend">
+        <item>Víkend! Jedni odpočívají, druzí vydělávají na těch, kdo odpočívají 😏</item>
+        <item>Sobota a neděle — čas večírků a dobrých zakázek 🎉</item>
+        <item>O víkendu je město jiné. Já taky — v pohodě 😎</item>
+    </string-array>
+    <string-array name="pet_tease_first_today">
+        <item>Ó, první návštěva dnes! Stýskalo se mi 💚</item>
+        <item>Dobrý den! Dnes bude dobrý den — rozhodl jsem 🦎</item>
+        <item>Tak co, ukážeme dnes, jak se to dělá? 😎</item>
+    </string-array>
+    <string-array name="pet_tease_good_now">
+        <item>Ber, ber, než si to Uber rozmyslí 😏</item>
+        <item>Tomu říkám zakázka! Ještě víc jsem zezelenal 💚</item>
+        <item>Skvělá volba. Sám bych ji vzal, kdybych měl ruce 🦎</item>
+    </string-array>
+    <string-array name="pet_tease_smart_now">
+        <item>Odmítnuto se ctí. Pravý profík 😎</item>
+        <item>Správně, tahle zakázka ať počká na někoho jiného 🙅</item>
+        <item>Krásně odmítnuto! I Uber to musí respektovat 👏</item>
+    </string-array>
 </resources>

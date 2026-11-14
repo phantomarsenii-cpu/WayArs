@@ -582,6 +582,9 @@
         <item>Fråga på 😉</item>
         <item>Fler frågor? Jag är här!</item>
         <item>Alltid 💚</item>
+        <item>Säg inte att du redan visste det 😏</item>
+        <item>Kom ihåg det, det blir prov 📚</item>
+        <item>Ser du? Med mig går du aldrig vilse 🦎</item>
     </string-array>
     <string-array name="chat_v_again">
         <item>En gång till 🙂</item>
@@ -592,16 +595,22 @@
         <item>Hej! 👋 Vad kan jag hjälpa till med?</item>
         <item>Tjena! Jag är här 🦎 Vad behöver du?</item>
         <item>Hej hej! Fråga mig om allt i appen.</item>
+        <item>Åh, hej! Jag tänkte precis på dig 🦎</item>
+        <item>Hej hej! Redo för lönsamma körningar? 😎</item>
     </string-array>
     <string-array name="chat_v_thanks">
         <item>Varsågod! 💚</item>
         <item>Kul att hjälpa! Bra körningar 🚕</item>
         <item>När som helst! Ett nöje 🦎</item>
+        <item>Ingen orsak! Betalning i flugor tas emot 🪰</item>
+        <item>Tack mottaget! Det åker ner i burken med goda gärningar 💚</item>
     </string-array>
     <string-array name="chat_v_how">
         <item>Toppen! Särskilt när du tar lönsamma körningar 😄</item>
         <item>Fint, jag växer sakta 🌱 Hur går passet?</item>
         <item>Bra! Sitter och räknar kilometer 🦎</item>
+        <item>Bättre än någonsin! Alltså, efter dig förstås 😉</item>
+        <item>Som en kameleont: jag byter färg, men humöret är alltid grönt 💚</item>
     </string-array>
     <string-array name="chat_v_unknown">
         <item>Hmm, det vet jag inte än 🤔 Säg det på ett annat sätt eller välj en fråga nedan.</item>
@@ -656,6 +665,11 @@
         <item>Varför tar en kameleont inga dåliga körningar? Den kan inte rodna av skam — den blir grön av vinst direkt 😎</item>
         <item>Två bud möts. Den ena: ”Jag körde 300 km i dag!” Den andra: ”Och hur mycket tjänade du?” Den första: ”…Jag frågar Wayo” 🦎</item>
         <item>Min favoritsport är jakten på lönsamma körningar. Okej, du springer, jag räknar 😄</item>
+        <item>En kameleont blev taxichaufför. Den slutade efter en vecka: passagerarna märkte den aldrig 🦎</item>
+        <item>Varför leker inte taxichaufförer kurragömma? Nästa körning hittar dem ändå 📱</item>
+        <item>— Wayo, hur mycket tjänade jag? — Till en kaffe. — Och en till? — Bara om du nekar en röd körning 😏</item>
+        <item>Ett bud ringer kunden: ”Jag står vid dörren.” — ”Vilken?” — ”Den som inte går att öppna” 🚪</item>
+        <item>Min körstil är som mina färger: jag anpassar mig alltid 😎</item>
     </string-array>
     <string-array name="chat_v_tired">
         <item>Starkt att du håller ut 💚 Ta en paus och drick vatten — de bra körningarna försvinner inte.</item>
@@ -761,6 +775,8 @@
     <string-array name="pet_tease_night">
         <item>Mitt i natten och du är här. Kör ugglor taxi nu också? 🦉</item>
         <item>Vaken igen? Jag är en kameleont, jag får — du behöver vila 😴</item>
+        <item>Vid den här tiden sover till och med stjärnorna. Ja, utom taxichaufförer 🌟</item>
+        <item>Nattpass? Jag skyddar dig mot sömniga körningar 😴</item>
     </string-array>
     <string-array name="pet_tease_early">
         <item>Så tidigt? Inte ens jag är vaken än… okej, nu är jag det 😅</item>
@@ -769,10 +785,14 @@
     <string-array name="pet_tease_visitor">
         <item>Är du på besök eller ska vi jobba i dag? 😄</item>
         <item>Tittar in igen? Smickrande, men körningarna tar inte sig själva 😏</item>
+        <item>Du använder appen som kylskåpet: öppna, titta, stäng 😄</item>
+        <item>Tredje gången i dag… Erkänn, det är för min skull? 😏</item>
     </string-array>
     <string-array name="pet_tease_away">
         <item>Kolla vem som är tillbaka! Jag trodde du gått över till cykel 🚲</item>
         <item>Borta i flera dagar — jag blev nästan ett ägg igen 🥚</item>
+        <item>Var har du varit? Jag höll på att torka ut av tristess 🌵</item>
+        <item>Du är tillbaka! Jag hade börjat prata med miniräknaren 🧮</item>
     </string-array>
     <string-array name="pet_tease_rich">
         <item>Med sådana intäkter är du skyldig mig några flugor 🪰😏</item>
@@ -782,11 +802,77 @@
         <item>Du igen? Skojar, jag blir glad att se dig 😄</item>
         <item>Ser ut som du saknat mig 😏</item>
         <item>Åh, min favoritförare är här. Okej, min enda 😅</item>
+        <item>Jag tänkte… är det inte dags att klappa din kameleont? 🦎</item>
+        <item>Vet du vem som är bästa föraren? Ledtråd: hen tittar på den här skärmen just nu 😉</item>
+        <item>Om jag kunde köra skulle du bli arbetslös. Tur att jag inte kan 😄</item>
+        <item>Jag är på strålande humör i dag. Säkert för att du kom 💚</item>
     </string-array>
     <string-array name="pet_tease_bad_now">
         <item>Den var ju röd! Okej, okej, du är chefen 🙈</item>
         <item>Åh… modigt val. Jag låtsas att jag inte såg 🫣</item>
+        <item>Vilken våghals! Det hamnar under ”prova inte hemma” 🙈</item>
+        <item>Okej, noterat. Tillagt på ”vad var det jag sa”-listan 📝</item>
     </string-array>
     <string name="pet_say_petted_5">Hallå, jag är ingen katt! Fast… fortsätt 😌</string>
     <string name="pet_say_petted_6">Lite till så börjar jag spinna. Kan kameleonter det? Nu kan de 😄</string>
+    <string-array name="pet_tease_long_shift">
+        <item>Du har kört i över 8 timmar. Jag är en kameleont, men till och med mina ögon tittar åt olika håll nu 👀</item>
+        <item>Åtta timmars pass! Kanske en paus? Hjul är också människor… nästan 🛞</item>
+        <item>Du jobbar längre än jag växer. Ta en paus, hjälte 💪</item>
+    </string-array>
+    <string-array name="pet_tease_shift_start">
+        <item>Nu kör vi! Regel nummer ett: inga röda körningar 😎</item>
+        <item>Passet har börjat! Jag har redan värmt upp miniräknaren 🧮</item>
+        <item>Iväg! Jag håller koll på körningarna, du på vägen. Perfekt lag 🤝</item>
+    </string-array>
+    <string-array name="pet_tease_many_orders">
+        <item>Körningar i dag: %1$d! Är du säker på att du inte är en robot? Låt mig kolla dina batterier 🔋</item>
+        <item>Körningar i dag: %1$d. Några till så ber jag om en autograf ✍️</item>
+        <item>Körningar i dag: %1$d. Stan känner dig vid namn nu 🏙️</item>
+    </string-array>
+    <string-array name="pet_tease_no_orders">
+        <item>”Active” är på men inga körningar än. Dricker Uber fortfarande kaffe? ☕</item>
+        <item>Radiotystnad… Till och med jag har tråkigt. Håll ut, snart kommer de 📱</item>
+        <item>Inte en enda körning än. Men vilken lugn dag, va? 😅</item>
+    </string-array>
+    <string-array name="pet_tease_lunch">
+        <item>Lunch! Även bud äter. Särskilt bud 🍔</item>
+        <item>Fikadags. Jag skulle äta en fluga, men du bör ta något mer rejält 🥪</item>
+        <item>En hungrig förare är en ledsen förare. Ät, jag väntar 😋</item>
+    </string-array>
+    <string-array name="pet_tease_late_evening">
+        <item>Jobbar du fortfarande? Månen har redan börjat sitt pass 🌙</item>
+        <item>Kvällskörningar är godast. Men vila finns också 😉</item>
+        <item>Det är sent! En sista körning och sen hem? Jag säger inget om det blir en till 🤫</item>
+    </string-array>
+    <string-array name="pet_tease_monday">
+        <item>Måndag… Jag är inte heller förtjust, men vi fixar det 💪</item>
+        <item>Glad måndag! Ny vecka, nya rekord. Eller åtminstone kaffe ☕</item>
+        <item>Måndagar är tunga, körningarna lätta. Förhoppningsvis 😅</item>
+    </string-array>
+    <string-array name="pet_tease_friday">
+        <item>Fredag! Stan går ut och festar, vi går ut och tjänar 💸</item>
+        <item>Fredagskväll — dags för feta körningar. Missa dem inte 🍕</item>
+        <item>Fredag! I dag ska alla någonstans, och nästan alla med dig 🚕</item>
+    </string-array>
+    <string-array name="pet_tease_weekend">
+        <item>Helg! Vissa vilar, andra tjänar på dem som vilar 😏</item>
+        <item>Lördag och söndag — dags för fester och bra körningar 🎉</item>
+        <item>På helgen är stan annorlunda. Jag också — helt avslappnad 😎</item>
+    </string-array>
+    <string-array name="pet_tease_first_today">
+        <item>Åh, dagens första besök! Jag har saknat dig 💚</item>
+        <item>God dag! I dag blir en bra dag — det har jag bestämt 🦎</item>
+        <item>Nå, ska vi visa dem hur det går till i dag? 😎</item>
+    </string-array>
+    <string-array name="pet_tease_good_now">
+        <item>Ta den, ta den, innan Uber ångrar sig 😏</item>
+        <item>Det kallar jag en körning! Jag blev ännu grönare 💚</item>
+        <item>Bra val. Jag skulle ta den själv om jag hade händer 🦎</item>
+    </string-array>
+    <string-array name="pet_tease_smart_now">
+        <item>Nekad med stil. Ett riktigt proffs 😎</item>
+        <item>Rätt, den körningen kan vänta på någon annan 🙅</item>
+        <item>Snyggt nekat! Till och med Uber måste respektera det 👏</item>
+    </string-array>
 </resources>

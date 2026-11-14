@@ -63,22 +63,42 @@ object PetGreeter {
      * rejections, coming back after days, working at night or at dawn, opening the app again and
      * again without working, or just because. Never mean — always with a wink.
      */
-    private fun tease(context: Context, now: Long, lastActivityAt: Long, opens: Int): String? {
+    private fun tease(context: Context, now: Long, lastActivityAt: Long, opens: Int, ordersToday: Int): String? {
         val r = context.resources
         fun pick(id: Int) = r.getStringArray(id).random()
         val bad = com.wayars.app.pet.PetState.badAcceptedToday(context)
         val streak = com.wayars.app.pet.PetState.rejectStreak(context)
-        val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
-        return when {
-            bad >= 2 -> String.format(pick(R.array.pet_tease_bad_accepted), bad)
-            streak >= 5 -> String.format(pick(R.array.pet_tease_picky), streak)
-            lastActivityAt > 0 && now - lastActivityAt > 3 * 24 * 3_600_000L -> pick(R.array.pet_tease_away)
-            hour in 0..4 -> pick(R.array.pet_tease_night)
-            hour in 5..6 -> pick(R.array.pet_tease_early)
-            opens >= 3 && ActiveSessionTracker.todayMillis() == 0L -> pick(R.array.pet_tease_visitor)
-            kotlin.random.Random.nextInt(4) == 0 -> pick(R.array.pet_tease_random)
-            else -> null
+        val cal = Calendar.getInstance()
+        val hour = cal.get(Calendar.HOUR_OF_DAY)
+        val day = cal.get(Calendar.DAY_OF_WEEK)
+        val worked = ActiveSessionTracker.todayMillis()
+        // Everything that fits the moment, with a weight; one is drawn at random, so Wayo
+        // doesn't say the same thing every time the same situation comes up.
+        val options = ArrayList<Pair<Int, () -> String>>()
+        fun add(weight: Int, line: () -> String) { options += weight to line }
+        if (bad >= 2) add(4) { String.format(pick(R.array.pet_tease_bad_accepted), bad) }
+        if (streak >= 5) add(3) { String.format(pick(R.array.pet_tease_picky), streak) }
+        if (worked >= 8 * 3_600_000L) add(4) { pick(R.array.pet_tease_long_shift) }
+        if (worked in 60_000L..15 * 60_000L) add(3) { pick(R.array.pet_tease_shift_start) }
+        if (ordersToday >= 15) add(3) { String.format(pick(R.array.pet_tease_many_orders), ordersToday) }
+        if (worked >= 3_600_000L && ordersToday == 0) add(3) { pick(R.array.pet_tease_no_orders) }
+        if (lastActivityAt > 0 && now - lastActivityAt > 3 * 24 * 3_600_000L) add(4) { pick(R.array.pet_tease_away) }
+        if (hour in 0..4) add(2) { pick(R.array.pet_tease_night) }
+        if (hour in 5..6) add(2) { pick(R.array.pet_tease_early) }
+        if (hour in 12..14) add(1) { pick(R.array.pet_tease_lunch) }
+        if (hour in 22..23) add(2) { pick(R.array.pet_tease_late_evening) }
+        if (day == Calendar.MONDAY && hour in 5..11) add(2) { pick(R.array.pet_tease_monday) }
+        if (day == Calendar.FRIDAY && hour >= 16) add(2) { pick(R.array.pet_tease_friday) }
+        if (day == Calendar.SATURDAY || day == Calendar.SUNDAY) add(1) { pick(R.array.pet_tease_weekend) }
+        if (opens == 1) add(1) { pick(R.array.pet_tease_first_today) }
+        if (opens >= 3 && worked == 0L) add(2) { pick(R.array.pet_tease_visitor) }
+        add(1) { pick(R.array.pet_tease_random) }
+        var roll = kotlin.random.Random.nextInt(options.sumOf { it.first })
+        for ((w, line) in options) {
+            if (roll < w) return line()
+            roll -= w
         }
+        return null
     }
 
     suspend fun next(context: Context, lastActivityAt: Long): String? = withContext(Dispatchers.IO) {
@@ -93,12 +113,12 @@ object PetGreeter {
             p.edit().putLong(KEY_AT, now).apply()
             val r = context.resources
             fun random(id: Int) = r.getStringArray(id).let { it[(now / 1000 % it.size).toInt()] }
-            // A friendly jab now and then (not every time — that would get old).
-            if (kotlin.random.Random.nextInt(100) < 45) tease(context, now, lastActivityAt, opens)?.let { return@runCatching it }
 
             val c = context.appContainer()
             val today = Earnings.startOfDay(now)
             val orders = c.orderRepository.acceptedSince(today)
+            // A friendly jab now and then (not every time — that would get old).
+            if (kotlin.random.Random.nextInt(100) < 50) tease(context, now, lastActivityAt, opens, orders.size)?.let { return@runCatching it }
             if (orders.isNotEmpty()) {
                 val cur = runCatching { c.settingsRepository.currency.first() }.getOrDefault(Currency.default)
                 val e = Earnings.period(orders, ActiveSessionTracker.intervals(today, now), today, now + 1, DriverPrefs.weeklyFee.value)

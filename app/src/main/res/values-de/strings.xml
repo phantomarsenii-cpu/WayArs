@@ -581,6 +581,9 @@
         <item>Frag ruhig weiter 😉</item>
         <item>Noch Fragen? Ich bin da!</item>
         <item>Jederzeit 💚</item>
+        <item>Sag bloß nicht, du wusstest das schon 😏</item>
+        <item>Merk’s dir, das kommt im Test dran 📚</item>
+        <item>Siehst du? Mit mir bist du nie verloren 🦎</item>
     </string-array>
     <string-array name="chat_v_again">
         <item>Nochmal 🙂</item>
@@ -591,16 +594,22 @@
         <item>Hallo! 👋 Wie kann ich helfen?</item>
         <item>Hey! Ich bin da 🦎 Was brauchst du?</item>
         <item>Hallo hallo! Frag mich alles zur App.</item>
+        <item>Oh, hallo! Ich hab gerade an dich gedacht 🦎</item>
+        <item>Hey hey! Bereit für lohnende Aufträge? 😎</item>
     </string-array>
     <string-array name="chat_v_thanks">
         <item>Gern geschehen! 💚</item>
         <item>Freut mich! Gute Aufträge 🚕</item>
         <item>Jederzeit! Mache ich gern 🦎</item>
+        <item>Kein Ding! Bezahlung in Fliegen wird angenommen 🪰</item>
+        <item>Danke erhalten! Kommt in mein Gute-Taten-Glas 💚</item>
     </string-array>
     <string-array name="chat_v_how">
         <item>Super! Vor allem, wenn du lohnende Aufträge nimmst 😄</item>
         <item>Prima, ich wachse langsam 🌱 Wie läuft deine Schicht?</item>
         <item>Gut! Ich zähle hier Kilometer 🦎</item>
+        <item>Bestens! Na ja, nach dir natürlich 😉</item>
+        <item>Wie ein Chamäleon: Ich wechsle die Farbe, aber die Laune ist immer grün 💚</item>
     </string-array>
     <string-array name="chat_v_unknown">
         <item>Hmm, das weiß ich noch nicht 🤔 Sag es anders oder wähle unten eine Frage.</item>
@@ -655,6 +664,11 @@
         <item>Warum nimmt ein Chamäleon keine schlechten Aufträge? Es kann nicht vor Scham rot werden — es wird gleich grün vor Gewinn 😎</item>
         <item>Treffen sich zwei Kuriere. Einer: „Ich bin heute 300 km gefahren!“ Der andere: „Und wie viel verdient?“ Der Erste: „…Ich frag mal Wayo“ 🦎</item>
         <item>Mein Lieblingssport: Jagd auf lohnende Aufträge. Na ja, du rennst, ich rechne 😄</item>
+        <item>Ein Chamäleon fing als Taxifahrer an. Nach einer Woche hörte es auf: Die Fahrgäste haben es nie bemerkt 🦎</item>
+        <item>Warum spielen Taxifahrer kein Verstecken? Der nächste Auftrag findet sie sowieso 📱</item>
+        <item>— Wayo, wie viel hab ich verdient? — Reicht für einen Kaffee. — Und einen zweiten? — Nur wenn du einen roten Auftrag ablehnst 😏</item>
+        <item>Ein Kurier ruft den Kunden an: „Ich bin an der Tür.“ — „An welcher?“ — „An der, die nicht aufgeht“ 🚪</item>
+        <item>Mein Fahrstil ist wie meine Farben: Ich passe mich immer der Lage an 😎</item>
     </string-array>
     <string-array name="chat_v_tired">
         <item>Stark, dass du durchhältst 💚 Mach eine Pause, trink Wasser — gute Aufträge laufen nicht weg.</item>
@@ -760,6 +774,8 @@
     <string-array name="pet_tease_night">
         <item>Mitten in der Nacht und du bist hier. Fahren Eulen jetzt auch Taxi? 🦉</item>
         <item>Schon wieder wach? Ich bin ein Chamäleon, ich darf das — du brauchst Schlaf 😴</item>
+        <item>Um diese Zeit schlafen sogar die Sterne. Na ja, außer Taxifahrern 🌟</item>
+        <item>Nachtschicht? Ich beschütze dich vor schläfrigen Aufträgen 😴</item>
     </string-array>
     <string-array name="pet_tease_early">
         <item>So früh? Selbst ich bin noch nicht wach… okay, jetzt schon 😅</item>
@@ -768,10 +784,14 @@
     <string-array name="pet_tease_visitor">
         <item>Bist du zu Besuch hier oder arbeiten wir heute? 😄</item>
         <item>Schon wieder reingeschaut? Schmeichelhaft, aber die Aufträge nehmen sich nicht von allein 😏</item>
+        <item>Du behandelst die App wie den Kühlschrank: auf, gucken, zu 😄</item>
+        <item>Schon das dritte Mal heute… Gib’s zu, das ist wegen mir, oder? 😏</item>
     </string-array>
     <string-array name="pet_tease_away">
         <item>Schau mal, wer zurück ist! Ich dachte schon, du fährst jetzt Fahrrad 🚲</item>
         <item>Tagelang weg — ich wäre fast wieder ein Ei geworden 🥚</item>
+        <item>Wo warst du denn? Ich bin vor Langeweile fast vertrocknet 🌵</item>
+        <item>Du bist zurück! Ich hab schon mit dem Taschenrechner geredet 🧮</item>
     </string-array>
     <string-array name="pet_tease_rich">
         <item>Bei dem Verdienst schuldest du mir ein paar Fliegen 🪰😏</item>
@@ -781,11 +801,77 @@
         <item>Du schon wieder? Spaß, ich freu mich 😄</item>
         <item>Sieht aus, als hättest du mich vermisst 😏</item>
         <item>Oh, mein Lieblingsfahrer ist da. Na gut, mein einziger 😅</item>
+        <item>Ich hab nachgedacht… ist es nicht Zeit, dein Chamäleon zu streicheln? 🦎</item>
+        <item>Weißt du, wer der beste Fahrer ist? Tipp: Er schaut gerade auf diesen Bildschirm 😉</item>
+        <item>Wenn ich fahren könnte, wärst du arbeitslos. Gut, dass ich’s nicht kann 😄</item>
+        <item>Ich hab heute super Laune. Wahrscheinlich, weil du da bist 💚</item>
     </string-array>
     <string-array name="pet_tease_bad_now">
         <item>Der war doch rot! Schon gut, du bist der Boss 🙈</item>
         <item>Oh… mutige Entscheidung. Ich tu so, als hätte ich nichts gesehen 🫣</item>
+        <item>Du Draufgänger! Das kommt unter „nicht zu Hause nachmachen“ 🙈</item>
+        <item>Okay, notiert. Steht jetzt auf der „Hab ich doch gesagt“-Liste 📝</item>
     </string-array>
     <string name="pet_say_petted_5">Hey, ich bin keine Katze! Obwohl… mach weiter 😌</string>
     <string name="pet_say_petted_6">Noch ein bisschen und ich fange an zu schnurren. Können Chamäleons das? Jetzt schon 😄</string>
+    <string-array name="pet_tease_long_shift">
+        <item>Du fährst schon über 8 Stunden. Ich bin ein Chamäleon, aber selbst meine Augen schauen jetzt in verschiedene Richtungen 👀</item>
+        <item>Acht Stunden Schicht! Vielleicht eine Pause? Räder sind auch nur Menschen… fast 🛞</item>
+        <item>Du arbeitest länger, als ich wachse. Mach mal Pause, Held 💪</item>
+    </string-array>
+    <string-array name="pet_tease_shift_start">
+        <item>Los geht’s! Regel Nummer eins: keine roten Aufträge 😎</item>
+        <item>Schicht gestartet! Ich hab den Taschenrechner schon aufgewärmt 🧮</item>
+        <item>Ab geht’s! Ich schau auf die Aufträge, du auf die Straße. Perfektes Team 🤝</item>
+    </string-array>
+    <string-array name="pet_tease_many_orders">
+        <item>Aufträge heute: %1$d! Bist du sicher kein Roboter? Lass mich deine Batterien prüfen 🔋</item>
+        <item>Aufträge heute: %1$d. Noch ein paar und ich will ein Autogramm ✍️</item>
+        <item>Aufträge heute: %1$d. Die Stadt kennt dich schon beim Namen 🏙️</item>
+    </string-array>
+    <string-array name="pet_tease_no_orders">
+        <item>„Active“ ist an, aber noch kein Auftrag. Trinkt Uber vielleicht noch Kaffee? ☕</item>
+        <item>Funkstille… Sogar mir ist langweilig. Halte durch, gleich geht’s los 📱</item>
+        <item>Noch kein einziger Auftrag. Aber was für ein ruhiger Tag, oder? 😅</item>
+    </string-array>
+    <string-array name="pet_tease_lunch">
+        <item>Mittagspause! Sogar Kuriere essen. Besonders Kuriere 🍔</item>
+        <item>Zeit für einen Snack. Ich würde eine Fliege essen, du nimmst besser was Ordentliches 🥪</item>
+        <item>Ein hungriger Fahrer ist ein trauriger Fahrer. Iss, ich warte 😋</item>
+    </string-array>
+    <string-array name="pet_tease_late_evening">
+        <item>Noch am Arbeiten? Der Mond hat seine Schicht schon angetreten 🌙</item>
+        <item>Abendaufträge sind die leckersten. Aber Erholung gibt’s auch noch 😉</item>
+        <item>Schon spät! Ein letzter Auftrag und dann heim? Ich verrate nichts, wenn’s noch einer wird 🤫</item>
+    </string-array>
+    <string-array name="pet_tease_monday">
+        <item>Montag… Ich bin auch nicht begeistert, aber wir schaffen das 💪</item>
+        <item>Schönen Montag! Neue Woche, neue Rekorde. Oder wenigstens Kaffee ☕</item>
+        <item>Montag ist schwer, Aufträge sind leicht. Hoffentlich 😅</item>
+    </string-array>
+    <string-array name="pet_tease_friday">
+        <item>Freitag! Die Stadt geht feiern, wir gehen verdienen 💸</item>
+        <item>Freitagabend — beste Zeit für fette Aufträge. Nicht verpassen 🍕</item>
+        <item>Freitag! Heute fahren alle irgendwohin, und fast alle mit dir 🚕</item>
+    </string-array>
+    <string-array name="pet_tease_weekend">
+        <item>Wochenende! Die einen ruhen sich aus, die anderen verdienen an denen, die sich ausruhen 😏</item>
+        <item>Samstag und Sonntag — Zeit für Partys und gute Aufträge 🎉</item>
+        <item>Am Wochenende ist die Stadt anders. Ich auch — ganz entspannt 😎</item>
+    </string-array>
+    <string-array name="pet_tease_first_today">
+        <item>Oh, der erste Besuch heute! Ich hab dich vermisst 💚</item>
+        <item>Guten Tag! Heute wird ein guter Tag — hab ich beschlossen 🦎</item>
+        <item>Na, zeigen wir heute, wie’s geht? 😎</item>
+    </string-array>
+    <string-array name="pet_tease_good_now">
+        <item>Nimm ihn, nimm ihn, bevor Uber es sich anders überlegt 😏</item>
+        <item>Das ist mal ein Auftrag! Ich bin noch grüner geworden 💚</item>
+        <item>Gute Wahl. Ich würde ihn selbst nehmen, wenn ich Hände hätte 🦎</item>
+    </string-array>
+    <string-array name="pet_tease_smart_now">
+        <item>Mit Würde abgelehnt. Ein echter Profi 😎</item>
+        <item>Richtig, der Auftrag kann auf jemand anderen warten 🙅</item>
+        <item>Schön abgelehnt! Selbst Uber muss das respektieren 👏</item>
+    </string-array>
 </resources>

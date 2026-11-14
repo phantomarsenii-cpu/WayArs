@@ -582,6 +582,9 @@
         <item>Kérdezz bátran 😉</item>
         <item>Van még kérdés? Itt vagyok!</item>
         <item>Bármikor 💚</item>
+        <item>Csak ne mondd, hogy ezt már tudtad 😏</item>
+        <item>Jegyezd meg, lesz dolgozat 📚</item>
+        <item>Látod? Velem nem veszel el 🦎</item>
     </string-array>
     <string-array name="chat_v_again">
         <item>Elismétlem 🙂</item>
@@ -592,16 +595,22 @@
         <item>Szia! 👋 Miben segíthetek?</item>
         <item>Hé! Itt vagyok 🦎 Mire van szükséged?</item>
         <item>Szia, szia! Kérdezz bármit az appról.</item>
+        <item>Ó, szia! Épp rád gondoltam 🦎</item>
+        <item>Hé, hé! Készen állsz a jó rendelésekre? 😎</item>
     </string-array>
     <string-array name="chat_v_thanks">
         <item>Szívesen! 💚</item>
         <item>Örülök, hogy segíthettem! Jó fuvarokat 🚕</item>
         <item>Bármikor! Örömmel 🦎</item>
+        <item>Nincs mit! Fizetést legyekben is elfogadok 🪰</item>
+        <item>Köszönet fogadva! Beteszem a jócselekedetek befőttesüvegébe 💚</item>
     </string-array>
     <string-array name="chat_v_how">
         <item>Szuper! Főleg ha jó rendeléseket vállalsz 😄</item>
         <item>Remekül, lassan növök 🌱 És a műszakod?</item>
         <item>Jól! Itt számolom a kilométereket 🦎</item>
+        <item>A legjobban! Na jó, utánad persze 😉</item>
+        <item>Mint egy kaméleon: színt váltok, de a kedvem mindig zöld 💚</item>
     </string-array>
     <string-array name="chat_v_unknown">
         <item>Hmm, ezt még nem tudom 🤔 Mondd másképp, vagy válassz lent egy kérdést.</item>
@@ -656,6 +665,11 @@
         <item>Miért nem vállal a kaméleon rossz rendelést? Nem tud elpirulni szégyenében — rögtön bezöldül a nyereségtől 😎</item>
         <item>Találkozik két futár. Az egyik: „Ma 300 km-t mentem!” A másik: „És mennyit kerestél?” Az első: „…Megkérdezem Wayót” 🦎</item>
         <item>A kedvenc sportom a jó rendelések vadászata. Na jó, te futsz, én számolok 😄</item>
+        <item>Egy kaméleon elment taxisnak. Egy hét múlva felmondott: az utasok sosem vették észre 🦎</item>
+        <item>Miért nem bújócskáznak a taxisok? Úgyis megtalálja őket a következő rendelés 📱</item>
+        <item>— Wayo, mennyit kerestem? — Egy kávéra elég. — És egy másodikra? — Csak ha elutasítasz egy piros rendelést 😏</item>
+        <item>A futár felhívja az ügyfelet: „Az ajtónál vagyok.” — „Melyiknél?” — „Annál, amelyik nem nyílik” 🚪</item>
+        <item>A vezetési stílusom olyan, mint a színeim: mindig alkalmazkodom 😎</item>
     </string-array>
     <string-array name="chat_v_tired">
         <item>Ügyes vagy, hogy bírod 💚 Tarts szünetet, igyál vizet — a jó rendelések nem szaladnak el.</item>
@@ -761,6 +775,8 @@
     <string-array name="pet_tease_night">
         <item>Az éjszaka közepén itt vagy. A baglyok is taxiznak? 🦉</item>
         <item>Megint nem alszol? Én kaméleon vagyok, nekem szabad — neked pihenés kell 😴</item>
+        <item>Ilyenkor még a csillagok is alszanak. Na jó, a taxisokon kívül 🌟</item>
+        <item>Éjszakai műszak? Megvédelek az álmos rendelésektől 😴</item>
     </string-array>
     <string-array name="pet_tease_early">
         <item>Ilyen korán? Még én sem ébredtem fel… jó, most már igen 😅</item>
@@ -769,10 +785,14 @@
     <string-array name="pet_tease_visitor">
         <item>Vendégségbe jöttél, vagy ma dolgozunk? 😄</item>
         <item>Megint benéztél? Hízelgő, de a rendelések maguktól nem vállalódnak 😏</item>
+        <item>Úgy bánsz az appal, mint a hűtővel: kinyit, megnéz, becsuk 😄</item>
+        <item>Ma már harmadszor… Valld be, miattam jössz? 😏</item>
     </string-array>
     <string-array name="pet_tease_away">
         <item>Nézd csak, ki jött vissza! Azt hittem, átnyergeltél biciklire 🚲</item>
         <item>Napokig eltűntél — majdnem visszaváltoztam tojássá 🥚</item>
+        <item>Hol jártál? Majdnem kiszáradtam az unalomtól 🌵</item>
+        <item>Visszajöttél! Én már a számológéppel kezdtem beszélgetni 🧮</item>
     </string-array>
     <string-array name="pet_tease_rich">
         <item>Ilyen kereset mellett tartozol nekem pár légyvel 🪰😏</item>
@@ -782,11 +802,77 @@
         <item>Megint te? Csak viccelek, örülök neked 😄</item>
         <item>Látom, hiányoztam 😏</item>
         <item>Ó, itt a kedvenc sofőröm. Jó, az egyetlen 😅</item>
+        <item>Gondolkodtam… nem lenne itt az ideje megsimogatni a kaméleonodat? 🦎</item>
+        <item>Tudod, ki a legjobb sofőr? Tipp: épp ezt a képernyőt nézi 😉</item>
+        <item>Ha tudnék vezetni, munka nélkül maradnál. Szerencse, hogy nem tudok 😄</item>
+        <item>Ma szuper kedvem van. Biztos azért, mert eljöttél 💚</item>
     </string-array>
     <string-array name="pet_tease_bad_now">
         <item>Hiszen piros volt! Jó, jó, te vagy a főnök 🙈</item>
         <item>Hű… bátor döntés. Úgy teszek, mintha nem láttam volna 🫣</item>
+        <item>Micsoda vakmerő! Beírom a „ne próbáld ki otthon” rovatba 🙈</item>
+        <item>Oké, feljegyezve. Felkerült a „megmondtam” listára 📝</item>
     </string-array>
     <string name="pet_say_petted_5">Hé, nem vagyok macska! Bár… folytasd 😌</string>
     <string name="pet_say_petted_6">Még egy kicsit, és dorombolni kezdek. Tudnak ilyet a kaméleonok? Most már igen 😄</string>
+    <string-array name="pet_tease_long_shift">
+        <item>Már több mint 8 órája vezetsz. Kaméleon vagyok, de még az én szemem is máshová néz már 👀</item>
+        <item>Nyolc óra műszak! Talán egy szünet? A kerekek is emberek… majdnem 🛞</item>
+        <item>Tovább dolgozol, mint ahogy én növök. Pihenj egyet, hős 💪</item>
+    </string-array>
+    <string-array name="pet_tease_shift_start">
+        <item>Indulás! Első szabály: nincs piros rendelés 😎</item>
+        <item>Kezdődik a műszak! Már bemelegítettem a számológépet 🧮</item>
+        <item>Gyerünk! Én figyelem a rendeléseket, te az utat. Tökéletes csapat 🤝</item>
+    </string-array>
+    <string-array name="pet_tease_many_orders">
+        <item>Rendelések ma: %1$d! Biztos nem vagy robot? Megnézem az elemeidet 🔋</item>
+        <item>Rendelések ma: %1$d. Még néhány, és autogramot kérek ✍️</item>
+        <item>Rendelések ma: %1$d. A város már név szerint ismer 🏙️</item>
+    </string-array>
+    <string-array name="pet_tease_no_orders">
+        <item>Az „Active” be van kapcsolva, de rendelés nulla. Talán az Uber még kávézik? ☕</item>
+        <item>Rádiócsend… Még én is unatkozom. Tarts ki, mindjárt jönnek 📱</item>
+        <item>Még egyetlen rendelés sincs. De milyen nyugis nap, nem? 😅</item>
+    </string-array>
+    <string-array name="pet_tease_lunch">
+        <item>Ebédidő! Még a futárok is esznek. Főleg a futárok 🍔</item>
+        <item>Uzsonnaidő. Én egy legyet ennék, de te inkább valami komolyabbat 🥪</item>
+        <item>Az éhes sofőr szomorú sofőr. Egyél, megvárlak 😋</item>
+    </string-array>
+    <string-array name="pet_tease_late_evening">
+        <item>Még dolgozol? A Hold már műszakba állt 🌙</item>
+        <item>Az esti rendelések a legfinomabbak. De a pihenést sem törölték 😉</item>
+        <item>Késő van! Egy utolsó rendelés és haza? Nem mondom el senkinek, ha lesz még egy 🤫</item>
+    </string-array>
+    <string-array name="pet_tease_monday">
+        <item>Hétfő… Én sem vagyok elragadtatva, de megoldjuk 💪</item>
+        <item>Boldog hétfőt! Új hét, új rekordok. Vagy legalább egy kávé ☕</item>
+        <item>A hétfő nehéz, a rendelések könnyűek. Remélem 😅</item>
+    </string-array>
+    <string-array name="pet_tease_friday">
+        <item>Péntek! A város bulizni megy, mi pénzt keresni 💸</item>
+        <item>Péntek este — a kövér rendelések ideje. Ne hagyd ki 🍕</item>
+        <item>Péntek! Ma mindenki megy valahova, és szinte mindenki veled 🚕</item>
+    </string-array>
+    <string-array name="pet_tease_weekend">
+        <item>Hétvége! Van, aki pihen, és van, aki a pihenőkön keres 😏</item>
+        <item>Szombat és vasárnap — bulik és jó rendelések ideje 🎉</item>
+        <item>Hétvégén más a város. Én is — laza vagyok 😎</item>
+    </string-array>
+    <string-array name="pet_tease_first_today">
+        <item>Ó, a mai első látogatás! Hiányoztál 💚</item>
+        <item>Szép napot! Ma jó nap lesz — így döntöttem 🦎</item>
+        <item>Na, megmutatjuk ma, hogy kell ezt csinálni? 😎</item>
+    </string-array>
+    <string-array name="pet_tease_good_now">
+        <item>Vállald, vállald, mielőtt az Uber meggondolja magát 😏</item>
+        <item>Na, ez rendelés! Még zöldebb lettem 💚</item>
+        <item>Remek választás. Magam is elvállalnám, ha lenne kezem 🦎</item>
+    </string-array>
+    <string-array name="pet_tease_smart_now">
+        <item>Méltósággal elutasítva. Igazi profi 😎</item>
+        <item>Helyes, ez a rendelés várjon valaki másra 🙅</item>
+        <item>Szép elutasítás! Még az Uber is tiszteli 👏</item>
+    </string-array>
 </resources>

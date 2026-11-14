@@ -582,6 +582,9 @@
         <item>Bare spør i vei 😉</item>
         <item>Flere spørsmål? Jeg er her!</item>
         <item>Alltid 💚</item>
+        <item>Ikke si at du visste det fra før 😏</item>
+        <item>Husk det, det kommer prøve 📚</item>
+        <item>Ser du? Med meg går du aldri deg vill 🦎</item>
     </string-array>
     <string-array name="chat_v_again">
         <item>En gang til 🙂</item>
@@ -592,16 +595,22 @@
         <item>Hei! 👋 Hva kan jeg hjelpe med?</item>
         <item>Hei der! Jeg er her 🦎 Hva trenger du?</item>
         <item>Hei hei! Spør meg om alt i appen.</item>
+        <item>Å, hei! Jeg tenkte akkurat på deg 🦎</item>
+        <item>Hei hei! Klar for lønnsomme ordrer? 😎</item>
     </string-array>
     <string-array name="chat_v_thanks">
         <item>Bare hyggelig! 💚</item>
         <item>Godt å hjelpe! Gode turer 🚕</item>
         <item>Når som helst! Det er en glede 🦎</item>
+        <item>Bare hyggelig! Betaling i fluer tas imot 🪰</item>
+        <item>Takk mottatt! Den havner i krukka med gode gjerninger 💚</item>
     </string-array>
     <string-array name="chat_v_how">
         <item>Supert! Særlig når du tar lønnsomme ordrer 😄</item>
         <item>Fint, jeg vokser litt etter litt 🌱 Hvordan går skiftet?</item>
         <item>Bra! Sitter her og teller kilometer 🦎</item>
+        <item>Kjempebra! Vel, etter deg, selvfølgelig 😉</item>
+        <item>Som en kameleon: jeg skifter farge, men humøret er alltid grønt 💚</item>
     </string-array>
     <string-array name="chat_v_unknown">
         <item>Hmm, det vet jeg ikke ennå 🤔 Si det på en annen måte eller velg et spørsmål under.</item>
@@ -656,6 +665,11 @@
         <item>Hvorfor tar ikke en kameleon dårlige ordrer? Den kan ikke rødme av skam — den blir grønn av profitt med en gang 😎</item>
         <item>To bud møtes. Den ene: «Jeg kjørte 300 km i dag!» Den andre: «Og hvor mye tjente du?» Den første: «…Jeg spør Wayo» 🦎</item>
         <item>Favorittsporten min er jakten på lønnsomme ordrer. Ok, du løper, jeg teller 😄</item>
+        <item>En kameleon ble drosjesjåfør. Den sluttet etter en uke: passasjerene la aldri merke til den 🦎</item>
+        <item>Hvorfor leker ikke drosjesjåfører gjemsel? Neste ordre finner dem uansett 📱</item>
+        <item>— Wayo, hvor mye tjente jeg? — Nok til en kaffe. — Og en til? — Bare om du avslår en rød ordre 😏</item>
+        <item>Et bud ringer kunden: «Jeg står ved døra.» — «Hvilken?» — «Den som ikke vil åpne seg» 🚪</item>
+        <item>Kjørestilen min er som fargene mine: jeg tilpasser meg alltid 😎</item>
     </string-array>
     <string-array name="chat_v_tired">
         <item>Sterkt at du holder ut 💚 Ta en pause og drikk vann — de gode ordrene forsvinner ikke.</item>
@@ -761,6 +775,8 @@
     <string-array name="pet_tease_night">
         <item>Midt på natta, og du er her. Kjører ugler taxi nå også? 🦉</item>
         <item>Våken igjen? Jeg er en kameleon, jeg får lov — du trenger hvile 😴</item>
+        <item>På denne tiden sover til og med stjernene. Vel, bortsett fra drosjesjåfører 🌟</item>
+        <item>Nattskift? Jeg passer på deg mot søvnige ordrer 😴</item>
     </string-array>
     <string-array name="pet_tease_early">
         <item>Så tidlig? Selv jeg er ikke våken ennå… ok, nå er jeg det 😅</item>
@@ -769,10 +785,14 @@
     <string-array name="pet_tease_visitor">
         <item>Er du på besøk, eller skal vi jobbe i dag? 😄</item>
         <item>Titter innom igjen? Smigrende, men ordrene tar ikke seg selv 😏</item>
+        <item>Du bruker appen som kjøleskapet: åpne, kikke, lukke 😄</item>
+        <item>Tredje gang i dag… Innrøm det, det er for min skyld? 😏</item>
     </string-array>
     <string-array name="pet_tease_away">
         <item>Se hvem som er tilbake! Jeg trodde du hadde gått over til sykkel 🚲</item>
         <item>Borte i flere dager — jeg ble nesten et egg igjen 🥚</item>
+        <item>Hvor har du vært? Jeg holdt på å tørke ut av kjedsomhet 🌵</item>
+        <item>Du er tilbake! Jeg hadde begynt å prate med kalkulatoren 🧮</item>
     </string-array>
     <string-array name="pet_tease_rich">
         <item>Med sånn inntekt skylder du meg noen fluer 🪰😏</item>
@@ -782,11 +802,77 @@
         <item>Du igjen? Tuller, jeg er glad for å se deg 😄</item>
         <item>Ser ut som du har savnet meg 😏</item>
         <item>Å, favorittsjåføren min er her. Ok, min eneste 😅</item>
+        <item>Jeg tenkte… er det ikke på tide å klappe kameleonen din? 🦎</item>
+        <item>Vet du hvem som er den beste sjåføren? Hint: vedkommende ser på denne skjermen nå 😉</item>
+        <item>Hvis jeg kunne kjøre, ville du vært arbeidsløs. Godt jeg ikke kan 😄</item>
+        <item>Jeg er i strålende humør i dag. Sikkert fordi du kom 💚</item>
     </string-array>
     <string-array name="pet_tease_bad_now">
         <item>Den var jo rød! Greit, greit, du er sjefen 🙈</item>
         <item>Å… modig valg. Jeg later som jeg ikke så det 🫣</item>
+        <item>For en våghals! Det havner under «ikke prøv dette hjemme» 🙈</item>
+        <item>Ok, notert. Lagt til på «hva sa jeg»-lista 📝</item>
     </string-array>
     <string name="pet_say_petted_5">Hei, jeg er ingen katt! Selv om… fortsett 😌</string>
     <string name="pet_say_petted_6">Litt til, så begynner jeg å male. Kan kameleoner det? Nå kan de 😄</string>
+    <string-array name="pet_tease_long_shift">
+        <item>Du har kjørt i over 8 timer. Jeg er en kameleon, men selv øynene mine ser nå i hver sin retning 👀</item>
+        <item>Åtte timers skift! Kanskje en pause? Hjul er også mennesker… nesten 🛞</item>
+        <item>Du jobber lenger enn jeg vokser. Ta en pause, helt 💪</item>
+    </string-array>
+    <string-array name="pet_tease_shift_start">
+        <item>Da kjører vi! Regel nummer én: ingen røde ordrer 😎</item>
+        <item>Skiftet er i gang! Jeg har allerede varmet opp kalkulatoren 🧮</item>
+        <item>Avgårde! Jeg følger med på ordrene, du på veien. Perfekt lag 🤝</item>
+    </string-array>
+    <string-array name="pet_tease_many_orders">
+        <item>Ordrer i dag: %1$d! Er du sikker på at du ikke er en robot? La meg sjekke batteriene dine 🔋</item>
+        <item>Ordrer i dag: %1$d. Noen til, så ber jeg om autograf ✍️</item>
+        <item>Ordrer i dag: %1$d. Byen kjenner deg ved navn nå 🏙️</item>
+    </string-array>
+    <string-array name="pet_tease_no_orders">
+        <item>«Active» er på, men ingen ordrer ennå. Drikker Uber fortsatt kaffe? ☕</item>
+        <item>Radiostille… Selv jeg kjeder meg. Hold ut, snart kommer de 📱</item>
+        <item>Ikke én eneste ordre ennå. Men for en rolig dag, hæ? 😅</item>
+    </string-array>
+    <string-array name="pet_tease_lunch">
+        <item>Lunsj! Selv bud spiser. Spesielt bud 🍔</item>
+        <item>Matpause. Jeg ville spist en flue, men du bør ta noe mer solid 🥪</item>
+        <item>En sulten sjåfør er en trist sjåfør. Spis, jeg venter 😋</item>
+    </string-array>
+    <string-array name="pet_tease_late_evening">
+        <item>Jobber du fortsatt? Månen har allerede startet skiftet sitt 🌙</item>
+        <item>Kveldsordrer er de beste. Men hvile finnes også 😉</item>
+        <item>Det er sent! En siste ordre og så hjem? Jeg sier ingenting hvis det blir en til 🤫</item>
+    </string-array>
+    <string-array name="pet_tease_monday">
+        <item>Mandag… Jeg er heller ikke begeistret, men vi fikser det 💪</item>
+        <item>God mandag! Ny uke, nye rekorder. Eller i det minste kaffe ☕</item>
+        <item>Mandager er tunge, ordrene lette. Forhåpentligvis 😅</item>
+    </string-array>
+    <string-array name="pet_tease_friday">
+        <item>Fredag! Byen går ut for å feste, vi går ut for å tjene 💸</item>
+        <item>Fredagskveld — tid for fete ordrer. Ikke gå glipp av dem 🍕</item>
+        <item>Fredag! I dag skal alle et sted, og nesten alle med deg 🚕</item>
+    </string-array>
+    <string-array name="pet_tease_weekend">
+        <item>Helg! Noen hviler, andre tjener på dem som hviler 😏</item>
+        <item>Lørdag og søndag — tid for fester og gode ordrer 🎉</item>
+        <item>I helgen er byen annerledes. Det er jeg også — helt avslappet 😎</item>
+    </string-array>
+    <string-array name="pet_tease_first_today">
+        <item>Å, dagens første besøk! Jeg har savnet deg 💚</item>
+        <item>God dag! I dag blir en fin dag — det har jeg bestemt 🦎</item>
+        <item>Nå, skal vi vise dem hvordan det gjøres i dag? 😎</item>
+    </string-array>
+    <string-array name="pet_tease_good_now">
+        <item>Ta den, ta den, før Uber ombestemmer seg 😏</item>
+        <item>Det er en ordre! Jeg ble enda grønnere 💚</item>
+        <item>Godt valg. Jeg ville tatt den selv om jeg hadde hender 🦎</item>
+    </string-array>
+    <string-array name="pet_tease_smart_now">
+        <item>Avslått med stil. En ekte proff 😎</item>
+        <item>Riktig, den ordren kan vente på noen andre 🙅</item>
+        <item>Fint avslag! Selv Uber må respektere det 👏</item>
+    </string-array>
 </resources>

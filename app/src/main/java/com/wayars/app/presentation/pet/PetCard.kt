@@ -275,6 +275,8 @@ fun PetCard(
         R.string.pet_say_petted_5, R.string.pet_say_petted_6
     )
     val teaseBadNow = androidx.compose.ui.res.stringArrayResource(R.array.pet_tease_bad_now)
+    val teaseGoodNow = androidx.compose.ui.res.stringArrayResource(R.array.pet_tease_good_now)
+    val teaseSmartNow = androidx.compose.ui.res.stringArrayResource(R.array.pet_tease_smart_now)
     val praiseGood = androidx.compose.ui.res.stringArrayResource(R.array.pet_praise_good)
     val praiseSmart = androidx.compose.ui.res.stringArrayResource(R.array.pet_praise_smart)
     val pick = (pet.reactionAt / 1000L).toInt().let { if (it < 0) -it else it }
@@ -282,6 +284,9 @@ fun PetCard(
     else if (mood == PetMood.HELLO && greeting != null) greeting!!
     // Took a red order? A wink instead of a lecture.
     else if (reactionFresh && pet.reaction == PetState.Reaction.BAD_ACCEPTED) teaseBadNow[pick % teaseBadNow.size]
+    // Now and then a joke instead of the usual praise.
+    else if (reactionFresh && pick % 3 == 0 && pet.reaction == PetState.Reaction.GOOD_ACCEPTED) teaseGoodNow[pick / 3 % teaseGoodNow.size]
+    else if (reactionFresh && pick % 3 == 0 && pet.reaction == PetState.Reaction.SMART_REJECT) teaseSmartNow[pick / 3 % teaseSmartNow.size]
     else when (mood) {
         PetMood.HELLO -> stringResource(R.string.pet_say_hello, name)
         PetMood.WORKING -> stringResource(R.string.pet_say_working)

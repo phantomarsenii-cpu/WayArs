@@ -594,6 +594,9 @@
         <item>Ask me anything else 😉</item>
         <item>More questions? I’m here!</item>
         <item>Any time 💚</item>
+        <item>Don’t tell me you already knew that 😏</item>
+        <item>Remember it, there’ll be a test 📚</item>
+        <item>See? With me you’re never lost 🦎</item>
     </string-array>
     <string-array name="chat_v_again">
         <item>Once more 🙂</item>
@@ -604,16 +607,22 @@
         <item>Hi! 👋 How can I help?</item>
         <item>Hey! I’m here 🦎 What do you need?</item>
         <item>Hello hello! Ask me anything about the app.</item>
+        <item>Oh, hi! I was just thinking about you 🦎</item>
+        <item>Hey hey! Ready for some profitable orders? 😎</item>
     </string-array>
     <string-array name="chat_v_thanks">
         <item>You’re welcome! 💚</item>
         <item>Happy to help! Good orders to you 🚕</item>
         <item>Any time! It’s my pleasure 🦎</item>
+        <item>No problem! Flies accepted as payment 🪰</item>
+        <item>Thanks received! Adding it to my good-deeds jar 💚</item>
     </string-array>
     <string-array name="chat_v_how">
         <item>Great! Especially when you take profitable orders 😄</item>
         <item>Super, growing little by little 🌱 How’s your shift?</item>
         <item>Good! Just counting kilometres here 🦎</item>
+        <item>Best ever! Well, after you, of course 😉</item>
+        <item>Like a chameleon: I change colours, but my mood is always green 💚</item>
     </string-array>
     <string-array name="chat_v_unknown">
         <item>Hmm, I don’t know that yet 🤔 Try saying it differently or pick a question below.</item>
@@ -668,6 +677,11 @@
         <item>Why doesn’t a chameleon take bad orders? It can’t blush with shame — it just turns green with profit 😎</item>
         <item>Two couriers meet. One: “I drove 300 km today!” The other: “And how much did you make?” The first: “…Let me ask Wayo” 🦎</item>
         <item>My favourite sport is chasing profitable orders. Well, you do the running, I do the counting 😄</item>
+        <item>A chameleon got a job as a taxi driver. Quit after a week: passengers never noticed him 🦎</item>
+        <item>Why don’t taxi drivers play hide and seek? The next order always finds them 📱</item>
+        <item>— Wayo, how much did I make? — Enough for a coffee. — And a second one? — Only if you skip a red order 😏</item>
+        <item>A courier calls a customer: “I’m at the door.” — “Which one?” — “The one that won’t open” 🚪</item>
+        <item>My driving style is like my colours: always adapting to the situation 😎</item>
     </string-array>
     <string-array name="chat_v_tired">
         <item>You’re doing great hanging in there 💚 Take a break, drink some water — the good orders aren’t going anywhere.</item>
@@ -773,6 +787,8 @@
     <string-array name="pet_tease_night">
         <item>It’s the middle of the night and you’re here. Do owls drive taxis too? 🦉</item>
         <item>Not sleeping again? I’m a chameleon, I’m allowed — you need rest 😴</item>
+        <item>At this hour even the stars are asleep. Well, except taxi drivers 🌟</item>
+        <item>Night shift? I’ll guard you from sleepy orders 😴</item>
     </string-array>
     <string-array name="pet_tease_early">
         <item>This early? Even I’m not awake yet… okay, now I am 😅</item>
@@ -781,10 +797,14 @@
     <string-array name="pet_tease_visitor">
         <item>Are you here for a visit or are we working today? 😄</item>
         <item>Popping in again? I’m flattered, but orders won’t take themselves 😏</item>
+        <item>You treat this app like the fridge: open, look, close 😄</item>
+        <item>Third time today… Admit it, it’s for me, right? 😏</item>
     </string-array>
     <string-array name="pet_tease_away">
         <item>Look who’s back! I thought you’d switched to a bicycle 🚲</item>
         <item>Gone for days — I almost turned back into an egg 🥚</item>
+        <item>Where have you been? I nearly dried up from boredom 🌵</item>
+        <item>You’re back! I’d started talking to the calculator 🧮</item>
     </string-array>
     <string-array name="pet_tease_rich">
         <item>With earnings like that, you owe me some flies 🪰😏</item>
@@ -794,11 +814,77 @@
         <item>You again? Kidding, I’m happy to see you 😄</item>
         <item>Looks like you missed me 😏</item>
         <item>Oh, my favourite driver is here. Okay, my only one 😅</item>
+        <item>I was thinking… isn’t it time to pet your chameleon? 🦎</item>
+        <item>Know who the best driver is? Hint: they’re looking at this screen right now 😉</item>
+        <item>If I could drive, you’d be out of a job. Good thing I can’t 😄</item>
+        <item>I’m in a great mood today. Probably because you came 💚</item>
     </string-array>
     <string-array name="pet_tease_bad_now">
         <item>That one was red! Fine, fine, you’re the boss 🙈</item>
         <item>Oh… bold move. I’ll pretend I didn’t see that 🫣</item>
+        <item>Daredevil! I’m filing this under “don’t try at home” 🙈</item>
+        <item>Okay, noted. Added to the “I told you so” list 📝</item>
     </string-array>
     <string name="pet_say_petted_5">Hey, I’m not a cat! Although… keep going 😌</string>
     <string name="pet_say_petted_6">A bit more and I’ll start purring. Can chameleons purr? Now they can 😄</string>
+    <string-array name="pet_tease_long_shift">
+        <item>You’ve been driving for over 8 hours. I’m a chameleon, but even my eyes are pointing in different directions now 👀</item>
+        <item>Eight hours on shift! Maybe a break? Wheels are people too… almost 🛞</item>
+        <item>You’ve been working longer than I’ve been growing. Take a pause, hero 💪</item>
+    </string-array>
+    <string-array name="pet_tease_shift_start">
+        <item>Let’s go! Rule number one: no red orders 😎</item>
+        <item>Shift started! I’ve already warmed up my calculator 🧮</item>
+        <item>Off we go! I watch the orders, you watch the road. Perfect team 🤝</item>
+    </string-array>
+    <string-array name="pet_tease_many_orders">
+        <item>Orders today: %1$d! Are you sure you’re not a robot? Let me check your batteries 🔋</item>
+        <item>Orders today: %1$d. A few more and I’ll ask for an autograph ✍️</item>
+        <item>Orders today: %1$d. The city knows you by name now 🏙️</item>
+    </string-array>
+    <string-array name="pet_tease_no_orders">
+        <item>“Active” is on but no orders yet. Maybe Uber is still having coffee? ☕</item>
+        <item>Radio silence… Even I’m bored. Hang on, they’ll start pouring in 📱</item>
+        <item>Not a single order yet. But what a calm day, huh? 😅</item>
+    </string-array>
+    <string-array name="pet_tease_lunch">
+        <item>Lunchtime! Even couriers eat. Especially couriers 🍔</item>
+        <item>Snack time. I’d eat a fly, but you should go for something bigger 🥪</item>
+        <item>A hungry driver is a sad driver. Eat, I’ll wait 😋</item>
+    </string-array>
+    <string-array name="pet_tease_late_evening">
+        <item>Still working? The moon has already started its shift 🌙</item>
+        <item>Evening orders are the tastiest. But rest is still a thing 😉</item>
+        <item>Getting late! One last order and home? I won’t tell if there’s another one 🤫</item>
+    </string-array>
+    <string-array name="pet_tease_monday">
+        <item>Monday… I’m not thrilled either, but we’ll manage 💪</item>
+        <item>Happy Monday! New week, new records. Or at least coffee ☕</item>
+        <item>Mondays are heavy, orders are light. Hopefully 😅</item>
+    </string-array>
+    <string-array name="pet_tease_friday">
+        <item>Friday! The city goes out to party, we go out to earn 💸</item>
+        <item>Friday night — prime time for juicy orders. Don’t miss out 🍕</item>
+        <item>Friday! Everyone’s going somewhere today, and almost all of them with you 🚕</item>
+    </string-array>
+    <string-array name="pet_tease_weekend">
+        <item>Weekend! Some people rest, others earn on the people who rest 😏</item>
+        <item>Saturday and Sunday — time for parties and good orders 🎉</item>
+        <item>The city is different at weekends. So am I — totally chill 😎</item>
+    </string-array>
+    <string-array name="pet_tease_first_today">
+        <item>Oh, first visit of the day! I missed you 💚</item>
+        <item>Good day! Today will be a good one — I’ve decided 🦎</item>
+        <item>So, shall we show them how it’s done today? 😎</item>
+    </string-array>
+    <string-array name="pet_tease_good_now">
+        <item>Take it, take it, before Uber changes its mind 😏</item>
+        <item>Now that’s an order! I turned even greener 💚</item>
+        <item>Great pick. I’d take it myself if I had hands 🦎</item>
+    </string-array>
+    <string-array name="pet_tease_smart_now">
+        <item>Declined with dignity. A true pro 😎</item>
+        <item>Right, that order can wait for somebody else 🙅</item>
+        <item>Beautiful rejection! Even Uber must respect it 👏</item>
+    </string-array>
 </resources>

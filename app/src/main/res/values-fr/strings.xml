@@ -581,6 +581,9 @@
         <item>Demande-moi autre chose 😉</item>
         <item>D’autres questions ? Je suis là !</item>
         <item>Quand tu veux 💚</item>
+        <item>Ne me dis pas que tu le savais déjà 😏</item>
+        <item>Retiens bien, il y aura une interro 📚</item>
+        <item>Tu vois ? Avec moi, tu n’es jamais perdu 🦎</item>
     </string-array>
     <string-array name="chat_v_again">
         <item>Je répète 🙂</item>
@@ -591,16 +594,22 @@
         <item>Salut ! 👋 Comment je peux aider ?</item>
         <item>Hey ! Je suis là 🦎 Tu as besoin de quoi ?</item>
         <item>Coucou ! Demande-moi tout sur l’appli.</item>
+        <item>Oh, salut ! Je pensais justement à toi 🦎</item>
+        <item>Coucou ! Prêt pour des courses rentables ? 😎</item>
     </string-array>
     <string-array name="chat_v_thanks">
         <item>Avec plaisir ! 💚</item>
         <item>Content d’avoir aidé ! Bonnes courses 🚕</item>
         <item>Quand tu veux ! C’est un plaisir 🦎</item>
+        <item>Pas de souci ! Paiement en mouches accepté 🪰</item>
+        <item>Merci reçu ! Je le range dans mon bocal de bonnes actions 💚</item>
     </string-array>
     <string-array name="chat_v_how">
         <item>Super ! Surtout quand tu prends des courses rentables 😄</item>
         <item>Très bien, je grandis petit à petit 🌱 Et ta journée ?</item>
         <item>Bien ! Je compte les kilomètres 🦎</item>
+        <item>Au top ! Enfin, après toi, bien sûr 😉</item>
+        <item>Comme un caméléon : je change de couleur, mais mon humeur reste verte 💚</item>
     </string-array>
     <string-array name="chat_v_unknown">
         <item>Hmm, je ne sais pas encore ça 🤔 Dis-le autrement ou choisis une question ci-dessous.</item>
@@ -655,6 +664,11 @@
         <item>Pourquoi un caméléon ne prend pas de mauvaises courses ? Il ne sait pas rougir de honte — il verdit direct de profit 😎</item>
         <item>Deux livreurs se croisent. L’un : « J’ai fait 300 km aujourd’hui ! » L’autre : « Et t’as gagné combien ? » Le premier : « …Je demande à Wayo » 🦎</item>
         <item>Mon sport préféré : la chasse aux courses rentables. Bon, toi tu cours, moi je compte 😄</item>
+        <item>Un caméléon s’est fait embaucher comme taxi. Il a démissionné au bout d’une semaine : les clients ne le remarquaient jamais 🦎</item>
+        <item>Pourquoi les taxis ne jouent pas à cache-cache ? La prochaine course les trouve toujours 📱</item>
+        <item>— Wayo, combien j’ai gagné ? — Assez pour un café. — Et un deuxième ? — Seulement si tu refuses une course rouge 😏</item>
+        <item>Un livreur appelle le client : « Je suis à la porte. » — « Laquelle ? » — « Celle qui ne s’ouvre pas » 🚪</item>
+        <item>Mon style de conduite, c’est comme mes couleurs : je m’adapte toujours 😎</item>
     </string-array>
     <string-array name="chat_v_tired">
         <item>Bravo de tenir le coup 💚 Fais une pause, bois de l’eau — les bonnes courses ne vont pas s’envoler.</item>
@@ -760,6 +774,8 @@
     <string-array name="pet_tease_night">
         <item>En pleine nuit et tu es là. Les hiboux conduisent des taxis maintenant ? 🦉</item>
         <item>Encore debout ? Moi je suis un caméléon, j’ai le droit — toi, il te faut du repos 😴</item>
+        <item>À cette heure-ci, même les étoiles dorment. Enfin, sauf les taxis 🌟</item>
+        <item>Service de nuit ? Je te protège des courses endormies 😴</item>
     </string-array>
     <string-array name="pet_tease_early">
         <item>Si tôt ? Même moi je ne suis pas réveillé… bon, maintenant si 😅</item>
@@ -768,10 +784,14 @@
     <string-array name="pet_tease_visitor">
         <item>Tu passes en visite ou on travaille aujourd’hui ? 😄</item>
         <item>Encore un petit coucou ? Flatté, mais les courses ne vont pas se prendre toutes seules 😏</item>
+        <item>Tu traites l’appli comme le frigo : ouvrir, regarder, refermer 😄</item>
+        <item>Troisième visite aujourd’hui… Avoue, c’est pour moi ? 😏</item>
     </string-array>
     <string-array name="pet_tease_away">
         <item>Tiens, qui revoilà ! Je croyais que tu étais passé au vélo 🚲</item>
         <item>Disparu plusieurs jours — j’ai failli redevenir un œuf 🥚</item>
+        <item>Où étais-tu passé ? J’ai failli sécher d’ennui 🌵</item>
+        <item>Te revoilà ! J’avais commencé à parler à la calculatrice 🧮</item>
     </string-array>
     <string-array name="pet_tease_rich">
         <item>Avec des gains pareils, tu me dois quelques mouches 🪰😏</item>
@@ -781,11 +801,77 @@
         <item>Encore toi ? Je rigole, content de te voir 😄</item>
         <item>On dirait que je t’ai manqué 😏</item>
         <item>Oh, mon chauffeur préféré est là. Bon, mon seul chauffeur 😅</item>
+        <item>Je me disais… ce ne serait pas le moment de caresser ton caméléon ? 🦎</item>
+        <item>Tu sais qui est le meilleur chauffeur ? Indice : il regarde cet écran en ce moment 😉</item>
+        <item>Si je savais conduire, tu serais au chômage. Heureusement que je ne sais pas 😄</item>
+        <item>Je suis de super humeur aujourd’hui. Sûrement parce que tu es là 💚</item>
     </string-array>
     <string-array name="pet_tease_bad_now">
         <item>Elle était rouge, pourtant ! Bon, bon, c’est toi le chef 🙈</item>
         <item>Oh… décision audacieuse. Je vais faire comme si je n’avais rien vu 🫣</item>
+        <item>Quel casse-cou ! Je classe ça dans « à ne pas reproduire » 🙈</item>
+        <item>D’accord, noté. Ajouté à la liste « je te l’avais dit » 📝</item>
     </string-array>
     <string name="pet_say_petted_5">Hé, je ne suis pas un chat ! Quoique… continue 😌</string>
     <string name="pet_say_petted_6">Encore un peu et je vais ronronner. Les caméléons savent faire ça ? Maintenant oui 😄</string>
+    <string-array name="pet_tease_long_shift">
+        <item>Tu conduis depuis plus de 8 heures. Je suis un caméléon, mais même mes yeux regardent dans tous les sens maintenant 👀</item>
+        <item>Huit heures de service ! Une pause, peut-être ? Les roues aussi sont des personnes… presque 🛞</item>
+        <item>Tu bosses plus longtemps que je ne grandis. Fais une pause, héros 💪</item>
+    </string-array>
+    <string-array name="pet_tease_shift_start">
+        <item>C’est parti ! Règle numéro un : pas de courses rouges 😎</item>
+        <item>Le service commence ! J’ai déjà échauffé ma calculatrice 🧮</item>
+        <item>En route ! Je surveille les courses, toi la route. Équipe parfaite 🤝</item>
+    </string-array>
+    <string-array name="pet_tease_many_orders">
+        <item>Courses aujourd’hui : %1$d ! Tu es sûr de ne pas être un robot ? Je vérifie tes piles 🔋</item>
+        <item>Courses aujourd’hui : %1$d. Encore quelques-unes et je demande un autographe ✍️</item>
+        <item>Courses aujourd’hui : %1$d. La ville te connaît par ton prénom 🏙️</item>
+    </string-array>
+    <string-array name="pet_tease_no_orders">
+        <item>« Active » est allumé, mais zéro course. Uber prend peut-être encore son café ? ☕</item>
+        <item>Silence radio… Même moi je m’ennuie. Tiens bon, ça va arriver 📱</item>
+        <item>Pas encore une seule course. Mais quelle journée calme, hein ? 😅</item>
+    </string-array>
+    <string-array name="pet_tease_lunch">
+        <item>C’est l’heure du déjeuner ! Même les livreurs mangent. Surtout les livreurs 🍔</item>
+        <item>Petite pause snack. Moi je mangerais une mouche, toi prends quelque chose de plus costaud 🥪</item>
+        <item>Un chauffeur affamé est un chauffeur triste. Mange, j’attends 😋</item>
+    </string-array>
+    <string-array name="pet_tease_late_evening">
+        <item>Encore au travail ? La lune a déjà pris son service 🌙</item>
+        <item>Les courses du soir sont les meilleures. Mais le repos, ça existe aussi 😉</item>
+        <item>Il se fait tard ! Une dernière course et au lit ? Je ne dirai rien s’il y en a une autre 🤫</item>
+    </string-array>
+    <string-array name="pet_tease_monday">
+        <item>Lundi… Je ne suis pas ravi non plus, mais on va gérer 💪</item>
+        <item>Bon lundi ! Nouvelle semaine, nouveaux records. Ou au moins un café ☕</item>
+        <item>Le lundi est lourd, les courses sont légères. Espérons 😅</item>
+    </string-array>
+    <string-array name="pet_tease_friday">
+        <item>Vendredi ! La ville sort faire la fête, nous on sort gagner 💸</item>
+        <item>Vendredi soir — l’heure des grosses courses. Ne les rate pas 🍕</item>
+        <item>Vendredi ! Tout le monde va quelque part aujourd’hui, et presque tous avec toi 🚕</item>
+    </string-array>
+    <string-array name="pet_tease_weekend">
+        <item>Le week-end ! Certains se reposent, d’autres gagnent grâce à ceux qui se reposent 😏</item>
+        <item>Samedi et dimanche — l’heure des fêtes et des bonnes courses 🎉</item>
+        <item>Le week-end, la ville change. Moi aussi — tout relax 😎</item>
+    </string-array>
+    <string-array name="pet_tease_first_today">
+        <item>Oh, première visite de la journée ! Tu m’as manqué 💚</item>
+        <item>Bonne journée ! Aujourd’hui sera une bonne journée — j’ai décidé 🦎</item>
+        <item>Alors, on leur montre comment on fait aujourd’hui ? 😎</item>
+    </string-array>
+    <string-array name="pet_tease_good_now">
+        <item>Prends-la, prends-la, avant qu’Uber change d’avis 😏</item>
+        <item>Ça, c’est une course ! Je suis devenu encore plus vert 💚</item>
+        <item>Super choix. Je la prendrais moi-même si j’avais des mains 🦎</item>
+    </string-array>
+    <string-array name="pet_tease_smart_now">
+        <item>Refusée avec classe. Un vrai pro 😎</item>
+        <item>Bien vu, cette course peut attendre quelqu’un d’autre 🙅</item>
+        <item>Joli refus ! Même Uber doit respecter ça 👏</item>
+    </string-array>
 </resources>

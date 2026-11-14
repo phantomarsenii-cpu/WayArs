@@ -582,6 +582,9 @@
         <item>Nə istəsən soruş 😉</item>
         <item>Başqa sualın var? Buradayam!</item>
         <item>Həmişə 💚</item>
+        <item>Ancaq bunu bilirdin demə 😏</item>
+        <item>Yadda saxla, imtahanda soruşacağam 📚</item>
+        <item>Görürsən? Mənimlə itməzsən 🦎</item>
     </string-array>
     <string-array name="chat_v_again">
         <item>Təkrar edirəm 🙂</item>
@@ -592,16 +595,22 @@
         <item>Salam! 👋 Nə ilə kömək edim?</item>
         <item>Hey! Buradayam 🦎 Nə lazımdır?</item>
         <item>Salam-salam! Tətbiq haqqında nə istəsən soruş.</item>
+        <item>O, salam! Elə indi səni düşünürdüm 🦎</item>
+        <item>Hey-hey! Sərfəli sifarişlərə hazırsan? 😎</item>
     </string-array>
     <string-array name="chat_v_thanks">
         <item>Dəyməz! 💚</item>
         <item>Kömək etdiyimə şadam! Uğurlu sifarişlər 🚕</item>
         <item>Həmişə! Mənim üçün xoşdur 🦎</item>
+        <item>Dəyməz! Ödənişi milçəklə qəbul edirəm 🪰</item>
+        <item>Təşəkkür qəbul olundu! Yaxşı əməllər qutusuna atıram 💚</item>
     </string-array>
     <string-array name="chat_v_how">
         <item>Əla! Xüsusən sərfəli sifarişlər götürəndə 😄</item>
         <item>Super, yavaş-yavaş böyüyürəm 🌱 Sənin növbən necədir?</item>
         <item>Yaxşı! Oturub kilometr sayıram 🦎</item>
+        <item>Hamıdan yaxşı! Yaxşı, səndən sonra, əlbəttə 😉</item>
+        <item>Buqələmun kimi: rəngimi dəyişirəm, amma əhvalım həmişə yaşıldır 💚</item>
     </string-array>
     <string-array name="chat_v_unknown">
         <item>Hmm, bunu hələ bilmirəm 🤔 Başqa cür de və ya aşağıdan sual seç.</item>
@@ -656,6 +665,11 @@
         <item>Buqələmun niyə pis sifariş götürmür? Utancdan qızara bilmir — dərhal qazancdan yaşıllaşır 😎</item>
         <item>İki kuryer görüşür. Biri: «Bu gün 300 km sürdüm!» O biri: «Bəs nə qədər qazandın?» Birinci: «…Wayo-dan soruşum» 🦎</item>
         <item>Sevimli idmanım sərfəli sifarişlərin dalınca qaçmaqdır. Düzdür, sən qaçırsan, mən sayıram 😄</item>
+        <item>Buqələmun taksiyə işə girdi. Bir həftəyə işdən çıxdı: sərnişinlər onu heç görmürdü 🦎</item>
+        <item>Taksiçilər niyə gizlənpaç oynamır? Onsuz da növbəti sifariş onları tapır 📱</item>
+        <item>— Wayo, nə qədər qazandım? — Bir qəhvəlik. — Bəs ikinciyə? — Yalnız qırmızı sifarişdən imtina etsən 😏</item>
+        <item>Kuryer müştəriyə zəng edir: «Qapının ağzındayam.» — «Hansı qapının?» — «Açılmayanın» 🚪</item>
+        <item>Sürmə tərzim rənglərim kimidir: həmişə vəziyyətə uyğunlaşıram 😎</item>
     </string-array>
     <string-array name="chat_v_tired">
         <item>Dözdüyün üçün afərin 💚 Fasilə ver, su iç — yaxşı sifarişlər heç yerə qaçmır.</item>
@@ -761,6 +775,8 @@
     <string-array name="pet_tease_night">
         <item>Gecənin yarısıdır, sən isə buradasan. Bayquşlar da taksidə işləyir? 🦉</item>
         <item>Yenə yatmırsan? Mən buqələmunam, mənə olar — sənə isə istirahət lazımdır 😴</item>
+        <item>Bu vaxt hətta ulduzlar da yatır. Yaxşı, taksiçilərdən başqa 🌟</item>
+        <item>Gecə növbəsi? Səni yuxulu sifarişlərdən qoruyacağam 😴</item>
     </string-array>
     <string-array name="pet_tease_early">
         <item>Bu qədər tez? Hətta mən də hələ oyanmamışam… yaxşı, oyandım 😅</item>
@@ -769,10 +785,14 @@
     <string-array name="pet_tease_visitor">
         <item>Qonaq gəlmisən, yoxsa bu gün işləyirik? 😄</item>
         <item>Yenə baş çəkdin? Xoşdur, amma sifarişlər özləri götürülməyəcək 😏</item>
+        <item>Tətbiqə soyuducu kimi baxırsan: aç, bax, bağla 😄</item>
+        <item>Bu gün üçüncü dəfədir… Etiraf et, mənə görədir? 😏</item>
     </string-array>
     <string-array name="pet_tease_away">
         <item>Bax, kim qayıtdı! Elə bildim velosipedə keçmisən 🚲</item>
         <item>Bir neçə gün yoxa çıxdın — az qala yenidən yumurtaya çevriləcəkdim 🥚</item>
+        <item>Harada idin? Az qala darıxmaqdan quruyacaqdım 🌵</item>
+        <item>Qayıtdın! Mən artıq kalkulyatorla danışmağa başlamışdım 🧮</item>
     </string-array>
     <string-array name="pet_tease_rich">
         <item>Belə qazancla mənə bir neçə milçək borclusan 🪰😏</item>
@@ -782,11 +802,77 @@
         <item>Yenə sən? Zarafat edirəm, səni görməyimə şadam 😄</item>
         <item>Deyəsən, mənim üçün darıxmısan 😏</item>
         <item>O, sevimli sürücüm gəldi. Yaxşı, yeganə 😅</item>
+        <item>Fikirləşirdim… buqələmununu sığallamağın vaxtı deyilmi? 🦎</item>
+        <item>Bilirsən ən yaxşı sürücü kimdir? İpucu: hazırda bu ekrana baxır 😉</item>
+        <item>Sürə bilsəydim, işsiz qalardın. Yaxşı ki, bacarmıram 😄</item>
+        <item>Bu gün əhvalım əladır. Yəqin ki, sən gəldiyin üçün 💚</item>
     </string-array>
     <string-array name="pet_tease_bad_now">
         <item>Axı qırmızı idi! Yaxşı, yaxşı, burada boss sənsən 🙈</item>
         <item>Of… cəsarətli qərar. Görməmiş kimi edəcəyəm 🫣</item>
+        <item>Nə risklisən! Bunu «evdə təkrarlamayın» bölməsinə yazıram 🙈</item>
+        <item>Oldu, qeyd etdim. «Demişdim axı» siyahısına əlavə olundu 📝</item>
     </string-array>
     <string name="pet_say_petted_5">Hey, mən pişik deyiləm! Amma… davam et 😌</string>
     <string name="pet_say_petted_6">Bir az da — mırıldamağa başlayacağam. Buqələmunlar bunu bacarır? İndi bacarır 😄</string>
+    <string-array name="pet_tease_long_shift">
+        <item>Artıq 8 saatdan çoxdur sükan arxasındasan. Mən buqələmunam, amma hətta mənim gözlərim də artıq müxtəlif tərəflərə baxır 👀</item>
+        <item>Səkkiz saatlıq növbə! Bəlkə fasilə? Təkərlər də insandır… demək olar 🛞</item>
+        <item>Mən böyüdüyümdən də çox işləyirsən. Fasilə ver, qəhrəman 💪</item>
+    </string-array>
+    <string-array name="pet_tease_shift_start">
+        <item>Getdik! Birinci qayda: qırmızı sifariş yox 😎</item>
+        <item>Növbə başladı! Kalkulyatoru artıq qızdırmışam 🧮</item>
+        <item>Yola düşdük! Mən sifarişlərə baxıram, sən yola. Mükəmməl komanda 🤝</item>
+    </string-array>
+    <string-array name="pet_tease_many_orders">
+        <item>Bu gün sifarişlər: %1$d! Robot olmadığına əminsən? Batareyalarını yoxlayım 🔋</item>
+        <item>Bu gün sifarişlər: %1$d. Bir az da — avtoqraf istəyəcəyəm ✍️</item>
+        <item>Bu gün sifarişlər: %1$d. Şəhər artıq səni adınla tanıyır 🏙️</item>
+    </string-array>
+    <string-array name="pet_tease_no_orders">
+        <item>«Active» açıqdır, amma sifariş sıfırdır. Bəlkə Uber hələ qəhvə içir? ☕</item>
+        <item>Efirdə sükut… Hətta mən də darıxdım. Dözüm göstər, indi gələcəklər 📱</item>
+        <item>Hələ bir dənə də sifariş yoxdur. Amma nə sakit gündür, hə? 😅</item>
+    </string-array>
+    <string-array name="pet_tease_lunch">
+        <item>Nahar vaxtı! Hətta kuryerlər də yeyir. Xüsusən kuryerlər 🍔</item>
+        <item>Qəlyanaltı vaxtı. Mən milçək yeyərdim, sən isə daha ciddi bir şey ye 🥪</item>
+        <item>Ac sürücü — kədərli sürücü. Ye, gözləyərəm 😋</item>
+    </string-array>
+    <string-array name="pet_tease_late_evening">
+        <item>Hələ işləyirsən? Ay artıq növbəyə çıxıb 🌙</item>
+        <item>Axşam sifarişləri ən dadlısıdır. Amma istirahəti də ləğv edən yoxdur 😉</item>
+        <item>Gec oldu! Son sifariş və evə? Biri də olsa, heç kimə deməyəcəyəm 🤫</item>
+    </string-array>
+    <string-array name="pet_tease_monday">
+        <item>Bazar ertəsi… Mən də heyran deyiləm, amma öhdəsindən gələrik 💪</item>
+        <item>Bazar ertəniz mübarək! Yeni həftə — yeni rekordlar. Heç olmasa qəhvə ☕</item>
+        <item>Bazar ertəsi ağırdır, sifarişlər yüngül. Ümid edirəm 😅</item>
+    </string-array>
+    <string-array name="pet_tease_friday">
+        <item>Cümə! Şəhər əylənməyə çıxır, biz isə qazanmağa 💸</item>
+        <item>Cümə axşamı — yağlı sifarişlərin vaxtı. Qaçırma 🍕</item>
+        <item>Cümə! Bu gün hamı haradasa gedir, demək olar ki, hamısı da səninlə 🚕</item>
+    </string-array>
+    <string-array name="pet_tease_weekend">
+        <item>Həftəsonu! Kimisi dincəlir, kimisi dincələnlərdən qazanır 😏</item>
+        <item>Şənbə və bazar — əyləncə və yaxşı sifarişlər vaxtı 🎉</item>
+        <item>Həftəsonu şəhər başqadır. Mən də — rahatam 😎</item>
+    </string-array>
+    <string-array name="pet_tease_first_today">
+        <item>O, günün ilk ziyarəti! Darıxmışdım 💚</item>
+        <item>Gününüz xeyir! Bu gün yaxşı gün olacaq — belə qərar verdim 🦎</item>
+        <item>Hə, bu gün klas göstərək? 😎</item>
+    </string-array>
+    <string-array name="pet_tease_good_now">
+        <item>Götür, götür, Uber fikrini dəyişməmiş 😏</item>
+        <item>Buna sifariş deyərlər! Daha da yaşıllaşdım 💚</item>
+        <item>Əla seçim. Əllərim olsaydı, özüm də götürərdim 🦎</item>
+    </string-array>
+    <string-array name="pet_tease_smart_now">
+        <item>Ləyaqətlə imtina etdin. Əsl peşəkar 😎</item>
+        <item>Düzdür, belə sifariş qoy başqasını gözləsin 🙅</item>
+        <item>Gözəl imtina! Hətta Uber də hörmət edir yəqin 👏</item>
+    </string-array>
 </resources>

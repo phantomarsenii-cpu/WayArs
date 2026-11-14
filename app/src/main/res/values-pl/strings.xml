@@ -586,6 +586,9 @@
         <item>Pytaj śmiało dalej 😉</item>
         <item>Masz jeszcze pytania? Jestem tu!</item>
         <item>Zawsze do usług 💚</item>
+        <item>Tylko nie mów, że to wiedziałeś 😏</item>
+        <item>Zapamiętaj, będzie kartkówka 📚</item>
+        <item>Widzisz? Ze mną nie zginiesz 🦎</item>
     </string-array>
     <string-array name="chat_v_again">
         <item>Powtórzę 🙂</item>
@@ -596,16 +599,22 @@
         <item>Cześć! 👋 W czym pomóc?</item>
         <item>Hej! Jestem tu 🦎 Co podpowiedzieć?</item>
         <item>Cześć, cześć! Pytaj o wszystko w aplikacji.</item>
+        <item>O, cześć! Akurat o Tobie myślałem 🦎</item>
+        <item>Hej, hej! Gotowy na opłacalne zlecenia? 😎</item>
     </string-array>
     <string-array name="chat_v_thanks">
         <item>Nie ma za co! 💚</item>
         <item>Cieszę się, że pomogłem! Udanych zleceń 🚕</item>
         <item>Zawsze! To dla mnie przyjemność 🦎</item>
+        <item>Nie ma sprawy! Przyjmuję zapłatę w muchach 🪰</item>
+        <item>Dziękuję przyjęte! Wrzucam do skarbonki dobrych uczynków 💚</item>
     </string-array>
     <string-array name="chat_v_how">
         <item>Super! Zwłaszcza gdy bierzesz opłacalne zlecenia 😄</item>
         <item>Świetnie, powoli rosnę 🌱 A jak Twoja zmiana?</item>
         <item>Dobrze! Siedzę i liczę kilometry 🦎</item>
+        <item>Najlepiej! No, po Tobie oczywiście 😉</item>
+        <item>Jak kameleon: zmieniam kolory, ale humor zawsze zielony 💚</item>
     </string-array>
     <string-array name="chat_v_unknown">
         <item>Hmm, tego jeszcze nie wiem 🤔 Spróbuj powiedzieć inaczej albo wybierz pytanie poniżej.</item>
@@ -660,6 +669,11 @@
         <item>Dlaczego kameleon nie bierze słabych zleceń? Nie umie się czerwienić ze wstydu — od razu zielenieje od zysku 😎</item>
         <item>Spotyka się dwóch kurierów. Jeden: „Zrobiłem dziś 300 km!” Drugi: „A ile zarobiłeś?” Pierwszy: „…Zapytam Wayo” 🦎</item>
         <item>Mój ulubiony sport to pogoń za opłacalnymi zleceniami. No, Ty biegasz, ja liczę 😄</item>
+        <item>Kameleon zatrudnił się na taxi. Po tygodniu odszedł: pasażerowie go nie zauważali 🦎</item>
+        <item>Dlaczego taksówkarz nie gra w chowanego? I tak znajdzie go następne zlecenie 📱</item>
+        <item>— Wayo, ile zarobiłem? — Na kawę. — A na drugą? — Tylko jak odrzucisz czerwone zlecenie 😏</item>
+        <item>Kurier dzwoni do klienta: „Jestem pod drzwiami”. — „Którymi?” — „Tymi, co się nie otwierają” 🚪</item>
+        <item>Mój styl jazdy jest jak moje kolory: zawsze dopasowuję się do sytuacji 😎</item>
     </string-array>
     <string-array name="chat_v_tired">
         <item>Świetnie, że dajesz radę 💚 Zrób przerwę, napij się wody — dobre zlecenia nie uciekną.</item>
@@ -765,6 +779,8 @@
     <string-array name="pet_tease_night">
         <item>Środek nocy, a Ty tutaj. Sowy też jeżdżą na taxi? 🦉</item>
         <item>Znowu nie śpisz? Ja jestem kameleonem, mi wolno, a Ty musisz odpocząć 😴</item>
+        <item>O tej porze nawet gwiazdy śpią. No, poza taksówkarzami 🌟</item>
+        <item>Nocna zmiana? Będę Cię pilnował przed sennymi zleceniami 😴</item>
     </string-array>
     <string-array name="pet_tease_early">
         <item>Tak wcześnie? Nawet ja jeszcze nie wstałem… dobra, już wstałem 😅</item>
@@ -773,10 +789,14 @@
     <string-array name="pet_tease_visitor">
         <item>Wpadasz w odwiedziny czy dziś pracujemy? 😄</item>
         <item>Znowu zaglądasz? Schlebia mi to, ale zlecenia same się nie wezmą 😏</item>
+        <item>Traktujesz tę apkę jak lodówkę: otwórz, popatrz, zamknij 😄</item>
+        <item>Trzeci raz dziś zaglądasz… Przyznaj się, to dla mnie? 😏</item>
     </string-array>
     <string-array name="pet_tease_away">
         <item>O, kto wrócił! Myślałem, że przesiadłeś się na rower 🚲</item>
         <item>Zniknąłeś na kilka dni — prawie z powrotem zmieniłem się w jajko 🥚</item>
+        <item>Gdzie się podziewałeś? Prawie uschłem z nudów 🌵</item>
+        <item>Wróciłeś! A ja już zacząłem gadać z kalkulatorem 🧮</item>
     </string-array>
     <string-array name="pet_tease_rich">
         <item>Przy takim zarobku należą mi się muchy 🪰😏</item>
@@ -786,11 +806,77 @@
         <item>Znowu Ty? Żartuję, cieszę się, że Cię widzę 😄</item>
         <item>Widzę, że tęskniłeś 😏</item>
         <item>O, mój ulubiony kierowca. No dobra, jedyny 😅</item>
+        <item>Tak sobie myślę… może czas pogłaskać swojego kameleona? 🦎</item>
+        <item>Wiesz, kto jest najlepszym kierowcą? Podpowiedź: patrzy teraz na ten ekran 😉</item>
+        <item>Gdybym umiał jeździć, straciłbyś pracę. Dobrze, że nie umiem 😄</item>
+        <item>Mam dziś świetny humor. Pewnie dlatego, że przyszedłeś 💚</item>
     </string-array>
     <string-array name="pet_tease_bad_now">
         <item>Przecież była czerwona! Dobra, dobra, Ty tu rządzisz 🙈</item>
         <item>Oj… odważna decyzja. Udam, że nie widziałem 🫣</item>
+        <item>Ale z Ciebie ryzykant! Wpisuję to do „nie próbuj w domu” 🙈</item>
+        <item>Dobra, przyjęte. Dopisuję do listy „a nie mówiłem” 📝</item>
     </string-array>
     <string name="pet_say_petted_5">Hej, nie jestem kotem! Chociaż… głaszcz dalej 😌</string>
     <string name="pet_say_petted_6">Jeszcze chwila i zacznę mruczeć. Kameleony to potrafią? Teraz tak 😄</string>
+    <string-array name="pet_tease_long_shift">
+        <item>Jesteś za kółkiem już ponad 8 godzin. Jestem kameleonem, ale nawet mnie oczy już patrzą w różne strony 👀</item>
+        <item>Osiem godzin zmiany! Może przerwa? Koła też są ludźmi… prawie 🛞</item>
+        <item>Pracujesz dłużej, niż ja rosnę. Zrób pauzę, bohaterze 💪</item>
+    </string-array>
+    <string-array name="pet_tease_shift_start">
+        <item>Jedziemy! Zasada numer jeden: czerwonych nie bierzemy 😎</item>
+        <item>Zmiana ruszyła! Już rozgrzałem kalkulator 🧮</item>
+        <item>W drogę! Ja pilnuję zleceń, Ty drogi. Idealny duet 🤝</item>
+    </string-array>
+    <string-array name="pet_tease_many_orders">
+        <item>Zleceń dziś: %1$d! Na pewno nie jesteś robotem? Sprawdzę Ci baterie 🔋</item>
+        <item>Zleceń dziś: %1$d. Jeszcze trochę i poproszę o autograf ✍️</item>
+        <item>Zleceń dziś: %1$d. Miasto zna Cię już z imienia 🏙️</item>
+    </string-array>
+    <string-array name="pet_tease_no_orders">
+        <item>„Active” włączone, a zleceń zero. Może Uber jeszcze pije kawę? ☕</item>
+        <item>Cisza w eterze… Nawet mi się nudzi. Trzymaj się, zaraz się posypią 📱</item>
+        <item>Jeszcze ani jednego zlecenia. Za to jaki spokojny dzień, co? 😅</item>
+    </string-array>
+    <string-array name="pet_tease_lunch">
+        <item>Obiad! Nawet kurierzy jedzą. Zwłaszcza kurierzy 🍔</item>
+        <item>Czas na przekąskę. Ja zjadłbym muchę, ale Ty weź coś konkretniejszego 🥪</item>
+        <item>Głodny kierowca to smutny kierowca. Zjedz, poczekam 😋</item>
+    </string-array>
+    <string-array name="pet_tease_late_evening">
+        <item>Jeszcze pracujesz? Księżyc już zaczął swoją zmianę 🌙</item>
+        <item>Wieczorne zlecenia są najsmaczniejsze. Ale odpoczynek też się liczy 😉</item>
+        <item>Późno już! Ostatnie zlecenie i do domu? Nikomu nie powiem, jak będzie jeszcze jedno 🤫</item>
+    </string-array>
+    <string-array name="pet_tease_monday">
+        <item>Poniedziałek… Też nie skaczę z radości, ale damy radę 💪</item>
+        <item>Udanego poniedziałku! Nowy tydzień — nowe rekordy. Albo chociaż kawa ☕</item>
+        <item>Poniedziałek ciężki, zlecenia lekkie. Mam nadzieję 😅</item>
+    </string-array>
+    <string-array name="pet_tease_friday">
+        <item>Piątek! Miasto wychodzi się bawić, a my zarabiać 💸</item>
+        <item>Piątkowy wieczór — czas tłustych zleceń. Nie przegap 🍕</item>
+        <item>Piątek! Dziś wszyscy gdzieś jadą, i prawie wszyscy z Tobą 🚕</item>
+    </string-array>
+    <string-array name="pet_tease_weekend">
+        <item>Weekend! Jedni odpoczywają, inni zarabiają na tych, co odpoczywają 😏</item>
+        <item>Sobota i niedziela — czas imprez i dobrych zleceń 🎉</item>
+        <item>W weekend miasto jest inne. Ja też — wyluzowany 😎</item>
+    </string-array>
+    <string-array name="pet_tease_first_today">
+        <item>O, pierwsza wizyta dzisiaj! Tęskniłem 💚</item>
+        <item>Dzień dobry! Dziś będzie dobry dzień — tak postanowiłem 🦎</item>
+        <item>No to co, pokażemy dziś klasę? 😎</item>
+    </string-array>
+    <string-array name="pet_tease_good_now">
+        <item>Bierz, bierz, zanim Uber się rozmyśli 😏</item>
+        <item>To się nazywa zlecenie! Aż bardziej zzieleniałem 💚</item>
+        <item>Świetny wybór. Sam bym wziął, gdybym miał ręce 🦎</item>
+    </string-array>
+    <string-array name="pet_tease_smart_now">
+        <item>Odmówiłeś z klasą. Jak prawdziwy zawodowiec 😎</item>
+        <item>Słusznie, takie zlecenie niech poczeka na kogoś innego 🙅</item>
+        <item>Pięknie odmówione! Nawet Uber pewnie to szanuje 👏</item>
+    </string-array>
 </resources>

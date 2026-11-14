@@ -582,6 +582,9 @@
         <item>Xohlaganingni so‘ra 😉</item>
         <item>Yana savollar bormi? Men shu yerdaman!</item>
         <item>Har doim 💚</item>
+        <item>Faqat buni bilarding dema 😏</item>
+        <item>Eslab qol, imtihonda so‘rayman 📚</item>
+        <item>Ko‘ryapsanmi? Men bilan adashmaysan 🦎</item>
     </string-array>
     <string-array name="chat_v_again">
         <item>Takrorlayman 🙂</item>
@@ -592,16 +595,22 @@
         <item>Salom! 👋 Qanday yordam beray?</item>
         <item>Hey! Men shu yerdaman 🦎 Nima kerak?</item>
         <item>Salom-salom! Ilova haqida xohlaganingni so‘ra.</item>
+        <item>O, salom! Endigina seni o‘ylayotgandim 🦎</item>
+        <item>Hey-hey! Foydali buyurtmalarga tayyormisan? 😎</item>
     </string-array>
     <string-array name="chat_v_thanks">
         <item>Arzimaydi! 💚</item>
         <item>Yordam berganimdan xursandman! Omadli buyurtmalar 🚕</item>
         <item>Har doim! Men uchun xursandchilik 🦎</item>
+        <item>Arzimaydi! To‘lovni pashsha bilan qabul qilaman 🪰</item>
+        <item>Rahmat qabul qilindi! Yaxshi ishlar xaltachasiga solaman 💚</item>
     </string-array>
     <string-array name="chat_v_how">
         <item>Zo‘r! Ayniqsa foydali buyurtmalarni olganingda 😄</item>
         <item>Yaxshi, sekin-asta o‘syapman 🌱 Smenang qalay?</item>
         <item>Yaxshi! O‘tirib kilometr sanayapman 🦎</item>
+        <item>Hammadan yaxshi! Mayli, sendan keyin, albatta 😉</item>
+        <item>Xameleondek: rangimni o‘zgartiraman, lekin kayfiyatim doim yashil 💚</item>
     </string-array>
     <string-array name="chat_v_unknown">
         <item>Hmm, buni hali bilmayman 🤔 Boshqacha ayt yoki pastdan savol tanla.</item>
@@ -656,6 +665,11 @@
         <item>Nega xameleon yomon buyurtma olmaydi? U uyatdan qizara olmaydi — darhol foydadan yashil bo‘ladi 😎</item>
         <item>Ikki kuryer uchrashadi. Biri: «Bugun 300 km yurdim!» Ikkinchisi: «Qancha ishlading?» Birinchisi: «…Wayo’dan so‘rab ko‘ray» 🦎</item>
         <item>Sevimli sportim — foydali buyurtmalar ortidan yugurish. To‘g‘ri, yuguradigan sensan, sanaydigan menman 😄</item>
+        <item>Xameleon taksiga ishga kirdi. Bir haftadan keyin ketdi: yo‘lovchilar uni payqamasdi 🦎</item>
+        <item>Nega taksichilar berkinmachoq o‘ynamaydi? Baribir keyingi buyurtma ularni topadi 📱</item>
+        <item>— Wayo, qancha ishladim? — Bir qahvalik. — Ikkinchisiga-chi? — Faqat qizil buyurtmadan voz kechsang 😏</item>
+        <item>Kuryer mijozga qo‘ng‘iroq qiladi: «Eshik oldidaman.» — «Qaysi eshik?» — «Ochilmaydiganining» 🚪</item>
+        <item>Haydash uslubim ranglarimga o‘xshaydi: doim vaziyatga moslashaman 😎</item>
     </string-array>
     <string-array name="chat_v_tired">
         <item>Chidaganing uchun barakalla 💚 Tanaffus qil, suv ich — yaxshi buyurtmalar hech qayerga qochmaydi.</item>
@@ -761,6 +775,8 @@
     <string-array name="pet_tease_night">
         <item>Yarim tun, sen esa shu yerdasan. Boyqushlar ham taksida ishlaydimi? 🦉</item>
         <item>Yana uxlamayapsanmi? Men xameleonman, menga mumkin — senga dam olish kerak 😴</item>
+        <item>Bu paytda hatto yulduzlar ham uxlaydi. Mayli, taksichilardan tashqari 🌟</item>
+        <item>Tungi smena? Seni uyquli buyurtmalardan qo‘riqlayman 😴</item>
     </string-array>
     <string-array name="pet_tease_early">
         <item>Shunchalik ertami? Hatto men ham hali uyg‘onmadim… xo‘p, uyg‘ondim 😅</item>
@@ -769,10 +785,14 @@
     <string-array name="pet_tease_visitor">
         <item>Mehmonga keldingmi yoki bugun ishlaymizmi? 😄</item>
         <item>Yana kirib chiqdingmi? Yoqimli, lekin buyurtmalar o‘z-o‘zidan olinmaydi 😏</item>
+        <item>Ilovaga muzlatkichdek qaraysan: och, qara, yop 😄</item>
+        <item>Bugun uchinchi marta… Tan ol, men uchunmi? 😏</item>
     </string-array>
     <string-array name="pet_tease_away">
         <item>Qara, kim qaytdi! Velosipedga o‘tib olgansan deb o‘ylagandim 🚲</item>
         <item>Bir necha kun yo‘qolding — sal qoldi yana tuxumga aylanib qolay deb 🥚</item>
+        <item>Qayerlarda yurding? Zerikishdan sal qoldi qurib qolay deb 🌵</item>
+        <item>Qaytding! Men esa kalkulyator bilan gaplasha boshlagandim 🧮</item>
     </string-array>
     <string-array name="pet_tease_rich">
         <item>Shunday daromad bilan menga bir nechta pashsha qarzdorsan 🪰😏</item>
@@ -782,11 +802,77 @@
         <item>Yana senmi? Hazil, seni ko‘rganimdan xursandman 😄</item>
         <item>Ko‘rinishidan, meni sog‘inibsan 😏</item>
         <item>O, sevimli haydovchim keldi. Xo‘p, yagonasi 😅</item>
+        <item>O‘ylab qoldim… xameleoningni silash vaqti kelmadimi? 🦎</item>
+        <item>Bilasanmi, eng yaxshi haydovchi kim? Maslahat: u hozir shu ekranga qarab turibdi 😉</item>
+        <item>Haydashni bilganimda, ishsiz qolarding. Yaxshiyamki, bilmayman 😄</item>
+        <item>Bugun kayfiyatim zo‘r. Sen kelganing uchun bo‘lsa kerak 💚</item>
     </string-array>
     <string-array name="pet_tease_bad_now">
         <item>Axir qizil edi-ku! Xo‘p, xo‘p, bu yerda boshliq sen 🙈</item>
         <item>Voy… jasoratli qaror. Ko‘rmagandek bo‘lib turaman 🫣</item>
+        <item>Qanday tavakkalchisan! Buni «uyda takrorlamang» bo‘limiga yozaman 🙈</item>
+        <item>Xo‘p, qayd etdim. «Aytgandim-ku» ro‘yxatiga qo‘shildi 📝</item>
     </string-array>
     <string name="pet_say_petted_5">Hey, men mushuk emasman! Lekin… davom et 😌</string>
     <string name="pet_say_petted_6">Yana biroz — va mushukdek erkalanib ketaman. Xameleonlar ham shunday qiladimi? Endi ha 😄</string>
+    <string-array name="pet_tease_long_shift">
+        <item>Rul ortida 8 soatdan oshdi. Men xameleonman, lekin hatto mening ko‘zlarim ham endi har tomonga qarayapti 👀</item>
+        <item>Sakkiz soatlik smena! Balki tanaffus? G‘ildiraklar ham odam… deyarli 🛞</item>
+        <item>Men o‘sganimdan ham ko‘proq ishlayapsan. Tanaffus qil, qahramon 💪</item>
+    </string-array>
+    <string-array name="pet_tease_shift_start">
+        <item>Ketdik! Birinchi qoida: qizil buyurtma olmaymiz 😎</item>
+        <item>Smena boshlandi! Kalkulyatorni allaqachon qizdirib qo‘ydim 🧮</item>
+        <item>Yo‘lga chiqdik! Men buyurtmalarni kuzataman, sen — yo‘lni. Ajoyib jamoa 🤝</item>
+    </string-array>
+    <string-array name="pet_tease_many_orders">
+        <item>Bugun buyurtmalar: %1$d! Robot emasligingga ishonchingmi? Batareyalaringni tekshirib ko‘ray 🔋</item>
+        <item>Bugun buyurtmalar: %1$d. Yana biroz — va avtograf so‘rayman ✍️</item>
+        <item>Bugun buyurtmalar: %1$d. Shahar seni allaqachon ismingdan taniydi 🏙️</item>
+    </string-array>
+    <string-array name="pet_tease_no_orders">
+        <item>«Active» yoqilgan, buyurtma esa nol. Balki Uber hali qahva ichayotgandir? ☕</item>
+        <item>Efirda sukunat… Hatto men ham zerikdim. Chida, hozir yog‘iladi 📱</item>
+        <item>Hali birorta ham buyurtma yo‘q. Lekin qanday tinch kun-a? 😅</item>
+    </string-array>
+    <string-array name="pet_tease_lunch">
+        <item>Tushlik vaqti! Hatto kuryerlar ham ovqatlanadi. Ayniqsa kuryerlar 🍔</item>
+        <item>Yengil tamaddi vaqti. Men pashsha yegan bo‘lardim, sen esa jiddiyroq narsa ye 🥪</item>
+        <item>Och haydovchi — xafa haydovchi. Ovqatlan, kutib turaman 😋</item>
+    </string-array>
+    <string-array name="pet_tease_late_evening">
+        <item>Hali ishlayapsanmi? Oy allaqachon smenaga chiqdi 🌙</item>
+        <item>Kechki buyurtmalar eng mazalisi. Lekin dam olishni hech kim bekor qilmagan 😉</item>
+        <item>Kech bo‘ldi! Oxirgi buyurtma va uyga? Yana bittasi bo‘lsa, hech kimga aytmayman 🤫</item>
+    </string-array>
+    <string-array name="pet_tease_monday">
+        <item>Dushanba… Men ham xursand emasman, lekin uddalaymiz 💪</item>
+        <item>Dushanbang xayrli bo‘lsin! Yangi hafta — yangi rekordlar. Hech bo‘lmasa qahva ☕</item>
+        <item>Dushanba og‘ir, buyurtmalar yengil. Umid qilaman 😅</item>
+    </string-array>
+    <string-array name="pet_tease_friday">
+        <item>Juma! Shahar dam olishga chiqadi, biz esa ishlashga 💸</item>
+        <item>Juma kechasi — yog‘li buyurtmalar vaqti. Boy berma 🍕</item>
+        <item>Juma! Bugun hamma qayergadir ketyapti, deyarli hammasi — sen bilan 🚕</item>
+    </string-array>
+    <string-array name="pet_tease_weekend">
+        <item>Dam olish kunlari! Kimdir dam oladi, kimdir dam oluvchilardan ishlaydi 😏</item>
+        <item>Shanba va yakshanba — bazmlar va yaxshi buyurtmalar vaqti 🎉</item>
+        <item>Dam olish kunlari shahar boshqacha. Men ham — bemalol 😎</item>
+    </string-array>
+    <string-array name="pet_tease_first_today">
+        <item>O, kunning birinchi tashrifi! Sog‘indim 💚</item>
+        <item>Kuningiz xayrli! Bugun yaxshi kun bo‘ladi — shunday qaror qildim 🦎</item>
+        <item>Xo‘sh, bugun klass ko‘rsatamizmi? 😎</item>
+    </string-array>
+    <string-array name="pet_tease_good_now">
+        <item>Ol, ol, Uber fikridan qaytmasidan 😏</item>
+        <item>Mana bu buyurtma! Yanada yashillandim 💚</item>
+        <item>Ajoyib tanlov. Qo‘llarim bo‘lganda o‘zim ham olardim 🦎</item>
+    </string-array>
+    <string-array name="pet_tease_smart_now">
+        <item>Obro‘ bilan rad etding. Haqiqiy professional 😎</item>
+        <item>To‘g‘ri, bunday buyurtma boshqani kutsin 🙅</item>
+        <item>Chiroyli rad etish! Hatto Uber ham hurmat qilsa kerak 👏</item>
+    </string-array>
 </resources>

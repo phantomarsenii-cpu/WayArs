@@ -581,6 +581,9 @@
         <item>Întreabă-mă orice 😉</item>
         <item>Mai ai întrebări? Sunt aici!</item>
         <item>Oricând 💚</item>
+        <item>Doar nu-mi spune că știai deja 😏</item>
+        <item>Ține minte, dăm test 📚</item>
+        <item>Vezi? Cu mine nu te pierzi 🦎</item>
     </string-array>
     <string-array name="chat_v_again">
         <item>Repet 🙂</item>
@@ -591,16 +594,22 @@
         <item>Salut! 👋 Cu ce te ajut?</item>
         <item>Hei! Sunt aici 🦎 De ce ai nevoie?</item>
         <item>Salut, salut! Întreabă-mă orice despre aplicație.</item>
+        <item>O, salut! Tocmai mă gândeam la tine 🦎</item>
+        <item>Hei, hei! Gata de comenzi bune? 😎</item>
     </string-array>
     <string-array name="chat_v_thanks">
         <item>Cu plăcere! 💚</item>
         <item>Mă bucur că am ajutat! Comenzi bune 🚕</item>
         <item>Oricând! E plăcerea mea 🦎</item>
+        <item>N-ai pentru ce! Accept plata în muște 🪰</item>
+        <item>Mulțumirea primită! O pun în borcanul faptelor bune 💚</item>
     </string-array>
     <string-array name="chat_v_how">
         <item>Super! Mai ales când iei comenzi bune 😄</item>
         <item>Bine, cresc încet-încet 🌱 Cum merge tura?</item>
         <item>Bine! Stau și număr kilometri 🦎</item>
+        <item>Cel mai bine! Mă rog, după tine, desigur 😉</item>
+        <item>Ca un cameleon: îmi schimb culoarea, dar cheful e mereu verde 💚</item>
     </string-array>
     <string-array name="chat_v_unknown">
         <item>Hmm, asta încă nu știu 🤔 Spune altfel sau alege o întrebare mai jos.</item>
@@ -655,6 +664,11 @@
         <item>De ce nu ia cameleonul comenzi proaste? Nu știe să se înroșească de rușine — se înverzește direct de profit 😎</item>
         <item>Se întâlnesc doi curieri. Unul: „Am făcut azi 300 km!” Celălalt: „Și cât ai câștigat?” Primul: „…Îl întreb pe Wayo” 🦎</item>
         <item>Sportul meu preferat e vânătoarea de comenzi bune. Mă rog, tu alergi, eu număr 😄</item>
+        <item>Un cameleon s-a angajat la taxi. A demisionat după o săptămână: pasagerii nu-l observau niciodată 🦎</item>
+        <item>De ce nu se joacă taximetriștii de-a v-ați ascunselea? Oricum îi găsește următoarea comandă 📱</item>
+        <item>— Wayo, cât am câștigat? — Pentru o cafea. — Și pentru a doua? — Doar dacă refuzi o comandă roșie 😏</item>
+        <item>Curierul sună clientul: „Sunt la ușă.” — „La care?” — „La cea care nu se deschide” 🚪</item>
+        <item>Stilul meu de condus e ca și culorile mele: mă adaptez mereu situației 😎</item>
     </string-array>
     <string-array name="chat_v_tired">
         <item>Bravo că rezişti 💚 Ia o pauză, bea apă — comenzile bune nu fug nicăieri.</item>
@@ -760,6 +774,8 @@
     <string-array name="pet_tease_night">
         <item>E miezul nopții și tu ești aici. Și bufnițele lucrează la taxi? 🦉</item>
         <item>Iar nu dormi? Eu sunt cameleon, am voie — tu ai nevoie de odihnă 😴</item>
+        <item>La ora asta până și stelele dorm. Mă rog, în afară de taximetriști 🌟</item>
+        <item>Tură de noapte? Te păzesc de comenzile somnoroase 😴</item>
     </string-array>
     <string-array name="pet_tease_early">
         <item>Așa devreme? Nici eu nu m-am trezit… bine, acum da 😅</item>
@@ -768,10 +784,14 @@
     <string-array name="pet_tease_visitor">
         <item>Ai venit în vizită sau lucrăm azi? 😄</item>
         <item>Iar ai trecut pe aici? Mă flatează, dar comenzile nu se iau singure 😏</item>
+        <item>Tratezi aplicația ca pe frigider: deschizi, te uiți, închizi 😄</item>
+        <item>A treia oară azi… Recunoaște, e pentru mine? 😏</item>
     </string-array>
     <string-array name="pet_tease_away">
         <item>Ia uite cine s-a întors! Credeam că te-ai mutat pe bicicletă 🚲</item>
         <item>Ai dispărut câteva zile — aproape că m-am transformat înapoi în ou 🥚</item>
+        <item>Unde ai umblat? Era să mă usuc de plictiseală 🌵</item>
+        <item>Te-ai întors! Eu începusem să vorbesc cu calculatorul 🧮</item>
     </string-array>
     <string-array name="pet_tease_rich">
         <item>Cu așa câștiguri, îmi datorezi niște muște 🪰😏</item>
@@ -781,11 +801,77 @@
         <item>Iar tu? Glumesc, mă bucur să te văd 😄</item>
         <item>Văd că ți-a fost dor de mine 😏</item>
         <item>O, a venit șoferul meu preferat. Bine, singurul 😅</item>
+        <item>Mă gândeam… n-ar fi timpul să-ți mângâi cameleonul? 🦎</item>
+        <item>Știi cine e cel mai bun șofer? Indiciu: se uită acum la ecranul ăsta 😉</item>
+        <item>Dacă aș ști să conduc, ai rămâne fără job. Bine că nu știu 😄</item>
+        <item>Azi am un chef grozav. Probabil pentru că ai venit 💚</item>
     </string-array>
     <string-array name="pet_tease_bad_now">
         <item>Doar era roșie! Bine, bine, tu ești șeful 🙈</item>
         <item>Of… decizie curajoasă. Mă prefac că n-am văzut 🫣</item>
+        <item>Ce temerar! Trec asta la „nu încercați acasă” 🙈</item>
+        <item>Bine, notat. Adăugat pe lista „ți-am zis eu” 📝</item>
     </string-array>
     <string name="pet_say_petted_5">Hei, nu sunt pisică! Deși… continuă 😌</string>
     <string name="pet_say_petted_6">Încă puțin și încep să torc. Cameleonii pot face asta? Acum da 😄</string>
+    <string-array name="pet_tease_long_shift">
+        <item>Conduci de peste 8 ore. Sunt cameleon, dar până și ochii mei se uită acum în direcții diferite 👀</item>
+        <item>Opt ore de tură! Poate o pauză? Și roțile sunt oameni… aproape 🛞</item>
+        <item>Lucrezi mai mult decât cresc eu. Ia o pauză, eroule 💪</item>
+    </string-array>
+    <string-array name="pet_tease_shift_start">
+        <item>Hai să mergem! Regula numărul unu: fără comenzi roșii 😎</item>
+        <item>A început tura! Mi-am încălzit deja calculatorul 🧮</item>
+        <item>La drum! Eu păzesc comenzile, tu drumul. Echipă perfectă 🤝</item>
+    </string-array>
+    <string-array name="pet_tease_many_orders">
+        <item>Comenzi azi: %1$d! Sigur nu ești robot? Să-ți verific bateriile 🔋</item>
+        <item>Comenzi azi: %1$d. Încă puțin și îți cer autograf ✍️</item>
+        <item>Comenzi azi: %1$d. Orașul te știe deja pe nume 🏙️</item>
+    </string-array>
+    <string-array name="pet_tease_no_orders">
+        <item>„Active” e pornit, dar comenzi zero. Poate Uber încă își bea cafeaua? ☕</item>
+        <item>Liniște radio… Până și eu m-am plictisit. Ține-te, acum vin 📱</item>
+        <item>Încă nicio comandă. Dar ce zi liniștită, nu? 😅</item>
+    </string-array>
+    <string-array name="pet_tease_lunch">
+        <item>Prânzul! Și curierii mănâncă. Mai ales curierii 🍔</item>
+        <item>Timp de gustare. Eu aș mânca o muscă, tu ia ceva mai serios 🥪</item>
+        <item>Un șofer flămând e un șofer trist. Mănâncă, te aștept 😋</item>
+    </string-array>
+    <string-array name="pet_tease_late_evening">
+        <item>Încă lucrezi? Luna și-a început deja tura 🌙</item>
+        <item>Comenzile de seară sunt cele mai gustoase. Dar și odihna contează 😉</item>
+        <item>S-a făcut târziu! O ultimă comandă și acasă? Nu spun nimănui dacă mai e una 🤫</item>
+    </string-array>
+    <string-array name="pet_tease_monday">
+        <item>Luni… Nici eu nu sunt încântat, dar ne descurcăm 💪</item>
+        <item>Luni fericită! Săptămână nouă, recorduri noi. Sau măcar o cafea ☕</item>
+        <item>Lunea e grea, comenzile ușoare. Sper 😅</item>
+    </string-array>
+    <string-array name="pet_tease_friday">
+        <item>Vineri! Orașul iese la distracție, noi la câștig 💸</item>
+        <item>Vineri seara — vremea comenzilor grase. Nu le rata 🍕</item>
+        <item>Vineri! Azi toată lumea merge undeva, și aproape toți cu tine 🚕</item>
+    </string-array>
+    <string-array name="pet_tease_weekend">
+        <item>Weekend! Unii se odihnesc, alții câștigă de pe urma celor care se odihnesc 😏</item>
+        <item>Sâmbătă și duminică — vreme de petreceri și comenzi bune 🎉</item>
+        <item>În weekend orașul e altfel. Și eu — relaxat 😎</item>
+    </string-array>
+    <string-array name="pet_tease_first_today">
+        <item>O, prima vizită de azi! Mi-a fost dor de tine 💚</item>
+        <item>O zi bună! Azi va fi o zi bună — așa am decis 🦎</item>
+        <item>Ei, le arătăm azi cum se face? 😎</item>
+    </string-array>
+    <string-array name="pet_tease_good_now">
+        <item>Ia-o, ia-o, până nu se răzgândește Uber 😏</item>
+        <item>Asta da comandă! M-am înverzit și mai tare 💚</item>
+        <item>Alegere grozavă. Aș lua-o și eu dacă aș avea mâini 🦎</item>
+    </string-array>
+    <string-array name="pet_tease_smart_now">
+        <item>Refuzată cu demnitate. Un adevărat profesionist 😎</item>
+        <item>Corect, comanda asta să aștepte pe altcineva 🙅</item>
+        <item>Frumos refuz! Până și Uber trebuie să-l respecte 👏</item>
+    </string-array>
 </resources>
