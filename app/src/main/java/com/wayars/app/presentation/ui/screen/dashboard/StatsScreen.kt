@@ -113,8 +113,14 @@ fun StatsScreen(
                     stringResource(R.string.stats_empty),
                     color = WaTextSecondary,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth().padding(top = 48.dp)
+                    modifier = Modifier.fillMaxWidth().padding(top = if (orders.isEmpty()) 48.dp else 24.dp, bottom = 8.dp)
                 )
+            }
+            // Nothing in this period yet, but there are earlier orders: app comparison and
+            // achievements cover all time, so they stay visible (e.g. "Today" before the first order).
+            if (orders.isNotEmpty()) {
+                item { ServicesCard(extras.services, extras.comparisons, extras.best, currency) }
+                item { AchievementsCard(extras.achievements, currency) }
             }
         } else {
             item { Box(Modifier.tourTarget(TourTarget.STATS_HOURLY)) { RealHourlyCard(extras.shift, currency) } }
