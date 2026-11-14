@@ -118,7 +118,28 @@ object WayoKeywords {
         "ok" to listOf("ок", "окей", "понятно", "ясно", "хорошо", "ладно", "принял", "ok", "okay", "got it", "i see", "jasne", "rozumiem", "dobrze", "зрозуміло", "добре", "verstanden", "d'accord", "bine", "rozumím"),
         "laugh" to listOf("хаха", "ахах", "хахаха", "лол", "смешно", "haha", "lol", "hahaha", "funny", "śmieszne", "смішно", "хаха"),
         "night" to listOf("спокойной ночи", "доброй ночи", "иду спать", "good night", "going to sleep", "dobranoc", "idę spać", "на добраніч", "йду спати", "gute nacht", "bonne nuit", "noapte bună"),
-        "love" to listOf("люблю тебя", "я тебя люблю", "обожаю тебя", "i love you", "love you", "kocham cię", "кохаю тебе", "люблю тебе", "ich liebe dich", "je t'aime", "te iubesc")
+        "love" to listOf("люблю тебя", "я тебя люблю", "обожаю тебя", "i love you", "love you", "kocham cię", "кохаю тебе", "люблю тебе", "ich liebe dich", "je t'aime", "te iubesc"),
+        "glad" to listOf("я рад", "я рада", "рад слышать", "рада слышать", "это хорошо", "хорошо что", "i'm glad", "i am glad", "glad to hear", "cieszę się", "ciesze sie", "miło mi", "радий", "рада чути", "freut mich", "je suis content", "mă bucur"),
+        "cool" to listOf("круто", "класс", "классно", "супер", "отлично", "здорово", "огонь", "бомба", "прикольно", "клёво", "cool", "awesome", "great", "nice", "amazing", "fajnie", "świetnie", "ekstra", "чудово", "класно", "toll", "génial", "grozav"),
+        "agree" to listOf("да", "ага", "угу", "согласен", "согласна", "точно", "верно", "конечно", "yes", "yeah", "yep", "sure", "right", "dokładnie", "zgadzam się", "звісно", "згоден", "oui", "genau"),
+        "disagree" to listOf("нет", "неа", "не согласен", "не согласна", "no", "nope", "nie", "ні", "nein", "non"),
+        "sorry" to listOf("извини", "прости", "извиняюсь", "sorry", "przepraszam", "sorki", "вибач", "пробач", "entschuldigung", "désolé", "scuze"),
+        "wow" to listOf("вау", "ого", "ничего себе", "офигеть", "wow", "whoa", "omg", "o kurczę", "łał", "нічого собі", "krass", "waouh"),
+        "notfunny" to listOf("не смешно", "несмешно", "not funny", "nie śmieszne", "не смішно", "nicht lustig", "pas drôle"),
+        "more" to listOf("ещё", "еще", "давай ещё", "давай еще", "ещё один", "еще один", "ещё одну", "another", "more", "one more", "again", "jeszcze", "jeszcze jeden", "ще", "ще один", "noch einen", "encore", "încă"),
+        "miss" to listOf("скучал", "скучала", "скучаю", "соскучился", "соскучилась", "miss you", "missed you", "tęsknię", "tęskniłem", "сумую", "скучив", "vermisse dich", "tu me manques")
+    )
+
+
+    /** Emoji-only messages: what kind of reaction each one is (first match wins). */
+    val emoji: List<Pair<String, List<String>>> = listOf(
+        "angry" to listOf("😡", "😠", "🤬", "👎"),
+        "emo_sad" to listOf("😢", "😭", "😔", "☹", "🙁", "😞", "😿", "🥺", "💔"),
+        "laugh" to listOf("😂", "🤣", "😄", "😁", "😆", "😅", "😹", "😀", "😃"),
+        "love" to listOf("❤", "💚", "💙", "💛", "🧡", "💜", "🖤", "🤍", "😍", "🥰", "😘", "💕", "💖", "💗", "🫶"),
+        "wow" to listOf("😮", "😲", "🤯", "😱", "😳"),
+        "think" to listOf("🤔", "🧐", "🤨"),
+        "like" to listOf("👍", "👌", "🔥", "💪", "👏", "🙌", "✨", "😎", "😊", "🙂", "🤝", "✅")
     )
 
     /** "It didn't help" / "still not working" — follow-up to the previous answer. */

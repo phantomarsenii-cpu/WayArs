@@ -325,6 +325,8 @@ fun WayoChatDialog(
     var input by remember { mutableStateOf("") }
     var typing by remember { mutableStateOf(false) }
     var lastKey by remember { mutableStateOf<String?>(null) }
+    // The last bit of chit-chat ("joke"…), so "😂" or "more" right after a joke gets the right answer.
+    var lastChit by remember { mutableStateOf<String?>(null) }
     val listState = rememberLazyListState()
     LaunchedEffect(messages.size, typing) { if (messages.isNotEmpty()) listState.animateScrollToItem(messages.size - 1 + if (typing) 1 else 0) }
 
@@ -352,6 +354,7 @@ fun WayoChatDialog(
     suspend fun answer(t: PetHelpTopic?, key: String) {
         // The driver's own numbers first (that's usually what they asked), then the explanation.
         personalLine(context, key, isSubscribed)?.let { messages.add(ChatMsg(false, "📊 $it")) }
+        lastChit = null
         if (t == null) { lastKey = "stats"; return }
         val again = key == lastKey
         lastKey = key
@@ -457,7 +460,14 @@ fun WayoChatDialog(
                     )
                 )
                 is WayoBrain.Reply.Chit -> {
-                    val arr = context.resources.getIdentifier("chat_v_" + r.kind, "array", context.packageName)
+                    val afterJoke = lastChit == "joke"
+                    val kind = when {
+                        afterJoke && r.kind == "more" -> "joke"               // "another one!" → another joke
+                        afterJoke && (r.kind == "laugh" || r.kind == "like") -> "after_joke"
+                        else -> r.kind
+                    }
+                    lastChit = if (kind == "after_joke") "joke" else kind
+                    val arr = context.resources.getIdentifier("chat_v_$kind", "array", context.packageName)
                     messages.add(ChatMsg(false, if (arr != 0) pick(arr) else pick(R.array.chat_v_hello)))
                     // "What's your name?" — and yours?
                     if (r.kind == "name" && DriverPrefs.driverName.value.isBlank()) {
@@ -465,8 +475,11 @@ fun WayoChatDialog(
                         awaitingName = true
                     }
                 }
+                // A short message Wayo didn't get ("я рад", "ну и?") — answer like a friend would,
+                // not with a support form. Longer ones get the popular questions and Telegram.
                 is WayoBrain.Reply.Unknown -> messages.add(
-                    ChatMsg(false, pick(R.array.chat_v_unknown), chips = topics(POPULAR_KEYS.take(4)), telegram = true)
+                    if (clean.split(Regex("\\s+")).size <= 3) ChatMsg(false, pick(R.array.chat_v_shrug))
+                    else ChatMsg(false, pick(R.array.chat_v_unknown), chips = topics(POPULAR_KEYS.take(4)), telegram = true)
                 )
             }
         }

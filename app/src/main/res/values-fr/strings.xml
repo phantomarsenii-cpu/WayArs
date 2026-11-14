@@ -874,4 +874,73 @@
         <item>Bien vu, cette course peut attendre quelqu’un d’autre 🙅</item>
         <item>Joli refus ! Même Uber doit respecter ça 👏</item>
     </string-array>
+    <string-array name="chat_v_glad">
+        <item>Moi aussi ! 💚 On s’amuse mieux à deux.</item>
+        <item>Super ! La bonne humeur, c’est la moitié des gains 😄</item>
+        <item>Youpi ! Alors la journée est réussie 🦎</item>
+    </string-array>
+    <string-array name="chat_v_cool">
+        <item>Oui, je trouve aussi 😎</item>
+        <item>Cool, hein ? J’ai fait de mon mieux 💚</item>
+        <item>Le feu ! 🔥 Demande-moi encore.</item>
+    </string-array>
+    <string-array name="chat_v_agree">
+        <item>Marché conclu 🤝</item>
+        <item>Exactement ! 😉</item>
+        <item>Je savais que tu serais d’accord 😏</item>
+    </string-array>
+    <string-array name="chat_v_disagree">
+        <item>Bon, bon, je ne discute pas 😅</item>
+        <item>Hmm, tu as ton avis — respect 🦎</item>
+    </string-array>
+    <string-array name="chat_v_sorry">
+        <item>Pas de souci, je ne t’en veux pas 💚</item>
+        <item>Oublié ! Je suis un caméléon — mon humeur change vite 😄</item>
+    </string-array>
+    <string-array name="chat_v_wow">
+        <item>N’est-ce pas ?! Moi-même je suis bluffé 😲</item>
+        <item>Ouais, on est trop forts 😎</item>
+        <item>Inattendu, hein ? 😄</item>
+    </string-array>
+    <string-array name="chat_v_notfunny">
+        <item>Oups, ça n’a pas pris… Je vais m’entraîner sur les mouches 😅</item>
+        <item>Bon, je ne suis pas humoriste. Mais je calcule les courses à merveille 😎</item>
+    </string-array>
+    <string-array name="chat_v_more">
+        <item>Encore quoi ? 😄 Pose-moi une question sur les courses ou écris « blague ».</item>
+        <item>Encore — j’adore ! Dis-moi de quoi parler 🦎</item>
+    </string-array>
+    <string-array name="chat_v_miss">
+        <item>Tu m’as manqué aussi ! 💚 Content que tu sois là.</item>
+        <item>Je suis toujours là — passe plus souvent 😊</item>
+    </string-array>
+    <string-array name="chat_v_like">
+        <item>Ouais ! 👍</item>
+        <item>Content que ça te plaise 😊</item>
+        <item>C’est l’esprit 💪</item>
+    </string-array>
+    <string-array name="chat_v_emo_sad">
+        <item>Hé, ne sois pas triste 🫂 Une blague ?</item>
+        <item>Ça va aller, je suis là 💚</item>
+        <item>Smiley triste ? Je te remonte le moral : écris « blague » 😉</item>
+    </string-array>
+    <string-array name="chat_v_angry">
+        <item>Oh, quelqu’un est fâché 😬 Raconte-moi ce qui se passe — je t’aide.</item>
+        <item>Doucement, doucement 🫣 Voyons ensemble ce qui ne va pas.</item>
+    </string-array>
+    <string-array name="chat_v_think">
+        <item>Tu réfléchis ? Moi aussi… aux mouches 🤔</item>
+        <item>Hmm, tu es mystérieux aujourd’hui 😏</item>
+    </string-array>
+    <string-array name="chat_v_after_joke">
+        <item>Content qu’elle t’ait plu ! 😄 Une autre ? Écris « encore ».</item>
+        <item>Ha, je savais que ça te plairait 😎 Tu en veux encore ?</item>
+        <item>Drôle ? J’en ai tout un stock ! Écris « encore » 🦎</item>
+    </string-array>
+    <string-array name="chat_v_shrug">
+        <item>Hmm 🤔 Tu m’en dis un peu plus ?</item>
+        <item>Je suis un caméléon, pas un télépathe 😅 Tu veux dire quoi ?</item>
+        <item>Je n’ai pas bien compris… mais ça m’intéresse ! Dis-le autrement ? 🦎</item>
+    </string-array>
+    <string name="share_ach_text">Mes succès dans WayArs 🏆 %1$s</string>
 </resources>

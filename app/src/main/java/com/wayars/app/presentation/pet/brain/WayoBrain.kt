@@ -116,6 +116,10 @@ class WayoBrain(
     }
 
     fun reply(message: String, lastKey: String?): Reply {
+        // Only emoji (no letters or digits): a reaction, answered in kind.
+        if (message.isNotBlank() && message.none { it.isLetterOrDigit() }) {
+            WayoKeywords.emoji.firstOrNull { (_, list) -> list.any { message.contains(it) } }?.let { return Reply.Chit(it.first) }
+        }
         val norm = normalize(message)
         val msg = tokens(message)
         val ranked = rank(message)
@@ -147,9 +151,11 @@ class WayoBrain(
     }
 
     private fun chitTalk(norm: String, size: Int): String? {
-        for ((kind, phrases) in WayoKeywords.chit) {
+        // "not funny" must win over "funny" (laugh), so it is checked first.
+        val ordered = WayoKeywords.chit.entries.sortedBy { if (it.key == "notfunny") 0 else 1 }
+        for ((kind, phrases) in ordered) {
             // "ok" / "haha" only when that's (almost) the whole message, not "ok, and how do I…".
-            if ((kind == "ok" || kind == "laugh") && size > 2) continue
+            if (kind in SHORT_ONLY && size > 2) continue
             if (phrases.any { containsPhrase(norm, it) }) return kind
         }
         return null
@@ -168,6 +174,8 @@ class WayoBrain(
     }
 
     companion object {
+        /** Chit-chat that only counts when it's (almost) the whole message: "yes", "ok", "more"… */
+        private val SHORT_ONLY = setOf("ok", "laugh", "agree", "disagree", "more", "cool", "glad")
         const val LOW = 2.2
         const val HIGH = 4.2
         const val VERY_HIGH = 8.0

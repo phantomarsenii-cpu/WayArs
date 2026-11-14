@@ -887,4 +887,73 @@
         <item>Right, that order can wait for somebody else 🙅</item>
         <item>Beautiful rejection! Even Uber must respect it 👏</item>
     </string-array>
+    <string-array name="chat_v_glad">
+        <item>Me too! 💚 More fun together.</item>
+        <item>Great! A good mood is half the earnings 😄</item>
+        <item>Yay! Then it’s a good day 🦎</item>
+    </string-array>
+    <string-array name="chat_v_cool">
+        <item>Yep, I think so too 😎</item>
+        <item>Cool, right? I tried hard 💚</item>
+        <item>Fire! 🔥 Ask me more anytime.</item>
+    </string-array>
+    <string-array name="chat_v_agree">
+        <item>Deal 🤝</item>
+        <item>Exactly! 😉</item>
+        <item>I knew you’d agree 😏</item>
+    </string-array>
+    <string-array name="chat_v_disagree">
+        <item>Okay, okay, no arguing 😅</item>
+        <item>Hmm, you have your own opinion — respect 🦎</item>
+    </string-array>
+    <string-array name="chat_v_sorry">
+        <item>It’s fine, no hard feelings 💚</item>
+        <item>Forget it! I’m a chameleon — my mood changes fast 😄</item>
+    </string-array>
+    <string-array name="chat_v_wow">
+        <item>Right?! I’m shocked myself 😲</item>
+        <item>Yep, that’s how good we are 😎</item>
+        <item>Unexpected, huh? 😄</item>
+    </string-array>
+    <string-array name="chat_v_notfunny">
+        <item>Oh, that one flopped… I’ll practise on flies 😅</item>
+        <item>Fine, I’m no comedian. But I count orders brilliantly 😎</item>
+    </string-array>
+    <string-array name="chat_v_more">
+        <item>More what? 😄 Ask me about orders or type “joke”.</item>
+        <item>More — I love that! Tell me what to talk about 🦎</item>
+    </string-array>
+    <string-array name="chat_v_miss">
+        <item>I missed you too! 💚 Glad you’re here.</item>
+        <item>I’m always here — drop by more often 😊</item>
+    </string-array>
+    <string-array name="chat_v_like">
+        <item>Yep! 👍</item>
+        <item>Glad you like it 😊</item>
+        <item>That’s the spirit 💪</item>
+    </string-array>
+    <string-array name="chat_v_emo_sad">
+        <item>Hey, don’t be sad 🫂 Want a joke?</item>
+        <item>It’ll be okay, I’m right here 💚</item>
+        <item>Sad face? Let me cheer you up: type “joke” 😉</item>
+    </string-array>
+    <string-array name="chat_v_angry">
+        <item>Uh-oh, someone’s angry 😬 Tell me what happened — I’ll help.</item>
+        <item>Easy, easy 🫣 Let’s figure out what’s wrong together.</item>
+    </string-array>
+    <string-array name="chat_v_think">
+        <item>Thinking? Me too… about flies 🤔</item>
+        <item>Hmm, you’re mysterious today 😏</item>
+    </string-array>
+    <string-array name="chat_v_after_joke">
+        <item>Glad it landed! 😄 Another one? Type “more”.</item>
+        <item>Ha, I knew you’d like it 😎 Want more?</item>
+        <item>Funny? I’ve got a whole stock! Type “more” 🦎</item>
+    </string-array>
+    <string-array name="chat_v_shrug">
+        <item>Hmm 🤔 Tell me a bit more?</item>
+        <item>I’m a chameleon, not a mind reader 😅 What do you mean?</item>
+        <item>Didn’t quite get that… but I’m curious! Say it another way? 🦎</item>
+    </string-array>
+    <string name="share_ach_text">My achievements in WayArs 🏆 %1$s</string>
 </resources>

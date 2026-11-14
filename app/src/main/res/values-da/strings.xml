@@ -875,4 +875,73 @@
         <item>Rigtigt, den ordre kan vente på en anden 🙅</item>
         <item>Flot afvisning! Selv Uber må respektere det 👏</item>
     </string-array>
+    <string-array name="chat_v_glad">
+        <item>Det er jeg også! 💚 Det er sjovere sammen.</item>
+        <item>Fedt! Godt humør er halvdelen af indtjeningen 😄</item>
+        <item>Hurra! Så blev det en god dag 🦎</item>
+    </string-array>
+    <string-array name="chat_v_cool">
+        <item>Jep, det synes jeg også 😎</item>
+        <item>Fedt, ikke? Jeg gjorde mig umage 💚</item>
+        <item>Ild! 🔥 Spørg bare igen.</item>
+    </string-array>
+    <string-array name="chat_v_agree">
+        <item>Aftale 🤝</item>
+        <item>Præcis! 😉</item>
+        <item>Jeg vidste, du ville være enig 😏</item>
+    </string-array>
+    <string-array name="chat_v_disagree">
+        <item>Okay, okay, jeg skændes ikke 😅</item>
+        <item>Hmm, du har din egen mening — respekt 🦎</item>
+    </string-array>
+    <string-array name="chat_v_sorry">
+        <item>Det er helt i orden, jeg er ikke sur 💚</item>
+        <item>Glem det! Jeg er en kamæleon — mit humør skifter hurtigt 😄</item>
+    </string-array>
+    <string-array name="chat_v_wow">
+        <item>Ikke?! Jeg er selv i chok 😲</item>
+        <item>Jep, så gode er vi 😎</item>
+        <item>Uventet, hva’? 😄</item>
+    </string-array>
+    <string-array name="chat_v_notfunny">
+        <item>Øv, den gik ikke… Jeg øver mig på fluer 😅</item>
+        <item>Fint, jeg er ingen komiker. Men ordrer regner jeg perfekt 😎</item>
+    </string-array>
+    <string-array name="chat_v_more">
+        <item>Mere hvad? 😄 Spørg om ordrer eller skriv „vittighed“.</item>
+        <item>Mere — det elsker jeg! Sig, hvad jeg skal fortælle om 🦎</item>
+    </string-array>
+    <string-array name="chat_v_miss">
+        <item>Jeg har også savnet dig! 💚 Godt, du er her.</item>
+        <item>Jeg er her altid — kig forbi oftere 😊</item>
+    </string-array>
+    <string-array name="chat_v_like">
+        <item>Jep! 👍</item>
+        <item>Glad for, at du kan lide det 😊</item>
+        <item>Sådan! 💪</item>
+    </string-array>
+    <string-array name="chat_v_emo_sad">
+        <item>Hey, vær ikke ked af det 🫂 Skal jeg fortælle en vittighed?</item>
+        <item>Det skal nok gå, jeg er her 💚</item>
+        <item>Trist smiley? Jeg muntrer dig op: skriv „vittighed“ 😉</item>
+    </string-array>
+    <string-array name="chat_v_angry">
+        <item>Uh, der er nogen, der er sure 😬 Fortæl, hvad der skete — jeg hjælper.</item>
+        <item>Rolig, rolig 🫣 Lad os finde ud af, hvad der er galt.</item>
+    </string-array>
+    <string-array name="chat_v_think">
+        <item>Tænker du? Det gør jeg også… på fluer 🤔</item>
+        <item>Hmm, du er mystisk i dag 😏</item>
+    </string-array>
+    <string-array name="chat_v_after_joke">
+        <item>Godt, den faldt i god jord! 😄 En til? Skriv „mere“.</item>
+        <item>Ha, jeg vidste, du ville kunne lide den 😎 Vil du have flere?</item>
+        <item>Sjovt? Jeg har et helt lager! Skriv „mere“ 🦎</item>
+    </string-array>
+    <string-array name="chat_v_shrug">
+        <item>Hmm 🤔 Fortæller du lidt mere?</item>
+        <item>Jeg er en kamæleon, ikke tankelæser 😅 Hvad mener du?</item>
+        <item>Det forstod jeg ikke helt… men jeg er nysgerrig! Sig det på en anden måde? 🦎</item>
+    </string-array>
+    <string name="share_ach_text">Mine præstationer i WayArs 🏆 %1$s</string>
 </resources>

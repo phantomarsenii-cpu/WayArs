@@ -875,4 +875,73 @@
         <item>Správně, tahle zakázka ať počká na někoho jiného 🙅</item>
         <item>Krásně odmítnuto! I Uber to musí respektovat 👏</item>
     </string-array>
+    <string-array name="chat_v_glad">
+        <item>Já jsem taky rád! 💚 Spolu je to veselejší.</item>
+        <item>Paráda! Dobrá nálada je půlka výdělku 😄</item>
+        <item>Hurá! Takže den se povedl 🦎</item>
+    </string-array>
+    <string-array name="chat_v_cool">
+        <item>Jo, taky si myslím 😎</item>
+        <item>Super, co? Snažil jsem se 💚</item>
+        <item>Pecka! 🔥 Ptej se dál.</item>
+    </string-array>
+    <string-array name="chat_v_agree">
+        <item>Platí 🤝</item>
+        <item>Přesně! 😉</item>
+        <item>Věděl jsem, že budeš souhlasit 😏</item>
+    </string-array>
+    <string-array name="chat_v_disagree">
+        <item>Dobře, dobře, nehádám se 😅</item>
+        <item>Hm, máš svůj názor — respekt 🦎</item>
+    </string-array>
+    <string-array name="chat_v_sorry">
+        <item>To nic, nezlobím se 💚</item>
+        <item>Zapomeň na to! Jsem chameleon — náladu měním rychle 😄</item>
+    </string-array>
+    <string-array name="chat_v_wow">
+        <item>Že jo?! Sám jsem v šoku 😲</item>
+        <item>Jo, tak dobří jsme 😎</item>
+        <item>Nečekané, co? 😄</item>
+    </string-array>
+    <string-array name="chat_v_notfunny">
+        <item>Ech, nezabralo… Budu trénovat na mouchách 😅</item>
+        <item>Dobře, komik ze mě nebude. Zato zakázky počítám skvěle 😎</item>
+    </string-array>
+    <string-array name="chat_v_more">
+        <item>Ještě co? 😄 Zeptej se na zakázky nebo napiš „vtip“.</item>
+        <item>Ještě — to mám rád! Řekni, o čem mám vyprávět 🦎</item>
+    </string-array>
+    <string-array name="chat_v_miss">
+        <item>Taky se mi stýskalo! 💚 Dobře, že jsi tu.</item>
+        <item>Jsem tu pořád — chod sem častěji 😊</item>
+    </string-array>
+    <string-array name="chat_v_like">
+        <item>Jo! 👍</item>
+        <item>Jsem rád, že se ti to líbí 😊</item>
+        <item>Tak se mi to líbí 💪</item>
+    </string-array>
+    <string-array name="chat_v_emo_sad">
+        <item>Hej, nebuď smutný 🫂 Chceš vtip?</item>
+        <item>Bude dobře, jsem tu 💚</item>
+        <item>Smutný smajlík? Zvednu ti náladu: napiš „vtip“ 😉</item>
+    </string-array>
+    <string-array name="chat_v_angry">
+        <item>Jejda, někdo se zlobí 😬 Řekni, co se stalo — pomůžu.</item>
+        <item>Klid, klid 🫣 Pojďme spolu zjistit, co je špatně.</item>
+    </string-array>
+    <string-array name="chat_v_think">
+        <item>Přemýšlíš? Já taky… o mouchách 🤔</item>
+        <item>Hm, dnes jsi nějaký tajemný 😏</item>
+    </string-array>
+    <string-array name="chat_v_after_joke">
+        <item>Jsem rád, že zabral! 😄 Ještě jeden? Napiš „ještě“.</item>
+        <item>Ha, věděl jsem, že se ti bude líbit 😎 Chceš další?</item>
+        <item>Vtipné? Mám jich celou zásobu! Napiš „ještě“ 🦎</item>
+    </string-array>
+    <string-array name="chat_v_shrug">
+        <item>Hm 🤔 Řekneš mi víc?</item>
+        <item>Jsem chameleon, ne telepat 😅 Co tím myslíš?</item>
+        <item>Úplně jsem nepochopil… ale zajímá mě to! Řekni to jinak? 🦎</item>
+    </string-array>
+    <string name="share_ach_text">Moje úspěchy ve WayArs 🏆 %1$s</string>
 </resources>

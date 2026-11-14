@@ -874,4 +874,73 @@
         <item>Richtig, der Auftrag kann auf jemand anderen warten 🙅</item>
         <item>Schön abgelehnt! Selbst Uber muss das respektieren 👏</item>
     </string-array>
+    <string-array name="chat_v_glad">
+        <item>Ich freu mich auch! 💚 Zusammen macht’s mehr Spaß.</item>
+        <item>Super! Gute Laune ist der halbe Verdienst 😄</item>
+        <item>Juhu! Dann ist der Tag gelungen 🦎</item>
+    </string-array>
+    <string-array name="chat_v_cool">
+        <item>Ja, find ich auch 😎</item>
+        <item>Cool, oder? Hab mir Mühe gegeben 💚</item>
+        <item>Stark! 🔥 Frag ruhig weiter.</item>
+    </string-array>
+    <string-array name="chat_v_agree">
+        <item>Abgemacht 🤝</item>
+        <item>Genau! 😉</item>
+        <item>Wusste ich doch, dass du zustimmst 😏</item>
+    </string-array>
+    <string-array name="chat_v_disagree">
+        <item>Schon gut, schon gut, ich streite nicht 😅</item>
+        <item>Hm, du hast deine eigene Meinung — Respekt 🦎</item>
+    </string-array>
+    <string-array name="chat_v_sorry">
+        <item>Alles gut, ich bin nicht sauer 💚</item>
+        <item>Schwamm drüber! Ich bin ein Chamäleon — meine Laune wechselt schnell 😄</item>
+    </string-array>
+    <string-array name="chat_v_wow">
+        <item>Eben! Ich bin selbst baff 😲</item>
+        <item>Jep, so gut sind wir 😎</item>
+        <item>Unerwartet, was? 😄</item>
+    </string-array>
+    <string-array name="chat_v_notfunny">
+        <item>Oh, der kam nicht an… Ich übe an Fliegen 😅</item>
+        <item>Na gut, ein Komiker bin ich nicht. Aber Aufträge rechne ich super 😎</item>
+    </string-array>
+    <string-array name="chat_v_more">
+        <item>Mehr was? 😄 Frag mich zu Aufträgen oder schreib „Witz“.</item>
+        <item>Mehr — das mag ich! Sag, worüber ich erzählen soll 🦎</item>
+    </string-array>
+    <string-array name="chat_v_miss">
+        <item>Ich hab dich auch vermisst! 💚 Schön, dass du da bist.</item>
+        <item>Ich bin immer hier — komm öfter vorbei 😊</item>
+    </string-array>
+    <string-array name="chat_v_like">
+        <item>Jep! 👍</item>
+        <item>Freut mich, dass es dir gefällt 😊</item>
+        <item>So muss das 💪</item>
+    </string-array>
+    <string-array name="chat_v_emo_sad">
+        <item>Hey, nicht traurig sein 🫂 Willst du einen Witz?</item>
+        <item>Alles wird gut, ich bin da 💚</item>
+        <item>Trauriger Smiley? Ich muntere dich auf: schreib „Witz“ 😉</item>
+    </string-array>
+    <string-array name="chat_v_angry">
+        <item>Oh, da ist jemand sauer 😬 Erzähl, was los ist — ich helfe.</item>
+        <item>Ruhig, ruhig 🫣 Klären wir zusammen, was nicht stimmt.</item>
+    </string-array>
+    <string-array name="chat_v_think">
+        <item>Am Grübeln? Ich auch… über Fliegen 🤔</item>
+        <item>Hm, du bist heute geheimnisvoll 😏</item>
+    </string-array>
+    <string-array name="chat_v_after_joke">
+        <item>Freut mich, dass er ankam! 😄 Noch einen? Schreib „mehr“.</item>
+        <item>Ha, wusste ich doch, dass er dir gefällt 😎 Noch einer?</item>
+        <item>Lustig? Ich hab einen ganzen Vorrat! Schreib „mehr“ 🦎</item>
+    </string-array>
+    <string-array name="chat_v_shrug">
+        <item>Hm 🤔 Erzählst du mir etwas mehr?</item>
+        <item>Ich bin ein Chamäleon, kein Gedankenleser 😅 Was meinst du?</item>
+        <item>Hab ich nicht ganz verstanden… aber ich bin neugierig! Sag’s anders? 🦎</item>
+    </string-array>
+    <string name="share_ach_text">Meine Erfolge in WayArs 🏆 %1$s</string>
 </resources>

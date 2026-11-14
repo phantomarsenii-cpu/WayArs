@@ -875,4 +875,73 @@
         <item>Ճիշտ է, այդպիսի պատվերը թող ուրիշին սպասի 🙅</item>
         <item>Գեղեցիկ մերժում։ Նույնիսկ Uber-ը երևի հարգում է 👏</item>
     </string-array>
+    <string-array name="chat_v_glad">
+        <item>Ես էլ եմ ուրախ 💚 Միասին ավելի ուրախ է։</item>
+        <item>Հրաշալի է։ Լավ տրամադրությունը վաստակի կեսն է 😄</item>
+        <item>Ուռա։ Ուրեմն օրը հաջող էր 🦎</item>
+    </string-array>
+    <string-array name="chat_v_cool">
+        <item>Այո, ես էլ եմ այդպես կարծում 😎</item>
+        <item>Լավն է, չէ՞։ Ջանացել էի 💚</item>
+        <item>Կրակ է 🔥 Էլի հարցրու։</item>
+    </string-array>
+    <string-array name="chat_v_agree">
+        <item>Պայմանավորվեցինք 🤝</item>
+        <item>Ճիշտ է 😉</item>
+        <item>Գիտեի, որ կհամաձայնես 😏</item>
+    </string-array>
+    <string-array name="chat_v_disagree">
+        <item>Լավ, լավ, չեմ վիճում 😅</item>
+        <item>Հմ, քո կարծիքն ունես, հարգում եմ 🦎</item>
+    </string-array>
+    <string-array name="chat_v_sorry">
+        <item>Ոչինչ, չեմ նեղանում 💚</item>
+        <item>Մոռացիր։ Ես քամելեոն եմ, տրամադրությունս արագ եմ փոխում 😄</item>
+    </string-array>
+    <string-array name="chat_v_wow">
+        <item>Չէ՞։ Ես էլ եմ շոկի մեջ 😲</item>
+        <item>Այո, ահա թե ինչպիսին ենք մենք 😎</item>
+        <item>Անսպասելի էր, չէ՞ 😄</item>
+    </string-array>
+    <string-array name="chat_v_notfunny">
+        <item>Էհ, չստացվեց… Կմարզվեմ ճանճերի վրա 😅</item>
+        <item>Լավ, կատակերգու չեմ։ Բայց պատվերները հիանալի եմ հաշվում 😎</item>
+    </string-array>
+    <string-array name="chat_v_more">
+        <item>Էլի ի՞նչ 😄 Հարցրու պատվերների մասին կամ գրիր «կատակ»։</item>
+        <item>Էլի՝ սա սիրում եմ։ Ասա, ինչի մասին պատմեմ 🦎</item>
+    </string-array>
+    <string-array name="chat_v_miss">
+        <item>Ես էլ էի կարոտել 💚 Լավ է, որ այստեղ ես։</item>
+        <item>Ես միշտ այստեղ եմ, ավելի հաճախ եկիր 😊</item>
+    </string-array>
+    <string-array name="chat_v_like">
+        <item>Այո 👍</item>
+        <item>Ուրախ եմ, որ դուր է գալիս 😊</item>
+        <item>Ահա այսպես 💪</item>
+    </string-array>
+    <string-array name="chat_v_emo_sad">
+        <item>Հեյ, մի տխրիր 🫂 Անեկդոտ պատմե՞մ</item>
+        <item>Ամեն ինչ լավ կլինի, ես կողքիդ եմ 💚</item>
+        <item>Տխուր սմայլի՞կ։ Տրամադրությունդ բարձրացնեմ՝ գրիր «կատակ» 😉</item>
+    </string-array>
+    <string-array name="chat_v_angry">
+        <item>Օհ, ինչ-որ մեկը բարկացած է 😬 Պատմիր, թե ինչ է եղել, կօգնեմ։</item>
+        <item>Հանգիստ, հանգիստ 🫣 Եկ միասին պարզենք, թե ինչն է սխալ։</item>
+    </string-array>
+    <string-array name="chat_v_think">
+        <item>Մտածո՞ւմ ես։ Ես էլ… ճանճերի մասին 🤔</item>
+        <item>Հմ, այսօր խորհրդավոր ես 😏</item>
+    </string-array>
+    <string-array name="chat_v_after_joke">
+        <item>Ուրախ եմ, որ դուր եկավ 😄 Մեկ էլ ուզո՞ւմ ես։ Գրիր «էլի»։</item>
+        <item>Հա, գիտեի, որ դուր կգա 😎 Էլի՞</item>
+        <item>Ծիծաղելի՞ է։ Ամբողջ պաշար ունեմ։ Գրիր «էլի» 🦎</item>
+    </string-array>
+    <string-array name="chat_v_shrug">
+        <item>Հմ 🤔 Մի քիչ ավելի մանրամասն կպատմե՞ս</item>
+        <item>Ես քամելեոն եմ, ոչ թե հեռատես 😅 Ի՞նչ նկատի ունես</item>
+        <item>Լրիվ չհասկացա… բայց հետաքրքիր է։ Այլ կերպ կասե՞ս 🦎</item>
+    </string-array>
+    <string name="share_ach_text">Իմ նվաճումները WayArs-ում 🏆 %1$s</string>
 </resources>

@@ -875,4 +875,73 @@
         <item>To‘g‘ri, bunday buyurtma boshqani kutsin 🙅</item>
         <item>Chiroyli rad etish! Hatto Uber ham hurmat qilsa kerak 👏</item>
     </string-array>
+    <string-array name="chat_v_glad">
+        <item>Men ham xursandman! 💚 Birga quvnoqroq.</item>
+        <item>Ajoyib! Yaxshi kayfiyat — daromadning yarmi 😄</item>
+        <item>Ura! Demak, kun yaxshi o‘tdi 🦎</item>
+    </string-array>
+    <string-array name="chat_v_cool">
+        <item>Ha, men ham shunday o‘ylayman 😎</item>
+        <item>Zo‘r-a? Harakat qilgandim 💚</item>
+        <item>Olov! 🔥 Yana so‘rayver.</item>
+    </string-array>
+    <string-array name="chat_v_agree">
+        <item>Kelishdik 🤝</item>
+        <item>Aynan! 😉</item>
+        <item>Rozi bo‘lishingni bilardim 😏</item>
+    </string-array>
+    <string-array name="chat_v_disagree">
+        <item>Xo‘p, xo‘p, bahslashmayman 😅</item>
+        <item>Hmm, o‘z fikring bor — hurmat qilaman 🦎</item>
+    </string-array>
+    <string-array name="chat_v_sorry">
+        <item>Hechqisi yo‘q, xafa emasman 💚</item>
+        <item>Unut! Men xameleonman — kayfiyatim tez o‘zgaradi 😄</item>
+    </string-array>
+    <string-array name="chat_v_wow">
+        <item>To‘g‘rimi?! O‘zim ham hayratdaman 😲</item>
+        <item>Ha, mana shunday zo‘rmiz 😎</item>
+        <item>Kutilmagan, a? 😄</item>
+    </string-array>
+    <string-array name="chat_v_notfunny">
+        <item>Eh, chiqmadi… Pashshalarda mashq qilaman 😅</item>
+        <item>Mayli, men komik emasman. Lekin buyurtmalarni a’lo hisoblayman 😎</item>
+    </string-array>
+    <string-array name="chat_v_more">
+        <item>Yana nima? 😄 Buyurtmalar haqida so‘ra yoki «hazil» deb yoz.</item>
+        <item>Yana — buni yaxshi ko‘raman! Nima haqida gapirib beray, ayt 🦎</item>
+    </string-array>
+    <string-array name="chat_v_miss">
+        <item>Men ham sog‘indim! 💚 Yaxshiyamki shu yerdasan.</item>
+        <item>Men doim shu yerdaman — tez-tez kelib tur 😊</item>
+    </string-array>
+    <string-array name="chat_v_like">
+        <item>Ha! 👍</item>
+        <item>Yoqqanidan xursandman 😊</item>
+        <item>Mana bu gap! 💪</item>
+    </string-array>
+    <string-array name="chat_v_emo_sad">
+        <item>Hey, xafa bo‘lma 🫂 Latifa aytaymi?</item>
+        <item>Hammasi yaxshi bo‘ladi, yoningdaman 💚</item>
+        <item>G‘amgin smaylik? Kayfiyatingni ko‘taray: «hazil» deb yoz 😉</item>
+    </string-array>
+    <string-array name="chat_v_angry">
+        <item>Voy, kimningdir jahli chiqibdi 😬 Nima bo‘lganini ayt — yordam beraman.</item>
+        <item>Sekin, sekin 🫣 Kel, nima noto‘g‘riligini birga aniqlaymiz.</item>
+    </string-array>
+    <string-array name="chat_v_think">
+        <item>O‘ylayapsanmi? Men ham… pashshalar haqida 🤔</item>
+        <item>Hmm, bugun sirlisan 😏</item>
+    </string-array>
+    <string-array name="chat_v_after_joke">
+        <item>Yoqqanidan xursandman! 😄 Yana bittami? «yana» deb yoz.</item>
+        <item>Ha, yoqishini bilardim 😎 Yana xohlaysanmi?</item>
+        <item>Kulgilimi? Butun zaxiram bor! «yana» deb yoz 🦎</item>
+    </string-array>
+    <string-array name="chat_v_shrug">
+        <item>Hmm 🤔 Biroz batafsilroq aytasanmi?</item>
+        <item>Men xameleonman, telepat emas 😅 Nima demoqchisan?</item>
+        <item>To‘liq tushunmadim… lekin qiziq! Boshqacha aytasanmi? 🦎</item>
+    </string-array>
+    <string name="share_ach_text">WayArs’dagi yutuqlarim 🏆 %1$s</string>
 </resources>

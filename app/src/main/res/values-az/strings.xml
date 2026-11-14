@@ -875,4 +875,73 @@
         <item>Düzdür, belə sifariş qoy başqasını gözləsin 🙅</item>
         <item>Gözəl imtina! Hətta Uber də hörmət edir yəqin 👏</item>
     </string-array>
+    <string-array name="chat_v_glad">
+        <item>Mən də şadam! 💚 Birlikdə daha şən olur.</item>
+        <item>Əla! Yaxşı əhval qazancın yarısıdır 😄</item>
+        <item>Ura! Deməli, gün uğurlu keçdi 🦎</item>
+    </string-array>
+    <string-array name="chat_v_cool">
+        <item>Hə, mən də elə düşünürəm 😎</item>
+        <item>Əladır, hə? Çalışmışdım 💚</item>
+        <item>Od! 🔥 İstədiyin vaxt yenə soruş.</item>
+    </string-array>
+    <string-array name="chat_v_agree">
+        <item>Razılaşdıq 🤝</item>
+        <item>Dəqiq! 😉</item>
+        <item>Razılaşacağını bilirdim 😏</item>
+    </string-array>
+    <string-array name="chat_v_disagree">
+        <item>Yaxşı, yaxşı, mübahisə etmirəm 😅</item>
+        <item>Hm, öz fikrin var — hörmət edirəm 🦎</item>
+    </string-array>
+    <string-array name="chat_v_sorry">
+        <item>Eybi yoxdur, incimirəm 💚</item>
+        <item>Keçdi getdi! Buqələmunam — əhvalım tez dəyişir 😄</item>
+    </string-array>
+    <string-array name="chat_v_wow">
+        <item>Elə deyilmi?! Mən də şokdayam 😲</item>
+        <item>Hə, belə yaxşıyıq 😎</item>
+        <item>Gözlənilməz idi, hə? 😄</item>
+    </string-array>
+    <string-array name="chat_v_notfunny">
+        <item>Eh, alınmadı… Milçəklər üzərində məşq edərəm 😅</item>
+        <item>Yaxşı, komik deyiləm. Amma sifarişləri əla hesablayıram 😎</item>
+    </string-array>
+    <string-array name="chat_v_more">
+        <item>Daha nə? 😄 Sifarişlər barədə soruş və ya «zarafat» yaz.</item>
+        <item>Daha — bunu sevirəm! De, nədən danışım 🦎</item>
+    </string-array>
+    <string-array name="chat_v_miss">
+        <item>Mən də darıxmışdım! 💚 Yaxşı ki, buradasan.</item>
+        <item>Həmişə buradayam — tez-tez gəl 😊</item>
+    </string-array>
+    <string-array name="chat_v_like">
+        <item>Hə! 👍</item>
+        <item>Xoşuna gəldiyinə şadam 😊</item>
+        <item>Budur! 💪</item>
+    </string-array>
+    <string-array name="chat_v_emo_sad">
+        <item>Hey, kədərlənmə 🫂 Lətifə danışım?</item>
+        <item>Hər şey yaxşı olacaq, yanındayam 💚</item>
+        <item>Kədərli smaylik? Əhvalını qaldırım: «zarafat» yaz 😉</item>
+    </string-array>
+    <string-array name="chat_v_angry">
+        <item>Of, kimsə əsəbiləşib 😬 Nə olduğunu de — kömək edərəm.</item>
+        <item>Sakit, sakit 🫣 Gəl birlikdə nəyin düz olmadığını tapaq.</item>
+    </string-array>
+    <string-array name="chat_v_think">
+        <item>Fikirləşirsən? Mən də… milçəklər haqqında 🤔</item>
+        <item>Hm, bu gün sirli görünürsən 😏</item>
+    </string-array>
+    <string-array name="chat_v_after_joke">
+        <item>Xoşuna gəldiyinə şadam! 😄 Biri də? «yenə» yaz.</item>
+        <item>Ha, xoşuna gələcəyini bilirdim 😎 Daha istəyirsən?</item>
+        <item>Gülməlidir? Bütöv ehtiyatım var! «yenə» yaz 🦎</item>
+    </string-array>
+    <string-array name="chat_v_shrug">
+        <item>Hm 🤔 Bir az ətraflı danışarsan?</item>
+        <item>Mən buqələmunam, telepat yox 😅 Nə demək istəyirsən?</item>
+        <item>Tam başa düşmədim… amma maraqlıdır! Başqa cür deyərsən? 🦎</item>
+    </string-array>
+    <string name="share_ach_text">WayArs-dakı nailiyyətlərim 🏆 %1$s</string>
 </resources>

@@ -874,4 +874,73 @@
         <item>Corect, comanda asta să aștepte pe altcineva 🙅</item>
         <item>Frumos refuz! Până și Uber trebuie să-l respecte 👏</item>
     </string-array>
+    <string-array name="chat_v_glad">
+        <item>Și eu mă bucur! 💚 Împreună e mai vesel.</item>
+        <item>Super! Buna dispoziție e jumătate din câștig 😄</item>
+        <item>Ura! Înseamnă că ziua a ieșit bine 🦎</item>
+    </string-array>
+    <string-array name="chat_v_cool">
+        <item>Da, și eu cred asta 😎</item>
+        <item>Tare, nu? M-am străduit 💚</item>
+        <item>Beton! 🔥 Mai întreabă oricând.</item>
+    </string-array>
+    <string-array name="chat_v_agree">
+        <item>Ne-am înțeles 🤝</item>
+        <item>Exact! 😉</item>
+        <item>Știam că o să fii de acord 😏</item>
+    </string-array>
+    <string-array name="chat_v_disagree">
+        <item>Bine, bine, nu mă cert 😅</item>
+        <item>Hmm, ai părerea ta — respect 🦎</item>
+    </string-array>
+    <string-array name="chat_v_sorry">
+        <item>E în regulă, nu mă supăr 💚</item>
+        <item>Trecem peste! Sunt cameleon — îmi schimb repede dispoziția 😄</item>
+    </string-array>
+    <string-array name="chat_v_wow">
+        <item>Nu-i așa?! Și eu sunt șocat 😲</item>
+        <item>Da, așa de buni suntem 😎</item>
+        <item>Neașteptat, nu? 😄</item>
+    </string-array>
+    <string-array name="chat_v_notfunny">
+        <item>Of, n-a mers… Mă antrenez pe muște 😅</item>
+        <item>Bine, nu-s comediant. Dar comenzile le calculez excelent 😎</item>
+    </string-array>
+    <string-array name="chat_v_more">
+        <item>Încă ce? 😄 Întreabă-mă despre comenzi sau scrie „glumă”.</item>
+        <item>Încă — asta îmi place! Spune-mi despre ce să povestesc 🦎</item>
+    </string-array>
+    <string-array name="chat_v_miss">
+        <item>Și mie mi-a fost dor! 💚 Bine că ești aici.</item>
+        <item>Sunt aici mereu — mai treci pe la mine 😊</item>
+    </string-array>
+    <string-array name="chat_v_like">
+        <item>Da! 👍</item>
+        <item>Mă bucur că-ți place 😊</item>
+        <item>Așa da 💪</item>
+    </string-array>
+    <string-array name="chat_v_emo_sad">
+        <item>Hei, nu fi trist 🫂 Vrei o glumă?</item>
+        <item>O să fie bine, sunt lângă tine 💚</item>
+        <item>Față tristă? Te înveselesc eu: scrie „glumă” 😉</item>
+    </string-array>
+    <string-array name="chat_v_angry">
+        <item>Of, cineva e supărat 😬 Spune-mi ce s-a întâmplat — te ajut.</item>
+        <item>Încet, încet 🫣 Hai să vedem împreună ce nu merge.</item>
+    </string-array>
+    <string-array name="chat_v_think">
+        <item>Te gândești? Și eu… la muște 🤔</item>
+        <item>Hmm, ești misterios azi 😏</item>
+    </string-array>
+    <string-array name="chat_v_after_joke">
+        <item>Mă bucur că ți-a plăcut! 😄 Încă una? Scrie „încă”.</item>
+        <item>Ha, știam că o să-ți placă 😎 Mai vrei?</item>
+        <item>Amuzant? Am o rezervă întreagă! Scrie „încă” 🦎</item>
+    </string-array>
+    <string-array name="chat_v_shrug">
+        <item>Hmm 🤔 Îmi spui mai multe?</item>
+        <item>Sunt cameleon, nu ghicitor 😅 Ce vrei să spui?</item>
+        <item>N-am prea înțeles… dar sunt curios! Spune altfel? 🦎</item>
+    </string-array>
+    <string name="share_ach_text">Realizările mele în WayArs 🏆 %1$s</string>
 </resources>

@@ -875,4 +875,73 @@
         <item>Helyes, ez a rendelés várjon valaki másra 🙅</item>
         <item>Szép elutasítás! Még az Uber is tiszteli 👏</item>
     </string-array>
+    <string-array name="chat_v_glad">
+        <item>Én is örülök! 💚 Együtt vidámabb.</item>
+        <item>Szuper! A jó kedv a kereset fele 😄</item>
+        <item>Hurrá! Akkor jól sikerült a nap 🦎</item>
+    </string-array>
+    <string-array name="chat_v_cool">
+        <item>Ja, szerintem is 😎</item>
+        <item>Menő, mi? Igyekeztem 💚</item>
+        <item>Tűz! 🔥 Kérdezz bátran tovább.</item>
+    </string-array>
+    <string-array name="chat_v_agree">
+        <item>Megegyeztünk 🤝</item>
+        <item>Pontosan! 😉</item>
+        <item>Tudtam, hogy egyetértesz 😏</item>
+    </string-array>
+    <string-array name="chat_v_disagree">
+        <item>Jó, jó, nem vitatkozom 😅</item>
+        <item>Hm, megvan a saját véleményed — tisztelem 🦎</item>
+    </string-array>
+    <string-array name="chat_v_sorry">
+        <item>Semmi gond, nem haragszom 💚</item>
+        <item>Felejtsd el! Kaméleon vagyok — gyorsan váltok hangulatot 😄</item>
+    </string-array>
+    <string-array name="chat_v_wow">
+        <item>Ugye?! Én is le vagyok döbbenve 😲</item>
+        <item>Bizony, ilyen jók vagyunk 😎</item>
+        <item>Váratlan, mi? 😄</item>
+    </string-array>
+    <string-array name="chat_v_notfunny">
+        <item>Jaj, ez nem jött be… Gyakorolok a legyeken 😅</item>
+        <item>Jó, humorista nem vagyok. De a rendeléseket remekül számolom 😎</item>
+    </string-array>
+    <string-array name="chat_v_more">
+        <item>Még mit? 😄 Kérdezz a rendelésekről, vagy írd: „vicc”.</item>
+        <item>Még — ezt szeretem! Mondd, miről meséljek 🦎</item>
+    </string-array>
+    <string-array name="chat_v_miss">
+        <item>Te is hiányoztál! 💚 Jó, hogy itt vagy.</item>
+        <item>Mindig itt vagyok — gyere gyakrabban 😊</item>
+    </string-array>
+    <string-array name="chat_v_like">
+        <item>Ja! 👍</item>
+        <item>Örülök, hogy tetszik 😊</item>
+        <item>Így kell ezt 💪</item>
+    </string-array>
+    <string-array name="chat_v_emo_sad">
+        <item>Hé, ne szomorkodj 🫂 Kérsz egy viccet?</item>
+        <item>Minden rendben lesz, itt vagyok 💚</item>
+        <item>Szomorú arc? Felvidítalak: írd be, „vicc” 😉</item>
+    </string-array>
+    <string-array name="chat_v_angry">
+        <item>Jaj, valaki mérges 😬 Mondd el, mi történt — segítek.</item>
+        <item>Nyugi, nyugi 🫣 Nézzük meg együtt, mi a baj.</item>
+    </string-array>
+    <string-array name="chat_v_think">
+        <item>Gondolkodsz? Én is… a legyeken 🤔</item>
+        <item>Hm, titokzatos vagy ma 😏</item>
+    </string-array>
+    <string-array name="chat_v_after_joke">
+        <item>Örülök, hogy bejött! 😄 Még egyet? Írd: „még”.</item>
+        <item>Ha, tudtam, hogy tetszeni fog 😎 Kérsz még?</item>
+        <item>Vicces? Van belőlük egy egész raktárnyi! Írd: „még” 🦎</item>
+    </string-array>
+    <string-array name="chat_v_shrug">
+        <item>Hm 🤔 Mondanál egy kicsit többet?</item>
+        <item>Kaméleon vagyok, nem gondolatolvasó 😅 Mire gondolsz?</item>
+        <item>Nem egészen értettem… de kíváncsi vagyok! Mondd másképp? 🦎</item>
+    </string-array>
+    <string name="share_ach_text">Az eredményeim a WayArs-ban 🏆 %1$s</string>
 </resources>

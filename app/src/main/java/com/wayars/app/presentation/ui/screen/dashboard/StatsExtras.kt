@@ -178,7 +178,7 @@ fun AchievementsCard(a: Achievements, currency: Currency) = Card {
             color = WaNeonGreen, fontSize = 13.sp, fontWeight = FontWeight.SemiBold,
             modifier = Modifier
                 .clip(RoundedCornerShape(10.dp))
-                .clickable { scope.launch { com.wayars.app.features.ShareCard.share(context) } }
+                .clickable { scope.launch { com.wayars.app.features.ShareCard.share(context, achievements = true) } }
                 .padding(horizontal = 8.dp, vertical = 4.dp)
         )
     }

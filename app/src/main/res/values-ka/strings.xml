@@ -875,4 +875,73 @@
         <item>სწორია, ასეთი შეკვეთა სხვას დაელოდოს 🙅</item>
         <item>ლამაზი უარი! Uber-იც ალბათ პატივს სცემს 👏</item>
     </string-array>
+    <string-array name="chat_v_glad">
+        <item>მეც მიხარია! 💚 ერთად უფრო მხიარულია.</item>
+        <item>მშვენიერია! კარგი განწყობა შემოსავლის ნახევარია 😄</item>
+        <item>ვაშა! ესე იგი, დღე წარმატებული იყო 🦎</item>
+    </string-array>
+    <string-array name="chat_v_cool">
+        <item>ჰო, მეც ასე ვფიქრობ 😎</item>
+        <item>მაგარია, არა? ვცდილობდი 💚</item>
+        <item>ცეცხლია! 🔥 კიდევ მკითხე.</item>
+    </string-array>
+    <string-array name="chat_v_agree">
+        <item>შევთანხმდით 🤝</item>
+        <item>ზუსტად! 😉</item>
+        <item>ვიცოდი, რომ დამეთანხმებოდი 😏</item>
+    </string-array>
+    <string-array name="chat_v_disagree">
+        <item>კარგი, კარგი, არ ვკამათობ 😅</item>
+        <item>ჰმ, შენი აზრი გაქვს — პატივს ვცემ 🦎</item>
+    </string-array>
+    <string-array name="chat_v_sorry">
+        <item>არაუშავს, არ ვწყინობ 💚</item>
+        <item>დაივიწყე! ქამელეონი ვარ — განწყობას სწრაფად ვიცვლი 😄</item>
+    </string-array>
+    <string-array name="chat_v_wow">
+        <item>ხომ?! მეც შოკში ვარ 😲</item>
+        <item>ჰო, აი ასეთები ვართ 😎</item>
+        <item>მოულოდნელია, არა? 😄</item>
+    </string-array>
+    <string-array name="chat_v_notfunny">
+        <item>ეჰ, ვერ გამოვიდა… ბუზებზე ვივარჯიშებ 😅</item>
+        <item>კარგი, კომიკოსი არ ვარ. სამაგიეროდ შეკვეთებს შესანიშნავად ვითვლი 😎</item>
+    </string-array>
+    <string-array name="chat_v_more">
+        <item>კიდევ რა? 😄 შეკვეთებზე მკითხე ან დაწერე „ხუმრობა“.</item>
+        <item>კიდევ — ეს მიყვარს! მითხარი, რაზე მოგიყვე 🦎</item>
+    </string-array>
+    <string-array name="chat_v_miss">
+        <item>მეც მომენატრე! 💚 კარგია, რომ აქ ხარ.</item>
+        <item>მე სულ აქ ვარ — ხშირად შემოიარე 😊</item>
+    </string-array>
+    <string-array name="chat_v_like">
+        <item>ჰო! 👍</item>
+        <item>მიხარია, რომ მოგწონს 😊</item>
+        <item>აი ასე! 💪</item>
+    </string-array>
+    <string-array name="chat_v_emo_sad">
+        <item>ჰეი, ნუ დარდობ 🫂 ანეკდოტი მოგიყვე?</item>
+        <item>ყველაფერი კარგად იქნება, გვერდით ვარ 💚</item>
+        <item>სევდიანი სმაილი? გაგიმხიარულებ: დაწერე „ხუმრობა“ 😉</item>
+    </string-array>
+    <string-array name="chat_v_angry">
+        <item>ოჰ, ვიღაც ბრაზობს 😬 მითხარი, რა მოხდა — დაგეხმარები.</item>
+        <item>მშვიდად, მშვიდად 🫣 ერთად გავარკვიოთ, რა არ არის რიგზე.</item>
+    </string-array>
+    <string-array name="chat_v_think">
+        <item>ფიქრობ? მეც ვფიქრობ… ბუზებზე 🤔</item>
+        <item>ჰმ, დღეს იდუმალი ხარ 😏</item>
+    </string-array>
+    <string-array name="chat_v_after_joke">
+        <item>მიხარია, რომ მოგეწონა! 😄 კიდევ ერთი? დაწერე „კიდევ“.</item>
+        <item>ჰა, ვიცოდი, რომ მოგეწონებოდა 😎 გინდა კიდევ?</item>
+        <item>სასაცილოა? მთელი მარაგი მაქვს! დაწერე „კიდევ“ 🦎</item>
+    </string-array>
+    <string-array name="chat_v_shrug">
+        <item>ჰმ 🤔 ცოტა უფრო დაწვრილებით მეტყვი?</item>
+        <item>ქამელეონი ვარ და არა ტელეპატი 😅 რას გულისხმობ?</item>
+        <item>ბოლომდე ვერ გავიგე… მაგრამ საინტერესოა! სხვანაირად მეტყვი? 🦎</item>
+    </string-array>
+    <string name="share_ach_text">ჩემი მიღწევები WayArs-ში 🏆 %1$s</string>
 </resources>

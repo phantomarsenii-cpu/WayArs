@@ -875,4 +875,73 @@
         <item>Правилно, такава поръчка да чака някой друг 🙅</item>
         <item>Красиво отказа! Дори Uber сигурно уважава 👏</item>
     </string-array>
+    <string-array name="chat_v_glad">
+        <item>И аз се радвам! 💚 Заедно е по-весело.</item>
+        <item>Чудесно! Доброто настроение е половината печалба 😄</item>
+        <item>Ура! Значи денят е успешен 🦎</item>
+    </string-array>
+    <string-array name="chat_v_cool">
+        <item>Да, и аз така мисля 😎</item>
+        <item>Яко, нали? Старах се 💚</item>
+        <item>Огън! 🔥 Питай още.</item>
+    </string-array>
+    <string-array name="chat_v_agree">
+        <item>Разбрахме се 🤝</item>
+        <item>Точно! 😉</item>
+        <item>Знаех, че ще се съгласиш 😏</item>
+    </string-array>
+    <string-array name="chat_v_disagree">
+        <item>Добре, добре, не споря 😅</item>
+        <item>Хм, имаш си мнение — уважавам 🦎</item>
+    </string-array>
+    <string-array name="chat_v_sorry">
+        <item>Няма проблем, не се сърдя 💚</item>
+        <item>Забрави! Хамелеон съм — бързо сменям настроението 😄</item>
+    </string-array>
+    <string-array name="chat_v_wow">
+        <item>Нали?! И аз съм в шок 😲</item>
+        <item>Да, ей такива сме 😎</item>
+        <item>Неочаквано, а? 😄</item>
+    </string-array>
+    <string-array name="chat_v_notfunny">
+        <item>Ех, не мина… Ще тренирам на мухите 😅</item>
+        <item>Добре, комик от мен няма. Затова пък поръчките смятам отлично 😎</item>
+    </string-array>
+    <string-array name="chat_v_more">
+        <item>Още какво? 😄 Питай ме за поръчки или напиши „виц“.</item>
+        <item>Още — това го обичам! Кажи за какво да разкажа 🦎</item>
+    </string-array>
+    <string-array name="chat_v_miss">
+        <item>И на мен ми липсваше! 💚 Добре, че си тук.</item>
+        <item>Тук съм постоянно — идвай по-често 😊</item>
+    </string-array>
+    <string-array name="chat_v_like">
+        <item>Да! 👍</item>
+        <item>Радвам се, че ти харесва 😊</item>
+        <item>Ето така 💪</item>
+    </string-array>
+    <string-array name="chat_v_emo_sad">
+        <item>Хей, не тъгувай 🫂 Искаш ли виц?</item>
+        <item>Всичко ще е наред, тук съм 💚</item>
+        <item>Тъжно личице? Ще ти оправя настроението: напиши „виц“ 😉</item>
+    </string-array>
+    <string-array name="chat_v_angry">
+        <item>Опа, някой се ядосва 😬 Кажи какво стана — ще помогна.</item>
+        <item>Спокойно, спокойно 🫣 Да видим заедно какво не е наред.</item>
+    </string-array>
+    <string-array name="chat_v_think">
+        <item>Мислиш ли? И аз мисля… за мухи 🤔</item>
+        <item>Хм, загадъчен си днес 😏</item>
+    </string-array>
+    <string-array name="chat_v_after_joke">
+        <item>Радвам се, че ти хареса! 😄 Още един? Напиши „още“.</item>
+        <item>Ха, знаех, че ще ти хареса 😎 Искаш ли още?</item>
+        <item>Смешно? Имам цял запас! Напиши „още“ 🦎</item>
+    </string-array>
+    <string-array name="chat_v_shrug">
+        <item>Хм 🤔 Ще ми кажеш ли малко повече?</item>
+        <item>Хамелеон съм, не телепат 😅 Какво имаш предвид?</item>
+        <item>Не разбрах съвсем… но ми е интересно! Кажи го иначе? 🦎</item>
+    </string-array>
+    <string name="share_ach_text">Моите постижения в WayArs 🏆 %1$s</string>
 </resources>
