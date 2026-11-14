@@ -2,13 +2,18 @@ package com.wayars.app.features.report
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -50,6 +55,35 @@ fun ReportBlock(isSubscribed: Boolean, modifier: Modifier = Modifier) {
         recent.ifEmpty { if (rechecked) ReportBuilder.installedApps(context) else emptyList() }
     }
     val small = Modifier.padding(top = 6.dp)
+    // Screen text read by the accessibility service leaves the phone only after the driver has
+    // seen exactly what goes into the report and confirmed it (Google Play's Accessibility API
+    // policy: prominent disclosure and consent before such data is transmitted).
+    var confirmPkg by remember { mutableStateOf<String?>(null) }
+    confirmPkg?.let { pkg ->
+        AlertDialog(
+            onDismissRequest = { confirmPkg = null },
+            title = { Text(stringResource(R.string.report_confirm_title)) },
+            text = {
+                Text(
+                    stringResource(R.string.report_confirm_body, AppNames.label(context, pkg)),
+                    modifier = Modifier.verticalScroll(rememberScrollState())
+                )
+            },
+            confirmButton = {
+                Button(onClick = {
+                    confirmPkg = null
+                    sending = true
+                    scope.launch {
+                        result = runCatching { ReportBuilder.send(context, pkg, isSubscribed) }.getOrDefault(false)
+                        sending = false
+                    }
+                }) { Text(stringResource(R.string.report_confirm_send)) }
+            },
+            dismissButton = {
+                TextButton(onClick = { confirmPkg = null }) { Text(stringResource(R.string.settings_cancel)) }
+            }
+        )
+    }
 
     Column(modifier) {
         when {
@@ -63,12 +97,7 @@ fun ReportBlock(isSubscribed: Boolean, modifier: Modifier = Modifier) {
         FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalArrangement = Arrangement.spacedBy(6.dp), modifier = small) {
             apps.forEach { pkg ->
                 Pill(stringResource(R.string.report_button, AppNames.label(context, pkg)), primary = true) {
-                    if (sending) return@Pill
-                    sending = true
-                    scope.launch {
-                        result = runCatching { ReportBuilder.send(context, pkg, isSubscribed) }.getOrDefault(false)
-                        sending = false
-                    }
+                    if (!sending) confirmPkg = pkg
                 }
             }
             if (recent.isEmpty()) Pill(stringResource(R.string.report_recheck), primary = false) { rechecked = true; tick++ }

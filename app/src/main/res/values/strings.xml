@@ -55,7 +55,7 @@
          Disclosure requirement — this must be its own affirmative-action
          screen, not folded into the privacy policy text. -->
     <string name="accessibility_consent_title">Accessibility Service permission</string>
-    <string name="accessibility_consent_body">WayArs uses Android’s AccessibilityService API. It is needed for the app’s core feature: automatically reading order offers on the screen of the delivery and ride apps you use, so WayArs can calculate your net profit and show a verdict (good / average / bad) in a floating overlay while scanning is on.\n\nHow it is used:\n• It reads the text shown by the supported apps (and any apps you add yourself) when an order offer appears: price, distance and estimated time.\n• Passwords, messages and anything you type are never read. Everything shown by other apps is ignored immediately.\n• It never taps, types, scrolls or changes anything on screen, and it is not used to record calls.\n\nWhat happens with the data:\n• It is processed only on this device to calculate profit. Nothing is sent to a server, shared, sold or used for advertising.\n• For orders you accept, only summary figures (price, distance, time, profit) are saved on this device for your statistics.\n\nYou stay in control: the service works only after you turn it on in Android settings, and you can turn it off at any time. If you also enable the optional notification access, WayArs reads only the notifications of supported apps about new orders.</string>
+    <string name="accessibility_consent_body">WayArs uses Android’s AccessibilityService API. It is needed for the app’s core feature: automatically reading order offers on the screen of the delivery and ride apps you use, so WayArs can calculate your net profit and show a verdict (good / average / bad) in a floating overlay while scanning is on.\n\nHow it is used:\n• It reads the text shown by the supported apps (and any apps you add yourself) when an order offer appears: price, distance and estimated time.\n• Passwords, messages and anything you type are never read. Everything shown by other apps is ignored immediately.\n• It never taps, types, scrolls or changes anything on screen, and it is not used to record calls.\n\nWhat happens with the data:\n• It is processed only on this device to calculate profit. Nothing is sent to a server, shared, sold or used for advertising.\n• For orders you accept, only summary figures (price, distance, time, profit) are saved on this device for your statistics.\n• The only exception is a report you decide to send yourself: if orders aren’t read, you can send the developer an encrypted report from Wayo’s phone check. Nothing is sent without your tap.\n\nYou stay in control: the service works only after you turn it on in Android settings, and you can turn it off at any time. If you also enable the optional notification access, WayArs reads only the notifications of supported apps about new orders.</string>
     <string name="accessibility_consent_allow">I agree and continue</string>
     <string name="accessibility_consent_decline">Not now</string>
 
@@ -326,7 +326,7 @@
     <string name="pet_q_clicks">Does WayArs accept orders for me?</string>
     <string name="pet_a_clicks">No. WayArs only reads the screen and shows its verdict. It never taps, accepts or rejects anything in Uber, Bolt or other apps — you decide.</string>
     <string name="pet_q_privacy">Is my data sent anywhere?</string>
-    <string name="pet_a_privacy">No. Orders are read and calculated on your phone; the screen content isn\'t sent anywhere. Details are in “Privacy Policy” at the bottom of Settings.</string>
+    <string name="pet_a_privacy">No. Orders are read and calculated on your phone; the screen content isn\'t sent anywhere. Details are in “Privacy Policy” at the bottom of Settings. The only exception is a report you send yourself from Wayo’s phone check — it’s encrypted and only the developer can read it.</string>
     <string name="pet_q_wrong_numbers">The numbers in the card are wrong. What do I do?</string>
     <string name="pet_a_wrong_numbers">Calibrate the app: Settings → Supported apps → the pencil. If it still reads wrong, send a screenshot of the order via Settings → Contact us and we\'ll fix it.</string>
     <string name="pet_q_move_card">How do I move the card?</string>
@@ -386,6 +386,9 @@
     <string name="report_email_body">Hello! Attached is a WayArs report: orders aren’t read in %1$s. The file is encrypted — only the developer can open it.</string>
     <string name="report_opened">Mail is open — just tap “Send” 📩 Thanks, this helps fix it!</string>
     <string name="report_no_mail">Couldn’t find a mail app 😕 Write to us at apstudiomobile@gmail.com.</string>
+    <string name="report_confirm_title">Send the report?</string>
+    <string name="report_confirm_body">The report will include:\n• the last texts WayArs read from the %1$s screen (they may include pickup and drop-off addresses) and how they were read;\n• phone model, Android and app versions, permission states and WayArs settings.\n\nThe file is encrypted on your phone — only the developer can open it. It’s sent only if you send the email yourself, is used only to fix order reading and is deleted once the problem is solved.</string>
+    <string name="report_confirm_send">Send</string>
     <string name="pet_diag_problems">Fix the items marked ❌ — then orders will show.</string>
     <string name="overlay_deduction_partner">partner −%1$s</string>
     <string name="settings_partner_title">Partner (fleet)</string>
@@ -645,7 +648,7 @@
         <item>Quoting the app:</item>
     </string-array>
     <string name="pet_q_p_screen">What exactly does the app read from the screen?</string>
-    <string name="pet_a_p_screen" formatted="false">Only the order details: price, distance and time 👀 — and only in the taxi and delivery apps on your list. Passwords, chats and what you type I don’t read or remember. Everything else on the screen I skip right away; I never tap anything or send anything anywhere.</string>
+    <string name="pet_a_p_screen" formatted="false">Only the order details: price, distance and time 👀 — and only in the taxi and delivery apps on your list. Passwords, chats and what you type I don’t read or remember. Everything else on the screen I skip right away; I never tap anything or send anything anywhere. Only if you tap “Send report” in my phone check 📩 — then you send the developer an encrypted file yourself.</string>
     <string name="pet_q_p_history">What is saved about my orders?</string>
     <string name="pet_a_p_history" formatted="false">Only what statistics need, and only on your phone 📱: amount, currency, kilometres, time, rates, fuel, take-home, the verdict and which app the order came from. No addresses or customer names. And none of it is sent anywhere.</string>
     <string name="pet_q_p_apps_list">Is the list of my apps saved?</string>

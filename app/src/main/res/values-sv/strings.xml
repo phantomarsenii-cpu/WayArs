@@ -50,7 +50,7 @@
     <string name="accessibility_service_description">WayArs läser beställningsdetaljer (pris, sträcka, tid) som visas på skärmen av leverans-/taxiappar för att hjälpa dig besluta snabbare. Den trycker eller ändrar aldrig något automatiskt.</string>
 
     <string name="accessibility_consent_title">Behörighet för hjälpmedelstjänst</string>
-    <string name="accessibility_consent_body">WayArs använder Androids AccessibilityService API. Det behövs för appens huvudfunktion: att automatiskt läsa orderförslag på skärmen i de leverans- och taxiappar du använder, så att WayArs kan beräkna din nettovinst och visa ett omdöme (bra / acceptabelt / dåligt) i ett flytande fönster medan skanning är på.\n\nSå används det:\n• Det läser texten som de stödda apparna (och appar du själv lägger till) visar när ett orderförslag dyker upp: pris, avstånd och beräknad tid.\n• Lösenord, meddelanden och det du skriver läses aldrig. Allt som andra appar visar ignoreras omedelbart.\n• WayArs trycker, skriver, rullar eller ändrar aldrig något på skärmen och används inte för att spela in samtal.\n\nVad som händer med data:\n• De bearbetas bara på den här enheten för att beräkna vinst. Inget skickas till en server, delas, säljs eller används för reklam.\n• För ordrar du accepterar sparas bara sammanfattande siffror (pris, avstånd, tid, vinst) på enheten för din statistik.\n\nDu har kontrollen: tjänsten fungerar först när du slår på den i Androids inställningar, och du kan stänga av den när som helst. Om du även aktiverar den valfria åtkomsten till aviseringar läser WayArs bara aviseringar från stödda appar om nya ordrar.</string>
+    <string name="accessibility_consent_body">WayArs använder Androids AccessibilityService API. Det behövs för appens huvudfunktion: att automatiskt läsa orderförslag på skärmen i de leverans- och taxiappar du använder, så att WayArs kan beräkna din nettovinst och visa ett omdöme (bra / acceptabelt / dåligt) i ett flytande fönster medan skanning är på.\n\nSå används det:\n• Det läser texten som de stödda apparna (och appar du själv lägger till) visar när ett orderförslag dyker upp: pris, avstånd och beräknad tid.\n• Lösenord, meddelanden och det du skriver läses aldrig. Allt som andra appar visar ignoreras omedelbart.\n• WayArs trycker, skriver, rullar eller ändrar aldrig något på skärmen och används inte för att spela in samtal.\n\nVad som händer med data:\n• De bearbetas bara på den här enheten för att beräkna vinst. Inget skickas till en server, delas, säljs eller används för reklam.\n• För ordrar du accepterar sparas bara sammanfattande siffror (pris, avstånd, tid, vinst) på enheten för din statistik.\n• Det enda undantaget är en rapport du själv väljer att skicka: om körningar inte läses kan du skicka en krypterad rapport till utvecklaren från Wayos telefonkontroll. Inget skickas utan att du trycker.\n\nDu har kontrollen: tjänsten fungerar först när du slår på den i Androids inställningar, och du kan stänga av den när som helst. Om du även aktiverar den valfria åtkomsten till aviseringar läser WayArs bara aviseringar från stödda appar om nya ordrar.</string>
     <string name="accessibility_consent_allow">Jag godkänner och fortsätter</string>
     <string name="accessibility_consent_decline">Inte nu</string>
 
@@ -314,7 +314,7 @@
     <string name="pet_q_clicks">Accepterar WayArs uppdrag åt mig?</string>
     <string name="pet_a_clicks">Nej. WayArs läser bara skärmen och visar sin bedömning. Den trycker, accepterar eller avvisar aldrig något i Uber, Bolt eller andra appar — du bestämmer.</string>
     <string name="pet_q_privacy">Skickas mina data någonstans?</string>
-    <string name="pet_a_privacy">Nej. Uppdrag läses och räknas på din telefon; skärminnehållet skickas ingenstans. Detaljer i ”Integritetspolicy” längst ned i inställningarna.</string>
+    <string name="pet_a_privacy">Nej. Uppdrag läses och räknas på din telefon; skärminnehållet skickas ingenstans. Detaljer i ”Integritetspolicy” längst ned i inställningarna. Det enda undantaget är en rapport du själv skickar från Wayos telefonkontroll — den är krypterad och bara utvecklaren kan läsa den.</string>
     <string name="pet_q_wrong_numbers">Siffrorna på kortet är fel. Vad gör jag?</string>
     <string name="pet_a_wrong_numbers">Kalibrera appen: Inställningar → Appar som stöds → pennan. Blir det fortfarande fel, skicka en skärmbild av uppdraget via Inställningar → Kontakt så fixar vi det.</string>
     <string name="pet_q_move_card">Hur flyttar jag kortet?</string>
@@ -374,6 +374,9 @@
     <string name="report_email_body">Hej! Bifogar en WayArs-rapport: körningar läses inte i %1$s. Filen är krypterad — bara utvecklaren kan öppna den.</string>
     <string name="report_opened">Mejlet är öppet — tryck bara ”Skicka” 📩 Tack, det hjälper att fixa det!</string>
     <string name="report_no_mail">Hittade ingen e-postapp 😕 Skriv till oss på apstudiomobile@gmail.com.</string>
+    <string name="report_confirm_title">Skicka rapporten?</string>
+    <string name="report_confirm_body">Rapporten innehåller:\n• de senaste texterna som WayArs läste från skärmen i %1$s (de kan innehålla upphämtnings- och leveransadresser) och resultatet av läsningen;\n• telefonmodell, Android- och appversioner, status för behörigheter och WayArs-inställningar.\n\nFilen krypteras på telefonen — bara utvecklaren kan öppna den. Den skickas bara om du själv skickar mejlet, används bara för att rätta läsningen av körningar och raderas när problemet är löst.</string>
+    <string name="report_confirm_send">Skicka</string>
     <string name="pet_diag_problems">Åtgärda punkterna med ❌ — då dyker uppdragen upp.</string>
     <string name="overlay_deduction_partner">partner −%1$s</string>
     <string name="settings_partner_title">Partner (flotta)</string>
@@ -633,7 +636,7 @@
         <item>Jag citerar:</item>
     </string-array>
     <string name="pet_q_p_screen">Vad läser appen exakt från skärmen?</string>
-    <string name="pet_a_p_screen" formatted="false">Bara beställningsuppgifterna: pris, sträcka och tid 👀 — och bara i taxi- och leveransapparna på din lista. Lösenord, chattar och det du skriver läser och minns jag inte. Resten av skärmen hoppar jag över direkt; jag trycker inte på något och skickar ingenting någonstans.</string>
+    <string name="pet_a_p_screen" formatted="false">Bara beställningsuppgifterna: pris, sträcka och tid 👀 — och bara i taxi- och leveransapparna på din lista. Lösenord, chattar och det du skriver läser och minns jag inte. Resten av skärmen hoppar jag över direkt; jag trycker inte på något och skickar ingenting någonstans. Bara om du själv trycker ”Skicka rapport” i min telefonkontroll 📩 — då skickar du själv en krypterad fil till utvecklaren.</string>
     <string name="pet_q_p_history">Vad sparas om mina körningar?</string>
     <string name="pet_a_p_history" formatted="false">Bara det statistiken behöver, och bara i din telefon 📱: belopp, valuta, kilometer, tid, taxor, bränsle, vad du får kvar, bedömning och vilken app körningen kom från. Inga adresser eller kundnamn. Och inget skickas någonstans.</string>
     <string name="pet_q_p_apps_list">Sparas listan över mina appar?</string>

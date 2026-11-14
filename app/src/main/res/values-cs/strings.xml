@@ -50,7 +50,7 @@
     <string name="accessibility_service_description">WayArs čte údaje o objednávce (cena, vzdálenost, čas) zobrazené na obrazovce aplikacemi pro doručování/taxi, aby vám pomohl rychleji se rozhodnout. Nikdy nic automaticky neklepe ani neupravuje.</string>
 
     <string name="accessibility_consent_title">Oprávnění služby usnadnění</string>
-    <string name="accessibility_consent_body">WayArs používá rozhraní Android AccessibilityService API. Je potřeba pro hlavní funkci aplikace: automaticky číst nabídky zakázek na obrazovce aplikací pro rozvoz a přepravu, které používáte, aby WayArs vypočítal váš čistý zisk a zobrazil hodnocení (dobré / přijatelné / špatné) v plovoucím okně, dokud je skenování zapnuté.\n\nJak se používá:\n• Čte text zobrazený podporovanými aplikacemi (a aplikacemi, které sami přidáte), když se objeví nabídka zakázky: cena, vzdálenost a odhadovaný čas.\n• Hesla, zprávy ani to, co píšete, se nikdy nečtou. Vše, co zobrazují jiné aplikace, se okamžitě ignoruje.\n• WayArs nikdy nic neklepne, nepíše, neposouvá ani nemění na obrazovce a nepoužívá se k nahrávání hovorů.\n\nCo se děje s daty:\n• Zpracovávají se pouze v tomto zařízení za účelem výpočtu zisku. Nic se neodesílá na server, nesdílí, neprodává ani nepoužívá k reklamě.\n• U přijatých zakázek se v zařízení ukládají jen souhrnné údaje (cena, vzdálenost, čas, zisk) pro vaše statistiky.\n\nMáte to pod kontrolou: služba funguje až po zapnutí v nastavení Androidu a můžete ji kdykoli vypnout. Pokud navíc zapnete volitelný přístup k oznámením, WayArs čte jen oznámení podporovaných aplikací o nových zakázkách.</string>
+    <string name="accessibility_consent_body">WayArs používá rozhraní Android AccessibilityService API. Je potřeba pro hlavní funkci aplikace: automaticky číst nabídky zakázek na obrazovce aplikací pro rozvoz a přepravu, které používáte, aby WayArs vypočítal váš čistý zisk a zobrazil hodnocení (dobré / přijatelné / špatné) v plovoucím okně, dokud je skenování zapnuté.\n\nJak se používá:\n• Čte text zobrazený podporovanými aplikacemi (a aplikacemi, které sami přidáte), když se objeví nabídka zakázky: cena, vzdálenost a odhadovaný čas.\n• Hesla, zprávy ani to, co píšete, se nikdy nečtou. Vše, co zobrazují jiné aplikace, se okamžitě ignoruje.\n• WayArs nikdy nic neklepne, nepíše, neposouvá ani nemění na obrazovce a nepoužívá se k nahrávání hovorů.\n\nCo se děje s daty:\n• Zpracovávají se pouze v tomto zařízení za účelem výpočtu zisku. Nic se neodesílá na server, nesdílí, neprodává ani nepoužívá k reklamě.\n• U přijatých zakázek se v zařízení ukládají jen souhrnné údaje (cena, vzdálenost, čas, zisk) pro vaše statistiky.\n• Jedinou výjimkou je hlášení, které se sami rozhodnete odeslat: pokud se zakázky nečtou, můžete z kontroly telefonu u Waya poslat vývojáři zašifrované hlášení. Bez vašeho klepnutí se nic neodešle.\n\nMáte to pod kontrolou: služba funguje až po zapnutí v nastavení Androidu a můžete ji kdykoli vypnout. Pokud navíc zapnete volitelný přístup k oznámením, WayArs čte jen oznámení podporovaných aplikací o nových zakázkách.</string>
     <string name="accessibility_consent_allow">Souhlasím a pokračuji</string>
     <string name="accessibility_consent_decline">Teď ne</string>
 
@@ -314,7 +314,7 @@
     <string name="pet_q_clicks">Přijímá WayArs zakázky za mě?</string>
     <string name="pet_a_clicks">Ne. WayArs jen čte obrazovku a ukazuje hodnocení. Nikdy nic neklepne, nepřijme ani neodmítne v Uberu, Boltu ani jinde — rozhodujete vy.</string>
     <string name="pet_q_privacy">Posílají se moje data někam?</string>
-    <string name="pet_a_privacy">Ne. Zakázky se čtou a počítají ve vašem telefonu, obsah obrazovky se nikam neposílá. Podrobnosti v „Zásady ochrany osobních údajů“ dole v nastavení.</string>
+    <string name="pet_a_privacy">Ne. Zakázky se čtou a počítají ve vašem telefonu, obsah obrazovky se nikam neposílá. Podrobnosti v „Zásady ochrany osobních údajů“ dole v nastavení. Výjimkou je jen hlášení, které sami odešlete z kontroly telefonu u Waya — je zašifrované a přečíst ho může jen vývojář.</string>
     <string name="pet_q_wrong_numbers">Čísla na kartě jsou špatně. Co dělat?</string>
     <string name="pet_a_wrong_numbers">Zkalibrujte aplikaci: Nastavení → Podporované aplikace → tužka. Pokud je to dál špatně, pošlete snímek zakázky přes Nastavení → Kontakt a opravíme to.</string>
     <string name="pet_q_move_card">Jak posunout kartu?</string>
@@ -374,6 +374,9 @@
     <string name="report_email_body">Dobrý den! Přikládám hlášení WayArs: v %1$s se nečtou zakázky. Soubor je zašifrovaný — otevřít ho může jen vývojář.</string>
     <string name="report_opened">Pošta je otevřená — stačí klepnout na „Odeslat“ 📩 Díky, pomůže to vše opravit!</string>
     <string name="report_no_mail">Nenašel jsem poštovní aplikaci 😕 Napiš nám na apstudiomobile@gmail.com.</string>
+    <string name="report_confirm_title">Odeslat hlášení?</string>
+    <string name="report_confirm_body">Hlášení bude obsahovat:\n• poslední texty, které WayArs přečetl z obrazovky %1$s (mohou obsahovat adresy vyzvednutí a doručení), a výsledek jejich čtení;\n• model telefonu, verze Androidu a aplikací, stav oprávnění a nastavení WayArs.\n\nSoubor se šifruje v telefonu — otevřít ho může jen vývojář. Odešle se jen tehdy, když e-mail odešlete sami, slouží pouze k opravě čtení zakázek a po vyřešení problému se smaže.</string>
+    <string name="report_confirm_send">Odeslat</string>
     <string name="pet_diag_problems">Opravte body s ❌ — pak se zakázky objeví.</string>
     <string name="overlay_deduction_partner">partner −%1$s</string>
     <string name="settings_partner_title">Partner (flotila)</string>
@@ -633,7 +636,7 @@
         <item>Cituji:</item>
     </string-array>
     <string name="pet_q_p_screen">Co přesně aplikace čte z obrazovky?</string>
-    <string name="pet_a_p_screen" formatted="false">Jen údaje zakázky: cenu, vzdálenost a čas 👀 — a jen v aplikacích taxi a rozvozu z tvého seznamu. Hesla, zprávy ani to, co píšeš, nečtu a nepamatuji si. Zbytek obrazovky hned přeskakuji, nic neklikám a nikam nic neposílám.</string>
+    <string name="pet_a_p_screen" formatted="false">Jen údaje zakázky: cenu, vzdálenost a čas 👀 — a jen v aplikacích taxi a rozvozu z tvého seznamu. Hesla, zprávy ani to, co píšeš, nečtu a nepamatuji si. Zbytek obrazovky hned přeskakuji, nic neklikám a nikam nic neposílám. Jen když sám klepneš na „Odeslat hlášení“ v mé kontrole telefonu 📩 — pak vývojáři sám posíláš zašifrovaný soubor.</string>
     <string name="pet_q_p_history">Co se ukládá o mých zakázkách?</string>
     <string name="pet_a_p_history" formatted="false">Jen to, co potřebují statistiky, a jen v tvém telefonu 📱: částka, měna, kilometry, čas, sazby, palivo, kolik ti zůstane, verdikt a z jaké aplikace zakázka byla. Žádné adresy ani jména zákazníků. A nic z toho se nikam neposílá.</string>
     <string name="pet_q_p_apps_list">Ukládá se seznam mých aplikací?</string>
