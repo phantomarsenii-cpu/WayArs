@@ -276,6 +276,7 @@
     <string name="pet_say_break">5 saatdan çoxdur işləyirsən. Qısa fasilə?</string>
     <string name="pet_say_sad">Sifarişləri görmürəm: ayarlarda girişi aç.</string>
     <string name="pet_say_helper">Nə bilmək istəyirsən?</string>
+    <string name="pet_say_full">Bu gün üçün toxam! Enerji sabah yenə 😋</string>
     <string name="pet_q_active">Sifarişləri oxumağa necə başlayım?</string>
     <string name="pet_a_active">Əsas ekranın yuxarısında „Active” açarını yandırın. Açıq olduqca yeni sifarişləri izləyir və çatdırılma və ya taksi tətbiqinin üstündə qiymət göstərirəm.</string>
     <string name="pet_q_overlay">Kart niyə sifarişin üstündə görünmür?</string>
@@ -305,5 +306,5 @@
     <string name="pet_q_contact">Sizinlə necə əlaqə saxlayım?</string>
     <string name="pet_a_contact">Ayarlar → Əlaqə: Telegram, Instagram, TikTok və ya e-poçt. İstənilən vaxt cavab veririk.</string>
     <string name="pet_q_pet">Necə böyüyürsən?</string>
-    <string name="pet_a_pet">Ağıllı qərarlardan enerji yeyirəm: yaxşı sifarişi qəbul etdin və ya pisindən imtina etdin — mənə +10. Skanlı hər gün +5 verir. Çox enerji — yüksək səviyyə!</string>
+    <string name="pet_a_pet">Ağıllı qərarlardan enerji yeyirəm: yaxşı sifarişi qəbul etdin və ya pisindən imtina etdin — mənə +3. Skanlı hər gün +5 verir. Çox enerji — yüksək səviyyə!</string>
 </resources>

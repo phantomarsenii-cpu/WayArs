@@ -276,6 +276,7 @@
     <string name="pet_say_break">Работиш над 5 часа. Кратка почивка?</string>
     <string name="pet_say_sad">Не виждам поръчките: включи достъпа в настройките.</string>
     <string name="pet_say_helper">Какво искаш да знаеш?</string>
+    <string name="pet_say_full">За днес съм сит! Енергията пак утре 😋</string>
     <string name="pet_q_active">Как да започна четенето на поръчки?</string>
     <string name="pet_a_active">Включете „Active“ горе на началния екран. Докато е включено, следя новите поръчки и показвам оценка върху приложението за доставки или такси.</string>
     <string name="pet_q_overlay">Защо картата не се появява над поръчката?</string>
@@ -305,5 +306,5 @@
     <string name="pet_q_contact">Как да се свържа с вас?</string>
     <string name="pet_a_contact">Настройки → Контакти: Telegram, Instagram, TikTok или имейл. Отговаряме по всяко време.</string>
     <string name="pet_q_pet">Как растеш?</string>
-    <string name="pet_a_pet">Ям енергия от умни решения: приета добра поръчка или отказана лоша — +10 за мен. Всеки ден със сканиране дава +5. Повече енергия — по-високо ниво!</string>
+    <string name="pet_a_pet">Ям енергия от умни решения: приета добра поръчка или отказана лоша — +3 за мен. Всеки ден със сканиране дава +5. Повече енергия — по-високо ниво!</string>
 </resources>

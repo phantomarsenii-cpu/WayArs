@@ -276,6 +276,7 @@
     <string name="pet_say_break">5 soatdan ko‘p ishlayapsan. Qisqa tanaffus qilasanmi?</string>
     <string name="pet_say_sad">Buyurtmalarni ko‘rmayapman: sozlamalarda ruxsatni yoq.</string>
     <string name="pet_say_helper">Nimani bilmoqchisan?</string>
+    <string name="pet_say_full">Bugunga to‘ydim! Energiya ertaga yana 😋</string>
     <string name="pet_q_active">Buyurtmalarni o‘qishni qanday boshlayman?</string>
     <string name="pet_a_active">Bosh ekran tepasidagi „Active” kalitini yoqing. Yoniq bo‘lsa, yangi buyurtmalarni kuzataman va yetkazib berish yoki taksi ilovasi ustida baho ko‘rsataman.</string>
     <string name="pet_q_overlay">Nega karta buyurtma ustida chiqmayapti?</string>
@@ -305,5 +306,5 @@
     <string name="pet_q_contact">Siz bilan qanday bog‘lanaman?</string>
     <string name="pet_a_contact">Sozlamalar → Aloqa: Telegram, Instagram, TikTok yoki e-pochta. Istalgan vaqtda javob beramiz.</string>
     <string name="pet_q_pet">Qanday o‘sasan?</string>
-    <string name="pet_a_pet">Aqlli qarorlardan energiya yeyman: yaxshi buyurtmani qabul qilding yoki yomonini rad etding — menga +10. Skanerli har bir kun +5 beradi. Ko‘p energiya — yuqori daraja!</string>
+    <string name="pet_a_pet">Aqlli qarorlardan energiya yeyman: yaxshi buyurtmani qabul qilding yoki yomonini rad etding — menga +3. Skanerli har bir kun +5 beradi. Ko‘p energiya — yuqori daraja!</string>
 </resources>

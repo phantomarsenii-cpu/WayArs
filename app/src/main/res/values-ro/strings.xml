@@ -275,6 +275,7 @@
     <string name="pet_say_break">Lucrezi de peste 5 ore. O pauză scurtă?</string>
     <string name="pet_say_sad">Nu văd comenzile: activează accesul în setări.</string>
     <string name="pet_say_helper">Ce vrei să afli?</string>
+    <string name="pet_say_full">Pentru azi m-am săturat! Energia revine mâine 😋</string>
     <string name="pet_q_active">Cum încep citirea comenzilor?</string>
     <string name="pet_a_active">Pornește comutatorul „Active” din partea de sus a ecranului principal. Cât e pornit, urmăresc comenzile noi și arăt verdictul peste aplicația de livrări sau taxi.</string>
     <string name="pet_q_overlay">De ce nu apare cardul peste comandă?</string>
@@ -304,5 +305,5 @@
     <string name="pet_q_contact">Cum vă contactez?</string>
     <string name="pet_a_contact">Setări → Contact: Telegram, Instagram, TikTok sau e-mail. Răspundem oricând.</string>
     <string name="pet_q_pet">Cum crești?</string>
-    <string name="pet_a_pet">Mănânc energie din decizii inteligente: comandă bună acceptată sau proastă refuzată — +10 pentru mine. Fiecare zi cu scanare dă +5. Mai multă energie — nivel mai mare!</string>
+    <string name="pet_a_pet">Mănânc energie din decizii inteligente: comandă bună acceptată sau proastă refuzată — +3 pentru mine. Fiecare zi cu scanare dă +5. Mai multă energie — nivel mai mare!</string>
 </resources>

@@ -275,6 +275,7 @@
     <string name="pet_say_break">Tu travailles depuis plus de 5 heures. Une petite pause ?</string>
     <string name="pet_say_sad">Je ne vois pas les courses : active l’accès dans les paramètres.</string>
     <string name="pet_say_helper">Que veux-tu savoir ?</string>
+    <string name="pet_say_full">Je suis rassasié pour aujourd’hui ! L’énergie revient demain 😋</string>
     <string name="pet_q_active">Comment lancer la lecture des courses ?</string>
     <string name="pet_a_active">Activez « Active » en haut de l’écran d’accueil. Tant qu’il est activé, je surveille les nouvelles courses et j’affiche mon verdict au-dessus de l’appli de livraison ou de taxi.</string>
     <string name="pet_q_overlay">Pourquoi la carte n’apparaît-elle pas sur la course ?</string>
@@ -304,5 +305,5 @@
     <string name="pet_q_contact">Comment vous contacter ?</string>
     <string name="pet_a_contact">Paramètres → Contact : Telegram, Instagram, TikTok ou e-mail. Nous répondons à tout moment.</string>
     <string name="pet_q_pet">Comment grandis-tu ?</string>
-    <string name="pet_a_pet">Je mange l’énergie des décisions malines : bonne course acceptée ou mauvaise refusée — +10 pour moi. Chaque jour de scan donne +5. Plus d’énergie — niveau plus haut !</string>
+    <string name="pet_a_pet">Je mange l’énergie des décisions malines : bonne course acceptée ou mauvaise refusée — +3 pour moi. Chaque jour de scan donne +5. Plus d’énergie — niveau plus haut !</string>
 </resources>

@@ -276,6 +276,7 @@
     <string name="pet_say_break">Több mint 5 órája dolgozol. Egy rövid szünet?</string>
     <string name="pet_say_sad">Nem látom a rendeléseket: kapcsold be a hozzáférést a beállításokban.</string>
     <string name="pet_say_helper">Mit szeretnél tudni?</string>
+    <string name="pet_say_full">Mára jóllaktam! Holnap újra jön energia 😋</string>
     <string name="pet_q_active">Hogyan indítom a rendelések olvasását?</string>
     <string name="pet_a_active">Kapcsold be az „Active” kapcsolót a főképernyő tetején. Amíg be van kapcsolva, figyelem az új rendeléseket, és értékelést mutatok a futár- vagy taxi app felett.</string>
     <string name="pet_q_overlay">Miért nem jelenik meg a kártya a rendelés felett?</string>
@@ -305,5 +306,5 @@
     <string name="pet_q_contact">Hogyan érlek el titeket?</string>
     <string name="pet_a_contact">Beállítások → Kapcsolat: Telegram, Instagram, TikTok vagy e-mail. Bármikor válaszolunk.</string>
     <string name="pet_q_pet">Hogyan nősz?</string>
-    <string name="pet_a_pet">Okos döntésekből eszem energiát: jó rendelést elfogadsz vagy rosszat elutasítasz — +10 nekem. Minden nap szkenneléssel +5. Több energia — magasabb szint!</string>
+    <string name="pet_a_pet">Okos döntésekből eszem energiát: jó rendelést elfogadsz vagy rosszat elutasítasz — +3 nekem. Minden nap szkenneléssel +5. Több energia — magasabb szint!</string>
 </resources>

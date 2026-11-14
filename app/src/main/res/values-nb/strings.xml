@@ -276,6 +276,7 @@
     <string name="pet_say_break">Du har jobbet over 5 timer. Tid for en kort pause?</string>
     <string name="pet_say_sad">Jeg ser ikke oppdrag: slå på tilgang i innstillingene.</string>
     <string name="pet_say_helper">Hva vil du vite?</string>
+    <string name="pet_say_full">Jeg er mett for i dag! Energi igjen i morgen 😋</string>
     <string name="pet_q_active">Hvordan begynner jeg å lese oppdrag?</string>
     <string name="pet_a_active">Slå på «Active» øverst på startskjermen. Så lenge den er på, følger jeg med på nye oppdrag og viser vurderingen over leverings- eller taxiappen.</string>
     <string name="pet_q_overlay">Hvorfor vises ikke kortet over oppdraget?</string>
@@ -305,5 +306,5 @@
     <string name="pet_q_contact">Hvordan kontakter jeg dere?</string>
     <string name="pet_a_contact">Innstillinger → Kontakt: Telegram, Instagram, TikTok eller e-post. Vi svarer når som helst.</string>
     <string name="pet_q_pet">Hvordan vokser du?</string>
-    <string name="pet_a_pet">Jeg spiser energi fra smarte valg: godt oppdrag godtatt eller dårlig avvist — +10 til meg. Hver dag med skanning gir +5. Mer energi — høyere nivå!</string>
+    <string name="pet_a_pet">Jeg spiser energi fra smarte valg: godt oppdrag godtatt eller dårlig avvist — +3 til meg. Hver dag med skanning gir +5. Mer energi — høyere nivå!</string>
 </resources>

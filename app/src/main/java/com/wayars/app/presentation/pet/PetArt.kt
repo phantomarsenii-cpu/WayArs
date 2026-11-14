@@ -77,11 +77,23 @@ fun PetArt(stage: PetState.Stage, mood: PetMood, modifier: Modifier = Modifier) 
 
     Box(modifier = modifier.graphicsLayer { translationY = -bob * jump * density }) {
         if (resId != 0) {
+            // The artwork is normalised to one size; smaller stages are shown smaller so
+            // growing up is visible.
+            val stageScale = when (stage) {
+                PetState.Stage.EGG -> 0.74f
+                PetState.Stage.BABY -> 0.80f
+                PetState.Stage.TEEN -> 0.92f
+                else -> 1f
+            }
             Image(
                 painter = painterResource(resId),
                 contentDescription = null,
                 contentScale = ContentScale.Fit,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize().graphicsLayer {
+                    scaleX = stageScale
+                    scaleY = stageScale
+                    transformOrigin = androidx.compose.ui.graphics.TransformOrigin(0.5f, 0.97f)
+                }
             )
         } else {
             Canvas(Modifier.fillMaxSize()) { drawChameleon(stage, mood, blink = clock in 0.0f..0.04f, t = clock) }

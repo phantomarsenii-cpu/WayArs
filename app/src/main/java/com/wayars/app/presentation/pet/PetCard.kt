@@ -120,6 +120,7 @@ fun PetCard(isActive: Boolean, onShowTopic: (TourStep) -> Unit, modifier: Modifi
             PetState.Reaction.GOOD_ACCEPTED -> PetMood.HAPPY
             PetState.Reaction.SMART_REJECT -> PetMood.COOL
             PetState.Reaction.LEVEL_UP -> PetMood.LEVEL_UP
+            PetState.Reaction.FULL -> PetMood.HAPPY
             else -> PetMood.EATING
         }
         !permissionsOk -> PetMood.SAD
@@ -133,7 +134,8 @@ fun PetCard(isActive: Boolean, onShowTopic: (TourStep) -> Unit, modifier: Modifi
     val says = when (mood) {
         PetMood.HELLO -> stringResource(R.string.pet_say_hello, name)
         PetMood.WORKING -> stringResource(R.string.pet_say_working)
-        PetMood.HAPPY -> stringResource(R.string.pet_say_happy, pet.lastGain)
+        PetMood.HAPPY -> if (pet.reaction == PetState.Reaction.FULL) stringResource(R.string.pet_say_full)
+            else stringResource(R.string.pet_say_happy, pet.lastGain)
         PetMood.COOL -> stringResource(R.string.pet_say_cool, pet.lastGain)
         PetMood.EATING -> stringResource(R.string.pet_say_eating, pet.lastGain)
         PetMood.LEVEL_UP -> stringResource(R.string.pet_say_level_up, pet.level)

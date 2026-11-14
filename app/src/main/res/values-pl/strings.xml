@@ -280,6 +280,7 @@
     <string name="pet_say_break">Pracujesz już ponad 5 godzin. Może krótka przerwa?</string>
     <string name="pet_say_sad">Nie widzę zleceń: włącz dostęp w ustawieniach.</string>
     <string name="pet_say_helper">Co chcesz wiedzieć?</string>
+    <string name="pet_say_full">Na dziś jestem najedzony! Energia znów jutro 😋</string>
     <string name="pet_q_active">Jak zacząć odczytywać zlecenia?</string>
     <string name="pet_a_active">Włącz przełącznik „Active” na górze ekranu głównego. Gdy jest włączony, pilnuję nowych zleceń i pokazuję ocenę nad aplikacją dostaw lub taxi.</string>
     <string name="pet_q_overlay">Dlaczego karta nie pojawia się nad zleceniem?</string>
@@ -309,5 +310,5 @@
     <string name="pet_q_contact">Jak się z wami skontaktować?</string>
     <string name="pet_a_contact">Ustawienia → Kontakt: Telegram, Instagram, TikTok lub e-mail. Odpowiadamy w każdej chwili.</string>
     <string name="pet_q_pet">Jak rośniesz?</string>
-    <string name="pet_a_pet">Jem energię z mądrych decyzji: przyjmiesz dobre zlecenie albo odrzucisz złe — dostaję +10. Każdy dzień ze skanowaniem to +5. Więcej energii — wyższy poziom!</string>
+    <string name="pet_a_pet">Jem energię z mądrych decyzji: przyjmiesz dobre zlecenie albo odrzucisz złe — dostaję +3. Każdy dzień ze skanowaniem to +5. Więcej energii — wyższy poziom!</string>
 </resources>

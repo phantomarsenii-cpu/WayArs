@@ -276,6 +276,7 @@
     <string name="pet_say_break">Du har arbejdet over 5 timer. Tid til en kort pause?</string>
     <string name="pet_say_sad">Jeg kan ikke se ordrer: slå adgang til i indstillinger.</string>
     <string name="pet_say_helper">Hvad vil du vide?</string>
+    <string name="pet_say_full">Jeg er mæt for i dag! Energi igen i morgen 😋</string>
     <string name="pet_q_active">Hvordan begynder jeg at læse ordrer?</string>
     <string name="pet_a_active">Slå „Active“ til øverst på startskærmen. Så længe den er til, holder jeg øje med nye ordrer og viser min vurdering over leverings- eller taxa-appen.</string>
     <string name="pet_q_overlay">Hvorfor vises kortet ikke over ordren?</string>
@@ -305,5 +306,5 @@
     <string name="pet_q_contact">Hvordan kontakter jeg jer?</string>
     <string name="pet_a_contact">Indstillinger → Kontakt: Telegram, Instagram, TikTok eller e-mail. Vi svarer når som helst.</string>
     <string name="pet_q_pet">Hvordan vokser du?</string>
-    <string name="pet_a_pet">Jeg spiser energi fra smarte beslutninger: god ordre accepteret eller dårlig afvist — +10 til mig. Hver dag med scanning giver +5. Mere energi — højere niveau!</string>
+    <string name="pet_a_pet">Jeg spiser energi fra smarte beslutninger: god ordre accepteret eller dårlig afvist — +3 til mig. Hver dag med scanning giver +5. Mere energi — højere niveau!</string>
 </resources>

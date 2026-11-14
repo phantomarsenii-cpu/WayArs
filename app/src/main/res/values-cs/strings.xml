@@ -276,6 +276,7 @@
     <string name="pet_say_break">Pracuješ už přes 5 hodin. Co krátká pauza?</string>
     <string name="pet_say_sad">Nevidím zakázky: zapni přístup v nastavení.</string>
     <string name="pet_say_helper">Co chceš vědět?</string>
+    <string name="pet_say_full">Pro dnešek jsem sytý! Energie zase zítra 😋</string>
     <string name="pet_q_active">Jak začít číst zakázky?</string>
     <string name="pet_a_active">Zapněte přepínač „Active“ nahoře na hlavní obrazovce. Dokud je zapnutý, hlídám nové zakázky a ukazuji hodnocení nad aplikací rozvozu nebo taxi.</string>
     <string name="pet_q_overlay">Proč se nad zakázkou neobjeví karta?</string>
@@ -305,5 +306,5 @@
     <string name="pet_q_contact">Jak vás kontaktovat?</string>
     <string name="pet_a_contact">Nastavení → Kontakt: Telegram, Instagram, TikTok nebo e-mail. Odpovídáme kdykoli.</string>
     <string name="pet_q_pet">Jak rosteš?</string>
-    <string name="pet_a_pet">Jím energii z chytrých rozhodnutí: dobrá zakázka přijata nebo špatná odmítnuta — +10 pro mě. Každý den skenování dá +5. Víc energie — vyšší úroveň!</string>
+    <string name="pet_a_pet">Jím energii z chytrých rozhodnutí: dobrá zakázka přijata nebo špatná odmítnuta — +3 pro mě. Každý den skenování dá +5. Víc energie — vyšší úroveň!</string>
 </resources>

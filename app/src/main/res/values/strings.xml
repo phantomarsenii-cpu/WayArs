@@ -288,6 +288,7 @@
     <string name="pet_say_break">You\'ve been working over 5 hours. Time for a short break?</string>
     <string name="pet_say_sad">I can\'t see orders: turn on access in Settings.</string>
     <string name="pet_say_helper">What would you like to know?</string>
+    <string name="pet_say_full">I\'m full for today! Energy is back tomorrow 😋</string>
     <string name="pet_q_active">How do I start reading orders?</string>
     <string name="pet_a_active">Turn on the “Active” switch at the top of the home screen. While it\'s on, I watch new orders and show my verdict over the delivery or taxi app.</string>
     <string name="pet_q_overlay">Why doesn\'t the card appear over the order?</string>
@@ -317,5 +318,5 @@
     <string name="pet_q_contact">How can I contact you?</string>
     <string name="pet_a_contact">Settings → Contact us: Telegram, Instagram, TikTok or e-mail. We answer any time.</string>
     <string name="pet_q_pet">How do you grow?</string>
-    <string name="pet_a_pet">I eat energy from smart decisions: accept a good order or reject a bad one and I get +10. Every day you switch on scanning gives +5. More energy — higher level!</string>
+    <string name="pet_a_pet">I eat energy from smart decisions: accept a good order or reject a bad one and I get +3. Every day you switch on scanning gives +5. More energy — higher level!</string>
 </resources>

@@ -276,6 +276,7 @@
     <string name="pet_say_break">Du har jobbat i över 5 timmar. Dags för en kort paus?</string>
     <string name="pet_say_sad">Jag ser inga uppdrag: slå på åtkomst i inställningarna.</string>
     <string name="pet_say_helper">Vad vill du veta?</string>
+    <string name="pet_say_full">Jag är mätt för i dag! Energi igen i morgon 😋</string>
     <string name="pet_q_active">Hur börjar jag läsa uppdrag?</string>
     <string name="pet_a_active">Slå på ”Active” högst upp på startskärmen. Så länge den är på håller jag koll på nya uppdrag och visar min bedömning över leverans- eller taxiappen.</string>
     <string name="pet_q_overlay">Varför visas inte kortet över uppdraget?</string>
@@ -305,5 +306,5 @@
     <string name="pet_q_contact">Hur kontaktar jag er?</string>
     <string name="pet_a_contact">Inställningar → Kontakt: Telegram, Instagram, TikTok eller e-post. Vi svarar när som helst.</string>
     <string name="pet_q_pet">Hur växer du?</string>
-    <string name="pet_a_pet">Jag äter energi från smarta beslut: bra uppdrag accepterat eller dåligt avböjt — +10 till mig. Varje dag med skanning ger +5. Mer energi — högre nivå!</string>
+    <string name="pet_a_pet">Jag äter energi från smarta beslut: bra uppdrag accepterat eller dåligt avböjt — +3 till mig. Varje dag med skanning ger +5. Mer energi — högre nivå!</string>
 </resources>

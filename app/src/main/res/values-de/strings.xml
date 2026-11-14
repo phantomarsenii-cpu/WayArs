@@ -275,6 +275,7 @@
     <string name="pet_say_break">Du arbeitest schon über 5 Stunden. Zeit für eine kurze Pause?</string>
     <string name="pet_say_sad">Ich sehe keine Aufträge: Schalte den Zugriff in den Einstellungen ein.</string>
     <string name="pet_say_helper">Was möchtest du wissen?</string>
+    <string name="pet_say_full">Für heute bin ich satt! Morgen gibt es wieder Energie 😋</string>
     <string name="pet_q_active">Wie starte ich das Lesen von Aufträgen?</string>
     <string name="pet_a_active">Schalte oben auf dem Startbildschirm „Active“ ein. Solange es an ist, beobachte ich neue Aufträge und zeige meine Bewertung über der Liefer- oder Taxi-App.</string>
     <string name="pet_q_overlay">Warum erscheint die Karte nicht über dem Auftrag?</string>
@@ -304,5 +305,5 @@
     <string name="pet_q_contact">Wie erreiche ich euch?</string>
     <string name="pet_a_contact">Einstellungen → Kontakt: Telegram, Instagram, TikTok oder E-Mail. Wir antworten jederzeit.</string>
     <string name="pet_q_pet">Wie wächst du?</string>
-    <string name="pet_a_pet">Ich esse Energie aus klugen Entscheidungen: guten Auftrag angenommen oder schlechten abgelehnt — +10 für mich. Jeder Tag mit Scannen gibt +5. Mehr Energie — höheres Level!</string>
+    <string name="pet_a_pet">Ich esse Energie aus klugen Entscheidungen: guten Auftrag angenommen oder schlechten abgelehnt — +3 für mich. Jeder Tag mit Scannen gibt +5. Mehr Energie — höheres Level!</string>
 </resources>
