@@ -458,4 +458,5 @@
     <string name="tour_new_title">Какво ново в WayArs</string>
     <string name="tour_new_text">Накратко за новото: помощникът Wayo, реален доход на час и сравнение на приложенията, комисиона на партньора, обобщение за деня, уиджет, часовник и покани.</string>
     <string name="settings_extras_summary">Обобщения, часовник, уиджет, покани</string>
+    <string name="dashboard_per_hour">на час, чисто</string>
 </resources>

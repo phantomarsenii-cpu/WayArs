@@ -462,4 +462,5 @@
     <string name="tour_new_title">Co nowego w WayArs</string>
     <string name="tour_new_text">Krótko o nowościach: pomocnik Wayo, realny zarobek na godzinę i porównanie aplikacji, prowizja partnera, podsumowania dnia, widżet, zegarek i zaproszenia.</string>
     <string name="settings_extras_summary">Podsumowania, zegarek, widżet, zaproszenia</string>
+    <string name="dashboard_per_hour">na godzinę, na rękę</string>
 </resources>

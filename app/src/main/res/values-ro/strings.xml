@@ -457,4 +457,5 @@
     <string name="tour_new_title">Ce e nou în WayArs</string>
     <string name="tour_new_text">Pe scurt: ajutorul Wayo, câștigul real pe oră și compararea aplicațiilor, comisionul partenerului, bilanțul zilei, widgetul, ceasul și invitațiile.</string>
     <string name="settings_extras_summary">Bilanțuri, ceas, widget, invitații</string>
+    <string name="dashboard_per_hour">pe oră, net</string>
 </resources>

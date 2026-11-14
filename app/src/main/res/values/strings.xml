@@ -470,4 +470,5 @@
     <string name="tour_new_title">What\'s new in WayArs</string>
     <string name="tour_new_text">A quick look at what\'s new: Wayo the helper, real earnings per hour and app comparison, partner commission, day summaries, the widget, the watch and invites.</string>
     <string name="settings_extras_summary">Summaries, watch, widget, invites</string>
+    <string name="dashboard_per_hour">per hour, take-home</string>
 </resources>

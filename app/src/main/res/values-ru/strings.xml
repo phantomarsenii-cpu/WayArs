@@ -462,4 +462,5 @@
     <string name="tour_new_title">Что нового в WayArs</string>
     <string name="tour_new_text">Коротко о новом: помощник Wayo, реальный заработок в час и сравнение приложений, комиссия партнёра, итоги дня, виджет, часы и приглашения.</string>
     <string name="settings_extras_summary">Итоги, часы, виджет, приглашения</string>
+    <string name="dashboard_per_hour">в час, на руки</string>
 </resources>

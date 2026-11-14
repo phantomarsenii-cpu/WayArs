@@ -25,7 +25,9 @@ data class TodaySummary(
     val totalDistanceKm: Double = 0.0,
     val totalTimeMinutes: Double = 0.0,
     val avgRatePerKm: Double = 0.0,
-    val currency: Currency = Currency.default
+    val currency: Currency = Currency.default,
+    /** Sum of take-home amounts (after partner commission, fuel if entered, and tax). */
+    val totalTakeHome: Double = 0.0
 )
 
 class MainViewModel(private val container: AppContainer) : ViewModel() {
@@ -121,7 +123,8 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
             totalDistanceKm = totalDistance,
             totalTimeMinutes = totalTime,
             avgRatePerKm = if (totalDistance > 0) totalEarnings / totalDistance else 0.0,
-            currency = currentCurrency
+            currency = currentCurrency,
+            totalTakeHome = orders.sumOf { it.evaluation.takeHome }
         )
     }
 

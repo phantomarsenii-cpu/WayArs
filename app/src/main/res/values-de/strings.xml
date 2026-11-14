@@ -457,4 +457,5 @@
     <string name="tour_new_title">Neu in WayArs</string>
     <string name="tour_new_text">Kurz das Neue: Helfer Wayo, echter Stundenverdienst und App-Vergleich, Partnerprovision, Tagesbilanz, Widget, Uhr und Einladungen.</string>
     <string name="settings_extras_summary">Bilanzen, Uhr, Widget, Einladungen</string>
+    <string name="dashboard_per_hour">pro Stunde, netto</string>
 </resources>

@@ -457,4 +457,5 @@
     <string name="tour_new_title">Що нового у WayArs</string>
     <string name="tour_new_text">Коротко про нове: помічник Wayo, реальний заробіток за годину й порівняння застосунків, комісія партнера, підсумки дня, віджет, годинник і запрошення.</string>
     <string name="settings_extras_summary">Підсумки, годинник, віджет, запрошення</string>
+    <string name="dashboard_per_hour">за годину, на руки</string>
 </resources>

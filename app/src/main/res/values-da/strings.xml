@@ -458,4 +458,5 @@
     <string name="tour_new_title">Nyt i WayArs</string>
     <string name="tour_new_text">Kort om det nye: hjælperen Wayo, reel timeløn og sammenligning af apps, partnerprovision, dagens resultat, widget, ur og invitationer.</string>
     <string name="settings_extras_summary">Resultater, ur, widget, invitationer</string>
+    <string name="dashboard_per_hour">pr. time, netto</string>
 </resources>

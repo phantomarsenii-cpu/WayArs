@@ -358,26 +358,58 @@ fun DashboardScreen(
                 color = WaTextSecondary,
                 fontSize = 14.sp
             )
-            Row(verticalAlignment = Alignment.Bottom) {
-                Text(
-                    "${summary.ordersCount}",
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 22.sp
-                )
-                Text(
-                    " ${stringResource(R.string.dashboard_orders)}",
-                    color = WaTextSecondary,
-                    fontSize = 14.sp,
-                    modifier = Modifier.padding(bottom = 3.dp)
-                )
+            // Left: orders + earnings. Right: real take-home per hour today (waiting included),
+            // the same figure as the top card in Stats.
+            val weeklyFee by com.wayars.app.data.prefs.DriverPrefs.weeklyFee.collectAsState()
+            val activeMs = activeTodayMinutes * 60_000L
+            val perHour = if (activeMs < 15 * 60_000L) null
+                else (summary.totalTakeHome - weeklyFee / 7.0) / (activeMs / 3_600_000.0)
+            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.Bottom) {
+                Column(Modifier.weight(1f)) {
+                    Row(verticalAlignment = Alignment.Bottom) {
+                        Text(
+                            "${summary.ordersCount}",
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 22.sp
+                        )
+                        Text(
+                            " ${stringResource(R.string.dashboard_orders)}",
+                            color = WaTextSecondary,
+                            fontSize = 14.sp,
+                            modifier = Modifier.padding(bottom = 3.dp)
+                        )
+                    }
+                    Text(
+                        CurrencyFormatter.format(summary.totalEarnings, summary.currency),
+                        color = WaNeonGreen,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 30.sp,
+                        maxLines = 1
+                    )
+                }
+                Column(
+                    horizontalAlignment = Alignment.End,
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(14.dp))
+                        .background(WaSurfaceVariant)
+                        .padding(horizontal = 12.dp, vertical = 8.dp)
+                ) {
+                    Text(
+                        perHour?.let { stringResource(R.string.summary_part_hour, CurrencyFormatter.format(it, summary.currency, 0)) } ?: "—",
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 22.sp,
+                        maxLines = 1
+                    )
+                    Text(
+                        stringResource(R.string.dashboard_per_hour),
+                        color = WaTextSecondary,
+                        fontSize = 12.sp,
+                        maxLines = 1
+                    )
+                }
             }
-            Text(
-                CurrencyFormatter.format(summary.totalEarnings, summary.currency),
-                color = WaNeonGreen,
-                fontWeight = FontWeight.Bold,
-                fontSize = 30.sp
-            )
 
             HorizontalDivider(modifier = Modifier.padding(vertical = 14.dp), color = WaSurfaceVariant)
 

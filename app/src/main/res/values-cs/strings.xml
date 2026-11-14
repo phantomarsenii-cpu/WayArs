@@ -458,4 +458,5 @@
     <string name="tour_new_title">Co je nového ve WayArs</string>
     <string name="tour_new_text">Krátce o novinkách: pomocník Wayo, reálný výdělek za hodinu a srovnání aplikací, provize partnera, souhrn dne, widget, hodinky a pozvánky.</string>
     <string name="settings_extras_summary">Souhrny, hodinky, widget, pozvánky</string>
+    <string name="dashboard_per_hour">za hodinu, čistého</string>
 </resources>
