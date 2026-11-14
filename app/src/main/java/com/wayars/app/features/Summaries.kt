@@ -173,8 +173,12 @@ class SummaryReceiver : BroadcastReceiver() {
                     try { runCatching { Summaries.handle(app, action) } } finally { result.finish() }
                 }
             }
-            // Boot / app update: alarms are lost, arm them again.
-            else -> Summaries.schedule(app)
+            // Boot / app update: alarms are lost, arm them again, and redraw the widget with the
+            // new version's numbers (the launcher keeps the old picture until it's updated).
+            else -> {
+                Summaries.schedule(app)
+                EarningsWidget.requestUpdate(app)
+            }
         }
     }
 }

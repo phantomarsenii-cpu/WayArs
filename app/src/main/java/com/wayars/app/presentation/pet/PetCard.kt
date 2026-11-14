@@ -314,16 +314,20 @@ fun PetCard(
                 stringResource(R.string.pet_energy, pet.xp, pet.nextLevelXp),
                 color = WaTextSecondary, fontSize = 11.sp
             )
-            Text(
-                says,
-                color = Color.White,
-                fontSize = 13.sp,
-                lineHeight = 17.sp,
+            // Fixed room for three lines: the text changes while petting / on reactions, and the
+            // card must not grow and shrink with it.
+            val bubbleMin = with(androidx.compose.ui.platform.LocalDensity.current) { (17.sp * 3).toDp() } + 14.dp
+            Box(
+                contentAlignment = Alignment.CenterStart,
                 modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = bubbleMin)
                     .clip(RoundedCornerShape(12.dp))
                     .background(WaSurfaceVariant)
                     .padding(horizontal = 10.dp, vertical = 7.dp)
-            )
+            ) {
+                Text(says, color = Color.White, fontSize = 13.sp, lineHeight = 17.sp, maxLines = 3, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
+            }
             Text(
                 "💬 " + stringResource(R.string.pet_ask, name),
                 color = WaNeonGreen,

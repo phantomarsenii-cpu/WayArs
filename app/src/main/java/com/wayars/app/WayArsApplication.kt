@@ -57,6 +57,7 @@ class WayArsApplication : Application() {
         com.wayars.app.pet.PetState.init(this)
         com.wayars.app.data.prefs.DriverPrefs.init(this)
         com.wayars.app.features.Summaries.schedule(this)
+        com.wayars.app.features.EarningsWidget.requestUpdate(this)
         configureRevenueCat()
         observeAppForeground()
         applicationScope.launch {

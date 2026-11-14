@@ -60,7 +60,7 @@ object EarningsWidget {
         val active = ScanningState.isActive.value
         val sub = buildString {
             append(context.getString(R.string.summary_part_orders, e.orders))
-            e.perHour?.let { append(" · ").append(context.getString(R.string.summary_part_hour, CurrencyFormatter.format(it, currency, 0))) }
+            e.perHour?.takeIf { e.orders > 0 }?.let { append(" · ").append(context.getString(R.string.summary_part_hour, CurrencyFormatter.format(it, currency, 0))) }
         }
         val open = PendingIntent.getActivity(
             context, 0, Intent(context, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
@@ -73,7 +73,7 @@ object EarningsWidget {
         for (id in ids) {
             val v = RemoteViews(context.packageName, R.layout.widget_earnings)
             v.setTextViewText(R.id.widget_title, context.getString(R.string.widget_today))
-            v.setTextViewText(R.id.widget_amount, CurrencyFormatter.format(e.net, currency))
+            v.setTextViewText(R.id.widget_amount, CurrencyFormatter.format(if (e.orders > 0) e.net else 0.0, currency))
             v.setTextViewText(R.id.widget_sub, sub)
             v.setTextViewText(R.id.widget_toggle, context.getString(if (active) R.string.widget_active else R.string.widget_off))
             v.setInt(R.id.widget_toggle, "setBackgroundResource", if (active) R.drawable.widget_toggle_on else R.drawable.widget_toggle_off)
