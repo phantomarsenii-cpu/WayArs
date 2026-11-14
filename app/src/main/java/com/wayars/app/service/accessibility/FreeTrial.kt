@@ -43,6 +43,9 @@ object FreeTrial {
         }
     }
 
+    /** Last subscription state the app learned from RevenueCat (false until it is known). */
+    fun isSubscribedCached(): Boolean = subscribed
+
     @Synchronized
     fun setSubscribed(value: Boolean) {
         subscribed = value

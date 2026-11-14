@@ -21,6 +21,9 @@ interface OrderDao {
     @Query("SELECT * FROM orders WHERE timestampMillis >= :sinceMillis ORDER BY timestampMillis DESC")
     fun observeSince(sinceMillis: Long): Flow<List<OrderEntity>>
 
+    @Query("SELECT * FROM orders WHERE timestampMillis >= :sinceMillis AND accepted = 1 ORDER BY timestampMillis ASC")
+    suspend fun acceptedSince(sinceMillis: Long): List<OrderEntity>
+
     @Query("DELETE FROM orders")
     suspend fun clearAll()
 }

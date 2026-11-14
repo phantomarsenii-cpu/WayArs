@@ -41,7 +41,8 @@ class EvaluateOrderUseCase {
         preset: Preset,
         vehicleProfile: VehicleProfile = VehicleProfile.DEFAULT,
         customThresholds: CustomThresholds? = null,
-        taxPercent: Double = 0.0
+        taxPercent: Double = 0.0,
+        commissionPercent: Double = 0.0
     ): OrderEvaluation {
         require(distanceKm > 0) { "distanceKm must be > 0" }
         // >= 0, not > 0: apps like Stuart don't always expose a parseable
@@ -55,7 +56,10 @@ class EvaluateOrderUseCase {
         // driver; the verdict and the per-km / per-minute rates stay based on fuel-only net profit, so the
         // driver's own thresholds keep their meaning.
         val taxAmount = if (taxPercent > 0.0) earnings * taxPercent / 100.0 else 0.0
-        val takeHome = earnings - (if (vehicleProfile.hasFuelCostData()) fuelCost else 0.0) - taxAmount
+        // Partner (fleet) commission works the same way: a share of the order amount that only
+        // lowers the take-home figure.
+        val commissionAmount = if (commissionPercent > 0.0) earnings * commissionPercent / 100.0 else 0.0
+        val takeHome = earnings - commissionAmount - (if (vehicleProfile.hasFuelCostData()) fuelCost else 0.0) - taxAmount
 
         // No hidden padding here anymore — this used to add a flat, fake
         // "parking/red lights/waiting" constant on top of the order's own
@@ -111,6 +115,8 @@ class EvaluateOrderUseCase {
             fuelDataEntered = vehicleProfile.hasFuelCostData(),
             taxPercent = taxPercent,
             taxAmount = taxAmount,
+            commissionPercent = commissionPercent,
+            commissionAmount = commissionAmount,
             takeHome = takeHome
         )
     }

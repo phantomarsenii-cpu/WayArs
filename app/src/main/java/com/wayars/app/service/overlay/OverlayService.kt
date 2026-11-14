@@ -255,6 +255,7 @@ class OverlayService : LifecycleService() {
      */
     private fun onDecision(accepted: Boolean, evaluation: OrderEvaluation?, sourcePackage: String?) {
         OverlayState.clear()
+        com.wayars.app.features.WatchVerdict.cancel(applicationContext)
         if (sourcePackage != null) {
             ScanningState.suppressScanningBriefly(sourcePackage)
             if (evaluation != null) {
@@ -273,8 +274,9 @@ class OverlayService : LifecycleService() {
         if (accepted && evaluation != null) {
             lifecycleScope.launch {
                 runCatching {
-                    val id = appContainer().orderRepository.record(evaluation)
+                    val id = appContainer().orderRepository.record(evaluation, sourcePackage)
                     appContainer().orderRepository.markDecision(id, true)
+                    com.wayars.app.features.EarningsWidget.requestUpdate(applicationContext)
                 }
             }
         }

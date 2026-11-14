@@ -20,6 +20,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.collectAsState
+import com.wayars.app.features.Achievements
+import com.wayars.app.features.Earnings
+import com.wayars.app.features.ServiceRate
+import com.wayars.app.features.ShiftEarnings
+import com.wayars.app.features.SlotRate
+import com.wayars.app.presentation.ui.tour.TourTarget
+import com.wayars.app.presentation.ui.tour.tourTarget
+import com.wayars.app.service.accessibility.ActiveSessionTracker
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -65,6 +74,25 @@ fun StatsScreen(
     modifier: Modifier = Modifier
 ) {
     val stats = remember(orders, period) { buildPeriodStats(orders, period) }
+    // Active-time history isn't observable; refresh the per-hour figures once a minute.
+    val tick by androidx.compose.runtime.produceState(0L) {
+        while (true) { value = System.currentTimeMillis(); kotlinx.coroutines.delay(60_000L) }
+    }
+    val weeklyFee by com.wayars.app.data.prefs.DriverPrefs.weeklyFee.collectAsState()
+    val extras = remember(orders, period, tick, weeklyFee) {
+        val now = System.currentTimeMillis()
+        val intervals = ActiveSessionTracker.intervals(now - 400L * 86_400_000L, now)
+        val shift = Earnings.period(orders, intervals, stats.start, now + 1, weeklyFee)
+        val recent = orders.filter { it.timestampMillis >= now - 60L * 86_400_000L }
+        val slots = Earnings.slotRates(recent, intervals)
+        StatsExtrasData(
+            shift = shift,
+            services = Earnings.serviceRates(slots),
+            comparisons = Earnings.comparisons(slots),
+            best = Earnings.bestSlots(slots),
+            achievements = Earnings.achievements(orders, intervals)
+        )
+    }
     val timeFormat = remember(period) {
         SimpleDateFormat(if (period == StatsPeriod.TODAY) "HH:mm" else "dd.MM HH:mm", Locale.getDefault())
     }
@@ -88,8 +116,11 @@ fun StatsScreen(
                 )
             }
         } else {
+            item { Box(Modifier.tourTarget(TourTarget.STATS_HOURLY)) { RealHourlyCard(extras.shift, currency) } }
             item { SummaryBlock(stats, currency) }
             item { EarningsChart(stats, currency) }
+            item { ServicesCard(extras.services, extras.comparisons, extras.best, currency) }
+            item { AchievementsCard(extras.achievements, currency) }
             items(stats.orders.take(50)) { order ->
                 Row(
                     modifier = Modifier
@@ -271,7 +302,16 @@ private fun EarningsChart(stats: PeriodStats, currency: Currency) {
     }
 }
 
+private class StatsExtrasData(
+    val shift: ShiftEarnings,
+    val services: List<ServiceRate>,
+    val comparisons: List<List<SlotRate>>,
+    val best: List<SlotRate>,
+    val achievements: Achievements
+)
+
 private class PeriodStats(
+    val start: Long,
     val period: StatsPeriod,
     val orders: List<OrderRecord>,
     val buckets: List<Double>,
@@ -357,5 +397,5 @@ private fun buildPeriodStats(all: List<OrderRecord>, period: StatsPeriod): Perio
             }
         }
     }
-    return PeriodStats(period, inPeriod, sums.toList(), labels, captions)
+    return PeriodStats(start.timeInMillis, period, inPeriod, sums.toList(), labels, captions)
 }

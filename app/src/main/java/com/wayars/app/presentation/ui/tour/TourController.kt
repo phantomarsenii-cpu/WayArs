@@ -35,7 +35,10 @@ enum class TourTarget {
     SETTINGS_PERMISSIONS,
     SETTINGS_APPS,
     SETTINGS_SUBSCRIPTION,
-    SETTINGS_INFO
+    SETTINGS_INFO,
+    SETTINGS_PARTNER,
+    SETTINGS_EXTRAS,
+    STATS_HOURLY
 }
 
 /**
@@ -54,6 +57,20 @@ class TourStep(
     @StringRes val text: Int
 )
 
+/** Item positions in the Settings LazyColumn (used to scroll the tour / helper to a card). */
+object SettingsItems {
+    const val SUBSCRIPTION = 1
+    const val GENERAL = 2
+    const val THRESHOLDS = 3
+    const val VEHICLE = 4
+    const val TAX = 5
+    const val PARTNER = 6
+    const val PERMISSIONS = 7
+    const val APPS = 8
+    const val EXTRAS = 9
+    const val INFO = 10
+}
+
 object TourSteps {
     val all: List<TourStep> = listOf(
         TourStep(null, MainTab.HOME, null, R.string.tour_welcome_title, R.string.tour_welcome_text),
@@ -66,8 +83,8 @@ object TourSteps {
         TourStep(TourTarget.SETTINGS_THRESHOLDS, MainTab.SETTINGS, 3, R.string.tour_thresholds_title, R.string.tour_thresholds_text),
         TourStep(TourTarget.SETTINGS_VEHICLE, MainTab.SETTINGS, 4, R.string.tour_vehicle_title, R.string.tour_vehicle_text),
         TourStep(TourTarget.SETTINGS_TAX, MainTab.SETTINGS, 5, R.string.tour_tax_title, R.string.tour_tax_text),
-        TourStep(TourTarget.SETTINGS_PERMISSIONS, MainTab.SETTINGS, 6, R.string.tour_permissions_title, R.string.tour_permissions_text),
-        TourStep(TourTarget.SETTINGS_APPS, MainTab.SETTINGS, 7, R.string.tour_apps_title, R.string.tour_apps_text),
+        TourStep(TourTarget.SETTINGS_PERMISSIONS, MainTab.SETTINGS, SettingsItems.PERMISSIONS, R.string.tour_permissions_title, R.string.tour_permissions_text),
+        TourStep(TourTarget.SETTINGS_APPS, MainTab.SETTINGS, SettingsItems.APPS, R.string.tour_apps_title, R.string.tour_apps_text),
         TourStep(null, MainTab.HOME, null, R.string.tour_final_title, R.string.tour_final_text)
     )
 }

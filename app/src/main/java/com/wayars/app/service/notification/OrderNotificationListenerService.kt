@@ -102,10 +102,12 @@ class OrderNotificationListenerService : NotificationListenerService() {
             preset = currentPreset,
             vehicleProfile = currentVehicleProfile,
             customThresholds = currentCustomThresholds,
-            taxPercent = currentTaxPercent
+            taxPercent = currentTaxPercent,
+            commissionPercent = com.wayars.app.data.prefs.DriverPrefs.commissionPercent.value
         )
         Log.d(TAG, "Parsed order from notification: $evaluation")
         OverlayState.publish(evaluation, recordId = null, sourcePackage = sbn.packageName)
+        com.wayars.app.features.WatchVerdict.onOrderShown(applicationContext, evaluation, sbn.packageName)
     }
 
     override fun onDestroy() {

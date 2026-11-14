@@ -57,6 +57,7 @@ import com.wayars.app.presentation.ui.theme.WaSurfaceVariant
 import com.wayars.app.presentation.ui.theme.WaTextSecondary
 import com.wayars.app.presentation.ui.tour.TourStep
 import com.wayars.app.presentation.ui.tour.TourTarget
+import com.wayars.app.presentation.ui.tour.SettingsItems
 import com.wayars.app.service.accessibility.ActiveSessionTracker
 import com.wayars.app.util.AccessibilityUtils
 import kotlinx.coroutines.delay
@@ -68,48 +69,56 @@ class PetHelpTopic(@StringRes val question: Int, @StringRes val answer: Int, val
 private fun topic(q: Int, a: Int, target: TourTarget?, tab: MainTab = MainTab.SETTINGS, item: Int? = null) =
     PetHelpTopic(q, a, target?.let { TourStep(it, tab, item, q, a) })
 
-// Settings list items: 0 title, 1 subscription, 2 currency, 3 thresholds, 4 vehicle, 5 tax,
-// 6 permissions, 7 supported apps, 8 info.
+// Settings list item positions: see SettingsItems (TourController.kt).
 val PET_HELP_TOPICS: List<PetHelpTopic> = listOf(
     topic(R.string.pet_q_active, R.string.pet_a_active, TourTarget.ACTIVE_SWITCH, MainTab.HOME),
-    topic(R.string.pet_q_overlay, R.string.pet_a_overlay, TourTarget.SETTINGS_PERMISSIONS, item = 6),
-    topic(R.string.pet_q_access, R.string.pet_a_access, TourTarget.SETTINGS_PERMISSIONS, item = 6),
-    topic(R.string.pet_q_add_app, R.string.pet_a_add_app, TourTarget.SETTINGS_APPS, item = 7),
-    topic(R.string.pet_q_calibrate, R.string.pet_a_calibrate, TourTarget.SETTINGS_APPS, item = 7),
-    topic(R.string.pet_q_currency, R.string.pet_a_currency, TourTarget.SETTINGS_CURRENCY, item = 2),
-    topic(R.string.pet_q_tax, R.string.pet_a_tax, TourTarget.SETTINGS_TAX, item = 5),
-    topic(R.string.pet_q_vehicle, R.string.pet_a_vehicle, TourTarget.SETTINGS_VEHICLE, item = 4),
-    topic(R.string.pet_q_thresholds, R.string.pet_a_thresholds, TourTarget.SETTINGS_THRESHOLDS, item = 3),
+    topic(R.string.pet_q_overlay, R.string.pet_a_overlay, TourTarget.SETTINGS_PERMISSIONS, item = SettingsItems.PERMISSIONS),
+    topic(R.string.pet_q_access, R.string.pet_a_access, TourTarget.SETTINGS_PERMISSIONS, item = SettingsItems.PERMISSIONS),
+    topic(R.string.pet_q_add_app, R.string.pet_a_add_app, TourTarget.SETTINGS_APPS, item = SettingsItems.APPS),
+    topic(R.string.pet_q_calibrate, R.string.pet_a_calibrate, TourTarget.SETTINGS_APPS, item = SettingsItems.APPS),
+    topic(R.string.pet_q_currency, R.string.pet_a_currency, TourTarget.SETTINGS_CURRENCY, item = SettingsItems.GENERAL),
+    topic(R.string.pet_q_tax, R.string.pet_a_tax, TourTarget.SETTINGS_TAX, item = SettingsItems.TAX),
+    topic(R.string.pet_q_vehicle, R.string.pet_a_vehicle, TourTarget.SETTINGS_VEHICLE, item = SettingsItems.VEHICLE),
+    topic(R.string.pet_q_thresholds, R.string.pet_a_thresholds, TourTarget.SETTINGS_THRESHOLDS, item = SettingsItems.THRESHOLDS),
     topic(R.string.pet_q_presets, R.string.pet_a_presets, TourTarget.NAV_PRESETS, MainTab.PRESETS),
     topic(R.string.pet_q_stats, R.string.pet_a_stats, TourTarget.NAV_STATS, MainTab.STATS),
     topic(R.string.pet_q_verdict, R.string.pet_a_verdict, TourTarget.VERDICT_CARD, MainTab.HOME),
-    topic(R.string.pet_q_subscription, R.string.pet_a_subscription, TourTarget.SETTINGS_SUBSCRIPTION, item = 1),
-    topic(R.string.pet_q_contact, R.string.pet_a_contact, TourTarget.SETTINGS_INFO, item = 8),
+    topic(R.string.pet_q_subscription, R.string.pet_a_subscription, TourTarget.SETTINGS_SUBSCRIPTION, item = SettingsItems.SUBSCRIPTION),
+    topic(R.string.pet_q_contact, R.string.pet_a_contact, TourTarget.SETTINGS_INFO, item = SettingsItems.INFO),
     topic(R.string.pet_q_pet, R.string.pet_a_pet, null),
     topic(R.string.pet_q_diagnostics, R.string.pet_a_diagnostics, null),
-    topic(R.string.pet_q_apps, R.string.pet_a_apps, TourTarget.SETTINGS_APPS, item = 7),
+    topic(R.string.pet_q_apps, R.string.pet_a_apps, TourTarget.SETTINGS_APPS, item = SettingsItems.APPS),
     topic(R.string.pet_q_clicks, R.string.pet_a_clicks, null),
-    topic(R.string.pet_q_privacy, R.string.pet_a_privacy, TourTarget.SETTINGS_INFO, item = 8),
-    topic(R.string.pet_q_wrong_numbers, R.string.pet_a_wrong_numbers, TourTarget.SETTINGS_APPS, item = 7),
+    topic(R.string.pet_q_privacy, R.string.pet_a_privacy, TourTarget.SETTINGS_INFO, item = SettingsItems.INFO),
+    topic(R.string.pet_q_wrong_numbers, R.string.pet_a_wrong_numbers, TourTarget.SETTINGS_APPS, item = SettingsItems.APPS),
     topic(R.string.pet_q_move_card, R.string.pet_a_move_card, null),
     topic(R.string.pet_q_buttons, R.string.pet_a_buttons, null),
-    topic(R.string.pet_q_net, R.string.pet_a_net, TourTarget.SETTINGS_VEHICLE, item = 4),
+    topic(R.string.pet_q_net, R.string.pet_a_net, TourTarget.SETTINGS_VEHICLE, item = SettingsItems.VEHICLE),
     topic(R.string.pet_q_no_time, R.string.pet_a_no_time, null),
     topic(R.string.pet_q_pickup, R.string.pet_a_pickup, null),
-    topic(R.string.pet_q_trial, R.string.pet_a_trial, TourTarget.SETTINGS_SUBSCRIPTION, item = 1),
-    topic(R.string.pet_q_restore, R.string.pet_a_restore, TourTarget.SETTINGS_SUBSCRIPTION, item = 1),
+    topic(R.string.pet_q_trial, R.string.pet_a_trial, TourTarget.SETTINGS_SUBSCRIPTION, item = SettingsItems.SUBSCRIPTION),
+    topic(R.string.pet_q_restore, R.string.pet_a_restore, TourTarget.SETTINGS_SUBSCRIPTION, item = SettingsItems.SUBSCRIPTION),
     topic(R.string.pet_q_cancel, R.string.pet_a_cancel, null),
-    topic(R.string.pet_q_language, R.string.pet_a_language, TourTarget.SETTINGS_CURRENCY, item = 2),
-    topic(R.string.pet_q_tutorial, R.string.pet_a_tutorial, TourTarget.SETTINGS_INFO, item = 8),
+    topic(R.string.pet_q_language, R.string.pet_a_language, TourTarget.SETTINGS_CURRENCY, item = SettingsItems.GENERAL),
+    topic(R.string.pet_q_tutorial, R.string.pet_a_tutorial, TourTarget.SETTINGS_INFO, item = SettingsItems.INFO),
     topic(R.string.pet_q_turns_off, R.string.pet_a_turns_off, TourTarget.ACTIVE_SWITCH, MainTab.HOME),
     topic(R.string.pet_q_background, R.string.pet_a_background, null),
-    topic(R.string.pet_q_several, R.string.pet_a_several, TourTarget.SETTINGS_APPS, item = 7),
-    topic(R.string.pet_q_battery, R.string.pet_a_battery, TourTarget.SETTINGS_PERMISSIONS, item = 6),
+    topic(R.string.pet_q_several, R.string.pet_a_several, TourTarget.SETTINGS_APPS, item = SettingsItems.APPS),
+    topic(R.string.pet_q_battery, R.string.pet_a_battery, TourTarget.SETTINGS_PERMISSIONS, item = SettingsItems.PERMISSIONS),
     topic(R.string.pet_q_stats_count, R.string.pet_a_stats_count, TourTarget.NAV_STATS, MainTab.STATS),
-    topic(R.string.pet_q_notifications, R.string.pet_a_notifications, TourTarget.SETTINGS_PERMISSIONS, item = 6),
-    topic(R.string.pet_q_country, R.string.pet_a_country, TourTarget.SETTINGS_CURRENCY, item = 2),
-    topic(R.string.pet_q_reset_calibration, R.string.pet_a_reset_calibration, TourTarget.SETTINGS_APPS, item = 7),
-    topic(R.string.pet_q_documents, R.string.pet_a_documents, TourTarget.SETTINGS_INFO, item = 8)
+    topic(R.string.pet_q_notifications, R.string.pet_a_notifications, TourTarget.SETTINGS_PERMISSIONS, item = SettingsItems.PERMISSIONS),
+    topic(R.string.pet_q_country, R.string.pet_a_country, TourTarget.SETTINGS_CURRENCY, item = SettingsItems.GENERAL),
+    topic(R.string.pet_q_reset_calibration, R.string.pet_a_reset_calibration, TourTarget.SETTINGS_APPS, item = SettingsItems.APPS),
+    topic(R.string.pet_q_documents, R.string.pet_a_documents, TourTarget.SETTINGS_INFO, item = SettingsItems.INFO),
+    topic(R.string.pet_q_hourly, R.string.pet_a_hourly, TourTarget.STATS_HOURLY, MainTab.STATS),
+    topic(R.string.pet_q_compare, R.string.pet_a_compare, TourTarget.NAV_STATS, MainTab.STATS),
+    topic(R.string.pet_q_partner, R.string.pet_a_partner, TourTarget.SETTINGS_PARTNER, item = SettingsItems.PARTNER),
+    topic(R.string.pet_q_weekly_fee, R.string.pet_a_weekly_fee, TourTarget.SETTINGS_PARTNER, item = SettingsItems.PARTNER),
+    topic(R.string.pet_q_summaries, R.string.pet_a_summaries, TourTarget.SETTINGS_EXTRAS, item = SettingsItems.EXTRAS),
+    topic(R.string.pet_q_widget, R.string.pet_a_widget, TourTarget.SETTINGS_EXTRAS, item = SettingsItems.EXTRAS),
+    topic(R.string.pet_q_achievements, R.string.pet_a_achievements, TourTarget.NAV_STATS, MainTab.STATS),
+    topic(R.string.pet_q_invite, R.string.pet_a_invite, TourTarget.SETTINGS_EXTRAS, item = SettingsItems.EXTRAS),
+    topic(R.string.pet_q_watch, R.string.pet_a_watch, TourTarget.SETTINGS_EXTRAS, item = SettingsItems.EXTRAS)
 )
 
 /** One live check of the phone/app state for "Check my phone". */
@@ -337,7 +346,7 @@ private fun PetHelpDialog(
             listOf(
                 DiagItem(R.string.pet_diag_accessibility, accessOk) { open(android.content.Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) },
                 DiagItem(R.string.pet_diag_overlay, overlayOk) { open(android.content.Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, pkgUri)) },
-                DiagItem(R.string.pet_diag_plan, planOk) { onShow(stepFor(TourTarget.SETTINGS_SUBSCRIPTION, MainTab.SETTINGS, 1)) },
+                DiagItem(R.string.pet_diag_plan, planOk) { onShow(stepFor(TourTarget.SETTINGS_SUBSCRIPTION, MainTab.SETTINGS, SettingsItems.SUBSCRIPTION)) },
                 DiagItem(R.string.pet_diag_active, isActive) { onShow(stepFor(TourTarget.ACTIVE_SWITCH, MainTab.HOME, null)) },
                 DiagItem(R.string.pet_diag_battery, pm.isIgnoringBatteryOptimizations(context.packageName)) {
                     open(android.content.Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS))

@@ -209,6 +209,12 @@ fun SettingsScreen(
         }
 
         item {
+            Box(modifier = Modifier.tourTarget(TourTarget.SETTINGS_PARTNER)) {
+                PartnerSection(currency = currency)
+            }
+        }
+
+        item {
             Box(modifier = Modifier.tourTarget(TourTarget.SETTINGS_PERMISSIONS)) {
                 PermissionsSection(
                     onOpenAccessibilitySettings = onOpenAccessibilitySettings,
@@ -231,6 +237,12 @@ fun SettingsScreen(
                     onSavePackageHint = onSavePackageHint,
                     onClearPackageHint = onClearPackageHint
                 )
+            }
+        }
+
+        item {
+            Box(modifier = Modifier.tourTarget(TourTarget.SETTINGS_EXTRAS)) {
+                ExtrasSection()
             }
         }
 
@@ -2213,5 +2225,198 @@ private fun SubscriptionSection(isSubscribed: Boolean, onOpenPaywall: () -> Unit
                 modifier = Modifier.padding(start = 56.dp, end = 16.dp, bottom = 14.dp)
             )
         }
+    }
+}
+
+/** Partner (fleet) commission and weekly payment: subtracted to show what really stays "in hand". */
+@Composable
+private fun PartnerSection(currency: Currency) {
+    val context = LocalContext.current
+    val commission by com.wayars.app.data.prefs.DriverPrefs.commissionPercent.collectAsState()
+    val fee by com.wayars.app.data.prefs.DriverPrefs.weeklyFee.collectAsState()
+    var expanded by remember { mutableStateOf(false) }
+    var commissionText by remember(commission) { mutableStateOf(if (commission > 0.0) formatTaxPercent(commission) else "") }
+    var feeText by remember(fee) { mutableStateOf(if (fee > 0.0) formatTaxPercent(fee) else "") }
+    val summary = if (commission > 0.0 || fee > 0.0) {
+        stringResource(R.string.settings_partner_summary, formatTaxPercent(commission), CurrencyFormatter.format(fee, currency, 0))
+    } else {
+        stringResource(R.string.settings_partner_summary_none)
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(14.dp))
+            .background(WaSurface)
+            .clickable { expanded = !expanded }
+            .padding(16.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(Icons.Filled.AccountBalanceWallet, contentDescription = null, tint = WaTextSecondary)
+            Column(Modifier.weight(1f).padding(start = 12.dp)) {
+                Text(
+                    stringResource(R.string.settings_partner_title),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    summary,
+                    color = WaTextSecondary,
+                    style = MaterialTheme.typography.bodyMedium,
+                    maxLines = 1,
+                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                )
+            }
+            Icon(
+                imageVector = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
+                contentDescription = null,
+                tint = WaTextSecondary
+            )
+        }
+
+        AnimatedVisibility(visible = expanded, enter = expandVertically(), exit = shrinkVertically()) {
+            Column(modifier = Modifier.padding(top = 14.dp)) {
+                Text(
+                    stringResource(R.string.settings_partner_desc),
+                    color = WaTextSecondary,
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Spacer(Modifier.padding(top = 12.dp))
+                ThresholdField(
+                    label = stringResource(R.string.settings_partner_commission_label),
+                    value = commissionText,
+                    accent = WaNeonGreen,
+                    onValueChange = { commissionText = it }
+                )
+                Spacer(Modifier.padding(top = 10.dp))
+                ThresholdField(
+                    label = stringResource(R.string.settings_partner_fee_label, currency.symbol),
+                    value = feeText,
+                    accent = WaNeonGreen,
+                    onValueChange = { feeText = it }
+                )
+                Spacer(Modifier.padding(top = 14.dp))
+                TextButton(
+                    onClick = {
+                        val c = (commissionText.replace(',', '.').toDoubleOrNull() ?: 0.0).coerceIn(0.0, 90.0)
+                        val f = (feeText.replace(',', '.').replace(" ", "").toDoubleOrNull() ?: 0.0).coerceAtLeast(0.0)
+                        com.wayars.app.data.prefs.DriverPrefs.setPartner(context, c, f)
+                        com.wayars.app.features.EarningsWidget.requestUpdate(context)
+                        expanded = false
+                        Toast.makeText(context, context.getString(R.string.settings_saved), Toast.LENGTH_SHORT).show()
+                    }
+                ) {
+                    Text(stringResource(R.string.settings_vehicle_save), color = WaNeonGreen)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ExtrasToggle(title: String, desc: String, checked: Boolean, onChange: (Boolean) -> Unit) {
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column(Modifier.weight(1f).padding(end = 10.dp)) {
+            Text(title, color = MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.bodyLarge)
+            Text(desc, color = WaTextSecondary, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(top = 2.dp))
+        }
+        Switch(
+            checked = checked,
+            onCheckedChange = onChange,
+            colors = SwitchDefaults.colors(checkedTrackColor = WaNeonGreen, checkedThumbColor = Color.Black)
+        )
+    }
+}
+
+/** Day/week summaries, verdict on the watch, home-screen widget and "invite a driver". */
+@Composable
+private fun ExtrasSection() {
+    val context = LocalContext.current
+    val summaries by com.wayars.app.data.prefs.DriverPrefs.summariesEnabled.collectAsState()
+    val watch by com.wayars.app.data.prefs.DriverPrefs.watchEnabled.collectAsState()
+    val notificationLauncher = androidx.activity.compose.rememberLauncherForActivityResult(
+        androidx.activity.result.contract.ActivityResultContracts.RequestPermission()
+    ) { }
+    fun askNotifications() {
+        if (android.os.Build.VERSION.SDK_INT >= 33 &&
+            androidx.core.content.ContextCompat.checkSelfPermission(context, "android.permission.POST_NOTIFICATIONS") !=
+            android.content.pm.PackageManager.PERMISSION_GRANTED
+        ) {
+            runCatching { notificationLauncher.launch("android.permission.POST_NOTIFICATIONS") }
+        }
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(14.dp))
+            .background(WaSurface)
+            .padding(16.dp)
+    ) {
+        Text(
+            stringResource(R.string.settings_extras_title),
+            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.titleMedium
+        )
+        Spacer(Modifier.padding(top = 6.dp))
+        ExtrasToggle(
+            title = stringResource(R.string.settings_summaries_title),
+            desc = stringResource(R.string.settings_summaries_desc),
+            checked = summaries
+        ) { on ->
+            com.wayars.app.data.prefs.DriverPrefs.setSummariesEnabled(context, on)
+            com.wayars.app.features.Summaries.schedule(context)
+            if (on) askNotifications()
+        }
+        ExtrasToggle(
+            title = stringResource(R.string.settings_watch_title),
+            desc = stringResource(R.string.settings_watch_desc),
+            checked = watch
+        ) { on ->
+            com.wayars.app.data.prefs.DriverPrefs.setWatchEnabled(context, on)
+            if (on) askNotifications()
+        }
+        Spacer(Modifier.padding(top = 8.dp))
+        Text(stringResource(R.string.settings_widget_title), color = MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.bodyLarge)
+        Text(
+            stringResource(R.string.settings_widget_desc),
+            color = WaTextSecondary,
+            style = MaterialTheme.typography.bodySmall,
+            modifier = Modifier.padding(top = 2.dp)
+        )
+        TextButton(onClick = {
+            if (!com.wayars.app.features.EarningsWidget.requestPin(context)) {
+                Toast.makeText(context, context.getString(R.string.settings_widget_desc), Toast.LENGTH_LONG).show()
+            }
+        }) { Text(stringResource(R.string.settings_widget_add), color = WaNeonGreen) }
+        Spacer(Modifier.padding(top = 4.dp))
+        Text(stringResource(R.string.settings_invite_title), color = MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.bodyLarge)
+        Text(
+            stringResource(R.string.settings_invite_desc),
+            color = WaTextSecondary,
+            style = MaterialTheme.typography.bodySmall,
+            modifier = Modifier.padding(top = 2.dp)
+        )
+        TextButton(onClick = {
+            val code = com.wayars.app.data.prefs.DriverPrefs.inviteCode(context)
+            val link = "https://play.google.com/store/apps/details?id=" + context.packageName +
+                "&referrer=utm_source%3Dinvite%26utm_medium%3Ddriver%26utm_campaign%3D" + code
+            val send = Intent(Intent.ACTION_SEND)
+                .setType("text/plain")
+                .putExtra(Intent.EXTRA_TEXT, context.getString(R.string.invite_share_text, link))
+            runCatching {
+                context.startActivity(
+                    Intent.createChooser(send, context.getString(R.string.settings_invite_button))
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                )
+            }
+        }) { Text(stringResource(R.string.settings_invite_button), color = WaNeonGreen) }
     }
 }

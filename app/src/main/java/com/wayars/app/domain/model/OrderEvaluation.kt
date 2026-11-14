@@ -24,7 +24,11 @@ data class OrderEvaluation(
     val taxPercent: Double = 0.0,
     /** Tax in the driver's currency: earnings * taxPercent / 100. */
     val taxAmount: Double = 0.0,
-    /** What the driver really keeps: earnings minus fuel (only if fuel data was entered) minus tax. */
+    /** Partner (fleet) commission rate the driver entered, percent of the order amount; 0 = none. */
+    val commissionPercent: Double = 0.0,
+    /** Partner commission in the driver's currency: earnings * commissionPercent / 100. */
+    val commissionAmount: Double = 0.0,
+    /** What the driver really keeps: earnings minus partner commission, fuel (only if entered) and tax. */
     val takeHome: Double = earnings
 ) {
     companion object {

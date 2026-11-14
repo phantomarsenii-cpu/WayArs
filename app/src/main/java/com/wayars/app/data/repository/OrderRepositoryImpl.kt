@@ -24,7 +24,10 @@ class OrderRepositoryImpl(private val dao: OrderDao) : OrderRepository {
     override fun observeAll(): Flow<List<OrderRecord>> =
         dao.observeAll().map { list -> list.map { it.toRecord() } }
 
-    override suspend fun record(evaluation: OrderEvaluation): Long = dao.insert(
+    override suspend fun acceptedSince(sinceMillis: Long): List<OrderRecord> =
+        dao.acceptedSince(sinceMillis).map { it.toRecord() }
+
+    override suspend fun record(evaluation: OrderEvaluation, sourcePackage: String?): Long = dao.insert(
         OrderEntity(
             timestampMillis = System.currentTimeMillis(),
             earnings = evaluation.earnings,
@@ -35,7 +38,9 @@ class OrderRepositoryImpl(private val dao: OrderDao) : OrderRepository {
             ratePerMinute = evaluation.ratePerMinute,
             fuelCost = evaluation.fuelCost,
             netProfit = evaluation.netProfit,
-            verdict = evaluation.verdict.name
+            verdict = evaluation.verdict.name,
+            sourcePackage = sourcePackage,
+            takeHome = evaluation.takeHome
         )
     )
 
@@ -55,8 +60,11 @@ class OrderRepositoryImpl(private val dao: OrderDao) : OrderRepository {
             ratePerMinute = ratePerMinute,
             fuelCost = fuelCost,
             netProfit = netProfit,
-            verdict = Verdict.valueOf(verdict)
+            verdict = Verdict.valueOf(verdict),
+            // Orders saved before take-home was stored: nothing was deducted from the amount then.
+            takeHome = takeHome ?: earnings
         ),
-        accepted = accepted
+        accepted = accepted,
+        sourcePackage = sourcePackage
     )
 }

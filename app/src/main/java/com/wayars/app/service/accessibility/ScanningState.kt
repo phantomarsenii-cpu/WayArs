@@ -38,6 +38,7 @@ object ScanningState {
         if (active) com.wayars.app.pet.PetState.onScanningStarted(context)
         FreeTrial.onActiveChanged(active, context)
         _isActive.value = active
+        com.wayars.app.features.EarningsWidget.requestUpdate(context)
         // Ties the file logger's lifetime exactly to one Active session,
         // regardless of which call site flips this flag.
         if (active) {

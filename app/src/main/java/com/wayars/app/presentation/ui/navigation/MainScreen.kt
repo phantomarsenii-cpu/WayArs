@@ -174,7 +174,7 @@ fun MainScreen(
     LaunchedEffect(permissionsRequestId) {
         if (permissionsRequestId > 0) {
             delay(80L)
-            runCatching { settingsListState.animateScrollToItem(6) }
+            runCatching { settingsListState.animateScrollToItem(com.wayars.app.presentation.ui.tour.SettingsItems.PERMISSIONS) }
         }
     }
 

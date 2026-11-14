@@ -74,6 +74,24 @@ object ActiveSessionTracker {
         }
     }
 
+    /**
+     * Every "Active" interval that overlaps [from, to] (the running one up to now), oldest first.
+     * Used for the real per-hour earnings, which count the waiting time between orders too.
+     */
+    @Synchronized
+    fun intervals(from: Long, to: Long = System.currentTimeMillis()): List<LongRange> {
+        val p = prefs() ?: return emptyList()
+        val list = ShiftLog.read(p).toMutableList()
+        val start = p.getLong(KEY_SESSION_START, 0L)
+        if (start > 0L) list.add(start..maxOf(start, System.currentTimeMillis()))
+        return list.filter { it.last > from && it.first < to }
+            .map { maxOf(it.first, from)..minOf(it.last, to) }
+    }
+
+    /** Active milliseconds within [from, to]. */
+    fun activeMillis(from: Long, to: Long = System.currentTimeMillis()): Long =
+        intervals(from, to).sumOf { it.last - it.first }
+
     /** Today's active milliseconds, including the currently running session. */
     @Synchronized
     fun todayMillis(now: Long = System.currentTimeMillis()): Long {
@@ -87,9 +105,37 @@ object ActiveSessionTracker {
 
     private fun credit(start: Long, end: Long) {
         val p = prefs() ?: return
+        ShiftLog.add(p, start, end)
         val dayStart = startOfDay(end)
         val base = if (p.getLong(KEY_DAY, 0L) == dayStart) p.getLong(KEY_TODAY_MS, 0L) else 0L
         val add = maxOf(0L, end - maxOf(start, dayStart))
         p.edit().putLong(KEY_DAY, dayStart).putLong(KEY_TODAY_MS, base + add).apply()
+    }
+}
+
+/**
+ * History of finished "Active" sessions as "start-end;start-end" in the tracker's prefs.
+ * Old entries (> 400 days) are dropped; adjacent sessions are kept separate.
+ */
+internal object ShiftLog {
+    private const val KEY = "shift_log"
+    private const val KEEP_MS = 400L * 24 * 60 * 60 * 1000
+
+    fun read(p: android.content.SharedPreferences): List<LongRange> =
+        (p.getString(KEY, "") ?: "").split(';').mapNotNull { part ->
+            val dash = part.indexOf('-')
+            if (dash <= 0) null else {
+                val a = part.substring(0, dash).toLongOrNull()
+                val b = part.substring(dash + 1).toLongOrNull()
+                if (a == null || b == null || b <= a) null else a..b
+            }
+        }
+
+    fun add(p: android.content.SharedPreferences, start: Long, end: Long) {
+        if (end - start < 1_000L) return
+        val cutoff = System.currentTimeMillis() - KEEP_MS
+        val kept = read(p).filter { it.last >= cutoff && !(it.first == start) }
+        val all = (kept + (start..end)).sortedBy { it.first }
+        p.edit().putString(KEY, all.joinToString(";") { "${it.first}-${it.last}" }).apply()
     }
 }

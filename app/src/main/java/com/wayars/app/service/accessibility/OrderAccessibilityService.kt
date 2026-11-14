@@ -463,7 +463,8 @@ class OrderAccessibilityService : AccessibilityService() {
             preset = currentPreset,
             vehicleProfile = currentVehicleProfile,
             customThresholds = currentCustomThresholds,
-            taxPercent = currentTaxPercent
+            taxPercent = currentTaxPercent,
+            commissionPercent = com.wayars.app.data.prefs.DriverPrefs.commissionPercent.value
         )
 
         Log.d(TAG, "Parsed order: $evaluation")
@@ -476,6 +477,7 @@ class OrderAccessibilityService : AccessibilityService() {
         // NOTE: nothing is written to Room here. A row is only ever inserted
         // when the driver taps Accept in the overlay (see OverlayService).
         OverlayState.publish(evaluation, recordId = null, sourcePackage = eventPackage)
+        com.wayars.app.features.WatchVerdict.onOrderShown(applicationContext, evaluation, eventPackage)
 
         if (Settings.canDrawOverlays(applicationContext)) {
             startForegroundService(Intent(applicationContext, OverlayService::class.java))
