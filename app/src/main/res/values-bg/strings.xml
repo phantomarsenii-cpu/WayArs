@@ -586,6 +586,7 @@
     <string-array name="chat_v_again">
         <item>Ще повторя 🙂</item>
         <item>Както казах:</item>
+        <item>Ще повторя, не ми е трудно. Но ще го запомня 😏</item>
     </string-array>
     <string-array name="chat_v_hello">
         <item>Здрасти! 👋 С какво да помогна?</item>
@@ -749,4 +750,43 @@
     <string name="chat_name_known">Казваш се %1$s 😊</string>
     <string name="chat_name_unknown">Още не знам името ти 🙂 Как се казваш?</string>
     <string name="chat_name_forgot">Добре, забравих 🙈 Кажи ми името си, когато пожелаеш.</string>
+    <string-array name="pet_tease_bad_accepted">
+        <item>Червени поръчки днес: %1$d. Мълча… но всичко видях 👀</item>
+        <item>Неизгодни поръчки днес: %1$d. Не съдя, просто тихо позеленявам от притеснение 🫣</item>
+    </string-array>
+    <string-array name="pet_tease_picky">
+        <item>Отказа поред: %1$d! Днес си по-придирчив от котка пред купичката 😼</item>
+        <item>Отказа поред: %1$d — Uber сигурно вече се притеснява 😏</item>
+    </string-array>
+    <string-array name="pet_tease_night">
+        <item>Посред нощ, а ти си тук. Совите и те ли карат такси? 🦉</item>
+        <item>Пак не спиш? Аз съм хамелеон, на мен ми е позволено — ти трябва да си почиваш 😴</item>
+    </string-array>
+    <string-array name="pet_tease_early">
+        <item>Толкова рано? Дори аз още не съм се събудил… добре, вече да 😅</item>
+        <item>Ранното пиле хваща изгодната поръчка 🐦 Или поне кафе.</item>
+    </string-array>
+    <string-array name="pet_tease_visitor">
+        <item>На гости ли си, или днес работим? 😄</item>
+        <item>Пак надникна? Поласкан съм, но поръчките няма да се вземат сами 😏</item>
+    </string-array>
+    <string-array name="pet_tease_away">
+        <item>Виж кой се върна! Мислех, че си минал на колело 🚲</item>
+        <item>Изчезна за няколко дни — едва не се превърнах обратно в яйце 🥚</item>
+    </string-array>
+    <string-array name="pet_tease_rich">
+        <item>С такава печалба ми дължиш няколко мухи 🪰😏</item>
+        <item>Забогатяваш пред очите ми! Не ме забравяй, като си купиш лимузина 😎</item>
+    </string-array>
+    <string-array name="pet_tease_random">
+        <item>Пак ти? Шегувам се, радвам се да те видя 😄</item>
+        <item>Виждам, че ти е липсвало 😏</item>
+        <item>О, любимият ми шофьор дойде. Добре де, единственият 😅</item>
+    </string-array>
+    <string-array name="pet_tease_bad_now">
+        <item>Нали беше червена! Добре, добре, ти си шефът 🙈</item>
+        <item>Ох… смело решение. Ще се направя, че не съм видял 🫣</item>
+    </string-array>
+    <string name="pet_say_petted_5">Ей, не съм котка! Макар че… продължавай 😌</string>
+    <string name="pet_say_petted_6">Още малко и ще започна да мъркам. Хамелеоните могат ли? Вече да 😄</string>
 </resources>

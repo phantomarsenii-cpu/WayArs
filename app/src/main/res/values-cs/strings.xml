@@ -586,6 +586,7 @@
     <string-array name="chat_v_again">
         <item>Zopakuju 🙂</item>
         <item>Jak jsem říkal:</item>
+        <item>Zopakuju, nic mi to nedá. Ale zapamatuju si to 😏</item>
     </string-array>
     <string-array name="chat_v_hello">
         <item>Ahoj! 👋 S čím pomoct?</item>
@@ -749,4 +750,43 @@
     <string name="chat_name_known">Jmenuješ se %1$s 😊</string>
     <string name="chat_name_unknown">Tvé jméno ještě neznám 🙂 Jak se jmenuješ?</string>
     <string name="chat_name_forgot">Dobře, zapomenuto 🙈 Až budeš chtít, řekni mi, jak se jmenuješ.</string>
+    <string-array name="pet_tease_bad_accepted">
+        <item>Červených zakázek dnes: %1$d. Mlčím… ale všechno jsem viděl 👀</item>
+        <item>Nevýhodných zakázek dnes: %1$d. Neodsuzuji, jen tiše zelenám starostí 🫣</item>
+    </string-array>
+    <string-array name="pet_tease_picky">
+        <item>Odmítnutí za sebou: %1$d! Dnes jsi vybíravější než kočka u misky 😼</item>
+        <item>Odmítnutí za sebou: %1$d — Uber už asi znervózňuje 😏</item>
+    </string-array>
+    <string-array name="pet_tease_night">
+        <item>Je hluboká noc a ty jsi tady. Jezdí sovy taky taxi? 🦉</item>
+        <item>Zase nespíš? Já jsem chameleon, já můžu — ty potřebuješ odpočinek 😴</item>
+    </string-array>
+    <string-array name="pet_tease_early">
+        <item>Tak brzy? Ani já ještě nejsem vzhůru… dobře, už jsem 😅</item>
+        <item>Ranní ptáče chytá výhodnou zakázku 🐦 Nebo aspoň kafe.</item>
+    </string-array>
+    <string-array name="pet_tease_visitor">
+        <item>Jsi tu na návštěvě, nebo dnes pracujeme? 😄</item>
+        <item>Zase nakukuješ? Lichotí mi to, ale zakázky se samy nevezmou 😏</item>
+    </string-array>
+    <string-array name="pet_tease_away">
+        <item>Hele, kdo se vrátil! Myslel jsem, že jsi přesedlal na kolo 🚲</item>
+        <item>Pár dní jsi zmizel — skoro jsem se zase proměnil ve vejce 🥚</item>
+    </string-array>
+    <string-array name="pet_tease_rich">
+        <item>S takovým výdělkem mi dlužíš pár much 🪰😏</item>
+        <item>Bohatneš mi před očima! Nezapomeň na mě, až si koupíš limuzínu 😎</item>
+    </string-array>
+    <string-array name="pet_tease_random">
+        <item>Zase ty? Dělám si legraci, jsem rád, že tě vidím 😄</item>
+        <item>Vidím, že ses mi stýskal 😏</item>
+        <item>Ó, přišel můj oblíbený řidič. No dobře, jediný 😅</item>
+    </string-array>
+    <string-array name="pet_tease_bad_now">
+        <item>Vždyť byla červená! Dobře, dobře, ty jsi tu šéf 🙈</item>
+        <item>Ach… odvážné rozhodnutí. Udělám, že jsem nic neviděl 🫣</item>
+    </string-array>
+    <string name="pet_say_petted_5">Hej, nejsem kočka! I když… pokračuj 😌</string>
+    <string name="pet_say_petted_6">Ještě chvilku a začnu příst. Umí to chameleoni? Teď už ano 😄</string>
 </resources>

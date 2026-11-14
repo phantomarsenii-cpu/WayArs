@@ -586,6 +586,7 @@
     <string-array name="chat_v_again">
         <item>Takrorlayman 🙂</item>
         <item>Aytganimdek:</item>
+        <item>Takrorlayman, qiyin emas. Lekin eslab qolaman 😏</item>
     </string-array>
     <string-array name="chat_v_hello">
         <item>Salom! 👋 Qanday yordam beray?</item>
@@ -749,4 +750,43 @@
     <string name="chat_name_known">Isming %1$s 😊</string>
     <string name="chat_name_unknown">Hali ismingni bilmayman 🙂 Isming nima?</string>
     <string name="chat_name_forgot">Xo‘p, unutdim 🙈 Xohlasang, ismingni ayt.</string>
+    <string-array name="pet_tease_bad_accepted">
+        <item>Bugun qizil buyurtmalar: %1$d. Jim turibman… lekin hammasini ko‘rdim 👀</item>
+        <item>Bugun foydasiz buyurtmalar: %1$d. Hukm qilmayman, shunchaki xavotirdan sekin yashillanyapman 🫣</item>
+    </string-array>
+    <string-array name="pet_tease_picky">
+        <item>Ketma-ket rad etish: %1$d! Bugun idish oldidagi mushukdan ham tanlovchisan 😼</item>
+        <item>Ketma-ket rad etish: %1$d — Uber allaqachon asabiylashyapti shekilli 😏</item>
+    </string-array>
+    <string-array name="pet_tease_night">
+        <item>Yarim tun, sen esa shu yerdasan. Boyqushlar ham taksida ishlaydimi? 🦉</item>
+        <item>Yana uxlamayapsanmi? Men xameleonman, menga mumkin — senga dam olish kerak 😴</item>
+    </string-array>
+    <string-array name="pet_tease_early">
+        <item>Shunchalik ertami? Hatto men ham hali uyg‘onmadim… xo‘p, uyg‘ondim 😅</item>
+        <item>Erta turgan qush foydali buyurtmani tutadi 🐦 Hech bo‘lmasa qahvani.</item>
+    </string-array>
+    <string-array name="pet_tease_visitor">
+        <item>Mehmonga keldingmi yoki bugun ishlaymizmi? 😄</item>
+        <item>Yana kirib chiqdingmi? Yoqimli, lekin buyurtmalar o‘z-o‘zidan olinmaydi 😏</item>
+    </string-array>
+    <string-array name="pet_tease_away">
+        <item>Qara, kim qaytdi! Velosipedga o‘tib olgansan deb o‘ylagandim 🚲</item>
+        <item>Bir necha kun yo‘qolding — sal qoldi yana tuxumga aylanib qolay deb 🥚</item>
+    </string-array>
+    <string-array name="pet_tease_rich">
+        <item>Shunday daromad bilan menga bir nechta pashsha qarzdorsan 🪰😏</item>
+        <item>Ko‘z oldimda boyib ketyapsan! Limuzin olganingda meni unutma 😎</item>
+    </string-array>
+    <string-array name="pet_tease_random">
+        <item>Yana senmi? Hazil, seni ko‘rganimdan xursandman 😄</item>
+        <item>Ko‘rinishidan, meni sog‘inibsan 😏</item>
+        <item>O, sevimli haydovchim keldi. Xo‘p, yagonasi 😅</item>
+    </string-array>
+    <string-array name="pet_tease_bad_now">
+        <item>Axir qizil edi-ku! Xo‘p, xo‘p, bu yerda boshliq sen 🙈</item>
+        <item>Voy… jasoratli qaror. Ko‘rmagandek bo‘lib turaman 🫣</item>
+    </string-array>
+    <string name="pet_say_petted_5">Hey, men mushuk emasman! Lekin… davom et 😌</string>
+    <string name="pet_say_petted_6">Yana biroz — va mushukdek erkalanib ketaman. Xameleonlar ham shunday qiladimi? Endi ha 😄</string>
 </resources>

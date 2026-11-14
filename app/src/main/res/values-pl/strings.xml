@@ -590,6 +590,7 @@
     <string-array name="chat_v_again">
         <item>Powtórzę 🙂</item>
         <item>Jak już mówiłem:</item>
+        <item>Powtórzę, żaden problem. Ale zapamiętam 😏</item>
     </string-array>
     <string-array name="chat_v_hello">
         <item>Cześć! 👋 W czym pomóc?</item>
@@ -753,4 +754,43 @@
     <string name="chat_name_known">Masz na imię %1$s 😊</string>
     <string name="chat_name_unknown">Jeszcze nie znam Twojego imienia 🙂 Jak masz na imię?</string>
     <string name="chat_name_forgot">Dobrze, zapomniałem 🙈 Jak zechcesz — powiedz, jak masz na imię.</string>
+    <string-array name="pet_tease_bad_accepted">
+        <item>Czerwonych zleceń dziś: %1$d. Nic nie mówię… ale wszystko widziałem 👀</item>
+        <item>Nieopłacalnych zleceń dziś: %1$d. Nie oceniam, po prostu cicho zielenieję z nerwów 🫣</item>
+    </string-array>
+    <string-array name="pet_tease_picky">
+        <item>Odmów z rzędu: %1$d! Jesteś dziś bardziej wybredny niż kot przy misce 😼</item>
+        <item>Odmów z rzędu: %1$d — Uber pewnie już się denerwuje 😏</item>
+    </string-array>
+    <string-array name="pet_tease_night">
+        <item>Środek nocy, a Ty tutaj. Sowy też jeżdżą na taxi? 🦉</item>
+        <item>Znowu nie śpisz? Ja jestem kameleonem, mi wolno, a Ty musisz odpocząć 😴</item>
+    </string-array>
+    <string-array name="pet_tease_early">
+        <item>Tak wcześnie? Nawet ja jeszcze nie wstałem… dobra, już wstałem 😅</item>
+        <item>Ranny ptaszek łapie opłacalne zlecenie 🐦 Albo chociaż kawę.</item>
+    </string-array>
+    <string-array name="pet_tease_visitor">
+        <item>Wpadasz w odwiedziny czy dziś pracujemy? 😄</item>
+        <item>Znowu zaglądasz? Schlebia mi to, ale zlecenia same się nie wezmą 😏</item>
+    </string-array>
+    <string-array name="pet_tease_away">
+        <item>O, kto wrócił! Myślałem, że przesiadłeś się na rower 🚲</item>
+        <item>Zniknąłeś na kilka dni — prawie z powrotem zmieniłem się w jajko 🥚</item>
+    </string-array>
+    <string-array name="pet_tease_rich">
+        <item>Przy takim zarobku należą mi się muchy 🪰😏</item>
+        <item>Bogacisz się na moich oczach! Nie zapomnij o mnie, jak kupisz limuzynę 😎</item>
+    </string-array>
+    <string-array name="pet_tease_random">
+        <item>Znowu Ty? Żartuję, cieszę się, że Cię widzę 😄</item>
+        <item>Widzę, że tęskniłeś 😏</item>
+        <item>O, mój ulubiony kierowca. No dobra, jedyny 😅</item>
+    </string-array>
+    <string-array name="pet_tease_bad_now">
+        <item>Przecież była czerwona! Dobra, dobra, Ty tu rządzisz 🙈</item>
+        <item>Oj… odważna decyzja. Udam, że nie widziałem 🫣</item>
+    </string-array>
+    <string name="pet_say_petted_5">Hej, nie jestem kotem! Chociaż… głaszcz dalej 😌</string>
+    <string name="pet_say_petted_6">Jeszcze chwila i zacznę mruczeć. Kameleony to potrafią? Teraz tak 😄</string>
 </resources>

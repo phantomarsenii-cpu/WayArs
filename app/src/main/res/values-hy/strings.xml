@@ -586,6 +586,7 @@
     <string-array name="chat_v_again">
         <item>Կկրկնեմ 🙂</item>
         <item>Ինչպես ասացի՝</item>
+        <item>Կկրկնեմ, դժվար չէ։ Բայց կհիշեմ 😏</item>
     </string-array>
     <string-array name="chat_v_hello">
         <item>Բարև։ 👋 Ինչո՞վ օգնեմ։</item>
@@ -749,4 +750,43 @@
     <string name="chat_name_known">Քո անունը %1$s է 😊</string>
     <string name="chat_name_unknown">Դեռ չգիտեմ քո անունը 🙂 Ի՞նչ է քո անունը</string>
     <string name="chat_name_forgot">Լավ, մոռացա 🙈 Երբ ուզես, ասա քո անունը։</string>
+    <string-array name="pet_tease_bad_accepted">
+        <item>Այսօրվա կարմիր պատվերներ՝ %1$d։ Լռում եմ… բայց ամեն ինչ տեսա 👀</item>
+        <item>Այսօրվա անձեռնտու պատվերներ՝ %1$d։ Չեմ դատում, պարզապես կամաց կանաչում եմ անհանգստությունից 🫣</item>
+    </string-array>
+    <string-array name="pet_tease_picky">
+        <item>Անընդմեջ մերժումներ՝ %1$d։ Այսօր ամանի մոտ կատվից էլ քմահաճ ես 😼</item>
+        <item>Անընդմեջ մերժումներ՝ %1$d։ Uber-ը երևի արդեն նյարդայնանում է 😏</item>
+    </string-array>
+    <string-array name="pet_tease_night">
+        <item>Կեսգիշեր է, իսկ դու այստեղ ես։ Բվերն էլ են տաքսիով աշխատո՞ւմ 🦉</item>
+        <item>Նորից չե՞ս քնում։ Ես քամելեոն եմ, ինձ թույլատրելի է, իսկ քեզ հանգիստ է պետք 😴</item>
+    </string-array>
+    <string-array name="pet_tease_early">
+        <item>Այսքան վա՞ղ։ Նույնիսկ ես դեռ չեմ արթնացել… լավ, արթնացա 😅</item>
+        <item>Վաղ թռչնակը ձեռնտու պատվեր է բռնում 🐦 Կամ գոնե սուրճ։</item>
+    </string-array>
+    <string-array name="pet_tease_visitor">
+        <item>Հյուրի՞ ես եկել, թե՞ այսօր աշխատում ենք 😄</item>
+        <item>Նորից ներս նայեցի՞ր։ Շոյված եմ, բայց պատվերներն իրենք իրենց չեն վերցնի 😏</item>
+    </string-array>
+    <string-array name="pet_tease_away">
+        <item>Տես՝ ով է վերադարձել։ Կարծում էի՝ հեծանիվ ես նստել 🚲</item>
+        <item>Մի քանի օր անհետացար. քիչ էր մնում նորից ձու դառնայի 🥚</item>
+    </string-array>
+    <string-array name="pet_tease_rich">
+        <item>Այսպիսի վաստակով մի քանի ճանճ ես պարտք ինձ 🪰😏</item>
+        <item>Աչքիս առաջ հարստանում ես։ Լիմուզին գնելիս ինձ չմոռանաս 😎</item>
+    </string-array>
+    <string-array name="pet_tease_random">
+        <item>Էլի դո՞ւ։ Կատակում եմ, ուրախ եմ քեզ տեսնել 😄</item>
+        <item>Տեսնում եմ՝ կարոտել ես ինձ 😏</item>
+        <item>Օ, իմ սիրելի վարորդը եկավ։ Լավ, միակը 😅</item>
+    </string-array>
+    <string-array name="pet_tease_bad_now">
+        <item>Չէ՞ որ կարմիր էր։ Լավ, լավ, այստեղ բոսը դու ես 🙈</item>
+        <item>Օհ… համարձակ որոշում։ Կձևացնեմ, թե չեմ տեսել 🫣</item>
+    </string-array>
+    <string name="pet_say_petted_5">Հեյ, ես կատու չեմ։ Թեև… շարունակիր 😌</string>
+    <string name="pet_say_petted_6">Մի քիչ էլ, և կսկսեմ մռմռալ։ Քամելեոնները կարո՞ղ են։ Հիմա՝ այո 😄</string>
 </resources>

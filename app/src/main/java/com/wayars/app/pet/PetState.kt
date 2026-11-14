@@ -20,7 +20,7 @@ object PetState {
     enum class Stage { EGG, BABY, TEEN, PRO, LEGEND }
 
     /** A short-lived reaction to something that just happened. */
-    enum class Reaction { NONE, GOOD_ACCEPTED, SMART_REJECT, ENERGY, LEVEL_UP, FULL }
+    enum class Reaction { NONE, GOOD_ACCEPTED, SMART_REJECT, ENERGY, LEVEL_UP, FULL, BAD_ACCEPTED }
 
     data class Snapshot(
         val xp: Int = 0,
@@ -46,6 +46,9 @@ object PetState {
     private const val KEY_STREAK = "streak_days"
     private const val KEY_DAY = "decision_epoch_day"
     private const val KEY_DAY_XP = "decision_xp_today"
+    private const val KEY_TEASE_DAY = "tease_day"
+    private const val KEY_BAD_ACCEPTED = "bad_accepted_today"
+    private const val KEY_REJECT_STREAK = "reject_streak"
 
     // Balance: growth must take MONTHS, not a week. An active driver earns at most
     // DAILY_DECISION_CAP from decisions plus the daily bonus (5, up to 10 with a streak),
@@ -90,15 +93,30 @@ object PetState {
         val usedToday = if (p.getLong(KEY_DAY, -1L) == today) p.getInt(KEY_DAY_XP, 0) else 0
         val gain = raw.coerceAtMost((DAILY_DECISION_CAP - usedToday).coerceAtLeast(0))
         p.edit().putLong(KEY_DAY, today).putInt(KEY_DAY_XP, usedToday + gain).apply()
+        // For Wayo's teasing: red orders taken today and rejections in a row.
+        val badToday = (if (p.getLong(KEY_TEASE_DAY, -1L) == today) p.getInt(KEY_BAD_ACCEPTED, 0) else 0) +
+            if (accepted && verdict == Verdict.BAD) 1 else 0
+        val streak = if (accepted) 0 else p.getInt(KEY_REJECT_STREAK, 0) + 1
+        p.edit().putLong(KEY_TEASE_DAY, today).putInt(KEY_BAD_ACCEPTED, badToday).putInt(KEY_REJECT_STREAK, streak).apply()
         val reaction = when {
             raw > 0 && gain == 0 -> Reaction.FULL
             accepted && verdict == Verdict.GOOD -> Reaction.GOOD_ACCEPTED
             !accepted && verdict == Verdict.BAD -> Reaction.SMART_REJECT
+            accepted && verdict == Verdict.BAD -> Reaction.BAD_ACCEPTED
             gain > 0 -> Reaction.ENERGY
             else -> Reaction.NONE
         }
         addXp(context, gain, reaction)
     }
+
+    /** Red (unprofitable) orders accepted today. */
+    fun badAcceptedToday(context: Context): Int {
+        val p = prefs(context) ?: return 0
+        return if (p.getLong(KEY_TEASE_DAY, -1L) == epochDay()) p.getInt(KEY_BAD_ACCEPTED, 0) else 0
+    }
+
+    /** Orders rejected in a row (any verdict) since the last accepted one. */
+    fun rejectStreak(context: Context): Int = prefs(context)?.getInt(KEY_REJECT_STREAK, 0) ?: 0
 
     /**
      * Once per calendar day, switching scanning on feeds the pet a little: 5, plus 1 for

@@ -598,6 +598,7 @@
     <string-array name="chat_v_again">
         <item>Once more 🙂</item>
         <item>Like I said:</item>
+        <item>I’ll repeat, no trouble. But I’ll remember 😏</item>
     </string-array>
     <string-array name="chat_v_hello">
         <item>Hi! 👋 How can I help?</item>
@@ -761,4 +762,43 @@
     <string name="chat_name_known">Your name is %1$s 😊</string>
     <string name="chat_name_unknown">I don’t know your name yet 🙂 What is it?</string>
     <string name="chat_name_forgot">Okay, forgotten 🙈 Tell me your name whenever you like.</string>
+    <string-array name="pet_tease_bad_accepted">
+        <item>Red orders today: %1$d. I’m saying nothing… but I saw everything 👀</item>
+        <item>Unprofitable orders today: %1$d. No judgement — I’m just quietly turning green with worry 🫣</item>
+    </string-array>
+    <string-array name="pet_tease_picky">
+        <item>Rejections in a row: %1$d! You’re pickier than a cat at its bowl today 😼</item>
+        <item>Rejections in a row: %1$d — Uber must be getting nervous 😏</item>
+    </string-array>
+    <string-array name="pet_tease_night">
+        <item>It’s the middle of the night and you’re here. Do owls drive taxis too? 🦉</item>
+        <item>Not sleeping again? I’m a chameleon, I’m allowed — you need rest 😴</item>
+    </string-array>
+    <string-array name="pet_tease_early">
+        <item>This early? Even I’m not awake yet… okay, now I am 😅</item>
+        <item>The early bird catches the profitable order 🐦 Or at least a coffee.</item>
+    </string-array>
+    <string-array name="pet_tease_visitor">
+        <item>Are you here for a visit or are we working today? 😄</item>
+        <item>Popping in again? I’m flattered, but orders won’t take themselves 😏</item>
+    </string-array>
+    <string-array name="pet_tease_away">
+        <item>Look who’s back! I thought you’d switched to a bicycle 🚲</item>
+        <item>Gone for days — I almost turned back into an egg 🥚</item>
+    </string-array>
+    <string-array name="pet_tease_rich">
+        <item>With earnings like that, you owe me some flies 🪰😏</item>
+        <item>Getting rich before my eyes! Don’t forget me when you buy a limo 😎</item>
+    </string-array>
+    <string-array name="pet_tease_random">
+        <item>You again? Kidding, I’m happy to see you 😄</item>
+        <item>Looks like you missed me 😏</item>
+        <item>Oh, my favourite driver is here. Okay, my only one 😅</item>
+    </string-array>
+    <string-array name="pet_tease_bad_now">
+        <item>That one was red! Fine, fine, you’re the boss 🙈</item>
+        <item>Oh… bold move. I’ll pretend I didn’t see that 🫣</item>
+    </string-array>
+    <string name="pet_say_petted_5">Hey, I’m not a cat! Although… keep going 😌</string>
+    <string name="pet_say_petted_6">A bit more and I’ll start purring. Can chameleons purr? Now they can 😄</string>
 </resources>

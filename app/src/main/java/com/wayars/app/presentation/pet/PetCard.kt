@@ -259,6 +259,7 @@ fun PetCard(
             PetState.Reaction.SMART_REJECT -> PetMood.COOL
             PetState.Reaction.LEVEL_UP -> PetMood.LEVEL_UP
             PetState.Reaction.FULL -> PetMood.HAPPY
+            PetState.Reaction.BAD_ACCEPTED -> PetMood.SAD
             else -> PetMood.EATING
         }
         !permissionsOk -> PetMood.SAD
@@ -270,13 +271,17 @@ fun PetCard(
     }
     val name = stringResource(R.string.pet_name)
     val pettedPhrases = listOf(
-        R.string.pet_say_petted_1, R.string.pet_say_petted_2, R.string.pet_say_petted_3, R.string.pet_say_petted_4
+        R.string.pet_say_petted_1, R.string.pet_say_petted_2, R.string.pet_say_petted_3, R.string.pet_say_petted_4,
+        R.string.pet_say_petted_5, R.string.pet_say_petted_6
     )
+    val teaseBadNow = androidx.compose.ui.res.stringArrayResource(R.array.pet_tease_bad_now)
     val praiseGood = androidx.compose.ui.res.stringArrayResource(R.array.pet_praise_good)
     val praiseSmart = androidx.compose.ui.res.stringArrayResource(R.array.pet_praise_smart)
     val pick = (pet.reactionAt / 1000L).toInt().let { if (it < 0) -it else it }
     val says = if (petting || afterglow) stringResource(pettedPhrases[phrase % pettedPhrases.size])
     else if (mood == PetMood.HELLO && greeting != null) greeting!!
+    // Took a red order? A wink instead of a lecture.
+    else if (reactionFresh && pet.reaction == PetState.Reaction.BAD_ACCEPTED) teaseBadNow[pick % teaseBadNow.size]
     else when (mood) {
         PetMood.HELLO -> stringResource(R.string.pet_say_hello, name)
         PetMood.WORKING -> stringResource(R.string.pet_say_working)

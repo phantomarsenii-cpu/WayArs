@@ -586,6 +586,7 @@
     <string-array name="chat_v_again">
         <item>Təkrar edirəm 🙂</item>
         <item>Dediyim kimi:</item>
+        <item>Təkrar edərəm, çətin deyil. Amma yadda saxlayacağam 😏</item>
     </string-array>
     <string-array name="chat_v_hello">
         <item>Salam! 👋 Nə ilə kömək edim?</item>
@@ -749,4 +750,43 @@
     <string name="chat_name_known">Adın %1$s-dir 😊</string>
     <string name="chat_name_unknown">Hələ adını bilmirəm 🙂 Adın nədir?</string>
     <string name="chat_name_forgot">Yaxşı, unutdum 🙈 İstəsən, adını de.</string>
+    <string-array name="pet_tease_bad_accepted">
+        <item>Bu gün qırmızı sifarişlər: %1$d. Susuram… amma hər şeyi gördüm 👀</item>
+        <item>Bu gün sərfəsiz sifarişlər: %1$d. Qınamıram, sadəcə narahatlıqdan sakitcə yaşıllaşıram 🫣</item>
+    </string-array>
+    <string-array name="pet_tease_picky">
+        <item>Ardıcıl imtina: %1$d! Bu gün qab başındakı pişikdən də seçicisən 😼</item>
+        <item>Ardıcıl imtina: %1$d — yəqin Uber artıq əsəbiləşir 😏</item>
+    </string-array>
+    <string-array name="pet_tease_night">
+        <item>Gecənin yarısıdır, sən isə buradasan. Bayquşlar da taksidə işləyir? 🦉</item>
+        <item>Yenə yatmırsan? Mən buqələmunam, mənə olar — sənə isə istirahət lazımdır 😴</item>
+    </string-array>
+    <string-array name="pet_tease_early">
+        <item>Bu qədər tez? Hətta mən də hələ oyanmamışam… yaxşı, oyandım 😅</item>
+        <item>Tez duran quş sərfəli sifarişi tutur 🐦 Heç olmasa qəhvəni.</item>
+    </string-array>
+    <string-array name="pet_tease_visitor">
+        <item>Qonaq gəlmisən, yoxsa bu gün işləyirik? 😄</item>
+        <item>Yenə baş çəkdin? Xoşdur, amma sifarişlər özləri götürülməyəcək 😏</item>
+    </string-array>
+    <string-array name="pet_tease_away">
+        <item>Bax, kim qayıtdı! Elə bildim velosipedə keçmisən 🚲</item>
+        <item>Bir neçə gün yoxa çıxdın — az qala yenidən yumurtaya çevriləcəkdim 🥚</item>
+    </string-array>
+    <string-array name="pet_tease_rich">
+        <item>Belə qazancla mənə bir neçə milçək borclusan 🪰😏</item>
+        <item>Gözümün qabağında varlanırsan! Limuzin alanda məni unutma 😎</item>
+    </string-array>
+    <string-array name="pet_tease_random">
+        <item>Yenə sən? Zarafat edirəm, səni görməyimə şadam 😄</item>
+        <item>Deyəsən, mənim üçün darıxmısan 😏</item>
+        <item>O, sevimli sürücüm gəldi. Yaxşı, yeganə 😅</item>
+    </string-array>
+    <string-array name="pet_tease_bad_now">
+        <item>Axı qırmızı idi! Yaxşı, yaxşı, burada boss sənsən 🙈</item>
+        <item>Of… cəsarətli qərar. Görməmiş kimi edəcəyəm 🫣</item>
+    </string-array>
+    <string name="pet_say_petted_5">Hey, mən pişik deyiləm! Amma… davam et 😌</string>
+    <string name="pet_say_petted_6">Bir az da — mırıldamağa başlayacağam. Buqələmunlar bunu bacarır? İndi bacarır 😄</string>
 </resources>

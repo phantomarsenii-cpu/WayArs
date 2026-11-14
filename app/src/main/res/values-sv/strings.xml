@@ -586,6 +586,7 @@
     <string-array name="chat_v_again">
         <item>En gång till 🙂</item>
         <item>Som jag sa:</item>
+        <item>Jag upprepar gärna. Men jag kommer ihåg det 😏</item>
     </string-array>
     <string-array name="chat_v_hello">
         <item>Hej! 👋 Vad kan jag hjälpa till med?</item>
@@ -749,4 +750,43 @@
     <string name="chat_name_known">Du heter %1$s 😊</string>
     <string name="chat_name_unknown">Jag vet inte vad du heter än 🙂 Vad heter du?</string>
     <string name="chat_name_forgot">Okej, glömt 🙈 Säg ditt namn när du vill.</string>
+    <string-array name="pet_tease_bad_accepted">
+        <item>Röda körningar i dag: %1$d. Jag säger inget… men jag såg allt 👀</item>
+        <item>Olönsamma körningar i dag: %1$d. Jag dömer inte — jag blir bara tyst grön av oro 🫣</item>
+    </string-array>
+    <string-array name="pet_tease_picky">
+        <item>Nej i rad: %1$d! Du är kräsnare än en katt vid matskålen i dag 😼</item>
+        <item>Nej i rad: %1$d — Uber börjar nog bli nervös 😏</item>
+    </string-array>
+    <string-array name="pet_tease_night">
+        <item>Mitt i natten och du är här. Kör ugglor taxi nu också? 🦉</item>
+        <item>Vaken igen? Jag är en kameleont, jag får — du behöver vila 😴</item>
+    </string-array>
+    <string-array name="pet_tease_early">
+        <item>Så tidigt? Inte ens jag är vaken än… okej, nu är jag det 😅</item>
+        <item>Morgonstund har lönsam körning i mun 🐦 Eller åtminstone kaffe.</item>
+    </string-array>
+    <string-array name="pet_tease_visitor">
+        <item>Är du på besök eller ska vi jobba i dag? 😄</item>
+        <item>Tittar in igen? Smickrande, men körningarna tar inte sig själva 😏</item>
+    </string-array>
+    <string-array name="pet_tease_away">
+        <item>Kolla vem som är tillbaka! Jag trodde du gått över till cykel 🚲</item>
+        <item>Borta i flera dagar — jag blev nästan ett ägg igen 🥚</item>
+    </string-array>
+    <string-array name="pet_tease_rich">
+        <item>Med sådana intäkter är du skyldig mig några flugor 🪰😏</item>
+        <item>Du blir rik framför mina ögon! Glöm inte mig när du köper limousin 😎</item>
+    </string-array>
+    <string-array name="pet_tease_random">
+        <item>Du igen? Skojar, jag blir glad att se dig 😄</item>
+        <item>Ser ut som du saknat mig 😏</item>
+        <item>Åh, min favoritförare är här. Okej, min enda 😅</item>
+    </string-array>
+    <string-array name="pet_tease_bad_now">
+        <item>Den var ju röd! Okej, okej, du är chefen 🙈</item>
+        <item>Åh… modigt val. Jag låtsas att jag inte såg 🫣</item>
+    </string-array>
+    <string name="pet_say_petted_5">Hallå, jag är ingen katt! Fast… fortsätt 😌</string>
+    <string name="pet_say_petted_6">Lite till så börjar jag spinna. Kan kameleonter det? Nu kan de 😄</string>
 </resources>

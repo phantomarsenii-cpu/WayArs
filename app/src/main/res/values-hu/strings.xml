@@ -586,6 +586,7 @@
     <string-array name="chat_v_again">
         <item>Elismétlem 🙂</item>
         <item>Ahogy mondtam:</item>
+        <item>Elismétlem, nem gond. De megjegyzem 😏</item>
     </string-array>
     <string-array name="chat_v_hello">
         <item>Szia! 👋 Miben segíthetek?</item>
@@ -749,4 +750,43 @@
     <string name="chat_name_known">%1$s a neved 😊</string>
     <string name="chat_name_unknown">Még nem tudom a neved 🙂 Hogy hívnak?</string>
     <string name="chat_name_forgot">Rendben, elfelejtettem 🙈 Ha szeretnéd, mondd meg, hogy hívnak.</string>
+    <string-array name="pet_tease_bad_accepted">
+        <item>Piros rendelések ma: %1$d. Nem szólok semmit… de mindent láttam 👀</item>
+        <item>Nem megérő rendelések ma: %1$d. Nem ítélkezem, csak csendben bezöldülök az aggodalomtól 🫣</item>
+    </string-array>
+    <string-array name="pet_tease_picky">
+        <item>Elutasítás egymás után: %1$d! Ma válogatósabb vagy, mint egy macska a tálnál 😼</item>
+        <item>Elutasítás egymás után: %1$d — az Uber biztos már ideges 😏</item>
+    </string-array>
+    <string-array name="pet_tease_night">
+        <item>Az éjszaka közepén itt vagy. A baglyok is taxiznak? 🦉</item>
+        <item>Megint nem alszol? Én kaméleon vagyok, nekem szabad — neked pihenés kell 😴</item>
+    </string-array>
+    <string-array name="pet_tease_early">
+        <item>Ilyen korán? Még én sem ébredtem fel… jó, most már igen 😅</item>
+        <item>Ki korán kel, megéri rendelést lel 🐦 Vagy legalább egy kávét.</item>
+    </string-array>
+    <string-array name="pet_tease_visitor">
+        <item>Vendégségbe jöttél, vagy ma dolgozunk? 😄</item>
+        <item>Megint benéztél? Hízelgő, de a rendelések maguktól nem vállalódnak 😏</item>
+    </string-array>
+    <string-array name="pet_tease_away">
+        <item>Nézd csak, ki jött vissza! Azt hittem, átnyergeltél biciklire 🚲</item>
+        <item>Napokig eltűntél — majdnem visszaváltoztam tojássá 🥚</item>
+    </string-array>
+    <string-array name="pet_tease_rich">
+        <item>Ilyen kereset mellett tartozol nekem pár légyvel 🪰😏</item>
+        <item>A szemem láttára gazdagodsz! Ne feledkezz meg rólam, ha limuzint veszel 😎</item>
+    </string-array>
+    <string-array name="pet_tease_random">
+        <item>Megint te? Csak viccelek, örülök neked 😄</item>
+        <item>Látom, hiányoztam 😏</item>
+        <item>Ó, itt a kedvenc sofőröm. Jó, az egyetlen 😅</item>
+    </string-array>
+    <string-array name="pet_tease_bad_now">
+        <item>Hiszen piros volt! Jó, jó, te vagy a főnök 🙈</item>
+        <item>Hű… bátor döntés. Úgy teszek, mintha nem láttam volna 🫣</item>
+    </string-array>
+    <string name="pet_say_petted_5">Hé, nem vagyok macska! Bár… folytasd 😌</string>
+    <string name="pet_say_petted_6">Még egy kicsit, és dorombolni kezdek. Tudnak ilyet a kaméleonok? Most már igen 😄</string>
 </resources>

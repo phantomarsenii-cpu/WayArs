@@ -585,6 +585,7 @@
     <string-array name="chat_v_again">
         <item>Repet 🙂</item>
         <item>Cum spuneam:</item>
+        <item>Repet, nicio problemă. Dar țin minte 😏</item>
     </string-array>
     <string-array name="chat_v_hello">
         <item>Salut! 👋 Cu ce te ajut?</item>
@@ -748,4 +749,43 @@
     <string name="chat_name_known">Te cheamă %1$s 😊</string>
     <string name="chat_name_unknown">Încă nu-ți știu numele 🙂 Cum te cheamă?</string>
     <string name="chat_name_forgot">Bine, am uitat 🙈 Spune-mi numele oricând vrei.</string>
+    <string-array name="pet_tease_bad_accepted">
+        <item>Comenzi roșii azi: %1$d. Nu zic nimic… dar am văzut tot 👀</item>
+        <item>Comenzi neprofitabile azi: %1$d. Nu judec, doar mă înverzesc încet de grijă 🫣</item>
+    </string-array>
+    <string-array name="pet_tease_picky">
+        <item>Refuzuri la rând: %1$d! Azi ești mai mofturos decât o pisică la castron 😼</item>
+        <item>Refuzuri la rând: %1$d — Uber probabil deja are emoții 😏</item>
+    </string-array>
+    <string-array name="pet_tease_night">
+        <item>E miezul nopții și tu ești aici. Și bufnițele lucrează la taxi? 🦉</item>
+        <item>Iar nu dormi? Eu sunt cameleon, am voie — tu ai nevoie de odihnă 😴</item>
+    </string-array>
+    <string-array name="pet_tease_early">
+        <item>Așa devreme? Nici eu nu m-am trezit… bine, acum da 😅</item>
+        <item>Cine se scoală de dimineață prinde comanda bună 🐦 Sau măcar o cafea.</item>
+    </string-array>
+    <string-array name="pet_tease_visitor">
+        <item>Ai venit în vizită sau lucrăm azi? 😄</item>
+        <item>Iar ai trecut pe aici? Mă flatează, dar comenzile nu se iau singure 😏</item>
+    </string-array>
+    <string-array name="pet_tease_away">
+        <item>Ia uite cine s-a întors! Credeam că te-ai mutat pe bicicletă 🚲</item>
+        <item>Ai dispărut câteva zile — aproape că m-am transformat înapoi în ou 🥚</item>
+    </string-array>
+    <string-array name="pet_tease_rich">
+        <item>Cu așa câștiguri, îmi datorezi niște muște 🪰😏</item>
+        <item>Te îmbogățești sub ochii mei! Nu mă uita când îți iei limuzină 😎</item>
+    </string-array>
+    <string-array name="pet_tease_random">
+        <item>Iar tu? Glumesc, mă bucur să te văd 😄</item>
+        <item>Văd că ți-a fost dor de mine 😏</item>
+        <item>O, a venit șoferul meu preferat. Bine, singurul 😅</item>
+    </string-array>
+    <string-array name="pet_tease_bad_now">
+        <item>Doar era roșie! Bine, bine, tu ești șeful 🙈</item>
+        <item>Of… decizie curajoasă. Mă prefac că n-am văzut 🫣</item>
+    </string-array>
+    <string name="pet_say_petted_5">Hei, nu sunt pisică! Deși… continuă 😌</string>
+    <string name="pet_say_petted_6">Încă puțin și încep să torc. Cameleonii pot face asta? Acum da 😄</string>
 </resources>

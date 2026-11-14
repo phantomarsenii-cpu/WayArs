@@ -586,6 +586,7 @@
     <string-array name="chat_v_again">
         <item>გავიმეორებ 🙂</item>
         <item>როგორც ვთქვი:</item>
+        <item>გავიმეორებ, არ მიჭირს. მაგრამ დავიმახსოვრებ 😏</item>
     </string-array>
     <string-array name="chat_v_hello">
         <item>გამარჯობა! 👋 რით დაგეხმარო?</item>
@@ -749,4 +750,43 @@
     <string name="chat_name_known">შენ გქვია %1$s 😊</string>
     <string name="chat_name_unknown">ჯერ შენი სახელი არ ვიცი 🙂 რა გქვია?</string>
     <string name="chat_name_forgot">კარგი, დამავიწყდა 🙈 როცა მოგინდება, მითხარი შენი სახელი.</string>
+    <string-array name="pet_tease_bad_accepted">
+        <item>დღეს წითელი შეკვეთები: %1$d. ვდუმვარ… მაგრამ ყველაფერი დავინახე 👀</item>
+        <item>დღეს წამგებიანი შეკვეთები: %1$d. არ განვსჯი, უბრალოდ ჩუმად ვმწვანდები ღელვისგან 🫣</item>
+    </string-array>
+    <string-array name="pet_tease_picky">
+        <item>ზედიზედ უარი: %1$d! დღეს ჯამთან მჯდომ კატაზე უფრო ახირებული ხარ 😼</item>
+        <item>ზედიზედ უარი: %1$d — Uber ალბათ უკვე ნერვიულობს 😏</item>
+    </string-array>
+    <string-array name="pet_tease_night">
+        <item>შუაღამეა, შენ კი აქ ხარ. ბუებიც ტაქსიში მუშაობენ? 🦉</item>
+        <item>ისევ არ გძინავს? მე ქამელეონი ვარ, მე შემიძლია — შენ კი დასვენება გჭირდება 😴</item>
+    </string-array>
+    <string-array name="pet_tease_early">
+        <item>ასე ადრე? მეც კი ჯერ არ გამღვიძებია… კარგი, გამეღვიძა 😅</item>
+        <item>ადრიანი ჩიტი მომგებიან შეკვეთას იჭერს 🐦 ან ყავას მაინც.</item>
+    </string-array>
+    <string-array name="pet_tease_visitor">
+        <item>სტუმრად შემოხვედი თუ დღეს ვმუშაობთ? 😄</item>
+        <item>ისევ შემოიხედე? მეამაყება, მაგრამ შეკვეთები თავისით არ აიღება 😏</item>
+    </string-array>
+    <string-array name="pet_tease_away">
+        <item>შეხედე, ვინ დაბრუნდა! მეგონა, ველოსიპედზე გადაჯექი 🚲</item>
+        <item>რამდენიმე დღით გაქრი — კინაღამ ისევ კვერცხად ვიქეცი 🥚</item>
+    </string-array>
+    <string-array name="pet_tease_rich">
+        <item>ასეთი შემოსავლით რამდენიმე ბუზი გმართებს ჩემთვის 🪰😏</item>
+        <item>თვალწინ მდიდრდები! ლიმუზინს რომ იყიდი, არ დამივიწყო 😎</item>
+    </string-array>
+    <string-array name="pet_tease_random">
+        <item>ისევ შენ? ვხუმრობ, მიხარია შენი ნახვა 😄</item>
+        <item>ვხედავ, მომენატრე 😏</item>
+        <item>ოჰ, ჩემი საყვარელი მძღოლი მოვიდა. კარგი, ერთადერთი 😅</item>
+    </string-array>
+    <string-array name="pet_tease_bad_now">
+        <item>ხომ წითელი იყო! კარგი, კარგი, აქ უფროსი შენ ხარ 🙈</item>
+        <item>ოჰ… გაბედული გადაწყვეტილებაა. ვითომ ვერ დავინახე 🫣</item>
+    </string-array>
+    <string name="pet_say_petted_5">ჰეი, კატა არ ვარ! თუმცა… გააგრძელე 😌</string>
+    <string name="pet_say_petted_6">ცოტაც და კრუტუნს დავიწყებ. ქამელეონებს შეუძლიათ? ახლა კი 😄</string>
 </resources>

@@ -586,6 +586,7 @@
     <string-array name="chat_v_again">
         <item>Igen 🙂</item>
         <item>Som jeg sagde:</item>
+        <item>Jeg gentager gerne. Men jeg husker det 😏</item>
     </string-array>
     <string-array name="chat_v_hello">
         <item>Hej! 👋 Hvad kan jeg hjælpe med?</item>
@@ -749,4 +750,43 @@
     <string name="chat_name_known">Du hedder %1$s 😊</string>
     <string name="chat_name_unknown">Jeg kender ikke dit navn endnu 🙂 Hvad hedder du?</string>
     <string name="chat_name_forgot">Okay, glemt 🙈 Sig dit navn, når du har lyst.</string>
+    <string-array name="pet_tease_bad_accepted">
+        <item>Røde ordrer i dag: %1$d. Jeg siger ingenting… men jeg så det hele 👀</item>
+        <item>Urentable ordrer i dag: %1$d. Jeg dømmer ikke — jeg bliver bare stille grøn af bekymring 🫣</item>
+    </string-array>
+    <string-array name="pet_tease_picky">
+        <item>Afvisninger i træk: %1$d! Du er mere kræsen end en kat ved madskålen i dag 😼</item>
+        <item>Afvisninger i træk: %1$d — Uber er nok begyndt at blive nervøs 😏</item>
+    </string-array>
+    <string-array name="pet_tease_night">
+        <item>Midt om natten, og du er her. Kører ugler også taxa nu? 🦉</item>
+        <item>Sover du heller ikke i nat? Jeg er en kamæleon, jeg må godt — du har brug for hvile 😴</item>
+    </string-array>
+    <string-array name="pet_tease_early">
+        <item>Så tidligt? Selv jeg er ikke vågen endnu… okay, nu er jeg 😅</item>
+        <item>Den tidlige fugl fanger den gode ordre 🐦 Eller i det mindste en kaffe.</item>
+    </string-array>
+    <string-array name="pet_tease_visitor">
+        <item>Er du på besøg, eller skal vi arbejde i dag? 😄</item>
+        <item>Kigger du forbi igen? Smigrende, men ordrerne tager ikke sig selv 😏</item>
+    </string-array>
+    <string-array name="pet_tease_away">
+        <item>Se, hvem der er tilbage! Jeg troede, du var skiftet til cykel 🚲</item>
+        <item>Væk i flere dage — jeg blev næsten til et æg igen 🥚</item>
+    </string-array>
+    <string-array name="pet_tease_rich">
+        <item>Med sådan en indtjening skylder du mig nogle fluer 🪰😏</item>
+        <item>Du bliver rig for øjnene af mig! Glem mig ikke, når du køber en limousine 😎</item>
+    </string-array>
+    <string-array name="pet_tease_random">
+        <item>Dig igen? Pjat, jeg er glad for at se dig 😄</item>
+        <item>Det ser ud til, at du har savnet mig 😏</item>
+        <item>Åh, min yndlingschauffør er her. Okay, min eneste 😅</item>
+    </string-array>
+    <string-array name="pet_tease_bad_now">
+        <item>Den var jo rød! Fint, fint, du er chefen 🙈</item>
+        <item>Åh… modigt valg. Jeg lader, som om jeg ikke så det 🫣</item>
+    </string-array>
+    <string name="pet_say_petted_5">Hey, jeg er ikke en kat! Selvom… fortsæt 😌</string>
+    <string name="pet_say_petted_6">Lidt mere, så begynder jeg at spinde. Kan kamæleoner det? Nu kan de 😄</string>
 </resources>

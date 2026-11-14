@@ -585,6 +585,7 @@
     <string-array name="chat_v_again">
         <item>Nochmal 🙂</item>
         <item>Wie gesagt:</item>
+        <item>Ich wiederhole gern. Aber ich merk’s mir 😏</item>
     </string-array>
     <string-array name="chat_v_hello">
         <item>Hallo! 👋 Wie kann ich helfen?</item>
@@ -748,4 +749,43 @@
     <string name="chat_name_known">Du heißt %1$s 😊</string>
     <string name="chat_name_unknown">Deinen Namen kenne ich noch nicht 🙂 Wie heißt du?</string>
     <string name="chat_name_forgot">Okay, vergessen 🙈 Sag mir deinen Namen, wann immer du willst.</string>
+    <string-array name="pet_tease_bad_accepted">
+        <item>Rote Aufträge heute: %1$d. Ich sag nichts… aber ich hab alles gesehen 👀</item>
+        <item>Unrentable Aufträge heute: %1$d. Ich urteile nicht — ich werde nur leise grün vor Sorge 🫣</item>
+    </string-array>
+    <string-array name="pet_tease_picky">
+        <item>Absagen in Folge: %1$d! Du bist heute wählerischer als eine Katze am Napf 😼</item>
+        <item>Absagen in Folge: %1$d — Uber wird bestimmt schon nervös 😏</item>
+    </string-array>
+    <string-array name="pet_tease_night">
+        <item>Mitten in der Nacht und du bist hier. Fahren Eulen jetzt auch Taxi? 🦉</item>
+        <item>Schon wieder wach? Ich bin ein Chamäleon, ich darf das — du brauchst Schlaf 😴</item>
+    </string-array>
+    <string-array name="pet_tease_early">
+        <item>So früh? Selbst ich bin noch nicht wach… okay, jetzt schon 😅</item>
+        <item>Der frühe Vogel fängt den lohnenden Auftrag 🐦 Oder wenigstens einen Kaffee.</item>
+    </string-array>
+    <string-array name="pet_tease_visitor">
+        <item>Bist du zu Besuch hier oder arbeiten wir heute? 😄</item>
+        <item>Schon wieder reingeschaut? Schmeichelhaft, aber die Aufträge nehmen sich nicht von allein 😏</item>
+    </string-array>
+    <string-array name="pet_tease_away">
+        <item>Schau mal, wer zurück ist! Ich dachte schon, du fährst jetzt Fahrrad 🚲</item>
+        <item>Tagelang weg — ich wäre fast wieder ein Ei geworden 🥚</item>
+    </string-array>
+    <string-array name="pet_tease_rich">
+        <item>Bei dem Verdienst schuldest du mir ein paar Fliegen 🪰😏</item>
+        <item>Du wirst vor meinen Augen reich! Vergiss mich nicht, wenn du eine Limo kaufst 😎</item>
+    </string-array>
+    <string-array name="pet_tease_random">
+        <item>Du schon wieder? Spaß, ich freu mich 😄</item>
+        <item>Sieht aus, als hättest du mich vermisst 😏</item>
+        <item>Oh, mein Lieblingsfahrer ist da. Na gut, mein einziger 😅</item>
+    </string-array>
+    <string-array name="pet_tease_bad_now">
+        <item>Der war doch rot! Schon gut, du bist der Boss 🙈</item>
+        <item>Oh… mutige Entscheidung. Ich tu so, als hätte ich nichts gesehen 🫣</item>
+    </string-array>
+    <string name="pet_say_petted_5">Hey, ich bin keine Katze! Obwohl… mach weiter 😌</string>
+    <string name="pet_say_petted_6">Noch ein bisschen und ich fange an zu schnurren. Können Chamäleons das? Jetzt schon 😄</string>
 </resources>

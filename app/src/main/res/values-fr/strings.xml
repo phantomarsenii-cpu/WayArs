@@ -585,6 +585,7 @@
     <string-array name="chat_v_again">
         <item>Je répète 🙂</item>
         <item>Comme je disais :</item>
+        <item>Je répète, pas de souci. Mais je m’en souviendrai 😏</item>
     </string-array>
     <string-array name="chat_v_hello">
         <item>Salut ! 👋 Comment je peux aider ?</item>
@@ -748,4 +749,43 @@
     <string name="chat_name_known">Tu t’appelles %1$s 😊</string>
     <string name="chat_name_unknown">Je ne connais pas encore ton prénom 🙂 Comment tu t’appelles ?</string>
     <string name="chat_name_forgot">D’accord, oublié 🙈 Dis-moi ton prénom quand tu veux.</string>
+    <string-array name="pet_tease_bad_accepted">
+        <item>Courses rouges aujourd’hui : %1$d. Je ne dis rien… mais j’ai tout vu 👀</item>
+        <item>Courses pas rentables aujourd’hui : %1$d. Je ne juge pas, je verdis juste d’inquiétude 🫣</item>
+    </string-array>
+    <string-array name="pet_tease_picky">
+        <item>Refus d’affilée : %1$d ! Tu es plus difficile qu’un chat devant sa gamelle aujourd’hui 😼</item>
+        <item>Refus d’affilée : %1$d — Uber doit commencer à stresser 😏</item>
+    </string-array>
+    <string-array name="pet_tease_night">
+        <item>En pleine nuit et tu es là. Les hiboux conduisent des taxis maintenant ? 🦉</item>
+        <item>Encore debout ? Moi je suis un caméléon, j’ai le droit — toi, il te faut du repos 😴</item>
+    </string-array>
+    <string-array name="pet_tease_early">
+        <item>Si tôt ? Même moi je ne suis pas réveillé… bon, maintenant si 😅</item>
+        <item>L’oiseau matinal attrape la course rentable 🐦 Ou au moins un café.</item>
+    </string-array>
+    <string-array name="pet_tease_visitor">
+        <item>Tu passes en visite ou on travaille aujourd’hui ? 😄</item>
+        <item>Encore un petit coucou ? Flatté, mais les courses ne vont pas se prendre toutes seules 😏</item>
+    </string-array>
+    <string-array name="pet_tease_away">
+        <item>Tiens, qui revoilà ! Je croyais que tu étais passé au vélo 🚲</item>
+        <item>Disparu plusieurs jours — j’ai failli redevenir un œuf 🥚</item>
+    </string-array>
+    <string-array name="pet_tease_rich">
+        <item>Avec des gains pareils, tu me dois quelques mouches 🪰😏</item>
+        <item>Tu t’enrichis sous mes yeux ! Ne m’oublie pas quand tu achèteras une limousine 😎</item>
+    </string-array>
+    <string-array name="pet_tease_random">
+        <item>Encore toi ? Je rigole, content de te voir 😄</item>
+        <item>On dirait que je t’ai manqué 😏</item>
+        <item>Oh, mon chauffeur préféré est là. Bon, mon seul chauffeur 😅</item>
+    </string-array>
+    <string-array name="pet_tease_bad_now">
+        <item>Elle était rouge, pourtant ! Bon, bon, c’est toi le chef 🙈</item>
+        <item>Oh… décision audacieuse. Je vais faire comme si je n’avais rien vu 🫣</item>
+    </string-array>
+    <string name="pet_say_petted_5">Hé, je ne suis pas un chat ! Quoique… continue 😌</string>
+    <string name="pet_say_petted_6">Encore un peu et je vais ronronner. Les caméléons savent faire ça ? Maintenant oui 😄</string>
 </resources>
