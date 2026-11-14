@@ -205,8 +205,8 @@ fun MainScreen(
     }
 
     // ------------------------------------------------------- "update available" card
-    // Checked once per visit to this screen: only for a subscribed user, only after the tour
-    // is done, and not while the user has pressed "Later" (3-day snooze, see MainViewModel).
+    // Checked once per visit to this screen (so on every launch), only after the tour is done,
+    // and not for a day after the user pressed "Later" (see MainViewModel.snoozeUpdatePrompt).
     var updateAvailable by remember { mutableStateOf(false) }
     var updateChecked by remember { mutableStateOf(false) }
     LaunchedEffect(isSubscribed, tourDone, updateSnoozeUntil) {
@@ -306,10 +306,11 @@ fun MainScreen(
 
             UpdatePromptCard(
                 visible = updateAvailable && !tour.running,
+                // "Update" doesn't snooze: until the update is really installed, the card comes
+                // back on every launch (an update may carry fixes the driver needs right away).
                 onUpdate = {
                     PlayUpdateChecker.openStorePage(context)
                     updateAvailable = false
-                    onUpdateLater()
                 },
                 onLater = {
                     updateAvailable = false

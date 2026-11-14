@@ -134,7 +134,7 @@ class MainViewModel(private val container: AppContainer) : ViewModel() {
     fun completeOnboarding() = viewModelScope.launch { settings.setOnboardingDone(true) }
     fun setTourDone(done: Boolean) = viewModelScope.launch { settings.setTourDone(done) }
     fun snoozeUpdatePrompt() = viewModelScope.launch {
-        settings.setUpdateSnoozeUntil(System.currentTimeMillis() + 3L * 24 * 60 * 60 * 1000)
+        settings.setUpdateSnoozeUntil(System.currentTimeMillis() + 24L * 60 * 60 * 1000)
     }
 
     /**
