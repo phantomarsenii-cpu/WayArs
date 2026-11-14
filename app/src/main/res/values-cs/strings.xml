@@ -522,7 +522,7 @@
     <string name="share_footer">WayArs — zkontroluje každou zakázku, než ji přijmeš</string>
     <string name="share_text">Můj Wayo ve WayArs dosáhl úrovně %1$d! 🦎 %2$s</string>
     <string name="pet_q_rewards">Co dostanu, když Wayo roste?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo roste jen z chytrých rozhodnutí. Odměny: motivy karty zakázky a widgetu — Neon (úr. 5), Karbon (10), Zlato (15), Legenda (20), vybereš je v Nastavení → Doplňky. Nové schopnosti: tip dne z tvých dat (úr. 5), předpověď nejlepších časů v souhrnu týdne (10), „lepší než X % tvých zakázek“ na kartě (20). A 📤 vytvoří obrázek Wayo s tvými rekordy ke sdílení.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo roste jen z chytrých rozhodnutí. Odměny: motivy karty zakázky a widgetu — Neon (úr. 5), Karbon (10), Zlato (15), Legenda (20), vybereš je v Nastavení → Doplňky. Nové schopnosti: tip dne z tvých dat (úr. 5), předpověď nejlepších časů v souhrnu týdne (10), „lepší než X % tvých zakázek“ na kartě (20). A 📤 vytvoří obrázek Wayo s tvými rekordy ke sdílení. Doplňky nakreslené přímo na Wayovi: kšiltovka (úr. 3), koruna (6), sluneční brýle (8), sluchátka (10), zlatý řetěz (13), klíč legendy (16) — nosí vždy jeden, vybereš v Nastavení → Doplňky.</string>
     <string name="acc_cap">Kšiltovka</string>
     <string name="acc_crown">Koruna</string>
     <string name="acc_sunglasses">Sluneční brýle</string>

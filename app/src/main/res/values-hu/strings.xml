@@ -522,7 +522,7 @@
     <string name="share_footer">WayArs — minden rendelést ellenőriz, mielőtt elfogadod</string>
     <string name="share_text">A Wayóm a WayArs-ban elérte a %1$d. szintet! 🦎 %2$s</string>
     <string name="pet_q_rewards">Mit kapok, ha Wayo nő?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo csak okos döntésektől nő. Jutalmak: témák a rendeléskártyához és a widgethez — Neon (5. szint), Karbon (10), Arany (15), Legenda (20), a Beállítások → Extrák alatt választhatók. Új képességek: a nap tippje az adataidból (5. szint), a legjobb időpontjaid előrejelzése a heti összesítőben (10), „jobb, mint a rendeléseid X%-a” a kártyán (20). A 📤 pedig képet készít Wayóról a rekordjaiddal.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo csak okos döntésektől nő. Jutalmak: témák a rendeléskártyához és a widgethez — Neon (5. szint), Karbon (10), Arany (15), Legenda (20), a Beállítások → Extrák alatt választhatók. Új képességek: a nap tippje az adataidból (5. szint), a legjobb időpontjaid előrejelzése a heti összesítőben (10), „jobb, mint a rendeléseid X%-a” a kártyán (20). A 📤 pedig képet készít Wayóról a rekordjaiddal. Közvetlenül Wayóra rajzolt kiegészítők: sapka (3. szint), korona (6), napszemüveg (8), fejhallgató (10), aranylánc (13), legenda kulcs (16) — egyszerre egyet visel, a Beállítások → Extrák alatt választhatsz.</string>
     <string name="acc_cap">Sapka</string>
     <string name="acc_crown">Korona</string>
     <string name="acc_sunglasses">Napszemüveg</string>

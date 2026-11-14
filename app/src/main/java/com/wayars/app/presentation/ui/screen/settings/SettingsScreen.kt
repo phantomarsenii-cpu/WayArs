@@ -2520,7 +2520,7 @@ private fun CardThemePicker() {
     }
 }
 
-/** Wayo's accessories (one per slot: head, eyes, neck, next to him), unlocked as Wayo grows. */
+/** Wayo's accessories (drawn on him, one at a time), unlocked as Wayo grows. */
 @OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
 @Composable
 private fun AccessoryPicker() {
@@ -2541,7 +2541,7 @@ private fun AccessoryPicker() {
     ) {
         com.wayars.app.presentation.pet.Accessory.values().forEach { a ->
             val open = a.unlocked(level)
-            val on = open && a in worn
+            val on = open && a == worn
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
@@ -2549,16 +2549,15 @@ private fun AccessoryPicker() {
                     .background(if (on) WaNeonGreen.copy(alpha = 0.18f) else WaSurfaceVariant)
                     .border(1.dp, if (on) WaNeonGreen else Color.Transparent, RoundedCornerShape(12.dp))
                     .clickable(enabled = open) {
-                        // One accessory per slot: wearing a new hat takes the old one off.
-                        val next = if (on) worn - a else worn.filter { it.slot != a.slot }.toSet() + a
-                        com.wayars.app.data.prefs.DriverPrefs.setAccessories(context, next.joinToString(",") { it.name })
+                        // One at a time: tapping another one swaps it, tapping the worn one takes it off.
+                        com.wayars.app.data.prefs.DriverPrefs.setAccessories(context, if (on) "" else a.name)
                     }
                     .padding(horizontal = 8.dp, vertical = 5.dp)
             ) {
                 androidx.compose.foundation.Image(
-                    painter = androidx.compose.ui.res.painterResource(a.image),
+                    painter = androidx.compose.ui.res.painterResource(a.icon),
                     contentDescription = null,
-                    modifier = Modifier.size(24.dp).graphicsLayer { alpha = if (open) 1f else 0.35f }
+                    modifier = Modifier.size(28.dp).clip(RoundedCornerShape(6.dp)).graphicsLayer { alpha = if (open) 1f else 0.35f }
                 )
                 Text(
                     if (open) stringResource(a.nameRes) else "🔒 " + stringResource(a.nameRes) + " · " + stringResource(R.string.theme_locked, a.minLevel),

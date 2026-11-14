@@ -522,7 +522,7 @@
     <string name="share_footer">WayArs — tjekker hver ordre, før du tager den</string>
     <string name="share_text">Min Wayo i WayArs har nået niveau %1$d! 🦎 %2$s</string>
     <string name="pet_q_rewards">Hvad får jeg, når Wayo vokser?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo vokser kun af kloge beslutninger. Belønninger: temaer til ordrekortet og widgetten — Neon (niv. 5), Karbon (10), Guld (15), Legende (20), vælges under Indstillinger → Ekstra. Nye evner: dagens tip ud fra dine data (niv. 5), en prognose for dine bedste tider i ugens resultat (10), „bedre end X % af dine ordrer“ på kortet (20). Og 📤 laver et billede af Wayo med dine rekorder til deling.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo vokser kun af kloge beslutninger. Belønninger: temaer til ordrekortet og widgetten — Neon (niv. 5), Karbon (10), Guld (15), Legende (20), vælges under Indstillinger → Ekstra. Nye evner: dagens tip ud fra dine data (niv. 5), en prognose for dine bedste tider i ugens resultat (10), „bedre end X % af dine ordrer“ på kortet (20). Og 📤 laver et billede af Wayo med dine rekorder til deling. Tilbehør tegnet direkte på Wayo: kasket (niv. 3), krone (6), solbriller (8), høretelefoner (10), guldkæde (13), legendenøgle (16) — han bærer ét ad gangen, vælg i Indstillinger → Ekstra.</string>
     <string name="acc_cap">Kasket</string>
     <string name="acc_crown">Krone</string>
     <string name="acc_sunglasses">Solbriller</string>

@@ -521,7 +521,7 @@
     <string name="share_footer">WayArs — prüft jeden Auftrag, bevor du ihn annimmst</string>
     <string name="share_text">Mein Wayo in WayArs hat Level %1$d erreicht! 🦎 %2$s</string>
     <string name="pet_q_rewards">Was bekomme ich, wenn Wayo wächst?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo wächst nur durch kluge Entscheidungen. Belohnungen: Designs für Auftragskarte und Widget — Neon (Lv 5), Carbon (10), Gold (15), Legende (20), auswählbar unter Einstellungen → Extras. Neue Fähigkeiten: Tipp des Tages aus deinen Daten (Lv 5), Prognose deiner besten Zeiten in der Wochenbilanz (10), „besser als X % deiner Aufträge“ auf der Karte (20). Mit 📤 teilst du ein Bild von Wayo mit deinen Rekorden.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo wächst nur durch kluge Entscheidungen. Belohnungen: Designs für Auftragskarte und Widget — Neon (Lv 5), Carbon (10), Gold (15), Legende (20), auswählbar unter Einstellungen → Extras. Neue Fähigkeiten: Tipp des Tages aus deinen Daten (Lv 5), Prognose deiner besten Zeiten in der Wochenbilanz (10), „besser als X % deiner Aufträge“ auf der Karte (20). Mit 📤 teilst du ein Bild von Wayo mit deinen Rekorden. Accessoires direkt auf Wayo gezeichnet: Cap (Lv. 3), Krone (6), Sonnenbrille (8), Kopfhörer (10), Goldkette (13), Legenden-Schlüssel (16) — er trägt jeweils eins, Auswahl unter Einstellungen → Extras.</string>
     <string name="acc_cap">Kappe</string>
     <string name="acc_crown">Krone</string>
     <string name="acc_sunglasses">Sonnenbrille</string>

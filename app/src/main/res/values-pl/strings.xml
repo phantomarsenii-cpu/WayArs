@@ -526,7 +526,7 @@
     <string name="share_footer">WayArs — sprawdza każde zlecenie, zanim je przyjmiesz</string>
     <string name="share_text">Mój Wayo w WayArs osiągnął poziom %1$d! 🦎 %2$s</string>
     <string name="pet_q_rewards">Co dostanę za rozwój Wayo?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo rośnie tylko dzięki mądrym decyzjom. Nagrody: motywy karty zlecenia i widżetu — Neon (poz. 5), Karbon (10), Złoty (15), Legenda (20), wybierasz je w Ustawienia → Dodatki. Nowe umiejętności: porada dnia z twoich danych (poz. 5), prognoza najlepszych godzin w podsumowaniu tygodnia (10), „lepsze niż X% twoich zleceń” na karcie (20). Przycisk 📤 tworzy obrazek z Wayo i twoimi rekordami do udostępnienia.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo rośnie tylko dzięki mądrym decyzjom. Nagrody: motywy karty zlecenia i widżetu — Neon (poz. 5), Karbon (10), Złoty (15), Legenda (20), wybierasz je w Ustawienia → Dodatki. Nowe umiejętności: porada dnia z twoich danych (poz. 5), prognoza najlepszych godzin w podsumowaniu tygodnia (10), „lepsze niż X% twoich zleceń” na karcie (20). Przycisk 📤 tworzy obrazek z Wayo i twoimi rekordami do udostępnienia. Akcesoria narysowane prosto na Wayo: czapka (poz. 3), korona (6), okulary przeciwsłoneczne (8), słuchawki (10), złoty łańcuch (13), klucz legendy (16) — nosi jedno naraz, wybierz w Ustawienia → Dodatki.</string>
     <string name="acc_cap">Czapka</string>
     <string name="acc_crown">Korona</string>
     <string name="acc_sunglasses">Okulary przeciwsłoneczne</string>

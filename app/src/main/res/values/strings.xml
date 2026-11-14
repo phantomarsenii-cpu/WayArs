@@ -534,7 +534,7 @@
     <string name="share_footer">WayArs — checks every order before you accept it</string>
     <string name="share_text">My Wayo in WayArs reached level %1$d! 🦎 %2$s</string>
     <string name="pet_q_rewards">What do I get when Wayo grows?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo grows only from smart decisions. Rewards: card themes for the order card and widget — Neon (lv 5), Carbon (10), Gold (15), Legend (20), pick them in Settings → Extras. New abilities: a tip of the day from your data (lv 5), a forecast of your best times in the Monday summary (10), “better than X% of your orders” on the card (20). And 📤 lets you share a picture of Wayo with your records.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo grows only from smart decisions. Rewards: card themes for the order card and widget — Neon (lv 5), Carbon (10), Gold (15), Legend (20), pick them in Settings → Extras. New abilities: a tip of the day from your data (lv 5), a forecast of your best times in the Monday summary (10), “better than X% of your orders” on the card (20). And 📤 lets you share a picture of Wayo with your records. Accessories drawn right on Wayo: cap (lv 3), crown (6), sunglasses (8), headphones (10), gold chain (13), legend key (16) — he wears one at a time, choose in Settings → Extras.</string>
     <string name="acc_cap">Cap</string>
     <string name="acc_crown">Crown</string>
     <string name="acc_sunglasses">Sunglasses</string>

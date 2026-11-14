@@ -522,7 +522,7 @@
     <string name="share_footer">WayArs — hər sifarişi qəbul etməzdən əvvəl yoxlayır</string>
     <string name="share_text">WayArs-dakı Wayo-m %1$d səviyyəyə çatdı! 🦎 %2$s</string>
     <string name="pet_q_rewards">Wayo böyüyəndə nə qazanıram?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo yalnız ağıllı qərarlardan böyüyür. Mükafatlar: sifariş kartı və vidcet üçün mövzular — Neon (səv. 5), Karbon (10), Qızıl (15), Əfsanə (20), Parametrlər → Əlavələr bölməsində seçilir. Yeni bacarıqlar: məlumatlarına görə günün məsləhəti (səv. 5), həftənin yekununda ən yaxşı vaxtların proqnozu (10), kartda “sifarişlərinin X%-dən yaxşıdır” (20). 📤 isə Wayo və rekordlarınla şəkil hazırlayır.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo yalnız ağıllı qərarlardan böyüyür. Mükafatlar: sifariş kartı və vidcet üçün mövzular — Neon (səv. 5), Karbon (10), Qızıl (15), Əfsanə (20), Parametrlər → Əlavələr bölməsində seçilir. Yeni bacarıqlar: məlumatlarına görə günün məsləhəti (səv. 5), həftənin yekununda ən yaxşı vaxtların proqnozu (10), kartda “sifarişlərinin X%-dən yaxşıdır” (20). 📤 isə Wayo və rekordlarınla şəkil hazırlayır. Birbaşa Wayo-nun üzərində çəkilmiş aksesuarlar: kepka (səv. 3), tac (6), gün eynəyi (8), qulaqlıq (10), qızıl zəncir (13), əfsanə açarı (16) — eyni anda birini taxır, Parametrlər → Əlavələr bölməsində seç.</string>
     <string name="acc_cap">Kepka</string>
     <string name="acc_crown">Tac</string>
     <string name="acc_sunglasses">Gün eynəyi</string>

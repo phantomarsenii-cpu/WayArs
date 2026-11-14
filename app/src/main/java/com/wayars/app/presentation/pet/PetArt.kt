@@ -36,8 +36,6 @@ import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.res.imageResource
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -67,23 +65,31 @@ fun PetArt(
     hopKey: Int = 0,
     /** True while the user strokes the pet: eyes close with pleasure, it sways and hearts rise. */
     petting: Boolean = false,
-    /** Accessories to wear (only those that fit the picture's pose are drawn). */
-    accessories: Set<Accessory> = emptySet()
+    /** The accessory Wayo wears: its picture replaces the calm (neutral) pose. */
+    accessory: Accessory? = null
 ) {
     val context = LocalContext.current
     fun lookup(name: String) = context.resources.getIdentifier(name, "drawable", context.packageName)
-    val resId = remember(stage, mood) {
+    // The mood's own picture; when that is the stage's calm neutral pose and Wayo wears an
+    // accessory, the picture of Wayo wearing it (drawn on him, with its own blink frame).
+    val baseId = remember(stage, mood) {
         val s = stage.name.lowercase()
         val m = mood.name.lowercase()
         listOf("pet_${s}_$m", "pet_${s}_neutral", "pet_teen_$m").map { lookup(it) }.firstOrNull { it != 0 } ?: 0
     }
+    val accId = remember(stage, baseId, accessory) {
+        if (accessory != null && baseId != 0 && baseId == lookup("pet_${stage.name.lowercase()}_neutral"))
+            accessory.picture(context, stage) else 0
+    }
+    val resId = if (accId != 0) accId else baseId
     // Eyes-closed frame, only for the picture actually shown: pet_<stage>_<mood>_blink, or
     // pet_<stage>_blink when the stage's neutral pose is on screen (that frame IS the neutral
     // pose with closed eyes, so it must never replace a different pose).
-    val blinkId = remember(stage, mood, resId) {
+    val blinkId = remember(stage, mood, resId, accId) {
         val s = stage.name.lowercase()
         val moodBlink = lookup("pet_${s}_${mood.name.lowercase()}_blink")
         when {
+            accId != 0 -> accessory?.blink(context, stage) ?: 0
             moodBlink != 0 -> moodBlink
             resId != 0 && resId == lookup("pet_${s}_neutral") -> lookup("pet_${s}_blink")
             else -> 0
@@ -223,27 +229,6 @@ fun PetArt(
                         contentScale = ContentScale.Fit,
                         modifier = Modifier.fillMaxSize()
                     )
-                }
-                // Accessories, positioned from the picture's anchor points; they move with Wayo.
-                val anchor = remember(resId) { PetAnchors.of(context, resId) }
-                if (anchor != null && accessories.isNotEmpty()) {
-                    val worn = accessories.filter { it.slot in anchor.slots }.sortedBy { it.slot.ordinal }
-                    val bitmaps = worn.map { ImageBitmap.imageResource(it.image) }
-                    Canvas(Modifier.fillMaxSize()) {
-                        val k = size.minDimension / 512f
-                        val ox = (size.width - 512f * k) / 2f
-                        val oy = (size.height - 512f * k) / 2f
-                        worn.forEachIndexed { i, a ->
-                            val b = bitmaps[i]
-                            val r = PetAnchors.rect(a, anchor, b.width, b.height)
-                            drawImage(
-                                b,
-                                dstOffset = androidx.compose.ui.unit.IntOffset((ox + r[0] * k).toInt(), (oy + r[1] * k).toInt()),
-                                dstSize = androidx.compose.ui.unit.IntSize((r[2] * k).toInt().coerceAtLeast(1), (r[3] * k).toInt().coerceAtLeast(1)),
-                                filterQuality = androidx.compose.ui.graphics.FilterQuality.High
-                            )
-                        }
-                    }
                 }
             } else {
                 Canvas(Modifier.fillMaxSize()) { drawChameleon(stage, mood, blink = petting || slow in 0.0f..0.03f, t = t) }

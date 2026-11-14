@@ -204,8 +204,8 @@ fun PetCard(
     }
 
     val accessoriesPref by com.wayars.app.data.prefs.DriverPrefs.accessories.collectAsState()
-    val wornAccessories = remember(accessoriesPref, pet.level) {
-        Accessory.parse(accessoriesPref).filter { it.unlocked(pet.level) }.toSet()
+    val wornAccessory = remember(accessoriesPref, pet.level, pet.stage) {
+        Accessory.worn(context, accessoriesPref, pet.level, pet.stage)
     }
 
     val reactionFresh = pet.reaction != PetState.Reaction.NONE && now - pet.reactionAt < REACTION_MS
@@ -279,7 +279,7 @@ fun PetCard(
                 mood = mood,
                 hopKey = hopKey,
                 petting = petting,
-                accessories = wornAccessories,
+                accessory = wornAccessory,
                 modifier = Modifier
                     .size(108.dp)
                     .clip(RoundedCornerShape(18.dp))

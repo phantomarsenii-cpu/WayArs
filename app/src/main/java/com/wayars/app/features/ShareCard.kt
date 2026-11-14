@@ -98,27 +98,16 @@ object ShareCard {
         // Wayo picture for the current stage.
         val s = pet.stage.name.lowercase()
         fun lookup(n: String) = context.resources.getIdentifier(n, "drawable", context.packageName)
-        val res = listOf("pet_${s}_level_up", "pet_${s}_happy", "pet_${s}_neutral", "pet_teen_happy").map { lookup(it) }.firstOrNull { it != 0 } ?: 0
+        // Wearing the chosen accessory (drawn on Wayo) when there is one, else the happiest pose.
+        val accRes = com.wayars.app.presentation.pet.Accessory.worn(context, DriverPrefs.accessories.value, pet.level, pet.stage)
+            ?.picture(context, pet.stage) ?: 0
+        val res = if (accRes != 0) accRes
+            else listOf("pet_${s}_level_up", "pet_${s}_happy", "pet_${s}_neutral", "pet_teen_happy").map { lookup(it) }.firstOrNull { it != 0 } ?: 0
         if (res != 0) {
             BitmapFactory.decodeResource(context.resources, res)?.let { img ->
                 val size = 620f
                 val left = (w - size) / 2f
                 cv.drawBitmap(img, null, RectF(left, y + 30f, left + size, y + 30f + size), Paint(Paint.FILTER_BITMAP_FLAG))
-                // Wayo's accessories on the share picture too.
-                val anchor = com.wayars.app.presentation.pet.PetAnchors.of(context, res)
-                if (anchor != null) {
-                    val k = size / 512f
-                    com.wayars.app.presentation.pet.Accessory.parse(DriverPrefs.accessories.value)
-                        .filter { it.unlocked(pet.level) && it.slot in anchor.slots }
-                        .sortedBy { it.slot.ordinal }
-                        .forEach { a ->
-                            BitmapFactory.decodeResource(context.resources, a.image)?.let { ab ->
-                                val r = com.wayars.app.presentation.pet.PetAnchors.rect(a, anchor, ab.width, ab.height)
-                                val l = left + r[0] * k; val t = y + 30f + r[1] * k
-                                cv.drawBitmap(ab, null, RectF(l, t, l + r[2] * k, t + r[3] * k), Paint(Paint.FILTER_BITMAP_FLAG))
-                            }
-                        }
-                }
                 y += 30f + size
             }
         }
