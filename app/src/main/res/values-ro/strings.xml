@@ -521,7 +521,7 @@
     <string name="share_footer">WayArs — verifică fiecare comandă înainte s-o accepți</string>
     <string name="share_text">Wayo al meu în WayArs a ajuns la nivelul %1$d! 🦎 %2$s</string>
     <string name="pet_q_rewards">Ce primesc când crește Wayo?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo crește doar din decizii istețe. Recompense: accesorii — șapcă (nv. 3), coroană (6), ochelari de soare (8), căști (10), lanț de aur (13), cheia legendei (16); teme pentru cardul comenzii și widget — Neon (5), Carbon (10), Auriu (15), Legendă (20). Le alegi în Setări → Extra. Abilități noi: sfatul zilei din datele tale (nv. 5), prognoza celor mai bune momente în bilanțul săptămânii (10), „mai bună decât X% din comenzile tale” pe card (20). Iar 📤 face o imagine cu Wayo și recordurile tale.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo crește doar din decizii istețe. Recompense: teme pentru cardul comenzii și widget — Neon (nv. 5), Carbon (10), Auriu (15), Legendă (20), le alegi în Setări → Extra. Abilități noi: sfatul zilei din datele tale (nv. 5), prognoza celor mai bune momente în bilanțul săptămânii (10), „mai bună decât X% din comenzile tale” pe card (20). Iar 📤 face o imagine cu Wayo și recordurile tale.</string>
     <string name="acc_cap">Șapcă</string>
     <string name="acc_crown">Coroană</string>
     <string name="acc_sunglasses">Ochelari de soare</string>
@@ -529,6 +529,6 @@
     <string name="acc_chain">Lanț de aur</string>
     <string name="acc_carkey">Cheia legendei</string>
     <string name="settings_acc_title">Accesoriile lui Wayo</string>
-    <string name="settings_acc_desc">Câte unul pentru cap, ochi, gât și lângă Wayo. Se deblochează cu nivelul. Șapca și coroana nu încap pe casca de Profesionist sau coroana de Legendă.</string>
+    <string name="settings_acc_desc">Se deblochează cu nivelul.</string>
     <string name="pet_unlocked_accessory">Accesoriu nou: %1$s 🎁</string>
 </resources>

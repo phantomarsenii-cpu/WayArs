@@ -526,7 +526,7 @@
     <string name="share_footer">WayArs — sprawdza każde zlecenie, zanim je przyjmiesz</string>
     <string name="share_text">Mój Wayo w WayArs osiągnął poziom %1$d! 🦎 %2$s</string>
     <string name="pet_q_rewards">Co dostanę za rozwój Wayo?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo rośnie tylko dzięki mądrym decyzjom. Nagrody: akcesoria — czapka (poz. 3), korona (6), okulary (8), słuchawki (10), złoty łańcuch (13), klucz legendy (16); motywy karty zlecenia i widżetu — Neon (5), Karbon (10), Złoty (15), Legenda (20). Wybierasz je w Ustawienia → Dodatki. Nowe umiejętności: porada dnia z twoich danych (poz. 5), prognoza najlepszych godzin w podsumowaniu tygodnia (10), „lepsze niż X% twoich zleceń” na karcie (20). A 📤 tworzy obrazek z Wayo i twoimi rekordami.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo rośnie tylko dzięki mądrym decyzjom. Nagrody: motywy karty zlecenia i widżetu — Neon (poz. 5), Karbon (10), Złoty (15), Legenda (20), wybierasz je w Ustawienia → Dodatki. Nowe umiejętności: porada dnia z twoich danych (poz. 5), prognoza najlepszych godzin w podsumowaniu tygodnia (10), „lepsze niż X% twoich zleceń” na karcie (20). Przycisk 📤 tworzy obrazek z Wayo i twoimi rekordami do udostępnienia.</string>
     <string name="acc_cap">Czapka</string>
     <string name="acc_crown">Korona</string>
     <string name="acc_sunglasses">Okulary przeciwsłoneczne</string>
@@ -534,6 +534,6 @@
     <string name="acc_chain">Złoty łańcuch</string>
     <string name="acc_carkey">Klucz legendy</string>
     <string name="settings_acc_title">Akcesoria Wayo</string>
-    <string name="settings_acc_desc">Po jednym na głowę, oczy, szyję i obok Wayo. Odblokowują się z poziomem. Czapki i korony nie da się założyć na kask Profi ani koronę Legendy.</string>
+    <string name="settings_acc_desc">Odblokowują się z poziomem.</string>
     <string name="pet_unlocked_accessory">Nowe akcesorium: %1$s 🎁</string>
 </resources>

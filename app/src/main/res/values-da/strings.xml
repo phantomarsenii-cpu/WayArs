@@ -522,7 +522,7 @@
     <string name="share_footer">WayArs — tjekker hver ordre, før du tager den</string>
     <string name="share_text">Min Wayo i WayArs har nået niveau %1$d! 🦎 %2$s</string>
     <string name="pet_q_rewards">Hvad får jeg, når Wayo vokser?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo vokser kun af kloge beslutninger. Belønninger: tilbehør — kasket (niv. 3), krone (6), solbriller (8), høretelefoner (10), guldkæde (13), legendens nøgle (16); temaer til ordrekortet og widgetten — Neon (5), Karbon (10), Guld (15), Legende (20). Vælges under Indstillinger → Ekstra. Nye evner: dagens tip ud fra dine data (niv. 5), prognose for dine bedste tider i ugens resultat (10), „bedre end X % af dine ordrer“ på kortet (20). Og 📤 deler et billede af Wayo med dine rekorder.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo vokser kun af kloge beslutninger. Belønninger: temaer til ordrekortet og widgetten — Neon (niv. 5), Karbon (10), Guld (15), Legende (20), vælges under Indstillinger → Ekstra. Nye evner: dagens tip ud fra dine data (niv. 5), en prognose for dine bedste tider i ugens resultat (10), „bedre end X % af dine ordrer“ på kortet (20). Og 📤 laver et billede af Wayo med dine rekorder til deling.</string>
     <string name="acc_cap">Kasket</string>
     <string name="acc_crown">Krone</string>
     <string name="acc_sunglasses">Solbriller</string>
@@ -530,6 +530,6 @@
     <string name="acc_chain">Guldkæde</string>
     <string name="acc_carkey">Legendens nøgle</string>
     <string name="settings_acc_title">Wayos tilbehør</string>
-    <string name="settings_acc_desc">Ét pr. plads: hoved, øjne, hals og ved siden af Wayo. Låses op med niveau. Kasket og krone kan ikke sidde på Pro-hjelmen eller Legende-kronen.</string>
+    <string name="settings_acc_desc">Låses op med niveau.</string>
     <string name="pet_unlocked_accessory">Nyt tilbehør: %1$s 🎁</string>
 </resources>

@@ -8,11 +8,9 @@ enum class AccessorySlot { HEAD, EYES, NECK, BADGE }
 
 /** Accessories Wayo earns by growing (smart decisions only). Images are in drawable-nodpi. */
 enum class Accessory(val minLevel: Int, val slot: AccessorySlot, val image: Int, val nameRes: Int) {
-    CAP(3, AccessorySlot.HEAD, R.drawable.pet_acc_cap, R.string.acc_cap),
-    CROWN(6, AccessorySlot.HEAD, R.drawable.pet_acc_crown, R.string.acc_crown),
-    SUNGLASSES(8, AccessorySlot.EYES, R.drawable.pet_acc_sunglasses, R.string.acc_sunglasses),
-    HEADPHONES(10, AccessorySlot.NECK, R.drawable.pet_acc_headphones, R.string.acc_headphones),
-    CHAIN(13, AccessorySlot.NECK, R.drawable.pet_acc_chain, R.string.acc_chain),
+    // Worn accessories (cap, glasses, headphones, chain) wait for art drawn ON Wayo for each
+    // stage: flat overlays on the 3/4-view head can't look natural. Items standing next to Wayo
+    // work as overlays.
     CARKEY(16, AccessorySlot.BADGE, R.drawable.pet_acc_carkey, R.string.acc_carkey);
 
     fun unlocked(level: Int) = level >= minLevel
@@ -62,28 +60,6 @@ object PetAnchors {
     fun rect(a: Accessory, p: PetAnchor, w: Int, h: Int): FloatArray {
         val aspect = w.toFloat() / h
         return when (a) {
-            Accessory.CAP -> {
-                val bottom = p.eyes - 0.12f * p.headW; val top = p.crest - 0.05f * p.headW
-                val hh = bottom - top; val ww = hh * aspect
-                floatArrayOf(p.hx - ww / 2, top, ww, hh)
-            }
-            Accessory.CROWN -> {
-                val ww = 0.75f * p.headW; val hh = ww / aspect
-                val bottom = (p.crest + p.eyes) / 2 - 0.05f * p.headW
-                floatArrayOf(p.hx - ww / 2, bottom - hh, ww, hh)
-            }
-            Accessory.SUNGLASSES -> {
-                val ww = 1.08f * p.eyesW; val hh = ww / aspect
-                floatArrayOf(p.hx - ww / 2, p.eyes - hh / 2, ww, hh)
-            }
-            Accessory.HEADPHONES -> {
-                val ww = 0.95f * p.headW * p.neckScale; val hh = ww / aspect
-                floatArrayOf(p.hx - ww / 2, p.neck - 0.06f * p.headW, ww, hh)
-            }
-            Accessory.CHAIN -> {
-                val ww = 0.80f * p.headW * p.neckScale; val hh = ww / aspect
-                floatArrayOf(p.hx - ww / 2, p.neck - 0.10f * p.headW, ww, hh)
-            }
             Accessory.CARKEY -> {
                 val ww = 62f; val hh = ww / aspect
                 floatArrayOf(452f - ww / 2, 470f - hh, ww, hh)

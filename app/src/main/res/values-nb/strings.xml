@@ -522,7 +522,7 @@
     <string name="share_footer">WayArs — sjekker hvert oppdrag før du tar det</string>
     <string name="share_text">Min Wayo i WayArs har nådd nivå %1$d! 🦎 %2$s</string>
     <string name="pet_q_rewards">Hva får jeg når Wayo vokser?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo vokser bare av smarte avgjørelser. Belønninger: tilbehør — caps (nivå 3), krone (6), solbriller (8), hodetelefoner (10), gullkjede (13), legendens nøkkel (16); temaer for oppdragskortet og widgeten — Neon (5), Karbon (10), Gull (15), Legende (20). Velges under Innstillinger → Ekstra. Nye evner: dagens tips fra dine data (nivå 5), prognose for dine beste tider i ukens resultat (10), «bedre enn X % av oppdragene dine» på kortet (20). Og 📤 deler et bilde av Wayo med rekordene dine.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo vokser bare av smarte avgjørelser. Belønninger: temaer for oppdragskortet og widgeten — Neon (nivå 5), Karbon (10), Gull (15), Legende (20), velges under Innstillinger → Ekstra. Nye evner: dagens tips fra dine data (nivå 5), prognose for dine beste tider i ukens resultat (10), «bedre enn X % av oppdragene dine» på kortet (20). Og 📤 lager et bilde av Wayo med rekordene dine til deling.</string>
     <string name="acc_cap">Caps</string>
     <string name="acc_crown">Krone</string>
     <string name="acc_sunglasses">Solbriller</string>
@@ -530,6 +530,6 @@
     <string name="acc_chain">Gullkjede</string>
     <string name="acc_carkey">Legendens nøkkel</string>
     <string name="settings_acc_title">Wayos tilbehør</string>
-    <string name="settings_acc_desc">Ett per plass: hode, øyne, hals og ved siden av Wayo. Låses opp med nivå. Caps og krone passer ikke på Proff-hjelmen eller Legende-kronen.</string>
+    <string name="settings_acc_desc">Låses opp med nivå.</string>
     <string name="pet_unlocked_accessory">Nytt tilbehør: %1$s 🎁</string>
 </resources>
