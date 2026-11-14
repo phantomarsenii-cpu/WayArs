@@ -102,7 +102,8 @@ class WayoBrain(docs: List<Doc>) {
         }
         // Small talk only when the message isn't really about a topic.
         val small = if (notHelped) null else smallTalk(norm)
-        if (small != null && !strong) return Reply.Small(small)
+        // Short chit-chat ("who are you?", "how are you?") stays chit-chat unless a topic matches very strongly.
+        if (small != null && (!strong || (msg.size <= 3 && top!!.second < VERY_HIGH))) return Reply.Small(small)
         if (top == null || top.second < LOW) {
             return Reply.Unknown(ranked.filter { it.second > 0.6 }.take(3).map { it.first })
         }

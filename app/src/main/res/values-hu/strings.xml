@@ -287,8 +287,8 @@
     <string name="pet_a_add_app">Beállítások → Támogatott appok → „Választás a telepítettek közül”, majd a futár- vagy taxi appod.</string>
     <string name="pet_q_calibrate">Hogyan kalibrálok egy appot?</string>
     <string name="pet_a_calibrate">Nyisd meg az appot, várj egy rendelésre, majd gyere vissza: Beállítások → Támogatott appok → ceruza az app mellett. Koppints az árra, távolságra és időre — kész.</string>
-    <string name="pet_q_currency">Melyik pénznemet válasszam?</string>
-    <string name="pet_a_currency">Az országod pénznemét vagy azt, amelyben a futár- vagy taxi appod az árakat mutatja. Minden díj és határ ebben számol.</string>
+    <string name="pet_q_currency">Milyen pénznemek vannak, és melyiket válasszam?</string>
+    <string name="pet_a_currency" formatted="false">26 pénznem van 💰: PLN, EUR, UAH, RON, MDL, CZK, HUF, BGN, SEK, NOK, DKK, CHF, GBP, USD, RUB, KZT, BYN, UZS, GEL, AMD, AZN, KGS, TRY, BRL, INR, JPY. Azt válaszd, amelyben a taxis vagy futár appod mutatja az árakat: Beállítások → Pénznem. A profilok határait magam számolom át.</string>
     <string name="pet_q_tax">Hogyan adom meg az adót?</string>
     <string name="pet_a_tax">Beállítások → Adó: írd be a kulcsot %-ban. Az üzemanyaggal együtt levonódik, a kártya megmutatja, mennyi marad valójában.</string>
     <string name="pet_q_vehicle">Hol adom meg az autót és az üzemanyagot?</string>
@@ -296,17 +296,17 @@
     <string name="pet_q_thresholds">Hogyan állítok saját határokat?</string>
     <string name="pet_a_thresholds">Beállítások → Saját határok: km-díj a rossz, közepes és jó rendelésekhez. Ezek felülírják a profilt.</string>
     <string name="pet_q_presets">Mik a profilok?</string>
-    <string name="pet_a_presets">Kész stratégiák (takarékos, egyensúly, csak megérő), amelyek eldöntik, mely rendelések jók. Válassz a „Profilok” fülön.</string>
+    <string name="pet_a_presets" formatted="false">A profilok kész stratégiák 🎯 „Gazdaságos” — 1,5 zł/km és 0,5 zł/perc felett, „Kiegyensúlyozott” — 2,2 zł/km és 0,8 zł/perc felett, „Csak nyereséges” — 3,0 zł/km és 1,1 zł/perc felett. Más pénznemben magam számolom át. A „Módok” fülön választhatsz, saját számok — Beállítások → Saját díjküszöbök.</string>
     <string name="pet_q_stats">Hol a keresetem és a statisztika?</string>
-    <string name="pet_a_stats">A „Statisztika” fülön: rendelések, kereset, távolság és átlagos díj napra, hétre vagy hónapra.</string>
+    <string name="pet_a_stats" formatted="false">„Statisztika” fül 📊: rendelések, kereset, kilométerek, átlagdíj és valódi órabér — mára, a hétre, a hónapra vagy az évre. Ott van az appok összehasonlítása, az eredmények és a sorozatok is.</string>
     <string name="pet_q_verdict">Mit jelent a zöld és a piros?</string>
-    <string name="pet_a_verdict">Zöld — a rendelés a beállításaid szerint megéri, piros — nem. A km- és percdíj már üzemanyag után értendő.</string>
+    <string name="pet_a_verdict" formatted="false">🟢 Zöld kártya — a rendelés megéri a beállításaid szerint, 🟡 sárga — közepes, 🔴 piros — nem éri meg, jobb kihagyni. A km-enkénti és percenkénti díj már üzemanyag után értendő.</string>
     <string name="pet_q_subscription">Hogyan működik az előfizetés?</string>
     <string name="pet_a_subscription">Beállítások → Előfizetés. Először 30 perc ingyen; az előfizetés a Google-fiókodhoz kötött, és a Google Playben kezelhető.</string>
     <string name="pet_q_contact">Hogyan érlek el titeket?</string>
     <string name="pet_a_contact">Beállítások → Kapcsolat: Telegram, Instagram, TikTok vagy e-mail. Bármikor válaszolunk.</string>
     <string name="pet_q_pet">Hogyan nősz?</string>
-    <string name="pet_a_pet">Okos döntésekből eszem energiát: jó rendelést elfogadsz vagy rosszat elutasítasz — +3 nekem. Minden nap szkenneléssel +5. Több energia — magasabb szint!</string>
+    <string name="pet_a_pet" formatted="false">Okos döntések energiájából élek ⚡ Elfogadtál egy jó rendelést vagy elutasítottál egy rosszat — +3, elfogadtál egy közepeset — +2. Minden munkanap „Active”-val — még +5, egymást követő napokért +10-ig. Döntésekből naponta legfeljebb 60. Több energia — magasabb szint!</string>
     <string name="pet_q_diagnostics">Valami nem működik. Mit ellenőrizzek?</string>
     <string name="pet_a_diagnostics">Koppints az ablak tetején a „🔍 Telefonom ellenőrzése” gombra: ellenőrzöm az engedélyeket, az „Active”-ot, az előfizetést és az akkumulátort, és megmutatom, mit kell javítani.</string>
     <string name="pet_q_apps">Milyen alkalmazásokkal működik a WayArs?</string>
@@ -333,8 +333,8 @@
     <string name="pet_a_restore">Nyisd meg az előfizetés képernyőt, és koppints a „Vásárlások visszaállítása” gombra. Ellenőrizd, hogy a telefonon ugyanaz a Google-fiók van, amellyel fizettél.</string>
     <string name="pet_q_cancel">Hogyan mondhatom le az előfizetést?</string>
     <string name="pet_a_cancel">Google Play → profilod → Fizetések és előfizetések → Előfizetések → WayArs → Lemondás.</string>
-    <string name="pet_q_language">Hogyan változtatom meg a nyelvet?</string>
-    <string name="pet_a_language">Beállítások → Nyelv. 17 nyelv érhető el.</string>
+    <string name="pet_q_language">Milyen nyelvek vannak, és hogyan váltok nyelvet?</string>
+    <string name="pet_a_language" formatted="false">17 nyelven beszélek 🌍: English, Polski, Українська, Русский, Deutsch, Français, Română, Čeština, Български, Magyar, Dansk, Norsk, Svenska, Azərbaycanca, Հայերեն, ქართული, Oʻzbekcha. Váltás: Beállítások → Nyelv. A rendeléseket bármilyen nyelven olvasom, akkor is, ha a taxis vagy futár app más nyelvű.</string>
     <string name="pet_q_tutorial">Hogyan nézhetem meg újra a bemutatót?</string>
     <string name="pet_a_tutorial">Beállítások → Bemutató, a beállítások legalján.</string>
     <string name="pet_q_turns_off">Miért kapcsol ki magától az „Active”?</string>
@@ -536,4 +536,76 @@
     <string name="settings_pet_summary">Kártyatéma és kiegészítők</string>
     <string name="tour_petset_text">A rendeléskártya és a widget témái, valamint Wayo kiegészítői. Akkor nyílnak meg, ahogy Wayo nő az okos döntéseidtől; egyszerre egy kiegészítőt visel.</string>
     <string name="tour_new2_text">Újdonság: Wayo mostantól jutalmakat ad a növekedésért — kártyatémák, közvetlenül rá rajzolt kiegészítők, új képességek és egy kép a rekordjaid megosztásához. Mindez a Beállítások → „Wayo kedvenc” alatt.</string>
+    <string name="pet_q_what_is">Mi a WayArs, és hogyan működik?</string>
+    <string name="pet_a_what_is" formatted="false">Én vagyok a rendelés-segítőd 🦎 Ha az Uberben, Boltban, Woltban vagy más appban rendelés jön, egy másodperc alatt kiolvasom az árat, a távolságot és az időt, levonom az üzemanyagot és az adót, és felül mutatok egy kártyát: 🟢 vállald, 🟡 közepes, 🔴 inkább hagyd ki. Mindig te döntesz — én semmit nem nyomok meg. Számolom a valódi órabéredet és statisztikát is vezetek.</string>
+    <string name="pet_q_internet">Kell internet?</string>
+    <string name="pet_a_internet" formatted="false">A munkához nem 📴 A rendeléseket a telefonon olvasom és számolom, és ebben a csetben is internet nélkül válaszolok. Internet csak az előfizetés megvásárlásához vagy ellenőrzéséhez és a frissítéshez kell.</string>
+    <string name="pet_q_iphone">Van iPhone-os verzió? Milyen telefon kell?</string>
+    <string name="pet_a_iphone" formatted="false">Csak Androidon élek 🤖 — 8.0-s vagy újabb verzió, bármilyen márka: Samsung, Xiaomi, Pixel, Motorola és mások. iPhone-os verzió nincs: az iOS nem engedi, hogy az appok más appok képernyőjét olvassák.</string>
+    <string name="pet_q_data">Átkerülnek az adataim új telefonra? Hogyan törlöm őket?</string>
+    <string name="pet_a_data" formatted="false">Minden csak ezen a telefonon van 🔒 — nincsenek fiókok és felhő, ezért a statisztika és a szintem nem költözik át. Az előfizetés igen: a Google-fiókodhoz kötődik, koppints a „Vásárlások visszaállítása” gombra. Minden törlése: Android-beállítások → Alkalmazások → WayArs → Tárhely → Adatok törlése, vagy egyszerűen töröld az appot.</string>
+    <string name="pet_q_update">Hogyan frissítem az appot?</string>
+    <string name="pet_a_update" formatted="false">A Google Playen keresztül 🔄 Ha új verzió jön, magam mutatok frissítés gombot az appban. Vagy kézzel: Google Play → WayArs → Frissítés.</string>
+    <string name="pet_q_stages">Milyen növekedési szakaszai vannak Wayónak?</string>
+    <string name="pet_a_stages" formatted="false">Öt szakaszom van 🥚→👑: Tojás (1. szint), Bébi (2–4), Kamasz (5–9), Profi (10–19) és Legenda (20+). A szintek 20 után is folytatódnak. Becsületesen növök: tini kb. egy hét munka után, profi egy hónap után, legenda 4–6 hónap után.</string>
+    <string name="pet_q_share">Hogyan osztok meg egy képet a rekordjaimmal?</string>
+    <string name="pet_a_share" formatted="false">Koppints a 📤-ra a kártyámon a főképernyőn — készítek egy képet: én, a szintem és a rekordjaid. Küldd el üzenetben vagy sztoriban 📸</string>
+    <string name="pet_q_theme">Hogyan váltok kártyatémát?</string>
+    <string name="pet_a_theme" formatted="false">Beállítások → Wayo kedvenc → Kártyatéma 🎨 A témák a növekedésemmel nyílnak meg: Neon (5. szint), Karbon (10), Arany (15), Legenda (20). A téma a rendeléskártyát és a widgetet is megváltoztatja.</string>
+    <string name="pet_q_accessories">Hogyan adok Wayóra kiegészítőt?</string>
+    <string name="pet_a_accessories" formatted="false">Beállítások → Wayo kedvenc → Wayo kiegészítői 😎 Sapka (3. szint), korona (6), napszemüveg (8), fejhallgató (10), aranylánc (13), legenda kulcs (16). Egyszerre egyet viselek: koppints — felveszem, koppints újra — leveszem.</string>
+    <string name="pet_q_ban">Nem tilt le emiatt az Uber vagy a Bolt?</string>
+    <string name="pet_a_ban" formatted="false">Semmit nem nyomok meg és nem változtatok az appjaikban 👀 — csak olvasom a képernyőt, mint a szemed, és tippet mutatok. A rendeléseket te fogadod el. De minden platformnak saját szabályai vannak, és ezekért nem vállalhatok garanciát — a döntés mindig a tiéd.</string>
+    <string name="pet_q_about">Ki készítette a WayArs-t?</string>
+    <string name="pet_a_about" formatted="false">Engem és a WayArs-t az AP STUDIO készítette, egy független fejlesztő 💚 Verzió és leírás: Beállítások → Az alkalmazásról. Ötleted van vagy hibát találtál? Írj Telegramon: t.me/wayars_app, vagy ide: apstudiomobile@gmail.com.</string>
+    <string-array name="chat_v_intro">
+        <item>Könnyű!</item>
+        <item>Ó, ezt tudom 😎</item>
+        <item>Nézd 👇</item>
+        <item>Jó kérdés!</item>
+        <item>Elmondom 🦎</item>
+        <item>Tessék 💚</item>
+    </string-array>
+    <string-array name="chat_v_intro_problem">
+        <item>Mindjárt megoldjuk 🔧</item>
+        <item>Semmi gond, megjavítjuk!</item>
+        <item>Előfordul. Lépésről lépésre:</item>
+        <item>Na, nézzük 👀</item>
+    </string-array>
+    <string-array name="chat_v_outro_show">
+        <item>Koppints a „Mutasd” gombra — kiemelem, hol van 👇</item>
+        <item>Meg tudom mutatni, hol van: gomb lent.</item>
+        <item>Elvigyelek oda? Gomb lent 👇</item>
+    </string-array>
+    <string-array name="chat_v_outro">
+        <item>Miben segíthetek még?</item>
+        <item>Kérdezz bátran 😉</item>
+        <item>Van még kérdés? Itt vagyok!</item>
+        <item>Bármikor 💚</item>
+    </string-array>
+    <string-array name="chat_v_again">
+        <item>Elismétlem 🙂</item>
+        <item>Ahogy mondtam:</item>
+    </string-array>
+    <string-array name="chat_v_hello">
+        <item>Szia! 👋 Miben segíthetek?</item>
+        <item>Hé! Itt vagyok 🦎 Mire van szükséged?</item>
+        <item>Szia, szia! Kérdezz bármit az appról.</item>
+    </string-array>
+    <string-array name="chat_v_thanks">
+        <item>Szívesen! 💚</item>
+        <item>Örülök, hogy segíthettem! Jó fuvarokat 🚕</item>
+        <item>Bármikor! Örömmel 🦎</item>
+    </string-array>
+    <string-array name="chat_v_how">
+        <item>Szuper! Főleg ha jó rendeléseket vállalsz 😄</item>
+        <item>Remekül, lassan növök 🌱 És a műszakod?</item>
+        <item>Jól! Itt számolom a kilométereket 🦎</item>
+    </string-array>
+    <string-array name="chat_v_unknown">
+        <item>Hmm, ezt még nem tudom 🤔 Mondd másképp, vagy válassz lent egy kérdést.</item>
+        <item>Hoppá, ebben nem vagyok biztos. Kérdezd másképp — vagy íme, amit gyakran kérdeznek:</item>
+        <item>Ez nincs a memóriámban 😅 Írj a fejlesztőknek — válaszolnak; addig íme a népszerűek:</item>
+    </string-array>
+    <string name="chat_related">Gyakran kérdezik még:</string>
 </resources>

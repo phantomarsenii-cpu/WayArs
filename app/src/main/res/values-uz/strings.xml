@@ -287,8 +287,8 @@
     <string name="pet_a_add_app">Sozlamalar → Qo‘llab-quvvatlanadigan ilovalar → „O‘rnatilganlardan tanlash” va yetkazib berish yoki taksi ilovangizni tanlang.</string>
     <string name="pet_q_calibrate">Ilovani qanday kalibrlayman?</string>
     <string name="pet_a_calibrate">Ilovani oching va istalgan buyurtmani kuting, keyin qayting: Sozlamalar → Qo‘llab-quvvatlanadigan ilovalar → ilova yonidagi qalam. Narx, masofa va vaqtga bosing — tayyor.</string>
-    <string name="pet_q_currency">Qaysi valyutani tanlay?</string>
-    <string name="pet_a_currency">Mamlakatingiz valyutasini yoki yetkazib berish, taksi ilovangiz narxlarni ko‘rsatadigan valyutani. Barcha stavkalar va chegaralar unda hisoblanadi.</string>
+    <string name="pet_q_currency">Qaysi valyutalar bor va qaysi birini tanlay?</string>
+    <string name="pet_a_currency" formatted="false">26 ta valyuta bor 💰: PLN, EUR, UAH, RON, MDL, CZK, HUF, BGN, SEK, NOK, DKK, CHF, GBP, USD, RUB, KZT, BYN, UZS, GEL, AMD, AZN, KGS, TRY, BRL, INR, JPY. Taksi yoki yetkazib berish ilovang narxlarni qaysi valyutada ko‘rsatsa, o‘shani tanla: Sozlamalar → Valyuta. Profillar chegaralarini o‘zim qayta hisoblayman.</string>
     <string name="pet_q_tax">Soliqni qanday kiritaman?</string>
     <string name="pet_a_tax">Sozlamalar → Soliq: stavkani %da kiriting. U yoqilg‘i bilan birga ayiriladi va karta aslida qancha qolishini ko‘rsatadi.</string>
     <string name="pet_q_vehicle">Mashina va yoqilg‘ini qayerga kiritaman?</string>
@@ -296,17 +296,17 @@
     <string name="pet_q_thresholds">O‘z chegaralarimni qanday qo‘yaman?</string>
     <string name="pet_a_thresholds">Sozlamalar → O‘z chegaralarim: yomon, o‘rtacha va yaxshi buyurtmalar uchun km stavkasi. Ular profilni almashtiradi.</string>
     <string name="pet_q_presets">Profillar nima?</string>
-    <string name="pet_a_presets">Qaysi buyurtmalar yaxshi ekanini hal qiladigan tayyor strategiyalar (tejamkor, muvozanat, faqat foydali). „Profillar” bo‘limida tanlang.</string>
+    <string name="pet_a_presets" formatted="false">Profillar — tayyor strategiyalar 🎯 «Tejamkor» — 1,5 zł/km va 0,5 zł/daqdan, «Muvozanat» — 2,2 zł/km va 0,8 zł/daqdan, «Faqat foydali» — 3,0 zł/km va 1,1 zł/daqdan. Boshqa valyutada o‘zim qayta hisoblayman. «Rejimlar» bo‘limida tanlanadi, o‘z raqamlaring — Sozlamalar → O\'zingizning tarif chegaralaringiz.</string>
     <string name="pet_q_stats">Daromadim va statistikam qayerda?</string>
-    <string name="pet_a_stats">„Statistika” bo‘limida: kun, hafta yoki oy bo‘yicha buyurtmalar, daromad, masofa va o‘rtacha stavka.</string>
+    <string name="pet_a_stats" formatted="false">«Statistika» bo‘limi 📊: buyurtmalar, daromad, kilometrlar, o‘rtacha stavka va soatlik haqiqiy daromad — bugun, hafta, oy yoki yil uchun. U yerda ilovalar taqqoslash, yutuqlar va seriyalar ham bor.</string>
     <string name="pet_q_verdict">Yashil va qizil nimani bildiradi?</string>
-    <string name="pet_a_verdict">Yashil — buyurtma sozlamalaringiz bo‘yicha foydali, qizil — yo‘q. Km va daqiqa stavkasi allaqachon yoqilg‘idan keyin.</string>
+    <string name="pet_a_verdict" formatted="false">🟢 Yashil karta — buyurtma sozlamalaringga ko‘ra foydali, 🟡 sariq — o‘rtacha, 🔴 qizil — foydasiz, o‘tkazib yuborgan ma’qul. Km va daqiqa uchun stavka allaqachon yoqilg‘idan keyin hisoblangan.</string>
     <string name="pet_q_subscription">Obuna qanday ishlaydi?</string>
     <string name="pet_a_subscription">Sozlamalar → Obuna. Avval 30 daqiqa bepul; obuna Google hisobingizga bog‘langan va Google Play’da boshqariladi.</string>
     <string name="pet_q_contact">Siz bilan qanday bog‘lanaman?</string>
     <string name="pet_a_contact">Sozlamalar → Aloqa: Telegram, Instagram, TikTok yoki e-pochta. Istalgan vaqtda javob beramiz.</string>
     <string name="pet_q_pet">Qanday o‘sasan?</string>
-    <string name="pet_a_pet">Aqlli qarorlardan energiya yeyman: yaxshi buyurtmani qabul qilding yoki yomonini rad etding — menga +3. Skanerli har bir kun +5 beradi. Ko‘p energiya — yuqori daraja!</string>
+    <string name="pet_a_pet" formatted="false">Men aqlli qarorlar energiyasi bilan oziqlanaman ⚡ Foydali buyurtmani olding yoki foydasizidan voz kechding — +3, o‘rtachani olding — +2. «Active» bilan har bir ish kuni — yana +5, ketma-ket kunlar uchun +10 gacha. Qarorlardan kuniga 60 gacha. Ko‘proq energiya — yuqoriroq daraja!</string>
     <string name="pet_q_diagnostics">Nimadir ishlamayapti. Nimani tekshiray?</string>
     <string name="pet_a_diagnostics">Shu oynaning tepasidagi “🔍 Telefonimni tekshir” tugmasini bosing: ruxsatlar, “Active”, obuna va batareyani tekshirib, nimani tuzatish kerakligini ko‘rsataman.</string>
     <string name="pet_q_apps">WayArs qaysi ilovalar bilan ishlaydi?</string>
@@ -333,8 +333,8 @@
     <string name="pet_a_restore">Obuna ekranini oching va “Xaridlarni tiklash” tugmasini bosing. Telefonda to‘lov qilgan Google hisobingiz turganini tekshiring.</string>
     <string name="pet_q_cancel">Obunani qanday bekor qilaman?</string>
     <string name="pet_a_cancel">Google Play → profilingiz → To‘lovlar va obunalar → Obunalar → WayArs → Bekor qilish.</string>
-    <string name="pet_q_language">Tilni qanday o‘zgartiraman?</string>
-    <string name="pet_a_language">Sozlamalar → Til. 17 ta til mavjud.</string>
+    <string name="pet_q_language">Qaysi tillar bor va tilni qanday o‘zgartiraman?</string>
+    <string name="pet_a_language" formatted="false">Men 17 tilda gaplashaman 🌍: English, Polski, Українська, Русский, Deutsch, Français, Română, Čeština, Български, Magyar, Dansk, Norsk, Svenska, Azərbaycanca, Հայերեն, ქართული, Oʻzbekcha. O‘zgartirish: Sozlamalar → Til. Buyurtmalarni esa istalgan tilda o‘qiyman, taksi yoki yetkazib berish ilovang boshqa tilda bo‘lsa ham.</string>
     <string name="pet_q_tutorial">Qo‘llanmani qanday qaytadan ko‘raman?</string>
     <string name="pet_a_tutorial">Sozlamalar → Qo‘llanma, sozlamalarning eng pastida.</string>
     <string name="pet_q_turns_off">Nega “Active” o‘zi o‘chib qoladi?</string>
@@ -536,4 +536,76 @@
     <string name="settings_pet_summary">Karta mavzusi va aksessuarlar</string>
     <string name="tour_petset_text">Buyurtma kartasi va vidjet mavzulari hamda Wayo aksessuarlari. Wayo aqlli qarorlaringizdan oʻsgani sari ochiladi; bir vaqtda bitta aksessuar taqadi.</string>
     <string name="tour_new2_text">Yangilik: Wayo endi oʻsish uchun mukofotlar beradi — karta mavzulari, toʻgʻridan-toʻgʻri unga chizilgan aksessuarlar, yangi qobiliyatlar va rekordlaringizni ulashish uchun rasm. Hammasi Sozlamalar → «Uy hayvoni Wayo» boʻlimida.</string>
+    <string name="pet_q_what_is">WayArs nima va qanday ishlaydi?</string>
+    <string name="pet_a_what_is" formatted="false">Men buyurtmalar bo‘yicha yordamchingman 🦎 Uber, Bolt, Wolt yoki boshqa ilovada buyurtma kelganda, bir soniyada narx, masofa va vaqtni o‘qiyman, yoqilg‘i va soliqni ayiraman va ustida karta ko‘rsataman: 🟢 ol, 🟡 o‘rtacha, 🔴 o‘tkazib yuborgan ma’qul. Har doim sen qaror qilasan — men hech narsani bosmayman. Yana soatlik haqiqiy daromadni hisoblayman va statistika yuritaman.</string>
+    <string name="pet_q_internet">Internet kerakmi?</string>
+    <string name="pet_a_internet" formatted="false">Ish uchun — yo‘q 📴 Buyurtmalarni telefonning o‘zida o‘qiyman va hisoblayman, bu chatda ham internetsiz javob beraman. Internet faqat obunani sotib olish yoki tekshirish va ilovani yangilash uchun kerak.</string>
+    <string name="pet_q_iphone">iPhone uchun versiya bormi? Qanday telefon kerak?</string>
+    <string name="pet_a_iphone" formatted="false">Men faqat Android’da yashayman 🤖 — 8.0 yoki yangiroq versiya, istalgan marka: Samsung, Xiaomi, Pixel, Motorola va boshqalar. iPhone uchun versiya yo‘q: iOS ilovalarga boshqa ilovalar ekranini o‘qishga ruxsat bermaydi.</string>
+    <string name="pet_q_data">Ma’lumotlar yangi telefonga o‘tadimi? Ularni qanday o‘chiraman?</string>
+    <string name="pet_a_data" formatted="false">Hammasi faqat shu telefonda saqlanadi 🔒 — akkaunt va bulut yo‘q, shuning uchun statistika va mening darajam yangi telefonga o‘tmaydi. Obuna esa o‘tadi: u Google akkauntiga bog‘langan, «Xaridlarni tiklash» tugmasini bos. Hammasini o‘chirish: Android sozlamalari → Ilovalar → WayArs → Xotira → Ma’lumotlarni tozalash, yoki shunchaki ilovani o‘chir.</string>
+    <string name="pet_q_update">Ilovani qanday yangilayman?</string>
+    <string name="pet_a_update" formatted="false">Google Play orqali 🔄 Yangi versiya chiqsa, ilovada o‘zim yangilash tugmasini ko‘rsataman. Yoki qo‘lda: Google Play → WayArs → Yangilash.</string>
+    <string name="pet_q_stages">Wayo’ning o‘sish bosqichlari qanday?</string>
+    <string name="pet_a_stages" formatted="false">Mening beshta bosqichim bor 🥚→👑: Tuxum (daraja 1), Chaqaloq (2–4), O‘smir (5–9), Profi (10–19) va Afsona (20+). Darajalar 20 dan keyin ham davom etadi. Halol o‘saman: o‘smir — taxminan bir haftalik ishdan keyin, profi — bir oydan keyin, afsona — 4–6 oydan keyin.</string>
+    <string name="pet_q_share">Rekordlarim bilan rasmni qanday ulashaman?</string>
+    <string name="pet_a_share" formatted="false">Bosh ekrandagi kartamda 📤 tugmasini bos — rasm tayyorlayman: men, darajam va sening rekordlaring. Messenjerga yoki storiesga yubor 📸</string>
+    <string name="pet_q_theme">Karta mavzusini qanday o‘zgartiraman?</string>
+    <string name="pet_a_theme" formatted="false">Sozlamalar → Uy hayvoni Wayo → Karta mavzusi 🎨 Mavzular men o‘sganim sari ochiladi: Neon (dar. 5), Karbon (10), Oltin (15), Afsona (20). Mavzu buyurtma kartasini ham, vidjetni ham o‘zgartiradi.</string>
+    <string name="pet_q_accessories">Wayo’ga aksessuarni qanday taqaman?</string>
+    <string name="pet_a_accessories" formatted="false">Sozlamalar → Uy hayvoni Wayo → Wayo aksessuarlari 😎 Kepka (dar. 3), toj (6), quyosh ko‘zoynagi (8), quloqchinlar (10), oltin zanjir (13), afsona kaliti (16). Bir vaqtda bittasini taqaman: bos — taqaman, yana bos — yechaman.</string>
+    <string name="pet_q_ban">Buning uchun Uber yoki Bolt meni bloklamaydimi?</string>
+    <string name="pet_a_ban" formatted="false">Ularning ilovalarida hech narsani bosmayman va o‘zgartirmayman 👀 — faqat ko‘zlaring kabi ekranni o‘qiyman va maslahat ko‘rsataman. Buyurtmalarni o‘zing qabul qilasan. Lekin har bir platformaning o‘z qoidalari bor va ularga kafolat bera olmayman — qaror doim seniki.</string>
+    <string name="pet_q_about">WayArs’ni kim yaratgan?</string>
+    <string name="pet_a_about" formatted="false">Meni va WayArs’ni mustaqil dasturchi AP STUDIO yaratgan 💚 Versiya va tavsif: Sozlamalar → Ilova haqida. G‘oyang bormi yoki xato topdingmi? Telegram’ga yoz t.me/wayars_app yoki apstudiomobile@gmail.com manziliga.</string>
+    <string-array name="chat_v_intro">
+        <item>Oson!</item>
+        <item>O, buni bilaman 😎</item>
+        <item>Qara 👇</item>
+        <item>Yaxshi savol!</item>
+        <item>Hozir aytaman 🦎</item>
+        <item>Marhamat 💚</item>
+    </string-array>
+    <string-array name="chat_v_intro_problem">
+        <item>Hozir hal qilamiz 🔧</item>
+        <item>Xavotir olma, tuzatamiz!</item>
+        <item>Bo‘lib turadi. Qadamma-qadam:</item>
+        <item>Xo‘p, ko‘ramiz 👀</item>
+    </string-array>
+    <string-array name="chat_v_outro_show">
+        <item>«Ko‘rsatish» tugmasini bos — qayerdaligini belgilab beraman 👇</item>
+        <item>Qayerdaligini ko‘rsata olaman: pastdagi tugma.</item>
+        <item>Seni u yerga olib boraymi? Tugma pastda 👇</item>
+    </string-array>
+    <string-array name="chat_v_outro">
+        <item>Yana nimada yordam beray?</item>
+        <item>Xohlaganingni so‘ra 😉</item>
+        <item>Yana savollar bormi? Men shu yerdaman!</item>
+        <item>Har doim 💚</item>
+    </string-array>
+    <string-array name="chat_v_again">
+        <item>Takrorlayman 🙂</item>
+        <item>Aytganimdek:</item>
+    </string-array>
+    <string-array name="chat_v_hello">
+        <item>Salom! 👋 Qanday yordam beray?</item>
+        <item>Hey! Men shu yerdaman 🦎 Nima kerak?</item>
+        <item>Salom-salom! Ilova haqida xohlaganingni so‘ra.</item>
+    </string-array>
+    <string-array name="chat_v_thanks">
+        <item>Arzimaydi! 💚</item>
+        <item>Yordam berganimdan xursandman! Omadli buyurtmalar 🚕</item>
+        <item>Har doim! Men uchun xursandchilik 🦎</item>
+    </string-array>
+    <string-array name="chat_v_how">
+        <item>Zo‘r! Ayniqsa foydali buyurtmalarni olganingda 😄</item>
+        <item>Yaxshi, sekin-asta o‘syapman 🌱 Smenang qalay?</item>
+        <item>Yaxshi! O‘tirib kilometr sanayapman 🦎</item>
+    </string-array>
+    <string-array name="chat_v_unknown">
+        <item>Hmm, buni hali bilmayman 🤔 Boshqacha ayt yoki pastdan savol tanla.</item>
+        <item>Voy, bu yerda ishonchim komil emas. Boshqacha so‘ra — yoki ko‘p so‘raladiganlarga qara:</item>
+        <item>Bu xotiramda yo‘q 😅 Dasturchilarga yoz — javob berishadi; hozircha mashhurlari:</item>
+    </string-array>
+    <string name="chat_related">Ko‘pincha yana so‘rashadi:</string>
 </resources>

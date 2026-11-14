@@ -299,8 +299,8 @@
     <string name="pet_a_add_app">Settings → Supported apps → “Pick from installed apps”, then choose your delivery or taxi app.</string>
     <string name="pet_q_calibrate">How do I calibrate an app?</string>
     <string name="pet_a_calibrate">Open the app and wait for any order, then come back: Settings → Supported apps → the pencil next to the app. Tap the price, the distance and the time — done.</string>
-    <string name="pet_q_currency">Which currency should I choose?</string>
-    <string name="pet_a_currency">The currency of your country, or the one your delivery or taxi app shows prices in. All rates and limits are counted in it.</string>
+    <string name="pet_q_currency">Which currencies are there and which should I pick?</string>
+    <string name="pet_a_currency" formatted="false">There are 26 currencies 💰: PLN, EUR, UAH, RON, MDL, CZK, HUF, BGN, SEK, NOK, DKK, CHF, GBP, USD, RUB, KZT, BYN, UZS, GEL, AMD, AZN, KGS, TRY, BRL, INR, JPY. Pick the one your taxi or delivery app shows prices in: Settings → Currency. I convert the preset limits into it myself.</string>
     <string name="pet_q_tax">How do I set my tax?</string>
     <string name="pet_a_tax">Settings → Tax: enter your rate in %. It\'s subtracted together with fuel, so the card shows what you really keep.</string>
     <string name="pet_q_vehicle">Where do I enter my car and fuel?</string>
@@ -308,17 +308,17 @@
     <string name="pet_q_thresholds">How do I set my own limits?</string>
     <string name="pet_a_thresholds">Settings → My limits: set the rate per km for bad, average and good orders. They replace the preset.</string>
     <string name="pet_q_presets">What are presets?</string>
-    <string name="pet_a_presets">Ready-made strategies (economy, balance, only profitable) that decide which orders count as good. Pick one on the Presets tab.</string>
+    <string name="pet_a_presets" formatted="false">Presets are ready-made strategies 🎯 “Economy” — from 1.5 zł/km and 0.5 zł/min, “Balance” — from 2.2 zł/km and 0.8 zł/min, “Profitable Only” — from 3.0 zł/km and 1.1 zł/min. In another currency I convert them myself. Pick one on the “Presets” tab; your own numbers — Settings → Your own rate thresholds.</string>
     <string name="pet_q_stats">Where are my earnings and statistics?</string>
-    <string name="pet_a_stats">On the Statistics tab: orders, earnings, distance and average rate for today, the week or the month.</string>
+    <string name="pet_a_stats" formatted="false">The “Stats” tab 📊: orders, earnings, kilometres, average rate and real earnings per hour — for today, the week, the month or the year. App comparison, achievements and streaks are there too.</string>
     <string name="pet_q_verdict">What do green and red mean?</string>
-    <string name="pet_a_verdict">Green — the order pays off with your settings, red — it doesn\'t. The rate per km and per minute is already after fuel.</string>
+    <string name="pet_a_verdict" formatted="false">🟢 Green card — the order pays off with your settings, 🟡 yellow — average, 🔴 red — not worth it, better skip. The rate per km and per minute is already after fuel.</string>
     <string name="pet_q_subscription">How does the subscription work?</string>
     <string name="pet_a_subscription">Settings → Subscription. First you get 30 minutes of free trial; the subscription is linked to your Google account and managed in Google Play.</string>
     <string name="pet_q_contact">How can I contact you?</string>
     <string name="pet_a_contact">Settings → Contact us: Telegram, Instagram, TikTok or e-mail. We answer any time.</string>
     <string name="pet_q_pet">How do you grow?</string>
-    <string name="pet_a_pet">I eat energy from smart decisions: accept a good order or reject a bad one and I get +3. Every day you switch on scanning gives +5. More energy — higher level!</string>
+    <string name="pet_a_pet" formatted="false">I feed on energy from smart decisions ⚡ Accept a profitable order or reject a bad one — +3, accept an average one — +2. Every working day with “Active” on — another +5, up to +10 for days in a row. Decisions give up to 60 a day. More energy — higher level!</string>
     <string name="pet_q_diagnostics">Something doesn\'t work. What should I check?</string>
     <string name="pet_a_diagnostics">Tap “🔍 Check my phone” at the top of this window: I\'ll check permissions, “Active”, subscription and battery and show what to fix.</string>
     <string name="pet_q_apps">Which apps does WayArs work with?</string>
@@ -345,8 +345,8 @@
     <string name="pet_a_restore">Open the subscription screen and tap “Restore purchases”. Check that the phone uses the same Google account you paid with.</string>
     <string name="pet_q_cancel">How do I cancel the subscription?</string>
     <string name="pet_a_cancel">Google Play → your profile → Payments and subscriptions → Subscriptions → WayArs → Cancel.</string>
-    <string name="pet_q_language">How do I change the language?</string>
-    <string name="pet_a_language">Settings → Language. 17 languages are available.</string>
+    <string name="pet_q_language">Which languages are there and how do I change it?</string>
+    <string name="pet_a_language" formatted="false">I speak 17 languages 🌍: English, Polski, Українська, Русский, Deutsch, Français, Română, Čeština, Български, Magyar, Dansk, Norsk, Svenska, Azərbaycanca, Հայերեն, ქართული, Oʻzbekcha. To change: Settings → Language. And I read orders in any language, even if your taxi or delivery app uses another one.</string>
     <string name="pet_q_tutorial">How do I replay the tutorial?</string>
     <string name="pet_a_tutorial">Settings → Tutorial, at the bottom of the settings.</string>
     <string name="pet_q_turns_off">Why does “Active” turn off by itself?</string>
@@ -548,4 +548,76 @@
     <string name="settings_pet_summary">Card theme and accessories</string>
     <string name="tour_petset_text">Themes for the order card and widget, and Wayo\'s accessories. They unlock as Wayo grows from your smart decisions; he wears one accessory at a time.</string>
     <string name="tour_new2_text">What\'s new: Wayo now gives rewards for growing — card themes, accessories drawn right on him, new abilities and a picture to share your records. All of it is in Settings → “Wayo pet”.</string>
+    <string name="pet_q_what_is">What is WayArs and how does it work?</string>
+    <string name="pet_a_what_is" formatted="false">I’m your order helper 🦎 When an order arrives in Uber, Bolt, Wolt or another app, I read the price, distance and time in a second, subtract fuel and tax and show a card on top: 🟢 take it, 🟡 so-so, 🔴 better skip. You always decide — I never tap anything. I also count your real earnings per hour and keep statistics.</string>
+    <string name="pet_q_internet">Do I need the internet?</string>
+    <string name="pet_a_internet" formatted="false">Not for the work 📴 I read and calculate orders right on the phone, and I answer in this chat offline too. The internet is only needed to buy or check the subscription and to update the app.</string>
+    <string name="pet_q_iphone">Is there an iPhone version? Which phone do I need?</string>
+    <string name="pet_a_iphone" formatted="false">I live only on Android 🤖 — version 8.0 or newer, any brand: Samsung, Xiaomi, Pixel, Motorola and others. There’s no iPhone version: iOS doesn’t let apps read the screen of other apps.</string>
+    <string name="pet_q_data">Will my data move to a new phone? How do I delete it?</string>
+    <string name="pet_a_data" formatted="false">Everything is stored only on this phone 🔒 — no accounts and no cloud, so statistics and my level won’t move to a new phone. The subscription will: it’s linked to your Google account, just tap “Restore purchases”. To delete everything: Android settings → Apps → WayArs → Storage → Clear data, or simply uninstall the app.</string>
+    <string name="pet_q_update">How do I update the app?</string>
+    <string name="pet_a_update" formatted="false">Through Google Play 🔄 When a new version comes out, I show an update button right in the app. You can also do it by hand: Google Play → WayArs → Update.</string>
+    <string name="pet_q_stages">What are Wayo’s growth stages?</string>
+    <string name="pet_a_stages" formatted="false">I have five stages 🥚→👑: Egg (level 1), Baby (2–4), Teen (5–9), Pro (10–19) and Legend (20+). Levels keep going after 20. I grow honestly: teen after about a week of work, pro after a month, legend after 4–6 months.</string>
+    <string name="pet_q_share">How do I share a picture with my records?</string>
+    <string name="pet_a_share" formatted="false">Tap 📤 on my card on the home screen — I’ll make a picture: me, my level and your records. Send it to a messenger or your story 📸</string>
+    <string name="pet_q_theme">How do I change the card theme?</string>
+    <string name="pet_a_theme" formatted="false">Settings → Wayo pet → Card theme 🎨 Themes unlock as I grow: Neon (lv 5), Carbon (10), Gold (15), Legend (20). The theme changes both the order card and the widget.</string>
+    <string name="pet_q_accessories">How do I put an accessory on Wayo?</string>
+    <string name="pet_a_accessories" formatted="false">Settings → Wayo pet → Wayo’s accessories 😎 Cap (lv 3), crown (6), sunglasses (8), headphones (10), gold chain (13), legend key (16). I wear one at a time: tap to put it on, tap again to take it off.</string>
+    <string name="pet_q_ban">Can Uber or Bolt block me for this?</string>
+    <string name="pet_a_ban" formatted="false">I never tap or change anything in their apps 👀 — I only read the screen, like your eyes do, and show a hint. You accept orders yourself. But every platform has its own rules and I can’t vouch for them — the decision is always yours.</string>
+    <string name="pet_q_about">Who made WayArs?</string>
+    <string name="pet_a_about" formatted="false">Me and WayArs were made by AP STUDIO, an independent developer 💚 Version and description: Settings → About the app. Got an idea or found a bug? Write on Telegram t.me/wayars_app or to apstudiomobile@gmail.com.</string>
+    <string-array name="chat_v_intro">
+        <item>Easy!</item>
+        <item>Oh, I know this one 😎</item>
+        <item>Look 👇</item>
+        <item>Good question!</item>
+        <item>Let me tell you 🦎</item>
+        <item>Here you go 💚</item>
+    </string-array>
+    <string-array name="chat_v_intro_problem">
+        <item>Let’s sort it out 🔧</item>
+        <item>Don’t worry, we’ll fix it!</item>
+        <item>It happens. Step by step:</item>
+        <item>Okay, let’s look 👀</item>
+    </string-array>
+    <string-array name="chat_v_outro_show">
+        <item>Tap “Show me” — I’ll highlight where it is 👇</item>
+        <item>I can show you where it is: tap the button below.</item>
+        <item>Want me to take you there? Button below 👇</item>
+    </string-array>
+    <string-array name="chat_v_outro">
+        <item>What else can I help with?</item>
+        <item>Ask me anything else 😉</item>
+        <item>More questions? I’m here!</item>
+        <item>Any time 💚</item>
+    </string-array>
+    <string-array name="chat_v_again">
+        <item>Once more 🙂</item>
+        <item>Like I said:</item>
+    </string-array>
+    <string-array name="chat_v_hello">
+        <item>Hi! 👋 How can I help?</item>
+        <item>Hey! I’m here 🦎 What do you need?</item>
+        <item>Hello hello! Ask me anything about the app.</item>
+    </string-array>
+    <string-array name="chat_v_thanks">
+        <item>You’re welcome! 💚</item>
+        <item>Happy to help! Good orders to you 🚕</item>
+        <item>Any time! It’s my pleasure 🦎</item>
+    </string-array>
+    <string-array name="chat_v_how">
+        <item>Great! Especially when you take profitable orders 😄</item>
+        <item>Super, growing little by little 🌱 How’s your shift?</item>
+        <item>Good! Just counting kilometres here 🦎</item>
+    </string-array>
+    <string-array name="chat_v_unknown">
+        <item>Hmm, I don’t know that yet 🤔 Try saying it differently or pick a question below.</item>
+        <item>Oops, not sure about this one. Ask another way — or here’s what people often ask:</item>
+        <item>That’s not in my memory 😅 Write to the developers — they’ll answer; meanwhile here’s what’s popular:</item>
+    </string-array>
+    <string name="chat_related">People also ask:</string>
 </resources>

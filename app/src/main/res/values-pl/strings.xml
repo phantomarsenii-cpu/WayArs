@@ -291,8 +291,8 @@
     <string name="pet_a_add_app">Ustawienia → Obsługiwane aplikacje → „Wybierz z zainstalowanych” i wybierz swoją aplikację dostaw lub taxi.</string>
     <string name="pet_q_calibrate">Jak skalibrować aplikację?</string>
     <string name="pet_a_calibrate">Otwórz aplikację i poczekaj na dowolne zlecenie, potem wróć: Ustawienia → Obsługiwane aplikacje → ołówek przy aplikacji. Dotknij ceny, odległości i czasu — gotowe.</string>
-    <string name="pet_q_currency">Jaką walutę wybrać?</string>
-    <string name="pet_a_currency">Walutę swojego kraju albo tę, w której ceny pokazuje Twoja aplikacja dostaw lub taxi. Wszystkie stawki i progi liczą się w niej.</string>
+    <string name="pet_q_currency">Jakie są waluty i którą wybrać?</string>
+    <string name="pet_a_currency" formatted="false">Jest 26 walut 💰: PLN, EUR, UAH, RON, MDL, CZK, HUF, BGN, SEK, NOK, DKK, CHF, GBP, USD, RUB, KZT, BYN, UZS, GEL, AMD, AZN, KGS, TRY, BRL, INR, JPY. Wybierz tę, w której Twoja aplikacja taxi lub dostaw pokazuje ceny: Ustawienia → Waluta. Progi profili sam przeliczę na tę walutę.</string>
     <string name="pet_q_tax">Jak ustawić podatek?</string>
     <string name="pet_a_tax">Ustawienia → Podatek: wpisz stawkę w %. Odejmuje się razem z paliwem, a karta pokazuje, ile naprawdę zostaje.</string>
     <string name="pet_q_vehicle">Gdzie wpisać auto i paliwo?</string>
@@ -300,17 +300,17 @@
     <string name="pet_q_thresholds">Jak ustawić własne progi?</string>
     <string name="pet_a_thresholds">Ustawienia → Własne progi: stawka za km dla złych, średnich i dobrych zleceń. Zastępują profil.</string>
     <string name="pet_q_presets">Czym są profile?</string>
-    <string name="pet_a_presets">Gotowe strategie (oszczędnie, balans, tylko opłacalne), które decydują, jakie zlecenia są dobre. Wybierz na zakładce „Profile”.</string>
+    <string name="pet_a_presets" formatted="false">Profile to gotowe strategie 🎯 „Ekonomiczny” — od 1,5 zł/km i 0,5 zł/min, „Balans” — od 2,2 zł/km i 0,8 zł/min, „Tylko opłacalne” — od 3,0 zł/km i 1,1 zł/min. W innej walucie przeliczę sam. Wybierasz na karcie „Profile”, a własne liczby — Ustawienia → Własne progi oceny.</string>
     <string name="pet_q_stats">Gdzie są moje zarobki i statystyki?</string>
-    <string name="pet_a_stats">Na zakładce „Statystyki”: zlecenia, zarobek, dystans i średnia stawka za dzień, tydzień lub miesiąc.</string>
+    <string name="pet_a_stats" formatted="false">Karta „Statystyki” 📊: zlecenia, zarobek, kilometry, średnia stawka i prawdziwy zarobek na godzinę — za dziś, tydzień, miesiąc lub rok. Tam też porównanie aplikacji, osiągnięcia i serie.</string>
     <string name="pet_q_verdict">Co oznacza zielony i czerwony?</string>
-    <string name="pet_a_verdict">Zielony — zlecenie się opłaca według Twoich ustawień, czerwony — nie. Stawka za km i za minutę jest już po paliwie.</string>
+    <string name="pet_a_verdict" formatted="false">🟢 Zielona karta — zlecenie opłaca się przy Twoich ustawieniach, 🟡 żółta — średnie, 🔴 czerwona — nieopłacalne, lepiej pominąć. Stawka za km i za minutę jest już po paliwie.</string>
     <string name="pet_q_subscription">Jak działa subskrypcja?</string>
     <string name="pet_a_subscription">Ustawienia → Subskrypcja. Najpierw 30 minut za darmo; subskrypcja jest przypisana do konta Google i zarządzana w Google Play.</string>
     <string name="pet_q_contact">Jak się z wami skontaktować?</string>
     <string name="pet_a_contact">Ustawienia → Kontakt: Telegram, Instagram, TikTok lub e-mail. Odpowiadamy w każdej chwili.</string>
     <string name="pet_q_pet">Jak rośniesz?</string>
-    <string name="pet_a_pet">Jem energię z mądrych decyzji: przyjmiesz dobre zlecenie albo odrzucisz złe — dostaję +3. Każdy dzień ze skanowaniem to +5. Więcej energii — wyższy poziom!</string>
+    <string name="pet_a_pet" formatted="false">Żywię się energią z mądrych decyzji ⚡ Przyjmiesz opłacalne zlecenie albo odrzucisz nieopłacalne — +3, przyjmiesz średnie — +2. Każdy dzień pracy z „Active” — jeszcze +5, a za dni z rzędu do +10. Z decyzji do 60 dziennie. Więcej energii — wyższy poziom!</string>
     <string name="pet_q_diagnostics">Coś nie działa. Co sprawdzić?</string>
     <string name="pet_a_diagnostics">Dotknij „🔍 Sprawdź mój telefon” na górze tego okna: sprawdzę uprawnienia, „Active”, subskrypcję i baterię i pokażę, co poprawić.</string>
     <string name="pet_q_apps">Z jakimi aplikacjami działa WayArs?</string>
@@ -337,8 +337,8 @@
     <string name="pet_a_restore">Otwórz ekran subskrypcji i dotknij „Przywróć zakupy”. Sprawdź, czy na telefonie jest to samo konto Google, z którego płaciłeś.</string>
     <string name="pet_q_cancel">Jak anulować subskrypcję?</string>
     <string name="pet_a_cancel">Google Play → Twój profil → Płatności i subskrypcje → Subskrypcje → WayArs → Anuluj.</string>
-    <string name="pet_q_language">Jak zmienić język?</string>
-    <string name="pet_a_language">Ustawienia → Język. Dostępnych jest 17 języków.</string>
+    <string name="pet_q_language">Jakie są języki i jak zmienić język?</string>
+    <string name="pet_a_language" formatted="false">Mówię w 17 językach 🌍: English, Polski, Українська, Русский, Deutsch, Français, Română, Čeština, Български, Magyar, Dansk, Norsk, Svenska, Azərbaycanca, Հայերեն, ქართული, Oʻzbekcha. Zmiana: Ustawienia → Język. A zlecenia czytam w każdym języku, nawet jeśli aplikacja taxi lub dostaw jest w innym.</string>
     <string name="pet_q_tutorial">Jak powtórzyć samouczek?</string>
     <string name="pet_a_tutorial">Ustawienia → Samouczek, na dole ustawień.</string>
     <string name="pet_q_turns_off">Dlaczego „Active” wyłącza się sam?</string>
@@ -540,4 +540,76 @@
     <string name="settings_pet_summary">Motyw karty i akcesoria</string>
     <string name="tour_petset_text">Motywy karty zlecenia i widżetu oraz akcesoria Wayo. Odblokowują się, gdy Wayo rośnie dzięki Twoim mądrym decyzjom; nosi jedno akcesorium naraz.</string>
     <string name="tour_new2_text">Co nowego: Wayo daje teraz nagrody za rozwój — motywy karty, akcesoria narysowane prosto na nim, nowe umiejętności i obrazek z rekordami do udostępnienia. Wszystko w Ustawienia → „Pupil Wayo”.</string>
+    <string name="pet_q_what_is">Czym jest WayArs i jak działa?</string>
+    <string name="pet_a_what_is" formatted="false">Jestem Twoim pomocnikiem od zleceń 🦎 Gdy w Uberze, Bolcie, Wolcie czy innej aplikacji przychodzi zlecenie, w sekundę czytam cenę, dystans i czas, odejmuję paliwo i podatek i pokazuję kartę na wierzchu: 🟢 bierz, 🟡 średnio, 🔴 lepiej pomiń. Decydujesz zawsze Ty — niczego nie klikam. Liczę też prawdziwy zarobek na godzinę i prowadzę statystyki.</string>
+    <string name="pet_q_internet">Czy potrzebny jest internet?</string>
+    <string name="pet_a_internet" formatted="false">Do pracy — nie 📴 Zlecenia czytam i liczę na telefonie, a w tym czacie też odpowiadam bez internetu. Jest potrzebny tylko do kupna lub sprawdzenia subskrypcji i aktualizacji aplikacji.</string>
+    <string name="pet_q_iphone">Czy jest wersja na iPhone? Jaki telefon jest potrzebny?</string>
+    <string name="pet_a_iphone" formatted="false">Mieszkam tylko na Androidzie 🤖 — wersja 8.0 lub nowsza, dowolna marka: Samsung, Xiaomi, Pixel, Motorola i inne. Wersji na iPhone nie ma: iOS nie pozwala aplikacjom czytać ekranu innych aplikacji.</string>
+    <string name="pet_q_data">Czy dane przeniosą się na nowy telefon? Jak usunąć dane?</string>
+    <string name="pet_a_data" formatted="false">Wszystko jest zapisane tylko na tym telefonie 🔒 — nie ma kont ani chmury, więc statystyki i mój poziom nie przeniosą się na nowy telefon. Subskrypcja tak: jest przypisana do konta Google, dotknij „Przywróć zakupy”. Usunąć wszystko: ustawienia Androida → Aplikacje → WayArs → Pamięć → Wyczyść dane, albo po prostu odinstaluj aplikację.</string>
+    <string name="pet_q_update">Jak zaktualizować aplikację?</string>
+    <string name="pet_a_update" formatted="false">Przez Google Play 🔄 Gdy wychodzi nowa wersja, sam pokażę w aplikacji przycisk aktualizacji. Można też ręcznie: Google Play → WayArs → Aktualizuj.</string>
+    <string name="pet_q_stages">Jakie etapy wzrostu ma Wayo?</string>
+    <string name="pet_a_stages" formatted="false">Mam pięć etapów 🥚→👑: Jajko (poziom 1), Maluch (2–4), Nastolatek (5–9), Profi (10–19) i Legenda (20+). Poziomy rosną też po 20. Rosnę uczciwie: nastolatek po ok. tygodniu pracy, profi po miesiącu, legenda po 4–6 miesiącach.</string>
+    <string name="pet_q_share">Jak udostępnić obrazek z rekordami?</string>
+    <string name="pet_a_share" formatted="false">Dotknij 📤 na mojej karcie na ekranie głównym — zrobię obrazek: ja, mój poziom i Twoje rekordy. Wyślij go na komunikator albo do relacji 📸</string>
+    <string name="pet_q_theme">Jak zmienić motyw karty?</string>
+    <string name="pet_a_theme" formatted="false">Ustawienia → Pupil Wayo → Motyw karty 🎨 Motywy odblokowują się, gdy rosnę: Neon (poz. 5), Karbon (10), Złoty (15), Legenda (20). Motyw zmienia kartę zlecenia i widżet.</string>
+    <string name="pet_q_accessories">Jak założyć Wayo akcesorium?</string>
+    <string name="pet_a_accessories" formatted="false">Ustawienia → Pupil Wayo → Akcesoria Wayo 😎 Czapka (poz. 3), korona (6), okulary przeciwsłoneczne (8), słuchawki (10), złoty łańcuch (13), klucz legendy (16). Noszę jedno naraz: dotknij — założę, dotknij jeszcze raz — zdejmę.</string>
+    <string name="pet_q_ban">Czy Uber albo Bolt mnie za to nie zablokuje?</string>
+    <string name="pet_a_ban" formatted="false">Niczego nie klikam i nie zmieniam w ich aplikacjach 👀 — tylko czytam ekran, tak jak Twoje oczy, i pokazuję podpowiedź. Zlecenia przyjmujesz sam. Ale każda platforma ma swoje zasady i nie mogę za nie ręczyć — decyzja zawsze należy do Ciebie.</string>
+    <string name="pet_q_about">Kto stworzył WayArs?</string>
+    <string name="pet_a_about" formatted="false">Mnie i WayArs stworzyło AP STUDIO — niezależny deweloper 💚 Wersja i opis: Ustawienia → O aplikacji. Masz pomysł albo znalazłeś błąd? Pisz na Telegram t.me/wayars_app lub na apstudiomobile@gmail.com.</string>
+    <string-array name="chat_v_intro">
+        <item>Łatwizna!</item>
+        <item>O, to wiem 😎</item>
+        <item>Patrz 👇</item>
+        <item>Dobre pytanie!</item>
+        <item>Już mówię 🦎</item>
+        <item>Proszę bardzo 💚</item>
+    </string-array>
+    <string-array name="chat_v_intro_problem">
+        <item>Zaraz to ogarniemy 🔧</item>
+        <item>Spokojnie, naprawimy!</item>
+        <item>Zdarza się. Krok po kroku:</item>
+        <item>Dobra, sprawdzamy 👀</item>
+    </string-array>
+    <string-array name="chat_v_outro_show">
+        <item>Dotknij „Pokaż” — podświetlę, gdzie to jest 👇</item>
+        <item>Mogę pokazać, gdzie to jest: przycisk poniżej.</item>
+        <item>Zaprowadzić Cię tam? Przycisk poniżej 👇</item>
+    </string-array>
+    <string-array name="chat_v_outro">
+        <item>W czym jeszcze pomóc?</item>
+        <item>Pytaj śmiało dalej 😉</item>
+        <item>Masz jeszcze pytania? Jestem tu!</item>
+        <item>Zawsze do usług 💚</item>
+    </string-array>
+    <string-array name="chat_v_again">
+        <item>Powtórzę 🙂</item>
+        <item>Jak już mówiłem:</item>
+    </string-array>
+    <string-array name="chat_v_hello">
+        <item>Cześć! 👋 W czym pomóc?</item>
+        <item>Hej! Jestem tu 🦎 Co podpowiedzieć?</item>
+        <item>Cześć, cześć! Pytaj o wszystko w aplikacji.</item>
+    </string-array>
+    <string-array name="chat_v_thanks">
+        <item>Nie ma za co! 💚</item>
+        <item>Cieszę się, że pomogłem! Udanych zleceń 🚕</item>
+        <item>Zawsze! To dla mnie przyjemność 🦎</item>
+    </string-array>
+    <string-array name="chat_v_how">
+        <item>Super! Zwłaszcza gdy bierzesz opłacalne zlecenia 😄</item>
+        <item>Świetnie, powoli rosnę 🌱 A jak Twoja zmiana?</item>
+        <item>Dobrze! Siedzę i liczę kilometry 🦎</item>
+    </string-array>
+    <string-array name="chat_v_unknown">
+        <item>Hmm, tego jeszcze nie wiem 🤔 Spróbuj powiedzieć inaczej albo wybierz pytanie poniżej.</item>
+        <item>Ojej, tu nie jestem pewien. Zapytaj inaczej — albo zobacz, o co często pytają:</item>
+        <item>Tego nie mam w pamięci 😅 Napisz do twórców — odpowiedzą, a ja na razie podpowiem popularne:</item>
+    </string-array>
+    <string name="chat_related">Często pytają też:</string>
 </resources>

@@ -287,8 +287,8 @@
     <string name="pet_a_add_app">Nastavení → Podporované aplikace → „Vybrat z nainstalovaných“ a zvolte svou aplikaci rozvozu nebo taxi.</string>
     <string name="pet_q_calibrate">Jak zkalibrovat aplikaci?</string>
     <string name="pet_a_calibrate">Otevřete aplikaci a počkejte na zakázku, pak se vraťte: Nastavení → Podporované aplikace → tužka u aplikace. Klepněte na cenu, vzdálenost a čas — hotovo.</string>
-    <string name="pet_q_currency">Jakou měnu zvolit?</string>
-    <string name="pet_a_currency">Měnu své země nebo tu, ve které ukazuje ceny vaše aplikace rozvozu či taxi. Všechny sazby a limity se počítají v ní.</string>
+    <string name="pet_q_currency">Jaké jsou měny a kterou zvolit?</string>
+    <string name="pet_a_currency" formatted="false">Je tu 26 měn 💰: PLN, EUR, UAH, RON, MDL, CZK, HUF, BGN, SEK, NOK, DKK, CHF, GBP, USD, RUB, KZT, BYN, UZS, GEL, AMD, AZN, KGS, TRY, BRL, INR, JPY. Zvol tu, ve které tvoje aplikace taxi nebo rozvozu ukazuje ceny: Nastavení → Měna. Prahy předvoleb přepočítám sám.</string>
     <string name="pet_q_tax">Jak zadat daň?</string>
     <string name="pet_a_tax">Nastavení → Daň: zadejte sazbu v %. Odečte se spolu s palivem a karta ukáže, kolik opravdu zůstane.</string>
     <string name="pet_q_vehicle">Kde zadat auto a palivo?</string>
@@ -296,17 +296,17 @@
     <string name="pet_q_thresholds">Jak nastavit vlastní limity?</string>
     <string name="pet_a_thresholds">Nastavení → Vlastní limity: sazba za km pro špatné, průměrné a dobré zakázky. Nahrazují profil.</string>
     <string name="pet_q_presets">Co jsou profily?</string>
-    <string name="pet_a_presets">Hotové strategie (úsporně, vyváženě, jen výhodné), které rozhodují, které zakázky jsou dobré. Vyberte na kartě „Profily“.</string>
+    <string name="pet_a_presets" formatted="false">Předvolby jsou hotové strategie 🎯 „Úsporný“ — od 1,5 zł/km a 0,5 zł/min, „Vyvážený“ — od 2,2 zł/km a 0,8 zł/min, „Jen výhodné“ — od 3,0 zł/km a 1,1 zł/min. V jiné měně přepočítám sám. Vybírá se na kartě „Režimy“, vlastní čísla — Nastavení → Vlastní sazbové prahy.</string>
     <string name="pet_q_stats">Kde jsou výdělky a statistiky?</string>
-    <string name="pet_a_stats">Na kartě „Statistiky“: zakázky, výdělek, vzdálenost a průměrná sazba za den, týden či měsíc.</string>
+    <string name="pet_a_stats" formatted="false">Karta „Statistika“ 📊: zakázky, výdělek, kilometry, průměrná sazba a skutečný výdělek za hodinu — za dnešek, týden, měsíc nebo rok. Je tam i srovnání aplikací, úspěchy a série.</string>
     <string name="pet_q_verdict">Co znamená zelená a červená?</string>
-    <string name="pet_a_verdict">Zelená — zakázka se podle vašeho nastavení vyplatí, červená — ne. Sazba za km a minutu je už po palivu.</string>
+    <string name="pet_a_verdict" formatted="false">🟢 Zelená karta — zakázka se vyplatí podle tvého nastavení, 🟡 žlutá — průměrná, 🔴 červená — nevyplatí se, raději vynechat. Sazba za km a minutu je už po palivu.</string>
     <string name="pet_q_subscription">Jak funguje předplatné?</string>
     <string name="pet_a_subscription">Nastavení → Předplatné. Nejprve 30 minut zdarma; předplatné je vázané na účet Google a spravuje se v Google Play.</string>
     <string name="pet_q_contact">Jak vás kontaktovat?</string>
     <string name="pet_a_contact">Nastavení → Kontakt: Telegram, Instagram, TikTok nebo e-mail. Odpovídáme kdykoli.</string>
     <string name="pet_q_pet">Jak rosteš?</string>
-    <string name="pet_a_pet">Jím energii z chytrých rozhodnutí: dobrá zakázka přijata nebo špatná odmítnuta — +3 pro mě. Každý den skenování dá +5. Víc energie — vyšší úroveň!</string>
+    <string name="pet_a_pet" formatted="false">Živím se energií z chytrých rozhodnutí ⚡ Přijal jsi výhodnou zakázku nebo odmítl nevýhodnou — +3, přijal průměrnou — +2. Každý pracovní den s „Active“ — ještě +5, za dny v řadě až +10. Z rozhodnutí až 60 denně. Víc energie — vyšší úroveň!</string>
     <string name="pet_q_diagnostics">Něco nefunguje. Co zkontrolovat?</string>
     <string name="pet_a_diagnostics">Klepněte nahoře v tomto okně na „🔍 Zkontrolovat můj telefon“: zkontroluji oprávnění, „Active“, předplatné a baterii a ukážu, co opravit.</string>
     <string name="pet_q_apps">S jakými aplikacemi WayArs funguje?</string>
@@ -333,8 +333,8 @@
     <string name="pet_a_restore">Otevřete obrazovku předplatného a klepněte na „Obnovit nákupy“. Zkontrolujte, že je v telefonu stejný účet Google, ze kterého jste platili.</string>
     <string name="pet_q_cancel">Jak zrušit předplatné?</string>
     <string name="pet_a_cancel">Google Play → váš profil → Platby a předplatná → Předplatná → WayArs → Zrušit.</string>
-    <string name="pet_q_language">Jak změnit jazyk?</string>
-    <string name="pet_a_language">Nastavení → Jazyk. K dispozici je 17 jazyků.</string>
+    <string name="pet_q_language">Jaké jsou jazyky a jak změnit jazyk?</string>
+    <string name="pet_a_language" formatted="false">Mluvím 17 jazyky 🌍: English, Polski, Українська, Русский, Deutsch, Français, Română, Čeština, Български, Magyar, Dansk, Norsk, Svenska, Azərbaycanca, Հայերեն, ქართული, Oʻzbekcha. Změna: Nastavení → Jazyk. Zakázky čtu v jakémkoli jazyce, i když je aplikace taxi nebo rozvozu v jiném.</string>
     <string name="pet_q_tutorial">Jak znovu spustit průvodce?</string>
     <string name="pet_a_tutorial">Nastavení → Nápověda, úplně dole v nastavení.</string>
     <string name="pet_q_turns_off">Proč se „Active“ vypíná samo?</string>
@@ -536,4 +536,76 @@
     <string name="settings_pet_summary">Motiv karty a doplňky</string>
     <string name="tour_petset_text">Motivy karty zakázky a widgetu a doplňky pro Waya. Odemykají se, jak Wayo roste díky tvým chytrým rozhodnutím; nosí vždy jeden doplněk.</string>
     <string name="tour_new2_text">Co je nového: Wayo teď dává odměny za růst — motivy karty, doplňky nakreslené přímo na něm, nové schopnosti a obrázek s rekordy ke sdílení. Vše v Nastavení → „Mazlíček Wayo“.</string>
+    <string name="pet_q_what_is">Co je WayArs a jak funguje?</string>
+    <string name="pet_a_what_is" formatted="false">Jsem tvůj pomocník se zakázkami 🦎 Když v Uberu, Boltu, Woltu nebo jiné aplikaci přijde zakázka, za sekundu přečtu cenu, vzdálenost a čas, odečtu palivo a daň a ukážu navrchu kartu: 🟢 ber, 🟡 průměr, 🔴 raději vynech. Rozhoduješ vždy ty — já nic neklikám. Taky počítám skutečný výdělek za hodinu a vedu statistiky.</string>
+    <string name="pet_q_internet">Potřebuji internet?</string>
+    <string name="pet_a_internet" formatted="false">Na práci ne 📴 Zakázky čtu a počítám přímo v telefonu a v tomhle chatu odpovídám také offline. Internet je potřeba jen ke koupi či ověření předplatného a k aktualizaci aplikace.</string>
+    <string name="pet_q_iphone">Je verze pro iPhone? Jaký telefon potřebuji?</string>
+    <string name="pet_a_iphone" formatted="false">Bydlím jen na Androidu 🤖 — verze 8.0 nebo novější, jakákoli značka: Samsung, Xiaomi, Pixel, Motorola a další. Verze pro iPhone není: iOS nedovoluje aplikacím číst obrazovku jiných aplikací.</string>
+    <string name="pet_q_data">Přenesou se data do nového telefonu? Jak je smazat?</string>
+    <string name="pet_a_data" formatted="false">Vše je uložené jen v tomto telefonu 🔒 — žádné účty ani cloud, takže statistiky a moje úroveň se nepřenesou. Předplatné ano: je vázané na účet Google, klepni na „Obnovit nákupy“. Smazat vše: nastavení Androidu → Aplikace → WayArs → Úložiště → Vymazat data, nebo aplikaci prostě odinstaluj.</string>
+    <string name="pet_q_update">Jak aktualizovat aplikaci?</string>
+    <string name="pet_a_update" formatted="false">Přes Google Play 🔄 Když vyjde nová verze, sám ukážu v aplikaci tlačítko aktualizace. Nebo ručně: Google Play → WayArs → Aktualizovat.</string>
+    <string name="pet_q_stages">Jaké fáze růstu má Wayo?</string>
+    <string name="pet_a_stages" formatted="false">Mám pět fází 🥚→👑: Vejce (úroveň 1), Mládě (2–4), Teenager (5–9), Profík (10–19) a Legenda (20+). Úrovně pokračují i po 20. Rostu poctivě: teenager asi po týdnu práce, profík po měsíci, legenda po 4–6 měsících.</string>
+    <string name="pet_q_share">Jak sdílet obrázek s rekordy?</string>
+    <string name="pet_a_share" formatted="false">Klepni na 📤 na mé kartě na hlavní obrazovce — udělám obrázek: já, moje úroveň a tvoje rekordy. Pošli ho do messengeru nebo do příběhu 📸</string>
+    <string name="pet_q_theme">Jak změnit motiv karty?</string>
+    <string name="pet_a_theme" formatted="false">Nastavení → Mazlíček Wayo → Motiv karty 🎨 Motivy se odemykají, jak rostu: Neon (úr. 5), Karbon (10), Zlato (15), Legenda (20). Motiv mění kartu zakázky i widget.</string>
+    <string name="pet_q_accessories">Jak nasadit Wayovi doplněk?</string>
+    <string name="pet_a_accessories" formatted="false">Nastavení → Mazlíček Wayo → Doplňky Wayo 😎 Kšiltovka (úr. 3), koruna (6), sluneční brýle (8), sluchátka (10), zlatý řetěz (13), klíč legendy (16). Nosím jeden naráz: klepni — nasadím, klepni znovu — sundám.</string>
+    <string name="pet_q_ban">Nezablokuje mě za to Uber nebo Bolt?</string>
+    <string name="pet_a_ban" formatted="false">V jejich aplikacích nic neklikám ani neměním 👀 — jen čtu obrazovku jako tvoje oči a ukazuji radu. Zakázky přijímáš sám. Ale každá platforma má svá pravidla a za ně ručit nemůžu — rozhodnutí je vždy na tobě.</string>
+    <string name="pet_q_about">Kdo vytvořil WayArs?</string>
+    <string name="pet_a_about" formatted="false">Mě a WayArs vytvořilo AP STUDIO, nezávislý vývojář 💚 Verze a popis: Nastavení → O aplikaci. Máš nápad nebo jsi našel chybu? Napiš na Telegram t.me/wayars_app nebo na apstudiomobile@gmail.com.</string>
+    <string-array name="chat_v_intro">
+        <item>Snadné!</item>
+        <item>Ó, to vím 😎</item>
+        <item>Koukej 👇</item>
+        <item>Dobrá otázka!</item>
+        <item>Hned povím 🦎</item>
+        <item>Tady máš 💚</item>
+    </string-array>
+    <string-array name="chat_v_intro_problem">
+        <item>Hned to vyřešíme 🔧</item>
+        <item>Neboj, opravíme to!</item>
+        <item>Stává se. Krok za krokem:</item>
+        <item>Tak se podíváme 👀</item>
+    </string-array>
+    <string-array name="chat_v_outro_show">
+        <item>Klepni na „Ukázat“ — zvýrazním, kde to je 👇</item>
+        <item>Můžu ukázat, kde to je: tlačítko níž.</item>
+        <item>Mám tě tam zavést? Tlačítko níž 👇</item>
+    </string-array>
+    <string-array name="chat_v_outro">
+        <item>S čím ještě pomoct?</item>
+        <item>Klidně se ptej dál 😉</item>
+        <item>Další otázky? Jsem tu!</item>
+        <item>Kdykoli 💚</item>
+    </string-array>
+    <string-array name="chat_v_again">
+        <item>Zopakuju 🙂</item>
+        <item>Jak jsem říkal:</item>
+    </string-array>
+    <string-array name="chat_v_hello">
+        <item>Ahoj! 👋 S čím pomoct?</item>
+        <item>Čau! Jsem tu 🦎 Co potřebuješ?</item>
+        <item>Ahoj, ahoj! Ptej se na cokoli o aplikaci.</item>
+    </string-array>
+    <string-array name="chat_v_thanks">
+        <item>Rádo se stalo! 💚</item>
+        <item>Rád jsem pomohl! Hodně dobrých zakázek 🚕</item>
+        <item>Kdykoli! Je mi potěšením 🦎</item>
+    </string-array>
+    <string-array name="chat_v_how">
+        <item>Skvěle! Hlavně když bereš výhodné zakázky 😄</item>
+        <item>Super, pomalu rostu 🌱 A jak tvoje směna?</item>
+        <item>Dobře! Sedím a počítám kilometry 🦎</item>
+    </string-array>
+    <string-array name="chat_v_unknown">
+        <item>Hmm, to ještě nevím 🤔 Zkus to říct jinak nebo vyber otázku níž.</item>
+        <item>Jejda, tady si nejsem jistý. Zeptej se jinak — nebo tady je, na co se často ptají:</item>
+        <item>Tohle v paměti nemám 😅 Napiš vývojářům — odpoví; zatím ti ukážu oblíbené:</item>
+    </string-array>
+    <string name="chat_related">Často se ptají také:</string>
 </resources>

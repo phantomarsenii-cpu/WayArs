@@ -286,8 +286,8 @@
     <string name="pet_a_add_app">Setări → Aplicații acceptate → „Alege din cele instalate”, apoi aplicația ta de livrări sau taxi.</string>
     <string name="pet_q_calibrate">Cum calibrez o aplicație?</string>
     <string name="pet_a_calibrate">Deschide aplicația și așteaptă o comandă, apoi revino: Setări → Aplicații acceptate → creionul de lângă aplicație. Atinge prețul, distanța și timpul — gata.</string>
-    <string name="pet_q_currency">Ce monedă aleg?</string>
-    <string name="pet_a_currency">Moneda țării tale sau cea în care aplicația de livrări sau taxi afișează prețurile. Toate tarifele și pragurile se calculează în ea.</string>
+    <string name="pet_q_currency">Ce monede există și pe care o aleg?</string>
+    <string name="pet_a_currency" formatted="false">Există 26 de monede 💰: PLN, EUR, UAH, RON, MDL, CZK, HUF, BGN, SEK, NOK, DKK, CHF, GBP, USD, RUB, KZT, BYN, UZS, GEL, AMD, AZN, KGS, TRY, BRL, INR, JPY. Alege-o pe cea în care aplicația ta de taxi sau livrare arată prețurile: Setări → Monedă. Pragurile presetărilor le convertesc singur.</string>
     <string name="pet_q_tax">Cum setez impozitul?</string>
     <string name="pet_a_tax">Setări → Impozit: introdu cota în %. Se scade împreună cu combustibilul, iar cardul arată cât îți rămâne.</string>
     <string name="pet_q_vehicle">Unde introduc mașina și combustibilul?</string>
@@ -295,17 +295,17 @@
     <string name="pet_q_thresholds">Cum îmi setez propriile praguri?</string>
     <string name="pet_a_thresholds">Setări → Pragurile mele: tarif pe km pentru comenzi proaste, medii și bune. Înlocuiesc profilul.</string>
     <string name="pet_q_presets">Ce sunt profilurile?</string>
-    <string name="pet_a_presets">Strategii gata făcute (economie, echilibru, doar profitabile) care decid ce comenzi sunt bune. Alege în fila „Profiluri”.</string>
+    <string name="pet_a_presets" formatted="false">Presetările sunt strategii gata făcute 🎯 „Economic” — de la 1,5 zł/km și 0,5 zł/min, „Echilibrat” — de la 2,2 zł/km și 0,8 zł/min, „Doar profitabile” — de la 3,0 zł/km și 1,1 zł/min. În altă monedă convertesc singur. Se aleg în fila „Profiluri”, iar cifrele tale — Setări → Praguri proprii de evaluare.</string>
     <string name="pet_q_stats">Unde sunt câștigurile și statisticile?</string>
-    <string name="pet_a_stats">În fila „Statistici”: comenzi, câștig, distanță și tarif mediu pe zi, săptămână sau lună.</string>
+    <string name="pet_a_stats" formatted="false">Fila „Statistici” 📊: comenzi, câștig, kilometri, tarif mediu și câștigul real pe oră — azi, săptămâna, luna sau anul. Tot acolo compararea aplicațiilor, realizările și seriile.</string>
     <string name="pet_q_verdict">Ce înseamnă verde și roșu?</string>
-    <string name="pet_a_verdict">Verde — comanda merită după setările tale, roșu — nu. Tariful pe km și pe minut e deja după combustibil.</string>
+    <string name="pet_a_verdict" formatted="false">🟢 Card verde — comanda merită cu setările tale, 🟡 galben — medie, 🔴 roșu — nu merită, mai bine sari peste. Tariful pe km și pe minut e deja după combustibil.</string>
     <string name="pet_q_subscription">Cum funcționează abonamentul?</string>
     <string name="pet_a_subscription">Setări → Abonament. Întâi 30 de minute gratuite; abonamentul e legat de contul Google și gestionat în Google Play.</string>
     <string name="pet_q_contact">Cum vă contactez?</string>
     <string name="pet_a_contact">Setări → Contact: Telegram, Instagram, TikTok sau e-mail. Răspundem oricând.</string>
     <string name="pet_q_pet">Cum crești?</string>
-    <string name="pet_a_pet">Mănânc energie din decizii inteligente: comandă bună acceptată sau proastă refuzată — +3 pentru mine. Fiecare zi cu scanare dă +5. Mai multă energie — nivel mai mare!</string>
+    <string name="pet_a_pet" formatted="false">Mă hrănesc cu energie din decizii inteligente ⚡ Ai acceptat o comandă bună sau ai refuzat una proastă — +3, ai acceptat una medie — +2. Fiecare zi de lucru cu „Active” — încă +5, iar pentru zile la rând până la +10. Din decizii până la 60 pe zi. Mai multă energie — nivel mai mare!</string>
     <string name="pet_q_diagnostics">Ceva nu merge. Ce să verific?</string>
     <string name="pet_a_diagnostics">Atinge „🔍 Verifică-mi telefonul” sus în această fereastră: verific permisiunile, „Active”, abonamentul și bateria și îți arăt ce să repari.</string>
     <string name="pet_q_apps">Cu ce aplicații funcționează WayArs?</string>
@@ -332,8 +332,8 @@
     <string name="pet_a_restore">Deschide ecranul de abonament și atinge „Restaurează achizițiile”. Verifică dacă pe telefon e același cont Google cu care ai plătit.</string>
     <string name="pet_q_cancel">Cum anulez abonamentul?</string>
     <string name="pet_a_cancel">Google Play → profilul tău → Plăți și abonamente → Abonamente → WayArs → Anulează.</string>
-    <string name="pet_q_language">Cum schimb limba?</string>
-    <string name="pet_a_language">Setări → Limbă. Sunt disponibile 17 limbi.</string>
+    <string name="pet_q_language">Ce limbi există și cum schimb limba?</string>
+    <string name="pet_a_language" formatted="false">Vorbesc 17 limbi 🌍: English, Polski, Українська, Русский, Deutsch, Français, Română, Čeština, Български, Magyar, Dansk, Norsk, Svenska, Azərbaycanca, Հայերեն, ქართული, Oʻzbekcha. Schimbare: Setări → Limbă. Iar comenzile le citesc în orice limbă, chiar dacă aplicația de taxi sau livrare e în alta.</string>
     <string name="pet_q_tutorial">Cum reiau tutorialul?</string>
     <string name="pet_a_tutorial">Setări → Tutorial, jos în setări.</string>
     <string name="pet_q_turns_off">De ce se oprește „Active” singur?</string>
@@ -535,4 +535,76 @@
     <string name="settings_pet_summary">Tema cardului și accesorii</string>
     <string name="tour_petset_text">Teme pentru cardul comenzii și widget, plus accesoriile lui Wayo. Se deblochează pe măsură ce Wayo crește din deciziile tale inteligente; poartă câte un accesoriu.</string>
     <string name="tour_new2_text">Ce e nou: Wayo oferă acum recompense pentru creștere — teme de card, accesorii desenate direct pe el, abilități noi și o imagine cu recordurile tale de distribuit. Totul în Setări → „Mascota Wayo”.</string>
+    <string name="pet_q_what_is">Ce este WayArs și cum funcționează?</string>
+    <string name="pet_a_what_is" formatted="false">Sunt ajutorul tău pentru comenzi 🦎 Când vine o comandă în Uber, Bolt, Wolt sau altă aplicație, citesc într-o secundă prețul, distanța și timpul, scad combustibilul și impozitul și arăt deasupra un card: 🟢 ia-o, 🟡 așa și așa, 🔴 mai bine sari. Decizi mereu tu — eu nu apăs nimic. Mai calculez câștigul real pe oră și țin statistici.</string>
+    <string name="pet_q_internet">Am nevoie de internet?</string>
+    <string name="pet_a_internet" formatted="false">Pentru lucru — nu 📴 Citesc și calculez comenzile direct pe telefon, iar în acest chat răspund tot fără internet. E nevoie de el doar ca să cumperi sau să verifici abonamentul și să actualizezi aplicația.</string>
+    <string name="pet_q_iphone">Există versiune pentru iPhone? Ce telefon îmi trebuie?</string>
+    <string name="pet_a_iphone" formatted="false">Trăiesc doar pe Android 🤖 — versiunea 8.0 sau mai nouă, orice marcă: Samsung, Xiaomi, Pixel, Motorola și altele. Versiune pentru iPhone nu există: iOS nu lasă aplicațiile să citească ecranul altor aplicații.</string>
+    <string name="pet_q_data">Se mută datele pe un telefon nou? Cum le șterg?</string>
+    <string name="pet_a_data" formatted="false">Totul e salvat doar pe acest telefon 🔒 — fără conturi și fără cloud, așa că statisticile și nivelul meu nu se mută. Abonamentul da: e legat de contul Google, apasă „Restabilește achizițiile”. Ca să ștergi tot: setări Android → Aplicații → WayArs → Stocare → Șterge datele, sau dezinstalează aplicația.</string>
+    <string name="pet_q_update">Cum actualizez aplicația?</string>
+    <string name="pet_a_update" formatted="false">Prin Google Play 🔄 Când apare o versiune nouă, îți arăt singur în aplicație un buton de actualizare. Sau manual: Google Play → WayArs → Actualizează.</string>
+    <string name="pet_q_stages">Ce etape de creștere are Wayo?</string>
+    <string name="pet_a_stages" formatted="false">Am cinci etape 🥚→👑: Ou (nivel 1), Pui (2–4), Adolescent (5–9), Profi (10–19) și Legendă (20+). Nivelurile continuă și după 20. Cresc cinstit: adolescent după cam o săptămână de lucru, profi după o lună, legendă după 4–6 luni.</string>
+    <string name="pet_q_share">Cum distribui o imagine cu recordurile mele?</string>
+    <string name="pet_a_share" formatted="false">Apasă 📤 pe cardul meu de pe ecranul principal — fac o imagine: eu, nivelul meu și recordurile tale. Trimite-o pe mesagerie sau în story 📸</string>
+    <string name="pet_q_theme">Cum schimb tema cardului?</string>
+    <string name="pet_a_theme" formatted="false">Setări → Mascota Wayo → Tema cardului 🎨 Temele se deblochează pe măsură ce cresc: Neon (niv. 5), Carbon (10), Auriu (15), Legendă (20). Tema schimbă și cardul comenzii, și widgetul.</string>
+    <string name="pet_q_accessories">Cum îi pun lui Wayo un accesoriu?</string>
+    <string name="pet_a_accessories" formatted="false">Setări → Mascota Wayo → Accesoriile lui Wayo 😎 Șapcă (niv. 3), coroană (6), ochelari de soare (8), căști (10), lanț de aur (13), cheia legendei (16). Port câte unul: apasă — îl pun, mai apasă o dată — îl scot.</string>
+    <string name="pet_q_ban">Mă poate bloca Uber sau Bolt pentru asta?</string>
+    <string name="pet_a_ban" formatted="false">Nu apăs și nu schimb nimic în aplicațiile lor 👀 — doar citesc ecranul, ca ochii tăi, și arăt un sfat. Comenzile le accepți tu. Dar fiecare platformă are regulile ei și nu pot garanta pentru ele — decizia e mereu a ta.</string>
+    <string name="pet_q_about">Cine a făcut WayArs?</string>
+    <string name="pet_a_about" formatted="false">Pe mine și WayArs ne-a făcut AP STUDIO, un dezvoltator independent 💚 Versiunea și descrierea: Setări → Despre aplicație. Ai o idee sau ai găsit o eroare? Scrie pe Telegram t.me/wayars_app sau la apstudiomobile@gmail.com.</string>
+    <string-array name="chat_v_intro">
+        <item>Ușor!</item>
+        <item>O, asta știu 😎</item>
+        <item>Uite 👇</item>
+        <item>Bună întrebare!</item>
+        <item>Îți spun imediat 🦎</item>
+        <item>Poftim 💚</item>
+    </string-array>
+    <string-array name="chat_v_intro_problem">
+        <item>Rezolvăm imediat 🔧</item>
+        <item>Nu-ți face griji, reparăm!</item>
+        <item>Se întâmplă. Pas cu pas:</item>
+        <item>Bun, ne uităm 👀</item>
+    </string-array>
+    <string-array name="chat_v_outro_show">
+        <item>Apasă „Arată” — îți evidențiez unde e 👇</item>
+        <item>Îți pot arăta unde e: butonul de mai jos.</item>
+        <item>Te duc acolo? Butonul de mai jos 👇</item>
+    </string-array>
+    <string-array name="chat_v_outro">
+        <item>Cu ce te mai ajut?</item>
+        <item>Întreabă-mă orice 😉</item>
+        <item>Mai ai întrebări? Sunt aici!</item>
+        <item>Oricând 💚</item>
+    </string-array>
+    <string-array name="chat_v_again">
+        <item>Repet 🙂</item>
+        <item>Cum spuneam:</item>
+    </string-array>
+    <string-array name="chat_v_hello">
+        <item>Salut! 👋 Cu ce te ajut?</item>
+        <item>Hei! Sunt aici 🦎 De ce ai nevoie?</item>
+        <item>Salut, salut! Întreabă-mă orice despre aplicație.</item>
+    </string-array>
+    <string-array name="chat_v_thanks">
+        <item>Cu plăcere! 💚</item>
+        <item>Mă bucur că am ajutat! Comenzi bune 🚕</item>
+        <item>Oricând! E plăcerea mea 🦎</item>
+    </string-array>
+    <string-array name="chat_v_how">
+        <item>Super! Mai ales când iei comenzi bune 😄</item>
+        <item>Bine, cresc încet-încet 🌱 Cum merge tura?</item>
+        <item>Bine! Stau și număr kilometri 🦎</item>
+    </string-array>
+    <string-array name="chat_v_unknown">
+        <item>Hmm, asta încă nu știu 🤔 Spune altfel sau alege o întrebare mai jos.</item>
+        <item>Ups, aici nu sunt sigur. Întreabă altfel — sau iată ce se întreabă des:</item>
+        <item>Asta nu e în memoria mea 😅 Scrie-le dezvoltatorilor — îți răspund; până atunci, cele populare:</item>
+    </string-array>
+    <string name="chat_related">Se mai întreabă des:</string>
 </resources>

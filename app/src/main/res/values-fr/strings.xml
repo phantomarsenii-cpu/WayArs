@@ -286,8 +286,8 @@
     <string name="pet_a_add_app">Paramètres → Applis prises en charge → « Choisir parmi les applis installées », puis votre appli de livraison ou de taxi.</string>
     <string name="pet_q_calibrate">Comment étalonner une appli ?</string>
     <string name="pet_a_calibrate">Ouvrez l’appli et attendez une course, puis revenez : Paramètres → Applis prises en charge → crayon à côté de l’appli. Touchez le prix, la distance et la durée — c’est fait.</string>
-    <string name="pet_q_currency">Quelle devise choisir ?</string>
-    <string name="pet_a_currency">La devise de votre pays, ou celle dans laquelle votre appli de livraison ou de taxi affiche les prix. Tous les tarifs et seuils y sont calculés.</string>
+    <string name="pet_q_currency">Quelles devises existent et laquelle choisir ?</string>
+    <string name="pet_a_currency" formatted="false">Il y a 26 devises 💰 : PLN, EUR, UAH, RON, MDL, CZK, HUF, BGN, SEK, NOK, DKK, CHF, GBP, USD, RUB, KZT, BYN, UZS, GEL, AMD, AZN, KGS, TRY, BRL, INR, JPY. Choisis celle de ton appli de taxi ou de livraison : Paramètres → Devise. Je convertis moi-même les seuils des préréglages.</string>
     <string name="pet_q_tax">Comment indiquer mon impôt ?</string>
     <string name="pet_a_tax">Paramètres → Impôt : saisissez votre taux en %. Il est déduit avec le carburant, la carte montre ce qu’il vous reste vraiment.</string>
     <string name="pet_q_vehicle">Où saisir la voiture et le carburant ?</string>
@@ -295,17 +295,17 @@
     <string name="pet_q_thresholds">Comment définir mes propres seuils ?</string>
     <string name="pet_a_thresholds">Paramètres → Mes seuils : tarif au km pour les mauvaises, moyennes et bonnes courses. Ils remplacent le profil.</string>
     <string name="pet_q_presets">Que sont les profils ?</string>
-    <string name="pet_a_presets">Des stratégies prêtes (économie, équilibre, seulement rentables) qui décident quelles courses sont bonnes. Choisissez dans l’onglet « Profils ».</string>
+    <string name="pet_a_presets" formatted="false">Les préréglages sont des stratégies toutes prêtes 🎯 « Économique » — dès 1,5 zł/km et 0,5 zł/min, « Équilibré » — dès 2,2 zł/km et 0,8 zł/min, « Rentable uniquement » — dès 3,0 zł/km et 1,1 zł/min. Dans une autre devise, je convertis moi-même. Choix dans l’onglet « Profils », tes propres chiffres — Paramètres → Vos propres seuils de tarif.</string>
     <string name="pet_q_stats">Où sont mes gains et statistiques ?</string>
-    <string name="pet_a_stats">Dans l’onglet « Statistiques » : courses, gains, distance et tarif moyen du jour, de la semaine ou du mois.</string>
+    <string name="pet_a_stats" formatted="false">Onglet « Statistiques » 📊 : courses, gains, kilomètres, tarif moyen et vrai gain par heure — pour aujourd’hui, la semaine, le mois ou l’année. Il y a aussi la comparaison des applis, les succès et les séries.</string>
     <string name="pet_q_verdict">Que signifient le vert et le rouge ?</string>
-    <string name="pet_a_verdict">Vert — la course est rentable selon vos réglages, rouge — non. Le tarif au km et à la minute est déjà après carburant.</string>
+    <string name="pet_a_verdict" formatted="false">🟢 Carte verte — la course est rentable avec tes réglages, 🟡 jaune — moyenne, 🔴 rouge — pas rentable, mieux vaut passer. Le tarif par km et par minute est déjà après carburant.</string>
     <string name="pet_q_subscription">Comment fonctionne l’abonnement ?</string>
     <string name="pet_a_subscription">Paramètres → Abonnement. D’abord 30 minutes gratuites ; l’abonnement est lié à votre compte Google et géré dans Google Play.</string>
     <string name="pet_q_contact">Comment vous contacter ?</string>
     <string name="pet_a_contact">Paramètres → Contact : Telegram, Instagram, TikTok ou e-mail. Nous répondons à tout moment.</string>
     <string name="pet_q_pet">Comment grandis-tu ?</string>
-    <string name="pet_a_pet">Je mange l’énergie des décisions malines : bonne course acceptée ou mauvaise refusée — +3 pour moi. Chaque jour de scan donne +5. Plus d’énergie — niveau plus haut !</string>
+    <string name="pet_a_pet" formatted="false">Je me nourris de l’énergie des bonnes décisions ⚡ Course rentable acceptée ou mauvaise refusée — +3, moyenne acceptée — +2. Chaque jour de travail avec « Active » — encore +5, jusqu’à +10 pour les jours d’affilée. Jusqu’à 60 par jour avec les décisions. Plus d’énergie — niveau plus haut !</string>
     <string name="pet_q_diagnostics">Quelque chose ne marche pas. Que vérifier ?</string>
     <string name="pet_a_diagnostics">Touchez « 🔍 Vérifier mon téléphone » en haut de cette fenêtre : je vérifie les autorisations, « Active », l’abonnement et la batterie, et je montre quoi corriger.</string>
     <string name="pet_q_apps">Avec quelles applis WayArs fonctionne-t-il ?</string>
@@ -332,8 +332,8 @@
     <string name="pet_a_restore">Ouvrez l’écran d’abonnement et touchez « Restaurer les achats ». Vérifiez que le téléphone utilise le même compte Google que pour le paiement.</string>
     <string name="pet_q_cancel">Comment résilier l’abonnement ?</string>
     <string name="pet_a_cancel">Google Play → votre profil → Paiements et abonnements → Abonnements → WayArs → Résilier.</string>
-    <string name="pet_q_language">Comment changer de langue ?</string>
-    <string name="pet_a_language">Paramètres → Langue. 17 langues sont disponibles.</string>
+    <string name="pet_q_language">Quelles langues existent et comment changer ?</string>
+    <string name="pet_a_language" formatted="false">Je parle 17 langues 🌍 : English, Polski, Українська, Русский, Deutsch, Français, Română, Čeština, Български, Magyar, Dansk, Norsk, Svenska, Azərbaycanca, Հայերեն, ქართული, Oʻzbekcha. Pour changer : Paramètres → Langue. Et je lis les courses dans n’importe quelle langue, même si ton appli de taxi ou de livraison en utilise une autre.</string>
     <string name="pet_q_tutorial">Comment revoir le tutoriel ?</string>
     <string name="pet_a_tutorial">Paramètres → Tutoriel, tout en bas des paramètres.</string>
     <string name="pet_q_turns_off">Pourquoi « Active » se désactive tout seul ?</string>
@@ -535,4 +535,76 @@
     <string name="settings_pet_summary">Thème de carte et accessoires</string>
     <string name="tour_petset_text">Thèmes de la carte de commande et du widget, et accessoires de Wayo. Ils se débloquent quand Wayo grandit grâce à vos bonnes décisions ; il porte un accessoire à la fois.</string>
     <string name="tour_new2_text">Nouveau : Wayo offre désormais des récompenses quand il grandit — thèmes de carte, accessoires dessinés sur lui, nouvelles capacités et une image pour partager vos records. Tout est dans Paramètres → « Compagnon Wayo ».</string>
+    <string name="pet_q_what_is">Qu’est-ce que WayArs et comment ça marche ?</string>
+    <string name="pet_a_what_is" formatted="false">Je suis ton assistant de courses 🦎 Quand une course arrive dans Uber, Bolt, Wolt ou une autre appli, je lis en une seconde le prix, la distance et le temps, je retire carburant et impôt et j’affiche une carte par-dessus : 🟢 prends-la, 🟡 moyen, 🔴 mieux vaut passer. C’est toujours toi qui décides — je ne touche à rien. Je calcule aussi ton vrai gain par heure et tiens les statistiques.</string>
+    <string name="pet_q_internet">Faut-il Internet ?</string>
+    <string name="pet_a_internet" formatted="false">Pas pour travailler 📴 Je lis et calcule les courses sur le téléphone, et je réponds dans ce chat hors ligne aussi. Internet sert seulement à acheter ou vérifier l’abonnement et à mettre à jour l’appli.</string>
+    <string name="pet_q_iphone">Y a-t-il une version iPhone ? Quel téléphone faut-il ?</string>
+    <string name="pet_a_iphone" formatted="false">Je vis seulement sur Android 🤖 — version 8.0 ou plus récente, toutes marques : Samsung, Xiaomi, Pixel, Motorola et d’autres. Pas de version iPhone : iOS n’autorise pas les applis à lire l’écran des autres applis.</string>
+    <string name="pet_q_data">Mes données passent-elles sur un nouveau téléphone ? Comment les supprimer ?</string>
+    <string name="pet_a_data" formatted="false">Tout est stocké uniquement sur ce téléphone 🔒 — pas de compte ni de cloud, donc les statistiques et mon niveau ne suivront pas. L’abonnement, si : il est lié à ton compte Google, touche « Restaurer les achats ». Tout supprimer : paramètres Android → Applis → WayArs → Stockage → Effacer les données, ou désinstalle simplement l’appli.</string>
+    <string name="pet_q_update">Comment mettre à jour l’appli ?</string>
+    <string name="pet_a_update" formatted="false">Via Google Play 🔄 Quand une nouvelle version sort, j’affiche moi-même un bouton de mise à jour dans l’appli. Ou à la main : Google Play → WayArs → Mettre à jour.</string>
+    <string name="pet_q_stages">Quelles sont les étapes de croissance de Wayo ?</string>
+    <string name="pet_a_stages" formatted="false">J’ai cinq étapes 🥚→👑 : Œuf (niveau 1), Bébé (2–4), Ado (5–9), Pro (10–19) et Légende (20+). Les niveaux continuent après 20. Je grandis honnêtement : ado après environ une semaine de travail, pro après un mois, légende après 4 à 6 mois.</string>
+    <string name="pet_q_share">Comment partager une image de mes records ?</string>
+    <string name="pet_a_share" formatted="false">Touche 📤 sur ma carte de l’écran d’accueil — je crée une image : moi, mon niveau et tes records. Envoie-la dans une messagerie ou en story 📸</string>
+    <string name="pet_q_theme">Comment changer le thème de la carte ?</string>
+    <string name="pet_a_theme" formatted="false">Paramètres → Compagnon Wayo → Thème de la carte 🎨 Les thèmes se débloquent pendant que je grandis : Néon (niv. 5), Carbone (10), Or (15), Légende (20). Le thème change la carte de course et le widget.</string>
+    <string name="pet_q_accessories">Comment mettre un accessoire à Wayo ?</string>
+    <string name="pet_a_accessories" formatted="false">Paramètres → Compagnon Wayo → Accessoires de Wayo 😎 Casquette (niv. 3), couronne (6), lunettes de soleil (8), casque audio (10), chaîne en or (13), clé de légende (16). J’en porte un à la fois : touche pour le mettre, touche encore pour l’enlever.</string>
+    <string name="pet_q_ban">Uber ou Bolt peuvent-ils me bloquer pour ça ?</string>
+    <string name="pet_a_ban" formatted="false">Je ne touche et ne change rien dans leurs applis 👀 — je lis seulement l’écran, comme tes yeux, et j’affiche un conseil. C’est toi qui acceptes les courses. Mais chaque plateforme a ses règles et je ne peux pas m’en porter garant — la décision t’appartient toujours.</string>
+    <string name="pet_q_about">Qui a créé WayArs ?</string>
+    <string name="pet_a_about" formatted="false">Moi et WayArs avons été créés par AP STUDIO, un développeur indépendant 💚 Version et description : Paramètres → À propos de l\'application. Une idée ou un bug ? Écris sur Telegram t.me/wayars_app ou à apstudiomobile@gmail.com.</string>
+    <string-array name="chat_v_intro">
+        <item>Facile !</item>
+        <item>Oh, ça je sais 😎</item>
+        <item>Regarde 👇</item>
+        <item>Bonne question !</item>
+        <item>Je t’explique 🦎</item>
+        <item>Voilà 💚</item>
+    </string-array>
+    <string-array name="chat_v_intro_problem">
+        <item>On va régler ça 🔧</item>
+        <item>Pas de panique, on répare !</item>
+        <item>Ça arrive. Étape par étape :</item>
+        <item>Bon, regardons 👀</item>
+    </string-array>
+    <string-array name="chat_v_outro_show">
+        <item>Touche « Montrer » — je surligne l’endroit 👇</item>
+        <item>Je peux te montrer où c’est : bouton ci-dessous.</item>
+        <item>Je t’y emmène ? Bouton ci-dessous 👇</item>
+    </string-array>
+    <string-array name="chat_v_outro">
+        <item>Je peux t’aider pour autre chose ?</item>
+        <item>Demande-moi autre chose 😉</item>
+        <item>D’autres questions ? Je suis là !</item>
+        <item>Quand tu veux 💚</item>
+    </string-array>
+    <string-array name="chat_v_again">
+        <item>Je répète 🙂</item>
+        <item>Comme je disais :</item>
+    </string-array>
+    <string-array name="chat_v_hello">
+        <item>Salut ! 👋 Comment je peux aider ?</item>
+        <item>Hey ! Je suis là 🦎 Tu as besoin de quoi ?</item>
+        <item>Coucou ! Demande-moi tout sur l’appli.</item>
+    </string-array>
+    <string-array name="chat_v_thanks">
+        <item>Avec plaisir ! 💚</item>
+        <item>Content d’avoir aidé ! Bonnes courses 🚕</item>
+        <item>Quand tu veux ! C’est un plaisir 🦎</item>
+    </string-array>
+    <string-array name="chat_v_how">
+        <item>Super ! Surtout quand tu prends des courses rentables 😄</item>
+        <item>Très bien, je grandis petit à petit 🌱 Et ta journée ?</item>
+        <item>Bien ! Je compte les kilomètres 🦎</item>
+    </string-array>
+    <string-array name="chat_v_unknown">
+        <item>Hmm, je ne sais pas encore ça 🤔 Dis-le autrement ou choisis une question ci-dessous.</item>
+        <item>Oups, je ne suis pas sûr. Demande autrement — ou voici ce qu’on demande souvent :</item>
+        <item>Ce n’est pas dans ma mémoire 😅 Écris aux développeurs — ils répondront ; en attendant, le plus demandé :</item>
+    </string-array>
+    <string name="chat_related">On demande aussi souvent :</string>
 </resources>

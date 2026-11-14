@@ -287,8 +287,8 @@
     <string name="pet_a_add_app">Ayarlar → Dəstəklənən tətbiqlər → „Quraşdırılmışlardan seç” və çatdırılma və ya taksi tətbiqinizi seçin.</string>
     <string name="pet_q_calibrate">Tətbiqi necə kalibrləyim?</string>
     <string name="pet_a_calibrate">Tətbiqi açın və istənilən sifarişi gözləyin, sonra qayıdın: Ayarlar → Dəstəklənən tətbiqlər → tətbiqin yanındakı qələm. Qiymətə, məsafəyə və vaxta toxunun — hazırdır.</string>
-    <string name="pet_q_currency">Hansı valyutanı seçim?</string>
-    <string name="pet_a_currency">Ölkənizin valyutasını və ya çatdırılma, yaxud taksi tətbiqinizin qiymət göstərdiyi valyutanı. Bütün dərəcələr və hədlər onda hesablanır.</string>
+    <string name="pet_q_currency">Hansı valyutalar var və hansını seçim?</string>
+    <string name="pet_a_currency" formatted="false">26 valyuta var 💰: PLN, EUR, UAH, RON, MDL, CZK, HUF, BGN, SEK, NOK, DKK, CHF, GBP, USD, RUB, KZT, BYN, UZS, GEL, AMD, AZN, KGS, TRY, BRL, INR, JPY. Taksi və ya çatdırılma tətbiqinin qiymətləri göstərdiyi valyutanı seç: Parametrlər → Valyuta. Profillərin hədlərini özüm çevirəcəyəm.</string>
     <string name="pet_q_tax">Vergini necə göstərim?</string>
     <string name="pet_a_tax">Ayarlar → Vergi: dərəcəni %-lə yazın. O, yanacaqla birlikdə çıxılır və kart həqiqətən nə qaldığını göstərir.</string>
     <string name="pet_q_vehicle">Avtomobili və yanacağı harada yazım?</string>
@@ -296,17 +296,17 @@
     <string name="pet_q_thresholds">Öz hədlərimi necə qoyum?</string>
     <string name="pet_a_thresholds">Ayarlar → Öz hədlərim: pis, orta və yaxşı sifarişlər üçün km dərəcəsi. Profili əvəz edir.</string>
     <string name="pet_q_presets">Profillər nədir?</string>
-    <string name="pet_a_presets">Hansı sifarişlərin yaxşı olduğunu müəyyən edən hazır strategiyalar (qənaət, balans, yalnız sərfəli). „Profillər” bölməsində seçin.</string>
+    <string name="pet_a_presets" formatted="false">Profillər hazır strategiyalardır 🎯 «Qənaətcil» — 1,5 zł/km və 0,5 zł/dəq-dən, «Tarazlıq» — 2,2 zł/km və 0,8 zł/dəq-dən, «Yalnız sərfəli» — 3,0 zł/km və 1,1 zł/dəq-dən. Başqa valyutada özüm çevirirəm. «Rejimlər» bölməsində seçilir, öz rəqəmlərin — Parametrlər → Öz tarif hədləriniz.</string>
     <string name="pet_q_stats">Qazancım və statistikam haradadır?</string>
-    <string name="pet_a_stats">„Statistika” bölməsində: gün, həftə və ya ay üzrə sifarişlər, qazanc, məsafə və orta dərəcə.</string>
+    <string name="pet_a_stats" formatted="false">«Statistika» bölməsi 📊: sifarişlər, qazanc, kilometrlər, orta tarif və saatlıq real qazanc — bu gün, həftə, ay və ya il üçün. Orada tətbiqlərin müqayisəsi, nailiyyətlər və seriyalar da var.</string>
     <string name="pet_q_verdict">Yaşıl və qırmızı nə deməkdir?</string>
-    <string name="pet_a_verdict">Yaşıl — sifariş ayarlarınıza görə sərfəlidir, qırmızı — yox. Km və dəqiqə dərəcəsi artıq yanacaqdan sonradır.</string>
+    <string name="pet_a_verdict" formatted="false">🟢 Yaşıl kart — sifariş ayarlarına görə sərfəlidir, 🟡 sarı — orta, 🔴 qırmızı — sərfəli deyil, keçmək daha yaxşıdır. Km və dəqiqə başına tarif artıq yanacaqdan sonradır.</string>
     <string name="pet_q_subscription">Abunə necə işləyir?</string>
     <string name="pet_a_subscription">Ayarlar → Abunə. Əvvəlcə 30 dəqiqə pulsuz; abunə Google hesabınıza bağlıdır və Google Play-də idarə olunur.</string>
     <string name="pet_q_contact">Sizinlə necə əlaqə saxlayım?</string>
     <string name="pet_a_contact">Ayarlar → Əlaqə: Telegram, Instagram, TikTok və ya e-poçt. İstənilən vaxt cavab veririk.</string>
     <string name="pet_q_pet">Necə böyüyürsən?</string>
-    <string name="pet_a_pet">Ağıllı qərarlardan enerji yeyirəm: yaxşı sifarişi qəbul etdin və ya pisindən imtina etdin — mənə +3. Skanlı hər gün +5 verir. Çox enerji — yüksək səviyyə!</string>
+    <string name="pet_a_pet" formatted="false">Mən ağıllı qərarların enerjisi ilə qidalanıram ⚡ Sərfəli sifarişi qəbul etdin və ya pisindən imtina etdin — +3, ortanı qəbul etdin — +2. «Active» ilə hər iş günü — daha +5, ardıcıl günlər üçün +10-a qədər. Qərarlardan gündə 60-a qədər. Çox enerji — yüksək səviyyə!</string>
     <string name="pet_q_diagnostics">Nəsə işləmir. Nəyi yoxlayım?</string>
     <string name="pet_a_diagnostics">Bu pəncərənin yuxarısında “🔍 Telefonumu yoxla” düyməsinə toxunun: icazələri, “Active”-i, abunəliyi və batareyanı yoxlayıb nəyi düzəltmək lazım olduğunu göstərəcəyəm.</string>
     <string name="pet_q_apps">WayArs hansı tətbiqlərlə işləyir?</string>
@@ -333,8 +333,8 @@
     <string name="pet_a_restore">Abunəlik ekranını açın və “Alışları bərpa et” düyməsinə toxunun. Telefonda ödəniş etdiyiniz eyni Google hesabının olduğunu yoxlayın.</string>
     <string name="pet_q_cancel">Abunəliyi necə ləğv edim?</string>
     <string name="pet_a_cancel">Google Play → profiliniz → Ödənişlər və abunəliklər → Abunəliklər → WayArs → Ləğv et.</string>
-    <string name="pet_q_language">Dili necə dəyişim?</string>
-    <string name="pet_a_language">Parametrlər → Dil. 17 dil mövcuddur.</string>
+    <string name="pet_q_language">Hansı dillər var və dili necə dəyişim?</string>
+    <string name="pet_a_language" formatted="false">Mən 17 dildə danışıram 🌍: English, Polski, Українська, Русский, Deutsch, Français, Română, Čeština, Български, Magyar, Dansk, Norsk, Svenska, Azərbaycanca, Հայերեն, ქართული, Oʻzbekcha. Dəyişmək: Parametrlər → Dil. Sifarişləri isə istənilən dildə oxuyuram, taksi və ya çatdırılma tətbiqin başqa dildə olsa belə.</string>
     <string name="pet_q_tutorial">Təlimatı yenidən necə keçim?</string>
     <string name="pet_a_tutorial">Parametrlər → Təlimat, parametrlərin ən aşağısında.</string>
     <string name="pet_q_turns_off">“Active” niyə öz-özünə sönür?</string>
@@ -536,4 +536,76 @@
     <string name="settings_pet_summary">Kart mövzusu və aksessuarlar</string>
     <string name="tour_petset_text">Sifariş kartı və vidcet üçün mövzular, həmçinin Wayo-nun aksessuarları. Wayo ağıllı qərarlarınızdan böyüdükcə açılır; eyni anda bir aksessuar taxır.</string>
     <string name="tour_new2_text">Yeniliklər: Wayo indi böyüdükcə mükafat verir — kart mövzuları, birbaşa onun üzərində çəkilmiş aksessuarlar, yeni bacarıqlar və rekordlarınızı paylaşmaq üçün şəkil. Hamısı Parametrlər → «Ev heyvanı Wayo» bölməsindədir.</string>
+    <string name="pet_q_what_is">WayArs nədir və necə işləyir?</string>
+    <string name="pet_a_what_is" formatted="false">Mən sifarişlər üzrə köməkçinəm 🦎 Uber, Bolt, Wolt və ya başqa tətbiqdə sifariş gələndə bir saniyəyə qiyməti, məsafəni və vaxtı oxuyuram, yanacağı və vergini çıxıram və üstdə kart göstərirəm: 🟢 götür, 🟡 orta, 🔴 keçmək yaxşıdır. Həmişə sən qərar verirsən — mən heç nəyə toxunmuram. Həm də saatlıq real qazancı hesablayıram və statistika aparıram.</string>
+    <string name="pet_q_internet">İnternet lazımdır?</string>
+    <string name="pet_a_internet" formatted="false">İş üçün — yox 📴 Sifarişləri telefonda oxuyub hesablayıram, bu çatda da internetsiz cavab verirəm. İnternet yalnız abunəni almaq və ya yoxlamaq və tətbiqi yeniləmək üçün lazımdır.</string>
+    <string name="pet_q_iphone">iPhone üçün versiya var? Hansı telefon lazımdır?</string>
+    <string name="pet_a_iphone" formatted="false">Mən yalnız Android-də yaşayıram 🤖 — 8.0 və daha yeni versiya, istənilən marka: Samsung, Xiaomi, Pixel, Motorola və başqaları. iPhone üçün versiya yoxdur: iOS tətbiqlərə başqa tətbiqlərin ekranını oxumağa icazə vermir.</string>
+    <string name="pet_q_data">Məlumatlar yeni telefona keçəcək? Onları necə silim?</string>
+    <string name="pet_a_data" formatted="false">Hər şey yalnız bu telefonda saxlanılır 🔒 — hesab və bulud yoxdur, ona görə statistika və mənim səviyyəm yeni telefona keçməyəcək. Abunə isə keçəcək: Google hesabına bağlıdır, «Alışları bərpa et» düyməsinə bas. Hamısını silmək: Android ayarları → Tətbiqlər → WayArs → Yaddaş → Məlumatları təmizlə, və ya sadəcə tətbiqi sil.</string>
+    <string name="pet_q_update">Tətbiqi necə yeniləyim?</string>
+    <string name="pet_a_update" formatted="false">Google Play vasitəsilə 🔄 Yeni versiya çıxanda tətbiqdə özüm yeniləmə düyməsini göstərəcəyəm. Və ya əl ilə: Google Play → WayArs → Yenilə.</string>
+    <string name="pet_q_stages">Wayo-nun böyümə mərhələləri hansılardır?</string>
+    <string name="pet_a_stages" formatted="false">Mənim beş mərhələm var 🥚→👑: Yumurta (səviyyə 1), Körpə (2–4), Yeniyetmə (5–9), Peşəkar (10–19) və Əfsanə (20+). Səviyyələr 20-dən sonra da davam edir. Dürüst böyüyürəm: yeniyetmə — təxminən bir həftəlik işdən sonra, peşəkar — bir aydan sonra, əfsanə — 4–6 aydan sonra.</string>
+    <string name="pet_q_share">Rekordlarımla şəkli necə paylaşım?</string>
+    <string name="pet_a_share" formatted="false">Ana ekranda kartımdakı 📤 düyməsinə bas — şəkil hazırlayacağam: mən, səviyyəm və sənin rekordların. Messencerə və ya hekayəyə göndər 📸</string>
+    <string name="pet_q_theme">Kartın mövzusunu necə dəyişim?</string>
+    <string name="pet_a_theme" formatted="false">Parametrlər → Ev heyvanı Wayo → Kart mövzusu 🎨 Mövzular mən böyüdükcə açılır: Neon (səv. 5), Karbon (10), Qızıl (15), Əfsanə (20). Mövzu həm sifariş kartını, həm vidceti dəyişir.</string>
+    <string name="pet_q_accessories">Wayo-ya aksessuar necə taxım?</string>
+    <string name="pet_a_accessories" formatted="false">Parametrlər → Ev heyvanı Wayo → Wayo-nun aksesuarları 😎 Kepka (səv. 3), tac (6), gün eynəyi (8), qulaqlıq (10), qızıl zəncir (13), əfsanə açarı (16). Eyni anda birini taxıram: bas — taxıram, yenə bas — çıxarıram.</string>
+    <string name="pet_q_ban">Bunun üçün Uber və ya Bolt məni bloklaya bilər?</string>
+    <string name="pet_a_ban" formatted="false">Onların tətbiqlərində heç nəyə basmıram və heç nəyi dəyişmirəm 👀 — sadəcə gözlərin kimi ekranı oxuyuram və ipucu göstərirəm. Sifarişləri özün qəbul edirsən. Amma hər platformanın öz qaydaları var və onlara zəmanət verə bilmərəm — qərar həmişə sənindir.</string>
+    <string name="pet_q_about">WayArs-ı kim yaradıb?</string>
+    <string name="pet_a_about" formatted="false">Məni və WayArs-ı müstəqil tərtibatçı AP STUDIO yaradıb 💚 Versiya və təsvir: Parametrlər → Tətbiq haqqında. İdeyan var və ya xəta tapdın? Telegram-a yaz t.me/wayars_app və ya apstudiomobile@gmail.com ünvanına.</string>
+    <string-array name="chat_v_intro">
+        <item>Asandır!</item>
+        <item>O, bunu bilirəm 😎</item>
+        <item>Bax 👇</item>
+        <item>Yaxşı sual!</item>
+        <item>İndi deyəcəm 🦎</item>
+        <item>Buyur 💚</item>
+    </string-array>
+    <string-array name="chat_v_intro_problem">
+        <item>İndi həll edərik 🔧</item>
+        <item>Narahat olma, düzəldərik!</item>
+        <item>Olur. Addım-addım:</item>
+        <item>Yaxşı, baxaq 👀</item>
+    </string-array>
+    <string-array name="chat_v_outro_show">
+        <item>«Göstər» düyməsinə bas — harada olduğunu işıqlandıracağam 👇</item>
+        <item>Harada olduğunu göstərə bilərəm: aşağıdakı düymə.</item>
+        <item>Səni ora aparım? Düymə aşağıdadır 👇</item>
+    </string-array>
+    <string-array name="chat_v_outro">
+        <item>Başqa nə ilə kömək edim?</item>
+        <item>Nə istəsən soruş 😉</item>
+        <item>Başqa sualın var? Buradayam!</item>
+        <item>Həmişə 💚</item>
+    </string-array>
+    <string-array name="chat_v_again">
+        <item>Təkrar edirəm 🙂</item>
+        <item>Dediyim kimi:</item>
+    </string-array>
+    <string-array name="chat_v_hello">
+        <item>Salam! 👋 Nə ilə kömək edim?</item>
+        <item>Hey! Buradayam 🦎 Nə lazımdır?</item>
+        <item>Salam-salam! Tətbiq haqqında nə istəsən soruş.</item>
+    </string-array>
+    <string-array name="chat_v_thanks">
+        <item>Dəyməz! 💚</item>
+        <item>Kömək etdiyimə şadam! Uğurlu sifarişlər 🚕</item>
+        <item>Həmişə! Mənim üçün xoşdur 🦎</item>
+    </string-array>
+    <string-array name="chat_v_how">
+        <item>Əla! Xüsusən sərfəli sifarişlər götürəndə 😄</item>
+        <item>Super, yavaş-yavaş böyüyürəm 🌱 Sənin növbən necədir?</item>
+        <item>Yaxşı! Oturub kilometr sayıram 🦎</item>
+    </string-array>
+    <string-array name="chat_v_unknown">
+        <item>Hmm, bunu hələ bilmirəm 🤔 Başqa cür de və ya aşağıdan sual seç.</item>
+        <item>Vay, burada əmin deyiləm. Başqa cür soruş — və ya tez-tez soruşulanlara bax:</item>
+        <item>Bu yaddaşımda yoxdur 😅 Tərtibatçılara yaz — cavab verəcəklər; hələlik populyarlar:</item>
+    </string-array>
+    <string name="chat_related">Tez-tez bunu da soruşurlar:</string>
 </resources>

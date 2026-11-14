@@ -287,8 +287,8 @@
     <string name="pet_a_add_app">Настройки → Поддържани приложения → „Избери от инсталираните“ и изберете своето приложение за доставки или такси.</string>
     <string name="pet_q_calibrate">Как да калибрирам приложение?</string>
     <string name="pet_a_calibrate">Отворете приложението и изчакайте поръчка, после се върнете: Настройки → Поддържани приложения → моливът до приложението. Докоснете цената, разстоянието и времето — готово.</string>
-    <string name="pet_q_currency">Коя валута да избера?</string>
-    <string name="pet_a_currency">Валутата на вашата държава или тази, в която приложението ви за доставки или такси показва цените. Всички ставки и прагове са в нея.</string>
+    <string name="pet_q_currency">Какви валути има и коя да избера?</string>
+    <string name="pet_a_currency" formatted="false">Има 26 валути 💰: PLN, EUR, UAH, RON, MDL, CZK, HUF, BGN, SEK, NOK, DKK, CHF, GBP, USD, RUB, KZT, BYN, UZS, GEL, AMD, AZN, KGS, TRY, BRL, INR, JPY. Избери тази, в която приложението ти за такси или доставки показва цените: Настройки → Валута. Праговете на профилите ще преизчисля сам.</string>
     <string name="pet_q_tax">Как да въведа данъка?</string>
     <string name="pet_a_tax">Настройки → Данък: въведете ставката в %. Изважда се заедно с горивото и картата показва колко реално остава.</string>
     <string name="pet_q_vehicle">Къде да въведа колата и горивото?</string>
@@ -296,17 +296,17 @@
     <string name="pet_q_thresholds">Как да задам свои прагове?</string>
     <string name="pet_a_thresholds">Настройки → Мои прагове: ставка на км за лоши, средни и добри поръчки. Заменят профила.</string>
     <string name="pet_q_presets">Какво са профилите?</string>
-    <string name="pet_a_presets">Готови стратегии (икономия, баланс, само изгодни), които решават кои поръчки са добри. Изберете в раздела „Профили“.</string>
+    <string name="pet_a_presets" formatted="false">Профилите са готови стратегии 🎯 „Икономичен“ — от 1,5 zł/км и 0,5 zł/мин, „Баланс“ — от 2,2 zł/км и 0,8 zł/мин, „Само изгодни“ — от 3,0 zł/км и 1,1 zł/мин. В друга валута преизчислявам сам. Избират се в раздел „Режими“, а своите числа — Настройки → Ваши собствени прагове на тарифата.</string>
     <string name="pet_q_stats">Къде са приходите и статистиката?</string>
-    <string name="pet_a_stats">В раздела „Статистика“: поръчки, приходи, разстояние и средна ставка за ден, седмица или месец.</string>
+    <string name="pet_a_stats" formatted="false">Раздел „Статистика“ 📊: поръчки, печалба, километри, средна тарифа и реална печалба на час — за днес, седмицата, месеца или годината. Там са и сравнението на приложенията, постиженията и сериите.</string>
     <string name="pet_q_verdict">Какво значат зелено и червено?</string>
-    <string name="pet_a_verdict">Зелено — поръчката е изгодна по вашите настройки, червено — не. Ставката на км и минута е вече след горивото.</string>
+    <string name="pet_a_verdict" formatted="false">🟢 Зелена карта — поръчката е изгодна по твоите настройки, 🟡 жълта — средна, 🔴 червена — неизгодна, по-добре я пропусни. Тарифата на км и минута е вече след горивото.</string>
     <string name="pet_q_subscription">Как работи абонаментът?</string>
     <string name="pet_a_subscription">Настройки → Абонамент. Първо 30 минути безплатно; абонаментът е свързан с Google профила и се управлява в Google Play.</string>
     <string name="pet_q_contact">Как да се свържа с вас?</string>
     <string name="pet_a_contact">Настройки → Контакти: Telegram, Instagram, TikTok или имейл. Отговаряме по всяко време.</string>
     <string name="pet_q_pet">Как растеш?</string>
-    <string name="pet_a_pet">Ям енергия от умни решения: приета добра поръчка или отказана лоша — +3 за мен. Всеки ден със сканиране дава +5. Повече енергия — по-високо ниво!</string>
+    <string name="pet_a_pet" formatted="false">Храня се с енергия от умни решения ⚡ Приел си изгодна поръчка или си отказал неизгодна — +3, приел си средна — +2. Всеки работен ден с „Active“ — още +5, а за поредни дни до +10. От решения до 60 на ден. Повече енергия — по-високо ниво!</string>
     <string name="pet_q_diagnostics">Нещо не работи. Какво да проверя?</string>
     <string name="pet_a_diagnostics">Докоснете „🔍 Провери телефона ми“ горе в този прозорец: ще проверя разрешенията, „Active“, абонамента и батерията и ще покажа какво да оправите.</string>
     <string name="pet_q_apps">С кои приложения работи WayArs?</string>
@@ -333,8 +333,8 @@
     <string name="pet_a_restore">Отворете екрана с абонамента и докоснете „Възстанови покупки“. Проверете дали телефонът ползва същия Google профил, с който сте платили.</string>
     <string name="pet_q_cancel">Как да откажа абонамента?</string>
     <string name="pet_a_cancel">Google Play → профилът ви → Плащания и абонаменти → Абонаменти → WayArs → Откажи.</string>
-    <string name="pet_q_language">Как да сменя езика?</string>
-    <string name="pet_a_language">Настройки → Език. Има 17 езика.</string>
+    <string name="pet_q_language">Какви езици има и как да сменя езика?</string>
+    <string name="pet_a_language" formatted="false">Говоря 17 езика 🌍: English, Polski, Українська, Русский, Deutsch, Français, Română, Čeština, Български, Magyar, Dansk, Norsk, Svenska, Azərbaycanca, Հայերեն, ქართული, Oʻzbekcha. Смяна: Настройки → Език. А поръчките чета на всеки език, дори приложението за такси или доставки да е на друг.</string>
     <string name="pet_q_tutorial">Как да мина обучението пак?</string>
     <string name="pet_a_tutorial">Настройки → Обучение, най-долу в настройките.</string>
     <string name="pet_q_turns_off">Защо „Active“ се изключва само?</string>
@@ -536,4 +536,76 @@
     <string name="settings_pet_summary">Тема на картата и аксесоари</string>
     <string name="tour_petset_text">Теми за картата на поръчката и уиджета и аксесоарите на Wayo. Отключват се, докато Wayo расте от умните ви решения; носи по един аксесоар.</string>
     <string name="tour_new2_text">Ново: Wayo вече дава награди за растеж — теми на картата, аксесоари, нарисувани директно на него, нови способности и картинка с рекордите за споделяне. Всичко е в Настройки → „Любимецът Wayo“.</string>
+    <string name="pet_q_what_is">Какво е WayArs и как работи?</string>
+    <string name="pet_a_what_is" formatted="false">Аз съм твоят помощник за поръчки 🦎 Когато в Uber, Bolt, Wolt или друго приложение дойде поръчка, за секунда чета цената, разстоянието и времето, вадя горивото и данъка и показвам отгоре карта: 🟢 вземи я, 🟡 средно, 🔴 по-добре пропусни. Винаги решаваш ти — аз нищо не натискам. Освен това смятам реалната печалба на час и водя статистика.</string>
+    <string name="pet_q_internet">Нужен ли е интернет?</string>
+    <string name="pet_a_internet" formatted="false">За работата — не 📴 Чета и смятам поръчките направо на телефона, а в този чат също отговарям без интернет. Нужен е само за покупка или проверка на абонамента и за обновяване.</string>
+    <string name="pet_q_iphone">Има ли версия за iPhone? Какъв телефон ми трябва?</string>
+    <string name="pet_a_iphone" formatted="false">Живея само на Android 🤖 — версия 8.0 или по-нова, всяка марка: Samsung, Xiaomi, Pixel, Motorola и други. Версия за iPhone няма: iOS не позволява на приложенията да четат екрана на други приложения.</string>
+    <string name="pet_q_data">Ще се прехвърлят ли данните на нов телефон? Как да ги изтрия?</string>
+    <string name="pet_a_data" formatted="false">Всичко се пази само на този телефон 🔒 — няма акаунти и облак, затова статистиката и нивото ми няма да се прехвърлят. Абонаментът — да: вързан е за Google акаунта, натисни „Възстанови покупките“. Изтриване на всичко: настройки на Android → Приложения → WayArs → Хранилище → Изчисти данните, или просто деинсталирай приложението.</string>
+    <string name="pet_q_update">Как да обновя приложението?</string>
+    <string name="pet_a_update" formatted="false">През Google Play 🔄 Когато излезе нова версия, сам ще покажа бутон за обновяване в приложението. Или ръчно: Google Play → WayArs → Актуализиране.</string>
+    <string name="pet_q_stages">Какви етапи на растеж има Wayo?</string>
+    <string name="pet_a_stages" formatted="false">Имам пет етапа 🥚→👑: Яйце (ниво 1), Бебе (2–4), Тийнейджър (5–9), Профи (10–19) и Легенда (20+). Нивата продължават и след 20. Раста честно: тийнейджър след около седмица работа, профи след месец, легенда след 4–6 месеца.</string>
+    <string name="pet_q_share">Как да споделя картинка с рекордите си?</string>
+    <string name="pet_a_share" formatted="false">Натисни 📤 на моята карта на началния екран — ще направя картинка: аз, нивото ми и твоите рекорди. Изпрати я в месинджър или в сторита 📸</string>
+    <string name="pet_q_theme">Как да сменя темата на картата?</string>
+    <string name="pet_a_theme" formatted="false">Настройки → Любимецът Wayo → Тема на картата 🎨 Темите се отключват, докато раста: Неон (ниво 5), Карбон (10), Злато (15), Легенда (20). Темата сменя и картата на поръчката, и уиджета.</string>
+    <string name="pet_q_accessories">Как да сложа аксесоар на Wayo?</string>
+    <string name="pet_a_accessories" formatted="false">Настройки → Любимецът Wayo → Аксесоари на Wayo 😎 Шапка (ниво 3), корона (6), слънчеви очила (8), слушалки (10), златна верига (13), ключ на легендата (16). Нося по един: натисни — слагам, натисни пак — свалям.</string>
+    <string name="pet_q_ban">Няма ли Uber или Bolt да ме блокират заради това?</string>
+    <string name="pet_a_ban" formatted="false">Нищо не натискам и не променям в техните приложения 👀 — само чета екрана, както очите ти, и показвам подсказка. Поръчките приемаш ти. Но всяка платформа има свои правила и не мога да гарантирам за тях — решението винаги е твое.</string>
+    <string name="pet_q_about">Кой направи WayArs?</string>
+    <string name="pet_a_about" formatted="false">Мен и WayArs ни направи AP STUDIO, независим разработчик 💚 Версия и описание: Настройки → За приложението. Имаш идея или намери грешка? Пиши в Telegram t.me/wayars_app или на apstudiomobile@gmail.com.</string>
+    <string-array name="chat_v_intro">
+        <item>Лесно!</item>
+        <item>О, това го знам 😎</item>
+        <item>Виж 👇</item>
+        <item>Добър въпрос!</item>
+        <item>Ей сега ще кажа 🦎</item>
+        <item>Заповядай 💚</item>
+    </string-array>
+    <string-array name="chat_v_intro_problem">
+        <item>Сега ще оправим 🔧</item>
+        <item>Не се тревожи, ще поправим!</item>
+        <item>Случва се. Стъпка по стъпка:</item>
+        <item>Така, гледаме 👀</item>
+    </string-array>
+    <string-array name="chat_v_outro_show">
+        <item>Натисни „Покажи“ — ще маркирам къде е 👇</item>
+        <item>Мога да покажа къде е: бутонът отдолу.</item>
+        <item>Да те заведа ли там? Бутонът отдолу 👇</item>
+    </string-array>
+    <string-array name="chat_v_outro">
+        <item>С какво още да помогна?</item>
+        <item>Питай още 😉</item>
+        <item>Още въпроси? Тук съм!</item>
+        <item>Винаги 💚</item>
+    </string-array>
+    <string-array name="chat_v_again">
+        <item>Ще повторя 🙂</item>
+        <item>Както казах:</item>
+    </string-array>
+    <string-array name="chat_v_hello">
+        <item>Здрасти! 👋 С какво да помогна?</item>
+        <item>Хей! Тук съм 🦎 Какво ти трябва?</item>
+        <item>Здрасти, здрасти! Питай ме всичко за приложението.</item>
+    </string-array>
+    <string-array name="chat_v_thanks">
+        <item>Моля! 💚</item>
+        <item>Радвам се, че помогнах! Успешни поръчки 🚕</item>
+        <item>Винаги! За мен е удоволствие 🦎</item>
+    </string-array>
+    <string-array name="chat_v_how">
+        <item>Супер! Особено когато взимаш изгодни поръчки 😄</item>
+        <item>Чудесно, раста полека 🌱 А как е смяната ти?</item>
+        <item>Добре! Седя и броя километри 🦎</item>
+    </string-array>
+    <string-array name="chat_v_unknown">
+        <item>Хм, това още не го знам 🤔 Кажи го иначе или избери въпрос отдолу.</item>
+        <item>Опа, тук не съм сигурен. Питай иначе — или ето какво питат често:</item>
+        <item>Това го няма в паметта ми 😅 Пиши на разработчиците — ще отговорят; дотогава ето популярното:</item>
+    </string-array>
+    <string name="chat_related">Често питат и:</string>
 </resources>

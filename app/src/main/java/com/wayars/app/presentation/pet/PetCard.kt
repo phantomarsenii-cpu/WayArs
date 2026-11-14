@@ -123,7 +123,18 @@ val PET_HELP_TOPICS: List<PetHelpTopic> = listOf(
     topic(R.string.pet_q_widget, R.string.pet_a_widget, TourTarget.SETTINGS_EXTRAS, item = SettingsItems.EXTRAS),
     topic(R.string.pet_q_achievements, R.string.pet_a_achievements, TourTarget.NAV_STATS, MainTab.STATS),
     topic(R.string.pet_q_invite, R.string.pet_a_invite, TourTarget.SETTINGS_EXTRAS, item = SettingsItems.EXTRAS),
-    topic(R.string.pet_q_watch, R.string.pet_a_watch, TourTarget.SETTINGS_EXTRAS, item = SettingsItems.EXTRAS)
+    topic(R.string.pet_q_watch, R.string.pet_a_watch, TourTarget.SETTINGS_EXTRAS, item = SettingsItems.EXTRAS),
+    topic(R.string.pet_q_what_is, R.string.pet_a_what_is, TourTarget.VERDICT_CARD, MainTab.HOME),
+    topic(R.string.pet_q_internet, R.string.pet_a_internet, null),
+    topic(R.string.pet_q_iphone, R.string.pet_a_iphone, null),
+    topic(R.string.pet_q_data, R.string.pet_a_data, null),
+    topic(R.string.pet_q_update, R.string.pet_a_update, null),
+    topic(R.string.pet_q_stages, R.string.pet_a_stages, TourTarget.PET_CARD, MainTab.HOME),
+    topic(R.string.pet_q_share, R.string.pet_a_share, TourTarget.PET_CARD, MainTab.HOME),
+    topic(R.string.pet_q_theme, R.string.pet_a_theme, TourTarget.SETTINGS_PET, item = SettingsItems.PET),
+    topic(R.string.pet_q_accessories, R.string.pet_a_accessories, TourTarget.SETTINGS_PET, item = SettingsItems.PET),
+    topic(R.string.pet_q_ban, R.string.pet_a_ban, null),
+    topic(R.string.pet_q_about, R.string.pet_a_about, TourTarget.SETTINGS_INFO, item = SettingsItems.INFO)
 )
 
 /** One live check of the phone/app state for "Check my phone". */

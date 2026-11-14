@@ -287,8 +287,8 @@
     <string name="pet_a_add_app">Indstillinger → Understøttede apps → „Vælg blandt installerede“, og vælg din leverings- eller taxa-app.</string>
     <string name="pet_q_calibrate">Hvordan kalibrerer jeg en app?</string>
     <string name="pet_a_calibrate">Åbn appen og vent på en ordre, og kom så tilbage: Indstillinger → Understøttede apps → blyanten ved appen. Tryk på prisen, afstanden og tiden — færdig.</string>
-    <string name="pet_q_currency">Hvilken valuta skal jeg vælge?</string>
-    <string name="pet_a_currency">Dit lands valuta eller den, din leverings- eller taxa-app viser priser i. Alle satser og grænser regnes i den.</string>
+    <string name="pet_q_currency">Hvilke valutaer findes der, og hvilken skal jeg vælge?</string>
+    <string name="pet_a_currency" formatted="false">Der er 26 valutaer 💰: PLN, EUR, UAH, RON, MDL, CZK, HUF, BGN, SEK, NOK, DKK, CHF, GBP, USD, RUB, KZT, BYN, UZS, GEL, AMD, AZN, KGS, TRY, BRL, INR, JPY. Vælg den, din taxa- eller leveringsapp viser priser i: Indstillinger → Valuta. Grænserne i profilerne regner jeg selv om.</string>
     <string name="pet_q_tax">Hvordan angiver jeg min skat?</string>
     <string name="pet_a_tax">Indstillinger → Skat: indtast satsen i %. Den trækkes fra sammen med brændstof, og kortet viser, hvad du reelt beholder.</string>
     <string name="pet_q_vehicle">Hvor indtaster jeg bil og brændstof?</string>
@@ -296,17 +296,17 @@
     <string name="pet_q_thresholds">Hvordan sætter jeg mine egne grænser?</string>
     <string name="pet_a_thresholds">Indstillinger → Egne grænser: sats pr. km for dårlige, middel og gode ordrer. De erstatter profilen.</string>
     <string name="pet_q_presets">Hvad er profiler?</string>
-    <string name="pet_a_presets">Færdige strategier (sparsom, balance, kun rentable), der afgør, hvilke ordrer er gode. Vælg på fanen „Profiler“.</string>
+    <string name="pet_a_presets" formatted="false">Profiler er færdige strategier 🎯 “Økonomi” — fra 1,5 zł/km og 0,5 zł/min, “Balance” — fra 2,2 zł/km og 0,8 zł/min, “Kun rentable” — fra 3,0 zł/km og 1,1 zł/min. I en anden valuta regner jeg selv om. Vælg under “Tilstande”, egne tal — Indstillinger → Dine egne taksttærskler.</string>
     <string name="pet_q_stats">Hvor er min indtjening og statistik?</string>
-    <string name="pet_a_stats">På fanen „Statistik“: ordrer, indtjening, afstand og gennemsnitssats for dag, uge eller måned.</string>
+    <string name="pet_a_stats" formatted="false">Fanen “Statistik” 📊: ordrer, indtjening, kilometer, gennemsnitssats og ægte timeløn — for i dag, ugen, måneden eller året. Der finder du også app-sammenligning, præstationer og stimer.</string>
     <string name="pet_q_verdict">Hvad betyder grøn og rød?</string>
-    <string name="pet_a_verdict">Grøn — ordren kan betale sig med dine indstillinger, rød — ikke. Satsen pr. km og minut er allerede efter brændstof.</string>
+    <string name="pet_a_verdict" formatted="false">🟢 Grønt kort — ordren kan betale sig med dine indstillinger, 🟡 gult — middel, 🔴 rødt — kan ikke betale sig, spring hellere over. Satsen pr. km og pr. minut er allerede efter brændstof.</string>
     <string name="pet_q_subscription">Hvordan virker abonnementet?</string>
     <string name="pet_a_subscription">Indstillinger → Abonnement. Først 30 minutter gratis; abonnementet er knyttet til din Google-konto og styres i Google Play.</string>
     <string name="pet_q_contact">Hvordan kontakter jeg jer?</string>
     <string name="pet_a_contact">Indstillinger → Kontakt: Telegram, Instagram, TikTok eller e-mail. Vi svarer når som helst.</string>
     <string name="pet_q_pet">Hvordan vokser du?</string>
-    <string name="pet_a_pet">Jeg spiser energi fra smarte beslutninger: god ordre accepteret eller dårlig afvist — +3 til mig. Hver dag med scanning giver +5. Mere energi — højere niveau!</string>
+    <string name="pet_a_pet" formatted="false">Jeg lever af energi fra kloge beslutninger ⚡ Tager du en god ordre eller afviser en dårlig — +3, tager du en middel — +2. Hver arbejdsdag med “Active” — +5 mere, op til +10 for dage i træk. Fra beslutninger op til 60 om dagen. Mere energi — højere niveau!</string>
     <string name="pet_q_diagnostics">Noget virker ikke. Hvad skal jeg tjekke?</string>
     <string name="pet_a_diagnostics">Tryk på „🔍 Tjek min telefon“ øverst i dette vindue: jeg tjekker tilladelser, „Active“, abonnement og batteri og viser, hvad der skal rettes.</string>
     <string name="pet_q_apps">Hvilke apps virker WayArs med?</string>
@@ -333,8 +333,8 @@
     <string name="pet_a_restore">Åbn abonnementsskærmen og tryk på „Gendan køb“. Tjek, at telefonen bruger den samme Google-konto, som du betalte med.</string>
     <string name="pet_q_cancel">Hvordan opsiger jeg abonnementet?</string>
     <string name="pet_a_cancel">Google Play → din profil → Betalinger og abonnementer → Abonnementer → WayArs → Opsig.</string>
-    <string name="pet_q_language">Hvordan skifter jeg sprog?</string>
-    <string name="pet_a_language">Indstillinger → Sprog. Der er 17 sprog.</string>
+    <string name="pet_q_language">Hvilke sprog findes der, og hvordan skifter jeg?</string>
+    <string name="pet_a_language" formatted="false">Jeg taler 17 sprog 🌍: English, Polski, Українська, Русский, Deutsch, Français, Română, Čeština, Български, Magyar, Dansk, Norsk, Svenska, Azərbaycanca, Հայերեն, ქართული, Oʻzbekcha. Skift: Indstillinger → Sprog. Og ordrer læser jeg på alle sprog, også hvis din taxa- eller leveringsapp bruger et andet.</string>
     <string name="pet_q_tutorial">Hvordan ser jeg vejledningen igen?</string>
     <string name="pet_a_tutorial">Indstillinger → Vejledning, nederst i indstillingerne.</string>
     <string name="pet_q_turns_off">Hvorfor slår „Active“ sig selv fra?</string>
@@ -536,4 +536,76 @@
     <string name="settings_pet_summary">Korttema og tilbehør</string>
     <string name="tour_petset_text">Temaer til ordrekortet og widgetten samt Wayos tilbehør. De låses op, når Wayo vokser af dine kloge valg; han bærer ét tilbehør ad gangen.</string>
     <string name="tour_new2_text">Nyt: Wayo giver nu belønninger for at vokse — korttemaer, tilbehør tegnet direkte på ham, nye evner og et billede til at dele dine rekorder. Det hele ligger i Indstillinger → “Kæledyret Wayo”.</string>
+    <string name="pet_q_what_is">Hvad er WayArs, og hvordan virker det?</string>
+    <string name="pet_a_what_is" formatted="false">Jeg er din ordrehjælper 🦎 Når en ordre kommer i Uber, Bolt, Wolt eller en anden app, læser jeg på et sekund pris, afstand og tid, trækker brændstof og skat fra og viser et kort ovenpå: 🟢 tag den, 🟡 middel, 🔴 spring hellere over. Det er altid dig, der bestemmer — jeg trykker aldrig på noget. Jeg tæller også din ægte timeløn og fører statistik.</string>
+    <string name="pet_q_internet">Skal jeg bruge internet?</string>
+    <string name="pet_a_internet" formatted="false">Ikke til arbejdet 📴 Ordrer læser og beregner jeg på telefonen, og i denne chat svarer jeg også offline. Internet skal kun bruges til at købe eller tjekke abonnementet og opdatere appen.</string>
+    <string name="pet_q_iphone">Findes der en iPhone-version? Hvilken telefon skal jeg have?</string>
+    <string name="pet_a_iphone" formatted="false">Jeg bor kun på Android 🤖 — version 8.0 eller nyere, alle mærker: Samsung, Xiaomi, Pixel, Motorola og andre. Der er ingen iPhone-version: iOS tillader ikke apps at læse skærmen i andre apps.</string>
+    <string name="pet_q_data">Flytter mine data med til en ny telefon? Hvordan sletter jeg dem?</string>
+    <string name="pet_a_data" formatted="false">Alt gemmes kun på denne telefon 🔒 — ingen konti og ingen sky, så statistik og mit niveau flytter ikke med. Abonnementet gør: det hører til din Google-konto, tryk “Gendan køb”. Slet alt: Android-indstillinger → Apps → WayArs → Lagerplads → Ryd data, eller afinstaller bare appen.</string>
+    <string name="pet_q_update">Hvordan opdaterer jeg appen?</string>
+    <string name="pet_a_update" formatted="false">Via Google Play 🔄 Når en ny version kommer, viser jeg selv en opdateringsknap i appen. Eller manuelt: Google Play → WayArs → Opdater.</string>
+    <string name="pet_q_stages">Hvilke vækststadier har Wayo?</string>
+    <string name="pet_a_stages" formatted="false">Jeg har fem stadier 🥚→👑: Æg (niveau 1), Baby (2–4), Teenager (5–9), Pro (10–19) og Legende (20+). Niveauerne fortsætter efter 20. Jeg vokser ærligt: teenager efter cirka en uges arbejde, pro efter en måned, legende efter 4–6 måneder.</string>
+    <string name="pet_q_share">Hvordan deler jeg et billede med mine rekorder?</string>
+    <string name="pet_a_share" formatted="false">Tryk 📤 på mit kort på startskærmen — jeg laver et billede: mig, mit niveau og dine rekorder. Send det i en chat eller din story 📸</string>
+    <string name="pet_q_theme">Hvordan skifter jeg korttema?</string>
+    <string name="pet_a_theme" formatted="false">Indstillinger → Kæledyret Wayo → Korttema 🎨 Temaer låses op, mens jeg vokser: Neon (niv. 5), Karbon (10), Guld (15), Legende (20). Temaet ændrer både ordrekortet og widgetten.</string>
+    <string name="pet_q_accessories">Hvordan giver jeg Wayo tilbehør på?</string>
+    <string name="pet_a_accessories" formatted="false">Indstillinger → Kæledyret Wayo → Wayos tilbehør 😎 Kasket (niv. 3), krone (6), solbriller (8), høretelefoner (10), guldkæde (13), legendenøgle (16). Jeg bærer ét ad gangen: tryk — på, tryk igen — af.</string>
+    <string name="pet_q_ban">Kan Uber eller Bolt blokere mig for det?</string>
+    <string name="pet_a_ban" formatted="false">Jeg trykker ikke på og ændrer intet i deres apps 👀 — jeg læser kun skærmen, ligesom dine øjne, og viser et tip. Ordrer accepterer du selv. Men hver platform har sine egne regler, og dem kan jeg ikke stå inde for — beslutningen er altid din.</string>
+    <string name="pet_q_about">Hvem har lavet WayArs?</string>
+    <string name="pet_a_about" formatted="false">Mig og WayArs er lavet af AP STUDIO, en uafhængig udvikler 💚 Version og beskrivelse: Indstillinger → Om appen. Har du en idé eller fundet en fejl? Skriv på Telegram t.me/wayars_app eller til apstudiomobile@gmail.com.</string>
+    <string-array name="chat_v_intro">
+        <item>Nemt!</item>
+        <item>Åh, det ved jeg 😎</item>
+        <item>Se her 👇</item>
+        <item>Godt spørgsmål!</item>
+        <item>Jeg fortæller 🦎</item>
+        <item>Værsgo 💚</item>
+    </string-array>
+    <string-array name="chat_v_intro_problem">
+        <item>Det klarer vi 🔧</item>
+        <item>Bare rolig, vi fikser det!</item>
+        <item>Det sker. Trin for trin:</item>
+        <item>Okay, lad os se 👀</item>
+    </string-array>
+    <string-array name="chat_v_outro_show">
+        <item>Tryk “Vis” — jeg fremhæver, hvor det er 👇</item>
+        <item>Jeg kan vise dig, hvor det er: knappen nedenfor.</item>
+        <item>Skal jeg tage dig derhen? Knappen nedenfor 👇</item>
+    </string-array>
+    <string-array name="chat_v_outro">
+        <item>Hvad kan jeg ellers hjælpe med?</item>
+        <item>Spørg bare løs 😉</item>
+        <item>Flere spørgsmål? Jeg er her!</item>
+        <item>Altid 💚</item>
+    </string-array>
+    <string-array name="chat_v_again">
+        <item>Igen 🙂</item>
+        <item>Som jeg sagde:</item>
+    </string-array>
+    <string-array name="chat_v_hello">
+        <item>Hej! 👋 Hvad kan jeg hjælpe med?</item>
+        <item>Hey! Jeg er her 🦎 Hvad har du brug for?</item>
+        <item>Hej hej! Spørg mig om alt i appen.</item>
+    </string-array>
+    <string-array name="chat_v_thanks">
+        <item>Selv tak! 💚</item>
+        <item>Godt jeg kunne hjælpe! Gode ture 🚕</item>
+        <item>Altid! Det er en fornøjelse 🦎</item>
+    </string-array>
+    <string-array name="chat_v_how">
+        <item>Super! Især når du tager gode ordrer 😄</item>
+        <item>Fint, jeg vokser stille og roligt 🌱 Hvordan går din vagt?</item>
+        <item>Godt! Jeg tæller kilometer 🦎</item>
+    </string-array>
+    <string-array name="chat_v_unknown">
+        <item>Hmm, det ved jeg ikke endnu 🤔 Sig det på en anden måde eller vælg et spørgsmål nedenfor.</item>
+        <item>Ups, her er jeg ikke sikker. Spørg på en anden måde — eller se, hvad folk ofte spørger om:</item>
+        <item>Det har jeg ikke i hukommelsen 😅 Skriv til udviklerne — de svarer; indtil da det populære:</item>
+    </string-array>
+    <string name="chat_related">Folk spørger også:</string>
 </resources>

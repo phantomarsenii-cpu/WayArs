@@ -117,13 +117,42 @@ private class ChatMsg(
     val step: TourStep? = null,
     val chips: List<PetHelpTopic> = emptyList(),
     val phoneCheck: Boolean = false,
-    val telegram: Boolean = false
+    val telegram: Boolean = false,
+    /** Chips are "people also ask" suggestions (shown with a small heading). */
+    val related: Boolean = false
 )
 
 /** Topics whose problems are worth an automatic phone check under the answer. */
 private val PROBLEM_KEYS = setOf("diagnostics", "overlay", "turns_off", "access", "active", "background")
 private val POPULAR_KEYS = listOf("overlay", "diagnostics", "wrong_numbers", "hourly", "invite")
 internal val PERSONAL_KEYS = listOf("my_today", "my_week", "my_month")
+/** Questions about something that went wrong: Wayo answers with empathy, not "Easy!". */
+private val FIX_KEYS = setOf("overlay", "diagnostics", "turns_off", "access", "wrong_numbers", "stats_count", "restore", "no_time", "move_card", "battery")
+/** What drivers usually ask next — offered under an answer so the chat flows like a conversation. */
+private val RELATED: Map<String, List<String>> = mapOf(
+    "overlay" to listOf("diagnostics", "battery"), "diagnostics" to listOf("overlay", "turns_off"),
+    "wrong_numbers" to listOf("calibrate", "reset_calibration"), "calibrate" to listOf("wrong_numbers", "add_app"),
+    "add_app" to listOf("calibrate", "apps"), "apps" to listOf("add_app", "several"), "several" to listOf("apps", "compare"),
+    "language" to listOf("currency", "country"), "currency" to listOf("country", "presets"), "country" to listOf("currency", "language"),
+    "presets" to listOf("thresholds", "verdict"), "thresholds" to listOf("presets", "verdict"), "verdict" to listOf("net", "buttons"),
+    "net" to listOf("vehicle", "tax"), "vehicle" to listOf("net", "tax"), "tax" to listOf("net", "partner"),
+    "partner" to listOf("weekly_fee", "hourly"), "weekly_fee" to listOf("partner", "hourly"),
+    "stats" to listOf("hourly", "compare"), "hourly" to listOf("compare", "stats_count"), "compare" to listOf("hourly", "achievements"),
+    "stats_count" to listOf("buttons", "stats"), "buttons" to listOf("stats_count", "verdict"),
+    "subscription" to listOf("trial", "cancel"), "trial" to listOf("subscription", "invite"), "restore" to listOf("subscription", "data"),
+    "cancel" to listOf("subscription", "restore"), "invite" to listOf("subscription", "trial"),
+    "pet" to listOf("stages", "rewards"), "stages" to listOf("rewards", "pet"), "rewards" to listOf("theme", "accessories"),
+    "theme" to listOf("accessories", "rewards"), "accessories" to listOf("theme", "stages"), "petting" to listOf("pet", "share"),
+    "share" to listOf("achievements", "stages"), "achievements" to listOf("share", "hourly"),
+    "privacy" to listOf("data", "internet"), "data" to listOf("privacy", "restore"), "internet" to listOf("privacy", "iphone"),
+    "iphone" to listOf("update", "internet"), "update" to listOf("about", "iphone"), "what_is" to listOf("verdict", "apps"),
+    "ban" to listOf("clicks", "privacy"), "clicks" to listOf("ban", "buttons"),
+    "summaries" to listOf("widget", "watch"), "widget" to listOf("summaries", "watch"), "watch" to listOf("widget", "summaries"),
+    "about" to listOf("contact", "update"), "contact" to listOf("about", "diagnostics"),
+    "turns_off" to listOf("battery", "access"), "battery" to listOf("turns_off", "background"), "background" to listOf("battery", "several"),
+    "access" to listOf("turns_off", "overlay"), "pickup" to listOf("net", "no_time"), "no_time" to listOf("pickup", "verdict"),
+    "move_card" to listOf("buttons", "verdict"), "tutorial" to listOf("what_is", "contact"), "documents" to listOf("privacy", "about")
+)
 
 /**
  * The driver's own numbers for a topic (earnings, per hour, best app, records, invite code,
@@ -232,13 +261,39 @@ fun WayoChatDialog(
     }
     val checks = remember(tick, isActive, isSubscribed) { phoneChecks(context, isActive, isSubscribed, onShow) }
 
+    // A different phrasing every time (never the same one twice in a row), so Wayo doesn't sound canned.
+    val lastPick = remember { HashMap<Int, Int>() }
+    fun pick(arr: Int): String {
+        val items = context.resources.getStringArray(arr)
+        if (items.size < 2) return items.firstOrNull() ?: ""
+        var i = kotlin.random.Random.nextInt(items.size)
+        if (i == lastPick[arr]) i = (i + 1) % items.size
+        lastPick[arr] = i
+        return items[i]
+    }
+
     suspend fun answer(t: PetHelpTopic?, key: String) {
         // The driver's own numbers first (that's usually what they asked), then the explanation.
         personalLine(context, key, isSubscribed)?.let { messages.add(ChatMsg(false, "📊 $it")) }
         if (t == null) { lastKey = "stats"; return }
+        val again = key == lastKey
         lastKey = key
         val needsCheck = key in PROBLEM_KEYS
-        messages.add(ChatMsg(false, context.getString(t.answer), step = t.step, phoneCheck = needsCheck))
+        val intro = pick(
+            when {
+                again -> R.array.chat_v_again
+                key in FIX_KEYS || needsCheck -> R.array.chat_v_intro_problem
+                else -> R.array.chat_v_intro
+            }
+        )
+        val outro = when {
+            t.step != null -> pick(R.array.chat_v_outro_show)
+            kotlin.random.Random.nextInt(3) == 0 -> pick(R.array.chat_v_outro)
+            else -> null
+        }
+        val text = intro + " " + context.getString(t.answer) + (outro?.let { "\n\n" + it } ?: "")
+        val next = if (again) emptyList() else topics(RELATED[key].orEmpty())
+        messages.add(ChatMsg(false, text, step = t.step, phoneCheck = needsCheck, chips = next, related = next.isNotEmpty()))
     }
 
     fun respond(text: String, asTopic: PetHelpTopic? = null) {
@@ -268,16 +323,16 @@ fun WayoChatDialog(
                     ChatMsg(
                         false,
                         when (r.kind) {
-                            WayoBrain.SmallTalk.HELLO -> context.getString(R.string.chat_hello)
-                            WayoBrain.SmallTalk.THANKS -> context.getString(R.string.chat_thanks)
+                            WayoBrain.SmallTalk.HELLO -> pick(R.array.chat_v_hello)
+                            WayoBrain.SmallTalk.THANKS -> pick(R.array.chat_v_thanks)
                             WayoBrain.SmallTalk.WHO -> context.getString(R.string.chat_who, name)
                             WayoBrain.SmallTalk.BYE -> context.getString(R.string.chat_bye)
-                            WayoBrain.SmallTalk.HOW_ARE_YOU -> context.getString(R.string.chat_how)
+                            WayoBrain.SmallTalk.HOW_ARE_YOU -> pick(R.array.chat_v_how)
                         }
                     )
                 )
                 is WayoBrain.Reply.Unknown -> messages.add(
-                    ChatMsg(false, context.getString(R.string.chat_unknown), chips = topics(POPULAR_KEYS.take(4)), telegram = true)
+                    ChatMsg(false, pick(R.array.chat_v_unknown), chips = topics(POPULAR_KEYS.take(4)), telegram = true)
                 )
             }
         }
@@ -343,6 +398,10 @@ fun WayoChatDialog(
                             }
                         }
                         if (m.chips.isNotEmpty()) {
+                            if (m.related) Text(
+                                stringResource(R.string.chat_related), color = WaTextSecondary, fontSize = 11.sp,
+                                modifier = Modifier.padding(top = 6.dp)
+                            )
                             FlowRow(
                                 horizontalArrangement = Arrangement.spacedBy(6.dp),
                                 verticalArrangement = Arrangement.spacedBy(6.dp),
