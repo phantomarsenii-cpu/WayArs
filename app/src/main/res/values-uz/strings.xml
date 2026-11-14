@@ -522,5 +522,14 @@
     <string name="share_footer">WayArs — har bir buyurtmani qabul qilishingdan oldin tekshiradi</string>
     <string name="share_text">WayArs’dagi Wayo’m %1$d darajaga yetdi! 🦎 %2$s</string>
     <string name="pet_q_rewards">Wayo o‘sganda nima olaman?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo faqat aqlli qarorlardan o‘sadi. Mukofotlar: buyurtma kartasi va vidjet uchun mavzular — Neon (daraja 5), Karbon (10), Oltin (15), Afsona (20), Sozlamalar → Qo‘shimcha bo‘limida tanlanadi. Yangi qobiliyatlar: ma’lumotlaringga ko‘ra kun maslahati (daraja 5), hafta yakunida eng yaxshi vaqtlar prognozi (10), kartada “buyurtmalaringning X%idan yaxshiroq” (20). 📤 esa Wayo va rekordlaring bilan rasm tayyorlaydi.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo faqat aqlli qarorlardan o‘sadi. Mukofotlar: aksessuarlar — kepka (daraja 3), toj (6), quyosh ko‘zoynagi (8), quloqchinlar (10), oltin zanjir (13), afsona kaliti (16); buyurtma kartasi va vidjet mavzulari — Neon (5), Karbon (10), Oltin (15), Afsona (20). Sozlamalar → Qo‘shimcha bo‘limida tanlanadi. Yangi qobiliyatlar: ma’lumotlaringga ko‘ra kun maslahati (daraja 5), hafta yakunida eng yaxshi vaqtlar prognozi (10), kartada “buyurtmalaringning X%idan yaxshiroq” (20). 📤 esa Wayo va rekordlaring bilan rasm ulashadi.</string>
+    <string name="acc_cap">Kepka</string>
+    <string name="acc_crown">Toj</string>
+    <string name="acc_sunglasses">Quyosh ko‘zoynagi</string>
+    <string name="acc_headphones">Quloqchinlar</string>
+    <string name="acc_chain">Oltin zanjir</string>
+    <string name="acc_carkey">Afsona kaliti</string>
+    <string name="settings_acc_title">Wayo aksessuarlari</string>
+    <string name="settings_acc_desc">Bosh, ko‘z, bo‘yin va Wayo yonida bittadan. Daraja bilan ochiladi. Kepka va toj Professional dubulg‘asi va Afsona tojiga sig‘maydi.</string>
+    <string name="pet_unlocked_accessory">Yangi aksessuar: %1$s 🎁</string>
 </resources>

@@ -59,7 +59,7 @@ object WayoKeywords {
         "achievements" to listOf("достижения", "серии", "серия", "рекорд", "значки", "награды", "achievements", "streak", "record", "badges", "osiągnięcia", "seria", "rekord", "odznaki", "досягнення", "серії"),
         "invite" to listOf("пригласить", "приглашение", "реферал", "пригласить друга", "бесплатный месяц", "месяц бесплатно", "код приглашения", "invite", "referral", "invite friend", "free month", "zaprosić", "polecić", "kod zaproszenia", "miesiąc za darmo", "запросити", "запрошення"),
         "watch" to listOf("часы", "смарт часы", "смарт-часы", "galaxy watch", "wear os", "вибрация", "на часы", "watch", "smartwatch", "vibration", "zegarek", "smartwatch", "wibracja", "годинник", "вібрація"),
-        "rewards" to listOf("награды", "награда", "что даёт уровень", "что дает рост", "зачем растить", "что я получу", "бонусы", "плюшки", "темы", "тема карточки", "оформление", "цвет карточки", "rewards", "what do i get", "unlock", "themes", "card theme", "nagrody", "co dostanę", "motyw", "motywy", "bonusy", "нагороди", "що я отримаю", "теми"),
+        "rewards" to listOf("аксессуары", "кепка", "корона", "цепь", "наушники", "тёмные очки", "одеть wayo", "akcesoria", "czapka", "korona", "łańcuch", "accessories", "cap", "crown", "chain", "аксесуари", "награды", "награда", "что даёт уровень", "что дает рост", "зачем растить", "что я получу", "бонусы", "плюшки", "темы", "тема карточки", "оформление", "цвет карточки", "rewards", "what do i get", "unlock", "themes", "card theme", "nagrody", "co dostanę", "motyw", "motywy", "bonusy", "нагороди", "що я отримаю", "теми"),
         "petting" to listOf("погладить", "гладить", "погладь", "приласкать", "почесать", "pet wayo", "stroke", "pogłaskać", "głaskać", "погладити")
     )
 

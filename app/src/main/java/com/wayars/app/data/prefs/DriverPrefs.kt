@@ -18,6 +18,7 @@ object DriverPrefs {
     private const val KEY_WATCH = "watch_verdict_enabled"
     private const val KEY_INVITE_CODE = "invite_code"
     private const val KEY_THEME = "card_theme"
+    private const val KEY_ACCESSORIES = "pet_accessories"
 
     private val _commissionPercent = MutableStateFlow(0.0)
     val commissionPercent: StateFlow<Double> = _commissionPercent
@@ -32,6 +33,10 @@ object DriverPrefs {
     /** Name of the chosen [com.wayars.app.features.CardTheme] for the overlay card and widget. */
     val cardTheme: StateFlow<String> = _cardTheme
 
+    private val _accessories = MutableStateFlow("")
+    /** Comma-separated names of the accessories Wayo wears (see presentation.pet.Accessory). */
+    val accessories: StateFlow<String> = _accessories
+
     @Volatile private var loaded = false
 
     private fun prefs(context: Context) =
@@ -45,6 +50,7 @@ object DriverPrefs {
         _summariesEnabled.value = p.getBoolean(KEY_SUMMARIES, true)
         _watchEnabled.value = p.getBoolean(KEY_WATCH, false)
         _cardTheme.value = p.getString(KEY_THEME, "CLASSIC") ?: "CLASSIC"
+        _accessories.value = p.getString(KEY_ACCESSORIES, "") ?: ""
         loaded = true
     }
 
@@ -69,6 +75,11 @@ object DriverPrefs {
     fun setCardTheme(context: Context, name: String) {
         prefs(context).edit().putString(KEY_THEME, name).apply()
         _cardTheme.value = name
+    }
+
+    fun setAccessories(context: Context, value: String) {
+        prefs(context).edit().putString(KEY_ACCESSORIES, value).apply()
+        _accessories.value = value
     }
 
     /** A short personal code put into invite links (no account needed, never leaves the phone otherwise). */

@@ -64,7 +64,9 @@ fun PetArt(
     /** Change this to make the pet hop once (e.g. when it is tapped). */
     hopKey: Int = 0,
     /** True while the user strokes the pet: eyes close with pleasure, it sways and hearts rise. */
-    petting: Boolean = false
+    petting: Boolean = false,
+    /** Accessories to wear (only those that fit the picture's pose are drawn). */
+    accessories: Set<Accessory> = emptySet()
 ) {
     val context = LocalContext.current
     fun lookup(name: String) = context.resources.getIdentifier(name, "drawable", context.packageName)
@@ -219,6 +221,27 @@ fun PetArt(
                         contentScale = ContentScale.Fit,
                         modifier = Modifier.fillMaxSize()
                     )
+                }
+                // Accessories, positioned from the picture's anchor points; they move with Wayo.
+                val anchor = remember(resId) { PetAnchors.of(context, resId) }
+                if (anchor != null && accessories.isNotEmpty()) {
+                    val worn = accessories.filter { it.slot in anchor.slots }.sortedBy { it.slot.ordinal }
+                    val bitmaps = worn.map { androidx.compose.ui.res.ImageBitmap.imageResource(it.image) }
+                    Canvas(Modifier.fillMaxSize()) {
+                        val k = size.minDimension / 512f
+                        val ox = (size.width - 512f * k) / 2f
+                        val oy = (size.height - 512f * k) / 2f
+                        worn.forEachIndexed { i, a ->
+                            val b = bitmaps[i]
+                            val r = PetAnchors.rect(a, anchor, b.width, b.height)
+                            drawImage(
+                                b,
+                                dstOffset = androidx.compose.ui.unit.IntOffset((ox + r[0] * k).toInt(), (oy + r[1] * k).toInt()),
+                                dstSize = androidx.compose.ui.unit.IntSize((r[2] * k).toInt().coerceAtLeast(1), (r[3] * k).toInt().coerceAtLeast(1)),
+                                filterQuality = androidx.compose.ui.graphics.FilterQuality.High
+                            )
+                        }
+                    }
                 }
             } else {
                 Canvas(Modifier.fillMaxSize()) { drawChameleon(stage, mood, blink = petting || slow in 0.0f..0.03f, t = t) }

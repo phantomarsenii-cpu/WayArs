@@ -522,5 +522,14 @@
     <string name="share_footer">WayArs — minden rendelést ellenőriz, mielőtt elfogadod</string>
     <string name="share_text">A Wayóm a WayArs-ban elérte a %1$d. szintet! 🦎 %2$s</string>
     <string name="pet_q_rewards">Mit kapok, ha Wayo nő?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo csak okos döntésektől nő. Jutalmak: témák a rendeléskártyához és a widgethez — Neon (5. szint), Karbon (10), Arany (15), Legenda (20), a Beállítások → Extrák alatt választhatók. Új képességek: a nap tippje az adataidból (5. szint), a legjobb időpontjaid előrejelzése a heti összesítőben (10), „jobb, mint a rendeléseid X%-a” a kártyán (20). A 📤 pedig képet készít Wayóról a rekordjaiddal.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo csak okos döntésektől nő. Jutalmak: kiegészítők — sapka (3. szint), korona (6), napszemüveg (8), fejhallgató (10), aranylánc (13), legenda kulcs (16); témák a rendeléskártyához és a widgethez — Neon (5), Karbon (10), Arany (15), Legenda (20). A Beállítások → Extrák alatt választhatók. Új képességek: a nap tippje az adataidból (5. szint), a legjobb időpontjaid előrejelzése a heti összesítőben (10), „jobb, mint a rendeléseid X%-a” a kártyán (20). A 📤 pedig képet oszt meg Wayóról a rekordjaiddal.</string>
+    <string name="acc_cap">Sapka</string>
+    <string name="acc_crown">Korona</string>
+    <string name="acc_sunglasses">Napszemüveg</string>
+    <string name="acc_headphones">Fejhallgató</string>
+    <string name="acc_chain">Aranylánc</string>
+    <string name="acc_carkey">Legenda kulcs</string>
+    <string name="settings_acc_title">Wayo kiegészítői</string>
+    <string name="settings_acc_desc">Egy-egy a fejre, szemre, nyakra és Wayo mellé. A szinttel nyílnak meg. A sapka és a korona nem fér a Profi sisakjára és a Legenda koronájára.</string>
+    <string name="pet_unlocked_accessory">Új kiegészítő: %1$s 🎁</string>
 </resources>

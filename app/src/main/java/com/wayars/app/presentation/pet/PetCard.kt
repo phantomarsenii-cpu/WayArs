@@ -203,6 +203,11 @@ fun PetCard(
         greeting = null
     }
 
+    val accessoriesPref by com.wayars.app.data.prefs.DriverPrefs.accessories.collectAsState()
+    val wornAccessories = remember(accessoriesPref, pet.level) {
+        Accessory.parse(accessoriesPref).filter { it.unlocked(pet.level) }.toSet()
+    }
+
     val reactionFresh = pet.reaction != PetState.Reaction.NONE && now - pet.reactionAt < REACTION_MS
     val mood = when {
         helpOpen -> PetMood.HELPER
@@ -240,7 +245,8 @@ fun PetCard(
         PetMood.COOL -> String.format(praiseSmart[pick % praiseSmart.size], pet.lastGain)
         PetMood.EATING -> stringResource(R.string.pet_say_eating, pet.lastGain)
         PetMood.LEVEL_UP -> stringResource(R.string.pet_say_level_up, pet.level) +
-            (com.wayars.app.features.CardTheme.unlockedAt(pet.level)?.let { " " + stringResource(R.string.pet_unlocked_theme, stringResource(it.nameRes)) } ?: "")
+            (com.wayars.app.features.CardTheme.unlockedAt(pet.level)?.let { " " + stringResource(R.string.pet_unlocked_theme, stringResource(it.nameRes)) } ?: "") +
+            (Accessory.unlockedAt(pet.level)?.let { " " + stringResource(R.string.pet_unlocked_accessory, stringResource(it.nameRes)) } ?: "")
         PetMood.SLEEPING -> stringResource(R.string.pet_say_sleeping)
         PetMood.BREAK -> stringResource(R.string.pet_say_break)
         PetMood.SAD -> stringResource(R.string.pet_say_sad)
@@ -273,6 +279,7 @@ fun PetCard(
                 mood = mood,
                 hopKey = hopKey,
                 petting = petting,
+                accessories = wornAccessories,
                 modifier = Modifier
                     .size(108.dp)
                     .clip(RoundedCornerShape(18.dp))

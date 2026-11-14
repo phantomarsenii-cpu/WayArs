@@ -76,6 +76,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -2392,6 +2393,8 @@ private fun ExtrasSection() {
         AnimatedVisibility(visible = expanded, enter = expandVertically(), exit = shrinkVertically()) {
         Column(modifier = Modifier.padding(top = 10.dp)) {
         CardThemePicker()
+        Spacer(Modifier.padding(top = 10.dp))
+        AccessoryPicker()
         Spacer(Modifier.padding(top = 8.dp))
         ExtrasToggle(
             title = stringResource(R.string.settings_summaries_title),
@@ -2508,6 +2511,57 @@ private fun CardThemePicker() {
                 )
                 Text(
                     if (open) stringResource(t.nameRes) else "🔒 " + stringResource(t.nameRes) + " · " + stringResource(R.string.theme_locked, t.minLevel),
+                    color = if (open) MaterialTheme.colorScheme.onSurface else WaTextSecondary,
+                    fontSize = 12.sp,
+                    modifier = Modifier.padding(start = 6.dp)
+                )
+            }
+        }
+    }
+}
+
+/** Wayo's accessories (one per slot: head, eyes, neck, next to him), unlocked as Wayo grows. */
+@OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+@Composable
+private fun AccessoryPicker() {
+    val context = LocalContext.current
+    val level = com.wayars.app.pet.PetState.state.collectAsState().value.level
+    val pref by com.wayars.app.data.prefs.DriverPrefs.accessories.collectAsState()
+    val worn = com.wayars.app.presentation.pet.Accessory.parse(pref)
+    Text(stringResource(R.string.settings_acc_title), color = MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.bodyLarge)
+    Text(
+        stringResource(R.string.settings_acc_desc),
+        color = WaTextSecondary,
+        style = MaterialTheme.typography.bodySmall,
+        modifier = Modifier.padding(top = 2.dp, bottom = 8.dp)
+    )
+    androidx.compose.foundation.layout.FlowRow(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        com.wayars.app.presentation.pet.Accessory.values().forEach { a ->
+            val open = a.unlocked(level)
+            val on = open && a in worn
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(if (on) WaNeonGreen.copy(alpha = 0.18f) else WaSurfaceVariant)
+                    .border(1.dp, if (on) WaNeonGreen else Color.Transparent, RoundedCornerShape(12.dp))
+                    .clickable(enabled = open) {
+                        // One accessory per slot: wearing a new hat takes the old one off.
+                        val next = if (on) worn - a else worn.filter { it.slot != a.slot }.toSet() + a
+                        com.wayars.app.data.prefs.DriverPrefs.setAccessories(context, next.joinToString(",") { it.name })
+                    }
+                    .padding(horizontal = 8.dp, vertical = 5.dp)
+            ) {
+                androidx.compose.foundation.Image(
+                    painter = androidx.compose.ui.res.painterResource(a.image),
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp).graphicsLayer { alpha = if (open) 1f else 0.35f }
+                )
+                Text(
+                    if (open) stringResource(a.nameRes) else "🔒 " + stringResource(a.nameRes) + " · " + stringResource(R.string.theme_locked, a.minLevel),
                     color = if (open) MaterialTheme.colorScheme.onSurface else WaTextSecondary,
                     fontSize = 12.sp,
                     modifier = Modifier.padding(start = 6.dp)

@@ -104,6 +104,21 @@ object ShareCard {
                 val size = 620f
                 val left = (w - size) / 2f
                 cv.drawBitmap(img, null, RectF(left, y + 30f, left + size, y + 30f + size), Paint(Paint.FILTER_BITMAP_FLAG))
+                // Wayo's accessories on the share picture too.
+                val anchor = com.wayars.app.presentation.pet.PetAnchors.of(context, res)
+                if (anchor != null) {
+                    val k = size / 512f
+                    com.wayars.app.presentation.pet.Accessory.parse(DriverPrefs.accessories.value)
+                        .filter { it.unlocked(pet.level) && it.slot in anchor.slots }
+                        .sortedBy { it.slot.ordinal }
+                        .forEach { a ->
+                            BitmapFactory.decodeResource(context.resources, a.image)?.let { ab ->
+                                val r = com.wayars.app.presentation.pet.PetAnchors.rect(a, anchor, ab.width, ab.height)
+                                val l = left + r[0] * k; val t = y + 30f + r[1] * k
+                                cv.drawBitmap(ab, null, RectF(l, t, l + r[2] * k, t + r[3] * k), Paint(Paint.FILTER_BITMAP_FLAG))
+                            }
+                        }
+                }
                 y += 30f + size
             }
         }
