@@ -522,7 +522,7 @@
     <string name="share_footer">WayArs — sjekker hvert oppdrag før du tar det</string>
     <string name="share_text">Min Wayo i WayArs har nådd nivå %1$d! 🦎 %2$s</string>
     <string name="pet_q_rewards">Hva får jeg når Wayo vokser?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo vokser bare av smarte avgjørelser. Belønninger: temaer for oppdragskortet og widgeten — Neon (nivå 5), Karbon (10), Gull (15), Legende (20), velges under Innstillinger → Ekstra. Nye evner: dagens tips fra dine data (nivå 5), prognose for dine beste tider i ukens resultat (10), «bedre enn X % av oppdragene dine» på kortet (20). Og 📤 lager et bilde av Wayo med rekordene dine til deling. Tilbehør tegnet rett på Wayo: caps (niv. 3), krone (6), solbriller (8), hodetelefoner (10), gullkjede (13), legendenøkkel (16) — han bruker ett om gangen, velg i Innstillinger → Ekstra.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo vokser bare av smarte avgjørelser. Belønninger: temaer for oppdragskortet og widgeten — Neon (nivå 5), Karbon (10), Gull (15), Legende (20), velges under Innstillinger → Kjæledyret Wayo. Nye evner: dagens tips fra dine data (nivå 5), prognose for dine beste tider i ukens resultat (10), «bedre enn X % av oppdragene dine» på kortet (20). Og 📤 lager et bilde av Wayo med rekordene dine til deling. Tilbehør tegnet rett på Wayo: caps (niv. 3), krone (6), solbriller (8), hodetelefoner (10), gullkjede (13), legendenøkkel (16) — han bruker ett om gangen, velg i Innstillinger → Kjæledyret Wayo.</string>
     <string name="acc_cap">Caps</string>
     <string name="acc_crown">Krone</string>
     <string name="acc_sunglasses">Solbriller</string>
@@ -532,4 +532,8 @@
     <string name="settings_acc_title">Wayos tilbehør</string>
     <string name="settings_acc_desc">Låses opp med nivå.</string>
     <string name="pet_unlocked_accessory">Nytt tilbehør: %1$s 🎁</string>
+    <string name="settings_pet_title">Kjæledyret Wayo</string>
+    <string name="settings_pet_summary">Korttema og tilbehør</string>
+    <string name="tour_petset_text">Temaer for ordrekortet og widgeten og Wayos tilbehør. De låses opp når Wayo vokser av de smarte valgene dine; han bruker ett tilbehør om gangen.</string>
+    <string name="tour_new2_text">Nytt: Wayo gir nå belønninger for å vokse — korttemaer, tilbehør tegnet rett på ham, nye evner og et bilde for å dele rekordene dine. Alt finnes i Innstillinger → «Kjæledyret Wayo».</string>
 </resources>

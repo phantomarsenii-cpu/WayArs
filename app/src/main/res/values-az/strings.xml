@@ -522,7 +522,7 @@
     <string name="share_footer">WayArs — hər sifarişi qəbul etməzdən əvvəl yoxlayır</string>
     <string name="share_text">WayArs-dakı Wayo-m %1$d səviyyəyə çatdı! 🦎 %2$s</string>
     <string name="pet_q_rewards">Wayo böyüyəndə nə qazanıram?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo yalnız ağıllı qərarlardan böyüyür. Mükafatlar: sifariş kartı və vidcet üçün mövzular — Neon (səv. 5), Karbon (10), Qızıl (15), Əfsanə (20), Parametrlər → Əlavələr bölməsində seçilir. Yeni bacarıqlar: məlumatlarına görə günün məsləhəti (səv. 5), həftənin yekununda ən yaxşı vaxtların proqnozu (10), kartda “sifarişlərinin X%-dən yaxşıdır” (20). 📤 isə Wayo və rekordlarınla şəkil hazırlayır. Birbaşa Wayo-nun üzərində çəkilmiş aksesuarlar: kepka (səv. 3), tac (6), gün eynəyi (8), qulaqlıq (10), qızıl zəncir (13), əfsanə açarı (16) — eyni anda birini taxır, Parametrlər → Əlavələr bölməsində seç.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo yalnız ağıllı qərarlardan böyüyür. Mükafatlar: sifariş kartı və vidcet üçün mövzular — Neon (səv. 5), Karbon (10), Qızıl (15), Əfsanə (20), Parametrlər → Ev heyvanı Wayo bölməsində seçilir. Yeni bacarıqlar: məlumatlarına görə günün məsləhəti (səv. 5), həftənin yekununda ən yaxşı vaxtların proqnozu (10), kartda “sifarişlərinin X%-dən yaxşıdır” (20). 📤 isə Wayo və rekordlarınla şəkil hazırlayır. Birbaşa Wayo-nun üzərində çəkilmiş aksesuarlar: kepka (səv. 3), tac (6), gün eynəyi (8), qulaqlıq (10), qızıl zəncir (13), əfsanə açarı (16) — eyni anda birini taxır, Parametrlər → Ev heyvanı Wayo bölməsində seç.</string>
     <string name="acc_cap">Kepka</string>
     <string name="acc_crown">Tac</string>
     <string name="acc_sunglasses">Gün eynəyi</string>
@@ -532,4 +532,8 @@
     <string name="settings_acc_title">Wayo-nun aksesuarları</string>
     <string name="settings_acc_desc">Səviyyə ilə açılır.</string>
     <string name="pet_unlocked_accessory">Yeni aksesuar: %1$s 🎁</string>
+    <string name="settings_pet_title">Ev heyvanı Wayo</string>
+    <string name="settings_pet_summary">Kart mövzusu və aksessuarlar</string>
+    <string name="tour_petset_text">Sifariş kartı və vidcet üçün mövzular, həmçinin Wayo-nun aksessuarları. Wayo ağıllı qərarlarınızdan böyüdükcə açılır; eyni anda bir aksessuar taxır.</string>
+    <string name="tour_new2_text">Yeniliklər: Wayo indi böyüdükcə mükafat verir — kart mövzuları, birbaşa onun üzərində çəkilmiş aksessuarlar, yeni bacarıqlar və rekordlarınızı paylaşmaq üçün şəkil. Hamısı Parametrlər → «Ev heyvanı Wayo» bölməsindədir.</string>
 </resources>

@@ -37,6 +37,7 @@ enum class TourTarget {
     SETTINGS_SUBSCRIPTION,
     SETTINGS_INFO,
     SETTINGS_PARTNER,
+    SETTINGS_PET,
     SETTINGS_EXTRAS,
     STATS_HOURLY,
     PET_CARD
@@ -68,8 +69,9 @@ object SettingsItems {
     const val PARTNER = 6
     const val PERMISSIONS = 7
     const val APPS = 8
-    const val EXTRAS = 9
-    const val INFO = 10
+    const val PET = 9
+    const val EXTRAS = 10
+    const val INFO = 11
 }
 
 object TourSteps {
@@ -88,6 +90,7 @@ object TourSteps {
         TourStep(TourTarget.SETTINGS_PARTNER, MainTab.SETTINGS, SettingsItems.PARTNER, R.string.tour_partner_title, R.string.tour_partner_text),
         TourStep(TourTarget.SETTINGS_PERMISSIONS, MainTab.SETTINGS, SettingsItems.PERMISSIONS, R.string.tour_permissions_title, R.string.tour_permissions_text),
         TourStep(TourTarget.SETTINGS_APPS, MainTab.SETTINGS, SettingsItems.APPS, R.string.tour_apps_title, R.string.tour_apps_text),
+        TourStep(TourTarget.SETTINGS_PET, MainTab.SETTINGS, SettingsItems.PET, R.string.settings_pet_title, R.string.tour_petset_text),
         TourStep(TourTarget.SETTINGS_EXTRAS, MainTab.SETTINGS, SettingsItems.EXTRAS, R.string.tour_extras_title, R.string.tour_extras_text),
         TourStep(null, MainTab.HOME, null, R.string.tour_final_title, R.string.tour_final_text)
     )
@@ -98,18 +101,30 @@ object TourSteps {
         TourStep(TourTarget.PET_CARD, MainTab.HOME, null, R.string.tour_pet_title, R.string.tour_pet_text),
         TourStep(TourTarget.NAV_STATS, MainTab.STATS, null, R.string.tour_stats_title, R.string.tour_stats_text),
         TourStep(TourTarget.SETTINGS_PARTNER, MainTab.SETTINGS, SettingsItems.PARTNER, R.string.tour_partner_title, R.string.tour_partner_text),
+        TourStep(TourTarget.SETTINGS_PET, MainTab.SETTINGS, SettingsItems.PET, R.string.settings_pet_title, R.string.tour_petset_text),
         TourStep(TourTarget.SETTINGS_EXTRAS, MainTab.SETTINGS, SettingsItems.EXTRAS, R.string.tour_extras_title, R.string.tour_extras_text)
+    )
+
+    /** For drivers who already saw [whatsNew]: only Wayo's rewards. */
+    val whatsNewRewards: List<TourStep> = listOf(
+        TourStep(null, MainTab.HOME, null, R.string.tour_new_title, R.string.tour_new2_text),
+        TourStep(TourTarget.SETTINGS_PET, MainTab.SETTINGS, SettingsItems.PET, R.string.settings_pet_title, R.string.tour_petset_text)
     )
 }
 
 /** Remembers whether the current "what's new" tour was already shown (bump [VERSION] for the next one). */
 object WhatsNewTour {
     private const val PREFS = "tour_prefs"
-    private const val VERSION = 1
+    private const val VERSION = 2
     private const val KEY = "whats_new_seen"
 
     fun isSeen(context: android.content.Context): Boolean =
         context.getSharedPreferences(PREFS, android.content.Context.MODE_PRIVATE).getInt(KEY, 0) >= VERSION
+
+    /** What to show: everything new for drivers who never saw it, otherwise only what came after. */
+    fun steps(context: android.content.Context): List<TourStep> =
+        if (context.getSharedPreferences(PREFS, android.content.Context.MODE_PRIVATE).getInt(KEY, 0) >= 1)
+            TourSteps.whatsNewRewards else TourSteps.whatsNew
 
     fun markSeen(context: android.content.Context) {
         context.getSharedPreferences(PREFS, android.content.Context.MODE_PRIVATE).edit().putInt(KEY, VERSION).apply()

@@ -522,7 +522,7 @@
     <string name="share_footer">WayArs — har bir buyurtmani qabul qilishingdan oldin tekshiradi</string>
     <string name="share_text">WayArs’dagi Wayo’m %1$d darajaga yetdi! 🦎 %2$s</string>
     <string name="pet_q_rewards">Wayo o‘sganda nima olaman?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo faqat aqlli qarorlardan o‘sadi. Mukofotlar: buyurtma kartasi va vidjet uchun mavzular — Neon (daraja 5), Karbon (10), Oltin (15), Afsona (20), Sozlamalar → Qo‘shimcha bo‘limida tanlanadi. Yangi qobiliyatlar: ma’lumotlaringga ko‘ra kun maslahati (daraja 5), hafta yakunida eng yaxshi vaqtlar prognozi (10), kartada “buyurtmalaringning X%idan yaxshiroq” (20). 📤 esa Wayo va rekordlaring bilan rasm tayyorlaydi. Toʻgʻridan-toʻgʻri Wayo ustiga chizilgan aksessuarlar: kepka (dar. 3), toj (6), quyosh koʻzoynagi (8), quloqchinlar (10), oltin zanjir (13), afsona kaliti (16) — bir vaqtda bittasini taqadi, Sozlamalar → Qo‘shimcha boʻlimida tanla.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo faqat aqlli qarorlardan o‘sadi. Mukofotlar: buyurtma kartasi va vidjet uchun mavzular — Neon (daraja 5), Karbon (10), Oltin (15), Afsona (20), Sozlamalar → Uy hayvoni Wayo bo‘limida tanlanadi. Yangi qobiliyatlar: ma’lumotlaringga ko‘ra kun maslahati (daraja 5), hafta yakunida eng yaxshi vaqtlar prognozi (10), kartada “buyurtmalaringning X%idan yaxshiroq” (20). 📤 esa Wayo va rekordlaring bilan rasm tayyorlaydi. Toʻgʻridan-toʻgʻri Wayo ustiga chizilgan aksessuarlar: kepka (dar. 3), toj (6), quyosh koʻzoynagi (8), quloqchinlar (10), oltin zanjir (13), afsona kaliti (16) — bir vaqtda bittasini taqadi, Sozlamalar → Uy hayvoni Wayo boʻlimida tanla.</string>
     <string name="acc_cap">Kepka</string>
     <string name="acc_crown">Toj</string>
     <string name="acc_sunglasses">Quyosh ko‘zoynagi</string>
@@ -532,4 +532,8 @@
     <string name="settings_acc_title">Wayo aksessuarlari</string>
     <string name="settings_acc_desc">Daraja bilan ochiladi.</string>
     <string name="pet_unlocked_accessory">Yangi aksessuar: %1$s 🎁</string>
+    <string name="settings_pet_title">Uy hayvoni Wayo</string>
+    <string name="settings_pet_summary">Karta mavzusi va aksessuarlar</string>
+    <string name="tour_petset_text">Buyurtma kartasi va vidjet mavzulari hamda Wayo aksessuarlari. Wayo aqlli qarorlaringizdan oʻsgani sari ochiladi; bir vaqtda bitta aksessuar taqadi.</string>
+    <string name="tour_new2_text">Yangilik: Wayo endi oʻsish uchun mukofotlar beradi — karta mavzulari, toʻgʻridan-toʻgʻri unga chizilgan aksessuarlar, yangi qobiliyatlar va rekordlaringizni ulashish uchun rasm. Hammasi Sozlamalar → «Uy hayvoni Wayo» boʻlimida.</string>
 </resources>

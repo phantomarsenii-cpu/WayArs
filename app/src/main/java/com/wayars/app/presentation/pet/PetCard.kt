@@ -90,7 +90,7 @@ val PET_HELP_TOPICS: List<PetHelpTopic> = listOf(
     topic(R.string.pet_q_contact, R.string.pet_a_contact, TourTarget.SETTINGS_INFO, item = SettingsItems.INFO),
     topic(R.string.pet_q_pet, R.string.pet_a_pet, null),
     topic(R.string.pet_q_petting, R.string.pet_a_petting, null),
-    topic(R.string.pet_q_rewards, R.string.pet_a_rewards, TourTarget.SETTINGS_EXTRAS, item = SettingsItems.EXTRAS),
+    topic(R.string.pet_q_rewards, R.string.pet_a_rewards, TourTarget.SETTINGS_PET, item = SettingsItems.PET),
     topic(R.string.pet_q_diagnostics, R.string.pet_a_diagnostics, null),
     topic(R.string.pet_q_apps, R.string.pet_a_apps, TourTarget.SETTINGS_APPS, item = SettingsItems.APPS),
     topic(R.string.pet_q_clicks, R.string.pet_a_clicks, null),

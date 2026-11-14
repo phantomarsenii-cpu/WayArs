@@ -521,7 +521,7 @@
     <string name="share_footer">WayArs — vérifie chaque course avant que tu l’acceptes</string>
     <string name="share_text">Mon Wayo dans WayArs a atteint le niveau %1$d ! 🦎 %2$s</string>
     <string name="pet_q_rewards">Qu’est-ce que je gagne quand Wayo grandit ?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo ne grandit qu’avec des décisions malines. Récompenses : des thèmes pour la carte de course et le widget — Néon (niv. 5), Carbone (10), Or (15), Légende (20), à choisir dans Paramètres → Extras. Nouvelles capacités : le conseil du jour d’après tes données (niv. 5), la prévision de tes meilleurs moments dans le bilan de la semaine (10), « mieux que X % de tes courses » sur la carte (20). Et 📤 crée une image de Wayo avec tes records à partager. Accessoires dessinés sur Wayo : casquette (niv. 3), couronne (6), lunettes de soleil (8), casque audio (10), chaîne en or (13), clé de légende (16) — il en porte un à la fois, à choisir dans Paramètres → Extras.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo ne grandit qu’avec des décisions malines. Récompenses : des thèmes pour la carte de course et le widget — Néon (niv. 5), Carbone (10), Or (15), Légende (20), à choisir dans Paramètres → Compagnon Wayo. Nouvelles capacités : le conseil du jour d’après tes données (niv. 5), la prévision de tes meilleurs moments dans le bilan de la semaine (10), « mieux que X % de tes courses » sur la carte (20). Et 📤 crée une image de Wayo avec tes records à partager. Accessoires dessinés sur Wayo : casquette (niv. 3), couronne (6), lunettes de soleil (8), casque audio (10), chaîne en or (13), clé de légende (16) — il en porte un à la fois, à choisir dans Paramètres → Compagnon Wayo.</string>
     <string name="acc_cap">Casquette</string>
     <string name="acc_crown">Couronne</string>
     <string name="acc_sunglasses">Lunettes de soleil</string>
@@ -531,4 +531,8 @@
     <string name="settings_acc_title">Accessoires de Wayo</string>
     <string name="settings_acc_desc">Se débloquent avec le niveau.</string>
     <string name="pet_unlocked_accessory">Nouvel accessoire : %1$s 🎁</string>
+    <string name="settings_pet_title">Compagnon Wayo</string>
+    <string name="settings_pet_summary">Thème de carte et accessoires</string>
+    <string name="tour_petset_text">Thèmes de la carte de commande et du widget, et accessoires de Wayo. Ils se débloquent quand Wayo grandit grâce à vos bonnes décisions ; il porte un accessoire à la fois.</string>
+    <string name="tour_new2_text">Nouveau : Wayo offre désormais des récompenses quand il grandit — thèmes de carte, accessoires dessinés sur lui, nouvelles capacités et une image pour partager vos records. Tout est dans Paramètres → « Compagnon Wayo ».</string>
 </resources>

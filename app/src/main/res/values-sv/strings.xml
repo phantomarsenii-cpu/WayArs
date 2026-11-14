@@ -522,7 +522,7 @@
     <string name="share_footer">WayArs — kollar varje uppdrag innan du tar det</string>
     <string name="share_text">Min Wayo i WayArs har nått nivå %1$d! 🦎 %2$s</string>
     <string name="pet_q_rewards">Vad får jag när Wayo växer?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo växer bara av smarta beslut. Belöningar: teman för uppdragskortet och widgeten — Neon (nivå 5), Kol (10), Guld (15), Legend (20), väljs under Inställningar → Extra. Nya förmågor: dagens tips från dina data (nivå 5), prognos för dina bästa tider i veckans resultat (10), ”bättre än X % av dina uppdrag” på kortet (20). Och 📤 skapar en bild av Wayo med dina rekord att dela. Tillbehör ritade direkt på Wayo: keps (niv. 3), krona (6), solglasögon (8), hörlurar (10), guldkedja (13), legendnyckel (16) — han bär ett åt gången, välj i Inställningar → Extra.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo växer bara av smarta beslut. Belöningar: teman för uppdragskortet och widgeten — Neon (nivå 5), Kol (10), Guld (15), Legend (20), väljs under Inställningar → Husdjuret Wayo. Nya förmågor: dagens tips från dina data (nivå 5), prognos för dina bästa tider i veckans resultat (10), ”bättre än X % av dina uppdrag” på kortet (20). Och 📤 skapar en bild av Wayo med dina rekord att dela. Tillbehör ritade direkt på Wayo: keps (niv. 3), krona (6), solglasögon (8), hörlurar (10), guldkedja (13), legendnyckel (16) — han bär ett åt gången, välj i Inställningar → Husdjuret Wayo.</string>
     <string name="acc_cap">Keps</string>
     <string name="acc_crown">Krona</string>
     <string name="acc_sunglasses">Solglasögon</string>
@@ -532,4 +532,8 @@
     <string name="settings_acc_title">Wayos tillbehör</string>
     <string name="settings_acc_desc">Låses upp med nivå.</string>
     <string name="pet_unlocked_accessory">Nytt tillbehör: %1$s 🎁</string>
+    <string name="settings_pet_title">Husdjuret Wayo</string>
+    <string name="settings_pet_summary">Korttema och tillbehör</string>
+    <string name="tour_petset_text">Teman för orderkortet och widgeten samt Wayos tillbehör. De låses upp när Wayo växer av dina smarta beslut; han bär ett tillbehör åt gången.</string>
+    <string name="tour_new2_text">Nytt: Wayo ger nu belöningar för att växa — korttema, tillbehör ritade direkt på honom, nya förmågor och en bild för att dela dina rekord. Allt finns under Inställningar → ”Husdjuret Wayo”.</string>
 </resources>

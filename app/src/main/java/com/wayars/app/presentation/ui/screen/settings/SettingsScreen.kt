@@ -4,6 +4,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.AccountBalance
 import androidx.compose.material.icons.filled.AutoAwesome
+import androidx.compose.material.icons.filled.Pets
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
@@ -239,6 +240,12 @@ fun SettingsScreen(
                     onSavePackageHint = onSavePackageHint,
                     onClearPackageHint = onClearPackageHint
                 )
+            }
+        }
+
+        item {
+            Box(modifier = Modifier.tourTarget(TourTarget.SETTINGS_PET)) {
+                PetSection()
             }
         }
 
@@ -2337,6 +2344,53 @@ private fun ExtrasToggle(title: String, desc: String, checked: Boolean, onChange
     }
 }
 
+/** Wayo's rewards: the order card theme and his accessories (both unlock as he grows). */
+@Composable
+private fun PetSection() {
+    var expanded by remember { mutableStateOf(false) }
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(14.dp))
+            .background(WaSurface)
+            .padding(16.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth().clickable { expanded = !expanded },
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(Icons.Filled.Pets, contentDescription = null, tint = WaTextSecondary)
+            Column(Modifier.weight(1f).padding(start = 12.dp)) {
+                Text(
+                    stringResource(R.string.settings_pet_title),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    stringResource(R.string.settings_pet_summary),
+                    color = WaTextSecondary,
+                    style = MaterialTheme.typography.bodyMedium,
+                    maxLines = 1,
+                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                )
+            }
+            Icon(
+                imageVector = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
+                contentDescription = null,
+                tint = WaTextSecondary
+            )
+        }
+        AnimatedVisibility(visible = expanded, enter = expandVertically(), exit = shrinkVertically()) {
+            Column(modifier = Modifier.padding(top = 10.dp)) {
+                CardThemePicker()
+                Spacer(Modifier.padding(top = 10.dp))
+                AccessoryPicker()
+            }
+        }
+    }
+}
+
 /** Day/week summaries, verdict on the watch, home-screen widget and "invite a driver". */
 @Composable
 private fun ExtrasSection() {
@@ -2392,10 +2446,6 @@ private fun ExtrasSection() {
         }
         AnimatedVisibility(visible = expanded, enter = expandVertically(), exit = shrinkVertically()) {
         Column(modifier = Modifier.padding(top = 10.dp)) {
-        CardThemePicker()
-        Spacer(Modifier.padding(top = 10.dp))
-        AccessoryPicker()
-        Spacer(Modifier.padding(top = 8.dp))
         ExtrasToggle(
             title = stringResource(R.string.settings_summaries_title),
             desc = stringResource(R.string.settings_summaries_desc),

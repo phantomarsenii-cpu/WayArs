@@ -521,7 +521,7 @@
     <string name="share_footer">WayArs — verifică fiecare comandă înainte s-o accepți</string>
     <string name="share_text">Wayo al meu în WayArs a ajuns la nivelul %1$d! 🦎 %2$s</string>
     <string name="pet_q_rewards">Ce primesc când crește Wayo?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo crește doar din decizii istețe. Recompense: teme pentru cardul comenzii și widget — Neon (nv. 5), Carbon (10), Auriu (15), Legendă (20), le alegi în Setări → Extra. Abilități noi: sfatul zilei din datele tale (nv. 5), prognoza celor mai bune momente în bilanțul săptămânii (10), „mai bună decât X% din comenzile tale” pe card (20). Iar 📤 face o imagine cu Wayo și recordurile tale. Accesorii desenate direct pe Wayo: șapcă (niv. 3), coroană (6), ochelari de soare (8), căști (10), lanț de aur (13), cheia legendei (16) — poartă câte unul, alegi în Setări → Extra.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo crește doar din decizii istețe. Recompense: teme pentru cardul comenzii și widget — Neon (nv. 5), Carbon (10), Auriu (15), Legendă (20), le alegi în Setări → Mascota Wayo. Abilități noi: sfatul zilei din datele tale (nv. 5), prognoza celor mai bune momente în bilanțul săptămânii (10), „mai bună decât X% din comenzile tale” pe card (20). Iar 📤 face o imagine cu Wayo și recordurile tale. Accesorii desenate direct pe Wayo: șapcă (niv. 3), coroană (6), ochelari de soare (8), căști (10), lanț de aur (13), cheia legendei (16) — poartă câte unul, alegi în Setări → Mascota Wayo.</string>
     <string name="acc_cap">Șapcă</string>
     <string name="acc_crown">Coroană</string>
     <string name="acc_sunglasses">Ochelari de soare</string>
@@ -531,4 +531,8 @@
     <string name="settings_acc_title">Accesoriile lui Wayo</string>
     <string name="settings_acc_desc">Se deblochează cu nivelul.</string>
     <string name="pet_unlocked_accessory">Accesoriu nou: %1$s 🎁</string>
+    <string name="settings_pet_title">Mascota Wayo</string>
+    <string name="settings_pet_summary">Tema cardului și accesorii</string>
+    <string name="tour_petset_text">Teme pentru cardul comenzii și widget, plus accesoriile lui Wayo. Se deblochează pe măsură ce Wayo crește din deciziile tale inteligente; poartă câte un accesoriu.</string>
+    <string name="tour_new2_text">Ce e nou: Wayo oferă acum recompense pentru creștere — teme de card, accesorii desenate direct pe el, abilități noi și o imagine cu recordurile tale de distribuit. Totul în Setări → „Mascota Wayo”.</string>
 </resources>

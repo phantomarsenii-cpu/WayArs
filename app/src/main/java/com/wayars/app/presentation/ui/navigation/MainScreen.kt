@@ -148,8 +148,9 @@ fun MainScreen(
         ) {
             // Drivers who finished the tour earlier: show only what's new, once.
             delay(1_200)
+            val steps = com.wayars.app.presentation.ui.tour.WhatsNewTour.steps(context)
             com.wayars.app.presentation.ui.tour.WhatsNewTour.markSeen(context)
-            tour.startSteps(com.wayars.app.presentation.ui.tour.TourSteps.whatsNew)
+            tour.startSteps(steps)
         }
     }
 

@@ -522,7 +522,7 @@
     <string name="share_footer">WayArs — minden rendelést ellenőriz, mielőtt elfogadod</string>
     <string name="share_text">A Wayóm a WayArs-ban elérte a %1$d. szintet! 🦎 %2$s</string>
     <string name="pet_q_rewards">Mit kapok, ha Wayo nő?</string>
-    <string name="pet_a_rewards" formatted="false">Wayo csak okos döntésektől nő. Jutalmak: témák a rendeléskártyához és a widgethez — Neon (5. szint), Karbon (10), Arany (15), Legenda (20), a Beállítások → Extrák alatt választhatók. Új képességek: a nap tippje az adataidból (5. szint), a legjobb időpontjaid előrejelzése a heti összesítőben (10), „jobb, mint a rendeléseid X%-a” a kártyán (20). A 📤 pedig képet készít Wayóról a rekordjaiddal. Közvetlenül Wayóra rajzolt kiegészítők: sapka (3. szint), korona (6), napszemüveg (8), fejhallgató (10), aranylánc (13), legenda kulcs (16) — egyszerre egyet visel, a Beállítások → Extrák alatt választhatsz.</string>
+    <string name="pet_a_rewards" formatted="false">Wayo csak okos döntésektől nő. Jutalmak: témák a rendeléskártyához és a widgethez — Neon (5. szint), Karbon (10), Arany (15), Legenda (20), a Beállítások → Wayo kedvenc alatt választhatók. Új képességek: a nap tippje az adataidból (5. szint), a legjobb időpontjaid előrejelzése a heti összesítőben (10), „jobb, mint a rendeléseid X%-a” a kártyán (20). A 📤 pedig képet készít Wayóról a rekordjaiddal. Közvetlenül Wayóra rajzolt kiegészítők: sapka (3. szint), korona (6), napszemüveg (8), fejhallgató (10), aranylánc (13), legenda kulcs (16) — egyszerre egyet visel, a Beállítások → Wayo kedvenc alatt választhatsz.</string>
     <string name="acc_cap">Sapka</string>
     <string name="acc_crown">Korona</string>
     <string name="acc_sunglasses">Napszemüveg</string>
@@ -532,4 +532,8 @@
     <string name="settings_acc_title">Wayo kiegészítői</string>
     <string name="settings_acc_desc">A szinttel nyílnak meg.</string>
     <string name="pet_unlocked_accessory">Új kiegészítő: %1$s 🎁</string>
+    <string name="settings_pet_title">Wayo kedvenc</string>
+    <string name="settings_pet_summary">Kártyatéma és kiegészítők</string>
+    <string name="tour_petset_text">A rendeléskártya és a widget témái, valamint Wayo kiegészítői. Akkor nyílnak meg, ahogy Wayo nő az okos döntéseidtől; egyszerre egy kiegészítőt visel.</string>
+    <string name="tour_new2_text">Újdonság: Wayo mostantól jutalmakat ad a növekedésért — kártyatémák, közvetlenül rá rajzolt kiegészítők, új képességek és egy kép a rekordjaid megosztásához. Mindez a Beállítások → „Wayo kedvenc” alatt.</string>
 </resources>
