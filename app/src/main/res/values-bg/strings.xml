@@ -608,4 +608,9 @@
         <item>Това го няма в паметта ми 😅 Пиши на разработчиците — ще отговорят; дотогава ето популярното:</item>
     </string-array>
     <string name="chat_related">Често питат и:</string>
+    <string-array name="chat_v_doc">
+        <item>Ето какво пише в приложението 👇</item>
+        <item>Намерих го в документите 📖</item>
+        <item>Цитирам:</item>
+    </string-array>
 </resources>

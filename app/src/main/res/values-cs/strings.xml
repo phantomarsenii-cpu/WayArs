@@ -608,4 +608,9 @@
         <item>Tohle v paměti nemám 😅 Napiš vývojářům — odpoví; zatím ti ukážu oblíbené:</item>
     </string-array>
     <string name="chat_related">Často se ptají také:</string>
+    <string-array name="chat_v_doc">
+        <item>Tohle říká aplikace 👇</item>
+        <item>Našel jsem v dokumentech 📖</item>
+        <item>Cituji:</item>
+    </string-array>
 </resources>

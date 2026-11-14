@@ -65,6 +65,7 @@ import com.wayars.app.util.CurrencyFormatter
 import kotlinx.coroutines.flow.first
 import com.wayars.app.pet.PetState
 import com.wayars.app.presentation.pet.brain.WayoBrain
+import com.wayars.app.presentation.pet.brain.WayoDocs
 import com.wayars.app.presentation.ui.component.MainTab
 import com.wayars.app.presentation.ui.theme.WaNeonGreen
 import com.wayars.app.presentation.ui.theme.WaSurface
@@ -109,6 +110,69 @@ object WayoBrainHolder {
             return WayoBrain(docs + personal).also { brain = it }
         }
     }
+
+    /** Everything written in the app, as passages Wayo can quote (see [WayoDocs]). */
+    private val DOC_RES = listOf(
+        "settings_privacy_content", "settings_terms_content", "settings_about_content", "accessibility_consent_body",
+        "accessibility_service_description", "settings_accessibility_hint", "settings_overlay_hint", "settings_notifications_hint",
+        "settings_permissions_hint", "settings_subscription_hint", "active_requires_permissions", "active_requires_subscription",
+        "settings_calibration_no_data", "settings_calibration_instructions", "settings_calibration_auto_ok",
+        "settings_calibration_auto_missing", "settings_calibration_check_fail", "settings_calibration_no_numbers",
+        "settings_contacts_subtitle", "terms_gate_subtitle", "paywall_subtitle", "paywall_section_subtitle", "paywall_trial_notice",
+        "paywall_footer_google_subtitle", "paywall_compat_label", "paywall_no_charge_notice", "update_available_text",
+        "vehicle_prompt_body", "settings_tax_desc", "settings_partner_desc", "settings_summaries_desc", "settings_watch_desc",
+        "settings_widget_desc", "settings_invite_desc", "settings_theme_desc", "stats_real_hour_hint", "stats_services_empty",
+        "tour_welcome_text", "tour_active_text", "tour_summary_text", "tour_verdict_text", "tour_stats_text", "tour_presets_text",
+        "tour_thresholds_text", "tour_vehicle_text", "tour_permissions_text", "tour_apps_text", "tour_currency_text",
+        "tour_tax_text", "tour_partner_text", "tour_pet_text", "tour_extras_text", "tour_petset_text", "tour_final_text"
+    )
+    /** Documents opened from Settings → bottom of the list ("show me" goes there). */
+    private val INFO_DOCS = setOf("settings_privacy_content", "settings_terms_content", "settings_about_content")
+    private val DOC_LANGS = listOf("en", "ru", "pl", "uk")
+    @Volatile private var docs: Pair<WayoBrain, List<WayoDocs.Chunk>>? = null
+
+    @android.annotation.SuppressLint("DiscouragedApi")
+    private fun docs(context: Context): Pair<WayoBrain, List<WayoDocs.Chunk>> {
+        docs?.let { return it }
+        synchronized(this) {
+            docs?.let { return it }
+            val version = runCatching { context.packageManager.getPackageInfo(context.packageName, 0).versionName }.getOrNull() ?: ""
+            // The app's own language first, then the languages most drivers write in.
+            val langs = (listOf(context.resources.configuration.locales[0].language) + DOC_LANGS).distinct()
+            val chunks = ArrayList<WayoDocs.Chunk>()
+            for (lang in langs) {
+                val cfg = Configuration(context.resources.configuration).apply { setLocale(Locale.forLanguageTag(lang)) }
+                val r = context.createConfigurationContext(cfg).resources
+                for (name in DOC_RES) {
+                    val id = r.getIdentifier(name, "string", context.packageName).takeIf { it != 0 } ?: continue
+                    val text = runCatching { if (name == "settings_about_content") r.getString(id, version) else r.getString(id) }.getOrNull() ?: continue
+                    val titleName = Regex("_(content|body|text|desc|hint|subtitle|description)$").replace(name, "_title")
+                    val label = r.getIdentifier(titleName, "string", context.packageName).takeIf { it != 0 && titleName != name }
+                        ?.let { runCatching { r.getString(it) }.getOrNull() }
+                    chunks += WayoDocs.split(label, text, if (name in INFO_DOCS) 1 else 0)
+                }
+            }
+            val uniq = chunks.distinctBy { it.text }
+            val b = WayoBrain(uniq.mapIndexed { i, c -> c.asDoc("doc:$i") }, lengthNorm = true, answerWeight = 1.0)
+            return (b to uniq).also { docs = it }
+        }
+    }
+
+    /** The passage that answers [message] best, or null when nothing in the documents really fits. */
+    fun searchDocs(context: Context, message: String): Pair<WayoDocs.Chunk, Double>? {
+        val (b, chunks) = docs(context)
+        val ranked = b.rank(message)
+        val top = ranked.firstOrNull() ?: return null
+        val cov = b.coverage(message, top.first)
+        if (top.second < DOC_MIN_SCORE || cov < DOC_MIN_COVERAGE) return null
+        // Several passages equally good (e.g. "where's the privacy policy?") — that's not a specific question.
+        val second = ranked.getOrNull(1)?.second ?: 0.0
+        if (top.second < second * 1.04) return null
+        return chunks[top.first.removePrefix("doc:").toInt()] to cov
+    }
+
+    private const val DOC_MIN_SCORE = 7.5
+    private const val DOC_MIN_COVERAGE = 0.52
 }
 
 private class ChatMsg(
@@ -306,7 +370,33 @@ fun WayoChatDialog(
             typing = false
             if (asTopic != null) { answer(asTopic, WayoBrainHolder.keyOf(context, asTopic)); return@launch }
             val b = brain ?: withContext(Dispatchers.Default) { WayoBrainHolder.get(context.applicationContext) }.also { brain = it }
-            when (val r = b.reply(clean, lastKey)) {
+            val r = b.reply(clean, lastKey)
+            // Anything written in the app (privacy policy, terms, settings texts…): quote the exact
+            // passage when no ready answer fits, or when the driver asks what a document says.
+            val askDocs = WayoDocs.mentionsDocs(clean)
+            val hit = when (r) {
+                is WayoBrain.Reply.Unknown, is WayoBrain.Reply.Clarify -> true
+                is WayoBrain.Reply.Answer -> askDocs
+                else -> false
+            }.let { if (it) withContext(Dispatchers.Default) { WayoBrainHolder.searchDocs(context.applicationContext, clean) } else null }
+                ?.takeIf { (_, cov) ->
+                    // When Wayo would only ask "which of these?", a well-matching passage is the better answer.
+                    r !is WayoBrain.Reply.Clarify || askDocs || cov >= 0.7 ||
+                        (b.rank(clean).firstOrNull()?.second ?: 0.0) < WayoBrain.HIGH
+                }
+            if (hit != null) {
+                val c = hit.first
+                val head = listOfNotNull(c.source, c.section).joinToString(" → ").ifEmpty { "WayArs" }
+                lastKey = "documents"
+                messages.add(
+                    ChatMsg(
+                        false, pick(R.array.chat_v_doc) + "\n\n📄 " + head + "\n" + c.text,
+                        step = if (c.step == 1) topicsByKey["documents"]?.step else null
+                    )
+                )
+                return@launch
+            }
+            when (r) {
                 is WayoBrain.Reply.Answer -> answer(topicsByKey[r.key], r.key)
                 is WayoBrain.Reply.Clarify -> messages.add(ChatMsg(false, context.getString(R.string.chat_clarify), chips = topics(r.keys)))
                 is WayoBrain.Reply.ShowLast -> {

@@ -608,4 +608,9 @@
         <item>Bu xotiramda yo‘q 😅 Dasturchilarga yoz — javob berishadi; hozircha mashhurlari:</item>
     </string-array>
     <string name="chat_related">Ko‘pincha yana so‘rashadi:</string>
+    <string-array name="chat_v_doc">
+        <item>Ilovada shunday yozilgan 👇</item>
+        <item>Hujjatlardan topdim 📖</item>
+        <item>Iqtibos keltiraman:</item>
+    </string-array>
 </resources>

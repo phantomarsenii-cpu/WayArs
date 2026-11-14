@@ -620,4 +620,9 @@
         <item>That’s not in my memory 😅 Write to the developers — they’ll answer; meanwhile here’s what’s popular:</item>
     </string-array>
     <string name="chat_related">People also ask:</string>
+    <string-array name="chat_v_doc">
+        <item>Here’s what the app says 👇</item>
+        <item>Found it in the documents 📖</item>
+        <item>Quoting the app:</item>
+    </string-array>
 </resources>

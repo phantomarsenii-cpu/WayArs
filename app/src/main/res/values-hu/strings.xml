@@ -608,4 +608,9 @@
         <item>Ez nincs a memóriámban 😅 Írj a fejlesztőknek — válaszolnak; addig íme a népszerűek:</item>
     </string-array>
     <string name="chat_related">Gyakran kérdezik még:</string>
+    <string-array name="chat_v_doc">
+        <item>Ezt írja az app 👇</item>
+        <item>Megtaláltam a dokumentumokban 📖</item>
+        <item>Idézem:</item>
+    </string-array>
 </resources>

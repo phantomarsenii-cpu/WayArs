@@ -608,4 +608,9 @@
         <item>Սա իմ հիշողության մեջ չկա 😅 Գրիր մշակողներին՝ կպատասխանեն, իսկ առայժմ՝ հայտնիները՝</item>
     </string-array>
     <string name="chat_related">Հաճախ նաև հարցնում են՝</string>
+    <string-array name="chat_v_doc">
+        <item>Ահա թե ինչ է գրված հավելվածում 👇</item>
+        <item>Գտա փաստաթղթերում 📖</item>
+        <item>Մեջբերում եմ՝</item>
+    </string-array>
 </resources>

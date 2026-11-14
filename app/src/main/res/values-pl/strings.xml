@@ -612,4 +612,9 @@
         <item>Tego nie mam w pamięci 😅 Napisz do twórców — odpowiedzą, a ja na razie podpowiem popularne:</item>
     </string-array>
     <string name="chat_related">Często pytają też:</string>
+    <string-array name="chat_v_doc">
+        <item>Oto co mówi aplikacja 👇</item>
+        <item>Znalazłem w dokumentach 📖</item>
+        <item>Cytuję:</item>
+    </string-array>
 </resources>

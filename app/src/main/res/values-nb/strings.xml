@@ -608,4 +608,9 @@
         <item>Det har jeg ikke i minnet 😅 Skriv til utviklerne — de svarer; i mellomtiden det populære:</item>
     </string-array>
     <string name="chat_related">Folk spør også:</string>
+    <string-array name="chat_v_doc">
+        <item>Her er hva appen sier 👇</item>
+        <item>Fant det i dokumentene 📖</item>
+        <item>Jeg siterer:</item>
+    </string-array>
 </resources>

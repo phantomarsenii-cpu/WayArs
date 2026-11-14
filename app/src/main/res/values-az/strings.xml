@@ -608,4 +608,9 @@
         <item>Bu yaddaşımda yoxdur 😅 Tərtibatçılara yaz — cavab verəcəklər; hələlik populyarlar:</item>
     </string-array>
     <string name="chat_related">Tez-tez bunu da soruşurlar:</string>
+    <string-array name="chat_v_doc">
+        <item>Tətbiqdə belə yazılıb 👇</item>
+        <item>Sənədlərdə tapdım 📖</item>
+        <item>Sitat gətirirəm:</item>
+    </string-array>
 </resources>

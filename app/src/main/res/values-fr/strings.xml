@@ -607,4 +607,9 @@
         <item>Ce n’est pas dans ma mémoire 😅 Écris aux développeurs — ils répondront ; en attendant, le plus demandé :</item>
     </string-array>
     <string name="chat_related">On demande aussi souvent :</string>
+    <string-array name="chat_v_doc">
+        <item>Voici ce que dit l’appli 👇</item>
+        <item>Trouvé dans les documents 📖</item>
+        <item>Je cite :</item>
+    </string-array>
 </resources>

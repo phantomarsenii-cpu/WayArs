@@ -607,4 +607,9 @@
         <item>Asta nu e în memoria mea 😅 Scrie-le dezvoltatorilor — îți răspund; până atunci, cele populare:</item>
     </string-array>
     <string name="chat_related">Se mai întreabă des:</string>
+    <string-array name="chat_v_doc">
+        <item>Iată ce scrie în aplicație 👇</item>
+        <item>Am găsit în documente 📖</item>
+        <item>Citez:</item>
+    </string-array>
 </resources>

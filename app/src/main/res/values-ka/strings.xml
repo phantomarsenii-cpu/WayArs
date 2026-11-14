@@ -608,4 +608,9 @@
         <item>ეს ჩემს მეხსიერებაში არ არის 😅 მისწერე დეველოპერებს — გიპასუხებენ; მანამდე პოპულარული:</item>
     </string-array>
     <string name="chat_related">ხშირად ასევე კითხულობენ:</string>
+    <string-array name="chat_v_doc">
+        <item>აი, რა წერია აპში 👇</item>
+        <item>დოკუმენტებში ვიპოვე 📖</item>
+        <item>ვციტირებ:</item>
+    </string-array>
 </resources>

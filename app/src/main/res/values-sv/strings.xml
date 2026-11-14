@@ -608,4 +608,9 @@
         <item>Det finns inte i mitt minne 😅 Skriv till utvecklarna — de svarar; under tiden det populära:</item>
     </string-array>
     <string name="chat_related">Folk frågar också:</string>
+    <string-array name="chat_v_doc">
+        <item>Så här står det i appen 👇</item>
+        <item>Hittade det i dokumenten 📖</item>
+        <item>Jag citerar:</item>
+    </string-array>
 </resources>

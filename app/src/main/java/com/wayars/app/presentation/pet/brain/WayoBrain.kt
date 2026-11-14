@@ -13,7 +13,13 @@ import kotlin.math.min
  * Wayo asks which topic was meant instead of guessing; small talk and follow-ups
  * ("show me", "didn't help") are understood too.
  */
-class WayoBrain(docs: List<Doc>) {
+class WayoBrain(
+    docs: List<Doc>,
+    /** For long passages (documents): a long text shouldn't win just because it has more words. */
+    private val lengthNorm: Boolean = false,
+    /** How much a word found only in the answer text counts (questions count 1.4). */
+    private val answerWeight: Double = 0.45
+) {
 
     /** One topic; [texts] are its question/answer texts in every language. */
     class Doc(val key: String, val questions: List<String>, val answers: List<String>)
@@ -38,6 +44,7 @@ class WayoBrain(docs: List<Doc>) {
 
     private val index: List<Indexed>
     private val idf: Map<String, Double>
+    private val avgLen: Double
 
     init {
         index = docs.map { d ->
@@ -52,6 +59,7 @@ class WayoBrain(docs: List<Doc>) {
         for (t in index) for (s in (t.q + t.a + t.kw.flatten()).map { stem(it) }.toSet()) df[s] = (df[s] ?: 0) + 1
         val n = index.size.toDouble()
         idf = df.mapValues { (_, c) -> ln(1.0 + n / c) }
+        avgLen = if (index.isEmpty()) 1.0 else index.sumOf { it.q.size + it.a.size }.toDouble() / index.size
     }
 
     private fun idfOf(token: String) = idf[stem(token)] ?: ln(1.0 + index.size)
@@ -61,6 +69,25 @@ class WayoBrain(docs: List<Doc>) {
         val msg = tokens(message)
         if (msg.isEmpty()) return emptyList()
         return index.map { t -> t.key to score(msg, t) }.sortedByDescending { it.second }
+    }
+
+    /**
+     * How much of the message (by word weight) is actually found in [key]'s texts — 1.0 when every
+     * meaningful word is there. Separates a real match from one carried by a couple of common words.
+     */
+    fun coverage(message: String, key: String): Double {
+        val msg = tokens(message)
+        val t = index.firstOrNull { it.key == key } ?: return 0.0
+        if (msg.isEmpty()) return 0.0
+        var total = 0.0
+        var found = 0.0
+        for (m in msg) {
+            val w = idfOf(m)
+            total += w
+            val best = max(t.q.maxOfOrNull { similarity(m, it) } ?: 0.0, t.a.maxOfOrNull { similarity(m, it) } ?: 0.0)
+            if (best >= 0.75) found += w
+        }
+        return if (total == 0.0) 0.0 else found / total
     }
 
     private fun score(msg: List<String>, t: Indexed): Double {
@@ -80,8 +107,9 @@ class WayoBrain(docs: List<Doc>) {
             val w = idfOf(m)
             val inQ = t.q.maxOfOrNull { similarity(m, it) } ?: 0.0
             val inA = t.a.maxOfOrNull { similarity(m, it) } ?: 0.0
-            s += w * max(1.4 * inQ, 0.45 * inA)
+            s += w * max(1.4 * inQ, answerWeight * inA)
         }
+        if (lengthNorm) s /= 0.75 + 0.25 * kotlin.math.sqrt((t.q.size + t.a.size).coerceAtLeast(1) / avgLen)
         return s
     }
 
@@ -160,7 +188,8 @@ class WayoBrain(docs: List<Doc>) {
             val minLen = min(a.length, b.length)
             if (minLen >= 5 && p >= 5) return 0.9
             if (minLen >= 4 && p >= 4 && max(a.length, b.length) >= 5) return 0.75
-            if (minLen >= 4) {
+            // A typo almost never hits the first letter: "вернуть" (return) is not "свернуть" (minimize).
+            if (minLen >= 4 && a[0] == b[0]) {
                 val limit = if (minLen >= 7) 2 else 1
                 if (kotlin.math.abs(a.length - b.length) <= limit && distance(a, b, limit) <= limit) return 0.8
             }

@@ -607,4 +607,9 @@
         <item>Das habe ich nicht im Kopf 😅 Schreib den Entwicklern — sie antworten; bis dahin das Beliebteste:</item>
     </string-array>
     <string name="chat_related">Oft gefragt:</string>
+    <string-array name="chat_v_doc">
+        <item>Das steht in der App 👇</item>
+        <item>In den Dokumenten gefunden 📖</item>
+        <item>Ich zitiere:</item>
+    </string-array>
 </resources>
