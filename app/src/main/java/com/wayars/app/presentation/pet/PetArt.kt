@@ -71,10 +71,17 @@ fun PetArt(
         val m = mood.name.lowercase()
         listOf("pet_${s}_$m", "pet_${s}_neutral", "pet_teen_$m").map { lookup(it) }.firstOrNull { it != 0 } ?: 0
     }
-    // Optional eyes-closed frame for blinking: pet_<stage>_<mood>_blink or pet_<stage>_blink.
-    val blinkId = remember(stage, mood) {
+    // Eyes-closed frame, only for the picture actually shown: pet_<stage>_<mood>_blink, or
+    // pet_<stage>_blink when the stage's neutral pose is on screen (that frame IS the neutral
+    // pose with closed eyes, so it must never replace a different pose).
+    val blinkId = remember(stage, mood, resId) {
         val s = stage.name.lowercase()
-        listOf("pet_${s}_${mood.name.lowercase()}_blink", "pet_${s}_blink").map { lookup(it) }.firstOrNull { it != 0 } ?: 0
+        val moodBlink = lookup("pet_${s}_${mood.name.lowercase()}_blink")
+        when {
+            moodBlink != 0 -> moodBlink
+            resId != 0 && resId == lookup("pet_${s}_neutral") -> lookup("pet_${s}_blink")
+            else -> 0
+        }
     }
 
     // One clock drives all idle motion; each mood turns it into its own movement.
@@ -179,12 +186,21 @@ fun PetArt(
                 }
         ) {
             if (resId != 0) {
-                // Blink (only if an eyes-closed frame exists): ~0.15 s every ~4.2 s.
-                val showBlink = blinkId != 0 && slow > 0.965f &&
-                    mood != PetMood.SLEEPING && mood != PetMood.EATING
-                Crossfade(targetState = if (showBlink) blinkId else resId, animationSpec = tween(140), label = "pet-img") { id ->
+                Crossfade(targetState = resId, animationSpec = tween(220), label = "pet-img") { id ->
                     Image(
                         painter = painterResource(id),
+                        contentDescription = null,
+                        contentScale = ContentScale.Fit,
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
+                // Blink: an instant eyes-closed frame for ~0.15 s every ~4 s, and a quick
+                // double blink every other cycle, so it doesn't look mechanical.
+                val blinking = blinkId != 0 && mood != PetMood.SLEEPING && mood != PetMood.EATING &&
+                    (slow > 0.965f || (slow in 0.905f..0.935f && (t * 4).toInt() % 2 == 0))
+                if (blinking) {
+                    Image(
+                        painter = painterResource(blinkId),
                         contentDescription = null,
                         contentScale = ContentScale.Fit,
                         modifier = Modifier.fillMaxSize()
