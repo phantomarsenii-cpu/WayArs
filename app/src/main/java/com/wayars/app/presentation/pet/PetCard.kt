@@ -238,7 +238,7 @@ fun PetCard(
     LaunchedEffect(resumeTick) {
         if (resumeTick == 0) return@LaunchedEffect
         val text = PetGreeter.next(context, pet.lastActivityAt) ?: return@LaunchedEffect
-        greeting = text
+        greeting = com.wayars.app.presentation.pet.brain.WayoNames.withName(text, com.wayars.app.data.prefs.DriverPrefs.driverName.value)
         delay(9_000)
         greeting = null
     }

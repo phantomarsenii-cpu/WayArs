@@ -19,6 +19,8 @@ object DriverPrefs {
     private const val KEY_INVITE_CODE = "invite_code"
     private const val KEY_THEME = "card_theme"
     private const val KEY_ACCESSORIES = "pet_accessories"
+    private const val KEY_DRIVER_NAME = "driver_name"
+    private const val KEY_NAME_ASKED = "driver_name_asked"
 
     private val _commissionPercent = MutableStateFlow(0.0)
     val commissionPercent: StateFlow<Double> = _commissionPercent
@@ -33,6 +35,9 @@ object DriverPrefs {
     /** Name of the chosen [com.wayars.app.features.CardTheme] for the overlay card and widget. */
     val cardTheme: StateFlow<String> = _cardTheme
 
+    private val _driverName = MutableStateFlow("")
+    /** The driver's name, if they told Wayo (stored only on this phone); empty when unknown. */
+    val driverName: StateFlow<String> = _driverName
     private val _accessories = MutableStateFlow("")
     /** Comma-separated names of the accessories Wayo wears (see presentation.pet.Accessory). */
     val accessories: StateFlow<String> = _accessories
@@ -51,6 +56,7 @@ object DriverPrefs {
         _watchEnabled.value = p.getBoolean(KEY_WATCH, false)
         _cardTheme.value = p.getString(KEY_THEME, "CLASSIC") ?: "CLASSIC"
         _accessories.value = p.getString(KEY_ACCESSORIES, "") ?: ""
+        _driverName.value = p.getString(KEY_DRIVER_NAME, "") ?: ""
         loaded = true
     }
 
@@ -75,6 +81,19 @@ object DriverPrefs {
     fun setCardTheme(context: Context, name: String) {
         prefs(context).edit().putString(KEY_THEME, name).apply()
         _cardTheme.value = name
+    }
+
+    fun setDriverName(context: Context, name: String) {
+        prefs(context).edit().putString(KEY_DRIVER_NAME, name).apply()
+        _driverName.value = name
+    }
+
+    /** How many times Wayo has asked for the name (he stops after a few). */
+    fun nameAskedCount(context: Context): Int = prefs(context).getInt(KEY_NAME_ASKED, 0)
+
+    fun markNameAsked(context: Context) {
+        val p = prefs(context)
+        p.edit().putInt(KEY_NAME_ASKED, p.getInt(KEY_NAME_ASKED, 0) + 1).apply()
     }
 
     fun setAccessories(context: Context, value: String) {

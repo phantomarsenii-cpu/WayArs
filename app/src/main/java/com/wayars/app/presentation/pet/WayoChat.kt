@@ -66,6 +66,7 @@ import kotlinx.coroutines.flow.first
 import com.wayars.app.pet.PetState
 import com.wayars.app.presentation.pet.brain.WayoBrain
 import com.wayars.app.presentation.pet.brain.WayoDocs
+import com.wayars.app.presentation.pet.brain.WayoNames
 import com.wayars.app.presentation.ui.component.MainTab
 import com.wayars.app.presentation.ui.theme.WaNeonGreen
 import com.wayars.app.presentation.ui.theme.WaSurface
@@ -307,8 +308,19 @@ fun WayoChatDialog(
     val topicsByKey = remember { PET_HELP_TOPICS.associateBy { WayoBrainHolder.keyOf(context, it) } }
     fun topics(keys: List<String>) = keys.mapNotNull { topicsByKey[it] }
 
+    // Wayo asks the driver's name a few times at most, then lets it be.
+    var awaitingName by remember { mutableStateOf(false) }
     val messages = remember {
-        mutableStateListOf(ChatMsg(false, context.getString(R.string.chat_welcome), chips = POPULAR_KEYS.mapNotNull { topicsByKey[it] }))
+        val name = DriverPrefs.driverName.value
+        val list = mutableStateListOf(
+            ChatMsg(false, WayoNames.withName(context.getString(R.string.chat_welcome), name), chips = POPULAR_KEYS.mapNotNull { topicsByKey[it] })
+        )
+        if (name.isBlank() && DriverPrefs.nameAskedCount(context) < 3) {
+            DriverPrefs.markNameAsked(context)
+            list.add(ChatMsg(false, context.getString(R.string.chat_ask_name)))
+            awaitingName = true
+        }
+        list
     }
     var input by remember { mutableStateOf("") }
     var typing by remember { mutableStateOf(false) }
@@ -350,7 +362,7 @@ fun WayoChatDialog(
                 key in FIX_KEYS || needsCheck -> R.array.chat_v_intro_problem
                 else -> R.array.chat_v_intro
             }
-        )
+        ).let { if (!again && kotlin.random.Random.nextInt(3) == 0) WayoNames.withName(it, DriverPrefs.driverName.value) else it }
         val outro = when {
             t.step != null -> pick(R.array.chat_v_outro_show)
             kotlin.random.Random.nextInt(3) == 0 -> pick(R.array.chat_v_outro)
@@ -371,6 +383,28 @@ fun WayoChatDialog(
             typing = false
             if (asTopic != null) { answer(asTopic, WayoBrainHolder.keyOf(context, asTopic)); return@launch }
             val b = brain ?: withContext(Dispatchers.Default) { WayoBrainHolder.get(context.applicationContext) }.also { brain = it }
+            // The driver's name: "forget it", "what's my name?", "my name is…" or a bare name right after Wayo asked.
+            val wasAwaiting = awaitingName
+            awaitingName = false
+            if (WayoNames.isForget(clean)) {
+                DriverPrefs.setDriverName(context, "")
+                messages.add(ChatMsg(false, context.getString(R.string.chat_name_forgot)))
+                return@launch
+            }
+            if (WayoNames.isAskOwn(clean)) {
+                val known = DriverPrefs.driverName.value
+                if (known.isNotBlank()) messages.add(ChatMsg(false, context.getString(R.string.chat_name_known, known)))
+                else { messages.add(ChatMsg(false, context.getString(R.string.chat_name_unknown))); awaitingName = true }
+                return@launch
+            }
+            WayoNames.extract(clean, wasAwaiting)?.let { (found, explicit) ->
+                // A bare word only counts as a name if it isn't a question Wayo understands.
+                if (explicit || b.reply(clean, null) is WayoBrain.Reply.Unknown) {
+                    DriverPrefs.setDriverName(context, found)
+                    messages.add(ChatMsg(false, String.format(pick(R.array.chat_v_name_saved), found)))
+                    return@launch
+                }
+            }
             val r = b.reply(clean, lastKey)
             // Anything written in the app (privacy policy, terms, settings texts…): quote the exact
             // passage when no ready answer fits, or when the driver asks what a document says.
@@ -414,8 +448,8 @@ fun WayoChatDialog(
                     ChatMsg(
                         false,
                         when (r.kind) {
-                            WayoBrain.SmallTalk.HELLO -> pick(R.array.chat_v_hello)
-                            WayoBrain.SmallTalk.THANKS -> pick(R.array.chat_v_thanks)
+                            WayoBrain.SmallTalk.HELLO -> WayoNames.withName(pick(R.array.chat_v_hello), DriverPrefs.driverName.value)
+                            WayoBrain.SmallTalk.THANKS -> WayoNames.withName(pick(R.array.chat_v_thanks), DriverPrefs.driverName.value)
                             WayoBrain.SmallTalk.WHO -> context.getString(R.string.chat_who, name)
                             WayoBrain.SmallTalk.BYE -> context.getString(R.string.chat_bye)
                             WayoBrain.SmallTalk.HOW_ARE_YOU -> pick(R.array.chat_v_how)
@@ -425,6 +459,11 @@ fun WayoChatDialog(
                 is WayoBrain.Reply.Chit -> {
                     val arr = context.resources.getIdentifier("chat_v_" + r.kind, "array", context.packageName)
                     messages.add(ChatMsg(false, if (arr != 0) pick(arr) else pick(R.array.chat_v_hello)))
+                    // "What's your name?" — and yours?
+                    if (r.kind == "name" && DriverPrefs.driverName.value.isBlank()) {
+                        messages.add(ChatMsg(false, context.getString(R.string.chat_ask_name)))
+                        awaitingName = true
+                    }
                 }
                 is WayoBrain.Reply.Unknown -> messages.add(
                     ChatMsg(false, pick(R.array.chat_v_unknown), chips = topics(POPULAR_KEYS.take(4)), telegram = true)
