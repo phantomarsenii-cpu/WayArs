@@ -443,4 +443,10 @@
     <string name="pet_a_watch">Настройки → „Допълнително“ → „Оценка на часовника“. Часовник с Wear OS вибрира: 1 кратка — изгодно, 2 кратки — не, 1 дълга — средно. В приложението Galaxy Wearable или Pixel Watch разрешете известията на WayArs; на Galaxy Watch разрешете и известия, докато ползвате телефона, иначе часовникът мълчи при включен екран на телефона.</string>
     <string name="settings_invite_code">Вашият код: %1$s (докоснете за копиране)</string>
     <string name="invite_code_copied">Кодът е копиран</string>
+    <string name="pet_say_petted_1">Ммм… колко приятно! 💚</string>
+    <string name="pet_say_petted_2">Хи-хи, гъделичка! 😄</string>
+    <string name="pet_say_petted_3">Мърр… по хамелеонски 🦎</string>
+    <string name="pet_say_petted_4">Още, моля! Разтапям се 😌</string>
+    <string name="pet_q_petting">Мога ли да погаля Wayo?</string>
+    <string name="pet_a_petting">Разбира се! Прокарайте пръст по мен — ще притворя очи, ще се полюлея и ще полетят сърчица 💚. Галенето не дава енергия: раста само от умните ви решения. Кратко докосване отваря помощта.</string>
 </resources>

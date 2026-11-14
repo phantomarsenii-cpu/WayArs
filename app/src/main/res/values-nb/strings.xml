@@ -443,4 +443,10 @@
     <string name="pet_a_watch">Innstillinger → «Ekstra» → «Vurdering på klokken». En Wear OS-klokke vibrerer: 1 kort — lønnsomt, 2 korte — ikke, 1 lang — middels. Tillat WayArs-varsler i appen Galaxy Wearable eller Pixel Watch; på en Galaxy Watch må du også tillate varsler mens telefonen brukes, ellers er klokken stille når telefonskjermen er på.</string>
     <string name="settings_invite_code">Koden din: %1$s (trykk for å kopiere)</string>
     <string name="invite_code_copied">Koden er kopiert</string>
+    <string name="pet_say_petted_1">Mmm… så deilig! 💚</string>
+    <string name="pet_say_petted_2">Hihi, det kiler! 😄</string>
+    <string name="pet_say_petted_3">Mmmrr… på kameleonvis 🦎</string>
+    <string name="pet_say_petted_4">Mer, takk! Jeg smelter 😌</string>
+    <string name="pet_q_petting">Kan jeg klappe Wayo?</string>
+    <string name="pet_a_petting">Selvfølgelig! Stryk meg med fingeren — jeg lukker øynene, vugger og hjerter flyr opp 💚. Kos gir ikke energi: jeg vokser bare av de smarte avgjørelsene dine. Et kort trykk åpner hjelpen.</string>
 </resources>

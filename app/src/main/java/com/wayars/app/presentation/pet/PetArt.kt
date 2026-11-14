@@ -62,7 +62,9 @@ fun PetArt(
     mood: PetMood,
     modifier: Modifier = Modifier,
     /** Change this to make the pet hop once (e.g. when it is tapped). */
-    hopKey: Int = 0
+    hopKey: Int = 0,
+    /** True while the user strokes the pet: eyes close with pleasure, it sways and hearts rise. */
+    petting: Boolean = false
 ) {
     val context = LocalContext.current
     fun lookup(name: String) = context.resources.getIdentifier(name, "drawable", context.packageName)
@@ -119,6 +121,12 @@ fun PetArt(
     }
     val tau = (2 * PI).toFloat()
     val breathe = sin(tau * t)
+    // Hearts fade in while stroked and fade out shortly after.
+    val heartAlpha by androidx.compose.animation.core.animateFloatAsState(
+        targetValue = if (petting) 1f else 0f,
+        animationSpec = tween(if (petting) 250 else 1200),
+        label = "hearts"
+    )
 
     Box(modifier) {
         Box(
@@ -175,6 +183,12 @@ fun PetArt(
                             ty = -2f * density * (1 + breathe) / 2
                         }
                     }
+                    if (petting) {                                     // blissful sway under the hand
+                        rot = 3.5f * sin(tau * t * 1.5f)
+                        val q = abs(sin(tau * t * 2f))
+                        sy = 1f - 0.035f * q; sx = 1f + 0.025f * q
+                        tx = 0f; ty = 0f
+                    }
                     val p = pop.value
                     val h = hop.value
                     scaleX = stageScale * sx * p * (1f + 0.06f * h)
@@ -196,8 +210,8 @@ fun PetArt(
                 }
                 // Blink: an instant eyes-closed frame for ~0.15 s every ~4 s, and a quick
                 // double blink every other cycle, so it doesn't look mechanical.
-                val blinking = blinkId != 0 && mood != PetMood.SLEEPING && mood != PetMood.EATING &&
-                    (slow > 0.965f || (slow in 0.905f..0.935f && (t * 4).toInt() % 2 == 0))
+                val blinking = blinkId != 0 && (petting || (mood != PetMood.SLEEPING && mood != PetMood.EATING &&
+                    (slow > 0.965f || (slow in 0.905f..0.935f && (t * 4).toInt() % 2 == 0))))
                 if (blinking) {
                     Image(
                         painter = painterResource(blinkId),
@@ -207,7 +221,21 @@ fun PetArt(
                     )
                 }
             } else {
-                Canvas(Modifier.fillMaxSize()) { drawChameleon(stage, mood, blink = slow in 0.0f..0.03f, t = t) }
+                Canvas(Modifier.fillMaxSize()) { drawChameleon(stage, mood, blink = petting || slow in 0.0f..0.03f, t = t) }
+            }
+        }
+        // Hearts rising while the pet is stroked.
+        if (heartAlpha > 0.01f) {
+            Canvas(Modifier.fillMaxSize()) {
+                val n = 5
+                for (i in 0 until n) {
+                    val phase = (t * 1.2f + i.toFloat() / n) % 1f
+                    val x = size.width * (0.22f + 0.56f * ((i * 53 % 100) / 100f)) + 7f * sin(tau * (phase + i * 0.21f))
+                    val y = size.height * (0.62f - 0.58f * phase)
+                    val a = heartAlpha * (1f - phase) * (if (phase < 0.12f) phase / 0.12f else 1f)
+                    val r = size.minDimension * (if (i % 2 == 0) 0.055f else 0.04f)
+                    drawHeart(Offset(x, y), r, Color(0xFFFF5C8A).copy(alpha = a))
+                }
             }
         }
         // Rising energy sparks while eating / levelling up / happy.
@@ -395,4 +423,15 @@ private fun DrawScope.drawCrown(at: Offset, r: Float) {
         }
         drawPath(p, Color(0xFFFFC83D))
     }
+}
+
+/** A small heart centred at [c], [r] ≈ half its width. */
+private fun DrawScope.drawHeart(c: Offset, r: Float, color: Color) {
+    val path = Path().apply {
+        moveTo(c.x, c.y + r * 0.9f)
+        cubicTo(c.x - r * 1.3f, c.y + r * 0.1f, c.x - r * 0.9f, c.y - r * 1.0f, c.x, c.y - r * 0.35f)
+        cubicTo(c.x + r * 0.9f, c.y - r * 1.0f, c.x + r * 1.3f, c.y + r * 0.1f, c.x, c.y + r * 0.9f)
+        close()
+    }
+    drawPath(path, color)
 }

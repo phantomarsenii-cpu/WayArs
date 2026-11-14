@@ -443,4 +443,10 @@
     <string name="pet_a_watch">Inställningar → ”Extra” → ”Bedömning på klockan”. En Wear OS-klocka vibrerar: 1 kort — lönsamt, 2 korta — inte, 1 lång — medel. Tillåt WayArs-aviseringar i appen Galaxy Wearable eller Pixel Watch; på en Galaxy Watch måste du även tillåta aviseringar medan telefonen används, annars är klockan tyst när telefonens skärm är på.</string>
     <string name="settings_invite_code">Din kod: %1$s (tryck för att kopiera)</string>
     <string name="invite_code_copied">Koden kopierad</string>
+    <string name="pet_say_petted_1">Mmm… vad skönt! 💚</string>
+    <string name="pet_say_petted_2">Hihi, det kittlas! 😄</string>
+    <string name="pet_say_petted_3">Spinn… på kameleontvis 🦎</string>
+    <string name="pet_say_petted_4">Mer, tack! Jag smälter 😌</string>
+    <string name="pet_q_petting">Kan jag klappa Wayo?</string>
+    <string name="pet_a_petting">Så klart! Stryk mig med fingret — jag blundar, gungar och hjärtan flyger upp 💚. Klappar ger ingen energi: jag växer bara av dina smarta beslut. Ett kort tryck öppnar hjälpen.</string>
 </resources>

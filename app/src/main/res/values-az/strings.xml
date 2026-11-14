@@ -443,4 +443,10 @@
     <string name="pet_a_watch">Parametrlər → “Əlavələr” → “Saatda qiymət”. Wear OS saatı titrəyir: 1 qısa — sərfəli, 2 qısa — yox, 1 uzun — orta. Galaxy Wearable və ya Pixel Watch tətbiqində WayArs bildirişlərinə icazə verin; Galaxy Watch-da telefondan istifadə edərkən bildirişləri də açın, əks halda telefon ekranı açıq olanda saat susur.</string>
     <string name="settings_invite_code">Kodunuz: %1$s (kopyalamaq üçün toxunun)</string>
     <string name="invite_code_copied">Kod kopyalandı</string>
+    <string name="pet_say_petted_1">Mmm… necə xoşdur! 💚</string>
+    <string name="pet_say_petted_2">Hi-hi, qıdıqlanıram! 😄</string>
+    <string name="pet_say_petted_3">Mırr… buqələmun sayağı 🦎</string>
+    <string name="pet_say_petted_4">Yenə, xahiş edirəm! Əriyirəm 😌</string>
+    <string name="pet_q_petting">Wayo-nu sığallamaq olar?</string>
+    <string name="pet_a_petting">Əlbəttə! Barmağınızı üstümdə gəzdirin — gözlərimi yumacağam, yırğalanacağam və ürəkciklər uçacaq 💚. Sığal enerji vermir: mən yalnız ağıllı qərarlarınızdan böyüyürəm. Qısa toxunuş köməyi açır.</string>
 </resources>

@@ -442,4 +442,10 @@
     <string name="pet_a_watch">Setări → „Extra” → „Verdict pe ceas”. Un ceas Wear OS vibrează: 1 scurtă — rentabil, 2 scurte — nu, 1 lungă — mediu. În aplicația Galaxy Wearable sau Pixel Watch permite notificările WayArs; pe Galaxy Watch permite și notificările cât folosești telefonul, altfel ceasul tace când ecranul telefonului e pornit.</string>
     <string name="settings_invite_code">Codul tău: %1$s (atinge ca să copiezi)</string>
     <string name="invite_code_copied">Cod copiat</string>
+    <string name="pet_say_petted_1">Mmm… ce plăcut! 💚</string>
+    <string name="pet_say_petted_2">Hihi, gâdilă! 😄</string>
+    <string name="pet_say_petted_3">Torc… în stil de cameleon 🦎</string>
+    <string name="pet_say_petted_4">Încă, te rog! Mă topesc 😌</string>
+    <string name="pet_q_petting">Pot să-l mângâi pe Wayo?</string>
+    <string name="pet_a_petting">Sigur! Trece cu degetul peste mine — închid ochii, mă legăn și zboară inimioare 💚. Mângâierile nu dau energie: cresc doar din deciziile tale istețe. O atingere scurtă deschide ajutorul.</string>
 </resources>

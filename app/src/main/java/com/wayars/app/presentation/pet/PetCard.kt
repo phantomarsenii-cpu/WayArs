@@ -48,6 +48,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.input.pointer.pointerInput
 import com.wayars.app.R
 import com.wayars.app.pet.PetState
 import com.wayars.app.presentation.ui.component.MainTab
@@ -86,6 +89,7 @@ val PET_HELP_TOPICS: List<PetHelpTopic> = listOf(
     topic(R.string.pet_q_subscription, R.string.pet_a_subscription, TourTarget.SETTINGS_SUBSCRIPTION, item = SettingsItems.SUBSCRIPTION),
     topic(R.string.pet_q_contact, R.string.pet_a_contact, TourTarget.SETTINGS_INFO, item = SettingsItems.INFO),
     topic(R.string.pet_q_pet, R.string.pet_a_pet, null),
+    topic(R.string.pet_q_petting, R.string.pet_a_petting, null),
     topic(R.string.pet_q_diagnostics, R.string.pet_a_diagnostics, null),
     topic(R.string.pet_q_apps, R.string.pet_a_apps, TourTarget.SETTINGS_APPS, item = SettingsItems.APPS),
     topic(R.string.pet_q_clicks, R.string.pet_a_clicks, null),
@@ -143,6 +147,15 @@ fun PetCard(
     val pet by PetState.state.collectAsState()
     var helpOpen by remember { mutableStateOf(false) }
     var hopKey by remember { mutableStateOf(0) }
+    // Stroking: while the finger moves over Wayo, and a short happy afterglow when it stops.
+    var petting by remember { mutableStateOf(false) }
+    var afterglow by remember { mutableStateOf(false) }
+    var phrase by remember { mutableStateOf(0) }
+    var strokeDistance by remember { mutableStateOf(0f) }
+    val haptic = androidx.compose.ui.platform.LocalHapticFeedback.current
+    LaunchedEffect(afterglow) {
+        if (afterglow) { delay(3_000); afterglow = false }
+    }
     val scope = rememberCoroutineScope()
     val gainFloat = remember { Animatable(1f) }
     LaunchedEffect(pet.reactionAt) {
@@ -171,6 +184,8 @@ fun PetCard(
     val reactionFresh = pet.reaction != PetState.Reaction.NONE && now - pet.reactionAt < REACTION_MS
     val mood = when {
         helpOpen -> PetMood.HELPER
+        petting -> PetMood.NEUTRAL
+        afterglow -> PetMood.HAPPY
         reactionFresh -> when (pet.reaction) {
             PetState.Reaction.GOOD_ACCEPTED -> PetMood.HAPPY
             PetState.Reaction.SMART_REJECT -> PetMood.COOL
@@ -186,7 +201,10 @@ fun PetCard(
         else -> PetMood.NEUTRAL
     }
     val name = stringResource(R.string.pet_name)
-    val says = when (mood) {
+    val pettedPhrases = listOf(
+        R.string.pet_say_petted_1, R.string.pet_say_petted_2, R.string.pet_say_petted_3, R.string.pet_say_petted_4
+    )
+    val says = if (petting || afterglow) stringResource(pettedPhrases[phrase % pettedPhrases.size]) else when (mood) {
         PetMood.HELLO -> stringResource(R.string.pet_say_hello, name)
         PetMood.WORKING -> stringResource(R.string.pet_say_working)
         PetMood.HAPPY -> if (pet.reaction == PetState.Reaction.FULL) stringResource(R.string.pet_say_full)
@@ -225,9 +243,33 @@ fun PetCard(
                 stage = pet.stage,
                 mood = mood,
                 hopKey = hopKey,
+                petting = petting,
                 modifier = Modifier
                     .size(108.dp)
                     .clip(RoundedCornerShape(18.dp))
+                    // Stroke with a finger to pet Wayo (doesn't give energy; only smart decisions do).
+                    .pointerInput(Unit) {
+                        detectDragGestures(
+                            onDragStart = {
+                                petting = true
+                                afterglow = false
+                                strokeDistance = 0f
+                                phrase = (phrase + 1) % 4
+                                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                            },
+                            onDragEnd = { petting = false; afterglow = true },
+                            onDragCancel = { petting = false; afterglow = true },
+                            onDrag = { change, drag ->
+                                change.consume()
+                                strokeDistance += drag.getDistance()
+                                // A soft tick for every ~stroke under the finger.
+                                if (strokeDistance > 90.dp.toPx()) {
+                                    strokeDistance = 0f
+                                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                }
+                            }
+                        )
+                    }
                     .clickable {
                         // Tap: Wayo hops, then opens the helper.
                         hopKey++

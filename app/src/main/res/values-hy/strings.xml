@@ -443,4 +443,10 @@
     <string name="pet_a_watch">Կարգավորումներ → «Լրացուցիչ» → «Գնահատական ժամացույցին»։ Wear OS ժամացույցը թրթռում է․ 1 կարճ՝ ձեռնտու, 2 կարճ՝ ոչ, 1 երկար՝ միջին։ Galaxy Wearable կամ Pixel Watch հավելվածում թույլատրեք WayArs-ի ծանուցումները, իսկ Galaxy Watch-ում միացրեք նաև ծանուցումները հեռախոսն օգտագործելիս, այլապես հեռախոսի էկրանը միացված լինելիս ժամացույցը լռում է։</string>
     <string name="settings_invite_code">Ձեր կոդը՝ %1$s (սեղմեք՝ պատճենելու համար)</string>
     <string name="invite_code_copied">Կոդը պատճենված է</string>
+    <string name="pet_say_petted_1">Մմմ… ինչ հաճելի է։ 💚</string>
+    <string name="pet_say_petted_2">Հի-հի, խուտուտ է գալիս։ 😄</string>
+    <string name="pet_say_petted_3">Մռռ… քամելեոնի ձևով 🦎</string>
+    <string name="pet_say_petted_4">Էլի, խնդրում եմ։ Հալվում եմ 😌</string>
+    <string name="pet_q_petting">Կարո՞ղ եմ շոյել Wayo-ին։</string>
+    <string name="pet_a_petting">Իհարկե։ Մատով անցեք վրայովս՝ աչքերս կփակեմ, կօրորվեմ, և սրտիկներ կթռչեն 💚։ Շոյելը էներգիա չի տալիս․ ես մեծանում եմ միայն ձեր խելացի որոշումներից։ Կարճ հպումը բացում է օգնությունը։</string>
 </resources>

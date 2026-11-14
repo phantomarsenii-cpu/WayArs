@@ -455,4 +455,10 @@
     <string name="pet_a_watch">Settings → “Extras” → “Verdict on the watch”. A Wear OS watch vibrates: 1 short — profitable, 2 short — not, 1 long — average. In the Galaxy Wearable or Pixel Watch app allow WayArs notifications; on a Galaxy Watch also allow notifications while using the phone, otherwise the watch stays quiet while the phone screen is on.</string>
     <string name="settings_invite_code">Your code: %1$s (tap to copy)</string>
     <string name="invite_code_copied">Code copied</string>
+    <string name="pet_say_petted_1">Mmm… that\'s nice! 💚</string>
+    <string name="pet_say_petted_2">Hehe, it tickles! 😄</string>
+    <string name="pet_say_petted_3">Purr… well, chameleon purr 🦎</string>
+    <string name="pet_say_petted_4">More, please! I\'m melting 😌</string>
+    <string name="pet_q_petting">Can I pet Wayo?</string>
+    <string name="pet_a_petting">Of course! Stroke me with your finger — I close my eyes, sway and hearts fly up 💚. Petting doesn\'t give energy: I only grow from your smart decisions. A short tap opens help.</string>
 </resources>

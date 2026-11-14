@@ -442,4 +442,10 @@
     <string name="pet_a_watch">Einstellungen → „Extras“ → „Bewertung auf der Uhr“. Eine Wear-OS-Uhr vibriert: 1× kurz — lohnend, 2× kurz — nicht, 1× lang — mittel. In der App Galaxy Wearable oder Pixel Watch WayArs-Benachrichtigungen erlauben; auf der Galaxy Watch auch Benachrichtigungen während der Handynutzung zulassen, sonst bleibt die Uhr bei eingeschaltetem Handybildschirm still.</string>
     <string name="settings_invite_code">Dein Code: %1$s (zum Kopieren tippen)</string>
     <string name="invite_code_copied">Code kopiert</string>
+    <string name="pet_say_petted_1">Mmm… wie schön! 💚</string>
+    <string name="pet_say_petted_2">Hihi, das kitzelt! 😄</string>
+    <string name="pet_say_petted_3">Schnurr… auf Chamäleon-Art 🦎</string>
+    <string name="pet_say_petted_4">Mehr, bitte! Ich schmelze 😌</string>
+    <string name="pet_q_petting">Kann ich Wayo streicheln?</string>
+    <string name="pet_a_petting">Na klar! Streich mit dem Finger über mich — ich schließe die Augen, wiege mich und Herzchen steigen auf 💚. Streicheln gibt keine Energie: Ich wachse nur durch deine klugen Entscheidungen. Kurz tippen öffnet die Hilfe.</string>
 </resources>

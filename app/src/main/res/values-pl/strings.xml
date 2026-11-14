@@ -447,4 +447,10 @@
     <string name="pet_a_watch">Ustawienia → „Dodatki” → „Ocena na zegarku”. Zegarek z Wear OS wibruje: jedna krótka — opłacalne, dwie — nie, jedna długa — średnie. W aplikacji Galaxy Wearable lub Pixel Watch zezwól na powiadomienia WayArs; na Galaxy Watch włącz też powiadomienia podczas używania telefonu, inaczej przy włączonym ekranie telefonu zegarek milczy.</string>
     <string name="settings_invite_code">Twój kod: %1$s (dotknij, aby skopiować)</string>
     <string name="invite_code_copied">Kod skopiowany</string>
+    <string name="pet_say_petted_1">Mmm… jak miło! 💚</string>
+    <string name="pet_say_petted_2">Hihi, łaskocze! 😄</string>
+    <string name="pet_say_petted_3">Mrr… po kameleonowemu 🦎</string>
+    <string name="pet_say_petted_4">Jeszcze, proszę! Rozpływam się 😌</string>
+    <string name="pet_q_petting">Czy mogę pogłaskać Wayo?</string>
+    <string name="pet_a_petting">Jasne! Przesuń po mnie palcem — zmrużę oczy, zakołyszę się i polecą serduszka 💚. Głaskanie nie daje energii: rosnę tylko dzięki twoim mądrym decyzjom. Krótkie dotknięcie otwiera pomoc.</string>
 </resources>

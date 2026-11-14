@@ -447,4 +447,10 @@
     <string name="pet_a_watch">Настройки → «Дополнительно» → «Оценка на часах». Часы на Wear OS вибрируют: одна короткая — выгодно, две — нет, одна длинная — средне. В приложении Galaxy Wearable или Pixel Watch разрешите уведомления WayArs; на Galaxy Watch включите показ уведомлений во время использования телефона, иначе при включённом экране телефона часы молчат.</string>
     <string name="settings_invite_code">Ваш код: %1$s (нажмите, чтобы скопировать)</string>
     <string name="invite_code_copied">Код скопирован</string>
+    <string name="pet_say_petted_1">Ммм… как приятно! 💚</string>
+    <string name="pet_say_petted_2">Хи-хи, щекотно! 😄</string>
+    <string name="pet_say_petted_3">Мурр… ну, по-хамелеоньи 🦎</string>
+    <string name="pet_say_petted_4">Ещё, пожалуйста! Я таю 😌</string>
+    <string name="pet_q_petting">Можно погладить Wayo?</string>
+    <string name="pet_a_petting">Конечно! Проведите по мне пальцем — я зажмурюсь, покачаюсь, и полетят сердечки 💚. Поглаживания не дают энергию: расту я только от ваших умных решений. Короткое нажатие открывает помощь.</string>
 </resources>

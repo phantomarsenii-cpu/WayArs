@@ -443,4 +443,10 @@
     <string name="pet_a_watch">პარამეტრები → „დამატებითი“ → „შეფასება საათზე“. Wear OS საათი ვიბრირებს: 1 მოკლე — მომგებიანი, 2 მოკლე — არა, 1 გრძელი — საშუალო. Galaxy Wearable ან Pixel Watch აპში დაუშვით WayArs-ის შეტყობინებები; Galaxy Watch-ზე ჩართეთ შეტყობინებები ტელეფონის გამოყენებისასაც, თორემ ტელეფონის ჩართული ეკრანისას საათი დუმს.</string>
     <string name="settings_invite_code">თქვენი კოდი: %1$s (შეეხეთ დასაკოპირებლად)</string>
     <string name="invite_code_copied">კოდი დაკოპირდა</string>
+    <string name="pet_say_petted_1">მმმ… რა სასიამოვნოა! 💚</string>
+    <string name="pet_say_petted_2">ჰი-ჰი, მიღიტინებს! 😄</string>
+    <string name="pet_say_petted_3">მრრ… ქამელეონურად 🦎</string>
+    <string name="pet_say_petted_4">კიდევ, გეთაყვა! ვდნები 😌</string>
+    <string name="pet_q_petting">შეიძლება Wayo-ს მოფერება?</string>
+    <string name="pet_a_petting">რა თქმა უნდა! გადამისვით თითი — თვალებს დავხუჭავ, შევირხევი და გულები აფრინდება 💚. მოფერება ენერგიას არ იძლევა: მხოლოდ თქვენი ჭკვიანი გადაწყვეტილებებით ვიზრდები. მოკლე შეხება დახმარებას ხსნის.</string>
 </resources>
