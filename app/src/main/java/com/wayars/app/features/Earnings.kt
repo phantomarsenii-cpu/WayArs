@@ -22,10 +22,15 @@ data class ShiftEarnings(
     val takeHome: Double,
     val orders: Int,
     val activeMillis: Long,
-    /** Pro-rated share of the partner's weekly fee for the period. */
-    val partnerFee: Double
+    /** Pro-rated share of the partner's weekly fee for the period (informational only). */
+    val partnerFee: Double,
+    /** Partner commission on the period's order amounts (informational only). */
+    val partnerCommission: Double = 0.0
 ) {
-    val net: Double get() = takeHome - partnerFee
+    /** Take-home (after fuel and tax). Partner costs are NOT subtracted: they're shown separately. */
+    val net: Double get() = takeHome
+    /** What's left after the partner's commission and weekly payment, if the driver entered them. */
+    val afterPartner: Double get() = takeHome - partnerFee - partnerCommission
     /** Null when there's too little active time (< 15 min) for a meaningful hourly figure. */
     val perHour: Double? get() = if (activeMillis < 15 * 60_000L) null else net / (activeMillis / 3_600_000.0)
 }
@@ -78,7 +83,8 @@ object Earnings {
         intervals: List<LongRange>,
         from: Long,
         to: Long,
-        weeklyFee: Double
+        weeklyFee: Double,
+        commissionPercent: Double = 0.0
     ): ShiftEarnings {
         val inRange = orders.filter { it.timestampMillis in from until to && it.accepted != false }
         val days = maxOf(1L, Math.ceil((to - from).toDouble() / DAY).toLong())
@@ -87,7 +93,8 @@ object Earnings {
             takeHome = inRange.sumOf { it.evaluation.takeHome },
             orders = inRange.size,
             activeMillis = overlap(intervals, from, to),
-            partnerFee = if (weeklyFee > 0) weeklyFee * days / 7.0 else 0.0
+            partnerFee = if (weeklyFee > 0) weeklyFee * days / 7.0 else 0.0,
+            partnerCommission = if (commissionPercent > 0) inRange.sumOf { it.evaluation.earnings } * commissionPercent / 100.0 else 0.0
         )
     }
 

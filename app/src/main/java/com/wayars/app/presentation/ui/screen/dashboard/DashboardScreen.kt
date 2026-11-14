@@ -359,11 +359,10 @@ fun DashboardScreen(
                 fontSize = 14.sp
             )
             // Left: orders + earnings. Right: real take-home per hour today (waiting included),
-            // the same figure as the top card in Stats.
-            val weeklyFee by com.wayars.app.data.prefs.DriverPrefs.weeklyFee.collectAsState()
+            // the same figure as the top card in Stats. Partner costs are informational (Stats only).
             val activeMs = activeTodayMinutes * 60_000L
             val perHour = if (activeMs < 15 * 60_000L) null
-                else (summary.totalTakeHome - weeklyFee / 7.0) / (activeMs / 3_600_000.0)
+                else summary.totalTakeHome / (activeMs / 3_600_000.0)
             Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.Bottom) {
                 Column(Modifier.weight(1f)) {
                     Row(verticalAlignment = Alignment.Bottom) {

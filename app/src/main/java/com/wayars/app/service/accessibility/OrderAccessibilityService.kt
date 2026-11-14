@@ -463,8 +463,7 @@ class OrderAccessibilityService : AccessibilityService() {
             preset = currentPreset,
             vehicleProfile = currentVehicleProfile,
             customThresholds = currentCustomThresholds,
-            taxPercent = currentTaxPercent,
-            commissionPercent = com.wayars.app.data.prefs.DriverPrefs.commissionPercent.value
+            taxPercent = currentTaxPercent
         )
 
         Log.d(TAG, "Parsed order: $evaluation")

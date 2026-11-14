@@ -102,8 +102,7 @@ class OrderNotificationListenerService : NotificationListenerService() {
             preset = currentPreset,
             vehicleProfile = currentVehicleProfile,
             customThresholds = currentCustomThresholds,
-            taxPercent = currentTaxPercent,
-            commissionPercent = com.wayars.app.data.prefs.DriverPrefs.commissionPercent.value
+            taxPercent = currentTaxPercent
         )
         Log.d(TAG, "Parsed order from notification: $evaluation")
         OverlayState.publish(evaluation, recordId = null, sourcePackage = sbn.packageName)

@@ -79,10 +79,11 @@ fun StatsScreen(
         while (true) { value = System.currentTimeMillis(); kotlinx.coroutines.delay(60_000L) }
     }
     val weeklyFee by com.wayars.app.data.prefs.DriverPrefs.weeklyFee.collectAsState()
-    val extras = remember(orders, period, tick, weeklyFee) {
+    val commissionPct by com.wayars.app.data.prefs.DriverPrefs.commissionPercent.collectAsState()
+    val extras = remember(orders, period, tick, weeklyFee, commissionPct) {
         val now = System.currentTimeMillis()
         val intervals = ActiveSessionTracker.intervals(now - 400L * 86_400_000L, now)
-        val shift = Earnings.period(orders, intervals, stats.start, now + 1, weeklyFee)
+        val shift = Earnings.period(orders, intervals, stats.start, now + 1, weeklyFee, commissionPct)
         val recent = orders.filter { it.timestampMillis >= now - 60L * 86_400_000L }
         val slots = Earnings.slotRates(recent, intervals)
         StatsExtrasData(

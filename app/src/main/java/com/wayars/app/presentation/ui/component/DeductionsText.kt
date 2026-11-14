@@ -12,10 +12,7 @@ import com.wayars.app.util.CurrencyFormatter
  */
 @Composable
 fun deductionsLine(evaluation: OrderEvaluation): String? {
-    val parts = ArrayList<String>(3)
-    if (evaluation.commissionAmount > 0.0) {
-        parts.add(stringResource(R.string.overlay_deduction_partner, CurrencyFormatter.format(evaluation.commissionAmount, evaluation.currency)))
-    }
+    val parts = ArrayList<String>(2)
     if (evaluation.fuelDataEntered && evaluation.fuelCost > 0.0) {
         parts.add(stringResource(R.string.overlay_deduction_fuel, CurrencyFormatter.format(evaluation.fuelCost, evaluation.currency)))
     }

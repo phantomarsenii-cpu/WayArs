@@ -13,6 +13,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -73,10 +74,24 @@ fun RealHourlyCard(e: ShiftEarnings, currency: Currency) = Card {
         stringResource(R.string.stats_real_hour_detail, CurrencyFormatter.format(e.net, currency), formatDuration(e.activeMillis)),
         color = MaterialTheme.colorScheme.onSurface, fontSize = 13.sp
     )
-    if (e.partnerFee > 0.0) {
+    // Partner (fleet) costs: informational, only when the driver entered them in Settings.
+    if (e.partnerCommission > 0.0 || e.partnerFee > 0.0) {
+        val pct = com.wayars.app.data.prefs.DriverPrefs.commissionPercent.collectAsState().value
+        if (e.partnerCommission > 0.0) {
+            Text(
+                stringResource(R.string.stats_partner_commission_line, formatPercent(pct), CurrencyFormatter.format(e.partnerCommission, currency)),
+                color = WaTextSecondary, fontSize = 12.sp
+            )
+        }
+        if (e.partnerFee > 0.0) {
+            Text(
+                stringResource(R.string.stats_partner_fee_line, CurrencyFormatter.format(e.partnerFee, currency)),
+                color = WaTextSecondary, fontSize = 12.sp
+            )
+        }
         Text(
-            stringResource(R.string.stats_partner_fee_line, CurrencyFormatter.format(e.partnerFee, currency)),
-            color = WaTextSecondary, fontSize = 12.sp
+            stringResource(R.string.stats_after_partner, CurrencyFormatter.format(e.afterPartner, currency)),
+            color = MaterialTheme.colorScheme.onSurface, fontSize = 13.sp, fontWeight = FontWeight.SemiBold
         )
     }
     Text(stringResource(R.string.stats_real_hour_hint), color = WaTextSecondary, fontSize = 12.sp, lineHeight = 16.sp)
@@ -184,3 +199,6 @@ fun AchievementsCard(a: Achievements, currency: Currency) = Card {
         }
     }
 }
+
+private fun formatPercent(v: Double): String =
+    if (v == v.toLong().toDouble()) v.toLong().toString() else String.format(java.util.Locale.US, "%.1f", v)
