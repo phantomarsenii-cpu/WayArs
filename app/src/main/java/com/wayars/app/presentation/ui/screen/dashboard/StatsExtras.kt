@@ -124,7 +124,10 @@ fun ServicesCard(services: List<ServiceRate>, comparisons: List<List<SlotRate>>,
     }
     comparisons.take(3).forEach { slot ->
         val first = slot.first()
-        val line = slot.joinToString(" · ") { "${AppNames.label(context, it.sourcePackage)} ${perHour(it.perHour, currency)}" }
+        val line = slot.joinToString(" · ") {
+            "${AppNames.label(context, it.sourcePackage)} " +
+                context.getString(R.string.summary_part_hour, CurrencyFormatter.format(it.perHour, currency, 0))
+        }
         Text(
             "${slotName(first.dayOfWeek, first.dayPart)}: $line",
             color = WaTextSecondary, fontSize = 13.sp, lineHeight = 18.sp

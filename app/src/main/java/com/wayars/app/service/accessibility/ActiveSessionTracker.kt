@@ -135,7 +135,7 @@ internal object ShiftLog {
         if (end - start < 1_000L) return
         val cutoff = System.currentTimeMillis() - KEEP_MS
         val kept = read(p).filter { it.last >= cutoff && !(it.first == start) }
-        val all = (kept + (start..end)).sortedBy { it.first }
+        val all = (kept + listOf(start..end)).sortedBy { it.first }
         p.edit().putString(KEY, all.joinToString(";") { "${it.first}-${it.last}" }).apply()
     }
 }
