@@ -296,7 +296,7 @@ fun DashboardScreen(
             }
         }
 
-        com.wayars.app.presentation.pet.PetCard(isActive = isActive, onShowTopic = onShowHelp)
+        com.wayars.app.presentation.pet.PetCard(isActive = isActive, onShowTopic = onShowHelp, isSubscribed = isSubscribed)
 
         if (!isSubscribed && trialLeftMinutes > 0) {
             Text(

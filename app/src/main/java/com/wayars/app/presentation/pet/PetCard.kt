@@ -85,8 +85,35 @@ val PET_HELP_TOPICS: List<PetHelpTopic> = listOf(
     topic(R.string.pet_q_verdict, R.string.pet_a_verdict, TourTarget.VERDICT_CARD, MainTab.HOME),
     topic(R.string.pet_q_subscription, R.string.pet_a_subscription, TourTarget.SETTINGS_SUBSCRIPTION, item = 1),
     topic(R.string.pet_q_contact, R.string.pet_a_contact, TourTarget.SETTINGS_INFO, item = 8),
-    topic(R.string.pet_q_pet, R.string.pet_a_pet, null)
+    topic(R.string.pet_q_pet, R.string.pet_a_pet, null),
+    topic(R.string.pet_q_diagnostics, R.string.pet_a_diagnostics, null),
+    topic(R.string.pet_q_apps, R.string.pet_a_apps, TourTarget.SETTINGS_APPS, item = 7),
+    topic(R.string.pet_q_clicks, R.string.pet_a_clicks, null),
+    topic(R.string.pet_q_privacy, R.string.pet_a_privacy, TourTarget.SETTINGS_INFO, item = 8),
+    topic(R.string.pet_q_wrong_numbers, R.string.pet_a_wrong_numbers, TourTarget.SETTINGS_APPS, item = 7),
+    topic(R.string.pet_q_move_card, R.string.pet_a_move_card, null),
+    topic(R.string.pet_q_buttons, R.string.pet_a_buttons, null),
+    topic(R.string.pet_q_net, R.string.pet_a_net, TourTarget.SETTINGS_VEHICLE, item = 4),
+    topic(R.string.pet_q_no_time, R.string.pet_a_no_time, null),
+    topic(R.string.pet_q_pickup, R.string.pet_a_pickup, null),
+    topic(R.string.pet_q_trial, R.string.pet_a_trial, TourTarget.SETTINGS_SUBSCRIPTION, item = 1),
+    topic(R.string.pet_q_restore, R.string.pet_a_restore, TourTarget.SETTINGS_SUBSCRIPTION, item = 1),
+    topic(R.string.pet_q_cancel, R.string.pet_a_cancel, null),
+    topic(R.string.pet_q_language, R.string.pet_a_language, TourTarget.SETTINGS_CURRENCY, item = 2),
+    topic(R.string.pet_q_tutorial, R.string.pet_a_tutorial, TourTarget.SETTINGS_INFO, item = 8),
+    topic(R.string.pet_q_turns_off, R.string.pet_a_turns_off, TourTarget.ACTIVE_SWITCH, MainTab.HOME),
+    topic(R.string.pet_q_background, R.string.pet_a_background, null),
+    topic(R.string.pet_q_several, R.string.pet_a_several, TourTarget.SETTINGS_APPS, item = 7),
+    topic(R.string.pet_q_battery, R.string.pet_a_battery, TourTarget.SETTINGS_PERMISSIONS, item = 6),
+    topic(R.string.pet_q_stats_count, R.string.pet_a_stats_count, TourTarget.NAV_STATS, MainTab.STATS),
+    topic(R.string.pet_q_notifications, R.string.pet_a_notifications, TourTarget.SETTINGS_PERMISSIONS, item = 6),
+    topic(R.string.pet_q_country, R.string.pet_a_country, TourTarget.SETTINGS_CURRENCY, item = 2),
+    topic(R.string.pet_q_reset_calibration, R.string.pet_a_reset_calibration, TourTarget.SETTINGS_APPS, item = 7),
+    topic(R.string.pet_q_documents, R.string.pet_a_documents, TourTarget.SETTINGS_INFO, item = 8)
 )
+
+/** One live check of the phone/app state for "Check my phone". */
+private class DiagItem(@StringRes val label: Int, val ok: Boolean, val fix: (() -> Unit)?)
 
 private const val REACTION_MS = 6_000L
 private const val SLEEP_AFTER_MS = 24L * 60 * 60 * 1000
@@ -97,7 +124,12 @@ private const val BREAK_AFTER_MS = 5L * 60 * 60 * 1000
  * Tapping the pet or "Ask" opens the helper.
  */
 @Composable
-fun PetCard(isActive: Boolean, onShowTopic: (TourStep) -> Unit, modifier: Modifier = Modifier) {
+fun PetCard(
+    isActive: Boolean,
+    onShowTopic: (TourStep) -> Unit,
+    modifier: Modifier = Modifier,
+    isSubscribed: Boolean = false
+) {
     val context = LocalContext.current
     val pet by PetState.state.collectAsState()
     var helpOpen by remember { mutableStateOf(false) }
@@ -253,6 +285,8 @@ fun PetCard(isActive: Boolean, onShowTopic: (TourStep) -> Unit, modifier: Modifi
     if (helpOpen) {
         PetHelpDialog(
             name = name,
+            isActive = isActive,
+            isSubscribed = isSubscribed,
             onDismiss = { helpOpen = false },
             onShow = { step ->
                 helpOpen = false
@@ -264,14 +298,64 @@ fun PetCard(isActive: Boolean, onShowTopic: (TourStep) -> Unit, modifier: Modifi
 
 /** The pet as a helper: type a question (or pick one) — it answers and can point at the setting. */
 @Composable
-private fun PetHelpDialog(name: String, onDismiss: () -> Unit, onShow: (TourStep) -> Unit) {
+private fun PetHelpDialog(
+    name: String,
+    isActive: Boolean,
+    isSubscribed: Boolean,
+    onDismiss: () -> Unit,
+    onShow: (TourStep) -> Unit
+) {
+    val context = LocalContext.current
     var query by remember { mutableStateOf("") }
     var openIndex by remember { mutableStateOf<Int?>(null) }
+    var diagOpen by remember { mutableStateOf(false) }
+    var diagTick by remember { mutableStateOf(0) }
     val resolved = PET_HELP_TOPICS.map { Triple(it, stringResource(it.question), stringResource(it.answer)) }
-    val words = query.lowercase().split(Regex("[^\\p{L}\\p{N}]+")).filter { it.length >= 3 }
-    val shown = if (words.isEmpty()) resolved else resolved.filter { (_, q, a) ->
-        val hay = (q + " " + a).lowercase()
-        words.any { w -> hay.contains(w.take(5)) }
+    // Ranked search: every word of the question (4+ letters, compared by its first 5 letters so
+    // word endings and small typos at the end don't matter) scores 3 in the question, 1 in the answer.
+    val words = query.lowercase().split(Regex("[^\\p{L}\\p{N}]+")).filter { it.length >= 3 }.map { it.take(5) }
+    val shown = if (words.isEmpty()) resolved else resolved
+        .map { tr -> tr to words.sumOf { w -> (if (tr.second.lowercase().contains(w)) 3 else 0) + (if (tr.third.lowercase().contains(w)) 1 else 0) } }
+        .filter { it.second > 0 }
+        .sortedByDescending { it.second }
+        .map { it.first }
+
+    fun open(intent: android.content.Intent) {
+        runCatching { context.startActivity(intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)) }
+    }
+    val pkgUri = android.net.Uri.parse("package:" + context.packageName)
+    val diag = remember(diagOpen, diagTick, isActive, isSubscribed) {
+        if (!diagOpen) emptyList() else {
+            val pm = context.getSystemService(android.content.Context.POWER_SERVICE) as android.os.PowerManager
+            val notifOk = android.os.Build.VERSION.SDK_INT < 33 ||
+                androidx.core.content.ContextCompat.checkSelfPermission(context, "android.permission.POST_NOTIFICATIONS") ==
+                android.content.pm.PackageManager.PERMISSION_GRANTED
+            val accessOk = AccessibilityUtils.isServiceEnabled(context)
+            val overlayOk = Settings.canDrawOverlays(context)
+            val planOk = isSubscribed || com.wayars.app.service.accessibility.FreeTrial.hasTimeLeft()
+            val stepFor = { target: TourTarget, tab: MainTab, item: Int? -> TourStep(target, tab, item, R.string.pet_diag_title, R.string.pet_diag_problems) }
+            listOf(
+                DiagItem(R.string.pet_diag_accessibility, accessOk) { open(android.content.Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) },
+                DiagItem(R.string.pet_diag_overlay, overlayOk) { open(android.content.Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, pkgUri)) },
+                DiagItem(R.string.pet_diag_plan, planOk) { onShow(stepFor(TourTarget.SETTINGS_SUBSCRIPTION, MainTab.SETTINGS, 1)) },
+                DiagItem(R.string.pet_diag_active, isActive) { onShow(stepFor(TourTarget.ACTIVE_SWITCH, MainTab.HOME, null)) },
+                DiagItem(R.string.pet_diag_battery, pm.isIgnoringBatteryOptimizations(context.packageName)) {
+                    open(android.content.Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS))
+                },
+                DiagItem(R.string.pet_diag_notifications, notifOk) {
+                    open(android.content.Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName))
+                }
+            )
+        }
+    }
+    // Re-check when the user comes back from a system settings screen.
+    val lifecycleOwner = androidx.compose.ui.platform.LocalLifecycleOwner.current
+    androidx.compose.runtime.DisposableEffect(lifecycleOwner) {
+        val obs = androidx.lifecycle.LifecycleEventObserver { _, e ->
+            if (e == androidx.lifecycle.Lifecycle.Event.ON_RESUME) diagTick++
+        }
+        lifecycleOwner.lifecycle.addObserver(obs)
+        onDispose { lifecycleOwner.lifecycle.removeObserver(obs) }
     }
 
     Dialog(onDismissRequest = onDismiss) {
@@ -303,6 +387,52 @@ private fun PetHelpDialog(name: String, onDismiss: () -> Unit, onShow: (TourStep
                 ),
                 modifier = Modifier.fillMaxWidth()
             )
+            Text(
+                stringResource(R.string.pet_diag_button),
+                color = Color.Black,
+                fontWeight = FontWeight.Bold,
+                fontSize = 14.sp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(WaNeonGreen)
+                    .clickable { diagOpen = !diagOpen; diagTick++ }
+                    .padding(horizontal = 12.dp, vertical = 10.dp)
+            )
+            if (diagOpen) {
+                Column(
+                    Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(WaSurfaceVariant)
+                        .padding(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    diag.forEach { item ->
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(if (item.ok) "✅" else "❌", fontSize = 14.sp)
+                            Text(
+                                stringResource(item.label),
+                                color = Color.White, fontSize = 13.sp,
+                                modifier = Modifier.weight(1f).padding(start = 8.dp)
+                            )
+                            if (!item.ok && item.fix != null) {
+                                Text(
+                                    stringResource(R.string.pet_diag_fix),
+                                    color = WaNeonGreen, fontWeight = FontWeight.Bold, fontSize = 13.sp,
+                                    modifier = Modifier.clip(RoundedCornerShape(8.dp)).clickable { item.fix.invoke() }
+                                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                                )
+                            }
+                        }
+                    }
+                    Text(
+                        stringResource(if (diag.all { it.ok }) R.string.pet_diag_all_ok else R.string.pet_diag_problems),
+                        color = if (diag.all { it.ok }) WaNeonGreen else WaTextSecondary,
+                        fontSize = 13.sp, lineHeight = 18.sp
+                    )
+                }
+            }
             if (shown.isEmpty()) {
                 Text(stringResource(R.string.pet_help_empty), color = WaTextSecondary, fontSize = 13.sp)
             }
