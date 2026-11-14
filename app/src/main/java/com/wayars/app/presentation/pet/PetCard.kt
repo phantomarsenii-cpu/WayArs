@@ -2,6 +2,8 @@ package com.wayars.app.presentation.pet
 
 import android.provider.Settings
 import androidx.annotation.StringRes
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -33,10 +35,12 @@ import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -56,6 +60,7 @@ import com.wayars.app.presentation.ui.tour.TourTarget
 import com.wayars.app.service.accessibility.ActiveSessionTracker
 import com.wayars.app.util.AccessibilityUtils
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /** One question the pet can answer; [step] (if any) is what "Show me" spotlights. */
 class PetHelpTopic(@StringRes val question: Int, @StringRes val answer: Int, val step: TourStep?)
@@ -96,6 +101,15 @@ fun PetCard(isActive: Boolean, onShowTopic: (TourStep) -> Unit, modifier: Modifi
     val context = LocalContext.current
     val pet by PetState.state.collectAsState()
     var helpOpen by remember { mutableStateOf(false) }
+    var hopKey by remember { mutableStateOf(0) }
+    val scope = rememberCoroutineScope()
+    val gainFloat = remember { Animatable(1f) }
+    LaunchedEffect(pet.reactionAt) {
+        if (pet.reactionAt > 0 && pet.lastGain > 0 && System.currentTimeMillis() - pet.reactionAt < 3_000) {
+            gainFloat.snapTo(0f)
+            gainFloat.animateTo(1f, tween(1400))
+        }
+    }
 
     // Ticks while a reaction is on screen, so the pet calms down by itself afterwards.
     var now by remember { mutableLongStateOf(System.currentTimeMillis()) }
@@ -165,14 +179,39 @@ fun PetCard(isActive: Boolean, onShowTopic: (TourStep) -> Unit, modifier: Modifi
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(14.dp)
     ) {
-        PetArt(
-            stage = pet.stage,
-            mood = mood,
-            modifier = Modifier
-                .size(108.dp)
-                .clip(RoundedCornerShape(18.dp))
-                .clickable { helpOpen = true }
-        )
+        Box(Modifier.size(108.dp), contentAlignment = Alignment.Center) {
+            PetArt(
+                stage = pet.stage,
+                mood = mood,
+                hopKey = hopKey,
+                modifier = Modifier
+                    .size(108.dp)
+                    .clip(RoundedCornerShape(18.dp))
+                    .clickable {
+                        // Tap: Wayo hops, then opens the helper.
+                        hopKey++
+                        scope.launch {
+                            delay(380)
+                            helpOpen = true
+                        }
+                    }
+            )
+            // "+3 ⚡" floats up from the pet when it gets energy.
+            if (gainFloat.value < 1f && pet.lastGain > 0) {
+                Text(
+                    "+${pet.lastGain} ⚡",
+                    color = WaNeonGreen,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 15.sp,
+                    modifier = Modifier
+                        .align(Alignment.TopCenter)
+                        .graphicsLayer {
+                            translationY = (10f - 46f * gainFloat.value) * density
+                            alpha = (1f - gainFloat.value).coerceIn(0f, 1f)
+                        }
+                )
+            }
+        }
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(name, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 17.sp)

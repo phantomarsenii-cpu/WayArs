@@ -1,6 +1,15 @@
 package com.wayars.app.presentation.pet
 
 import android.annotation.SuppressLint
+import kotlin.math.sin
+import kotlin.math.abs
+import kotlin.math.PI
+import androidx.compose.ui.graphics.TransformOrigin
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -41,62 +50,165 @@ enum class PetMood { NEUTRAL, WORKING, HAPPY, COOL, EATING, LEVEL_UP, SLEEPING, 
  * Real artwork can be dropped into res/drawable without touching code:
  *   pet_<stage>_<mood>.png   e.g. pet_teen_happy.png, pet_baby_sleeping.png, pet_egg_neutral.png
  * Lookup order: exact stage+mood → pet_<stage>_neutral → pet_teen_<mood> → built-in drawing.
+ * An optional eyes-closed frame (pet_<stage>_blink / pet_<stage>_<mood>_blink) makes it blink.
+ * Every picture is animated in code per mood (breathing, bouncing, riding, swaying…).
  * Stage and mood names are the enum names in lower case (egg, baby, teen, pro, legend /
  * neutral, working, happy, cool, eating, level_up, sleeping, break, sad, helper, hello).
  */
 @SuppressLint("DiscouragedApi")
 @Composable
-fun PetArt(stage: PetState.Stage, mood: PetMood, modifier: Modifier = Modifier) {
+fun PetArt(
+    stage: PetState.Stage,
+    mood: PetMood,
+    modifier: Modifier = Modifier,
+    /** Change this to make the pet hop once (e.g. when it is tapped). */
+    hopKey: Int = 0
+) {
     val context = LocalContext.current
+    fun lookup(name: String) = context.resources.getIdentifier(name, "drawable", context.packageName)
     val resId = remember(stage, mood) {
-        val res = context.resources
-        val pkg = context.packageName
         val s = stage.name.lowercase()
         val m = mood.name.lowercase()
-        listOf("pet_${s}_$m", "pet_${s}_neutral", "pet_teen_$m")
-            .map { res.getIdentifier(it, "drawable", pkg) }
-            .firstOrNull { it != 0 } ?: 0
+        listOf("pet_${s}_$m", "pet_${s}_neutral", "pet_teen_$m").map { lookup(it) }.firstOrNull { it != 0 } ?: 0
+    }
+    // Optional eyes-closed frame for blinking: pet_<stage>_<mood>_blink or pet_<stage>_blink.
+    val blinkId = remember(stage, mood) {
+        val s = stage.name.lowercase()
+        listOf("pet_${s}_${mood.name.lowercase()}_blink", "pet_${s}_blink").map { lookup(it) }.firstOrNull { it != 0 } ?: 0
     }
 
+    // One clock drives all idle motion; each mood turns it into its own movement.
     val transition = rememberInfiniteTransition(label = "pet")
-    val bob by transition.animateFloat(
+    val t by transition.animateFloat(
         initialValue = 0f, targetValue = 1f,
-        animationSpec = infiniteRepeatable(tween(1400, easing = LinearEasing), RepeatMode.Reverse),
-        label = "bob"
+        animationSpec = infiniteRepeatable(tween(2400, easing = LinearEasing)),
+        label = "t"
     )
-    val clock by transition.animateFloat(
+    val slow by transition.animateFloat(
         initialValue = 0f, targetValue = 1f,
-        animationSpec = infiniteRepeatable(tween(4000, easing = LinearEasing)),
-        label = "clock"
+        animationSpec = infiniteRepeatable(tween(4200, easing = LinearEasing)),
+        label = "slow"
     )
-    val jump = when (mood) {
-        PetMood.LEVEL_UP, PetMood.HAPPY -> 10f
-        PetMood.SLEEPING -> 1.5f
-        else -> 4f
+
+    // Pop when the mood changes (new reaction), hop when tapped.
+    val pop = remember { Animatable(1f) }
+    LaunchedEffect(mood) {
+        pop.snapTo(0.86f)
+        pop.animateTo(1f, spring(dampingRatio = 0.42f, stiffness = Spring.StiffnessMediumLow))
+    }
+    val hop = remember { Animatable(0f) }
+    LaunchedEffect(hopKey) {
+        if (hopKey == 0) return@LaunchedEffect
+        hop.snapTo(0f)
+        hop.animateTo(1f, tween(170))
+        hop.animateTo(0f, spring(dampingRatio = 0.35f, stiffness = Spring.StiffnessMedium))
     }
 
-    Box(modifier = modifier.graphicsLayer { translationY = -bob * jump * density }) {
-        if (resId != 0) {
-            // The artwork is normalised to one size; smaller stages are shown smaller so
-            // growing up is visible.
-            val stageScale = when (stage) {
-                PetState.Stage.EGG -> 0.74f
-                PetState.Stage.BABY -> 0.80f
-                PetState.Stage.TEEN -> 0.92f
-                else -> 1f
-            }
-            Image(
-                painter = painterResource(resId),
-                contentDescription = null,
-                contentScale = ContentScale.Fit,
-                modifier = Modifier.fillMaxSize().graphicsLayer {
-                    scaleX = stageScale
-                    scaleY = stageScale
-                    transformOrigin = androidx.compose.ui.graphics.TransformOrigin(0.5f, 0.97f)
+    val stageScale = when (stage) {
+        PetState.Stage.EGG -> 0.74f
+        PetState.Stage.BABY -> 0.80f
+        PetState.Stage.TEEN -> 0.92f
+        else -> 1f
+    }
+    val tau = (2 * PI).toFloat()
+    val breathe = sin(tau * t)
+
+    Box(modifier) {
+        Box(
+            Modifier
+                .fillMaxSize()
+                .graphicsLayer {
+                    var sx = 1f
+                    var sy = 1f
+                    var ty = 0f
+                    var tx = 0f
+                    var rot = 0f
+                    when (mood) {
+                        PetMood.HAPPY, PetMood.LEVEL_UP -> {           // happy bouncing with squash on landing
+                            val b = abs(sin(tau * t * 2))
+                            ty = -b * (if (mood == PetMood.LEVEL_UP) 16f else 10f) * density
+                            sy = 1f + 0.05f * b - 0.04f * (1 - b)
+                            sx = 1f - 0.03f * b + 0.03f * (1 - b)
+                        }
+                        PetMood.EATING -> {                            // munching
+                            val c = abs(sin(tau * t * 3))
+                            sx = 1f + 0.03f * c; sy = 1f - 0.03f * c
+                        }
+                        PetMood.WORKING -> {                           // riding: engine vibration + gentle rock
+                            tx = 1.6f * density * sin(tau * t * 9)
+                            ty = 1.2f * density * sin(tau * t * 5)
+                            rot = 1.2f * sin(tau * t)
+                        }
+                        PetMood.SLEEPING -> {                          // slow, deep breathing
+                            val b = sin(tau * slow)
+                            sy = 1f + 0.025f * b; sx = 1f - 0.01f * b
+                        }
+                        PetMood.SAD -> {                               // droopy sway
+                            rot = -2f + 1.5f * sin(tau * slow)
+                            ty = 2f * density * (1 + sin(tau * slow)) / 2
+                        }
+                        PetMood.HELLO -> {                             // friendly wave of the whole body
+                            rot = 4f * sin(tau * t * 2)
+                            sy = 1f + 0.012f * breathe
+                        }
+                        PetMood.HELPER -> {                            // leans toward where it points
+                            rot = 3f + 2f * sin(tau * t)
+                            sy = 1f + 0.012f * breathe
+                        }
+                        PetMood.COOL -> {                              // confident sway
+                            rot = 2f * sin(tau * slow)
+                            sy = 1f + 0.01f * breathe
+                        }
+                        PetMood.BREAK -> {                             // relaxed rocking
+                            rot = 1.5f * sin(tau * slow)
+                            sy = 1f + 0.015f * breathe
+                        }
+                        PetMood.NEUTRAL -> {                           // idle breathing + small bob
+                            sy = 1f + 0.018f * breathe; sx = 1f - 0.008f * breathe
+                            ty = -2f * density * (1 + breathe) / 2
+                        }
+                    }
+                    val p = pop.value
+                    val h = hop.value
+                    scaleX = stageScale * sx * p * (1f + 0.06f * h)
+                    scaleY = stageScale * sy * p * (1f - 0.04f * h)
+                    translationX = tx
+                    translationY = ty - h * 22f * density
+                    rotationZ = rot
+                    transformOrigin = TransformOrigin(0.5f, 0.97f)
                 }
-            )
-        } else {
-            Canvas(Modifier.fillMaxSize()) { drawChameleon(stage, mood, blink = clock in 0.0f..0.04f, t = clock) }
+        ) {
+            if (resId != 0) {
+                // Blink (only if an eyes-closed frame exists): ~0.15 s every ~4.2 s.
+                val showBlink = blinkId != 0 && slow > 0.965f &&
+                    mood != PetMood.SLEEPING && mood != PetMood.EATING
+                Crossfade(targetState = if (showBlink) blinkId else resId, animationSpec = tween(140), label = "pet-img") { id ->
+                    Image(
+                        painter = painterResource(id),
+                        contentDescription = null,
+                        contentScale = ContentScale.Fit,
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
+            } else {
+                Canvas(Modifier.fillMaxSize()) { drawChameleon(stage, mood, blink = slow in 0.0f..0.03f, t = t) }
+            }
+        }
+        // Rising energy sparks while eating / levelling up / happy.
+        if (mood == PetMood.EATING || mood == PetMood.LEVEL_UP || mood == PetMood.HAPPY) {
+            Canvas(Modifier.fillMaxSize()) {
+                val n = if (mood == PetMood.LEVEL_UP) 10 else 6
+                for (i in 0 until n) {
+                    val phase = (t * 1.5f + i.toFloat() / n) % 1f
+                    val x = size.width * (0.18f + 0.64f * ((i * 37 % 100) / 100f)) + 6f * sin(tau * (phase + i * 0.13f))
+                    val y = size.height * (0.85f - 0.75f * phase)
+                    val a = (1f - phase) * 0.9f
+                    val r = size.minDimension * (if (i % 3 == 0) 0.022f else 0.014f)
+                    val c = if (mood == PetMood.LEVEL_UP && i % 2 == 0) Color(0xFFFFD23F) else Neon
+                    drawCircle(c.copy(alpha = a * 0.35f), r * 2.4f, Offset(x, y))
+                    drawCircle(c.copy(alpha = a), r, Offset(x, y))
+                }
+            }
         }
     }
 }
