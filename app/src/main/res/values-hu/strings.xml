@@ -502,4 +502,25 @@
     <string name="pet_praise_today">Ma már %1$d rendelés és %2$s nettó — szép munka! 💪</string>
     <string name="pet_praise_record">Ma rekordtempó: %1$s! 🔥</string>
     <string name="pet_praise_streak">%1$d okos nap egymás után — csak így tovább! 🔥</string>
+    <string name="theme_classic">Klasszikus</string>
+    <string name="theme_neon">Neon</string>
+    <string name="theme_carbon">Karbon</string>
+    <string name="theme_gold">Arany</string>
+    <string name="theme_legend">Legenda</string>
+    <string name="settings_theme_title">Kártyatéma</string>
+    <string name="settings_theme_desc">A rendeléskártya és a widget témái Wayo növekedésével nyílnak meg.</string>
+    <string name="theme_locked">%1$d. szint</string>
+    <string name="pet_unlocked_theme">Új téma nyílt meg: %1$s 🎨</string>
+    <string name="pet_tip_day">💡 %1$s — a(z) %2$s fizet neked a legjobban: %3$s</string>
+    <string name="summary_forecast">a legjobb időpontjaid: %1$s</string>
+    <string name="overlay_percentile">jobb, mint a rendeléseid %1$d%%-a</string>
+    <string name="share_button">Megosztás</string>
+    <string name="share_title">%1$d. szint · %2$s</string>
+    <string name="share_record">Rekord: %1$s</string>
+    <string name="share_streak">Okos napok egymás után: %1$d</string>
+    <string name="share_best_day">Legjobb nap: %1$s</string>
+    <string name="share_footer">WayArs — minden rendelést ellenőriz, mielőtt elfogadod</string>
+    <string name="share_text">A Wayóm a WayArs-ban elérte a %1$d. szintet! 🦎 %2$s</string>
+    <string name="pet_q_rewards">Mit kapok, ha Wayo nő?</string>
+    <string name="pet_a_rewards" formatted="false">Wayo csak okos döntésektől nő. Jutalmak: témák a rendeléskártyához és a widgethez — Neon (5. szint), Karbon (10), Arany (15), Legenda (20), a Beállítások → Extrák alatt választhatók. Új képességek: a nap tippje az adataidból (5. szint), a legjobb időpontjaid előrejelzése a heti összesítőben (10), „jobb, mint a rendeléseid X%-a” a kártyán (20). A 📤 pedig képet készít Wayóról a rekordjaiddal.</string>
 </resources>

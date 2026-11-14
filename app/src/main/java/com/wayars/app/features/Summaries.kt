@@ -117,6 +117,19 @@ object Summaries {
         val fmt = { v: Double -> CurrencyFormatter.format(v, currency) }
         val parts = mutableListOf(context.getString(R.string.summary_part_orders, e.orders))
         e.perHour?.let { parts.add(context.getString(R.string.summary_part_hour, fmt(it))) }
+        if (weekly && com.wayars.app.pet.PetState.state.value.level >= Abilities.WEEKLY_FORECAST_LEVEL) {
+            // Pro ability: the driver's best times (app + weekday + part of the day) from 60 days.
+            val since = to - 60L * 86_400_000L
+            val best = Earnings.bestSlots(
+                Earnings.slotRates(container.orderRepository.acceptedSince(since).filter { it.timestampMillis < to }, ActiveSessionTracker.intervals(since, to)),
+                2
+            )
+            if (best.isNotEmpty()) {
+                parts.add(context.getString(R.string.summary_forecast, best.joinToString(", ") {
+                    com.wayars.app.presentation.pet.PetGreeter.slotName(context, it.dayOfWeek, it.dayPart) + " (" + AppNames.label(context, it.sourcePackage) + ")"
+                }))
+            }
+        }
         if (weekly) {
             val bestDay = orders.groupBy { Earnings.startOfDay(it.timestampMillis) }
                 .maxByOrNull { (_, l) -> l.sumOf { it.evaluation.takeHome } }?.key

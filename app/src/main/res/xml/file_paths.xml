@@ -3,4 +3,6 @@
     <!-- Matches the "wayars_logs" folder ScanLogFile writes into under
          getExternalFilesDir(null). -->
     <external-files-path name="wayars_logs" path="wayars_logs/" />
+    <!-- Wayo "Share" picture (ShareCard). -->
+    <cache-path name="share" path="share/" />
 </paths>

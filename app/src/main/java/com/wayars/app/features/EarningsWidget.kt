@@ -70,8 +70,19 @@ object EarningsWidget {
             context, 1, Intent(context, EarningsWidgetProvider::class.java).setAction(ACTION_TOGGLE),
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
+        val level = com.wayars.app.pet.PetState.state.value.level
+        val theme = CardTheme.of(DriverPrefs.cardTheme.value).takeIf { it.unlocked(level) } ?: CardTheme.CLASSIC
+        val bg = when (theme) {
+            CardTheme.CLASSIC -> R.drawable.widget_bg
+            CardTheme.NEON -> R.drawable.widget_bg_neon
+            CardTheme.CARBON -> R.drawable.widget_bg_carbon
+            CardTheme.GOLD -> R.drawable.widget_bg_gold
+            CardTheme.LEGEND -> R.drawable.widget_bg_legend
+        }
         for (id in ids) {
             val v = RemoteViews(context.packageName, R.layout.widget_earnings)
+            v.setInt(R.id.widget_root, "setBackgroundResource", bg)
+            v.setTextColor(R.id.widget_amount, theme.accent.toInt())
             v.setTextViewText(R.id.widget_title, context.getString(R.string.widget_today))
             v.setTextViewText(R.id.widget_amount, CurrencyFormatter.format(if (e.orders > 0) e.net else 0.0, currency))
             v.setTextViewText(R.id.widget_sub, sub)

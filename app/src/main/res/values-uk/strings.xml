@@ -501,4 +501,25 @@
     <string name="pet_praise_today">Сьогодні вже %1$d замовлень і %2$s на руки — ти молодець! 💪</string>
     <string name="pet_praise_record">Сьогодні рекордний темп: %1$s! 🔥</string>
     <string name="pet_praise_streak">%1$d розумних днів поспіль — так тримати! 🔥</string>
+    <string name="theme_classic">Класика</string>
+    <string name="theme_neon">Неон</string>
+    <string name="theme_carbon">Карбон</string>
+    <string name="theme_gold">Золото</string>
+    <string name="theme_legend">Легенда</string>
+    <string name="settings_theme_title">Тема картки</string>
+    <string name="settings_theme_desc">Теми для картки замовлення й віджета відкриваються, коли Wayo росте.</string>
+    <string name="theme_locked">рів. %1$d</string>
+    <string name="pet_unlocked_theme">Відкрито нову тему: %1$s 🎨</string>
+    <string name="pet_tip_day">💡 %1$s — тобі найкраще платить %2$s: %3$s</string>
+    <string name="summary_forecast">найкращий час для тебе: %1$s</string>
+    <string name="overlay_percentile">краще, ніж %1$d%% твоїх замовлень</string>
+    <string name="share_button">Поділитися</string>
+    <string name="share_title">Рівень %1$d · %2$s</string>
+    <string name="share_record">Рекорд: %1$s</string>
+    <string name="share_streak">Розумних днів поспіль: %1$d</string>
+    <string name="share_best_day">Найкращий день: %1$s</string>
+    <string name="share_footer">WayArs — перевіряє кожне замовлення, перш ніж ти його приймеш</string>
+    <string name="share_text">Мій Wayo у WayArs досяг %1$d рівня! 🦎 %2$s</string>
+    <string name="pet_q_rewards">Що я отримаю за ріст Wayo?</string>
+    <string name="pet_a_rewards" formatted="false">Wayo росте лише від розумних рішень. Нагороди: теми для картки замовлення й віджета — Неон (рів. 5), Карбон (10), Золото (15), Легенда (20), обираються в Налаштування → Додатково. Нові здібності: порада дня за твоїми даними (рів. 5), прогноз найкращого часу в підсумку тижня (10), «краще, ніж X% твоїх замовлень» на картці (20). А кнопка 📤 робить картинку з Wayo і твоїми рекордами, щоб поділитися.</string>
 </resources>

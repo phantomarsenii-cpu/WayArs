@@ -24,6 +24,38 @@ object PetGreeter {
     private const val MIN_GAP_MS = 20 * 60_000L
     private const val AWAY_MS = 2L * 24 * 60 * 60 * 1000
 
+    /** "Thursday evening — Bolt pays you best, 41 zł/h" from the last 60 days, or null without enough data. */
+    suspend fun tipOfDay(context: Context, now: Long = System.currentTimeMillis()): String? = withContext(Dispatchers.IO) {
+        runCatching {
+            val c = context.appContainer()
+            val from = now - 60L * 86_400_000L
+            val slots = Earnings.slotRates(c.orderRepository.acceptedSince(from), ActiveSessionTracker.intervals(from, now))
+            val dow = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
+            val best = Earnings.bestSlots(slots.filter { it.dayOfWeek == dow }, 1).firstOrNull() ?: return@runCatching null
+            val cur = runCatching { c.settingsRepository.currency.first() }.getOrDefault(Currency.default)
+            context.getString(
+                R.string.pet_tip_day,
+                slotName(context, best.dayOfWeek, best.dayPart),
+                com.wayars.app.features.AppNames.label(context, best.sourcePackage),
+                context.getString(R.string.summary_part_hour, CurrencyFormatter.format(best.perHour, cur, 0))
+            )
+        }.getOrNull()
+    }
+
+    fun slotName(context: Context, dayOfWeek: Int, part: com.wayars.app.features.DayPart): String {
+        val cal = Calendar.getInstance().apply { set(Calendar.DAY_OF_WEEK, dayOfWeek) }
+        val day = java.text.SimpleDateFormat("EEEE", java.util.Locale.getDefault()).format(cal.time)
+        val p = context.getString(
+            when (part) {
+                com.wayars.app.features.DayPart.MORNING -> R.string.daypart_morning
+                com.wayars.app.features.DayPart.DAY -> R.string.daypart_day
+                com.wayars.app.features.DayPart.EVENING -> R.string.daypart_evening
+                com.wayars.app.features.DayPart.NIGHT -> R.string.daypart_night
+            }
+        )
+        return context.getString(R.string.stats_slot, day, p)
+    }
+
     suspend fun next(context: Context, lastActivityAt: Long): String? = withContext(Dispatchers.IO) {
         runCatching {
             val p = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
@@ -51,6 +83,10 @@ object PetGreeter {
                 }
             }
             if (lastActivityAt > 0 && now - lastActivityAt > AWAY_MS) return@runCatching random(R.array.pet_greet_back)
+            // Teen and older: a tip for today from the driver's own data.
+            if (com.wayars.app.pet.PetState.state.value.level >= com.wayars.app.features.Abilities.TIP_OF_DAY_LEVEL) {
+                tipOfDay(context, now)?.let { return@runCatching it }
+            }
             val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
             random(
                 when (hour) {

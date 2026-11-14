@@ -502,4 +502,25 @@
     <string name="pet_praise_today">I dag redan %1$d uppdrag och %2$s netto — bra jobbat! 💪</string>
     <string name="pet_praise_record">Rekordtempo i dag: %1$s! 🔥</string>
     <string name="pet_praise_streak">%1$d smarta dagar i rad — fortsätt så! 🔥</string>
+    <string name="theme_classic">Klassisk</string>
+    <string name="theme_neon">Neon</string>
+    <string name="theme_carbon">Kol</string>
+    <string name="theme_gold">Guld</string>
+    <string name="theme_legend">Legend</string>
+    <string name="settings_theme_title">Kortets tema</string>
+    <string name="settings_theme_desc">Teman för uppdragskortet och widgeten låses upp när Wayo växer.</string>
+    <string name="theme_locked">nivå %1$d</string>
+    <string name="pet_unlocked_theme">Nytt tema upplåst: %1$s 🎨</string>
+    <string name="pet_tip_day">💡 %1$s — %2$s betalar dig bäst: %3$s</string>
+    <string name="summary_forecast">dina bästa tider: %1$s</string>
+    <string name="overlay_percentile">bättre än %1$d %% av dina uppdrag</string>
+    <string name="share_button">Dela</string>
+    <string name="share_title">Nivå %1$d · %2$s</string>
+    <string name="share_record">Rekord: %1$s</string>
+    <string name="share_streak">Smarta dagar i rad: %1$d</string>
+    <string name="share_best_day">Bästa dag: %1$s</string>
+    <string name="share_footer">WayArs — kollar varje uppdrag innan du tar det</string>
+    <string name="share_text">Min Wayo i WayArs har nått nivå %1$d! 🦎 %2$s</string>
+    <string name="pet_q_rewards">Vad får jag när Wayo växer?</string>
+    <string name="pet_a_rewards" formatted="false">Wayo växer bara av smarta beslut. Belöningar: teman för uppdragskortet och widgeten — Neon (nivå 5), Kol (10), Guld (15), Legend (20), väljs under Inställningar → Extra. Nya förmågor: dagens tips från dina data (nivå 5), prognos för dina bästa tider i veckans resultat (10), ”bättre än X % av dina uppdrag” på kortet (20). Och 📤 skapar en bild av Wayo med dina rekord att dela.</string>
 </resources>

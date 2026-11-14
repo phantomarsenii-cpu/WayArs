@@ -502,4 +502,25 @@
     <string name="pet_praise_today">I dag allerede %1$d oppdrag og %2$s netto — bra jobba! 💪</string>
     <string name="pet_praise_record">Rekordtempo i dag: %1$s! 🔥</string>
     <string name="pet_praise_streak">%1$d smarte dager på rad — fortsett sånn! 🔥</string>
+    <string name="theme_classic">Klassisk</string>
+    <string name="theme_neon">Neon</string>
+    <string name="theme_carbon">Karbon</string>
+    <string name="theme_gold">Gull</string>
+    <string name="theme_legend">Legende</string>
+    <string name="settings_theme_title">Korttema</string>
+    <string name="settings_theme_desc">Temaer for oppdragskortet og widgeten låses opp når Wayo vokser.</string>
+    <string name="theme_locked">nivå %1$d</string>
+    <string name="pet_unlocked_theme">Nytt tema låst opp: %1$s 🎨</string>
+    <string name="pet_tip_day">💡 %1$s — %2$s betaler deg best: %3$s</string>
+    <string name="summary_forecast">dine beste tider: %1$s</string>
+    <string name="overlay_percentile">bedre enn %1$d %% av oppdragene dine</string>
+    <string name="share_button">Del</string>
+    <string name="share_title">Nivå %1$d · %2$s</string>
+    <string name="share_record">Rekord: %1$s</string>
+    <string name="share_streak">Smarte dager på rad: %1$d</string>
+    <string name="share_best_day">Beste dag: %1$s</string>
+    <string name="share_footer">WayArs — sjekker hvert oppdrag før du tar det</string>
+    <string name="share_text">Min Wayo i WayArs har nådd nivå %1$d! 🦎 %2$s</string>
+    <string name="pet_q_rewards">Hva får jeg når Wayo vokser?</string>
+    <string name="pet_a_rewards" formatted="false">Wayo vokser bare av smarte avgjørelser. Belønninger: temaer for oppdragskortet og widgeten — Neon (nivå 5), Karbon (10), Gull (15), Legende (20), velges under Innstillinger → Ekstra. Nye evner: dagens tips fra dine data (nivå 5), prognose for dine beste tider i ukens resultat (10), «bedre enn X % av oppdragene dine» på kortet (20). Og 📤 lager et bilde av Wayo med rekordene dine til deling.</string>
 </resources>

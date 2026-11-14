@@ -502,4 +502,25 @@
     <string name="pet_praise_today">Днес вече %1$d поръчки и %2$s чисто — браво! 💪</string>
     <string name="pet_praise_record">Днес рекордно темпо: %1$s! 🔥</string>
     <string name="pet_praise_streak">%1$d умни дни подред — така те искам! 🔥</string>
+    <string name="theme_classic">Класика</string>
+    <string name="theme_neon">Неон</string>
+    <string name="theme_carbon">Карбон</string>
+    <string name="theme_gold">Злато</string>
+    <string name="theme_legend">Легенда</string>
+    <string name="settings_theme_title">Тема на картата</string>
+    <string name="settings_theme_desc">Темите за картата на поръчката и уиджета се отключват, докато Wayo расте.</string>
+    <string name="theme_locked">ниво %1$d</string>
+    <string name="pet_unlocked_theme">Отключена нова тема: %1$s 🎨</string>
+    <string name="pet_tip_day">💡 %1$s — най-добре ти плаща %2$s: %3$s</string>
+    <string name="summary_forecast">най-доброто време за теб: %1$s</string>
+    <string name="overlay_percentile">по-добра от %1$d%% от поръчките ти</string>
+    <string name="share_button">Сподели</string>
+    <string name="share_title">Ниво %1$d · %2$s</string>
+    <string name="share_record">Рекорд: %1$s</string>
+    <string name="share_streak">Умни дни подред: %1$d</string>
+    <string name="share_best_day">Най-добър ден: %1$s</string>
+    <string name="share_footer">WayArs — проверява всяка поръчка, преди да я приемеш</string>
+    <string name="share_text">Моят Wayo в WayArs достигна ниво %1$d! 🦎 %2$s</string>
+    <string name="pet_q_rewards">Какво получавам, когато Wayo расте?</string>
+    <string name="pet_a_rewards" formatted="false">Wayo расте само от умни решения. Награди: теми за картата на поръчката и уиджета — Неон (ниво 5), Карбон (10), Злато (15), Легенда (20), избират се в Настройки → Допълнително. Нови способности: съвет на деня по твоите данни (ниво 5), прогноза за най-доброто време в седмичното обобщение (10), „по-добра от X% от поръчките ти“ на картата (20). А 📤 прави картинка с Wayo и рекордите ти за споделяне.</string>
 </resources>

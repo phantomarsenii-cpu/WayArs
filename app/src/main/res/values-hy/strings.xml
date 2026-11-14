@@ -502,4 +502,25 @@
     <string name="pet_praise_today">Այսօր արդեն %1$d պատվեր և %2$s ձեռքին՝ ապրես։ 💪</string>
     <string name="pet_praise_record">Այսօր ռեկորդային տեմպ՝ %1$s։ 🔥</string>
     <string name="pet_praise_streak">%1$d խելացի օր անընդմեջ՝ այդպես շարունակիր։ 🔥</string>
+    <string name="theme_classic">Դասական</string>
+    <string name="theme_neon">Նեոն</string>
+    <string name="theme_carbon">Կարբոն</string>
+    <string name="theme_gold">Ոսկի</string>
+    <string name="theme_legend">Լեգենդ</string>
+    <string name="settings_theme_title">Քարտի թեմա</string>
+    <string name="settings_theme_desc">Պատվերի քարտի և վիջեթի թեմաները բացվում են, երբ Wayo-ն մեծանում է։</string>
+    <string name="theme_locked">մակ. %1$d</string>
+    <string name="pet_unlocked_theme">Բացվեց նոր թեմա՝ %1$s 🎨</string>
+    <string name="pet_tip_day">💡 %1$s — քեզ ամենալավը վճարում է %2$s-ը՝ %3$s</string>
+    <string name="summary_forecast">քո լավագույն ժամանակը՝ %1$s</string>
+    <string name="overlay_percentile">ավելի լավ, քան քո պատվերների %1$d%%-ը</string>
+    <string name="share_button">Կիսվել</string>
+    <string name="share_title">Մակարդակ %1$d · %2$s</string>
+    <string name="share_record">Ռեկորդ՝ %1$s</string>
+    <string name="share_streak">Խելացի օրեր անընդմեջ՝ %1$d</string>
+    <string name="share_best_day">Լավագույն օր՝ %1$s</string>
+    <string name="share_footer">WayArs — ստուգում է յուրաքանչյուր պատվեր, նախքան կընդունես</string>
+    <string name="share_text">Իմ Wayo-ն WayArs-ում հասավ %1$d մակարդակի։ 🦎 %2$s</string>
+    <string name="pet_q_rewards">Ի՞նչ եմ ստանում, երբ Wayo-ն մեծանում է</string>
+    <string name="pet_a_rewards" formatted="false">Wayo-ն մեծանում է միայն խելացի որոշումներից։ Պարգևներ՝ պատվերի քարտի և վիջեթի թեմաներ՝ Նեոն (մակ. 5), Կարբոն (10), Ոսկի (15), Լեգենդ (20), ընտրվում են Կարգավորումներ → Լրացուցիչ բաժնում։ Նոր ունակություններ՝ օրվա խորհուրդ քո տվյալներով (մակ. 5), լավագույն ժամերի կանխատեսում շաբաթվա ամփոփումում (10), «ավելի լավ, քան քո պատվերների X%-ը» քարտում (20)։ Իսկ 📤-ը պատրաստում է նկար Wayo-ի և քո ռեկորդների հետ։</string>
 </resources>

@@ -502,4 +502,25 @@
     <string name="pet_praise_today">I dag allerede %1$d ordrer og %2$s netto — flot! 💪</string>
     <string name="pet_praise_record">Rekordtempo i dag: %1$s! 🔥</string>
     <string name="pet_praise_streak">%1$d kloge dage i træk — bliv ved! 🔥</string>
+    <string name="theme_classic">Klassisk</string>
+    <string name="theme_neon">Neon</string>
+    <string name="theme_carbon">Karbon</string>
+    <string name="theme_gold">Guld</string>
+    <string name="theme_legend">Legende</string>
+    <string name="settings_theme_title">Korttema</string>
+    <string name="settings_theme_desc">Temaer til ordrekortet og widgetten låses op, når Wayo vokser.</string>
+    <string name="theme_locked">niv. %1$d</string>
+    <string name="pet_unlocked_theme">Nyt tema låst op: %1$s 🎨</string>
+    <string name="pet_tip_day">💡 %1$s — %2$s betaler dig bedst: %3$s</string>
+    <string name="summary_forecast">dine bedste tider: %1$s</string>
+    <string name="overlay_percentile">bedre end %1$d %% af dine ordrer</string>
+    <string name="share_button">Del</string>
+    <string name="share_title">Niveau %1$d · %2$s</string>
+    <string name="share_record">Rekord: %1$s</string>
+    <string name="share_streak">Kloge dage i træk: %1$d</string>
+    <string name="share_best_day">Bedste dag: %1$s</string>
+    <string name="share_footer">WayArs — tjekker hver ordre, før du tager den</string>
+    <string name="share_text">Min Wayo i WayArs har nået niveau %1$d! 🦎 %2$s</string>
+    <string name="pet_q_rewards">Hvad får jeg, når Wayo vokser?</string>
+    <string name="pet_a_rewards" formatted="false">Wayo vokser kun af kloge beslutninger. Belønninger: temaer til ordrekortet og widgetten — Neon (niv. 5), Karbon (10), Guld (15), Legende (20), vælges under Indstillinger → Ekstra. Nye evner: dagens tip ud fra dine data (niv. 5), en prognose for dine bedste tider i ugens resultat (10), „bedre end X % af dine ordrer“ på kortet (20). Og 📤 laver et billede af Wayo med dine rekorder til deling.</string>
 </resources>

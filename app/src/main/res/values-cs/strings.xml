@@ -502,4 +502,25 @@
     <string name="pet_praise_today">Dnes už %1$d zakázek a %2$s čistého — jen tak dál! 💪</string>
     <string name="pet_praise_record">Dnes rekordní tempo: %1$s! 🔥</string>
     <string name="pet_praise_streak">%1$d chytrých dní v řadě — jen tak dál! 🔥</string>
+    <string name="theme_classic">Klasika</string>
+    <string name="theme_neon">Neon</string>
+    <string name="theme_carbon">Karbon</string>
+    <string name="theme_gold">Zlato</string>
+    <string name="theme_legend">Legenda</string>
+    <string name="settings_theme_title">Motiv karty</string>
+    <string name="settings_theme_desc">Motivy karty zakázky a widgetu se odemykají, jak Wayo roste.</string>
+    <string name="theme_locked">úr. %1$d</string>
+    <string name="pet_unlocked_theme">Odemčen nový motiv: %1$s 🎨</string>
+    <string name="pet_tip_day">💡 %1$s — nejlépe ti platí %2$s: %3$s</string>
+    <string name="summary_forecast">tvé nejlepší časy: %1$s</string>
+    <string name="overlay_percentile">lepší než %1$d %% tvých zakázek</string>
+    <string name="share_button">Sdílet</string>
+    <string name="share_title">Úroveň %1$d · %2$s</string>
+    <string name="share_record">Rekord: %1$s</string>
+    <string name="share_streak">Chytrých dní v řadě: %1$d</string>
+    <string name="share_best_day">Nejlepší den: %1$s</string>
+    <string name="share_footer">WayArs — zkontroluje každou zakázku, než ji přijmeš</string>
+    <string name="share_text">Můj Wayo ve WayArs dosáhl úrovně %1$d! 🦎 %2$s</string>
+    <string name="pet_q_rewards">Co dostanu, když Wayo roste?</string>
+    <string name="pet_a_rewards" formatted="false">Wayo roste jen z chytrých rozhodnutí. Odměny: motivy karty zakázky a widgetu — Neon (úr. 5), Karbon (10), Zlato (15), Legenda (20), vybereš je v Nastavení → Doplňky. Nové schopnosti: tip dne z tvých dat (úr. 5), předpověď nejlepších časů v souhrnu týdne (10), „lepší než X % tvých zakázek“ na kartě (20). A 📤 vytvoří obrázek Wayo s tvými rekordy ke sdílení.</string>
 </resources>

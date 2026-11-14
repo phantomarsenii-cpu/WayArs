@@ -1,6 +1,8 @@
 package com.wayars.app.presentation.ui.screen.dashboard
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import kotlinx.coroutines.launch
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -162,7 +164,24 @@ private class Badge(val icon: String, val label: Int, val progress: Double, val 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun AchievementsCard(a: Achievements, currency: Currency) = Card {
-    Text(stringResource(R.string.stats_achievements_title), color = MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.titleMedium)
+    val context = LocalContext.current
+    val scope = androidx.compose.runtime.rememberCoroutineScope()
+    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+        Text(
+            stringResource(R.string.stats_achievements_title),
+            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.weight(1f)
+        )
+        Text(
+            "📤 " + stringResource(R.string.share_button),
+            color = WaNeonGreen, fontSize = 13.sp, fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .clip(RoundedCornerShape(10.dp))
+                .clickable { scope.launch { com.wayars.app.features.ShareCard.share(context) } }
+                .padding(horizontal = 8.dp, vertical = 4.dp)
+        )
+    }
     Text(
         stringResource(R.string.ach_streak, a.currentSmartStreak, a.bestSmartStreak),
         color = MaterialTheme.colorScheme.onSurface, fontSize = 13.sp, lineHeight = 18.sp

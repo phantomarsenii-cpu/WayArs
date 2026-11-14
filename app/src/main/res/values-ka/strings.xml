@@ -502,4 +502,25 @@
     <string name="pet_praise_today">დღეს უკვე %1$d შეკვეთა და %2$s ხელზე — ყოჩაღ! 💪</string>
     <string name="pet_praise_record">დღეს რეკორდული ტემპი: %1$s! 🔥</string>
     <string name="pet_praise_streak">%1$d ჭკვიანი დღე ზედიზედ — ასე გააგრძელე! 🔥</string>
+    <string name="theme_classic">კლასიკა</string>
+    <string name="theme_neon">ნეონი</string>
+    <string name="theme_carbon">კარბონი</string>
+    <string name="theme_gold">ოქრო</string>
+    <string name="theme_legend">ლეგენდა</string>
+    <string name="settings_theme_title">ბარათის თემა</string>
+    <string name="settings_theme_desc">შეკვეთის ბარათისა და ვიჯეტის თემები იხსნება, როცა Wayo იზრდება.</string>
+    <string name="theme_locked">დონე %1$d</string>
+    <string name="pet_unlocked_theme">გაიხსნა ახალი თემა: %1$s 🎨</string>
+    <string name="pet_tip_day">💡 %1$s — ყველაზე კარგად %2$s გიხდის: %3$s</string>
+    <string name="summary_forecast">შენი საუკეთესო დრო: %1$s</string>
+    <string name="overlay_percentile">შენი შეკვეთების %1$d%%-ზე უკეთესი</string>
+    <string name="share_button">გაზიარება</string>
+    <string name="share_title">დონე %1$d · %2$s</string>
+    <string name="share_record">რეკორდი: %1$s</string>
+    <string name="share_streak">ჭკვიანი დღეები ზედიზედ: %1$d</string>
+    <string name="share_best_day">საუკეთესო დღე: %1$s</string>
+    <string name="share_footer">WayArs — ამოწმებს ყოველ შეკვეთას, სანამ მიიღებ</string>
+    <string name="share_text">ჩემმა Wayo-მ WayArs-ში %1$d დონეს მიაღწია! 🦎 %2$s</string>
+    <string name="pet_q_rewards">რას მივიღებ, როცა Wayo იზრდება?</string>
+    <string name="pet_a_rewards" formatted="false">Wayo მხოლოდ ჭკვიანი გადაწყვეტილებებით იზრდება. ჯილდოები: თემები შეკვეთის ბარათისა და ვიჯეტისთვის — ნეონი (დონე 5), კარბონი (10), ოქრო (15), ლეგენდა (20), აირჩიე პარამეტრები → დამატებითი. ახალი უნარები: დღის რჩევა შენი მონაცემებით (დონე 5), საუკეთესო დროის პროგნოზი კვირის შედეგში (10), „შენი შეკვეთების X%-ზე უკეთესი“ ბარათზე (20). ხოლო 📤 ქმნის სურათს Wayo-თი და შენი რეკორდებით.</string>
 </resources>

@@ -17,6 +17,7 @@ object DriverPrefs {
     private const val KEY_SUMMARIES = "summaries_enabled"
     private const val KEY_WATCH = "watch_verdict_enabled"
     private const val KEY_INVITE_CODE = "invite_code"
+    private const val KEY_THEME = "card_theme"
 
     private val _commissionPercent = MutableStateFlow(0.0)
     val commissionPercent: StateFlow<Double> = _commissionPercent
@@ -26,6 +27,10 @@ object DriverPrefs {
     val summariesEnabled: StateFlow<Boolean> = _summariesEnabled
     private val _watchEnabled = MutableStateFlow(false)
     val watchEnabled: StateFlow<Boolean> = _watchEnabled
+
+    private val _cardTheme = MutableStateFlow("CLASSIC")
+    /** Name of the chosen [com.wayars.app.features.CardTheme] for the overlay card and widget. */
+    val cardTheme: StateFlow<String> = _cardTheme
 
     @Volatile private var loaded = false
 
@@ -39,6 +44,7 @@ object DriverPrefs {
         _weeklyFee.value = p.getFloat(KEY_WEEKLY_FEE, 0f).toDouble()
         _summariesEnabled.value = p.getBoolean(KEY_SUMMARIES, true)
         _watchEnabled.value = p.getBoolean(KEY_WATCH, false)
+        _cardTheme.value = p.getString(KEY_THEME, "CLASSIC") ?: "CLASSIC"
         loaded = true
     }
 
@@ -58,6 +64,11 @@ object DriverPrefs {
     fun setWatchEnabled(context: Context, enabled: Boolean) {
         prefs(context).edit().putBoolean(KEY_WATCH, enabled).apply()
         _watchEnabled.value = enabled
+    }
+
+    fun setCardTheme(context: Context, name: String) {
+        prefs(context).edit().putString(KEY_THEME, name).apply()
+        _cardTheme.value = name
     }
 
     /** A short personal code put into invite links (no account needed, never leaves the phone otherwise). */

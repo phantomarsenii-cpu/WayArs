@@ -94,6 +94,15 @@ class OverlayService : LifecycleService() {
         lifecycleScope.launch {
             ScanningState.isActive.collect { active -> if (!active) stopSelf() }
         }
+        // History for the Legend ability "better than X% of your orders" (last 60 days).
+        lifecycleScope.launch {
+            runCatching {
+                val since = System.currentTimeMillis() - 60L * 86_400_000L
+                com.wayars.app.features.OrderPercentile.load(
+                    appContainer().orderRepository.acceptedSince(since).map { it.evaluation.ratePerKm }
+                )
+            }
+        }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -274,6 +283,7 @@ class OverlayService : LifecycleService() {
         if (accepted && evaluation != null) {
             lifecycleScope.launch {
                 runCatching {
+                    com.wayars.app.features.OrderPercentile.add(evaluation.ratePerKm)
                     val id = appContainer().orderRepository.record(evaluation, sourcePackage)
                     appContainer().orderRepository.markDecision(id, true)
                     com.wayars.app.features.EarningsWidget.requestUpdate(applicationContext)

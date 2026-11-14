@@ -502,4 +502,25 @@
     <string name="pet_praise_today">Bugun allaqachon %1$d buyurtma va %2$s qo‘lga — barakalla! 💪</string>
     <string name="pet_praise_record">Bugun rekord sur’at: %1$s! 🔥</string>
     <string name="pet_praise_streak">Ketma-ket %1$d aqlli kun — shunday davom et! 🔥</string>
+    <string name="theme_classic">Klassik</string>
+    <string name="theme_neon">Neon</string>
+    <string name="theme_carbon">Karbon</string>
+    <string name="theme_gold">Oltin</string>
+    <string name="theme_legend">Afsona</string>
+    <string name="settings_theme_title">Karta mavzusi</string>
+    <string name="settings_theme_desc">Buyurtma kartasi va vidjet mavzulari Wayo o‘sgan sari ochiladi.</string>
+    <string name="theme_locked">daraja %1$d</string>
+    <string name="pet_unlocked_theme">Yangi mavzu ochildi: %1$s 🎨</string>
+    <string name="pet_tip_day">💡 %1$s — senga eng yaxshi %2$s to‘laydi: %3$s</string>
+    <string name="summary_forecast">sen uchun eng yaxshi vaqt: %1$s</string>
+    <string name="overlay_percentile">buyurtmalaringning %1$d%%idan yaxshiroq</string>
+    <string name="share_button">Ulashish</string>
+    <string name="share_title">Daraja %1$d · %2$s</string>
+    <string name="share_record">Rekord: %1$s</string>
+    <string name="share_streak">Ketma-ket aqlli kunlar: %1$d</string>
+    <string name="share_best_day">Eng yaxshi kun: %1$s</string>
+    <string name="share_footer">WayArs — har bir buyurtmani qabul qilishingdan oldin tekshiradi</string>
+    <string name="share_text">WayArs’dagi Wayo’m %1$d darajaga yetdi! 🦎 %2$s</string>
+    <string name="pet_q_rewards">Wayo o‘sganda nima olaman?</string>
+    <string name="pet_a_rewards" formatted="false">Wayo faqat aqlli qarorlardan o‘sadi. Mukofotlar: buyurtma kartasi va vidjet uchun mavzular — Neon (daraja 5), Karbon (10), Oltin (15), Afsona (20), Sozlamalar → Qo‘shimcha bo‘limida tanlanadi. Yangi qobiliyatlar: ma’lumotlaringga ko‘ra kun maslahati (daraja 5), hafta yakunida eng yaxshi vaqtlar prognozi (10), kartada “buyurtmalaringning X%idan yaxshiroq” (20). 📤 esa Wayo va rekordlaring bilan rasm tayyorlaydi.</string>
 </resources>

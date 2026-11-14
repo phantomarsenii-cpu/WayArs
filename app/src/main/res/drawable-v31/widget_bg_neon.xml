@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Widget background for the "neon" card theme (unlocked by Wayo's level). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient android:angle="270" android:startColor="#F20A1024" android:endColor="#F21C0B30" />
+    <corners android:radius="@android:dimen/system_app_widget_background_radius" />
+    <stroke android:width="1dp" android:color="#997C4DFF" />
+</shape>

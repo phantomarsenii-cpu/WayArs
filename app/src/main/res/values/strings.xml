@@ -514,4 +514,25 @@
     <string name="pet_praise_today">Today: %1$d orders and %2$s take-home — you’re doing great! 💪</string>
     <string name="pet_praise_record">Record pace today: %1$s! 🔥</string>
     <string name="pet_praise_streak">%1$d smart days in a row — keep it up! 🔥</string>
+    <string name="theme_classic">Classic</string>
+    <string name="theme_neon">Neon</string>
+    <string name="theme_carbon">Carbon</string>
+    <string name="theme_gold">Gold</string>
+    <string name="theme_legend">Legend</string>
+    <string name="settings_theme_title">Card theme</string>
+    <string name="settings_theme_desc">Themes for the order card and the widget unlock as Wayo grows.</string>
+    <string name="theme_locked">Lv %1$d</string>
+    <string name="pet_unlocked_theme">New theme unlocked: %1$s 🎨</string>
+    <string name="pet_tip_day">💡 %1$s — %2$s pays you best: %3$s</string>
+    <string name="summary_forecast">best times for you: %1$s</string>
+    <string name="overlay_percentile">better than %1$d%% of your orders</string>
+    <string name="share_button">Share</string>
+    <string name="share_title">Level %1$d · %2$s</string>
+    <string name="share_record">Record: %1$s</string>
+    <string name="share_streak">Smart days in a row: %1$d</string>
+    <string name="share_best_day">Best day: %1$s</string>
+    <string name="share_footer">WayArs — checks every order before you accept it</string>
+    <string name="share_text">My Wayo in WayArs reached level %1$d! 🦎 %2$s</string>
+    <string name="pet_q_rewards">What do I get when Wayo grows?</string>
+    <string name="pet_a_rewards" formatted="false">Wayo grows only from smart decisions. Rewards: card themes for the order card and widget — Neon (lv 5), Carbon (10), Gold (15), Legend (20), pick them in Settings → Extras. New abilities: a tip of the day from your data (lv 5), a forecast of your best times in the Monday summary (10), “better than X% of your orders” on the card (20). And 📤 lets you share a picture of Wayo with your records.</string>
 </resources>

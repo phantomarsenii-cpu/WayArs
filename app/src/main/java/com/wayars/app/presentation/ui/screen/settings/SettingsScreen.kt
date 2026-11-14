@@ -2391,6 +2391,8 @@ private fun ExtrasSection() {
         }
         AnimatedVisibility(visible = expanded, enter = expandVertically(), exit = shrinkVertically()) {
         Column(modifier = Modifier.padding(top = 10.dp)) {
+        CardThemePicker()
+        Spacer(Modifier.padding(top = 8.dp))
         ExtrasToggle(
             title = stringResource(R.string.settings_summaries_title),
             desc = stringResource(R.string.settings_summaries_desc),
@@ -2461,6 +2463,56 @@ private fun ExtrasSection() {
             }
         }) { Text(stringResource(R.string.settings_invite_button), color = WaNeonGreen) }
         }
+        }
+    }
+}
+
+/** Card themes for the overlay and the widget, unlocked as Wayo grows. */
+@OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+@Composable
+private fun CardThemePicker() {
+    val context = LocalContext.current
+    val level = com.wayars.app.pet.PetState.state.collectAsState().value.level
+    val chosen by com.wayars.app.data.prefs.DriverPrefs.cardTheme.collectAsState()
+    Text(stringResource(R.string.settings_theme_title), color = MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.bodyLarge)
+    Text(
+        stringResource(R.string.settings_theme_desc),
+        color = WaTextSecondary,
+        style = MaterialTheme.typography.bodySmall,
+        modifier = Modifier.padding(top = 2.dp, bottom = 8.dp)
+    )
+    androidx.compose.foundation.layout.FlowRow(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        com.wayars.app.features.CardTheme.values().forEach { t ->
+            val open = t.unlocked(level)
+            val selected = open && t.name == chosen
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(if (selected) Color(t.accent).copy(alpha = 0.18f) else WaSurfaceVariant)
+                    .border(1.dp, if (selected) Color(t.accent) else Color.Transparent, RoundedCornerShape(12.dp))
+                    .clickable(enabled = open) {
+                        com.wayars.app.data.prefs.DriverPrefs.setCardTheme(context, t.name)
+                        com.wayars.app.features.EarningsWidget.requestUpdate(context)
+                    }
+                    .padding(horizontal = 10.dp, vertical = 7.dp)
+            ) {
+                Box(
+                    Modifier
+                        .size(16.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(androidx.compose.ui.graphics.Brush.linearGradient(listOf(Color(t.bgTop), Color(t.accent))))
+                )
+                Text(
+                    if (open) stringResource(t.nameRes) else "🔒 " + stringResource(t.nameRes) + " · " + stringResource(R.string.theme_locked, t.minLevel),
+                    color = if (open) MaterialTheme.colorScheme.onSurface else WaTextSecondary,
+                    fontSize = 12.sp,
+                    modifier = Modifier.padding(start = 6.dp)
+                )
+            }
         }
     }
 }

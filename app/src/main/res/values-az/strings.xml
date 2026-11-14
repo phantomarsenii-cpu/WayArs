@@ -502,4 +502,25 @@
     <string name="pet_praise_today">Bu gün artıq %1$d sifariş və %2$s əlində — afərin! 💪</string>
     <string name="pet_praise_record">Bu gün rekord temp: %1$s! 🔥</string>
     <string name="pet_praise_streak">Ardıcıl %1$d ağıllı gün — belə davam et! 🔥</string>
+    <string name="theme_classic">Klassik</string>
+    <string name="theme_neon">Neon</string>
+    <string name="theme_carbon">Karbon</string>
+    <string name="theme_gold">Qızıl</string>
+    <string name="theme_legend">Əfsanə</string>
+    <string name="settings_theme_title">Kart mövzusu</string>
+    <string name="settings_theme_desc">Sifariş kartı və vidcet üçün mövzular Wayo böyüdükcə açılır.</string>
+    <string name="theme_locked">səv. %1$d</string>
+    <string name="pet_unlocked_theme">Yeni mövzu açıldı: %1$s 🎨</string>
+    <string name="pet_tip_day">💡 %1$s — sənə ən yaxşı %2$s ödəyir: %3$s</string>
+    <string name="summary_forecast">sənin üçün ən yaxşı vaxt: %1$s</string>
+    <string name="overlay_percentile">sifarişlərinin %1$d%%-dən yaxşıdır</string>
+    <string name="share_button">Paylaş</string>
+    <string name="share_title">Səviyyə %1$d · %2$s</string>
+    <string name="share_record">Rekord: %1$s</string>
+    <string name="share_streak">Ardıcıl ağıllı günlər: %1$d</string>
+    <string name="share_best_day">Ən yaxşı gün: %1$s</string>
+    <string name="share_footer">WayArs — hər sifarişi qəbul etməzdən əvvəl yoxlayır</string>
+    <string name="share_text">WayArs-dakı Wayo-m %1$d səviyyəyə çatdı! 🦎 %2$s</string>
+    <string name="pet_q_rewards">Wayo böyüyəndə nə qazanıram?</string>
+    <string name="pet_a_rewards" formatted="false">Wayo yalnız ağıllı qərarlardan böyüyür. Mükafatlar: sifariş kartı və vidcet üçün mövzular — Neon (səv. 5), Karbon (10), Qızıl (15), Əfsanə (20), Parametrlər → Əlavələr bölməsində seçilir. Yeni bacarıqlar: məlumatlarına görə günün məsləhəti (səv. 5), həftənin yekununda ən yaxşı vaxtların proqnozu (10), kartda “sifarişlərinin X%-dən yaxşıdır” (20). 📤 isə Wayo və rekordlarınla şəkil hazırlayır.</string>
 </resources>

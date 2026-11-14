@@ -42,6 +42,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -181,13 +182,19 @@ fun OverlayContent(
         label = "overlay_glow_pulse_value"
     )
     val pulse = if (reducedMotion) 1f else pulseAnimated
+    // Card theme unlocked by Wayo's level (verdict colours stay the same in every theme).
+    val level = com.wayars.app.pet.PetState.state.collectAsState().value.level
+    val chosen = com.wayars.app.data.prefs.DriverPrefs.cardTheme.collectAsState().value
+    val theme = com.wayars.app.features.CardTheme.of(chosen).takeIf { it.unlocked(level) } ?: com.wayars.app.features.CardTheme.CLASSIC
+    val accent = Color(theme.accent)
+    val cardBrush = androidx.compose.ui.graphics.Brush.verticalGradient(listOf(Color(theme.bgTop), Color(theme.bgBottom)))
     Column(
         modifier = Modifier
             .padding(OVERLAY_GLOW_PADDING)
             .width(212.dp)
             .verdictGlow(glowColor, 16.dp, OVERLAY_GLOW_PADDING, glowStrength * pulse, 0.7f + 0.3f * pulse)
             .clip(RoundedCornerShape(16.dp))
-            .background(WaSurface)
+            .background(cardBrush)
             .border(1.5.dp, glowColor.copy(alpha = (0.35f + 0.65f * glowStrength) * (0.7f + 0.3f * pulse)), RoundedCornerShape(16.dp))
             .padding(12.dp)
     ) {
@@ -211,7 +218,7 @@ fun OverlayContent(
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Spacer(Modifier.width(5.dp))
-                Box(Modifier.size(6.dp).clip(CircleShape).background(WaNeonGreen))
+                Box(Modifier.size(6.dp).clip(CircleShape).background(accent))
             }
             Row {
                 IconButton(onClick = onSettings, modifier = Modifier.size(30.dp)) {
@@ -294,8 +301,19 @@ fun OverlayContent(
                 Text(
                     badgeText,
                     fontSize = 10.sp,
-                    color = WaNeonGreen
+                    color = accent
                 )
+            }
+            // Legend ability: where this order stands among the driver's own orders.
+            if (level >= com.wayars.app.features.Abilities.PERCENTILE_LEVEL) {
+                com.wayars.app.features.OrderPercentile.of(evaluation.ratePerKm)?.let { pct ->
+                    Text(
+                        "👑 " + stringResource(R.string.overlay_percentile, pct),
+                        fontSize = 10.sp,
+                        color = accent,
+                        modifier = Modifier.padding(top = 4.dp)
+                    )
+                }
             }
 
             // What was subtracted from the order amount: fuel (only if the driver entered fuel data) and tax.

@@ -501,4 +501,25 @@
     <string name="pet_praise_today">Heute schon %1$d Aufträge und %2$s netto — stark! 💪</string>
     <string name="pet_praise_record">Heute Rekordtempo: %1$s! 🔥</string>
     <string name="pet_praise_streak">%1$d kluge Tage in Folge — weiter so! 🔥</string>
+    <string name="theme_classic">Klassisch</string>
+    <string name="theme_neon">Neon</string>
+    <string name="theme_carbon">Carbon</string>
+    <string name="theme_gold">Gold</string>
+    <string name="theme_legend">Legende</string>
+    <string name="settings_theme_title">Kartendesign</string>
+    <string name="settings_theme_desc">Designs für Auftragskarte und Widget werden freigeschaltet, wenn Wayo wächst.</string>
+    <string name="theme_locked">Lv %1$d</string>
+    <string name="pet_unlocked_theme">Neues Design freigeschaltet: %1$s 🎨</string>
+    <string name="pet_tip_day">💡 %1$s — am besten zahlt dir %2$s: %3$s</string>
+    <string name="summary_forecast">deine besten Zeiten: %1$s</string>
+    <string name="overlay_percentile">besser als %1$d%% deiner Aufträge</string>
+    <string name="share_button">Teilen</string>
+    <string name="share_title">Level %1$d · %2$s</string>
+    <string name="share_record">Rekord: %1$s</string>
+    <string name="share_streak">Kluge Tage in Folge: %1$d</string>
+    <string name="share_best_day">Bester Tag: %1$s</string>
+    <string name="share_footer">WayArs — prüft jeden Auftrag, bevor du ihn annimmst</string>
+    <string name="share_text">Mein Wayo in WayArs hat Level %1$d erreicht! 🦎 %2$s</string>
+    <string name="pet_q_rewards">Was bekomme ich, wenn Wayo wächst?</string>
+    <string name="pet_a_rewards" formatted="false">Wayo wächst nur durch kluge Entscheidungen. Belohnungen: Designs für Auftragskarte und Widget — Neon (Lv 5), Carbon (10), Gold (15), Legende (20), auswählbar unter Einstellungen → Extras. Neue Fähigkeiten: Tipp des Tages aus deinen Daten (Lv 5), Prognose deiner besten Zeiten in der Wochenbilanz (10), „besser als X % deiner Aufträge“ auf der Karte (20). Mit 📤 teilst du ein Bild von Wayo mit deinen Rekorden.</string>
 </resources>
