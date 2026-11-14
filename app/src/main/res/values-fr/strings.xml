@@ -212,7 +212,7 @@
     <string name="tour_verdict_title">Évaluation de la commande</string>
     <string name="tour_verdict_text">Chaque commande reçoit un verdict : bonne, moyenne ou mauvaise. Le même verdict s’affiche aussi dans un petit widget flottant au-dessus de votre application de livraison.</string>
     <string name="tour_stats_title">Statistiques</string>
-    <string name="tour_stats_text">La liste des commandes évaluées aujourd’hui avec la rémunération, la distance, la durée et le verdict.</string>
+    <string name="tour_stats_text">Votre gain réel par heure (attente entre les courses comprise), quelle appli paie le plus et quand, succès et séries, ainsi que le graphique et la liste des courses acceptées.</string>
     <string name="tour_presets_title">Préréglages</string>
     <string name="tour_presets_text">Choisissez la sévérité de l’évaluation : économe, équilibré ou uniquement les commandes rentables.</string>
     <string name="tour_thresholds_title">Vos propres seuils</string>
@@ -228,7 +228,7 @@
     <string name="tour_tax_title">Impôt</string>
     <string name="tour_tax_text">Saisissez votre taux d’impôt en %. WayArs le déduit avec le carburant, pour que l’overlay montre ce qu’il vous reste vraiment de chaque course.</string>
     <string name="tour_final_title">Tout est prêt !</string>
-    <string name="tour_final_text">Activez les autorisations dans les Réglages, puis activez Active sur l’écran d’accueil. Vous pouvez revoir ce tutoriel à tout moment dans les Réglages.</string>
+    <string name="tour_final_text">Activez les autorisations dans Paramètres, puis activez Active sur l’écran d’accueil. Des questions ? Touchez Wayo sur l’écran d’accueil. Vous pouvez revoir ce tutoriel à tout moment dans Paramètres.</string>
     <string name="settings_tutorial_title">Tutoriel</string>
     <string name="update_available_title">Mise à jour disponible</string>
     <string name="update_available_text">Une nouvelle version de WayArs est disponible avec des améliorations et des corrections.</string>
@@ -448,4 +448,12 @@
     <string name="pet_say_petted_4">Encore, s’il te plaît ! Je fonds 😌</string>
     <string name="pet_q_petting">Puis-je caresser Wayo ?</string>
     <string name="pet_a_petting">Bien sûr ! Passez le doigt sur moi — je ferme les yeux, je me balance et des cœurs s’envolent 💚. Les caresses ne donnent pas d’énergie : je grandis seulement grâce à vos décisions malines. Un appui court ouvre l’aide.</string>
+    <string name="tour_pet_title">Voici Wayo</string>
+    <string name="tour_pet_text">Votre caméléon assistant. Touchez-le — il répond à toute question sur l’appli et vérifie votre téléphone ; passez le doigt sur lui — vous le caressez. Il grandit grâce aux décisions malines : prendre les bonnes courses et passer les mauvaises.</string>
+    <string name="tour_partner_title">Partenaire (flotte)</string>
+    <string name="tour_partner_text" formatted="false">Si vous roulez via un partenaire (flotte), indiquez sa commission en % et le paiement hebdomadaire. Les cartes de course montreront ce qui vous reste vraiment. Si vous travaillez en direct, laissez vide.</string>
+    <string name="tour_extras_title">Extras</string>
+    <string name="tour_extras_text">Bilan du jour et de la semaine en notification, verdict sur une montre Wear OS avec vibration, widget d’écran d’accueil avec le bouton Active et invitation d’un chauffeur pour un mois gratuit.</string>
+    <string name="tour_new_title">Nouveautés de WayArs</string>
+    <string name="tour_new_text">En bref : l’assistant Wayo, le gain réel par heure et la comparaison des applis, la commission du partenaire, le bilan du jour, le widget, la montre et les invitations.</string>
 </resources>

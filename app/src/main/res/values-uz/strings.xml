@@ -213,7 +213,7 @@
     <string name="tour_verdict_title">Buyurtmani baholash</string>
     <string name="tour_verdict_text">Har bir buyurtma baho oladi: yaxshi, o‘rtacha yoki yomon. Xuddi shu baho yetkazib berish ilovangiz ustidagi kichik suzuvchi vidjetda ham ko‘rsatiladi.</string>
     <string name="tour_stats_title">Statistika</string>
-    <string name="tour_stats_text">Bugun baholangan buyurtmalar ro‘yxati: to‘lov, masofa, vaqt va baho.</string>
+    <string name="tour_stats_text">Haqiqiy soatlik daromadingiz (buyurtmalar orasidagi kutish bilan), qaysi ilova qachon ko‘proq to‘laydi, yutuqlar va seriyalar, shuningdek grafik va qabul qilingan buyurtmalar ro‘yxati.</string>
     <string name="tour_presets_title">Tayyor rejimlar</string>
     <string name="tour_presets_text">Baholash qanchalik qat’iy bo‘lishini tanlang: tejamkor, muvozanatli yoki faqat foydali buyurtmalar.</string>
     <string name="tour_thresholds_title">O‘z chegaralaringiz</string>
@@ -229,7 +229,7 @@
     <string name="tour_tax_title">Soliq</string>
     <string name="tour_tax_text">Soliq stavkasini %da kiriting. WayArs uni yoqilg‘i bilan birga ayiradi va overlay har bir buyurtmadan sizga haqiqatan qancha qolishini ko‘rsatadi.</string>
     <string name="tour_final_title">Hammasi tayyor!</string>
-    <string name="tour_final_text">Ruxsatlarni Sozlamalarda yoqing, so‘ng bosh ekranda Active’ni yoqing. Bu qo‘llanmani istalgan vaqtda Sozlamalarda qayta ko‘rishingiz mumkin.</string>
+    <string name="tour_final_text">Sozlamalarda ruxsatlarni yoqing, so‘ng bosh ekranda Active’ni yoqing. Savollar bormi? Bosh ekrandagi Wayo’ga bosing. Qo‘llanmani istalgan vaqtda Sozlamalarda takrorlashingiz mumkin.</string>
     <string name="settings_tutorial_title">Qo‘llanma</string>
     <string name="update_available_title">Yangilanish mavjud</string>
     <string name="update_available_text">WayArs’ning yaxshilanishlar va tuzatishlar bilan yangi versiyasi mavjud.</string>
@@ -449,4 +449,12 @@
     <string name="pet_say_petted_4">Yana, iltimos! Erib ketyapman 😌</string>
     <string name="pet_q_petting">Wayo’ni silasam bo‘ladimi?</string>
     <string name="pet_a_petting">Albatta! Barmog‘ingizni ustimdan yurgizing — ko‘zlarimni yumaman, tebranaman va yurakchalar uchadi 💚. Silash energiya bermaydi: men faqat aqlli qarorlaringizdan o‘saman. Qisqa bosish yordamni ochadi.</string>
+    <string name="tour_pet_title">Wayo bilan tanishing</string>
+    <string name="tour_pet_text">Yordamchi xameleoningiz. Unga bosing — ilova haqidagi istalgan savolga javob beradi va telefonni tekshiradi; barmog‘ingizni ustidan yurgizing — uni silaysiz. U aqlli qarorlardan o‘sadi: foydali buyurtmalarni olish va foydasizlarini o‘tkazib yuborish.</string>
+    <string name="tour_partner_title">Hamkor (park)</string>
+    <string name="tour_partner_text" formatted="false">Agar hamkor (park) orqali ishlasangiz, uning komissiyasini % da va haftalik to‘lovni kiriting. Buyurtma kartalari qo‘lingizda haqiqatda qancha qolishini ko‘rsatadi. To‘g‘ridan-to‘g‘ri ishlasangiz, bo‘sh qoldiring.</string>
+    <string name="tour_extras_title">Qo‘shimcha</string>
+    <string name="tour_extras_text">Bildirishnomalarda kun va hafta yakuni, Wear OS soatida tebranishli baho, Active tugmali bosh ekran vidjeti va bir oy bepul uchun haydovchini taklif qilish.</string>
+    <string name="tour_new_title">WayArs’dagi yangiliklar</string>
+    <string name="tour_new_text">Qisqacha yangiliklar: yordamchi Wayo, haqiqiy soatlik daromad va ilovalarni solishtirish, hamkor komissiyasi, kun yakuni, vidjet, soat va takliflar.</string>
 </resources>

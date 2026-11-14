@@ -212,7 +212,7 @@
     <string name="tour_verdict_title">Auftragsbewertung</string>
     <string name="tour_verdict_text">Jeder Auftrag bekommt ein Urteil: gut, durchschnittlich oder schlecht. Dasselbe Urteil erscheint auch in einem kleinen schwebenden Widget über deiner Liefer-App.</string>
     <string name="tour_stats_title">Statistik</string>
-    <string name="tour_stats_text">Die Liste der heute bewerteten Aufträge mit Bezahlung, Strecke, Zeit und Urteil.</string>
+    <string name="tour_stats_text">Dein echter Stundenverdienst (Wartezeit zwischen Aufträgen inklusive), welche App wann mehr zahlt, Erfolge und Serien sowie Diagramm und Liste der angenommenen Aufträge.</string>
     <string name="tour_presets_title">Voreinstellungen</string>
     <string name="tour_presets_text">Wähle, wie streng die Bewertung sein soll: sparsam, ausgewogen oder nur lohnende Aufträge.</string>
     <string name="tour_thresholds_title">Eigene Schwellenwerte</string>
@@ -228,7 +228,7 @@
     <string name="tour_tax_title">Steuer</string>
     <string name="tour_tax_text">Gib deinen Steuersatz in % ein. WayArs zieht ihn zusammen mit dem Kraftstoff ab, damit das Overlay zeigt, was dir von jedem Auftrag wirklich bleibt.</string>
     <string name="tour_final_title">Alles bereit!</string>
-    <string name="tour_final_text">Aktiviere die Berechtigungen in den Einstellungen und schalte dann Active auf dem Startbildschirm ein. Diese Anleitung kannst du jederzeit in den Einstellungen wiederholen.</string>
+    <string name="tour_final_text">Aktiviere die Berechtigungen in den Einstellungen und schalte dann Active auf dem Startbildschirm ein. Fragen? Tippe auf Wayo auf dem Startbildschirm. Die Anleitung kannst du jederzeit in den Einstellungen wiederholen.</string>
     <string name="settings_tutorial_title">Anleitung</string>
     <string name="update_available_title">Update verfügbar</string>
     <string name="update_available_text">Eine neue Version von WayArs mit Verbesserungen und Fehlerbehebungen ist verfügbar.</string>
@@ -448,4 +448,12 @@
     <string name="pet_say_petted_4">Mehr, bitte! Ich schmelze 😌</string>
     <string name="pet_q_petting">Kann ich Wayo streicheln?</string>
     <string name="pet_a_petting">Na klar! Streich mit dem Finger über mich — ich schließe die Augen, wiege mich und Herzchen steigen auf 💚. Streicheln gibt keine Energie: Ich wachse nur durch deine klugen Entscheidungen. Kurz tippen öffnet die Hilfe.</string>
+    <string name="tour_pet_title">Das ist Wayo</string>
+    <string name="tour_pet_text">Dein Helfer-Chamäleon. Tippe ihn an — er beantwortet jede Frage zur App und prüft dein Handy; streich mit dem Finger über ihn — du streichelst ihn. Er wächst durch kluge Entscheidungen: gute Aufträge annehmen und schlechte auslassen.</string>
+    <string name="tour_partner_title">Partner (Flotte)</string>
+    <string name="tour_partner_text" formatted="false">Fährst du über einen Partner (Flotte), trage seine Provision in % und die Wochengebühr ein. Die Auftragskarten zeigen dann, was dir wirklich bleibt. Fährst du direkt, lass es leer.</string>
+    <string name="tour_extras_title">Extras</string>
+    <string name="tour_extras_text">Tages- und Wochenbilanz als Benachrichtigung, Bewertung auf einer Wear-OS-Uhr mit Vibration, ein Widget mit Active-Schalter für den Startbildschirm und Fahrer einladen für einen Gratismonat.</string>
+    <string name="tour_new_title">Neu in WayArs</string>
+    <string name="tour_new_text">Kurz das Neue: Helfer Wayo, echter Stundenverdienst und App-Vergleich, Partnerprovision, Tagesbilanz, Widget, Uhr und Einladungen.</string>
 </resources>

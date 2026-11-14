@@ -217,7 +217,7 @@
     <string name="tour_verdict_title">Ocena zamówienia</string>
     <string name="tour_verdict_text">Każde zamówienie dostaje werdykt: dobre, średnie lub złe. Ten sam werdykt pojawia się w małym pływającym widżecie nad aplikacją dowozu.</string>
     <string name="tour_stats_title">Statystyki</string>
-    <string name="tour_stats_text">Lista dzisiejszych ocenionych zamówień: wynagrodzenie, dystans, czas i werdykt.</string>
+    <string name="tour_stats_text">Realny zarobek na godzinę (z przestojami między zleceniami), gdzie i kiedy lepiej jeździć, osiągnięcia i serie, a także wykres i lista przyjętych zleceń.</string>
     <string name="tour_presets_title">Presety</string>
     <string name="tour_presets_text">Wybierz, jak surowa ma być ocena: oszczędny, zrównoważony albo tylko opłacalne zamówienia.</string>
     <string name="tour_thresholds_title">Własne progi</string>
@@ -233,7 +233,7 @@
     <string name="tour_tax_title">Podatek</string>
     <string name="tour_tax_text">Wpisz stawkę podatku w %. WayArs odejmie ją razem z paliwem, a nakładka pokaże, ile naprawdę zostaje Ci z każdego zlecenia.</string>
     <string name="tour_final_title">Wszystko gotowe!</string>
-    <string name="tour_final_text">Włącz uprawnienia w Ustawieniach, a potem włącz Active na ekranie głównym. Ten samouczek możesz powtórzyć w Ustawieniach w dowolnej chwili.</string>
+    <string name="tour_final_text">Włącz uprawnienia w Ustawieniach, a potem włącz Active na ekranie głównym. Masz pytania? Dotknij Wayo na ekranie głównym. Samouczek możesz powtórzyć w Ustawieniach w każdej chwili.</string>
     <string name="settings_tutorial_title">Samouczek</string>
     <string name="update_available_title">Dostępna aktualizacja</string>
     <string name="update_available_text">Dostępna jest nowa wersja WayArs z ulepszeniami i poprawkami.</string>
@@ -453,4 +453,12 @@
     <string name="pet_say_petted_4">Jeszcze, proszę! Rozpływam się 😌</string>
     <string name="pet_q_petting">Czy mogę pogłaskać Wayo?</string>
     <string name="pet_a_petting">Jasne! Przesuń po mnie palcem — zmrużę oczy, zakołyszę się i polecą serduszka 💚. Głaskanie nie daje energii: rosnę tylko dzięki twoim mądrym decyzjom. Krótkie dotknięcie otwiera pomoc.</string>
+    <string name="tour_pet_title">Poznaj Wayo</string>
+    <string name="tour_pet_text">Twój pomocnik-kameleon. Dotknij go — odpowie na każde pytanie o aplikację i sprawdzi telefon; przesuń po nim palcem — pogłaszczesz go. Rośnie dzięki mądrym decyzjom: braniu opłacalnych zleceń i pomijaniu nieopłacalnych.</string>
+    <string name="tour_partner_title">Partner (flota)</string>
+    <string name="tour_partner_text" formatted="false">Jeśli jeździsz przez partnera (flotę), wpisz jego prowizję w % i opłatę tygodniową. Karty zleceń pokażą, ile naprawdę zostaje na rękę. Jeśli pracujesz bezpośrednio — zostaw puste.</string>
+    <string name="tour_extras_title">Dodatki</string>
+    <string name="tour_extras_text">Podsumowanie dnia i tygodnia w powiadomieniach, ocena na zegarku z Wear OS z wibracją, widżet na ekran główny z przyciskiem Active i zaproszenie kierowcy za miesiąc za darmo.</string>
+    <string name="tour_new_title">Co nowego w WayArs</string>
+    <string name="tour_new_text">Krótko o nowościach: pomocnik Wayo, realny zarobek na godzinę i porównanie aplikacji, prowizja partnera, podsumowania dnia, widżet, zegarek i zaproszenia.</string>
 </resources>

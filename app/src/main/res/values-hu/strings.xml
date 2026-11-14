@@ -213,7 +213,7 @@
     <string name="tour_verdict_title">A rendelés értékelése</string>
     <string name="tour_verdict_text">Minden rendelés kap egy értékelést: jó, közepes vagy rossz. Ugyanez az értékelés egy kis lebegő widgetben is megjelenik a futáralkalmazásod felett.</string>
     <string name="tour_stats_title">Statisztika</string>
-    <string name="tour_stats_text">A mai értékelt rendelések listája fizetéssel, távolsággal, idővel és értékeléssel.</string>
+    <string name="tour_stats_text">A valós óránkénti kereseted (a rendelések közti várakozással együtt), melyik alkalmazás mikor fizet többet, eredmények és sorozatok, valamint a grafikon és az elfogadott rendelések listája.</string>
     <string name="tour_presets_title">Előbeállítások</string>
     <string name="tour_presets_text">Válaszd ki, mennyire legyen szigorú az értékelés: takarékos, kiegyensúlyozott vagy csak a kifizetődő rendelések.</string>
     <string name="tour_thresholds_title">Saját küszöbértékek</string>
@@ -229,7 +229,7 @@
     <string name="tour_tax_title">Adó</string>
     <string name="tour_tax_text">Add meg az adókulcsot %-ban. A WayArs az üzemanyaggal együtt levonja, így az overlay megmutatja, mennyi marad valójában minden rendelésből.</string>
     <string name="tour_final_title">Minden kész!</string>
-    <string name="tour_final_text">Engedélyezd a jogosultságokat a Beállításokban, majd kapcsold be az Active-ot a főképernyőn. Ezt a bemutatót bármikor megismételheted a Beállításokban.</string>
+    <string name="tour_final_text">Engedélyezd a jogosultságokat a Beállításokban, majd kapcsold be az Active-ot a kezdőképernyőn. Kérdésed van? Koppints Wayóra a kezdőképernyőn. A bemutatót bármikor megismételheted a Beállításokban.</string>
     <string name="settings_tutorial_title">Bemutató</string>
     <string name="update_available_title">Frissítés érhető el</string>
     <string name="update_available_text">A WayArs új verziója érhető el fejlesztésekkel és javításokkal.</string>
@@ -449,4 +449,12 @@
     <string name="pet_say_petted_4">Még, kérlek! Elolvadok 😌</string>
     <string name="pet_q_petting">Megsimogathatom Wayót?</string>
     <string name="pet_a_petting">Persze! Húzd végig rajtam az ujjad — lehunyom a szemem, ringatózom, és szívecskék szállnak fel 💚. A simogatás nem ad energiát: csak az okos döntéseidtől növök. Egy rövid koppintás megnyitja a súgót.</string>
+    <string name="tour_pet_title">Ismerd meg Wayót</string>
+    <string name="tour_pet_text">A segítő kaméleonod. Koppints rá — bármilyen kérdésre válaszol az alkalmazásról, és ellenőrzi a telefont; húzd végig rajta az ujjad — megsimogatod. Az okos döntésektől nő: a jó rendelések elvállalásától és a rosszak kihagyásától.</string>
+    <string name="tour_partner_title">Partner (flotta)</string>
+    <string name="tour_partner_text" formatted="false">Ha partneren (flottán) keresztül dolgozol, add meg a jutalékát %-ban és a heti díjat. A rendeléskártyák megmutatják, mennyi marad valójában a kezedben. Ha közvetlenül dolgozol, hagyd üresen.</string>
+    <string name="tour_extras_title">Extrák</string>
+    <string name="tour_extras_text">Napi és heti összesítő értesítésben, értékelés Wear OS-es órán rezgéssel, kezdőképernyő-widget Active kapcsolóval és sofőr meghívása egy ingyenes hónapért.</string>
+    <string name="tour_new_title">Újdonságok a WayArs-ban</string>
+    <string name="tour_new_text">Röviden az újdonságok: Wayo, a segítő, valós óránkénti kereset és alkalmazás-összehasonlítás, partnerjutalék, napi összesítő, widget, óra és meghívók.</string>
 </resources>

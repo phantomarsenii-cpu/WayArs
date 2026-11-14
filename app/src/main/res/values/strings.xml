@@ -224,7 +224,7 @@
     <string name="tour_verdict_title">Order evaluation</string>
     <string name="tour_verdict_text">Every order gets a verdict: good, average or bad. The same verdict also appears in a small floating widget over your delivery app.</string>
     <string name="tour_stats_title">Stats</string>
-    <string name="tour_stats_text">The list of today’s rated orders with pay, distance, time and verdict.</string>
+    <string name="tour_stats_text">Your real earnings per hour (waiting between orders included), which app pays more and when, achievements and streaks, plus a chart and the list of accepted orders.</string>
     <string name="tour_presets_title">Presets</string>
     <string name="tour_presets_text">Choose how strict the rating is: Economy, Balance or Profitable only.</string>
     <string name="tour_thresholds_title">Your own thresholds</string>
@@ -240,7 +240,7 @@
     <string name="tour_tax_title">Tax</string>
     <string name="tour_tax_text">Enter your tax rate in %. WayArs subtracts it together with fuel, so the overlay shows how much you really keep from each order.</string>
     <string name="tour_final_title">You’re all set!</string>
-    <string name="tour_final_text">Enable the permissions in Settings, then switch Active on the Home screen. You can replay this tutorial any time in Settings.</string>
+    <string name="tour_final_text">Enable the permissions in Settings, then switch Active on the Home screen. Questions? Tap Wayo on the Home screen. You can replay this tutorial any time in Settings.</string>
     <string name="settings_tutorial_title">Tutorial</string>
     <string name="update_available_title">Update available</string>
     <string name="update_available_text">A new version of WayArs is available with improvements and fixes.</string>
@@ -461,4 +461,12 @@
     <string name="pet_say_petted_4">More, please! I\'m melting 😌</string>
     <string name="pet_q_petting">Can I pet Wayo?</string>
     <string name="pet_a_petting">Of course! Stroke me with your finger — I close my eyes, sway and hearts fly up 💚. Petting doesn\'t give energy: I only grow from your smart decisions. A short tap opens help.</string>
+    <string name="tour_pet_title">Meet Wayo</string>
+    <string name="tour_pet_text">Your helper chameleon. Tap him for answers to any question about the app and a phone check; stroke him with a finger to pet him. He grows from smart decisions: taking good orders and skipping bad ones.</string>
+    <string name="tour_partner_title">Partner (fleet)</string>
+    <string name="tour_partner_text" formatted="false">If you drive through a partner (fleet), enter its commission % and the weekly payment. Order cards then show what really stays in your hand. Leave it empty if you work directly.</string>
+    <string name="tour_extras_title">Extras</string>
+    <string name="tour_extras_text">Day and week summaries in notifications, the verdict on a Wear OS watch with vibration, a home-screen widget with the Active switch, and inviting a driver for a free month.</string>
+    <string name="tour_new_title">What\'s new in WayArs</string>
+    <string name="tour_new_text">A quick look at what\'s new: Wayo the helper, real earnings per hour and app comparison, partner commission, day summaries, the widget, the watch and invites.</string>
 </resources>

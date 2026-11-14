@@ -212,7 +212,7 @@
     <string name="tour_verdict_title">Evaluarea comenzii</string>
     <string name="tour_verdict_text">Fiecare comandă primește un verdict: bună, medie sau slabă. Același verdict apare și într-un mic widget plutitor peste aplicația ta de livrare.</string>
     <string name="tour_stats_title">Statistici</string>
-    <string name="tour_stats_text">Lista comenzilor evaluate azi, cu plata, distanța, timpul și verdictul.</string>
+    <string name="tour_stats_text">Câștigul tău real pe oră (inclusiv așteptarea dintre comenzi), ce aplicație plătește mai mult și când, realizări și serii, plus graficul și lista comenzilor acceptate.</string>
     <string name="tour_presets_title">Presetări</string>
     <string name="tour_presets_text">Alege cât de strictă să fie evaluarea: economă, echilibrată sau doar comenzi profitabile.</string>
     <string name="tour_thresholds_title">Pragurile tale</string>
@@ -228,7 +228,7 @@
     <string name="tour_tax_title">Impozit</string>
     <string name="tour_tax_text">Introdu cota de impozit în %. WayArs o scade împreună cu combustibilul, iar overlay-ul arată cât îți rămâne cu adevărat din fiecare comandă.</string>
     <string name="tour_final_title">Totul este gata!</string>
-    <string name="tour_final_text">Activează permisiunile în Setări, apoi pornește Active pe ecranul principal. Poți relua acest tutorial oricând în Setări.</string>
+    <string name="tour_final_text">Activează permisiunile în Setări, apoi pornește Active pe ecranul principal. Întrebări? Atinge-l pe Wayo pe ecranul principal. Poți relua tutorialul oricând din Setări.</string>
     <string name="settings_tutorial_title">Tutorial</string>
     <string name="update_available_title">Actualizare disponibilă</string>
     <string name="update_available_text">Este disponibilă o nouă versiune WayArs cu îmbunătățiri și remedieri.</string>
@@ -448,4 +448,12 @@
     <string name="pet_say_petted_4">Încă, te rog! Mă topesc 😌</string>
     <string name="pet_q_petting">Pot să-l mângâi pe Wayo?</string>
     <string name="pet_a_petting">Sigur! Trece cu degetul peste mine — închid ochii, mă legăn și zboară inimioare 💚. Mângâierile nu dau energie: cresc doar din deciziile tale istețe. O atingere scurtă deschide ajutorul.</string>
+    <string name="tour_pet_title">Faceți cunoștință cu Wayo</string>
+    <string name="tour_pet_text">Cameleonul tău ajutor. Atinge-l — răspunde la orice întrebare despre aplicație și îți verifică telefonul; trece cu degetul peste el — îl mângâi. Crește din decizii istețe: să iei comenzile bune și să le sari pe cele proaste.</string>
+    <string name="tour_partner_title">Partener (flotă)</string>
+    <string name="tour_partner_text" formatted="false">Dacă lucrezi printr-un partener (flotă), introdu comisionul lui în % și plata săptămânală. Cardurile comenzilor vor arăta ce îți rămâne cu adevărat. Dacă lucrezi direct, lasă gol.</string>
+    <string name="tour_extras_title">Extra</string>
+    <string name="tour_extras_text">Bilanțul zilei și al săptămânii în notificări, verdict pe ceasul Wear OS cu vibrație, widget pe ecranul principal cu butonul Active și invitarea unui șofer pentru o lună gratis.</string>
+    <string name="tour_new_title">Ce e nou în WayArs</string>
+    <string name="tour_new_text">Pe scurt: ajutorul Wayo, câștigul real pe oră și compararea aplicațiilor, comisionul partenerului, bilanțul zilei, widgetul, ceasul și invitațiile.</string>
 </resources>

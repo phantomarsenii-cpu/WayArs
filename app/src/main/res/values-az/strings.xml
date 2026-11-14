@@ -213,7 +213,7 @@
     <string name="tour_verdict_title">Sifarişin qiymətləndirilməsi</string>
     <string name="tour_verdict_text">Hər sifariş qiymət alır: yaxşı, orta və ya pis. Eyni qiymət çatdırılma tətbiqinizin üzərində kiçik üzən vidcetdə də göstərilir.</string>
     <string name="tour_stats_title">Statistika</string>
-    <string name="tour_stats_text">Bu gün qiymətləndirilmiş sifarişlərin siyahısı: ödəniş, məsafə, vaxt və qiymət.</string>
+    <string name="tour_stats_text">Real saatlıq qazancınız (sifarişlər arası gözləmə ilə), hansı tətbiqin nə vaxt daha çox ödədiyi, nailiyyətlər və seriyalar, həmçinin qrafik və qəbul edilmiş sifarişlərin siyahısı.</string>
     <string name="tour_presets_title">Hazır rejimlər</string>
     <string name="tour_presets_text">Qiymətləndirmənin nə qədər sərt olacağını seçin: qənaətcil, balanslı və ya yalnız sərfəli sifarişlər.</string>
     <string name="tour_thresholds_title">Öz hədləriniz</string>
@@ -229,7 +229,7 @@
     <string name="tour_tax_title">Vergi</string>
     <string name="tour_tax_text">Vergi dərəcəsini %-lə daxil edin. WayArs onu yanacaqla birlikdə çıxır və overlay hər sifarişdən həqiqətən nə qədər qaldığını göstərir.</string>
     <string name="tour_final_title">Hər şey hazırdır!</string>
-    <string name="tour_final_text">İcazələri Ayarlarda aktiv edin, sonra əsas ekranda Active-i yandırın. Bu təlimatı istənilən vaxt Ayarlarda təkrar keçə bilərsiniz.</string>
+    <string name="tour_final_text">Parametrlərdə icazələri açın, sonra ana ekranda Active-i yandırın. Sualınız var? Ana ekranda Wayo-ya toxunun. Təlimatı istənilən vaxt Parametrlərdə təkrarlaya bilərsiniz.</string>
     <string name="settings_tutorial_title">Təlimat</string>
     <string name="update_available_title">Yeniləmə mövcuddur</string>
     <string name="update_available_text">WayArs-ın təkmilləşdirmələr və düzəlişlərlə yeni versiyası mövcuddur.</string>
@@ -449,4 +449,12 @@
     <string name="pet_say_petted_4">Yenə, xahiş edirəm! Əriyirəm 😌</string>
     <string name="pet_q_petting">Wayo-nu sığallamaq olar?</string>
     <string name="pet_a_petting">Əlbəttə! Barmağınızı üstümdə gəzdirin — gözlərimi yumacağam, yırğalanacağam və ürəkciklər uçacaq 💚. Sığal enerji vermir: mən yalnız ağıllı qərarlarınızdan böyüyürəm. Qısa toxunuş köməyi açır.</string>
+    <string name="tour_pet_title">Wayo ilə tanış olun</string>
+    <string name="tour_pet_text">Köməkçi buqələmununuz. Ona toxunun — tətbiq haqqında istənilən suala cavab verəcək və telefonu yoxlayacaq; barmağınızı üstündə gəzdirin — onu sığallayacaqsınız. Ağıllı qərarlardan böyüyür: sərfəli sifarişləri götürmək və sərfəsizləri buraxmaq.</string>
+    <string name="tour_partner_title">Partnyor (park)</string>
+    <string name="tour_partner_text" formatted="false">Partnyor (park) vasitəsilə işləyirsinizsə, onun komissiyasını % ilə və həftəlik ödənişi daxil edin. Sifariş kartları əlinizdə həqiqətən nə qaldığını göstərəcək. Birbaşa işləyirsinizsə, boş saxlayın.</string>
+    <string name="tour_extras_title">Əlavələr</string>
+    <string name="tour_extras_text">Bildirişlərdə günün və həftənin yekunu, Wear OS saatında titrəyişli qiymət, Active düyməli ana ekran vidceti və bir ay pulsuz üçün sürücü dəvəti.</string>
+    <string name="tour_new_title">WayArs-da yeniliklər</string>
+    <string name="tour_new_text">Qısaca yeniliklər: köməkçi Wayo, real saatlıq qazanc və tətbiqlərin müqayisəsi, partnyor komissiyası, günün yekunu, vidcet, saat və dəvətlər.</string>
 </resources>

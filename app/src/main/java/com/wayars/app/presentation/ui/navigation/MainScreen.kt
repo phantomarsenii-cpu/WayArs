@@ -140,7 +140,16 @@ fun MainScreen(
     LaunchedEffect(tourDone, isSubscribed, a11yDisclosureShown, showA11yDisclosure) {
         if (tourDone == false && a11yDisclosureShown == true && !showA11yDisclosure && !tour.running) {
             delay(900)
+            // The full tour already contains the new features.
+            com.wayars.app.presentation.ui.tour.WhatsNewTour.markSeen(context)
             tour.start()
+        } else if (tourDone == true && a11yDisclosureShown == true && !showA11yDisclosure && !tour.running &&
+            !com.wayars.app.presentation.ui.tour.WhatsNewTour.isSeen(context)
+        ) {
+            // Drivers who finished the tour earlier: show only what's new, once.
+            delay(1_200)
+            com.wayars.app.presentation.ui.tour.WhatsNewTour.markSeen(context)
+            tour.startSteps(com.wayars.app.presentation.ui.tour.TourSteps.whatsNew)
         }
     }
 
@@ -275,7 +284,10 @@ fun MainScreen(
                     onClearPackageHint = onClearPackageHint,
                     termsAcceptedAt = termsAcceptedAt,
                     listState = settingsListState,
-                    onReplayTour = { tour.start() },
+                    onReplayTour = {
+                        com.wayars.app.presentation.ui.tour.WhatsNewTour.markSeen(context)
+                        tour.start()
+                    },
                     isSubscribed = isSubscribed,
                     onOpenPaywall = onOpenPaywall,
                     permissionsPrompt = showPermissionsPrompt,

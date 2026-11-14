@@ -38,7 +38,8 @@ enum class TourTarget {
     SETTINGS_INFO,
     SETTINGS_PARTNER,
     SETTINGS_EXTRAS,
-    STATS_HOURLY
+    STATS_HOURLY,
+    PET_CARD
 }
 
 /**
@@ -77,16 +78,42 @@ object TourSteps {
         TourStep(TourTarget.ACTIVE_SWITCH, MainTab.HOME, null, R.string.tour_active_title, R.string.tour_active_text),
         TourStep(TourTarget.SUMMARY_CARD, MainTab.HOME, null, R.string.tour_summary_title, R.string.tour_summary_text),
         TourStep(TourTarget.VERDICT_CARD, MainTab.HOME, null, R.string.tour_verdict_title, R.string.tour_verdict_text),
+        TourStep(TourTarget.PET_CARD, MainTab.HOME, null, R.string.tour_pet_title, R.string.tour_pet_text),
         TourStep(TourTarget.NAV_STATS, MainTab.STATS, null, R.string.tour_stats_title, R.string.tour_stats_text),
         TourStep(TourTarget.NAV_PRESETS, MainTab.PRESETS, null, R.string.tour_presets_title, R.string.tour_presets_text),
         TourStep(TourTarget.SETTINGS_CURRENCY, MainTab.SETTINGS, 2, R.string.tour_currency_title, R.string.tour_currency_text),
         TourStep(TourTarget.SETTINGS_THRESHOLDS, MainTab.SETTINGS, 3, R.string.tour_thresholds_title, R.string.tour_thresholds_text),
         TourStep(TourTarget.SETTINGS_VEHICLE, MainTab.SETTINGS, 4, R.string.tour_vehicle_title, R.string.tour_vehicle_text),
-        TourStep(TourTarget.SETTINGS_TAX, MainTab.SETTINGS, 5, R.string.tour_tax_title, R.string.tour_tax_text),
+        TourStep(TourTarget.SETTINGS_TAX, MainTab.SETTINGS, SettingsItems.TAX, R.string.tour_tax_title, R.string.tour_tax_text),
+        TourStep(TourTarget.SETTINGS_PARTNER, MainTab.SETTINGS, SettingsItems.PARTNER, R.string.tour_partner_title, R.string.tour_partner_text),
         TourStep(TourTarget.SETTINGS_PERMISSIONS, MainTab.SETTINGS, SettingsItems.PERMISSIONS, R.string.tour_permissions_title, R.string.tour_permissions_text),
         TourStep(TourTarget.SETTINGS_APPS, MainTab.SETTINGS, SettingsItems.APPS, R.string.tour_apps_title, R.string.tour_apps_text),
+        TourStep(TourTarget.SETTINGS_EXTRAS, MainTab.SETTINGS, SettingsItems.EXTRAS, R.string.tour_extras_title, R.string.tour_extras_text),
         TourStep(null, MainTab.HOME, null, R.string.tour_final_title, R.string.tour_final_text)
     )
+
+    /** Shown once to drivers who finished the tour before these features existed. */
+    val whatsNew: List<TourStep> = listOf(
+        TourStep(null, MainTab.HOME, null, R.string.tour_new_title, R.string.tour_new_text),
+        TourStep(TourTarget.PET_CARD, MainTab.HOME, null, R.string.tour_pet_title, R.string.tour_pet_text),
+        TourStep(TourTarget.NAV_STATS, MainTab.STATS, null, R.string.tour_stats_title, R.string.tour_stats_text),
+        TourStep(TourTarget.SETTINGS_PARTNER, MainTab.SETTINGS, SettingsItems.PARTNER, R.string.tour_partner_title, R.string.tour_partner_text),
+        TourStep(TourTarget.SETTINGS_EXTRAS, MainTab.SETTINGS, SettingsItems.EXTRAS, R.string.tour_extras_title, R.string.tour_extras_text)
+    )
+}
+
+/** Remembers whether the current "what's new" tour was already shown (bump [VERSION] for the next one). */
+object WhatsNewTour {
+    private const val PREFS = "tour_prefs"
+    private const val VERSION = 1
+    private const val KEY = "whats_new_seen"
+
+    fun isSeen(context: android.content.Context): Boolean =
+        context.getSharedPreferences(PREFS, android.content.Context.MODE_PRIVATE).getInt(KEY, 0) >= VERSION
+
+    fun markSeen(context: android.content.Context) {
+        context.getSharedPreferences(PREFS, android.content.Context.MODE_PRIVATE).edit().putInt(KEY, VERSION).apply()
+    }
 }
 
 /**
@@ -125,6 +152,17 @@ class TourController {
     fun start() {
         steps = TourSteps.all
         singleStep = false
+        index = 0
+        settled = false
+        targetRect = null
+        running = true
+    }
+
+    /** A short tour of a few steps (e.g. "what's new"); doesn't count as finishing the full tour. */
+    fun startSteps(list: List<TourStep>) {
+        if (list.isEmpty()) return
+        steps = list
+        singleStep = true
         index = 0
         settled = false
         targetRect = null

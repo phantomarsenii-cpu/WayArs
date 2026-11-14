@@ -213,7 +213,7 @@
     <string name="tour_verdict_title">Bedömning av beställning</string>
     <string name="tour_verdict_text">Varje beställning får ett utlåtande: bra, medel eller dålig. Samma utlåtande visas också i en liten flytande widget ovanpå din leveransapp.</string>
     <string name="tour_stats_title">Statistik</string>
-    <string name="tour_stats_text">Listan över dagens bedömda beställningar med betalning, sträcka, tid och utlåtande.</string>
+    <string name="tour_stats_text">Din verkliga timlön (inklusive väntan mellan uppdrag), vilken app som betalar mest och när, prestationer och serier samt diagram och lista över tagna uppdrag.</string>
     <string name="tour_presets_title">Förval</string>
     <string name="tour_presets_text">Välj hur strikt bedömningen ska vara: ekonomisk, balanserad eller bara lönsamma beställningar.</string>
     <string name="tour_thresholds_title">Egna gränser</string>
@@ -229,7 +229,7 @@
     <string name="tour_tax_title">Skatt</string>
     <string name="tour_tax_text">Ange din skattesats i %. WayArs drar av den tillsammans med bränslet, så att overlayen visar vad du faktiskt behåller av varje uppdrag.</string>
     <string name="tour_final_title">Allt är klart!</string>
-    <string name="tour_final_text">Aktivera behörigheterna i Inställningar och slå sedan på Active på startskärmen. Du kan göra om den här genomgången när som helst i Inställningar.</string>
+    <string name="tour_final_text">Slå på behörigheterna i Inställningar och sedan Active på hemskärmen. Frågor? Tryck på Wayo på hemskärmen. Du kan visa genomgången igen när som helst i Inställningar.</string>
     <string name="settings_tutorial_title">Genomgång</string>
     <string name="update_available_title">Uppdatering tillgänglig</string>
     <string name="update_available_text">En ny version av WayArs finns tillgänglig med förbättringar och rättelser.</string>
@@ -449,4 +449,12 @@
     <string name="pet_say_petted_4">Mer, tack! Jag smälter 😌</string>
     <string name="pet_q_petting">Kan jag klappa Wayo?</string>
     <string name="pet_a_petting">Så klart! Stryk mig med fingret — jag blundar, gungar och hjärtan flyger upp 💚. Klappar ger ingen energi: jag växer bara av dina smarta beslut. Ett kort tryck öppnar hjälpen.</string>
+    <string name="tour_pet_title">Möt Wayo</string>
+    <string name="tour_pet_text">Din hjälpare-kameleont. Tryck på honom — han svarar på alla frågor om appen och kontrollerar telefonen; stryk honom med fingret — då klappar du honom. Han växer av smarta beslut: att ta bra uppdrag och hoppa över dåliga.</string>
+    <string name="tour_partner_title">Partner (flotta)</string>
+    <string name="tour_partner_text" formatted="false">Kör du via en partner (flotta), ange provisionen i % och veckoavgiften. Uppdragskorten visar då vad du verkligen får behålla. Kör du direkt, lämna tomt.</string>
+    <string name="tour_extras_title">Extra</string>
+    <string name="tour_extras_text">Dagens och veckans resultat som avisering, bedömning på en Wear OS-klocka med vibration, en widget på hemskärmen med Active-knappen och inbjudan av en förare för en gratis månad.</string>
+    <string name="tour_new_title">Nytt i WayArs</string>
+    <string name="tour_new_text">Kort om nyheterna: hjälparen Wayo, verklig timlön och jämförelse av appar, partnerprovision, dagens resultat, widget, klocka och inbjudningar.</string>
 </resources>

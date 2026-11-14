@@ -212,7 +212,7 @@
     <string name="tour_verdict_title">Оцінка замовлення</string>
     <string name="tour_verdict_text">Кожне замовлення отримує вердикт: хороше, середнє чи погане. Той самий вердикт показується в невеликому плаваючому віджеті поверх застосунку доставки.</string>
     <string name="tour_stats_title">Статистика</string>
-    <string name="tour_stats_text">Список оцінених за сьогодні замовлень: оплата, відстань, час і вердикт.</string>
+    <string name="tour_stats_text">Реальний заробіток за годину (з простоєм між замовленнями), де й коли вигідніше працювати, досягнення та серії, а також графік і список прийнятих замовлень.</string>
     <string name="tour_presets_title">Пресети</string>
     <string name="tour_presets_text">Оберіть, наскільки суворою буде оцінка: економний, збалансований або лише вигідні замовлення.</string>
     <string name="tour_thresholds_title">Власні пороги</string>
@@ -228,7 +228,7 @@
     <string name="tour_tax_title">Податок</string>
     <string name="tour_tax_text">Вкажіть ставку податку у %. WayArs відніме її разом із пальним, і в оверлеї буде видно, скільки ви реально отримаєте з кожного замовлення.</string>
     <string name="tour_final_title">Усе готово!</string>
-    <string name="tour_final_text">Увімкніть дозволи в Налаштуваннях, а потім увімкніть Active на головному екрані. Пройти навчання знову можна будь-коли в Налаштуваннях.</string>
+    <string name="tour_final_text">Увімкніть дозволи в Налаштуваннях, потім увімкніть Active на Головній. Є питання — натисніть на Wayo на Головній. Навчання можна повторити в Налаштуваннях будь-коли.</string>
     <string name="settings_tutorial_title">Навчання</string>
     <string name="update_available_title">Доступне оновлення</string>
     <string name="update_available_text">Вийшла нова версія WayArs з покращеннями та виправленнями.</string>
@@ -448,4 +448,12 @@
     <string name="pet_say_petted_4">Ще, будь ласка! Я тану 😌</string>
     <string name="pet_q_petting">Можна погладити Wayo?</string>
     <string name="pet_a_petting">Звісно! Проведіть по мені пальцем — я замружуся, похитаюся, і полетять сердечка 💚. Погладжування не дають енергії: я росту лише від ваших розумних рішень. Коротке натискання відкриває допомогу.</string>
+    <string name="tour_pet_title">Знайомтеся: Wayo</string>
+    <string name="tour_pet_text">Ваш помічник-хамелеон. Натисніть на нього — відповість на будь-яке питання про застосунок і перевірить телефон; проведіть пальцем — погладите. Росте від розумних рішень: брати вигідні замовлення й пропускати невигідні.</string>
+    <string name="tour_partner_title">Партнер (флотилія)</string>
+    <string name="tour_partner_text" formatted="false">Якщо працюєте через партнера (флотилію), вкажіть його комісію у % і платіж на тиждень. Картки замовлень покажуть, скільки реально лишається на руки. Якщо працюєте напряму — залиште порожнім.</string>
+    <string name="tour_extras_title">Додатково</string>
+    <string name="tour_extras_text">Підсумки дня і тижня в сповіщеннях, оцінка на годиннику Wear OS з вібрацією, віджет на головний екран із кнопкою Active і запрошення водія за місяць безкоштовно.</string>
+    <string name="tour_new_title">Що нового у WayArs</string>
+    <string name="tour_new_text">Коротко про нове: помічник Wayo, реальний заробіток за годину й порівняння застосунків, комісія партнера, підсумки дня, віджет, годинник і запрошення.</string>
 </resources>
