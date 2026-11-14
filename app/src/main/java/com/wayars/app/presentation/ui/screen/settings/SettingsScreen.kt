@@ -163,7 +163,9 @@ fun SettingsScreen(
         }
 
         item {
-            SubscriptionSection(isSubscribed = isSubscribed, onOpenPaywall = onOpenPaywall)
+            Box(modifier = Modifier.tourTarget(TourTarget.SETTINGS_SUBSCRIPTION)) {
+                SubscriptionSection(isSubscribed = isSubscribed, onOpenPaywall = onOpenPaywall)
+            }
         }
 
         item {
@@ -233,7 +235,9 @@ fun SettingsScreen(
         }
 
         item {
-            InfoSection(termsAcceptedAt = termsAcceptedAt, onReplayTour = onReplayTour)
+            Box(modifier = Modifier.tourTarget(TourTarget.SETTINGS_INFO)) {
+                InfoSection(termsAcceptedAt = termsAcceptedAt, onReplayTour = onReplayTour)
+            }
         }
     }
 }

@@ -83,6 +83,7 @@ fun DashboardScreen(
     promptsEnabled: Boolean = true,
     onVehiclePromptShown: () -> Unit = {},
     onVehicleSetupRequested: () -> Unit = {},
+    onShowHelp: (com.wayars.app.presentation.ui.tour.TourStep) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -294,6 +295,8 @@ fun DashboardScreen(
                 )
             }
         }
+
+        com.wayars.app.presentation.pet.PetCard(isActive = isActive, onShowTopic = onShowHelp)
 
         if (!isSubscribed && trialLeftMinutes > 0) {
             Text(

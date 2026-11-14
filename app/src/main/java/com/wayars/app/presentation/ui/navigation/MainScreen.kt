@@ -238,7 +238,8 @@ fun MainScreen(
                         tab = MainTab.SETTINGS
                         vehicleSetupPrompt = true
                         vehicleSetupRequestId++
-                    }
+                    },
+                    onShowHelp = { step -> tour.startSingle(step) }
                 )
                 MainTab.STATS -> StatsScreen(
                     orders = allOrders,

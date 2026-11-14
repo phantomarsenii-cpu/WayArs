@@ -266,6 +266,10 @@ class OverlayService : LifecycleService() {
                 DecidedOrdersState.markDecided(sourcePackage, evaluation.earnings, evaluation.distanceKm, evaluation.currency)
             }
         }
+        // Feeds the pet: smart decisions (accept good / reject bad) give energy.
+        if (evaluation != null) {
+            com.wayars.app.pet.PetState.onDecision(applicationContext, accepted, evaluation.verdict)
+        }
         if (accepted && evaluation != null) {
             lifecycleScope.launch {
                 runCatching {

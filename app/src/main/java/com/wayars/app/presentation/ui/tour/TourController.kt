@@ -33,7 +33,9 @@ enum class TourTarget {
     SETTINGS_VEHICLE,
     SETTINGS_TAX,
     SETTINGS_PERMISSIONS,
-    SETTINGS_APPS
+    SETTINGS_APPS,
+    SETTINGS_SUBSCRIPTION,
+    SETTINGS_INFO
 }
 
 /**
@@ -80,7 +82,10 @@ object TourSteps {
 @OptIn(ExperimentalFoundationApi::class)
 @Stable
 class TourController {
-    val steps: List<TourStep> = TourSteps.all
+    /** The full tour, or a single step when the pet helper points at one setting. */
+    var steps: List<TourStep> by mutableStateOf(TourSteps.all)
+        private set
+    private var singleStep = false
 
     var running by mutableStateOf(false)
         private set
@@ -101,6 +106,18 @@ class TourController {
     val current: TourStep get() = steps[index]
 
     fun start() {
+        steps = TourSteps.all
+        singleStep = false
+        index = 0
+        settled = false
+        targetRect = null
+        running = true
+    }
+
+    /** Spotlights ONE element (used by the pet helper's "Show me"); doesn't count as finishing the tour. */
+    fun startSingle(step: TourStep) {
+        steps = listOf(step)
+        singleStep = true
         index = 0
         settled = false
         targetRect = null
@@ -113,8 +130,10 @@ class TourController {
 
     fun finish() {
         if (!running) return
+        val wasSingle = singleStep
         stop()
-        onFinished?.invoke()
+        singleStep = false
+        if (!wasSingle) onFinished?.invoke()
     }
 
     /** Hides the tour without marking it as completed (e.g. the screen was left). */

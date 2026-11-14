@@ -54,6 +54,7 @@ class WayArsApplication : Application() {
         container = AppContainer(this)
         ActiveSessionTracker.init(this)
         FreeTrial.init(this)
+        com.wayars.app.pet.PetState.init(this)
         configureRevenueCat()
         observeAppForeground()
         applicationScope.launch {

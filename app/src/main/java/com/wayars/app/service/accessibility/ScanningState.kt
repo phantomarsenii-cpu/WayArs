@@ -35,6 +35,7 @@ object ScanningState {
                 .apply()
         }
         ActiveSessionTracker.onActiveChanged(active, context)
+        if (active) com.wayars.app.pet.PetState.onScanningStarted(context)
         FreeTrial.onActiveChanged(active, context)
         _isActive.value = active
         // Ties the file logger's lifetime exactly to one Active session,
