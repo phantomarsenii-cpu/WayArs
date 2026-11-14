@@ -476,4 +476,20 @@
     <string name="chat_typing">skriver…</string>
     <string name="chat_offline">kan appen · uten internett</string>
     <string name="chat_check_title">Telefonsjekk</string>
+    <string name="chat_period_today">I dag</string>
+    <string name="chat_period_week">Siste 7 dager</string>
+    <string name="chat_period_month">Siste 30 dager</string>
+    <string name="chat_my_none">%1$s: ingen tatte oppdrag ennå. Slå på «Active» og marker tatte oppdrag med ✓ på kortet — så teller jeg dem.</string>
+    <string name="chat_my_period">%1$s: %2$d oppdrag, %3$s netto (%4$s brutto).</string>
+    <string name="chat_my_hour">Per time: %1$s, aktiv %2$s.</string>
+    <string name="chat_my_partner">Partner: −%1$s, igjen etter partneren: %2$s.</string>
+    <string name="chat_my_compare">Dine siste 60 dager: %1$s.</string>
+    <string name="chat_my_compare_none">For lite data til å sammenligne apper ennå — kjør noen skift med «Active» i ulike apper.</string>
+    <string name="chat_my_best_time">Beste tid: %1$s — %2$s.</string>
+    <string name="chat_my_record">Dager på rad uten dårlige oppdrag: %1$d (beste %2$d). Rekord per time: %3$s. Beste dag: %4$s.</string>
+    <string name="chat_my_code">Invitasjonskoden din: %1$s</string>
+    <string name="chat_my_pet">Akkurat nå er jeg nivå %1$d, energi %2$d / %3$d.</string>
+    <string name="chat_my_subscribed">Abonnementet ditt er aktivt ✅</string>
+    <string name="chat_my_trial">Prøveperiode: %1$d min igjen.</string>
+    <string name="chat_my_trial_over">Prøveperioden er over — det trengs et abonnement for å skanne oppdrag.</string>
 </resources>

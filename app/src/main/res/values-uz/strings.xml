@@ -476,4 +476,20 @@
     <string name="chat_typing">yozmoqda…</string>
     <string name="chat_offline">ilovani biladi · internetsiz</string>
     <string name="chat_check_title">Telefonni tekshirish</string>
+    <string name="chat_period_today">Bugun</string>
+    <string name="chat_period_week">Oxirgi 7 kun</string>
+    <string name="chat_period_month">Oxirgi 30 kun</string>
+    <string name="chat_my_none">%1$s: hali qabul qilingan buyurtmalar yo‘q. “Active”ni yoq va olgan buyurtmalaringni kartada ✓ bilan belgila — shunda ularni hisoblayman.</string>
+    <string name="chat_my_period">%1$s: %2$d buyurtma, %3$s qo‘lga (%4$s jami).</string>
+    <string name="chat_my_hour">Soatiga: %1$s, faol %2$s.</string>
+    <string name="chat_my_partner">Hamkorga: −%1$s, hamkordan keyin qoladi: %2$s.</string>
+    <string name="chat_my_compare">Oxirgi 60 kuning: %1$s.</string>
+    <string name="chat_my_compare_none">Ilovalarni solishtirish uchun hali ma’lumot kam — turli ilovalarda “Active” yoqilgan holda bir necha smena ishla.</string>
+    <string name="chat_my_best_time">Eng yaxshi vaqt: %1$s — %2$s.</string>
+    <string name="chat_my_record">Foydasiz buyurtmalarsiz ketma-ket kunlar: %1$d (eng yaxshi %2$d). Soatlik rekord: %3$s. Eng yaxshi kun: %4$s.</string>
+    <string name="chat_my_code">Taklif kodingiz: %1$s</string>
+    <string name="chat_my_pet">Hozir darajam %1$d, energiya %2$d / %3$d.</string>
+    <string name="chat_my_subscribed">Obunangiz faol ✅</string>
+    <string name="chat_my_trial">Bepul sinov: %1$d daqiqa qoldi.</string>
+    <string name="chat_my_trial_over">Bepul sinov tugadi — buyurtmalarni skanerlash uchun obuna kerak.</string>
 </resources>

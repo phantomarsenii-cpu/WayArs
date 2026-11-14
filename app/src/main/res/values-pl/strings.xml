@@ -480,4 +480,20 @@
     <string name="chat_typing">pisze…</string>
     <string name="chat_offline">zna aplikację · bez internetu</string>
     <string name="chat_check_title">Sprawdzenie telefonu</string>
+    <string name="chat_period_today">Dziś</string>
+    <string name="chat_period_week">Ostatnie 7 dni</string>
+    <string name="chat_period_month">Ostatnie 30 dni</string>
+    <string name="chat_my_none">%1$s: brak przyjętych zleceń. Włącz „Active” i zaznaczaj przyjęte zlecenia ✓ na karcie — wtedy je policzę.</string>
+    <string name="chat_my_period">%1$s: %2$d zleceń, %3$s na rękę (%4$s brutto).</string>
+    <string name="chat_my_hour">Na godzinę: %1$s, w pracy %2$s.</string>
+    <string name="chat_my_partner">Partner: −%1$s, zostaje po partnerze: %2$s.</string>
+    <string name="chat_my_compare">Twoje ostatnie 60 dni: %1$s.</string>
+    <string name="chat_my_compare_none">Na razie za mało danych, by porównać aplikacje — przepracuj kilka zmian z włączonym „Active” w różnych aplikacjach.</string>
+    <string name="chat_my_best_time">Najlepsza pora: %1$s — %2$s.</string>
+    <string name="chat_my_record">Dni z rzędu bez nieopłacalnych zleceń: %1$d (rekord %2$d). Rekord na godzinę: %3$s. Najlepszy dzień: %4$s.</string>
+    <string name="chat_my_code">Twój kod zaproszenia: %1$s</string>
+    <string name="chat_my_pet">Teraz mam poziom %1$d, energia %2$d / %3$d.</string>
+    <string name="chat_my_subscribed">Subskrypcja aktywna ✅</string>
+    <string name="chat_my_trial">Okres próbny: zostało %1$d min.</string>
+    <string name="chat_my_trial_over">Okres próbny się skończył — do skanowania zleceń potrzebna jest subskrypcja.</string>
 </resources>

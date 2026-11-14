@@ -55,6 +55,14 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import com.wayars.app.R
+import com.wayars.app.appContainer
+import com.wayars.app.data.prefs.DriverPrefs
+import com.wayars.app.domain.model.Currency
+import com.wayars.app.features.AppNames
+import com.wayars.app.features.Earnings
+import com.wayars.app.service.accessibility.ActiveSessionTracker
+import com.wayars.app.util.CurrencyFormatter
+import kotlinx.coroutines.flow.first
 import com.wayars.app.pet.PetState
 import com.wayars.app.presentation.pet.brain.WayoBrain
 import com.wayars.app.presentation.ui.component.MainTab
@@ -96,7 +104,9 @@ object WayoBrainHolder {
                     answers = res.map { it.getString(t.answer) }.distinct()
                 )
             }
-            return WayoBrain(docs).also { brain = it }
+            // "How much did I earn today / this week / this month" — answered from the driver's own data.
+            val personal = PERSONAL_KEYS.map { WayoBrain.Doc(it, emptyList(), emptyList()) }
+            return WayoBrain(docs + personal).also { brain = it }
         }
     }
 }
@@ -113,6 +123,72 @@ private class ChatMsg(
 /** Topics whose problems are worth an automatic phone check under the answer. */
 private val PROBLEM_KEYS = setOf("diagnostics", "overlay", "turns_off", "access", "active", "background")
 private val POPULAR_KEYS = listOf("overlay", "diagnostics", "wrong_numbers", "hourly", "invite")
+internal val PERSONAL_KEYS = listOf("my_today", "my_week", "my_month")
+
+/**
+ * The driver's own numbers for a topic (earnings, per hour, best app, records, invite code,
+ * Wayo's level, trial / subscription), or null when the topic has none. Read on the phone only.
+ */
+private suspend fun personalLine(context: Context, key: String, isSubscribed: Boolean): String? = withContext(Dispatchers.IO) {
+    runCatching {
+        val c = context.appContainer()
+        val cur = runCatching { c.settingsRepository.currency.first() }.getOrDefault(Currency.default)
+        val now = System.currentTimeMillis()
+        val day = 86_400_000L
+        fun money(v: Double) = CurrencyFormatter.format(v, cur)
+        fun perHour(v: Double) = context.getString(R.string.summary_part_hour, CurrencyFormatter.format(v, cur, 0))
+        fun duration(ms: Long): String { val m = ms / 60_000L; return context.getString(R.string.stats_duration, (m / 60).toInt(), (m % 60).toInt()) }
+        when (key) {
+            "my_today", "my_week", "my_month", "hourly", "stats" -> {
+                val today = Earnings.startOfDay(now)
+                val from = when (key) { "my_week" -> today - 6 * day; "my_month" -> today - 29 * day; else -> today }
+                val periodName = context.getString(
+                    when (key) { "my_week" -> R.string.chat_period_week; "my_month" -> R.string.chat_period_month; else -> R.string.chat_period_today }
+                )
+                val orders = c.orderRepository.acceptedSince(from)
+                if (orders.isEmpty()) return@runCatching context.getString(R.string.chat_my_none, periodName)
+                val e = Earnings.period(
+                    orders, ActiveSessionTracker.intervals(from, now), from, now + 1,
+                    DriverPrefs.weeklyFee.value, DriverPrefs.commissionPercent.value
+                )
+                val lines = mutableListOf(context.getString(R.string.chat_my_period, periodName, e.orders, money(e.net), money(e.gross)))
+                e.perHour?.let { lines.add(context.getString(R.string.chat_my_hour, perHour(it), duration(e.activeMillis))) }
+                if (e.partnerCommission + e.partnerFee > 0.0) {
+                    lines.add(context.getString(R.string.chat_my_partner, money(e.partnerCommission + e.partnerFee), money(e.afterPartner)))
+                }
+                lines.joinToString("\n")
+            }
+            "compare" -> {
+                val from = now - 60 * day
+                val slots = Earnings.slotRates(c.orderRepository.acceptedSince(from), ActiveSessionTracker.intervals(from, now))
+                val rates = Earnings.serviceRates(slots)
+                if (rates.isEmpty()) context.getString(R.string.chat_my_compare_none)
+                else context.getString(
+                    R.string.chat_my_compare,
+                    rates.joinToString(" · ") { "${AppNames.label(context, it.sourcePackage)} ${perHour(it.perHour)}" }
+                ) + (Earnings.bestSlots(slots, 1).firstOrNull()?.let { b ->
+                    "\n" + context.getString(R.string.chat_my_best_time, AppNames.label(context, b.sourcePackage), perHour(b.perHour))
+                } ?: "")
+            }
+            "achievements" -> {
+                val a = Earnings.achievements(c.orderRepository.acceptedSince(0L), ActiveSessionTracker.intervals(0L, now))
+                if (a.totalOrders == 0) null
+                else context.getString(
+                    R.string.chat_my_record, a.currentSmartStreak, a.bestSmartStreak,
+                    a.recordPerHour?.let { perHour(it) } ?: "—", a.bestDay?.let { money(it) } ?: "—"
+                )
+            }
+            "invite" -> context.getString(R.string.chat_my_code, DriverPrefs.inviteCode(context))
+            "pet" -> PetState.state.value.let { context.getString(R.string.chat_my_pet, it.level, it.xp, it.nextLevelXp) }
+            "subscription", "trial", "restore" -> when {
+                isSubscribed -> context.getString(R.string.chat_my_subscribed)
+                FreeTrial.hasTimeLeft() -> context.getString(R.string.chat_my_trial, FreeTrial.minutesLeft())
+                else -> context.getString(R.string.chat_my_trial_over)
+            }
+            else -> null
+        }
+    }.getOrNull()
+}
 
 /**
  * Chat with Wayo: the driver writes in their own words, Wayo answers from what it knows about the
@@ -156,7 +232,10 @@ fun WayoChatDialog(
     }
     val checks = remember(tick, isActive, isSubscribed) { phoneChecks(context, isActive, isSubscribed, onShow) }
 
-    fun answer(t: PetHelpTopic, key: String) {
+    suspend fun answer(t: PetHelpTopic?, key: String) {
+        // The driver's own numbers first (that's usually what they asked), then the explanation.
+        personalLine(context, key, isSubscribed)?.let { messages.add(ChatMsg(false, "📊 $it")) }
+        if (t == null) { lastKey = "stats"; return }
         lastKey = key
         val needsCheck = key in PROBLEM_KEYS
         messages.add(ChatMsg(false, context.getString(t.answer), step = t.step, phoneCheck = needsCheck))
@@ -173,7 +252,7 @@ fun WayoChatDialog(
             if (asTopic != null) { answer(asTopic, WayoBrainHolder.keyOf(context, asTopic)); return@launch }
             val b = brain ?: withContext(Dispatchers.Default) { WayoBrainHolder.get(context.applicationContext) }.also { brain = it }
             when (val r = b.reply(clean, lastKey)) {
-                is WayoBrain.Reply.Answer -> topicsByKey[r.key]?.let { answer(it, r.key) }
+                is WayoBrain.Reply.Answer -> answer(topicsByKey[r.key], r.key)
                 is WayoBrain.Reply.Clarify -> messages.add(ChatMsg(false, context.getString(R.string.chat_clarify), chips = topics(r.keys)))
                 is WayoBrain.Reply.ShowLast -> {
                     val step = topicsByKey[r.key]?.step

@@ -476,4 +476,20 @@
     <string name="chat_typing">yazır…</string>
     <string name="chat_offline">tətbiqi bilir · internetsiz</string>
     <string name="chat_check_title">Telefonun yoxlanması</string>
+    <string name="chat_period_today">Bu gün</string>
+    <string name="chat_period_week">Son 7 gün</string>
+    <string name="chat_period_month">Son 30 gün</string>
+    <string name="chat_my_none">%1$s: hələ qəbul edilmiş sifariş yoxdur. “Active”-i aç və götürdüyün sifarişləri kartda ✓ ilə qeyd et — onda onları sayacağam.</string>
+    <string name="chat_my_period">%1$s: %2$d sifariş, %3$s əlinizdə (%4$s ümumi).</string>
+    <string name="chat_my_hour">Saatda: %1$s, aktiv %2$s.</string>
+    <string name="chat_my_partner">Partnyor: −%1$s, partnyordan sonra qalan: %2$s.</string>
+    <string name="chat_my_compare">Son 60 günün: %1$s.</string>
+    <string name="chat_my_compare_none">Tətbiqləri müqayisə etmək üçün hələ məlumat azdır — müxtəlif tətbiqlərdə “Active” açıq bir neçə növbə işlə.</string>
+    <string name="chat_my_best_time">Ən yaxşı vaxt: %1$s — %2$s.</string>
+    <string name="chat_my_record">Sərfəsiz sifarişsiz ardıcıl günlər: %1$d (ən yaxşı %2$d). Saatlıq rekord: %3$s. Ən yaxşı gün: %4$s.</string>
+    <string name="chat_my_code">Dəvət kodun: %1$s</string>
+    <string name="chat_my_pet">İndi səviyyəm %1$d, enerji %2$d / %3$d.</string>
+    <string name="chat_my_subscribed">Abunəliyin aktivdir ✅</string>
+    <string name="chat_my_trial">Pulsuz sınaq: %1$d dəq qalıb.</string>
+    <string name="chat_my_trial_over">Pulsuz sınaq bitib — sifarişləri skan etmək üçün abunəlik lazımdır.</string>
 </resources>

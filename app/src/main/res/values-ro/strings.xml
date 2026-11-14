@@ -475,4 +475,20 @@
     <string name="chat_typing">scrie…</string>
     <string name="chat_offline">știe aplicația · fără internet</string>
     <string name="chat_check_title">Verificarea telefonului</string>
+    <string name="chat_period_today">Azi</string>
+    <string name="chat_period_week">Ultimele 7 zile</string>
+    <string name="chat_period_month">Ultimele 30 de zile</string>
+    <string name="chat_my_none">%1$s: încă nicio comandă acceptată. Pornește „Active” și marchează comenzile luate cu ✓ pe card — apoi le număr.</string>
+    <string name="chat_my_period">%1$s: %2$d comenzi, %3$s net (%4$s brut).</string>
+    <string name="chat_my_hour">Pe oră: %1$s, activ %2$s.</string>
+    <string name="chat_my_partner">Partener: −%1$s, rămâne după partener: %2$s.</string>
+    <string name="chat_my_compare">Ultimele tale 60 de zile: %1$s.</string>
+    <string name="chat_my_compare_none">Încă prea puține date pentru a compara aplicațiile — lucrează câteva ture cu „Active” în aplicații diferite.</string>
+    <string name="chat_my_best_time">Cel mai bun moment: %1$s — %2$s.</string>
+    <string name="chat_my_record">Zile la rând fără comenzi proaste: %1$d (record %2$d). Record pe oră: %3$s. Cea mai bună zi: %4$s.</string>
+    <string name="chat_my_code">Codul tău de invitație: %1$s</string>
+    <string name="chat_my_pet">Acum sunt la nivelul %1$d, energie %2$d / %3$d.</string>
+    <string name="chat_my_subscribed">Abonamentul tău e activ ✅</string>
+    <string name="chat_my_trial">Perioada de probă: mai sunt %1$d min.</string>
+    <string name="chat_my_trial_over">Perioada de probă s-a terminat — e nevoie de abonament pentru scanarea comenzilor.</string>
 </resources>

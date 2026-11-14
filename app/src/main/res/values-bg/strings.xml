@@ -476,4 +476,20 @@
     <string name="chat_typing">пише…</string>
     <string name="chat_offline">знае приложението · без интернет</string>
     <string name="chat_check_title">Проверка на телефона</string>
+    <string name="chat_period_today">Днес</string>
+    <string name="chat_period_week">Последните 7 дни</string>
+    <string name="chat_period_month">Последните 30 дни</string>
+    <string name="chat_my_none">%1$s: още няма приети поръчки. Включи „Active“ и отбелязвай взетите поръчки с ✓ на картата — тогава ще ги преброя.</string>
+    <string name="chat_my_period">%1$s: %2$d поръчки, %3$s чисто (%4$s общо).</string>
+    <string name="chat_my_hour">На час: %1$s, активно %2$s.</string>
+    <string name="chat_my_partner">Партньор: −%1$s, остава след партньора: %2$s.</string>
+    <string name="chat_my_compare">Твоите последни 60 дни: %1$s.</string>
+    <string name="chat_my_compare_none">Още няма достатъчно данни за сравнение — изкарай няколко смени с включен „Active“ в различни приложения.</string>
+    <string name="chat_my_best_time">Най-добро време: %1$s — %2$s.</string>
+    <string name="chat_my_record">Дни подред без неизгодни поръчки: %1$d (рекорд %2$d). Рекорд на час: %3$s. Най-добър ден: %4$s.</string>
+    <string name="chat_my_code">Твоят код за покана: %1$s</string>
+    <string name="chat_my_pet">Сега съм ниво %1$d, енергия %2$d / %3$d.</string>
+    <string name="chat_my_subscribed">Абонаментът ти е активен ✅</string>
+    <string name="chat_my_trial">Пробен период: остават %1$d мин.</string>
+    <string name="chat_my_trial_over">Пробният период изтече — за сканиране на поръчки е нужен абонамент.</string>
 </resources>

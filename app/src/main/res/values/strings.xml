@@ -488,4 +488,20 @@
     <string name="chat_typing">typing…</string>
     <string name="chat_offline">knows the app · works offline</string>
     <string name="chat_check_title">Phone check</string>
+    <string name="chat_period_today">Today</string>
+    <string name="chat_period_week">Last 7 days</string>
+    <string name="chat_period_month">Last 30 days</string>
+    <string name="chat_my_none">%1$s: no accepted orders yet. Switch on “Active” and mark taken orders with ✓ on the card — then I’ll count them.</string>
+    <string name="chat_my_period">%1$s: %2$d orders, %3$s take-home (%4$s gross).</string>
+    <string name="chat_my_hour">Per hour: %1$s, active %2$s.</string>
+    <string name="chat_my_partner">Partner: −%1$s, left after the partner: %2$s.</string>
+    <string name="chat_my_compare">Your last 60 days: %1$s.</string>
+    <string name="chat_my_compare_none">Not enough data to compare apps yet — work a few shifts with “Active” on in different apps.</string>
+    <string name="chat_my_best_time">Best time: %1$s — %2$s.</string>
+    <string name="chat_my_record">Days in a row without bad orders: %1$d (best %2$d). Record per hour: %3$s. Best day: %4$s.</string>
+    <string name="chat_my_code">Your invite code: %1$s</string>
+    <string name="chat_my_pet">Right now I’m level %1$d, energy %2$d / %3$d.</string>
+    <string name="chat_my_subscribed">Your subscription is active ✅</string>
+    <string name="chat_my_trial">Your free trial: %1$d min left.</string>
+    <string name="chat_my_trial_over">Your free trial is over — a subscription is needed to scan orders.</string>
 </resources>

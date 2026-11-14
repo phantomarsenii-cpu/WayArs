@@ -475,4 +475,20 @@
     <string name="chat_typing">schreibt…</string>
     <string name="chat_offline">kennt die App · ohne Internet</string>
     <string name="chat_check_title">Handy-Check</string>
+    <string name="chat_period_today">Heute</string>
+    <string name="chat_period_week">Letzte 7 Tage</string>
+    <string name="chat_period_month">Letzte 30 Tage</string>
+    <string name="chat_my_none">%1$s: noch keine angenommenen Aufträge. Schalte „Active“ ein und markiere angenommene Aufträge mit ✓ auf der Karte — dann zähle ich sie.</string>
+    <string name="chat_my_period">%1$s: %2$d Aufträge, %3$s netto (%4$s brutto).</string>
+    <string name="chat_my_hour">Pro Stunde: %1$s, aktiv %2$s.</string>
+    <string name="chat_my_partner">Partner: −%1$s, nach dem Partner übrig: %2$s.</string>
+    <string name="chat_my_compare">Deine letzten 60 Tage: %1$s.</string>
+    <string name="chat_my_compare_none">Noch zu wenig Daten für einen App-Vergleich — fahre ein paar Schichten mit „Active“ in verschiedenen Apps.</string>
+    <string name="chat_my_best_time">Beste Zeit: %1$s — %2$s.</string>
+    <string name="chat_my_record">Tage in Folge ohne unrentable Aufträge: %1$d (Bestwert %2$d). Rekord pro Stunde: %3$s. Bester Tag: %4$s.</string>
+    <string name="chat_my_code">Dein Einladungscode: %1$s</string>
+    <string name="chat_my_pet">Gerade bin ich Level %1$d, Energie %2$d / %3$d.</string>
+    <string name="chat_my_subscribed">Dein Abo ist aktiv ✅</string>
+    <string name="chat_my_trial">Testphase: noch %1$d Min.</string>
+    <string name="chat_my_trial_over">Die Testphase ist vorbei — zum Scannen von Aufträgen braucht es ein Abo.</string>
 </resources>

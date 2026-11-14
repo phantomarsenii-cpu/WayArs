@@ -476,4 +476,20 @@
     <string name="chat_typing">skriver…</string>
     <string name="chat_offline">kan appen · utan internet</string>
     <string name="chat_check_title">Telefonkontroll</string>
+    <string name="chat_period_today">I dag</string>
+    <string name="chat_period_week">Senaste 7 dagarna</string>
+    <string name="chat_period_month">Senaste 30 dagarna</string>
+    <string name="chat_my_none">%1$s: inga tagna uppdrag än. Slå på ”Active” och markera tagna uppdrag med ✓ på kortet — då räknar jag dem.</string>
+    <string name="chat_my_period">%1$s: %2$d uppdrag, %3$s netto (%4$s brutto).</string>
+    <string name="chat_my_hour">Per timme: %1$s, aktiv %2$s.</string>
+    <string name="chat_my_partner">Partner: −%1$s, kvar efter partnern: %2$s.</string>
+    <string name="chat_my_compare">Dina senaste 60 dagar: %1$s.</string>
+    <string name="chat_my_compare_none">För lite data för att jämföra appar än — kör några pass med ”Active” i olika appar.</string>
+    <string name="chat_my_best_time">Bästa tid: %1$s — %2$s.</string>
+    <string name="chat_my_record">Dagar i rad utan dåliga uppdrag: %1$d (bästa %2$d). Rekord per timme: %3$s. Bästa dag: %4$s.</string>
+    <string name="chat_my_code">Din inbjudningskod: %1$s</string>
+    <string name="chat_my_pet">Just nu är jag nivå %1$d, energi %2$d / %3$d.</string>
+    <string name="chat_my_subscribed">Din prenumeration är aktiv ✅</string>
+    <string name="chat_my_trial">Provperiod: %1$d min kvar.</string>
+    <string name="chat_my_trial_over">Provperioden är slut — en prenumeration krävs för att skanna uppdrag.</string>
 </resources>

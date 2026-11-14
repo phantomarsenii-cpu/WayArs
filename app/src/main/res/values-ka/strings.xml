@@ -476,4 +476,20 @@
     <string name="chat_typing">წერს…</string>
     <string name="chat_offline">იცის აპი · ინტერნეტის გარეშე</string>
     <string name="chat_check_title">ტელეფონის შემოწმება</string>
+    <string name="chat_period_today">დღეს</string>
+    <string name="chat_period_week">ბოლო 7 დღე</string>
+    <string name="chat_period_month">ბოლო 30 დღე</string>
+    <string name="chat_my_none">%1$s: მიღებული შეკვეთები ჯერ არ არის. ჩართე „Active“ და აღებული შეკვეთები მონიშნე ✓-ით ბარათზე — მაშინ დავითვლი.</string>
+    <string name="chat_my_period">%1$s: %2$d შეკვეთა, %3$s ხელზე (%4$s სულ).</string>
+    <string name="chat_my_hour">საათში: %1$s, აქტიური %2$s.</string>
+    <string name="chat_my_partner">პარტნიორს: −%1$s, პარტნიორის შემდეგ რჩება: %2$s.</string>
+    <string name="chat_my_compare">შენი ბოლო 60 დღე: %1$s.</string>
+    <string name="chat_my_compare_none">აპების შესადარებლად ჯერ ცოტა მონაცემია — იმუშავე რამდენიმე ცვლა ჩართული „Active“-ით სხვადასხვა აპში.</string>
+    <string name="chat_my_best_time">საუკეთესო დრო: %1$s — %2$s.</string>
+    <string name="chat_my_record">ზედიზედ დღეები წამგებიანი შეკვეთების გარეშე: %1$d (საუკეთესო %2$d). საათის რეკორდი: %3$s. საუკეთესო დღე: %4$s.</string>
+    <string name="chat_my_code">შენი მოწვევის კოდი: %1$s</string>
+    <string name="chat_my_pet">ახლა ვარ %1$d დონეზე, ენერგია %2$d / %3$d.</string>
+    <string name="chat_my_subscribed">გამოწერა აქტიურია ✅</string>
+    <string name="chat_my_trial">უფასო საცდელი: დარჩა %1$d წთ.</string>
+    <string name="chat_my_trial_over">საცდელი პერიოდი დასრულდა — შეკვეთების სკანირებისთვის გამოწერაა საჭირო.</string>
 </resources>

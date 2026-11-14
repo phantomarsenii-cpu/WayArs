@@ -476,4 +476,20 @@
     <string name="chat_typing">píše…</string>
     <string name="chat_offline">zná aplikaci · bez internetu</string>
     <string name="chat_check_title">Kontrola telefonu</string>
+    <string name="chat_period_today">Dnes</string>
+    <string name="chat_period_week">Posledních 7 dní</string>
+    <string name="chat_period_month">Posledních 30 dní</string>
+    <string name="chat_my_none">%1$s: zatím žádné přijaté zakázky. Zapni „Active“ a přijaté zakázky označuj ✓ na kartě — pak je spočítám.</string>
+    <string name="chat_my_period">%1$s: %2$d zakázek, %3$s čistého (%4$s hrubého).</string>
+    <string name="chat_my_hour">Za hodinu: %1$s, aktivní %2$s.</string>
+    <string name="chat_my_partner">Partner: −%1$s, po partnerovi zbývá: %2$s.</string>
+    <string name="chat_my_compare">Tvých posledních 60 dní: %1$s.</string>
+    <string name="chat_my_compare_none">Zatím málo dat pro srovnání aplikací — odjezdi pár směn se zapnutým „Active“ v různých aplikacích.</string>
+    <string name="chat_my_best_time">Nejlepší doba: %1$s — %2$s.</string>
+    <string name="chat_my_record">Dní v řadě bez nevýhodných zakázek: %1$d (nejlépe %2$d). Rekord za hodinu: %3$s. Nejlepší den: %4$s.</string>
+    <string name="chat_my_code">Tvůj zvací kód: %1$s</string>
+    <string name="chat_my_pet">Teď mám úroveň %1$d, energie %2$d / %3$d.</string>
+    <string name="chat_my_subscribed">Předplatné je aktivní ✅</string>
+    <string name="chat_my_trial">Zkušební doba: zbývá %1$d min.</string>
+    <string name="chat_my_trial_over">Zkušební doba skončila — ke skenování zakázek je potřeba předplatné.</string>
 </resources>

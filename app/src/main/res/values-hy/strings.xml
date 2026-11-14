@@ -476,4 +476,20 @@
     <string name="chat_typing">գրում է…</string>
     <string name="chat_offline">գիտի հավելվածը · առանց ինտերնետի</string>
     <string name="chat_check_title">Հեռախոսի ստուգում</string>
+    <string name="chat_period_today">Այսօր</string>
+    <string name="chat_period_week">Վերջին 7 օրը</string>
+    <string name="chat_period_month">Վերջին 30 օրը</string>
+    <string name="chat_my_none">%1$s՝ դեռ ընդունված պատվերներ չկան։ Միացրու «Active»-ը և վերցրած պատվերները նշիր ✓-ով քարտում՝ այդ ժամանակ կհաշվեմ։</string>
+    <string name="chat_my_period">%1$s՝ %2$d պատվեր, %3$s ձեռքին (%4$s ընդհանուր)։</string>
+    <string name="chat_my_hour">Ժամում՝ %1$s, ակտիվ՝ %2$s։</string>
+    <string name="chat_my_partner">Գործընկերոջը՝ −%1$s, գործընկերոջից հետո մնում է՝ %2$s։</string>
+    <string name="chat_my_compare">Քո վերջին 60 օրը՝ %1$s։</string>
+    <string name="chat_my_compare_none">Հավելվածները համեմատելու համար դեռ քիչ տվյալներ կան՝ աշխատիր մի քանի հերթափոխ «Active»-ով տարբեր հավելվածներում։</string>
+    <string name="chat_my_best_time">Լավագույն ժամանակ՝ %1$s — %2$s։</string>
+    <string name="chat_my_record">Անընդմեջ օրեր առանց անշահավետ պատվերների՝ %1$d (լավագույնը՝ %2$d)։ Ժամային ռեկորդ՝ %3$s։ Լավագույն օր՝ %4$s։</string>
+    <string name="chat_my_code">Քո հրավերի կոդը՝ %1$s</string>
+    <string name="chat_my_pet">Հիմա իմ մակարդակը %1$d է, էներգիան՝ %2$d / %3$d։</string>
+    <string name="chat_my_subscribed">Բաժանորդագրությունդ ակտիվ է ✅</string>
+    <string name="chat_my_trial">Անվճար փորձաշրջան՝ մնացել է %1$d րոպե։</string>
+    <string name="chat_my_trial_over">Փորձաշրջանն ավարտվել է՝ պատվերներ սկանավորելու համար բաժանորդագրություն է պետք։</string>
 </resources>

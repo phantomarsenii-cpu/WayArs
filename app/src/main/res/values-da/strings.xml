@@ -476,4 +476,20 @@
     <string name="chat_typing">skriver…</string>
     <string name="chat_offline">kender appen · uden internet</string>
     <string name="chat_check_title">Telefontjek</string>
+    <string name="chat_period_today">I dag</string>
+    <string name="chat_period_week">Seneste 7 dage</string>
+    <string name="chat_period_month">Seneste 30 dage</string>
+    <string name="chat_my_none">%1$s: ingen tagne ordrer endnu. Slå „Active“ til og marker tagne ordrer med ✓ på kortet — så tæller jeg dem.</string>
+    <string name="chat_my_period">%1$s: %2$d ordrer, %3$s netto (%4$s brutto).</string>
+    <string name="chat_my_hour">Pr. time: %1$s, aktiv %2$s.</string>
+    <string name="chat_my_partner">Partner: −%1$s, tilbage efter partneren: %2$s.</string>
+    <string name="chat_my_compare">Dine seneste 60 dage: %1$s.</string>
+    <string name="chat_my_compare_none">For lidt data til at sammenligne apps endnu — kør et par vagter med „Active“ i forskellige apps.</string>
+    <string name="chat_my_best_time">Bedste tid: %1$s — %2$s.</string>
+    <string name="chat_my_record">Dage i træk uden dårlige ordrer: %1$d (bedste %2$d). Rekord pr. time: %3$s. Bedste dag: %4$s.</string>
+    <string name="chat_my_code">Din invitationskode: %1$s</string>
+    <string name="chat_my_pet">Lige nu er jeg niveau %1$d, energi %2$d / %3$d.</string>
+    <string name="chat_my_subscribed">Dit abonnement er aktivt ✅</string>
+    <string name="chat_my_trial">Prøveperiode: %1$d min tilbage.</string>
+    <string name="chat_my_trial_over">Prøveperioden er slut — der kræves et abonnement for at scanne ordrer.</string>
 </resources>

@@ -475,4 +475,20 @@
     <string name="chat_typing">écrit…</string>
     <string name="chat_offline">connaît l’appli · sans internet</string>
     <string name="chat_check_title">Vérification du téléphone</string>
+    <string name="chat_period_today">Aujourd’hui</string>
+    <string name="chat_period_week">7 derniers jours</string>
+    <string name="chat_period_month">30 derniers jours</string>
+    <string name="chat_my_none">%1$s : aucune course acceptée pour l’instant. Active « Active » et marque les courses prises d’un ✓ sur la carte — je les compterai.</string>
+    <string name="chat_my_period">%1$s : %2$d courses, %3$s net (%4$s brut).</string>
+    <string name="chat_my_hour">Par heure : %1$s, actif %2$s.</string>
+    <string name="chat_my_partner">Partenaire : −%1$s, reste après le partenaire : %2$s.</string>
+    <string name="chat_my_compare">Tes 60 derniers jours : %1$s.</string>
+    <string name="chat_my_compare_none">Pas encore assez de données pour comparer les applis — fais quelques services avec « Active » dans différentes applis.</string>
+    <string name="chat_my_best_time">Meilleur moment : %1$s — %2$s.</string>
+    <string name="chat_my_record">Jours d’affilée sans mauvaise course : %1$d (record %2$d). Record par heure : %3$s. Meilleur jour : %4$s.</string>
+    <string name="chat_my_code">Ton code d’invitation : %1$s</string>
+    <string name="chat_my_pet">En ce moment je suis niveau %1$d, énergie %2$d / %3$d.</string>
+    <string name="chat_my_subscribed">Ton abonnement est actif ✅</string>
+    <string name="chat_my_trial">Essai gratuit : encore %1$d min.</string>
+    <string name="chat_my_trial_over">L’essai gratuit est terminé — un abonnement est nécessaire pour scanner les courses.</string>
 </resources>

@@ -476,4 +476,20 @@
     <string name="chat_typing">ír…</string>
     <string name="chat_offline">ismeri az alkalmazást · internet nélkül</string>
     <string name="chat_check_title">Telefon ellenőrzése</string>
+    <string name="chat_period_today">Ma</string>
+    <string name="chat_period_week">Utolsó 7 nap</string>
+    <string name="chat_period_month">Utolsó 30 nap</string>
+    <string name="chat_my_none">%1$s: még nincs elfogadott rendelés. Kapcsold be az „Active”-ot, és jelöld ✓-vel a kártyán az elvállalt rendeléseket — akkor megszámolom őket.</string>
+    <string name="chat_my_period">%1$s: %2$d rendelés, %3$s nettó (%4$s bruttó).</string>
+    <string name="chat_my_hour">Óránként: %1$s, aktív %2$s.</string>
+    <string name="chat_my_partner">Partner: −%1$s, a partner után marad: %2$s.</string>
+    <string name="chat_my_compare">Az utolsó 60 napod: %1$s.</string>
+    <string name="chat_my_compare_none">Még kevés az adat az összehasonlításhoz — dolgozz néhány műszakot bekapcsolt „Active”-val különböző alkalmazásokban.</string>
+    <string name="chat_my_best_time">Legjobb idő: %1$s — %2$s.</string>
+    <string name="chat_my_record">Egymás utáni napok veszteséges rendelés nélkül: %1$d (legjobb %2$d). Óránkénti rekord: %3$s. Legjobb nap: %4$s.</string>
+    <string name="chat_my_code">A meghívókódod: %1$s</string>
+    <string name="chat_my_pet">Most %1$d. szinten vagyok, energia %2$d / %3$d.</string>
+    <string name="chat_my_subscribed">Az előfizetésed aktív ✅</string>
+    <string name="chat_my_trial">Próbaidő: még %1$d perc.</string>
+    <string name="chat_my_trial_over">A próbaidő lejárt — a rendelések szkenneléséhez előfizetés kell.</string>
 </resources>

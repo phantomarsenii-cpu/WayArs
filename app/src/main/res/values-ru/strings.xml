@@ -480,4 +480,20 @@
     <string name="chat_typing">печатает…</string>
     <string name="chat_offline">знает приложение · без интернета</string>
     <string name="chat_check_title">Проверка телефона</string>
+    <string name="chat_period_today">Сегодня</string>
+    <string name="chat_period_week">За 7 дней</string>
+    <string name="chat_period_month">За 30 дней</string>
+    <string name="chat_my_none">%1$s: принятых заказов пока нет. Включи «Active» и отмечай взятые заказы ✓ на карточке — тогда я их посчитаю.</string>
+    <string name="chat_my_period">%1$s: %2$d заказов, %3$s на руки (%4$s всего).</string>
+    <string name="chat_my_hour">В час: %1$s, в работе %2$s.</string>
+    <string name="chat_my_partner">Партнёру: −%1$s, осталось после партнёра: %2$s.</string>
+    <string name="chat_my_compare">За твои последние 60 дней: %1$s.</string>
+    <string name="chat_my_compare_none">Пока мало данных, чтобы сравнить приложения — поработай несколько смен с включённым «Active» в разных приложениях.</string>
+    <string name="chat_my_best_time">Лучшее время: %1$s — %2$s.</string>
+    <string name="chat_my_record">Дней подряд без невыгодных заказов: %1$d (лучшее %2$d). Рекорд в час: %3$s. Лучший день: %4$s.</string>
+    <string name="chat_my_code">Твой код приглашения: %1$s</string>
+    <string name="chat_my_pet">Сейчас у меня уровень %1$d, энергия %2$d / %3$d.</string>
+    <string name="chat_my_subscribed">Подписка активна ✅</string>
+    <string name="chat_my_trial">Пробный период: осталось %1$d мин.</string>
+    <string name="chat_my_trial_over">Пробный период закончился — для сканирования заказов нужна подписка.</string>
 </resources>
